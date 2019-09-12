@@ -1,0 +1,428 @@
+<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml" lang="" xml:lang="">
+<head>
+
+  <meta charset="utf-8" />
+  <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+  <title>Chapter 6 Repeated Measures-ANOVA Part 3 | Validation of Superpower</title>
+  <meta name="description" content="This is a minimal example of using the bookdown package to write a book. The output format for this example is bookdown::gitbook." />
+  <meta name="generator" content="bookdown 0.13 and GitBook 2.6.7" />
+
+  <meta property="og:title" content="Chapter 6 Repeated Measures-ANOVA Part 3 | Validation of Superpower" />
+  <meta property="og:type" content="book" />
+  
+  
+  <meta property="og:description" content="This is a minimal example of using the bookdown package to write a book. The output format for this example is bookdown::gitbook." />
+  
+
+  <meta name="twitter:card" content="summary" />
+  <meta name="twitter:title" content="Chapter 6 Repeated Measures-ANOVA Part 3 | Validation of Superpower" />
+  
+  <meta name="twitter:description" content="This is a minimal example of using the bookdown package to write a book. The output format for this example is bookdown::gitbook." />
+  
+
+<meta name="author" content="Aaron Caldwell &amp; Daniël Lakens" />
+
+
+<meta name="date" content="2019-09-12" />
+
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <meta name="apple-mobile-web-app-capable" content="yes" />
+  <meta name="apple-mobile-web-app-status-bar-style" content="black" />
+  
+  
+<link rel="prev" href="repeated-measures-anova-part-2.html"/>
+
+<script src="libs/jquery-2.2.3/jquery.min.js"></script>
+<link href="libs/gitbook-2.6.7/css/style.css" rel="stylesheet" />
+<link href="libs/gitbook-2.6.7/css/plugin-table.css" rel="stylesheet" />
+<link href="libs/gitbook-2.6.7/css/plugin-bookdown.css" rel="stylesheet" />
+<link href="libs/gitbook-2.6.7/css/plugin-highlight.css" rel="stylesheet" />
+<link href="libs/gitbook-2.6.7/css/plugin-search.css" rel="stylesheet" />
+<link href="libs/gitbook-2.6.7/css/plugin-fontsettings.css" rel="stylesheet" />
+
+
+
+
+
+
+
+
+
+<style type="text/css">
+a.sourceLine { display: inline-block; line-height: 1.25; }
+a.sourceLine { pointer-events: none; color: inherit; text-decoration: inherit; }
+a.sourceLine:empty { height: 1.2em; }
+.sourceCode { overflow: visible; }
+code.sourceCode { white-space: pre; position: relative; }
+pre.sourceCode { margin: 0; }
+@media screen {
+div.sourceCode { overflow: auto; }
+}
+@media print {
+code.sourceCode { white-space: pre-wrap; }
+a.sourceLine { text-indent: -1em; padding-left: 1em; }
+}
+pre.numberSource a.sourceLine
+  { position: relative; left: -4em; }
+pre.numberSource a.sourceLine::before
+  { content: attr(title);
+    position: relative; left: -1em; text-align: right; vertical-align: baseline;
+    border: none; pointer-events: all; display: inline-block;
+    -webkit-touch-callout: none; -webkit-user-select: none;
+    -khtml-user-select: none; -moz-user-select: none;
+    -ms-user-select: none; user-select: none;
+    padding: 0 4px; width: 4em;
+    color: #aaaaaa;
+  }
+pre.numberSource { margin-left: 3em; border-left: 1px solid #aaaaaa;  padding-left: 4px; }
+div.sourceCode
+  {  }
+@media screen {
+a.sourceLine::before { text-decoration: underline; }
+}
+code span.al { color: #ff0000; font-weight: bold; } /* Alert */
+code span.an { color: #60a0b0; font-weight: bold; font-style: italic; } /* Annotation */
+code span.at { color: #7d9029; } /* Attribute */
+code span.bn { color: #40a070; } /* BaseN */
+code span.bu { } /* BuiltIn */
+code span.cf { color: #007020; font-weight: bold; } /* ControlFlow */
+code span.ch { color: #4070a0; } /* Char */
+code span.cn { color: #880000; } /* Constant */
+code span.co { color: #60a0b0; font-style: italic; } /* Comment */
+code span.cv { color: #60a0b0; font-weight: bold; font-style: italic; } /* CommentVar */
+code span.do { color: #ba2121; font-style: italic; } /* Documentation */
+code span.dt { color: #902000; } /* DataType */
+code span.dv { color: #40a070; } /* DecVal */
+code span.er { color: #ff0000; font-weight: bold; } /* Error */
+code span.ex { } /* Extension */
+code span.fl { color: #40a070; } /* Float */
+code span.fu { color: #06287e; } /* Function */
+code span.im { } /* Import */
+code span.in { color: #60a0b0; font-weight: bold; font-style: italic; } /* Information */
+code span.kw { color: #007020; font-weight: bold; } /* Keyword */
+code span.op { color: #666666; } /* Operator */
+code span.ot { color: #007020; } /* Other */
+code span.pp { color: #bc7a00; } /* Preprocessor */
+code span.sc { color: #4070a0; } /* SpecialChar */
+code span.ss { color: #bb6688; } /* SpecialString */
+code span.st { color: #4070a0; } /* String */
+code span.va { color: #19177c; } /* Variable */
+code span.vs { color: #4070a0; } /* VerbatimString */
+code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warning */
+</style>
+
+<link rel="stylesheet" href="style.css" type="text/css" />
+</head>
+
+<body>
+
+
+
+  <div class="book without-animation with-summary font-size-2 font-family-1" data-basepath=".">
+
+    <div class="book-summary">
+      <nav role="navigation">
+
+<ul class="summary">
+<li><a href="./">A Minimal Book Example</a></li>
+
+<li class="divider"></li>
+<li class="chapter" data-level="1" data-path="index.html"><a href="index.html"><i class="fa fa-check"></i><b>1</b> Introduction</a></li>
+<li class="chapter" data-level="2" data-path="intro.html"><a href="intro.html"><i class="fa fa-check"></i><b>2</b> One-way ANOVA Part 1</a><ul>
+<li class="chapter" data-level="2.1" data-path="intro.html"><a href="intro.html#validation-of-power-in-one-way-anova"><i class="fa fa-check"></i><b>2.1</b> Validation of Power in One-Way ANOVA</a></li>
+<li class="chapter" data-level="2.2" data-path="intro.html"><a href="intro.html#two-conditions"><i class="fa fa-check"></i><b>2.2</b> Two conditions</a></li>
+</ul></li>
+<li class="chapter" data-level="3" data-path="one-way-anova-part-2.html"><a href="one-way-anova-part-2.html"><i class="fa fa-check"></i><b>3</b> One-way ANOVA Part 2</a><ul>
+<li class="chapter" data-level="3.1" data-path="one-way-anova-part-2.html"><a href="one-way-anova-part-2.html#validation-of-power-in-one-way-anova-with-brysbaert-example"><i class="fa fa-check"></i><b>3.1</b> Validation of Power in One-Way ANOVA with Brysbaert example</a><ul>
+<li class="chapter" data-level="3.1.1" data-path="one-way-anova-part-2.html"><a href="one-way-anova-part-2.html#three-conditions"><i class="fa fa-check"></i><b>3.1.1</b> Three conditions</a></li>
+</ul></li>
+<li class="chapter" data-level="3.2" data-path="one-way-anova-part-2.html"><a href="one-way-anova-part-2.html#power-for-simple-effects"><i class="fa fa-check"></i><b>3.2</b> Power for simple effects</a></li>
+<li class="chapter" data-level="3.3" data-path="one-way-anova-part-2.html"><a href="one-way-anova-part-2.html#one-way-anova-part-3"><i class="fa fa-check"></i><b>3.3</b> One-way ANOVA Part 3</a></li>
+<li class="chapter" data-level="3.4" data-path="one-way-anova-part-2.html"><a href="one-way-anova-part-2.html#three-conditions-replication"><i class="fa fa-check"></i><b>3.4</b> Three conditions replication</a></li>
+<li class="chapter" data-level="3.5" data-path="one-way-anova-part-2.html"><a href="one-way-anova-part-2.html#variation-1"><i class="fa fa-check"></i><b>3.5</b> Variation 1</a></li>
+<li class="chapter" data-level="3.6" data-path="one-way-anova-part-2.html"><a href="one-way-anova-part-2.html#three-conditions-replication-1"><i class="fa fa-check"></i><b>3.6</b> Three conditions replication</a></li>
+<li class="chapter" data-level="3.7" data-path="one-way-anova-part-2.html"><a href="one-way-anova-part-2.html#variation-2"><i class="fa fa-check"></i><b>3.7</b> Variation 2</a></li>
+<li class="chapter" data-level="3.8" data-path="one-way-anova-part-2.html"><a href="one-way-anova-part-2.html#three-conditions-replication-2"><i class="fa fa-check"></i><b>3.8</b> Three conditions replication</a></li>
+</ul></li>
+<li class="chapter" data-level="4" data-path="repeated-measures-anova-part-1.html"><a href="repeated-measures-anova-part-1.html"><i class="fa fa-check"></i><b>4</b> Repeated Measures-ANOVA Part 1</a><ul>
+<li class="chapter" data-level="4.1" data-path="repeated-measures-anova-part-1.html"><a href="repeated-measures-anova-part-1.html#two-conditions-medium-effect-size"><i class="fa fa-check"></i><b>4.1</b> Two conditions, medium effect size</a></li>
+</ul></li>
+<li class="chapter" data-level="5" data-path="repeated-measures-anova-part-2.html"><a href="repeated-measures-anova-part-2.html"><i class="fa fa-check"></i><b>5</b> Repeated Measures-ANOVA Part 2</a><ul>
+<li class="chapter" data-level="5.1" data-path="repeated-measures-anova-part-2.html"><a href="repeated-measures-anova-part-2.html#the-relation-between-cohens-f-and-cohens-d"><i class="fa fa-check"></i><b>5.1</b> The relation between Cohen’s f and Cohen’s d</a></li>
+<li class="chapter" data-level="5.2" data-path="repeated-measures-anova-part-2.html"><a href="repeated-measures-anova-part-2.html#three-within-conditions-medium-effect-size"><i class="fa fa-check"></i><b>5.2</b> Three within conditions, medium effect size</a></li>
+</ul></li>
+<li class="chapter" data-level="6" data-path="repeated-measures-anova-part-3.html"><a href="repeated-measures-anova-part-3.html"><i class="fa fa-check"></i><b>6</b> Repeated Measures-ANOVA Part 3</a><ul>
+<li class="chapter" data-level="6.1" data-path="repeated-measures-anova-part-3.html"><a href="repeated-measures-anova-part-3.html#reproducing-brysbaert"><i class="fa fa-check"></i><b>6.1</b> Reproducing Brysbaert</a></li>
+<li class="chapter" data-level="6.2" data-path="repeated-measures-anova-part-3.html"><a href="repeated-measures-anova-part-3.html#reproducing-brysbaert-variation-1-changing-correlation"><i class="fa fa-check"></i><b>6.2</b> Reproducing Brysbaert Variation 1 Changing Correlation</a></li>
+</ul></li>
+<li class="divider"></li>
+<li><a href="https://github.com/rstudio/bookdown" target="blank">Published with bookdown</a></li>
+
+</ul>
+
+      </nav>
+    </div>
+
+    <div class="book-body">
+      <div class="body-inner">
+        <div class="book-header" role="navigation">
+          <h1>
+            <i class="fa fa-circle-o-notch fa-spin"></i><a href="./">Validation of Superpower</a>
+          </h1>
+        </div>
+
+        <div class="page-wrapper" tabindex="-1" role="main">
+          <div class="page-inner">
+
+            <section class="normal" id="section-">
+<div id="repeated-measures-anova-part-3" class="section level1">
+<h1><span class="header-section-number">Chapter 6</span> Repeated Measures-ANOVA Part 3</h1>
+<p>We first repeat the simulation by Brysbaert:</p>
+<div class="sourceCode" id="cb165"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb165-1" title="1"><span class="co"># give sample size</span></a>
+<a class="sourceLine" id="cb165-2" title="2">N =<span class="st"> </span><span class="dv">75</span></a>
+<a class="sourceLine" id="cb165-3" title="3"><span class="co"># give effect size d</span></a>
+<a class="sourceLine" id="cb165-4" title="4">d1 =<span class="st"> </span><span class="fl">.4</span> <span class="co">#difference between the extremes</span></a>
+<a class="sourceLine" id="cb165-5" title="5">d2 =<span class="st"> </span><span class="fl">.4</span> <span class="co">#third condition goes with the highest extreme</span></a>
+<a class="sourceLine" id="cb165-6" title="6"><span class="co"># give the correlation between the conditions</span></a>
+<a class="sourceLine" id="cb165-7" title="7">r =<span class="st"> </span><span class="fl">.5</span></a>
+<a class="sourceLine" id="cb165-8" title="8"><span class="co"># give number of simulations</span></a>
+<a class="sourceLine" id="cb165-9" title="9">nSim =<span class="st"> </span>nsims</a>
+<a class="sourceLine" id="cb165-10" title="10"><span class="co"># give alpha levels</span></a>
+<a class="sourceLine" id="cb165-11" title="11">alpha1 =<span class="st"> </span><span class="fl">.05</span> <span class="co">#alpha level for the omnibus ANOVA</span></a>
+<a class="sourceLine" id="cb165-12" title="12">alpha2 =<span class="st"> </span><span class="fl">.05</span> <span class="co">#also adjusted from original by DL</span></a>
+<a class="sourceLine" id="cb165-13" title="13"><span class="co"># create progress bar in case it takes a while</span></a>
+<a class="sourceLine" id="cb165-14" title="14"><span class="co">#pb &lt;- winProgressBar(title = &quot;progress bar&quot;, min = 0, max = nSim, width = 300)</span></a>
+<a class="sourceLine" id="cb165-15" title="15"><span class="co"># create vectors to store p-values</span></a>
+<a class="sourceLine" id="cb165-16" title="16">p1 &lt;-<span class="kw">numeric</span>(nSim) <span class="co">#p-value omnibus ANOVA</span></a>
+<a class="sourceLine" id="cb165-17" title="17">p2 &lt;-<span class="kw">numeric</span>(nSim) <span class="co">#p-value first post hoc test</span></a>
+<a class="sourceLine" id="cb165-18" title="18">p3 &lt;-<span class="kw">numeric</span>(nSim) <span class="co">#p-value second post hoc test</span></a>
+<a class="sourceLine" id="cb165-19" title="19">p4 &lt;-<span class="kw">numeric</span>(nSim) <span class="co">#p-value third post hoc test</span></a>
+<a class="sourceLine" id="cb165-20" title="20"><span class="co"># open library MASS</span></a>
+<a class="sourceLine" id="cb165-21" title="21"><span class="kw">library</span>(<span class="st">&#39;MASS&#39;</span>)</a>
+<a class="sourceLine" id="cb165-22" title="22"><span class="co"># define correlation matrix</span></a>
+<a class="sourceLine" id="cb165-23" title="23">rho &lt;-<span class="st"> </span><span class="kw">cbind</span>(<span class="kw">c</span>(<span class="dv">1</span>, r, r), <span class="kw">c</span>(r, <span class="dv">1</span>, r), <span class="kw">c</span>(r, r, <span class="dv">1</span>))</a>
+<a class="sourceLine" id="cb165-24" title="24"><span class="co"># define participant codes</span></a>
+<a class="sourceLine" id="cb165-25" title="25">part &lt;-<span class="st"> </span><span class="kw">paste</span>(<span class="st">&quot;part&quot;</span>,<span class="kw">seq</span>(<span class="dv">1</span><span class="op">:</span>N))</a>
+<a class="sourceLine" id="cb165-26" title="26"><span class="cf">for</span>(i <span class="cf">in</span> <span class="dv">1</span><span class="op">:</span>nSim){ <span class="co">#for each simulated experiment</span></a>
+<a class="sourceLine" id="cb165-27" title="27"> <span class="co"># setWinProgressBar(pb, i, title=paste(round(i/nSim*100, 1), &quot;% done&quot;))</span></a>
+<a class="sourceLine" id="cb165-28" title="28">  data =<span class="st"> </span><span class="kw">mvrnorm</span>(<span class="dt">n=</span>N, <span class="dt">mu=</span><span class="kw">c</span>(<span class="dv">0</span>, <span class="dv">0</span>, <span class="dv">0</span>), <span class="dt">Sigma=</span>rho)</a>
+<a class="sourceLine" id="cb165-29" title="29">  data[,<span class="dv">2</span>] =<span class="st"> </span>data[,<span class="dv">2</span>]<span class="op">+</span>d1</a>
+<a class="sourceLine" id="cb165-30" title="30">  data[,<span class="dv">3</span>] =<span class="st"> </span>data[,<span class="dv">3</span>]<span class="op">+</span>d2</a>
+<a class="sourceLine" id="cb165-31" title="31">  datalong =<span class="st"> </span><span class="kw">c</span>(data[,<span class="dv">1</span>],data[,<span class="dv">2</span>],data[,<span class="dv">3</span>])</a>
+<a class="sourceLine" id="cb165-32" title="32">  conds=<span class="st"> </span><span class="kw">factor</span>(<span class="kw">rep</span>(letters[<span class="dv">24</span><span class="op">:</span><span class="dv">26</span>], <span class="dt">each =</span> N))</a>
+<a class="sourceLine" id="cb165-33" title="33">  partID =<span class="st"> </span><span class="kw">factor</span>(<span class="kw">rep</span>(part, <span class="dt">times =</span> <span class="dv">3</span>))</a>
+<a class="sourceLine" id="cb165-34" title="34">  output &lt;-<span class="kw">data.frame</span>(partID,conds,datalong)</a>
+<a class="sourceLine" id="cb165-35" title="35">  test &lt;-<span class="st"> </span><span class="kw">aov</span>(datalong<span class="op">~</span>conds <span class="op">+</span><span class="st"> </span><span class="kw">Error</span>(partID<span class="op">/</span>conds), <span class="dt">data=</span>output)</a>
+<a class="sourceLine" id="cb165-36" title="36">  tests &lt;-<span class="st"> </span>(<span class="kw">summary</span>(test))</a>
+<a class="sourceLine" id="cb165-37" title="37">  p1[i] &lt;-<span class="st"> </span>tests<span class="op">$</span><span class="st">&#39;Error: partID:conds&#39;</span>[[<span class="dv">1</span>]]<span class="op">$</span><span class="st">&#39;Pr(&gt;F)&#39;</span>[[<span class="dv">1</span>]]</a>
+<a class="sourceLine" id="cb165-38" title="38">  p2[i] &lt;-<span class="st"> </span><span class="kw">t.test</span>(data[,<span class="dv">1</span>],data[,<span class="dv">2</span>], <span class="dt">paired=</span><span class="ot">TRUE</span>)<span class="op">$</span>p.value</a>
+<a class="sourceLine" id="cb165-39" title="39">  p3[i] &lt;-<span class="st"> </span><span class="kw">t.test</span>(data[,<span class="dv">1</span>],data[,<span class="dv">3</span>], <span class="dt">paired=</span><span class="ot">TRUE</span>)<span class="op">$</span>p.value</a>
+<a class="sourceLine" id="cb165-40" title="40">  p4[i] &lt;-<span class="st"> </span><span class="kw">t.test</span>(data[,<span class="dv">2</span>],data[,<span class="dv">3</span>], <span class="dt">paired=</span><span class="ot">TRUE</span>)<span class="op">$</span>p.value</a>
+<a class="sourceLine" id="cb165-41" title="41">  }</a>
+<a class="sourceLine" id="cb165-42" title="42"><span class="co">#close(pb)#close progress bar</span></a>
+<a class="sourceLine" id="cb165-43" title="43"><span class="co">#printing all unique tests (adjusted code by DL)</span></a>
+<a class="sourceLine" id="cb165-44" title="44"><span class="kw">sum</span>(p1<span class="op">&lt;</span>alpha1)<span class="op">/</span>nSim</a></code></pre></div>
+<pre><code>## [1] 0.97</code></pre>
+<div class="sourceCode" id="cb167"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb167-1" title="1"><span class="kw">sum</span>(p2<span class="op">&lt;</span>alpha2)<span class="op">/</span>nSim</a></code></pre></div>
+<pre><code>## [1] 0.92</code></pre>
+<div class="sourceCode" id="cb169"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb169-1" title="1"><span class="kw">sum</span>(p3<span class="op">&lt;</span>alpha2)<span class="op">/</span>nSim</a></code></pre></div>
+<pre><code>## [1] 0.93</code></pre>
+<div class="sourceCode" id="cb171"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb171-1" title="1"><span class="kw">sum</span>(p4<span class="op">&lt;</span>alpha2)<span class="op">/</span>nSim</a></code></pre></div>
+<pre><code>## [1] 0.04</code></pre>
+<div id="reproducing-brysbaert" class="section level2">
+<h2><span class="header-section-number">6.1</span> Reproducing Brysbaert</h2>
+<p>We can reproduce the same results as Brysbaeert finds with his code:</p>
+<div class="sourceCode" id="cb173"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb173-1" title="1">design &lt;-<span class="st"> &quot;3w&quot;</span></a>
+<a class="sourceLine" id="cb173-2" title="2">n &lt;-<span class="st"> </span><span class="dv">75</span></a>
+<a class="sourceLine" id="cb173-3" title="3">mu &lt;-<span class="st"> </span><span class="kw">c</span>(<span class="dv">0</span>, <span class="fl">0.4</span>, <span class="fl">0.4</span>)</a>
+<a class="sourceLine" id="cb173-4" title="4">sd &lt;-<span class="st"> </span><span class="dv">1</span></a>
+<a class="sourceLine" id="cb173-5" title="5">r &lt;-<span class="st"> </span><span class="fl">0.5</span></a>
+<a class="sourceLine" id="cb173-6" title="6">labelnames &lt;-<span class="st"> </span><span class="kw">c</span>(<span class="st">&quot;speed&quot;</span>, <span class="st">&quot;fast&quot;</span>, <span class="st">&quot;medium&quot;</span>, <span class="st">&quot;slow&quot;</span>)</a></code></pre></div>
+<p>We create the within design, and run the simulation</p>
+<div class="sourceCode" id="cb174"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb174-1" title="1">design_result &lt;-<span class="st"> </span><span class="kw">ANOVA_design</span>(<span class="dt">design =</span> design,</a>
+<a class="sourceLine" id="cb174-2" title="2">                   <span class="dt">n =</span> n, </a>
+<a class="sourceLine" id="cb174-3" title="3">                   <span class="dt">mu =</span> mu, </a>
+<a class="sourceLine" id="cb174-4" title="4">                   <span class="dt">sd =</span> sd, </a>
+<a class="sourceLine" id="cb174-5" title="5">                   <span class="dt">r =</span> r, </a>
+<a class="sourceLine" id="cb174-6" title="6">                   <span class="dt">labelnames =</span> labelnames)</a></code></pre></div>
+<p><img src="SuperpowerValidation_files/figure-html/unnamed-chunk-43-1.png" width="672" /></p>
+<div class="sourceCode" id="cb175"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb175-1" title="1"><span class="kw">ANOVA_power</span>(design_result, <span class="dt">nsims =</span> nsims)</a></code></pre></div>
+<pre><code>## Power and Effect sizes for ANOVA tests
+##             power effect_size
+## anova_speed    97      0.1053
+## 
+## Power and Effect sizes for contrasts
+##                           power effect_size
+## p_speed_fast_speed_medium    92   0.3978903
+## p_speed_fast_speed_slow      90   0.4004933
+## p_speed_medium_speed_slow     7   0.0008825
+## 
+## Within-Subject Factors Included: Check MANOVA Results</code></pre>
+<p>#Results</p>
+<p>The results of the simulation are very similar. Power for the ANOVA <em>F</em>-test is around 95.2%. For the three paired t-tests, power is around 92.7. This is in line with the a-priori power analysis when using g*power:</p>
+<p><img src="screenshots/gpower_2.png" /></p>
+<p>We can perform an post-hoc power analysis in G*power. We can calculate Cohen´s f based on the means and sd, using our own custom formula.</p>
+<div class="sourceCode" id="cb177"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb177-1" title="1"><span class="co"># Our simulation is based onthe following means and sd:</span></a>
+<a class="sourceLine" id="cb177-2" title="2"><span class="co"># mu &lt;- c(0, 0.4, 0.4)</span></a>
+<a class="sourceLine" id="cb177-3" title="3"><span class="co"># sd &lt;- 1</span></a>
+<a class="sourceLine" id="cb177-4" title="4">f &lt;-<span class="st"> </span><span class="kw">sqrt</span>(<span class="kw">sum</span>((mu<span class="op">-</span><span class="kw">mean</span>(mu))<span class="op">^</span><span class="dv">2</span>)<span class="op">/</span><span class="kw">length</span>(mu))<span class="op">/</span>sd <span class="co">#Cohen, 1988, formula 8.2.1 and 8.2.2</span></a>
+<a class="sourceLine" id="cb177-5" title="5"><span class="co"># We can see why f = 0.5*d. </span></a>
+<a class="sourceLine" id="cb177-6" title="6"><span class="co"># Imagine 2 group, mu = 1 and 2</span></a>
+<a class="sourceLine" id="cb177-7" title="7"><span class="co"># Grand mean is 1.5, we have sqrt(sum(0.5^2 + 0.5^2)/2), or sqrt(0.5/2), = 0.5. </span></a>
+<a class="sourceLine" id="cb177-8" title="8"><span class="co"># For Cohen&#39;s d we use the difference, 2-1 = 1. </span></a></code></pre></div>
+<p>The Cohen´s f is 0.1885618. We can enter the f (using the default ’as in G*Power 3.0’ in the option window) and enter a sample size of 75, number of groups as 1, number of measurements as 3, correlation as 0.5. This yields:</p>
+<p><img src="screenshots/gpower_3.png" /></p>
+</div>
+<div id="reproducing-brysbaert-variation-1-changing-correlation" class="section level2">
+<h2><span class="header-section-number">6.2</span> Reproducing Brysbaert Variation 1 Changing Correlation</h2>
+<div class="sourceCode" id="cb178"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb178-1" title="1"><span class="co"># give sample size</span></a>
+<a class="sourceLine" id="cb178-2" title="2">N =<span class="st"> </span><span class="dv">75</span></a>
+<a class="sourceLine" id="cb178-3" title="3"><span class="co"># give effect size d</span></a>
+<a class="sourceLine" id="cb178-4" title="4">d1 =<span class="st"> </span><span class="fl">.4</span> <span class="co">#difference between the extremes</span></a>
+<a class="sourceLine" id="cb178-5" title="5">d2 =<span class="st"> </span><span class="fl">.4</span> <span class="co">#third condition goes with the highest extreme</span></a>
+<a class="sourceLine" id="cb178-6" title="6"><span class="co"># give the correlation between the conditions</span></a>
+<a class="sourceLine" id="cb178-7" title="7">r =<span class="st"> </span><span class="fl">.6</span> <span class="co">#increased correlation</span></a>
+<a class="sourceLine" id="cb178-8" title="8"><span class="co"># give number of simulations</span></a>
+<a class="sourceLine" id="cb178-9" title="9">nSim =<span class="st"> </span>nsims</a>
+<a class="sourceLine" id="cb178-10" title="10"><span class="co"># give alpha levels</span></a>
+<a class="sourceLine" id="cb178-11" title="11">alpha1 =<span class="st"> </span><span class="fl">.05</span> <span class="co">#alpha level for the omnibus ANOVA</span></a>
+<a class="sourceLine" id="cb178-12" title="12">alpha2 =<span class="st"> </span><span class="fl">.05</span> <span class="co">#also adjusted from original by DL</span></a>
+<a class="sourceLine" id="cb178-13" title="13"><span class="co"># create progress bar in case it takes a while</span></a>
+<a class="sourceLine" id="cb178-14" title="14"><span class="co">#pb &lt;- winProgressBar(title = &quot;progress bar&quot;, min = 0, max = nSim, width = 300)</span></a>
+<a class="sourceLine" id="cb178-15" title="15"><span class="co"># create vectors to store p-values</span></a>
+<a class="sourceLine" id="cb178-16" title="16">p1 &lt;-<span class="kw">numeric</span>(nSim) <span class="co">#p-value omnibus ANOVA</span></a>
+<a class="sourceLine" id="cb178-17" title="17">p2 &lt;-<span class="kw">numeric</span>(nSim) <span class="co">#p-value first post hoc test</span></a>
+<a class="sourceLine" id="cb178-18" title="18">p3 &lt;-<span class="kw">numeric</span>(nSim) <span class="co">#p-value second post hoc test</span></a>
+<a class="sourceLine" id="cb178-19" title="19">p4 &lt;-<span class="kw">numeric</span>(nSim) <span class="co">#p-value third post hoc test</span></a>
+<a class="sourceLine" id="cb178-20" title="20"><span class="co"># open library MASS</span></a>
+<a class="sourceLine" id="cb178-21" title="21"><span class="kw">library</span>(<span class="st">&#39;MASS&#39;</span>)</a>
+<a class="sourceLine" id="cb178-22" title="22"><span class="co"># define correlation matrix</span></a>
+<a class="sourceLine" id="cb178-23" title="23">rho &lt;-<span class="st"> </span><span class="kw">cbind</span>(<span class="kw">c</span>(<span class="dv">1</span>, r, r), <span class="kw">c</span>(r, <span class="dv">1</span>, r), <span class="kw">c</span>(r, r, <span class="dv">1</span>))</a>
+<a class="sourceLine" id="cb178-24" title="24"><span class="co"># define participant codes</span></a>
+<a class="sourceLine" id="cb178-25" title="25">part &lt;-<span class="st"> </span><span class="kw">paste</span>(<span class="st">&quot;part&quot;</span>,<span class="kw">seq</span>(<span class="dv">1</span><span class="op">:</span>N))</a>
+<a class="sourceLine" id="cb178-26" title="26"><span class="cf">for</span>(i <span class="cf">in</span> <span class="dv">1</span><span class="op">:</span>nSim){ <span class="co">#for each simulated experiment</span></a>
+<a class="sourceLine" id="cb178-27" title="27"> <span class="co"># setWinProgressBar(pb, i, title=paste(round(i/nSim*100, 1), &quot;% done&quot;))</span></a>
+<a class="sourceLine" id="cb178-28" title="28">  data =<span class="st"> </span><span class="kw">mvrnorm</span>(<span class="dt">n=</span>N, <span class="dt">mu=</span><span class="kw">c</span>(<span class="dv">0</span>, <span class="dv">0</span>, <span class="dv">0</span>), <span class="dt">Sigma=</span>rho)</a>
+<a class="sourceLine" id="cb178-29" title="29">  data[,<span class="dv">2</span>] =<span class="st"> </span>data[,<span class="dv">2</span>]<span class="op">+</span>d1</a>
+<a class="sourceLine" id="cb178-30" title="30">  data[,<span class="dv">3</span>] =<span class="st"> </span>data[,<span class="dv">3</span>]<span class="op">+</span>d2</a>
+<a class="sourceLine" id="cb178-31" title="31">  datalong =<span class="st"> </span><span class="kw">c</span>(data[,<span class="dv">1</span>],data[,<span class="dv">2</span>],data[,<span class="dv">3</span>])</a>
+<a class="sourceLine" id="cb178-32" title="32">  conds=<span class="st"> </span><span class="kw">factor</span>(<span class="kw">rep</span>(letters[<span class="dv">24</span><span class="op">:</span><span class="dv">26</span>], <span class="dt">each =</span> N))</a>
+<a class="sourceLine" id="cb178-33" title="33">  partID =<span class="st"> </span><span class="kw">factor</span>(<span class="kw">rep</span>(part, <span class="dt">times =</span> <span class="dv">3</span>))</a>
+<a class="sourceLine" id="cb178-34" title="34">  output &lt;-<span class="kw">data.frame</span>(partID,conds,datalong)</a>
+<a class="sourceLine" id="cb178-35" title="35">  test &lt;-<span class="st"> </span><span class="kw">aov</span>(datalong<span class="op">~</span>conds <span class="op">+</span><span class="st"> </span><span class="kw">Error</span>(partID<span class="op">/</span>conds), <span class="dt">data=</span>output)</a>
+<a class="sourceLine" id="cb178-36" title="36">  tests &lt;-<span class="st"> </span>(<span class="kw">summary</span>(test))</a>
+<a class="sourceLine" id="cb178-37" title="37">  p1[i] &lt;-<span class="st"> </span>tests<span class="op">$</span><span class="st">&#39;Error: partID:conds&#39;</span>[[<span class="dv">1</span>]]<span class="op">$</span><span class="st">&#39;Pr(&gt;F)&#39;</span>[[<span class="dv">1</span>]]</a>
+<a class="sourceLine" id="cb178-38" title="38">  p2[i] &lt;-<span class="st"> </span><span class="kw">t.test</span>(data[,<span class="dv">1</span>],data[,<span class="dv">2</span>], <span class="dt">paired=</span><span class="ot">TRUE</span>)<span class="op">$</span>p.value</a>
+<a class="sourceLine" id="cb178-39" title="39">  p3[i] &lt;-<span class="st"> </span><span class="kw">t.test</span>(data[,<span class="dv">1</span>],data[,<span class="dv">3</span>], <span class="dt">paired=</span><span class="ot">TRUE</span>)<span class="op">$</span>p.value</a>
+<a class="sourceLine" id="cb178-40" title="40">  p4[i] &lt;-<span class="st"> </span><span class="kw">t.test</span>(data[,<span class="dv">2</span>],data[,<span class="dv">3</span>], <span class="dt">paired=</span><span class="ot">TRUE</span>)<span class="op">$</span>p.value</a>
+<a class="sourceLine" id="cb178-41" title="41">  }</a>
+<a class="sourceLine" id="cb178-42" title="42"><span class="co">#close(pb)#close progress bar</span></a>
+<a class="sourceLine" id="cb178-43" title="43"><span class="co">#printing all unique tests (adjusted code by DL)</span></a>
+<a class="sourceLine" id="cb178-44" title="44"><span class="kw">sum</span>(p1<span class="op">&lt;</span>alpha1)<span class="op">/</span>nSim</a></code></pre></div>
+<pre><code>## [1] 1</code></pre>
+<div class="sourceCode" id="cb180"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb180-1" title="1"><span class="kw">sum</span>(p2<span class="op">&lt;</span>alpha2)<span class="op">/</span>nSim</a></code></pre></div>
+<pre><code>## [1] 0.96</code></pre>
+<div class="sourceCode" id="cb182"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb182-1" title="1"><span class="kw">sum</span>(p3<span class="op">&lt;</span>alpha2)<span class="op">/</span>nSim</a></code></pre></div>
+<pre><code>## [1] 0.96</code></pre>
+<div class="sourceCode" id="cb184"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb184-1" title="1"><span class="kw">sum</span>(p4<span class="op">&lt;</span>alpha2)<span class="op">/</span>nSim</a></code></pre></div>
+<pre><code>## [1] 0.04</code></pre>
+<div class="sourceCode" id="cb186"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb186-1" title="1">design &lt;-<span class="st"> &quot;3w&quot;</span></a>
+<a class="sourceLine" id="cb186-2" title="2">n &lt;-<span class="st"> </span><span class="dv">75</span></a>
+<a class="sourceLine" id="cb186-3" title="3">mu &lt;-<span class="st"> </span><span class="kw">c</span>(<span class="dv">0</span>, <span class="fl">0.4</span>, <span class="fl">0.4</span>)</a>
+<a class="sourceLine" id="cb186-4" title="4">sd &lt;-<span class="st"> </span><span class="dv">1</span></a>
+<a class="sourceLine" id="cb186-5" title="5">r &lt;-<span class="st"> </span><span class="fl">0.6</span></a>
+<a class="sourceLine" id="cb186-6" title="6">labelnames &lt;-<span class="st"> </span><span class="kw">c</span>(<span class="st">&quot;speed&quot;</span>, <span class="st">&quot;fast&quot;</span>, <span class="st">&quot;medium&quot;</span>, <span class="st">&quot;slow&quot;</span>)</a></code></pre></div>
+<p>We create the within design, and run the simulation</p>
+<div class="sourceCode" id="cb187"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb187-1" title="1">design_result &lt;-<span class="st"> </span><span class="kw">ANOVA_design</span>(<span class="dt">design =</span> design,</a>
+<a class="sourceLine" id="cb187-2" title="2">                   <span class="dt">n =</span> n, </a>
+<a class="sourceLine" id="cb187-3" title="3">                   <span class="dt">mu =</span> mu, </a>
+<a class="sourceLine" id="cb187-4" title="4">                   <span class="dt">sd =</span> sd, </a>
+<a class="sourceLine" id="cb187-5" title="5">                   <span class="dt">r =</span> r, </a>
+<a class="sourceLine" id="cb187-6" title="6">                   <span class="dt">labelnames =</span> labelnames)</a></code></pre></div>
+<p><img src="SuperpowerValidation_files/figure-html/unnamed-chunk-47-1.png" width="672" /></p>
+<div class="sourceCode" id="cb188"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb188-1" title="1"><span class="kw">ANOVA_power</span>(design_result, <span class="dt">nsims =</span> nsims)</a></code></pre></div>
+<pre><code>## Power and Effect sizes for ANOVA tests
+##             power effect_size
+## anova_speed   100      0.1237
+## 
+## Power and Effect sizes for contrasts
+##                           power effect_size
+## p_speed_fast_speed_medium    99    0.438119
+## p_speed_fast_speed_slow      99    0.442785
+## p_speed_medium_speed_slow     8    0.002318
+## 
+## Within-Subject Factors Included: Check MANOVA Results</code></pre>
+<p>Again, this is similar to g*power for the ANOVA:</p>
+<p><img src="screenshots/gpower_4.png" /></p>
+
+</div>
+</div>
+            </section>
+
+          </div>
+        </div>
+      </div>
+<a href="repeated-measures-anova-part-2.html" class="navigation navigation-prev navigation-unique" aria-label="Previous page"><i class="fa fa-angle-left"></i></a>
+
+    </div>
+  </div>
+<script src="libs/gitbook-2.6.7/js/app.min.js"></script>
+<script src="libs/gitbook-2.6.7/js/lunr.js"></script>
+<script src="libs/gitbook-2.6.7/js/plugin-search.js"></script>
+<script src="libs/gitbook-2.6.7/js/plugin-sharing.js"></script>
+<script src="libs/gitbook-2.6.7/js/plugin-fontsettings.js"></script>
+<script src="libs/gitbook-2.6.7/js/plugin-bookdown.js"></script>
+<script src="libs/gitbook-2.6.7/js/jquery.highlight.js"></script>
+<script>
+gitbook.require(["gitbook"], function(gitbook) {
+gitbook.start({
+"sharing": {
+"github": false,
+"facebook": true,
+"twitter": true,
+"google": false,
+"linkedin": false,
+"weibo": false,
+"instapaper": false,
+"vk": false,
+"all": ["facebook", "google", "twitter", "linkedin", "weibo", "instapaper"]
+},
+"fontsettings": {
+"theme": "white",
+"family": "sans",
+"size": 2
+},
+"edit": {
+"link": null,
+"text": null
+},
+"history": {
+"link": null,
+"text": null
+},
+"download": ["SuperpowerValidation.pdf", "SuperpowerValidation.epub"],
+"toc": {
+"collapse": "subsection"
+}
+});
+});
+</script>
+
+<!-- dynamically load mathjax for compatibility with self-contained -->
+<script>
+  (function () {
+    var script = document.createElement("script");
+    script.type = "text/javascript";
+    var src = "true";
+    if (src === "" || src === "true") src = "https://mathjax.rstudio.com/latest/MathJax.js?config=TeX-MML-AM_CHTML";
+    if (location.protocol !== "file:")
+      if (/^https?:/.test(src))
+        src = src.replace(/^https?:/, '');
+    script.src = src;
+    document.getElementsByTagName("head")[0].appendChild(script);
+  })();
+</script>
+</body>
+
+</html>
