@@ -21,6 +21,7 @@
 \usepackage{microtype}
 \UseMicrotypeSet[protrusion]{basicmath} % disable protrusion for tt fonts
 }{}
+\usepackage[margin=1in]{geometry}
 \usepackage{hyperref}
 \hypersetup{unicode=true,
             pdftitle={Validation of Superpower},
@@ -137,14 +138,6 @@
 }
 This is a compilation of validation documents for \texttt{Superpower} written in \textbf{Markdown} and compiled by \textbf{Bookdown}.
 
-\begin{Shaded}
-\begin{Highlighting}[]
-\KeywordTok{install.packages}\NormalTok{(}\StringTok{"bookdown"}\NormalTok{)}
-\CommentTok{# or the development version}
-\CommentTok{# devtools::install_github("rstudio/bookdown")}
-\end{Highlighting}
-\end{Shaded}
-
 \hypertarget{introduction}{%
 \chapter{Introduction}\label{introduction}}
 
@@ -152,23 +145,6 @@ Below we have included various examples of the performance of \texttt{Superpower
 
 \hypertarget{intro}{%
 \chapter{One-way ANOVA Part 1}\label{intro}}
-
-\begin{Shaded}
-\begin{Highlighting}[]
-\NormalTok{knitr}\OperatorTok{::}\NormalTok{opts_chunk}\OperatorTok{$}\KeywordTok{set}\NormalTok{(}\DataTypeTok{echo =} \OtherTok{TRUE}\NormalTok{)}
-\NormalTok{nsims <-}\StringTok{ }\DecValTok{100} \CommentTok{#set number of simulations}
-\KeywordTok{require}\NormalTok{(mvtnorm, }\DataTypeTok{quietly =} \OtherTok{TRUE}\NormalTok{)}
-\KeywordTok{require}\NormalTok{(MASS, }\DataTypeTok{quietly =} \OtherTok{TRUE}\NormalTok{)}
-\KeywordTok{require}\NormalTok{(afex, }\DataTypeTok{quietly =} \OtherTok{TRUE}\NormalTok{)}
-\KeywordTok{require}\NormalTok{(emmeans, }\DataTypeTok{quietly =} \OtherTok{TRUE}\NormalTok{)}
-\KeywordTok{require}\NormalTok{(ggplot2, }\DataTypeTok{quietly =} \OtherTok{TRUE}\NormalTok{)}
-\KeywordTok{require}\NormalTok{(gridExtra, }\DataTypeTok{quietly =} \OtherTok{TRUE}\NormalTok{)}
-\KeywordTok{require}\NormalTok{(reshape2, }\DataTypeTok{quietly =} \OtherTok{TRUE}\NormalTok{)}
-\KeywordTok{require}\NormalTok{(pwr, }\DataTypeTok{quietly =} \OtherTok{TRUE}\NormalTok{)}
-\CommentTok{# Install functions from GitHub by running the code below:}
-\KeywordTok{library}\NormalTok{(Superpower)}
-\end{Highlighting}
-\end{Shaded}
 
 \hypertarget{validation-of-power-in-one-way-anova}{%
 \section{Validation of Power in One-Way ANOVA}\label{validation-of-power-in-one-way-anova}}
@@ -199,7 +175,7 @@ Imagine we aim to design a study to test the hypothesis that giving people a pet
 \end{Highlighting}
 \end{Shaded}
 
-\includegraphics{SuperpowerValidation_files/figure-latex/unnamed-chunk-3-1.pdf}
+\includegraphics{SuperpowerValidation_files/figure-latex/unnamed-chunk-2-1.pdf}
 
 \begin{Shaded}
 \begin{Highlighting}[]
@@ -213,11 +189,11 @@ Imagine we aim to design a study to test the hypothesis that giving people a pet
 \begin{verbatim}
 ## Power and Effect sizes for ANOVA tests
 ##                 power effect_size
-## anova_condition    69     0.03316
+## anova_condition    66     0.03461
 ## 
 ## Power and Effect sizes for contrasts
 ##                                   power effect_size
-## p_condition_control_condition_pet    69       0.341
+## p_condition_control_condition_pet    66      0.3465
 \end{verbatim}
 
 The result shows that we have exactly the same power for the ANOVA, as we have for the \emph{t}-test. This is because when there are only two groups, these tests are mathematically identical. In a study with 100 participants, we would have quite low power (around 67.7\%). An ANOVA with 2 groups is identical to a \emph{t}-test. For our example, Cohen's d (the standardized mean difference) is 2.2/6.4, or d = 0.34375 for the difference between the control condition and pets, which we can use to easily compute the expected power for these simple comparisons using the pwr package.
@@ -317,7 +293,7 @@ We can compute a pattern of means, given a standard deviation of 6.4, that would
 \end{Highlighting}
 \end{Shaded}
 
-\includegraphics{SuperpowerValidation_files/figure-latex/unnamed-chunk-9-1.pdf}
+\includegraphics{SuperpowerValidation_files/figure-latex/unnamed-chunk-8-1.pdf}
 
 \begin{Shaded}
 \begin{Highlighting}[]
@@ -328,11 +304,11 @@ We can compute a pattern of means, given a standard deviation of 6.4, that would
 \begin{verbatim}
 ## Power and Effect sizes for ANOVA tests
 ##                 power effect_size
-## anova_condition    88     0.04836
+## anova_condition    88      0.0511
 ## 
 ## Power and Effect sizes for contrasts
 ##                                   power effect_size
-## p_condition_control_condition_pet    88      0.4328
+## p_condition_control_condition_pet    88      0.4444
 \end{verbatim}
 
 The simulation confirms that for the \emph{F}-test for the ANOVA we have 90\% power. This is also what g*power tells us what would happen based on a post-hoc power analysis with an f of 0.2303587, 2 groups, 200 participants in total (100 in each between subject condition), and an alpha of 5\%.
@@ -385,7 +361,7 @@ If we re-run the simulation with this sample size, we indeed have 90\% power.
 \end{Highlighting}
 \end{Shaded}
 
-\includegraphics{SuperpowerValidation_files/figure-latex/unnamed-chunk-11-1.pdf}
+\includegraphics{SuperpowerValidation_files/figure-latex/unnamed-chunk-10-1.pdf}
 
 \begin{Shaded}
 \begin{Highlighting}[]
@@ -397,11 +373,11 @@ If we re-run the simulation with this sample size, we indeed have 90\% power.
 \begin{verbatim}
 ## Power and Effect sizes for ANOVA tests
 ##                 power effect_size
-## anova_condition    88     0.03289
+## anova_condition    85     0.03191
 ## 
 ## Power and Effect sizes for contrasts
 ##                                   power effect_size
-## p_condition_control_condition_pet    88      0.3533
+## p_condition_control_condition_pet    85      0.3474
 \end{verbatim}
 
 We stored the result from the power analysis in an object. This allows us to request plots (which are not printed automatically) showing the \emph{p}-value distribution. If we request power\_result\$plot1 we get the p-value distribution for the ANOVA:
@@ -412,7 +388,7 @@ We stored the result from the power analysis in an object. This allows us to req
 \end{Highlighting}
 \end{Shaded}
 
-\includegraphics{SuperpowerValidation_files/figure-latex/unnamed-chunk-12-1.pdf}
+\includegraphics{SuperpowerValidation_files/figure-latex/unnamed-chunk-11-1.pdf}
 If we request power\_result\$plot2 we get the p-value distribution for the paired comparisons (in this case only one):
 
 \begin{Shaded}
@@ -421,7 +397,7 @@ If we request power\_result\$plot2 we get the p-value distribution for the paire
 \end{Highlighting}
 \end{Shaded}
 
-\includegraphics{SuperpowerValidation_files/figure-latex/unnamed-chunk-13-1.pdf}
+\includegraphics{SuperpowerValidation_files/figure-latex/unnamed-chunk-12-1.pdf}
 
 \hypertarget{one-way-anova-part-2}{%
 \chapter{One-way ANOVA Part 2}\label{one-way-anova-part-2}}
@@ -453,7 +429,7 @@ Imagine we aim to design a study to test the hypothesis that giving people a pet
 \end{Highlighting}
 \end{Shaded}
 
-\includegraphics{SuperpowerValidation_files/figure-latex/unnamed-chunk-15-1.pdf}
+\includegraphics{SuperpowerValidation_files/figure-latex/unnamed-chunk-14-1.pdf}
 
 \begin{Shaded}
 \begin{Highlighting}[]
@@ -467,13 +443,13 @@ Imagine we aim to design a study to test the hypothesis that giving people a pet
 \begin{verbatim}
 ## Power and Effect sizes for ANOVA tests
 ##                 power effect_size
-## anova_condition    46     0.04169
+## anova_condition    53     0.05078
 ## 
 ## Power and Effect sizes for contrasts
 ##                                   power effect_size
-## p_condition_control_condition_cat    41     0.33459
-## p_condition_control_condition_dog    46     0.37274
-## p_condition_cat_condition_dog         7     0.03855
+## p_condition_control_condition_cat    44      0.3614
+## p_condition_control_condition_dog    61      0.4644
+## p_condition_cat_condition_dog         5      0.1008
 \end{verbatim}
 
 \begin{Shaded}
@@ -601,7 +577,7 @@ We can compute a pattern of means, given a standard deviation of 6.4, that would
 \end{Highlighting}
 \end{Shaded}
 
-\includegraphics{SuperpowerValidation_files/figure-latex/unnamed-chunk-20-1.pdf}
+\includegraphics{SuperpowerValidation_files/figure-latex/unnamed-chunk-19-1.pdf}
 
 \begin{Shaded}
 \begin{Highlighting}[]
@@ -612,13 +588,13 @@ We can compute a pattern of means, given a standard deviation of 6.4, that would
 \begin{verbatim}
 ## Power and Effect sizes for ANOVA tests
 ##                 power effect_size
-## anova_condition    88     0.08837
+## anova_condition    95     0.09547
 ## 
 ## Power and Effect sizes for contrasts
 ##                                   power effect_size
-## p_condition_control_condition_cat    48      0.3741
-## p_condition_control_condition_dog    91      0.7049
-## p_condition_cat_condition_dog        39      0.3247
+## p_condition_control_condition_cat    46      0.4072
+## p_condition_control_condition_dog    98      0.7647
+## p_condition_cat_condition_dog        39      0.3475
 \end{verbatim}
 
 The simulation confirms that for the \emph{F}-test for the ANOVA we have 90\% power. This is also what g*power tells us what would happen based on a post-hoc power analysis with an f of 0.2934417, 3 groups, 150 participants in total (50 in each between subject condition), and an alpha of 5\%.
@@ -777,7 +753,7 @@ Then we use the function to calculate power.
 \end{Shaded}
 
 \hypertarget{one-way-anova-part-3}{%
-\section{One-way ANOVA Part 3}\label{one-way-anova-part-3}}
+\chapter{One-way ANOVA Part 3}\label{one-way-anova-part-3}}
 
 We first repeat the simulation by Brysbaert:
 
@@ -832,7 +808,7 @@ We first repeat the simulation by Brysbaert:
 \end{Shaded}
 
 \begin{verbatim}
-## [1] 0.71
+## [1] 0.81
 \end{verbatim}
 
 \begin{Shaded}
@@ -842,7 +818,7 @@ We first repeat the simulation by Brysbaert:
 \end{Shaded}
 
 \begin{verbatim}
-## [1] 0.63
+## [1] 0.79
 \end{verbatim}
 
 \begin{Shaded}
@@ -852,7 +828,7 @@ We first repeat the simulation by Brysbaert:
 \end{Shaded}
 
 \begin{verbatim}
-## [1] 0.73
+## [1] 0.78
 \end{verbatim}
 
 \begin{Shaded}
@@ -862,7 +838,7 @@ We first repeat the simulation by Brysbaert:
 \end{Shaded}
 
 \begin{verbatim}
-## [1] 0.07
+## [1] 0.03
 \end{verbatim}
 
 \begin{Shaded}
@@ -872,7 +848,7 @@ We first repeat the simulation by Brysbaert:
 \end{Shaded}
 
 \begin{verbatim}
-## [1] 0.03808708
+## [1] 0.04011467
 \end{verbatim}
 
 \begin{Shaded}
@@ -882,7 +858,7 @@ We first repeat the simulation by Brysbaert:
 \end{Shaded}
 
 \begin{verbatim}
-## [1] 0.03816216
+## [1] 0.04241091
 \end{verbatim}
 
 \hypertarget{three-conditions-replication}{%
@@ -909,7 +885,7 @@ We first repeat the simulation by Brysbaert:
 \end{Highlighting}
 \end{Shaded}
 
-\includegraphics{SuperpowerValidation_files/figure-latex/unnamed-chunk-26-1.pdf}
+\includegraphics{SuperpowerValidation_files/figure-latex/unnamed-chunk-25-1.pdf}
 
 \begin{Shaded}
 \begin{Highlighting}[]
@@ -920,13 +896,13 @@ We first repeat the simulation by Brysbaert:
 \begin{verbatim}
 ## Power and Effect sizes for ANOVA tests
 ##               power effect_size
-## anova_factor1    81     0.04089
+## anova_factor1    82     0.04214
 ## 
 ## Power and Effect sizes for contrasts
 ##                                 power effect_size
-## p_factor1_level1_factor1_level2    82     0.40691
-## p_factor1_level1_factor1_level3    75     0.39780
-## p_factor1_level2_factor1_level3     3    -0.01002
+## p_factor1_level1_factor1_level2    74    0.401812
+## p_factor1_level1_factor1_level3    72    0.398766
+## p_factor1_level2_factor1_level3     7   -0.002054
 \end{verbatim}
 
 \hypertarget{variation-1}{%
@@ -980,7 +956,7 @@ We first repeat the simulation by Brysbaert:
 \end{Shaded}
 
 \begin{verbatim}
-## [1] 0.9
+## [1] 0.94
 \end{verbatim}
 
 \begin{Shaded}
@@ -990,7 +966,7 @@ We first repeat the simulation by Brysbaert:
 \end{Shaded}
 
 \begin{verbatim}
-## [1] 0.91
+## [1] 0.89
 \end{verbatim}
 
 \begin{Shaded}
@@ -1000,7 +976,7 @@ We first repeat the simulation by Brysbaert:
 \end{Shaded}
 
 \begin{verbatim}
-## [1] 0.03
+## [1] 0.05
 \end{verbatim}
 
 \begin{Shaded}
@@ -1010,7 +986,7 @@ We first repeat the simulation by Brysbaert:
 \end{Shaded}
 
 \begin{verbatim}
-## [1] 0.91
+## [1] 0.94
 \end{verbatim}
 
 \begin{Shaded}
@@ -1020,7 +996,7 @@ We first repeat the simulation by Brysbaert:
 \end{Shaded}
 
 \begin{verbatim}
-## [1] 0.03644733
+## [1] 0.04057115
 \end{verbatim}
 
 \begin{Shaded}
@@ -1030,7 +1006,7 @@ We first repeat the simulation by Brysbaert:
 \end{Shaded}
 
 \begin{verbatim}
-## [1] 0.04017308
+## [1] 0.04531236
 \end{verbatim}
 
 \hypertarget{three-conditions-replication-1}{%
@@ -1057,7 +1033,7 @@ We first repeat the simulation by Brysbaert:
 \end{Highlighting}
 \end{Shaded}
 
-\includegraphics{SuperpowerValidation_files/figure-latex/unnamed-chunk-29-1.pdf}
+\includegraphics{SuperpowerValidation_files/figure-latex/unnamed-chunk-28-1.pdf}
 
 \begin{Shaded}
 \begin{Highlighting}[]
@@ -1068,13 +1044,13 @@ We first repeat the simulation by Brysbaert:
 \begin{verbatim}
 ## Power and Effect sizes for ANOVA tests
 ##               power effect_size
-## anova_factor1    92     0.03871
+## anova_factor1    92     0.03798
 ## 
 ## Power and Effect sizes for contrasts
 ##                                 power effect_size
-## p_factor1_level1_factor1_level2    91    0.397884
-## p_factor1_level1_factor1_level3     5   -0.005665
-## p_factor1_level2_factor1_level3    91   -0.403446
+## p_factor1_level1_factor1_level2    93    0.394404
+## p_factor1_level1_factor1_level3     6    0.005287
+## p_factor1_level2_factor1_level3    88   -0.391447
 \end{verbatim}
 
 \hypertarget{variation-2}{%
@@ -1128,7 +1104,7 @@ We first repeat the simulation by Brysbaert:
 \end{Shaded}
 
 \begin{verbatim}
-## [1] 0.58
+## [1] 0.63
 \end{verbatim}
 
 \begin{Shaded}
@@ -1138,7 +1114,7 @@ We first repeat the simulation by Brysbaert:
 \end{Shaded}
 
 \begin{verbatim}
-## [1] 0.62
+## [1] 0.73
 \end{verbatim}
 
 \begin{Shaded}
@@ -1148,7 +1124,7 @@ We first repeat the simulation by Brysbaert:
 \end{Shaded}
 
 \begin{verbatim}
-## [1] 0.26
+## [1] 0.18
 \end{verbatim}
 
 \begin{Shaded}
@@ -1158,7 +1134,7 @@ We first repeat the simulation by Brysbaert:
 \end{Shaded}
 
 \begin{verbatim}
-## [1] 0.2
+## [1] 0.3
 \end{verbatim}
 
 \begin{Shaded}
@@ -1168,7 +1144,7 @@ We first repeat the simulation by Brysbaert:
 \end{Shaded}
 
 \begin{verbatim}
-## [1] 0.03198582
+## [1] 0.03383246
 \end{verbatim}
 
 \begin{Shaded}
@@ -1178,7 +1154,7 @@ We first repeat the simulation by Brysbaert:
 \end{Shaded}
 
 \begin{verbatim}
-## [1] 0.04184699
+## [1] 0.0425566
 \end{verbatim}
 
 \hypertarget{three-conditions-replication-2}{%
@@ -1204,7 +1180,7 @@ We first repeat the simulation by Brysbaert:
 \end{Highlighting}
 \end{Shaded}
 
-\includegraphics{SuperpowerValidation_files/figure-latex/unnamed-chunk-32-1.pdf}
+\includegraphics{SuperpowerValidation_files/figure-latex/unnamed-chunk-31-1.pdf}
 
 \begin{Shaded}
 \begin{Highlighting}[]
@@ -1215,13 +1191,13 @@ We first repeat the simulation by Brysbaert:
 \begin{verbatim}
 ## Power and Effect sizes for ANOVA tests
 ##               power effect_size
-## anova_factor1    58     0.03266
+## anova_factor1    64      0.0368
 ## 
 ## Power and Effect sizes for contrasts
 ##                                 power effect_size
-## p_factor1_level1_factor1_level2    71      0.3891
-## p_factor1_level1_factor1_level3    24      0.1995
-## p_factor1_level2_factor1_level3    20     -0.1892
+## p_factor1_level1_factor1_level2    77      0.4242
+## p_factor1_level1_factor1_level3    21      0.2039
+## p_factor1_level2_factor1_level3    26     -0.2198
 \end{verbatim}
 
 \hypertarget{repeated-measures-anova-part-1}{%
@@ -1343,7 +1319,7 @@ We can perform both these power analyses using simuations as well. We set groups
 \end{Highlighting}
 \end{Shaded}
 
-\includegraphics{SuperpowerValidation_files/figure-latex/unnamed-chunk-34-1.pdf}
+\includegraphics{SuperpowerValidation_files/figure-latex/unnamed-chunk-33-1.pdf}
 
 \begin{Shaded}
 \begin{Highlighting}[]
@@ -1355,11 +1331,11 @@ We can perform both these power analyses using simuations as well. We set groups
 \begin{verbatim}
 ## Power and Effect sizes for ANOVA tests
 ##             power effect_size
-## anova_speed    83      0.2252
+## anova_speed    80      0.2138
 ## 
 ## Power and Effect sizes for contrasts
 ##                         power effect_size
-## p_speed_fast_speed_slow    83      0.5273
+## p_speed_fast_speed_slow    80      0.5077
 ## 
 ## Within-Subject Factors Included: Check MANOVA Results
 \end{verbatim}
@@ -1400,7 +1376,7 @@ We should see a larger dz if we increase the correlation, keeping the sample siz
 \end{Highlighting}
 \end{Shaded}
 
-\includegraphics{SuperpowerValidation_files/figure-latex/unnamed-chunk-35-1.pdf}
+\includegraphics{SuperpowerValidation_files/figure-latex/unnamed-chunk-34-1.pdf}
 
 \begin{Shaded}
 \begin{Highlighting}[]
@@ -1424,11 +1400,11 @@ We should see a larger dz if we increase the correlation, keeping the sample siz
 \begin{verbatim}
 ## Power and Effect sizes for ANOVA tests
 ##             power effect_size
-## anova_speed    81      0.3359
+## anova_speed    75      0.2973
 ## 
 ## Power and Effect sizes for contrasts
 ##                         power effect_size
-## p_speed_fast_speed_slow    81      0.7132
+## p_speed_fast_speed_slow    75      0.6434
 ## 
 ## Within-Subject Factors Included: Check MANOVA Results
 \end{verbatim}
@@ -1582,7 +1558,7 @@ In this case, we simulate data with means -0.3061862, 0.0000000, and 0.3061862, 
 \end{Highlighting}
 \end{Shaded}
 
-\includegraphics{SuperpowerValidation_files/figure-latex/unnamed-chunk-39-1.pdf}
+\includegraphics{SuperpowerValidation_files/figure-latex/unnamed-chunk-38-1.pdf}
 
 \begin{Shaded}
 \begin{Highlighting}[]
@@ -1594,13 +1570,13 @@ In this case, we simulate data with means -0.3061862, 0.0000000, and 0.3061862, 
 \begin{verbatim}
 ## Power and Effect sizes for ANOVA tests
 ##             power effect_size
-## anova_speed    98       0.351
+## anova_speed    95      0.3583
 ## 
 ## Power and Effect sizes for contrasts
 ##                           power effect_size
-## p_speed_fast_speed_medium    52      0.5183
-## p_speed_fast_speed_slow     100      1.0454
-## p_speed_medium_speed_slow    58      0.5029
+## p_speed_fast_speed_medium    60      0.5350
+## p_speed_fast_speed_slow      97      1.0342
+## p_speed_medium_speed_slow    53      0.5059
 ## 
 ## Within-Subject Factors Included: Check MANOVA Results
 \end{verbatim}
@@ -1643,7 +1619,7 @@ We can also validate this by creating the code to do a power analysis in R from 
 \end{Highlighting}
 \end{Shaded}
 
-\includegraphics{SuperpowerValidation_files/figure-latex/unnamed-chunk-40-1.pdf}
+\includegraphics{SuperpowerValidation_files/figure-latex/unnamed-chunk-39-1.pdf}
 
 \begin{Shaded}
 \begin{Highlighting}[]
@@ -1754,7 +1730,7 @@ We first repeat the simulation by Brysbaert:
 \end{Shaded}
 
 \begin{verbatim}
-## [1] 1
+## [1] 0.94
 \end{verbatim}
 
 \begin{Shaded}
@@ -1764,7 +1740,7 @@ We first repeat the simulation by Brysbaert:
 \end{Shaded}
 
 \begin{verbatim}
-## [1] 0.96
+## [1] 0.94
 \end{verbatim}
 
 \begin{Shaded}
@@ -1774,7 +1750,7 @@ We first repeat the simulation by Brysbaert:
 \end{Shaded}
 
 \begin{verbatim}
-## [1] 0.94
+## [1] 0.93
 \end{verbatim}
 
 \begin{Shaded}
@@ -1784,7 +1760,7 @@ We first repeat the simulation by Brysbaert:
 \end{Shaded}
 
 \begin{verbatim}
-## [1] 0.06
+## [1] 0.01
 \end{verbatim}
 
 \hypertarget{reproducing-brysbaert}{%
@@ -1816,7 +1792,7 @@ We create the within design, and run the simulation
 \end{Highlighting}
 \end{Shaded}
 
-\includegraphics{SuperpowerValidation_files/figure-latex/unnamed-chunk-43-1.pdf}
+\includegraphics{SuperpowerValidation_files/figure-latex/unnamed-chunk-42-1.pdf}
 
 \begin{Shaded}
 \begin{Highlighting}[]
@@ -1827,13 +1803,13 @@ We create the within design, and run the simulation
 \begin{verbatim}
 ## Power and Effect sizes for ANOVA tests
 ##             power effect_size
-## anova_speed    98      0.1108
+## anova_speed    94     0.09853
 ## 
 ## Power and Effect sizes for contrasts
 ##                           power effect_size
-## p_speed_fast_speed_medium    89    0.411530
-## p_speed_fast_speed_slow      95    0.414675
-## p_speed_medium_speed_slow     8    0.005365
+## p_speed_fast_speed_medium    91      0.3842
+## p_speed_fast_speed_slow      93      0.3887
+## p_speed_medium_speed_slow     6      0.0078
 ## 
 ## Within-Subject Factors Included: Check MANOVA Results
 \end{verbatim}
@@ -1916,7 +1892,7 @@ The Cohen´s f is 0.1885618. We can enter the f (using the default 'as in G*Powe
 \end{Shaded}
 
 \begin{verbatim}
-## [1] 0.98
+## [1] 0.94
 \end{verbatim}
 
 \begin{Shaded}
@@ -1926,7 +1902,7 @@ The Cohen´s f is 0.1885618. We can enter the f (using the default 'as in G*Powe
 \end{Shaded}
 
 \begin{verbatim}
-## [1] 0.97
+## [1] 0.93
 \end{verbatim}
 
 \begin{Shaded}
@@ -1936,7 +1912,7 @@ The Cohen´s f is 0.1885618. We can enter the f (using the default 'as in G*Powe
 \end{Shaded}
 
 \begin{verbatim}
-## [1] 0.95
+## [1] 0.92
 \end{verbatim}
 
 \begin{Shaded}
@@ -1946,7 +1922,7 @@ The Cohen´s f is 0.1885618. We can enter the f (using the default 'as in G*Powe
 \end{Shaded}
 
 \begin{verbatim}
-## [1] 0.05
+## [1] 0.01
 \end{verbatim}
 
 \begin{Shaded}
@@ -1973,7 +1949,7 @@ We create the within design, and run the simulation
 \end{Highlighting}
 \end{Shaded}
 
-\includegraphics{SuperpowerValidation_files/figure-latex/unnamed-chunk-47-1.pdf}
+\includegraphics{SuperpowerValidation_files/figure-latex/unnamed-chunk-46-1.pdf}
 
 \begin{Shaded}
 \begin{Highlighting}[]
@@ -1984,13 +1960,13 @@ We create the within design, and run the simulation
 \begin{verbatim}
 ## Power and Effect sizes for ANOVA tests
 ##             power effect_size
-## anova_speed    99      0.1307
+## anova_speed    99      0.1223
 ## 
 ## Power and Effect sizes for contrasts
 ##                           power effect_size
-## p_speed_fast_speed_medium    99     0.46715
-## p_speed_fast_speed_slow      95     0.44372
-## p_speed_medium_speed_slow     3    -0.01717
+## p_speed_fast_speed_medium    98    0.436167
+## p_speed_fast_speed_slow      97    0.443268
+## p_speed_medium_speed_slow     8   -0.001819
 ## 
 ## Within-Subject Factors Included: Check MANOVA Results
 \end{verbatim}
@@ -1998,6 +1974,2654 @@ We create the within design, and run the simulation
 Again, this is similar to g*power for the ANOVA:
 
 \includegraphics{screenshots/gpower_4.png}
+
+\hypertarget{mixed-anova-part-1}{%
+\chapter{Mixed ANOVA Part 1}\label{mixed-anova-part-1}}
+
+\hypertarget{two-by-two-anova-within-between-design}{%
+\section{Two by two ANOVA, within-between design}\label{two-by-two-anova-within-between-design}}
+
+We can simulate a Two-Way ANOVA with a specific alpha, sample size and effect size, to achieve a specified statistical power. We wil try to reproduce the power analysis by g*power for an F-test, ANOVA: Repeated measures, within-between interaction.
+
+\includegraphics{screenshots/gpower_5.png}
+
+For the 2-way interaction, the result should be a power of 91.25\% is we have a total samplesize of 46. Since we have 2 groups in the between factor that means the sample size per group is 2 (and both these groups collect 2 repeated measures).
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\NormalTok{mu <-}\StringTok{ }\KeywordTok{c}\NormalTok{(}\OperatorTok{-}\FloatTok{0.25}\NormalTok{, }\FloatTok{0.25}\NormalTok{, }\FloatTok{0.25}\NormalTok{, }\FloatTok{-0.25}\NormalTok{)}
+\NormalTok{n <-}\StringTok{ }\DecValTok{23}
+\NormalTok{sd <-}\StringTok{ }\DecValTok{1}
+\NormalTok{r <-}\StringTok{ }\FloatTok{0.5}
+\NormalTok{string =}\StringTok{ "2w*2b"}
+\NormalTok{alpha_level <-}\StringTok{ }\FloatTok{0.05}
+\NormalTok{labelnames =}\StringTok{ }\KeywordTok{c}\NormalTok{(}\StringTok{"age"}\NormalTok{, }\StringTok{"old"}\NormalTok{, }\StringTok{"young"}\NormalTok{, }\StringTok{"color"}\NormalTok{, }\StringTok{"blue"}\NormalTok{, }\StringTok{"red"}\NormalTok{)}
+\NormalTok{design_result <-}\StringTok{ }\KeywordTok{ANOVA_design}\NormalTok{(}\DataTypeTok{design =}\NormalTok{ string,}
+                              \DataTypeTok{n =}\NormalTok{ n, }
+                              \DataTypeTok{mu =}\NormalTok{ mu, }
+                              \DataTypeTok{sd =}\NormalTok{ sd, }
+                              \DataTypeTok{r =}\NormalTok{ r, }
+                              \DataTypeTok{labelnames =}\NormalTok{ labelnames)}
+\end{Highlighting}
+\end{Shaded}
+
+\includegraphics{SuperpowerValidation_files/figure-latex/unnamed-chunk-47-1.pdf}
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\NormalTok{simulation_result <-}\StringTok{ }\KeywordTok{ANOVA_power}\NormalTok{(design_result, }\DataTypeTok{alpha =} \FloatTok{0.05}\NormalTok{, }\DataTypeTok{nsims =}\NormalTok{ nsims)}
+\end{Highlighting}
+\end{Shaded}
+
+\begin{verbatim}
+## Power and Effect sizes for ANOVA tests
+##                 power effect_size
+## anova_color         5     0.02118
+## anova_age           6     0.02362
+## anova_color:age    91     0.20318
+## 
+## Power and Effect sizes for contrasts
+##                                            power effect_size
+## p_age_old_color_blue_age_old_color_red        28     0.46087
+## p_age_old_color_blue_age_young_color_blue     56     0.49235
+## p_age_old_color_blue_age_young_color_red       9    -0.02785
+## p_age_old_color_red_age_young_color_blue       5     0.01655
+## p_age_old_color_red_age_young_color_red       59    -0.50668
+## p_age_young_color_blue_age_young_color_red    37    -0.50244
+## 
+## Within-Subject Factors Included: Check MANOVA Results
+\end{verbatim}
+
+\hypertarget{two-by-two-anova-within-between-design-variation-1}{%
+\section{Two by two ANOVA, within-between design Variation 1}\label{two-by-two-anova-within-between-design-variation-1}}
+
+We can simulate the same Two-Way ANOVA increasing the correlation to 0.7.
+
+\includegraphics{screenshots/gpower_6.png}
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\NormalTok{mu <-}\StringTok{ }\KeywordTok{c}\NormalTok{(}\OperatorTok{-}\FloatTok{0.25}\NormalTok{, }\FloatTok{0.25}\NormalTok{, }\FloatTok{0.25}\NormalTok{, }\FloatTok{-0.25}\NormalTok{)}
+\NormalTok{n <-}\StringTok{ }\DecValTok{23}
+\NormalTok{sd <-}\StringTok{ }\DecValTok{1}
+\NormalTok{r <-}\StringTok{ }\FloatTok{0.7}
+\NormalTok{string =}\StringTok{ "2w*2b"}
+\NormalTok{alpha_level <-}\StringTok{ }\FloatTok{0.05}
+\NormalTok{labelnames =}\StringTok{ }\KeywordTok{c}\NormalTok{(}\StringTok{"age"}\NormalTok{, }\StringTok{"old"}\NormalTok{, }\StringTok{"young"}\NormalTok{, }\StringTok{"color"}\NormalTok{, }\StringTok{"blue"}\NormalTok{, }\StringTok{"red"}\NormalTok{)}
+\NormalTok{design_result <-}\StringTok{ }\KeywordTok{ANOVA_design}\NormalTok{(}\DataTypeTok{design =}\NormalTok{ string,}
+                              \DataTypeTok{n =}\NormalTok{ n, }
+                              \DataTypeTok{mu =}\NormalTok{ mu, }
+                              \DataTypeTok{sd =}\NormalTok{ sd, }
+                              \DataTypeTok{r =}\NormalTok{ r, }
+                              \DataTypeTok{labelnames =}\NormalTok{ labelnames)}
+\end{Highlighting}
+\end{Shaded}
+
+\includegraphics{SuperpowerValidation_files/figure-latex/unnamed-chunk-48-1.pdf}
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\NormalTok{simulation_result <-}\StringTok{ }\KeywordTok{ANOVA_power}\NormalTok{(design_result, }\DataTypeTok{alpha =} \FloatTok{0.05}\NormalTok{, }\DataTypeTok{nsims =}\NormalTok{ nsims)}
+\end{Highlighting}
+\end{Shaded}
+
+\begin{verbatim}
+## Power and Effect sizes for ANOVA tests
+##                 power effect_size
+## anova_color         2     0.01759
+## anova_age           7     0.02260
+## anova_color:age    98     0.29823
+## 
+## Power and Effect sizes for contrasts
+##                                            power effect_size
+## p_age_old_color_blue_age_old_color_red        45     0.54169
+## p_age_old_color_blue_age_young_color_blue     87     0.68826
+## p_age_old_color_blue_age_young_color_red       5     0.04402
+## p_age_old_color_red_age_young_color_blue       2    -0.01272
+## p_age_old_color_red_age_young_color_red       77    -0.62245
+## p_age_young_color_blue_age_young_color_red    34    -0.47829
+## 
+## Within-Subject Factors Included: Check MANOVA Results
+\end{verbatim}
+
+\hypertarget{mixed-anova-part-2}{%
+\chapter{Mixed ANOVA Part 2}\label{mixed-anova-part-2}}
+
+\hypertarget{two-by-two-anova-within-within-design}{%
+\section{Two by two ANOVA, within-within design}\label{two-by-two-anova-within-within-design}}
+
+We can simulate a 2x2 ANOVA, both factors manipulated within participants, with a specific sample size and effect size, to achieve a desired statistical power.
+
+As Potvin \& Schutz (2000) explain, analytic procedures for a two-factor repeated measures ANOVA do not seem to exist. The main problem is quantifying the error variance (the denominator when calculating lambda or Cohen's f). Simulation based aproaches provide a solution.
+
+We can reproduce the simulation coded by \href{https://cognitivedatascientist.com/2015/12/14/power-simulation-in-r-the-repeated-measures-anova-5/}{Ben Amsel}
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\NormalTok{knitr}\OperatorTok{::}\NormalTok{opts_chunk}\OperatorTok{$}\KeywordTok{set}\NormalTok{(}\DataTypeTok{echo=}\OtherTok{TRUE}\NormalTok{, }\DataTypeTok{warning=}\OtherTok{FALSE}\NormalTok{, }\DataTypeTok{message=}\OtherTok{FALSE}\NormalTok{)}
+ 
+\CommentTok{# define the parameters}
+\NormalTok{mu =}\StringTok{ }\KeywordTok{c}\NormalTok{(}\DecValTok{700}\NormalTok{, }\DecValTok{670}\NormalTok{, }\DecValTok{670}\NormalTok{, }\DecValTok{700}\NormalTok{) }\CommentTok{# true effects (in this case, a double dissociation)}
+\NormalTok{sigma =}\StringTok{ }\DecValTok{150}  \CommentTok{# population standard deviation}
+\NormalTok{rho =}\StringTok{ }\FloatTok{0.75} \CommentTok{# correlation between repeated measures}
+\NormalTok{nsubs =}\StringTok{ }\DecValTok{25} \CommentTok{# how many subjects?}
+\NormalTok{nsims =}\StringTok{ }\NormalTok{nsims }\CommentTok{# how many simulation replicates?}
+ 
+\CommentTok{# create 2 factors representing the 2 independent variables}
+\NormalTok{cond =}\StringTok{ }\KeywordTok{data.frame}\NormalTok{(}
+  \DataTypeTok{X1 =} \KeywordTok{rep}\NormalTok{(}\KeywordTok{factor}\NormalTok{(letters[}\DecValTok{1}\OperatorTok{:}\DecValTok{2}\NormalTok{]), nsubs }\OperatorTok{*}\StringTok{ }\DecValTok{2}\NormalTok{),}
+  \DataTypeTok{X2 =} \KeywordTok{rep}\NormalTok{(}\KeywordTok{factor}\NormalTok{(letters[}\DecValTok{1}\OperatorTok{:}\DecValTok{2}\NormalTok{]), nsubs, }\DataTypeTok{each=}\DecValTok{2}\NormalTok{))}
+ 
+\CommentTok{# create a subjects factor}
+\NormalTok{subject =}\StringTok{ }\KeywordTok{factor}\NormalTok{(}\KeywordTok{sort}\NormalTok{(}\KeywordTok{rep}\NormalTok{(}\DecValTok{1}\OperatorTok{:}\NormalTok{nsubs, }\DecValTok{4}\NormalTok{)))}
+ 
+\CommentTok{# combine above into the design matrix}
+\NormalTok{dm =}\StringTok{ }\KeywordTok{data.frame}\NormalTok{(subject, cond)}
+\end{Highlighting}
+\end{Shaded}
+
+Build Sigma: the population variance-covariance matrix
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\CommentTok{# create k x k matrix populated with sigma}
+\NormalTok{sigma.mat <-}\StringTok{ }\KeywordTok{rep}\NormalTok{(sigma, }\DecValTok{4}\NormalTok{)}
+\NormalTok{S <-}\StringTok{ }\KeywordTok{matrix}\NormalTok{(sigma.mat, }\DataTypeTok{ncol=}\KeywordTok{length}\NormalTok{(sigma.mat), }\DataTypeTok{nrow=}\KeywordTok{length}\NormalTok{(sigma.mat))}
+ 
+\CommentTok{# compute covariance between measures}
+\NormalTok{Sigma <-}\StringTok{ }\KeywordTok{t}\NormalTok{(S) }\OperatorTok{*}\StringTok{ }\NormalTok{S }\OperatorTok{*}\StringTok{ }\NormalTok{rho  }
+ 
+\CommentTok{# put the variances on the diagonal }
+\KeywordTok{diag}\NormalTok{(Sigma) <-}\StringTok{ }\NormalTok{sigma}\OperatorTok{^}\DecValTok{2}  
+\end{Highlighting}
+\end{Shaded}
+
+Run the simulation
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\CommentTok{# stack 'nsims' individual data frames into one large data frame}
+\NormalTok{df =}\StringTok{ }\NormalTok{dm[}\KeywordTok{rep}\NormalTok{(}\KeywordTok{seq_len}\NormalTok{(}\KeywordTok{nrow}\NormalTok{(dm)), nsims), ]}
+ 
+\CommentTok{# add an index column to track the simulation run}
+\NormalTok{df}\OperatorTok{$}\NormalTok{simID =}\StringTok{ }\KeywordTok{sort}\NormalTok{(}\KeywordTok{rep}\NormalTok{(}\KeywordTok{seq_len}\NormalTok{(nsims), }\KeywordTok{nrow}\NormalTok{(dm)))}
+ 
+\CommentTok{# sample the observed data from a multivariate normal distribution}
+\CommentTok{# using MASS::mvrnorm with the parameters mu and Sigma created earlier}
+\CommentTok{# and bind to the existing df}
+ 
+\KeywordTok{require}\NormalTok{(MASS)}
+\NormalTok{make.y =}\StringTok{ }\KeywordTok{expression}\NormalTok{(}\KeywordTok{as.vector}\NormalTok{(}\KeywordTok{t}\NormalTok{(}\KeywordTok{mvrnorm}\NormalTok{(nsubs, mu, Sigma))))}
+\NormalTok{df}\OperatorTok{$}\NormalTok{y =}\StringTok{ }\KeywordTok{as.vector}\NormalTok{(}\KeywordTok{replicate}\NormalTok{(nsims, }\KeywordTok{eval}\NormalTok{(make.y)))             }
+ 
+\CommentTok{# use do(), the general purpose complement to the specialized data }
+\CommentTok{# manipulation functions available in dplyr, to run the ANOVA on}
+\CommentTok{# each section of the grouped data frame created by group_by}
+ 
+\KeywordTok{require}\NormalTok{(dplyr)}
+\KeywordTok{require}\NormalTok{(car)}
+\KeywordTok{require}\NormalTok{(broom)}
+ 
+\NormalTok{mods <-}\StringTok{ }\NormalTok{df }\OperatorTok{%>%}\StringTok{ }
+\StringTok{  }\KeywordTok{group_by}\NormalTok{(simID) }\OperatorTok{%>%}\StringTok{ }
+\StringTok{    }\KeywordTok{do}\NormalTok{(}\DataTypeTok{model =} \KeywordTok{aov}\NormalTok{(y }\OperatorTok{~}\StringTok{ }\NormalTok{X1 }\OperatorTok{*}\StringTok{ }\NormalTok{X2 }\OperatorTok{+}\StringTok{ }\KeywordTok{Error}\NormalTok{(subject }\OperatorTok{/}\StringTok{ }\NormalTok{(X1}\OperatorTok{*}\NormalTok{X2)), }\DataTypeTok{qr=}\OtherTok{FALSE}\NormalTok{, }\DataTypeTok{data =}\NormalTok{ .)) }
+ 
+\CommentTok{# extract p-values for each effect and store in a data frame}
+\NormalTok{p =}\StringTok{ }\KeywordTok{data.frame}\NormalTok{(}
+\NormalTok{  mods }\OperatorTok{%>%}\StringTok{ }\KeywordTok{do}\NormalTok{(}\KeywordTok{as.data.frame}\NormalTok{(}\KeywordTok{tidy}\NormalTok{(.}\OperatorTok{$}\NormalTok{model[[}\DecValTok{3}\NormalTok{]])}\OperatorTok{$}\NormalTok{p.value[}\DecValTok{1}\NormalTok{])),}
+\NormalTok{  mods }\OperatorTok{%>%}\StringTok{ }\KeywordTok{do}\NormalTok{(}\KeywordTok{as.data.frame}\NormalTok{(}\KeywordTok{tidy}\NormalTok{(.}\OperatorTok{$}\NormalTok{model[[}\DecValTok{4}\NormalTok{]])}\OperatorTok{$}\NormalTok{p.value[}\DecValTok{1}\NormalTok{])),}
+\NormalTok{  mods }\OperatorTok{%>%}\StringTok{ }\KeywordTok{do}\NormalTok{(}\KeywordTok{as.data.frame}\NormalTok{(}\KeywordTok{tidy}\NormalTok{(.}\OperatorTok{$}\NormalTok{model[[}\DecValTok{5}\NormalTok{]])}\OperatorTok{$}\NormalTok{p.value[}\DecValTok{1}\NormalTok{])))}
+\KeywordTok{colnames}\NormalTok{(p) =}\StringTok{ }\KeywordTok{c}\NormalTok{(}\StringTok{'X1'}\NormalTok{,}\StringTok{'X2'}\NormalTok{,}\StringTok{'Interaction'}\NormalTok{)}
+\end{Highlighting}
+\end{Shaded}
+
+The empirical power is easy to compute, it's just the proportion of simulation runs where p \textless. 05.
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\NormalTok{power.res =}\StringTok{ }\KeywordTok{apply}\NormalTok{(}\KeywordTok{as.matrix}\NormalTok{(p), }\DecValTok{2}\NormalTok{, }
+  \ControlFlowTok{function}\NormalTok{(x) }\KeywordTok{round}\NormalTok{(}\KeywordTok{mean}\NormalTok{(}\KeywordTok{ifelse}\NormalTok{(x }\OperatorTok{<}\StringTok{ }\FloatTok{.05}\NormalTok{, }\DecValTok{1}\NormalTok{, }\DecValTok{0}\NormalTok{) }\OperatorTok{*}\StringTok{ }\DecValTok{100}\NormalTok{),}\DecValTok{2}\NormalTok{))}
+\NormalTok{power.res}
+\end{Highlighting}
+\end{Shaded}
+
+\begin{verbatim}
+##          X1          X2 Interaction 
+##           3           6          47
+\end{verbatim}
+
+Visualize the distributions of p-values
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\CommentTok{# plot the known effects}
+\KeywordTok{require}\NormalTok{(ggplot2)}
+\KeywordTok{require}\NormalTok{(gridExtra)}
+ 
+\NormalTok{means =}\StringTok{ }\KeywordTok{data.frame}\NormalTok{(cond[}\DecValTok{1}\OperatorTok{:}\DecValTok{4}\NormalTok{, ], mu, }\DataTypeTok{SE =}\NormalTok{ sigma }\OperatorTok{/}\StringTok{ }\KeywordTok{sqrt}\NormalTok{(nsubs))}
+\NormalTok{plt1 =}\StringTok{ }\KeywordTok{ggplot}\NormalTok{(means, }\KeywordTok{aes}\NormalTok{(}\DataTypeTok{y =}\NormalTok{ mu, }\DataTypeTok{x =}\NormalTok{ X1, }\DataTypeTok{fill=}\NormalTok{X2)) }\OperatorTok{+}
+\StringTok{  }\KeywordTok{geom_bar}\NormalTok{(}\DataTypeTok{position =} \KeywordTok{position_dodge}\NormalTok{(), }\DataTypeTok{stat=}\StringTok{"identity"}\NormalTok{) }\OperatorTok{+}
+\StringTok{  }\KeywordTok{geom_errorbar}\NormalTok{(}\KeywordTok{aes}\NormalTok{(}\DataTypeTok{ymin =}\NormalTok{ mu}\OperatorTok{-}\NormalTok{SE, }\DataTypeTok{ymax =}\NormalTok{ mu}\OperatorTok{+}\NormalTok{SE), }
+    \DataTypeTok{position =} \KeywordTok{position_dodge}\NormalTok{(}\DataTypeTok{width=}\FloatTok{0.9}\NormalTok{), }\DataTypeTok{size=}\NormalTok{.}\DecValTok{6}\NormalTok{, }\DataTypeTok{width=}\NormalTok{.}\DecValTok{3}\NormalTok{) }\OperatorTok{+}
+\StringTok{  }\KeywordTok{coord_cartesian}\NormalTok{(}\DataTypeTok{ylim=}\KeywordTok{c}\NormalTok{((.}\DecValTok{7}\OperatorTok{*}\KeywordTok{min}\NormalTok{(mu)), }\FloatTok{1.2}\OperatorTok{*}\KeywordTok{max}\NormalTok{(mu))) }\OperatorTok{+}
+\StringTok{  }\KeywordTok{theme_bw}\NormalTok{()}
+ 
+\CommentTok{# melt the data into a ggplot friendly 'long' format}
+\KeywordTok{require}\NormalTok{(reshape2)}
+\NormalTok{plotData <-}\StringTok{ }\KeywordTok{melt}\NormalTok{(p, }\DataTypeTok{value.name =} \StringTok{'p'}\NormalTok{)}
+ 
+\CommentTok{# plot each of the p-value distributions on a log scale}
+\KeywordTok{options}\NormalTok{(}\DataTypeTok{scipen =} \DecValTok{999}\NormalTok{) }\CommentTok{# 'turn off' scientific notation}
+\NormalTok{plt2 =}\StringTok{ }\KeywordTok{ggplot}\NormalTok{(plotData, }\KeywordTok{aes}\NormalTok{(}\DataTypeTok{x =}\NormalTok{ p)) }\OperatorTok{+}
+\StringTok{    }\KeywordTok{scale_x_log10}\NormalTok{(}\DataTypeTok{breaks=}\KeywordTok{c}\NormalTok{(}\DecValTok{1}\NormalTok{, }\FloatTok{0.05}\NormalTok{, }\FloatTok{0.001}\NormalTok{), }
+                  \DataTypeTok{labels=}\KeywordTok{c}\NormalTok{(}\DecValTok{1}\NormalTok{, }\FloatTok{0.05}\NormalTok{, }\FloatTok{0.001}\NormalTok{)) }\OperatorTok{+}
+\StringTok{    }\KeywordTok{geom_histogram}\NormalTok{(}\DataTypeTok{colour =} \StringTok{"darkblue"}\NormalTok{, }\DataTypeTok{fill =} \StringTok{"white"}\NormalTok{) }\OperatorTok{+}
+\StringTok{    }\KeywordTok{geom_vline}\NormalTok{(}\DataTypeTok{xintercept =} \FloatTok{0.05}\NormalTok{, }\DataTypeTok{colour=}\StringTok{'red'}\NormalTok{) }\OperatorTok{+}
+\StringTok{    }\KeywordTok{facet_grid}\NormalTok{(variable }\OperatorTok{~}\StringTok{ }\NormalTok{.) }\OperatorTok{+}
+\StringTok{    }\KeywordTok{labs}\NormalTok{(}\DataTypeTok{x =} \KeywordTok{expression}\NormalTok{(Log[}\DecValTok{10}\NormalTok{]}\OperatorTok{~}\NormalTok{P)) }\OperatorTok{+}
+\StringTok{    }\KeywordTok{theme}\NormalTok{(}\DataTypeTok{axis.text.x =} \KeywordTok{element_text}\NormalTok{(}\DataTypeTok{color=}\StringTok{'black'}\NormalTok{, }\DataTypeTok{size=}\DecValTok{7}\NormalTok{))}
+ 
+\CommentTok{# arrange plots side by side and print}
+\KeywordTok{grid.arrange}\NormalTok{(plt1, plt2, }\DataTypeTok{nrow=}\DecValTok{1}\NormalTok{)}
+\end{Highlighting}
+\end{Shaded}
+
+\includegraphics{SuperpowerValidation_files/figure-latex/unnamed-chunk-53-1.pdf}
+
+We can reproduce this simulation:
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\NormalTok{mu =}\StringTok{ }\KeywordTok{c}\NormalTok{(}\DecValTok{700}\NormalTok{, }\DecValTok{670}\NormalTok{, }\DecValTok{670}\NormalTok{, }\DecValTok{700}\NormalTok{) }\CommentTok{# true effects (in this case, a double dissociation)}
+\NormalTok{sigma =}\StringTok{ }\DecValTok{150}  \CommentTok{# population standard deviation}
+\NormalTok{n <-}\StringTok{ }\DecValTok{25}
+\NormalTok{sd <-}\StringTok{ }\DecValTok{150}
+\NormalTok{r <-}\StringTok{ }\FloatTok{0.75}
+\NormalTok{string =}\StringTok{ "2w*2w"}
+\NormalTok{alpha_level <-}\StringTok{ }\FloatTok{0.05}
+\NormalTok{labelnames =}\StringTok{ }\KeywordTok{c}\NormalTok{(}\StringTok{"age"}\NormalTok{, }\StringTok{"old"}\NormalTok{, }\StringTok{"young"}\NormalTok{, }\StringTok{"color"}\NormalTok{, }\StringTok{"blue"}\NormalTok{, }\StringTok{"red"}\NormalTok{)}
+\NormalTok{design_result <-}\StringTok{ }\KeywordTok{ANOVA_design}\NormalTok{(}\DataTypeTok{design =}\NormalTok{ string,}
+                              \DataTypeTok{n =}\NormalTok{ n, }
+                              \DataTypeTok{mu =}\NormalTok{ mu, }
+                              \DataTypeTok{sd =}\NormalTok{ sd, }
+                              \DataTypeTok{r =}\NormalTok{ r, }
+                              \DataTypeTok{labelnames =}\NormalTok{ labelnames)}
+\end{Highlighting}
+\end{Shaded}
+
+\includegraphics{SuperpowerValidation_files/figure-latex/unnamed-chunk-54-1.pdf}
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\NormalTok{simulation_result <-}\StringTok{ }\KeywordTok{ANOVA_power}\NormalTok{(design_result, }\DataTypeTok{alpha =} \FloatTok{0.05}\NormalTok{, }\DataTypeTok{nsims =}\NormalTok{ nsims)}
+\end{Highlighting}
+\end{Shaded}
+
+\begin{verbatim}
+## Power and Effect sizes for ANOVA tests
+##                 power effect_size
+## anova_age           5     0.03539
+## anova_color         7     0.04235
+## anova_age:color    43     0.16063
+## 
+## Power and Effect sizes for contrasts
+##                                            power effect_size
+## p_age_old_color_blue_age_old_color_red        19   -0.277372
+## p_age_old_color_blue_age_young_color_blue     23   -0.275603
+## p_age_old_color_blue_age_young_color_red       6    0.024031
+## p_age_old_color_red_age_young_color_blue       4   -0.009016
+## p_age_old_color_red_age_young_color_red       28    0.310872
+## p_age_young_color_blue_age_young_color_red    28    0.309777
+## 
+## Within-Subject Factors Included: Check MANOVA Results
+\end{verbatim}
+
+The simulations yield closely matching results.
+
+\hypertarget{examine-variation-of-means-and-correlation}{%
+\section{Examine variation of means and correlation}\label{examine-variation-of-means-and-correlation}}
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\CommentTok{# define the parameters}
+\NormalTok{mu =}\StringTok{ }\KeywordTok{c}\NormalTok{(}\DecValTok{700}\NormalTok{, }\DecValTok{670}\NormalTok{, }\DecValTok{690}\NormalTok{, }\DecValTok{750}\NormalTok{) }\CommentTok{# true effects (in this case, a double dissociation)}
+\NormalTok{sigma =}\StringTok{ }\DecValTok{150}  \CommentTok{# population standard deviation}
+\NormalTok{rho =}\StringTok{ }\FloatTok{0.4} \CommentTok{# correlation between repeated measures}
+\NormalTok{nsubs =}\StringTok{ }\DecValTok{25} \CommentTok{# how many subjects?}
+\NormalTok{nsims =}\StringTok{ }\NormalTok{nsims }\CommentTok{# how many simulation replicates?}
+ 
+\CommentTok{# create 2 factors representing the 2 independent variables}
+\NormalTok{cond =}\StringTok{ }\KeywordTok{data.frame}\NormalTok{(}
+  \DataTypeTok{X1 =} \KeywordTok{rep}\NormalTok{(}\KeywordTok{factor}\NormalTok{(letters[}\DecValTok{1}\OperatorTok{:}\DecValTok{2}\NormalTok{]), nsubs }\OperatorTok{*}\StringTok{ }\DecValTok{2}\NormalTok{),}
+  \DataTypeTok{X2 =} \KeywordTok{rep}\NormalTok{(}\KeywordTok{factor}\NormalTok{(letters[}\DecValTok{1}\OperatorTok{:}\DecValTok{2}\NormalTok{]), nsubs, }\DataTypeTok{each=}\DecValTok{2}\NormalTok{))}
+ 
+\CommentTok{# create a subjects factor}
+\NormalTok{subject =}\StringTok{ }\KeywordTok{factor}\NormalTok{(}\KeywordTok{sort}\NormalTok{(}\KeywordTok{rep}\NormalTok{(}\DecValTok{1}\OperatorTok{:}\NormalTok{nsubs, }\DecValTok{4}\NormalTok{)))}
+ 
+\CommentTok{# combine above into the design matrix}
+\NormalTok{dm =}\StringTok{ }\KeywordTok{data.frame}\NormalTok{(subject, cond)}
+\end{Highlighting}
+\end{Shaded}
+
+Build Sigma: the population variance-covariance matrix
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\CommentTok{# create k x k matrix populated with sigma}
+\NormalTok{sigma.mat <-}\StringTok{ }\KeywordTok{rep}\NormalTok{(sigma, }\DecValTok{4}\NormalTok{)}
+\NormalTok{S <-}\StringTok{ }\KeywordTok{matrix}\NormalTok{(sigma.mat, }\DataTypeTok{ncol=}\KeywordTok{length}\NormalTok{(sigma.mat), }\DataTypeTok{nrow=}\KeywordTok{length}\NormalTok{(sigma.mat))}
+ 
+\CommentTok{# compute covariance between measures}
+\NormalTok{Sigma <-}\StringTok{ }\KeywordTok{t}\NormalTok{(S) }\OperatorTok{*}\StringTok{ }\NormalTok{S }\OperatorTok{*}\StringTok{ }\NormalTok{rho  }
+ 
+\CommentTok{# put the variances on the diagonal }
+\KeywordTok{diag}\NormalTok{(Sigma) <-}\StringTok{ }\NormalTok{sigma}\OperatorTok{^}\DecValTok{2}  
+\end{Highlighting}
+\end{Shaded}
+
+Run the simulation
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\CommentTok{# stack 'nsims' individual data frames into one large data frame}
+\NormalTok{df =}\StringTok{ }\NormalTok{dm[}\KeywordTok{rep}\NormalTok{(}\KeywordTok{seq_len}\NormalTok{(}\KeywordTok{nrow}\NormalTok{(dm)), nsims), ]}
+ 
+\CommentTok{# add an index column to track the simulation run}
+\NormalTok{df}\OperatorTok{$}\NormalTok{simID =}\StringTok{ }\KeywordTok{sort}\NormalTok{(}\KeywordTok{rep}\NormalTok{(}\KeywordTok{seq_len}\NormalTok{(nsims), }\KeywordTok{nrow}\NormalTok{(dm)))}
+ 
+\CommentTok{# sample the observed data from a multivariate normal distribution}
+\CommentTok{# using MASS::mvrnorm with the parameters mu and Sigma created earlier}
+\CommentTok{# and bind to the existing df}
+ 
+\KeywordTok{require}\NormalTok{(MASS)}
+\NormalTok{make.y =}\StringTok{ }\KeywordTok{expression}\NormalTok{(}\KeywordTok{as.vector}\NormalTok{(}\KeywordTok{t}\NormalTok{(}\KeywordTok{mvrnorm}\NormalTok{(nsubs, mu, Sigma))))}
+\NormalTok{df}\OperatorTok{$}\NormalTok{y =}\StringTok{ }\KeywordTok{as.vector}\NormalTok{(}\KeywordTok{replicate}\NormalTok{(nsims, }\KeywordTok{eval}\NormalTok{(make.y)))             }
+ 
+\CommentTok{# use do(), the general purpose complement to the specialized data }
+\CommentTok{# manipulation functions available in dplyr, to run the ANOVA on}
+\CommentTok{# each section of the grouped data frame created by group_by}
+ 
+\KeywordTok{require}\NormalTok{(dplyr)}
+\KeywordTok{require}\NormalTok{(car)}
+\KeywordTok{require}\NormalTok{(broom)}
+ 
+\NormalTok{mods <-}\StringTok{ }\NormalTok{df }\OperatorTok{%>%}\StringTok{ }
+\StringTok{  }\KeywordTok{group_by}\NormalTok{(simID) }\OperatorTok{%>%}\StringTok{ }
+\StringTok{    }\KeywordTok{do}\NormalTok{(}\DataTypeTok{model =} \KeywordTok{aov}\NormalTok{(y }\OperatorTok{~}\StringTok{ }\NormalTok{X1 }\OperatorTok{*}\StringTok{ }\NormalTok{X2 }\OperatorTok{+}\StringTok{ }\KeywordTok{Error}\NormalTok{(subject }\OperatorTok{/}\StringTok{ }\NormalTok{(X1}\OperatorTok{*}\NormalTok{X2)), }\DataTypeTok{qr=}\OtherTok{FALSE}\NormalTok{, }\DataTypeTok{data =}\NormalTok{ .)) }
+ 
+\CommentTok{# extract p-values for each effect and store in a data frame}
+\NormalTok{p =}\StringTok{ }\KeywordTok{data.frame}\NormalTok{(}
+\NormalTok{  mods }\OperatorTok{%>%}\StringTok{ }\KeywordTok{do}\NormalTok{(}\KeywordTok{as.data.frame}\NormalTok{(}\KeywordTok{tidy}\NormalTok{(.}\OperatorTok{$}\NormalTok{model[[}\DecValTok{3}\NormalTok{]])}\OperatorTok{$}\NormalTok{p.value[}\DecValTok{1}\NormalTok{])),}
+\NormalTok{  mods }\OperatorTok{%>%}\StringTok{ }\KeywordTok{do}\NormalTok{(}\KeywordTok{as.data.frame}\NormalTok{(}\KeywordTok{tidy}\NormalTok{(.}\OperatorTok{$}\NormalTok{model[[}\DecValTok{4}\NormalTok{]])}\OperatorTok{$}\NormalTok{p.value[}\DecValTok{1}\NormalTok{])),}
+\NormalTok{  mods }\OperatorTok{%>%}\StringTok{ }\KeywordTok{do}\NormalTok{(}\KeywordTok{as.data.frame}\NormalTok{(}\KeywordTok{tidy}\NormalTok{(.}\OperatorTok{$}\NormalTok{model[[}\DecValTok{5}\NormalTok{]])}\OperatorTok{$}\NormalTok{p.value[}\DecValTok{1}\NormalTok{])))}
+\KeywordTok{colnames}\NormalTok{(p) =}\StringTok{ }\KeywordTok{c}\NormalTok{(}\StringTok{'X1'}\NormalTok{,}\StringTok{'X2'}\NormalTok{,}\StringTok{'Interaction'}\NormalTok{)}
+\end{Highlighting}
+\end{Shaded}
+
+The empirical power is easy to compute, it's just the proportion of simulation runs where p \textless. 05.
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\NormalTok{power.res =}\StringTok{ }\KeywordTok{apply}\NormalTok{(}\KeywordTok{as.matrix}\NormalTok{(p), }\DecValTok{2}\NormalTok{, }
+  \ControlFlowTok{function}\NormalTok{(x) }\KeywordTok{round}\NormalTok{(}\KeywordTok{mean}\NormalTok{(}\KeywordTok{ifelse}\NormalTok{(x }\OperatorTok{<}\StringTok{ }\FloatTok{.05}\NormalTok{, }\DecValTok{1}\NormalTok{, }\DecValTok{0}\NormalTok{) }\OperatorTok{*}\StringTok{ }\DecValTok{100}\NormalTok{),}\DecValTok{2}\NormalTok{))}
+\NormalTok{power.res}
+\end{Highlighting}
+\end{Shaded}
+
+\begin{verbatim}
+##          X1          X2 Interaction 
+##           7          35          50
+\end{verbatim}
+
+Visualize the distributions of p-values
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\CommentTok{# plot the known effects}
+\KeywordTok{require}\NormalTok{(ggplot2)}
+\KeywordTok{require}\NormalTok{(gridExtra)}
+ 
+\NormalTok{means =}\StringTok{ }\KeywordTok{data.frame}\NormalTok{(cond[}\DecValTok{1}\OperatorTok{:}\DecValTok{4}\NormalTok{, ], mu, }\DataTypeTok{SE =}\NormalTok{ sigma }\OperatorTok{/}\StringTok{ }\KeywordTok{sqrt}\NormalTok{(nsubs))}
+\NormalTok{plt1 =}\StringTok{ }\KeywordTok{ggplot}\NormalTok{(means, }\KeywordTok{aes}\NormalTok{(}\DataTypeTok{y =}\NormalTok{ mu, }\DataTypeTok{x =}\NormalTok{ X1, }\DataTypeTok{fill=}\NormalTok{X2)) }\OperatorTok{+}
+\StringTok{  }\KeywordTok{geom_bar}\NormalTok{(}\DataTypeTok{position =} \KeywordTok{position_dodge}\NormalTok{(), }\DataTypeTok{stat=}\StringTok{"identity"}\NormalTok{) }\OperatorTok{+}
+\StringTok{  }\KeywordTok{geom_errorbar}\NormalTok{(}\KeywordTok{aes}\NormalTok{(}\DataTypeTok{ymin =}\NormalTok{ mu}\OperatorTok{-}\NormalTok{SE, }\DataTypeTok{ymax =}\NormalTok{ mu}\OperatorTok{+}\NormalTok{SE), }
+    \DataTypeTok{position =} \KeywordTok{position_dodge}\NormalTok{(}\DataTypeTok{width=}\FloatTok{0.9}\NormalTok{), }\DataTypeTok{size=}\NormalTok{.}\DecValTok{6}\NormalTok{, }\DataTypeTok{width=}\NormalTok{.}\DecValTok{3}\NormalTok{) }\OperatorTok{+}
+\StringTok{  }\KeywordTok{coord_cartesian}\NormalTok{(}\DataTypeTok{ylim=}\KeywordTok{c}\NormalTok{((.}\DecValTok{7}\OperatorTok{*}\KeywordTok{min}\NormalTok{(mu)), }\FloatTok{1.2}\OperatorTok{*}\KeywordTok{max}\NormalTok{(mu))) }\OperatorTok{+}
+\StringTok{  }\KeywordTok{theme_bw}\NormalTok{()}
+ 
+\CommentTok{# melt the data into a ggplot friendly 'long' format}
+\KeywordTok{require}\NormalTok{(reshape2)}
+\NormalTok{plotData <-}\StringTok{ }\KeywordTok{melt}\NormalTok{(p, }\DataTypeTok{value.name =} \StringTok{'p'}\NormalTok{)}
+ 
+\CommentTok{# plot each of the p-value distributions on a log scale}
+\KeywordTok{options}\NormalTok{(}\DataTypeTok{scipen =} \DecValTok{999}\NormalTok{) }\CommentTok{# 'turn off' scientific notation}
+\NormalTok{plt2 =}\StringTok{ }\KeywordTok{ggplot}\NormalTok{(plotData, }\KeywordTok{aes}\NormalTok{(}\DataTypeTok{x =}\NormalTok{ p)) }\OperatorTok{+}
+\StringTok{    }\KeywordTok{scale_x_log10}\NormalTok{(}\DataTypeTok{breaks=}\KeywordTok{c}\NormalTok{(}\DecValTok{1}\NormalTok{, }\FloatTok{0.05}\NormalTok{, }\FloatTok{0.001}\NormalTok{), }
+                  \DataTypeTok{labels=}\KeywordTok{c}\NormalTok{(}\DecValTok{1}\NormalTok{, }\FloatTok{0.05}\NormalTok{, }\FloatTok{0.001}\NormalTok{)) }\OperatorTok{+}
+\StringTok{    }\KeywordTok{geom_histogram}\NormalTok{(}\DataTypeTok{colour =} \StringTok{"darkblue"}\NormalTok{, }\DataTypeTok{fill =} \StringTok{"white"}\NormalTok{) }\OperatorTok{+}
+\StringTok{    }\KeywordTok{geom_vline}\NormalTok{(}\DataTypeTok{xintercept =} \FloatTok{0.05}\NormalTok{, }\DataTypeTok{colour=}\StringTok{'red'}\NormalTok{) }\OperatorTok{+}
+\StringTok{    }\KeywordTok{facet_grid}\NormalTok{(variable }\OperatorTok{~}\StringTok{ }\NormalTok{.) }\OperatorTok{+}
+\StringTok{    }\KeywordTok{labs}\NormalTok{(}\DataTypeTok{x =} \KeywordTok{expression}\NormalTok{(Log[}\DecValTok{10}\NormalTok{]}\OperatorTok{~}\NormalTok{P)) }\OperatorTok{+}
+\StringTok{    }\KeywordTok{theme}\NormalTok{(}\DataTypeTok{axis.text.x =} \KeywordTok{element_text}\NormalTok{(}\DataTypeTok{color=}\StringTok{'black'}\NormalTok{, }\DataTypeTok{size=}\DecValTok{7}\NormalTok{))}
+ 
+\CommentTok{# arrange plots side by side and print}
+\KeywordTok{grid.arrange}\NormalTok{(plt1, plt2, }\DataTypeTok{nrow=}\DecValTok{1}\NormalTok{)}
+\end{Highlighting}
+\end{Shaded}
+
+\includegraphics{SuperpowerValidation_files/figure-latex/unnamed-chunk-59-1.pdf}
+
+We can reproduce this simulation:
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\NormalTok{mu =}\StringTok{ }\KeywordTok{c}\NormalTok{(}\DecValTok{700}\NormalTok{, }\DecValTok{670}\NormalTok{, }\DecValTok{690}\NormalTok{, }\DecValTok{750}\NormalTok{) }\CommentTok{# true effects (in this case, a double dissociation)}
+\NormalTok{sigma =}\StringTok{ }\DecValTok{150}  \CommentTok{# population standard deviation}
+\NormalTok{n <-}\StringTok{ }\DecValTok{25}
+\NormalTok{sd <-}\StringTok{ }\DecValTok{150}
+\NormalTok{r <-}\StringTok{ }\FloatTok{0.4}
+\NormalTok{string =}\StringTok{ "2w*2w"}
+\NormalTok{alpha_level <-}\StringTok{ }\FloatTok{0.05}
+\NormalTok{labelnames =}\StringTok{ }\KeywordTok{c}\NormalTok{(}\StringTok{"age"}\NormalTok{, }\StringTok{"old"}\NormalTok{, }\StringTok{"young"}\NormalTok{, }\StringTok{"color"}\NormalTok{, }\StringTok{"blue"}\NormalTok{, }\StringTok{"red"}\NormalTok{)}
+\NormalTok{design_result <-}\StringTok{ }\KeywordTok{ANOVA_design}\NormalTok{(}\DataTypeTok{design =}\NormalTok{ string,}
+                              \DataTypeTok{n =}\NormalTok{ n, }
+                              \DataTypeTok{mu =}\NormalTok{ mu, }
+                              \DataTypeTok{sd =}\NormalTok{ sd, }
+                              \DataTypeTok{r =}\NormalTok{ r, }
+                              \DataTypeTok{labelnames =}\NormalTok{ labelnames)}
+\end{Highlighting}
+\end{Shaded}
+
+\includegraphics{SuperpowerValidation_files/figure-latex/unnamed-chunk-60-1.pdf}
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\NormalTok{simulation_result <-}\StringTok{ }\KeywordTok{ANOVA_power}\NormalTok{(design_result, }\DataTypeTok{alpha =} \FloatTok{0.05}\NormalTok{, }\DataTypeTok{nsims =}\NormalTok{ nsims)}
+\end{Highlighting}
+\end{Shaded}
+
+\begin{verbatim}
+## Power and Effect sizes for ANOVA tests
+##                 power effect_size
+## anova_age          29     0.10813
+## anova_color        10     0.05224
+## anova_age:color    43     0.14890
+## 
+## Power and Effect sizes for contrasts
+##                                            power effect_size
+## p_age_old_color_blue_age_old_color_red        16    -0.19631
+## p_age_old_color_blue_age_young_color_blue      6    -0.05495
+## p_age_old_color_blue_age_young_color_red      25     0.27436
+## p_age_old_color_red_age_young_color_blue      11     0.13305
+## p_age_old_color_red_age_young_color_red       57     0.46801
+## p_age_young_color_blue_age_young_color_red    32     0.32829
+## 
+## Within-Subject Factors Included: Check MANOVA Results
+\end{verbatim}
+
+\hypertarget{mixed-anova-part-3}{%
+\chapter{Mixed ANOVA Part 3}\label{mixed-anova-part-3}}
+
+\hypertarget{two-by-two-anova-within-design}{%
+\section{Two by two ANOVA, within design}\label{two-by-two-anova-within-design}}
+
+Potvin \& Schutz (2000) simulate a wide range of repeated measure designs. The give an example of a 3x3 design, with the following correlation matrix:
+
+\includegraphics{screenshots/PS2000.png}
+
+Variances were set to 1 (so all covariance matrices in their simulations were identical). In this specific example, the white fields are related to the correlation for the A main effect (these cells have the same level for B, but different levels of A). The grey cells are related to the main effect of B (the cells have the same level of A, but different levels of B). Finally, the black cells are related to the AxB interaction (they have different levels of A and B). The diagonal (all 1) relate to cells with the same levels of A and B.
+
+Potvin \& Schulz (2000) examine power for 2x2 within ANOVA designs and develop approximations of the error variance. For a design with 2 within factors (A and B) these are:
+
+For the main effect of A:
+\(\sigma _ { e } ^ { 2 } = \sigma ^ { 2 } ( 1 - \overline { \rho } _ { A } ) + \sigma ^ { 2 } ( q - 1 ) ( \overline { \rho } _ { B } - \overline { \rho } _ { AB } )\)
+
+For the main effectof B:
+\(\sigma _ { e } ^ { 2 } = \sigma ^ { 2 } ( 1 - \overline { \rho } _ { B } ) + \sigma ^ { 2 } ( p - 1 ) ( \overline { \rho } _ { A } - \overline { \rho } _ { A B } )\)
+
+For the interaction between A and B:
+\(\sigma _ { e } ^ { 2 } = \sigma ^ { 2 } ( 1 - \rho _ { \max } ) - \sigma ^ { 2 } ( \overline { \rho } _ { \min } - \overline { \rho } _ { AB } )\)
+
+\hypertarget{simple-example-2x2-within-design}{%
+\chapter{Simple example: 2x2 within design}\label{simple-example-2x2-within-design}}
+
+It is difficult to just come up with a positive definite covariance matrix. The best way to achieve this is to get the correlations from a pilot study. Indeed, it should be rather difficult to know which correlations to fill in without some pilot data.
+
+We try to get the formulas in Potvin and Schutz (2000) working. \textbf{Below, I manage for the main effects, but not for the interaction}.
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\NormalTok{mu =}\StringTok{ }\KeywordTok{c}\NormalTok{(}\DecValTok{2}\NormalTok{,}\DecValTok{1}\NormalTok{,}\DecValTok{4}\NormalTok{,}\DecValTok{2}\NormalTok{) }
+\NormalTok{n <-}\StringTok{ }\DecValTok{20}
+\NormalTok{sd <-}\StringTok{ }\DecValTok{5}
+\NormalTok{r <-}\StringTok{ }\KeywordTok{c}\NormalTok{(}
+  \FloatTok{0.8}\NormalTok{, }\FloatTok{0.4}\NormalTok{, }\FloatTok{0.4}\NormalTok{,}
+       \FloatTok{0.4}\NormalTok{, }\FloatTok{0.4}\NormalTok{,}
+            \FloatTok{0.8}
+\NormalTok{  )}
+\NormalTok{string =}\StringTok{ "2w*2w"}
+\NormalTok{alpha_level <-}\StringTok{ }\FloatTok{0.05}
+
+\NormalTok{labelnames =}\StringTok{ }\KeywordTok{c}\NormalTok{(}\StringTok{"A"}\NormalTok{, }\StringTok{"a1"}\NormalTok{, }\StringTok{"a2"}\NormalTok{, }\StringTok{"B"}\NormalTok{, }\StringTok{"b1"}\NormalTok{, }\StringTok{"b2"}\NormalTok{)}
+\NormalTok{design_result <-}\StringTok{ }\KeywordTok{ANOVA_design}\NormalTok{(}\DataTypeTok{design =}\NormalTok{ string,}
+                              \DataTypeTok{n =}\NormalTok{ n, }
+                              \DataTypeTok{mu =}\NormalTok{ mu, }
+                              \DataTypeTok{sd =}\NormalTok{ sd, }
+                              \DataTypeTok{r =}\NormalTok{ r, }
+                              \DataTypeTok{labelnames =}\NormalTok{ labelnames)}
+\end{Highlighting}
+\end{Shaded}
+
+\includegraphics{SuperpowerValidation_files/figure-latex/unnamed-chunk-61-1.pdf}
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\NormalTok{simulation_result <-}\StringTok{ }\KeywordTok{ANOVA_power}\NormalTok{(design_result, }\DataTypeTok{alpha =} \FloatTok{0.05}\NormalTok{, }\DataTypeTok{nsims =} \DecValTok{1000}\NormalTok{)}
+\end{Highlighting}
+\end{Shaded}
+
+\begin{verbatim}
+## Power and Effect sizes for ANOVA tests
+##           power effect_size
+## anova_A    25.2     0.12701
+## anova_B    80.9     0.33263
+## anova_A:B  15.7     0.09032
+## 
+## Power and Effect sizes for contrasts
+##                       power effect_size
+## p_A_a1_B_b1_A_a1_B_b2  28.8   -0.337604
+## p_A_a1_B_b1_A_a2_B_b1  34.6    0.384171
+## p_A_a1_B_b1_A_a2_B_b2   6.1    0.003857
+## p_A_a1_B_b2_A_a2_B_b1  65.2    0.577616
+## p_A_a1_B_b2_A_a2_B_b2  13.2    0.197427
+## p_A_a2_B_b1_A_a2_B_b2  75.9   -0.652759
+## 
+## Within-Subject Factors Included: Check MANOVA Results
+\end{verbatim}
+
+Result simulation after 100000 simulations
+
+simulation\_result \textless- ANOVA\_power(design\_result, alpha = 0.05, nsims = 100000)
+Power and Effect sizes for ANOVA tests
+power effect size
+anova\_A 26.849 0.0984
+anova\_B 64.091 0.2452
+anova\_A:B 26.875 0.0983
+
+Power and Effect sizes for contrasts
+power effect size
+p\_A\_a1\_B\_b1\_A\_a1\_B\_b2 27.052 -0.3298
+p\_A\_a1\_B\_b1\_A\_a2\_B\_b1 39.637 0.4162
+p\_A\_a1\_B\_b1\_A\_a2\_B\_b2 4.983 -0.0005
+p\_A\_a1\_B\_b2\_A\_a2\_B\_b1 64.252 0.5699
+p\_A\_a1\_B\_b2\_A\_a2\_B\_b2 13.479 0.2077
+p\_A\_a2\_B\_b1\_A\_a2\_B\_b2 76.622 -0.6597
+
+We can try to use the formula in Potvin \& Schutz (2000).
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\NormalTok{k <-}\StringTok{ }\DecValTok{1} \CommentTok{#one group (because all factors are within)}
+\NormalTok{rho_A <-}\StringTok{ }\FloatTok{0.5} \CommentTok{#mean r for factor A}
+\NormalTok{rho_B <-}\StringTok{ }\FloatTok{0.8} \CommentTok{#mean r for factor B}
+\NormalTok{rho_AB <-}\StringTok{ }\FloatTok{0.4} \CommentTok{#mean r for factor AB}
+\NormalTok{alpha <-}\StringTok{ }\FloatTok{0.05}
+\NormalTok{sigma <-}\StringTok{ }\NormalTok{sd}
+\NormalTok{m_A <-}\StringTok{ }\DecValTok{2} \CommentTok{#levels factor A}
+\NormalTok{variance_e_A <-}\StringTok{ }\NormalTok{sigma}\OperatorTok{^}\DecValTok{2} \OperatorTok{*}\StringTok{ }\NormalTok{(}\DecValTok{1} \OperatorTok{-}\StringTok{ }\NormalTok{rho_A) }\OperatorTok{+}\StringTok{ }\NormalTok{sigma}\OperatorTok{^}\DecValTok{2} \OperatorTok{*}\StringTok{ }\NormalTok{(m_A }\OperatorTok{-}\StringTok{ }\DecValTok{1}\NormalTok{) }\OperatorTok{*}\StringTok{ }\NormalTok{(rho_B }\OperatorTok{-}\StringTok{ }\NormalTok{rho_AB) }\CommentTok{#Variance A}
+\NormalTok{variance_e_A}
+\end{Highlighting}
+\end{Shaded}
+
+\begin{verbatim}
+## [1] 22.5
+\end{verbatim}
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\NormalTok{m_B <-}\StringTok{ }\DecValTok{2} \CommentTok{#levels factor B}
+\NormalTok{variance_e_B <-}\StringTok{ }\NormalTok{sigma}\OperatorTok{^}\DecValTok{2} \OperatorTok{*}\StringTok{ }\NormalTok{(}\DecValTok{1} \OperatorTok{-}\StringTok{ }\NormalTok{rho_B) }\OperatorTok{+}\StringTok{ }\NormalTok{sigma}\OperatorTok{^}\DecValTok{2} \OperatorTok{*}\StringTok{ }\NormalTok{(m_B }\OperatorTok{-}\StringTok{ }\DecValTok{1}\NormalTok{) }\OperatorTok{*}\StringTok{ }\NormalTok{(rho_A }\OperatorTok{-}\StringTok{ }\NormalTok{rho_AB) }\CommentTok{#Variance B}
+\NormalTok{variance_e_B}
+\end{Highlighting}
+\end{Shaded}
+
+\begin{verbatim}
+## [1] 7.5
+\end{verbatim}
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\NormalTok{variance_e_AB <-}\StringTok{ }\NormalTok{sigma}\OperatorTok{^}\DecValTok{2} \OperatorTok{*}\StringTok{ }\NormalTok{(}\DecValTok{1} \OperatorTok{-}\StringTok{ }\KeywordTok{max}\NormalTok{(rho_A, rho_B)) }\OperatorTok{-}\StringTok{ }\NormalTok{sigma}\OperatorTok{^}\DecValTok{2} \OperatorTok{*}\StringTok{ }\NormalTok{(}\KeywordTok{min}\NormalTok{(rho_A, rho_B) }\OperatorTok{-}\StringTok{ }\NormalTok{rho_AB) }\CommentTok{#Variance AB}
+\NormalTok{variance_e_AB}
+\end{Highlighting}
+\end{Shaded}
+
+\begin{verbatim}
+## [1] 2.5
+\end{verbatim}
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\NormalTok{mean_mat <-}\StringTok{ }\KeywordTok{t}\NormalTok{(}\KeywordTok{matrix}\NormalTok{(mu, }\DataTypeTok{nrow =}\NormalTok{ m_B,}\DataTypeTok{ncol =}\NormalTok{ m_A)) }\CommentTok{#Create a mean matrix}
+\NormalTok{mean_mat}
+\end{Highlighting}
+\end{Shaded}
+
+\begin{verbatim}
+##      [,1] [,2]
+## [1,]    2    1
+## [2,]    4    2
+\end{verbatim}
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\CommentTok{# Potving & Schutz, 2000, formula 2, p. 348}
+\CommentTok{# For main effect A}
+\NormalTok{lambda_A <-}\StringTok{ }\NormalTok{n }\OperatorTok{*}\StringTok{ }\NormalTok{m_A }\OperatorTok{*}\StringTok{ }\KeywordTok{sum}\NormalTok{((}\KeywordTok{rowMeans}\NormalTok{(mean_mat) }\OperatorTok{-}\StringTok{ }\KeywordTok{mean}\NormalTok{(}\KeywordTok{rowMeans}\NormalTok{(mean_mat))) }\OperatorTok{^}\StringTok{ }\DecValTok{2}\NormalTok{) }\OperatorTok{/}\StringTok{ }\NormalTok{variance_e_A }
+\NormalTok{lambda_A}
+\end{Highlighting}
+\end{Shaded}
+
+\begin{verbatim}
+## [1] 2
+\end{verbatim}
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\NormalTok{df1 <-}\StringTok{ }\NormalTok{(m_A }\OperatorTok{-}\StringTok{ }\DecValTok{1}\NormalTok{) }\CommentTok{#calculate degrees of freedom 1 - ignoring the * e sphericity correction}
+\NormalTok{df2 <-}\StringTok{ }\NormalTok{(n }\OperatorTok{-}\StringTok{ }\NormalTok{k) }\OperatorTok{*}\StringTok{ }\NormalTok{(m_A }\OperatorTok{-}\StringTok{ }\DecValTok{1}\NormalTok{) }\CommentTok{#calculate degrees of freedom 2}
+\NormalTok{F_critical <-}\StringTok{ }\KeywordTok{qf}\NormalTok{(alpha, }\CommentTok{# critical F-vaue}
+\NormalTok{                 df1,}
+\NormalTok{                 df2, }
+                 \DataTypeTok{lower.tail =} \OtherTok{FALSE}\NormalTok{) }
+\NormalTok{pow_A <-}\StringTok{ }\KeywordTok{pf}\NormalTok{(}\KeywordTok{qf}\NormalTok{(alpha, }\CommentTok{#power }
+\NormalTok{             df1, }
+\NormalTok{             df2, }
+             \DataTypeTok{lower.tail =} \OtherTok{FALSE}\NormalTok{), }
+\NormalTok{          df1, }
+\NormalTok{          df2, }
+\NormalTok{          lambda_A, }
+          \DataTypeTok{lower.tail =} \OtherTok{FALSE}\NormalTok{)}
+\NormalTok{lambda_B <-}\StringTok{ }\NormalTok{n }\OperatorTok{*}\StringTok{ }\NormalTok{m_B }\OperatorTok{*}\StringTok{ }\KeywordTok{sum}\NormalTok{((}\KeywordTok{colMeans}\NormalTok{(mean_mat) }\OperatorTok{-}\StringTok{ }\KeywordTok{mean}\NormalTok{(}\KeywordTok{colMeans}\NormalTok{(mean_mat))) }\OperatorTok{^}\StringTok{ }\DecValTok{2}\NormalTok{) }\OperatorTok{/}\StringTok{ }\NormalTok{variance_e_B }
+\NormalTok{lambda_B}
+\end{Highlighting}
+\end{Shaded}
+
+\begin{verbatim}
+## [1] 6
+\end{verbatim}
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\NormalTok{df1 <-}\StringTok{ }\NormalTok{(m_B }\OperatorTok{-}\StringTok{ }\DecValTok{1}\NormalTok{) }\CommentTok{#calculate degrees of freedom 1}
+\NormalTok{df2 <-}\StringTok{ }\NormalTok{(n }\OperatorTok{-}\StringTok{ }\NormalTok{k) }\OperatorTok{*}\StringTok{ }\NormalTok{(m_B }\OperatorTok{-}\StringTok{ }\DecValTok{1}\NormalTok{) }\CommentTok{#calculate degrees of freedom 2}
+\NormalTok{F_critical <-}\StringTok{ }\KeywordTok{qf}\NormalTok{(alpha, }\CommentTok{# critical F-vaue}
+\NormalTok{                 df1,}
+\NormalTok{                 df2,}
+                 \DataTypeTok{lower.tail =} \OtherTok{FALSE}\NormalTok{) }
+\NormalTok{pow_B <-}\StringTok{ }\KeywordTok{pf}\NormalTok{(}\KeywordTok{qf}\NormalTok{(alpha, }\CommentTok{#power }
+\NormalTok{             df1, }
+\NormalTok{             df2, }
+             \DataTypeTok{lower.tail =} \OtherTok{FALSE}\NormalTok{), }
+\NormalTok{          df1, }
+\NormalTok{          df2, }
+\NormalTok{          lambda_B, }
+          \DataTypeTok{lower.tail =} \OtherTok{FALSE}\NormalTok{)}
+\NormalTok{pow_A}
+\end{Highlighting}
+\end{Shaded}
+
+\begin{verbatim}
+## [1] 0.2691752
+\end{verbatim}
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\NormalTok{pow_B}
+\end{Highlighting}
+\end{Shaded}
+
+\begin{verbatim}
+## [1] 0.6422587
+\end{verbatim}
+
+We see the 26.9 and 64.2 correspond to the results of the simulation quite closely.
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\CommentTok{#This (or the variance calculation above) does not work. }
+\NormalTok{lambda_AB <-}\StringTok{ }\NormalTok{n }\OperatorTok{*}\StringTok{ }\KeywordTok{sum}\NormalTok{((}
+\NormalTok{  mean_mat }\OperatorTok{-}\StringTok{ }\KeywordTok{rowMeans}\NormalTok{(mean_mat) }\OperatorTok{-}\StringTok{ }\KeywordTok{colMeans}\NormalTok{(mean_mat) }\OperatorTok{+}\StringTok{ }\KeywordTok{mean}\NormalTok{(mean_mat)}
+\NormalTok{  ) }\OperatorTok{^}\StringTok{ }\DecValTok{2}\NormalTok{) }\OperatorTok{/}\StringTok{ }\NormalTok{variance_e_AB }
+\NormalTok{lambda_AB}
+\end{Highlighting}
+\end{Shaded}
+
+\begin{verbatim}
+## [1] 38
+\end{verbatim}
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\NormalTok{df1 <-}\StringTok{ }\NormalTok{(m_A }\OperatorTok{-}\StringTok{ }\DecValTok{1}\NormalTok{)}\OperatorTok{*}\NormalTok{(m_B }\OperatorTok{-}\StringTok{ }\DecValTok{1}\NormalTok{)  }\CommentTok{#calculate degrees of freedom 1}
+\NormalTok{df2 <-}\StringTok{ }\NormalTok{(n }\OperatorTok{-}\StringTok{ }\NormalTok{k) }\OperatorTok{*}\StringTok{ }\NormalTok{(m_A }\OperatorTok{-}\StringTok{ }\DecValTok{1}\NormalTok{) }\OperatorTok{*}\StringTok{ }\NormalTok{(m_B }\OperatorTok{-}\StringTok{ }\DecValTok{1}\NormalTok{) }\CommentTok{#calculate degrees of freedom 2}
+\NormalTok{F_critical <-}\StringTok{ }\KeywordTok{qf}\NormalTok{(alpha, }\CommentTok{# critical F-vaue}
+\NormalTok{                 df1,}
+\NormalTok{                 df2, }
+                 \DataTypeTok{lower.tail =} \OtherTok{FALSE}\NormalTok{) }
+\NormalTok{pow <-}\StringTok{ }\KeywordTok{pf}\NormalTok{(}\KeywordTok{qf}\NormalTok{(alpha, }\CommentTok{#power }
+\NormalTok{             df1, }
+\NormalTok{             df2, }
+             \DataTypeTok{lower.tail =} \OtherTok{FALSE}\NormalTok{), }
+\NormalTok{          df1, }
+\NormalTok{          df2, }
+\NormalTok{          lambda_AB, }
+          \DataTypeTok{lower.tail =} \OtherTok{FALSE}\NormalTok{)}
+\NormalTok{pow}
+\end{Highlighting}
+\end{Shaded}
+
+\begin{verbatim}
+## [1] 0.9999458
+\end{verbatim}
+
+Maybe the simulation is not correct for the interaction, or the formula is not correctly programmed.
+
+\hypertarget{error-control-in-exploratory-anova}{%
+\chapter{Error Control in Exploratory ANOVA}\label{error-control-in-exploratory-anova}}
+
+In a 2X2X2 design, an ANOVA will give the test results for three main effects, three two-way interactions, and one three-way interaction. That's 7 statistical tests. The probability of making at least one Type 1 error in a single 2x2x2 ANOVA is 1-(0.95)\^{}7 = 30\%.
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\NormalTok{string <-}\StringTok{ "2b*2b*2b"}
+\NormalTok{n <-}\StringTok{ }\DecValTok{50}
+\NormalTok{mu <-}\StringTok{ }\KeywordTok{c}\NormalTok{(}\DecValTok{20}\NormalTok{, }\DecValTok{20}\NormalTok{, }\DecValTok{20}\NormalTok{, }\DecValTok{20}\NormalTok{, }\DecValTok{20}\NormalTok{, }\DecValTok{20}\NormalTok{, }\DecValTok{20}\NormalTok{, }\DecValTok{20}\NormalTok{) }\CommentTok{#All means are equal - so there is no real difference.}
+\CommentTok{# Enter means in the order that matches the labels below.}
+\NormalTok{sd <-}\StringTok{ }\DecValTok{5}
+\NormalTok{p_adjust =}\StringTok{ "none"}
+\CommentTok{# "none" means we do not correct for multiple comparisons}
+\NormalTok{labelnames <-}\StringTok{ }\KeywordTok{c}\NormalTok{(}\StringTok{"condition1"}\NormalTok{, }\StringTok{"a"}\NormalTok{, }\StringTok{"b"}\NormalTok{, }\StringTok{"condition2"}\NormalTok{, }\StringTok{"c"}\NormalTok{, }\StringTok{"d"}\NormalTok{, }\StringTok{"condition3"}\NormalTok{, }\StringTok{"e"}\NormalTok{, }\StringTok{"f"}\NormalTok{) }\CommentTok{#}
+\CommentTok{# the label names should be in the order of the means specified above.}
+\NormalTok{design_result <-}\StringTok{ }\KeywordTok{ANOVA_design}\NormalTok{(}\DataTypeTok{design =}\NormalTok{ string,}
+                   \DataTypeTok{n =}\NormalTok{ n, }
+                   \DataTypeTok{mu =}\NormalTok{ mu, }
+                   \DataTypeTok{sd =}\NormalTok{ sd, }
+                   \DataTypeTok{labelnames =}\NormalTok{ labelnames)}
+\end{Highlighting}
+\end{Shaded}
+
+\includegraphics{SuperpowerValidation_files/figure-latex/unnamed-chunk-64-1.pdf}
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\NormalTok{alpha_level <-}\StringTok{ }\FloatTok{0.05}
+\CommentTok{#We set the alpha level at 0.05. }
+\NormalTok{power_result <-}\StringTok{ }\KeywordTok{ANOVA_power}\NormalTok{(design_result, }
+                            \DataTypeTok{alpha_level =}\NormalTok{ alpha_level, }
+                            \DataTypeTok{p_adjust =}\NormalTok{ p_adjust,}
+                            \DataTypeTok{nsims =}\NormalTok{ nsims)}
+\end{Highlighting}
+\end{Shaded}
+
+\begin{verbatim}
+## Power and Effect sizes for ANOVA tests
+##                                        power effect_size
+## anova_condition1                           7    0.002448
+## anova_condition2                           6    0.002890
+## anova_condition3                           4    0.002388
+## anova_condition1:condition2                5    0.002922
+## anova_condition1:condition3                8    0.003331
+## anova_condition2:condition3                5    0.002616
+## anova_condition1:condition2:condition3     4    0.002362
+## 
+## Power and Effect sizes for contrasts
+##                                                                                 power
+## p_condition1_a_condition2_c_condition3_e_condition1_a_condition2_c_condition3_f     7
+## p_condition1_a_condition2_c_condition3_e_condition1_a_condition2_d_condition3_e     5
+## p_condition1_a_condition2_c_condition3_e_condition1_a_condition2_d_condition3_f     9
+## p_condition1_a_condition2_c_condition3_e_condition1_b_condition2_c_condition3_e     9
+## p_condition1_a_condition2_c_condition3_e_condition1_b_condition2_c_condition3_f     9
+## p_condition1_a_condition2_c_condition3_e_condition1_b_condition2_d_condition3_e     6
+## p_condition1_a_condition2_c_condition3_e_condition1_b_condition2_d_condition3_f     7
+## p_condition1_a_condition2_c_condition3_f_condition1_a_condition2_d_condition3_e     4
+## p_condition1_a_condition2_c_condition3_f_condition1_a_condition2_d_condition3_f     2
+## p_condition1_a_condition2_c_condition3_f_condition1_b_condition2_c_condition3_e     5
+## p_condition1_a_condition2_c_condition3_f_condition1_b_condition2_c_condition3_f     2
+## p_condition1_a_condition2_c_condition3_f_condition1_b_condition2_d_condition3_e     3
+## p_condition1_a_condition2_c_condition3_f_condition1_b_condition2_d_condition3_f     8
+## p_condition1_a_condition2_d_condition3_e_condition1_a_condition2_d_condition3_f     3
+## p_condition1_a_condition2_d_condition3_e_condition1_b_condition2_c_condition3_e     5
+## p_condition1_a_condition2_d_condition3_e_condition1_b_condition2_c_condition3_f     3
+## p_condition1_a_condition2_d_condition3_e_condition1_b_condition2_d_condition3_e     5
+## p_condition1_a_condition2_d_condition3_e_condition1_b_condition2_d_condition3_f     5
+## p_condition1_a_condition2_d_condition3_f_condition1_b_condition2_c_condition3_e     4
+## p_condition1_a_condition2_d_condition3_f_condition1_b_condition2_c_condition3_f     5
+## p_condition1_a_condition2_d_condition3_f_condition1_b_condition2_d_condition3_e     4
+## p_condition1_a_condition2_d_condition3_f_condition1_b_condition2_d_condition3_f     3
+## p_condition1_b_condition2_c_condition3_e_condition1_b_condition2_c_condition3_f     6
+## p_condition1_b_condition2_c_condition3_e_condition1_b_condition2_d_condition3_e     5
+## p_condition1_b_condition2_c_condition3_e_condition1_b_condition2_d_condition3_f     3
+## p_condition1_b_condition2_c_condition3_f_condition1_b_condition2_d_condition3_e     5
+## p_condition1_b_condition2_c_condition3_f_condition1_b_condition2_d_condition3_f     6
+## p_condition1_b_condition2_d_condition3_e_condition1_b_condition2_d_condition3_f     6
+##                                                                                 effect_size
+## p_condition1_a_condition2_c_condition3_e_condition1_a_condition2_c_condition3_f   -0.033968
+## p_condition1_a_condition2_c_condition3_e_condition1_a_condition2_d_condition3_e   -0.028220
+## p_condition1_a_condition2_c_condition3_e_condition1_a_condition2_d_condition3_f   -0.029225
+## p_condition1_a_condition2_c_condition3_e_condition1_b_condition2_c_condition3_e   -0.020848
+## p_condition1_a_condition2_c_condition3_e_condition1_b_condition2_c_condition3_f   -0.005659
+## p_condition1_a_condition2_c_condition3_e_condition1_b_condition2_d_condition3_e   -0.022539
+## p_condition1_a_condition2_c_condition3_e_condition1_b_condition2_d_condition3_f   -0.021272
+## p_condition1_a_condition2_c_condition3_f_condition1_a_condition2_d_condition3_e    0.002424
+## p_condition1_a_condition2_c_condition3_f_condition1_a_condition2_d_condition3_f    0.001919
+## p_condition1_a_condition2_c_condition3_f_condition1_b_condition2_c_condition3_e    0.010053
+## p_condition1_a_condition2_c_condition3_f_condition1_b_condition2_c_condition3_f    0.024860
+## p_condition1_a_condition2_c_condition3_f_condition1_b_condition2_d_condition3_e    0.010224
+## p_condition1_a_condition2_c_condition3_f_condition1_b_condition2_d_condition3_f    0.010262
+## p_condition1_a_condition2_d_condition3_e_condition1_a_condition2_d_condition3_f    0.001681
+## p_condition1_a_condition2_d_condition3_e_condition1_b_condition2_c_condition3_e    0.008714
+## p_condition1_a_condition2_d_condition3_e_condition1_b_condition2_c_condition3_f    0.021857
+## p_condition1_a_condition2_d_condition3_e_condition1_b_condition2_d_condition3_e    0.007698
+## p_condition1_a_condition2_d_condition3_e_condition1_b_condition2_d_condition3_f    0.008300
+## p_condition1_a_condition2_d_condition3_f_condition1_b_condition2_c_condition3_e    0.009875
+## p_condition1_a_condition2_d_condition3_f_condition1_b_condition2_c_condition3_f    0.022620
+## p_condition1_a_condition2_d_condition3_f_condition1_b_condition2_d_condition3_e    0.003900
+## p_condition1_a_condition2_d_condition3_f_condition1_b_condition2_d_condition3_f    0.005537
+## p_condition1_b_condition2_c_condition3_e_condition1_b_condition2_c_condition3_f    0.012153
+## p_condition1_b_condition2_c_condition3_e_condition1_b_condition2_d_condition3_e   -0.003082
+## p_condition1_b_condition2_c_condition3_e_condition1_b_condition2_d_condition3_f   -0.003265
+## p_condition1_b_condition2_c_condition3_f_condition1_b_condition2_d_condition3_e   -0.015912
+## p_condition1_b_condition2_c_condition3_f_condition1_b_condition2_d_condition3_f   -0.014475
+## p_condition1_b_condition2_d_condition3_e_condition1_b_condition2_d_condition3_f    0.000289
+\end{verbatim}
+
+When there is no true effect, we formally do not have `power' (which is defined as the probability of finding p \textless{} \(\alpha\) if there is a true effect to be found) so the power column should be read as the `Type 1 error rate'. Because we have saved the power simulation in the `power\_result' object, we can perform calculations on the `sim\_data' dataframe that is stored. This dataframe contains the results for the nsims simulations (e.g., 10000 rows if you ran 10000 simulations) and stores the p-values and effect size estimates for each ANOVA. The first 7 columns are the p-values for the ANOVA, first the main effects of condition 1, 2, and 3, then three two-way interactions, and finally the threeway interaction.
+
+We can calculate the number of significant results for each test (which should be 5\%) by counting the number of significant p-values in each of the 7 rows:
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\KeywordTok{apply}\NormalTok{(}\KeywordTok{as.matrix}\NormalTok{(power_result}\OperatorTok{$}\NormalTok{sim_data[(}\DecValTok{1}\OperatorTok{:}\DecValTok{7}\NormalTok{)]), }\DecValTok{2}\NormalTok{, }
+    \ControlFlowTok{function}\NormalTok{(x) }\KeywordTok{round}\NormalTok{(}\KeywordTok{mean}\NormalTok{(}\KeywordTok{ifelse}\NormalTok{(x }\OperatorTok{<}\StringTok{ }\NormalTok{alpha_level, }\DecValTok{1}\NormalTok{, }\DecValTok{0}\NormalTok{) }\OperatorTok{*}\StringTok{ }\DecValTok{100}\NormalTok{),}\DecValTok{4}\NormalTok{))}
+\end{Highlighting}
+\end{Shaded}
+
+\begin{verbatim}
+##                       anova_condition1 
+##                                      7 
+##                       anova_condition2 
+##                                      6 
+##                       anova_condition3 
+##                                      4 
+##            anova_condition1:condition2 
+##                                      5 
+##            anova_condition1:condition3 
+##                                      8 
+##            anova_condition2:condition3 
+##                                      5 
+## anova_condition1:condition2:condition3 
+##                                      4
+\end{verbatim}
+
+This is the Type 1 error rate for each test. When we talk about error rate inflation due to multiple comparisons, we are talking about the probability that you conclude there is an effect, when there is actually no effect, when there is a significant effect for the main effect of condition 1, or condition 2, or condition 3, or for the two-way interaction between condition 1 and 2, or condition 1 and 3, or condition 2 and 3, or in the threeway interaction.
+
+To calculate this error rate we do not just add the 7 error rates (so 7 * 5\% - 35\%). Instead, we calculate the probability that there will be at least one significant result in an ANOVA we perform. Some ANOVA results will have multiple significant results, just due to the Type 1 error rate (e.g., a significant result for the threeway interaction, and for the main effect of condition 1) but such an ANOVA is counted only once. Iwe calculate this percentage from our simulations, we see the number is indeed very close to 1-(0.95)\^{}7 = 30\%.
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\KeywordTok{sum}\NormalTok{(}\KeywordTok{apply}\NormalTok{(}\KeywordTok{as.matrix}\NormalTok{(power_result}\OperatorTok{$}\NormalTok{sim_data[(}\DecValTok{1}\OperatorTok{:}\DecValTok{7}\NormalTok{)]), }\DecValTok{1}\NormalTok{, }
+    \ControlFlowTok{function}\NormalTok{(x) }\KeywordTok{round}\NormalTok{(}\KeywordTok{mean}\NormalTok{(}\KeywordTok{ifelse}\NormalTok{(x }\OperatorTok{<}\StringTok{ }\NormalTok{alpha_level, }\DecValTok{1}\NormalTok{, }\DecValTok{0}\NormalTok{) }\OperatorTok{*}\StringTok{ }\DecValTok{100}\NormalTok{),}\DecValTok{4}\NormalTok{)) }\OperatorTok{>}\StringTok{ }\DecValTok{0}\NormalTok{)}\OperatorTok{/}\NormalTok{nsims}\OperatorTok{*}\DecValTok{100}
+\end{Highlighting}
+\end{Shaded}
+
+\begin{verbatim}
+## [1] 33
+\end{verbatim}
+
+The question is what we should do about this alpha inflation. It is undesirable if you perform exploratory ANOVA's and are fooled too often by Type 1 errors, which will not replicate if you try to build on them. Therefore, you need to control the Type 1 error rate.
+
+In the simulation code, which relies on the afex package, there is the option to set p\_adjust. In the simulation above, p\_adjust was set to ``none''. This means no adjustment is mage to which p-values are considered to be significant, and the alpha level is used as it is set in the simulation (above this was 0.05).
+
+Afex relies on the p.adjust functon in the stats package in R (more information is available \href{https://www.rdocumentation.org/packages/stats/versions/3.1.1/topics/p.adjust}{here}). From the package details:
+
+\emph{The adjustment methods include the Bonferroni correction (``bonferroni'') in which the p-values are multiplied by the number of comparisons. Less conservative corrections are also included by Holm (1979) (``holm''), Hochberg (1988) (``hochberg''), Hommel (1988) (``hommel''), Benjamini \& Hochberg (1995) (``BH'' or its alias ``fdr''), and Benjamini \& Yekutieli (2001) (``BY''), respectively. A pass-through option (``none'') is also included. The first four methods are designed to give strong control of the family-wise error rate. There seems no reason to use the unmodified Bonferroni correction because it is dominated by Holm's method, which is also valid under arbitrary assumptions.}
+
+\emph{Hochberg's and Hommel's methods are valid when the hypothesis tests are independent or when they are non-negatively associated (Sarkar, 1998; Sarkar and Chang, 1997). Hommel's method is more powerful than Hochberg's, but the difference is usually small and the Hochberg p-values are faster to compute.}
+
+\emph{The ``BH'' (aka ``fdr'') and ``BY'' method of Benjamini, Hochberg, and Yekutieli control the false discovery rate, the expected proportion of false discoveries amongst the rejected hypotheses. The false discovery rate is a less stringent condition than the family-wise error rate, so these methods are more powerful than the others.}
+
+Let's re-run the simulation twith the Holm-Bonferroni correction, which is simple and require no assumptions.
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\NormalTok{string <-}\StringTok{ "2b*2b*2b"}
+\NormalTok{n <-}\StringTok{ }\DecValTok{50}
+\NormalTok{mu <-}\StringTok{ }\KeywordTok{c}\NormalTok{(}\DecValTok{20}\NormalTok{, }\DecValTok{20}\NormalTok{, }\DecValTok{20}\NormalTok{, }\DecValTok{20}\NormalTok{, }\DecValTok{20}\NormalTok{, }\DecValTok{20}\NormalTok{, }\DecValTok{20}\NormalTok{, }\DecValTok{20}\NormalTok{) }\CommentTok{#All means are equal - so there is no real difference.}
+\CommentTok{# Enter means in the order that matches the labels below.}
+\NormalTok{sd <-}\StringTok{ }\DecValTok{5}
+\NormalTok{p_adjust =}\StringTok{ "holm"}
+\CommentTok{# Changed to Holm-Bonferroni}
+\NormalTok{labelnames <-}\StringTok{ }\KeywordTok{c}\NormalTok{(}\StringTok{"condition1"}\NormalTok{, }\StringTok{"a"}\NormalTok{, }\StringTok{"b"}\NormalTok{, }\StringTok{"condition2"}\NormalTok{, }\StringTok{"c"}\NormalTok{, }\StringTok{"d"}\NormalTok{, }\StringTok{"condition3"}\NormalTok{, }\StringTok{"e"}\NormalTok{, }\StringTok{"f"}\NormalTok{) }\CommentTok{#}
+\CommentTok{# the label names should be in the order of the means specified above.}
+\NormalTok{design_result <-}\StringTok{ }\KeywordTok{ANOVA_design}\NormalTok{(}\DataTypeTok{design =}\NormalTok{ string,}
+                   \DataTypeTok{n =}\NormalTok{ n, }
+                   \DataTypeTok{mu =}\NormalTok{ mu, }
+                   \DataTypeTok{sd =}\NormalTok{ sd, }
+                   \DataTypeTok{labelnames =}\NormalTok{ labelnames)}
+\end{Highlighting}
+\end{Shaded}
+
+\includegraphics{SuperpowerValidation_files/figure-latex/unnamed-chunk-67-1.pdf}
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\NormalTok{alpha_level <-}\StringTok{ }\FloatTok{0.05}
+\CommentTok{#We set the alpha level at 0.05. }
+\NormalTok{power_result <-}\StringTok{ }\KeywordTok{ANOVA_power}\NormalTok{(design_result, }
+                            \DataTypeTok{alpha_level =}\NormalTok{ alpha_level,}
+                            \DataTypeTok{p_adjust =}\NormalTok{ p_adjust,}
+                            \DataTypeTok{nsims =}\NormalTok{ nsims)}
+\end{Highlighting}
+\end{Shaded}
+
+\begin{verbatim}
+## Power and Effect sizes for ANOVA tests
+##                                        power effect_size
+## anova_condition1                           0    0.002118
+## anova_condition2                           0    0.002285
+## anova_condition3                           0    0.002092
+## anova_condition1:condition2                1    0.002154
+## anova_condition1:condition3                0    0.002392
+## anova_condition2:condition3                1    0.002676
+## anova_condition1:condition2:condition3     0    0.002047
+## 
+## Power and Effect sizes for contrasts
+##                                                                                 power
+## p_condition1_a_condition2_c_condition3_e_condition1_a_condition2_c_condition3_f     0
+## p_condition1_a_condition2_c_condition3_e_condition1_a_condition2_d_condition3_e     0
+## p_condition1_a_condition2_c_condition3_e_condition1_a_condition2_d_condition3_f     0
+## p_condition1_a_condition2_c_condition3_e_condition1_b_condition2_c_condition3_e     0
+## p_condition1_a_condition2_c_condition3_e_condition1_b_condition2_c_condition3_f     0
+## p_condition1_a_condition2_c_condition3_e_condition1_b_condition2_d_condition3_e     0
+## p_condition1_a_condition2_c_condition3_e_condition1_b_condition2_d_condition3_f     0
+## p_condition1_a_condition2_c_condition3_f_condition1_a_condition2_d_condition3_e     0
+## p_condition1_a_condition2_c_condition3_f_condition1_a_condition2_d_condition3_f     0
+## p_condition1_a_condition2_c_condition3_f_condition1_b_condition2_c_condition3_e     0
+## p_condition1_a_condition2_c_condition3_f_condition1_b_condition2_c_condition3_f     0
+## p_condition1_a_condition2_c_condition3_f_condition1_b_condition2_d_condition3_e     0
+## p_condition1_a_condition2_c_condition3_f_condition1_b_condition2_d_condition3_f     1
+## p_condition1_a_condition2_d_condition3_e_condition1_a_condition2_d_condition3_f     0
+## p_condition1_a_condition2_d_condition3_e_condition1_b_condition2_c_condition3_e     0
+## p_condition1_a_condition2_d_condition3_e_condition1_b_condition2_c_condition3_f     0
+## p_condition1_a_condition2_d_condition3_e_condition1_b_condition2_d_condition3_e     0
+## p_condition1_a_condition2_d_condition3_e_condition1_b_condition2_d_condition3_f     0
+## p_condition1_a_condition2_d_condition3_f_condition1_b_condition2_c_condition3_e     0
+## p_condition1_a_condition2_d_condition3_f_condition1_b_condition2_c_condition3_f     0
+## p_condition1_a_condition2_d_condition3_f_condition1_b_condition2_d_condition3_e     0
+## p_condition1_a_condition2_d_condition3_f_condition1_b_condition2_d_condition3_f     0
+## p_condition1_b_condition2_c_condition3_e_condition1_b_condition2_c_condition3_f     1
+## p_condition1_b_condition2_c_condition3_e_condition1_b_condition2_d_condition3_e     0
+## p_condition1_b_condition2_c_condition3_e_condition1_b_condition2_d_condition3_f     0
+## p_condition1_b_condition2_c_condition3_f_condition1_b_condition2_d_condition3_e     0
+## p_condition1_b_condition2_c_condition3_f_condition1_b_condition2_d_condition3_f     1
+## p_condition1_b_condition2_d_condition3_e_condition1_b_condition2_d_condition3_f     0
+##                                                                                 effect_size
+## p_condition1_a_condition2_c_condition3_e_condition1_a_condition2_c_condition3_f   0.0154433
+## p_condition1_a_condition2_c_condition3_e_condition1_a_condition2_d_condition3_e   0.0205541
+## p_condition1_a_condition2_c_condition3_e_condition1_a_condition2_d_condition3_f   0.0422268
+## p_condition1_a_condition2_c_condition3_e_condition1_b_condition2_c_condition3_e   0.0035021
+## p_condition1_a_condition2_c_condition3_e_condition1_b_condition2_c_condition3_f   0.0044807
+## p_condition1_a_condition2_c_condition3_e_condition1_b_condition2_d_condition3_e   0.0138438
+## p_condition1_a_condition2_c_condition3_e_condition1_b_condition2_d_condition3_f  -0.0094933
+## p_condition1_a_condition2_c_condition3_f_condition1_a_condition2_d_condition3_e   0.0053333
+## p_condition1_a_condition2_c_condition3_f_condition1_a_condition2_d_condition3_f   0.0265343
+## p_condition1_a_condition2_c_condition3_f_condition1_b_condition2_c_condition3_e  -0.0091160
+## p_condition1_a_condition2_c_condition3_f_condition1_b_condition2_c_condition3_f  -0.0120365
+## p_condition1_a_condition2_c_condition3_f_condition1_b_condition2_d_condition3_e  -0.0026837
+## p_condition1_a_condition2_c_condition3_f_condition1_b_condition2_d_condition3_f  -0.0230180
+## p_condition1_a_condition2_d_condition3_e_condition1_a_condition2_d_condition3_f   0.0204428
+## p_condition1_a_condition2_d_condition3_e_condition1_b_condition2_c_condition3_e  -0.0169158
+## p_condition1_a_condition2_d_condition3_e_condition1_b_condition2_c_condition3_f  -0.0190223
+## p_condition1_a_condition2_d_condition3_e_condition1_b_condition2_d_condition3_e  -0.0070959
+## p_condition1_a_condition2_d_condition3_e_condition1_b_condition2_d_condition3_f  -0.0292813
+## p_condition1_a_condition2_d_condition3_f_condition1_b_condition2_c_condition3_e  -0.0365485
+## p_condition1_a_condition2_d_condition3_f_condition1_b_condition2_c_condition3_f  -0.0382325
+## p_condition1_a_condition2_d_condition3_f_condition1_b_condition2_d_condition3_e  -0.0288324
+## p_condition1_a_condition2_d_condition3_f_condition1_b_condition2_d_condition3_f  -0.0504461
+## p_condition1_b_condition2_c_condition3_e_condition1_b_condition2_c_condition3_f   0.0007649
+## p_condition1_b_condition2_c_condition3_e_condition1_b_condition2_d_condition3_e   0.0091853
+## p_condition1_b_condition2_c_condition3_e_condition1_b_condition2_d_condition3_f  -0.0144361
+## p_condition1_b_condition2_c_condition3_f_condition1_b_condition2_d_condition3_e   0.0104412
+## p_condition1_b_condition2_c_condition3_f_condition1_b_condition2_d_condition3_f  -0.0120434
+## p_condition1_b_condition2_d_condition3_e_condition1_b_condition2_d_condition3_f  -0.0225975
+\end{verbatim}
+
+If we now calculate the overall Type 1 error rate:
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\KeywordTok{sum}\NormalTok{(}\KeywordTok{apply}\NormalTok{(}\KeywordTok{as.matrix}\NormalTok{(power_result}\OperatorTok{$}\NormalTok{sim_data[(}\DecValTok{1}\OperatorTok{:}\DecValTok{7}\NormalTok{)]), }\DecValTok{1}\NormalTok{, }
+    \ControlFlowTok{function}\NormalTok{(x) }\KeywordTok{round}\NormalTok{(}\KeywordTok{mean}\NormalTok{(}\KeywordTok{ifelse}\NormalTok{(x }\OperatorTok{<}\StringTok{ }\NormalTok{alpha_level, }\DecValTok{1}\NormalTok{, }\DecValTok{0}\NormalTok{) }\OperatorTok{*}\StringTok{ }\DecValTok{100}\NormalTok{),}\DecValTok{4}\NormalTok{)) }\OperatorTok{>}\StringTok{ }\DecValTok{0}\NormalTok{)}\OperatorTok{/}\NormalTok{nsims}\OperatorTok{*}\DecValTok{100}
+\end{Highlighting}
+\end{Shaded}
+
+\begin{verbatim}
+## [1] 2
+\end{verbatim}
+
+We see it is close to 5\%. Note that error rates have variation, and even in a few thousand simulations, the error rate in the sample of studies can easily be half a percentage point higher or lower. But \emph{in the long run} the error rate should equal the alpha level. Furthermore, note that the \href{https://en.wikipedia.org/wiki/Holm\%E2\%80\%93Bonferroni_method}{Holm-bonferroni} method is slightly more powerful than the Bonferroni procedure (which is simply \(\alpha\) divided by the numner of tests). There are more powerful procedures to control the Type 1 error rate, which require more assumptions. For a small number of tests, they Holm-Bonferroni procedure works well. Alternative procedure to control error rates can be found in the \href{https://cran.r-project.org/web/packages/multcomp/index.html}{multcomp} R package.
+
+\hypertarget{power-in-interactions}{%
+\chapter{Power in Interactions}\label{power-in-interactions}}
+
+In the 17th Data Colada blog post titled \href{http://datacolada.org/17}{No-way Interactions} Uri Simonsohn discusses how a moderated interaction (the effect is there in one condition, but disappears in another condition) requires at least twice as many subjects per cell as a study that simply aims to show the simple effect. For example, see the plot below. Assume the score on the vertical axis is desire for fruit, as a function of the fruit that is available (an apple or a banana) and how hungry people are (not, or very). We see there is a difference between the participants desire for a banana compared to an apple, but only for participants who are very hungry. The point that is made is that you need twice as many participants in each cell to have power for the interaction, as you need for the simple effect.
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\NormalTok{string <-}\StringTok{ "2b*2b"}
+\NormalTok{n <-}\StringTok{ }\DecValTok{20}
+\NormalTok{mu <-}\StringTok{ }\KeywordTok{c}\NormalTok{(}\DecValTok{20}\NormalTok{, }\DecValTok{20}\NormalTok{, }\DecValTok{20}\NormalTok{, }\DecValTok{25}\NormalTok{) }\CommentTok{#All means are equal - so there is no real difference.}
+\CommentTok{# Enter means in the order that matches the labels below.}
+\NormalTok{sd <-}\StringTok{ }\FloatTok{0.5}
+\NormalTok{labelnames <-}\StringTok{ }\KeywordTok{c}\NormalTok{(}\StringTok{"fruit"}\NormalTok{, }\StringTok{"apple"}\NormalTok{, }\StringTok{"banana"}\NormalTok{, }\StringTok{"hunger"}\NormalTok{, }\StringTok{"no hunger"}\NormalTok{, }\StringTok{"very hungry"}\NormalTok{) }\CommentTok{#}
+\CommentTok{# the label names should be in the order of the means specified above.}
+\NormalTok{design_result <-}\StringTok{ }\KeywordTok{ANOVA_design}\NormalTok{(}\DataTypeTok{design =}\NormalTok{ string,}
+                   \DataTypeTok{n =}\NormalTok{ n, }
+                   \DataTypeTok{mu =}\NormalTok{ mu, }
+                   \DataTypeTok{sd =}\NormalTok{ sd, }
+                   \DataTypeTok{labelnames =}\NormalTok{ labelnames)}
+\end{Highlighting}
+\end{Shaded}
+
+\includegraphics{SuperpowerValidation_files/figure-latex/unnamed-chunk-69-1.pdf}
+
+We can reproduce the simulations in the Data Colada blog post, using the original code.
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\CommentTok{#R-Code}
+\CommentTok{#}
+\CommentTok{#Written by Uri Simonsohn, March 2014}
+\CommentTok{#}
+\CommentTok{#}
+\CommentTok{#In DataColada[17] I propose that 2x2 interaction studies need 2x the sample size}
+\CommentTok{#http://datacolada.org/2014/03/10/17-no-way-interactions}
+\CommentTok{#In a companion ,pdf I show the simple math behind it}
+\CommentTok{#}
+\CommentTok{#}
+\CommentTok{#Simulations are often more persuasive than math, so here it goes.}
+\CommentTok{#I run simulations that compute power for 2 and 4 cell design, the latter testing the interaction}
+\CommentTok{###################################################################################################}
+\CommentTok{#Create function that computes power of Studies 1 and 2, where Study 1  has 2 cells and tests a simple effect}
+\CommentTok{#and Study 2 has 4 cells and tests the interaction}
+\NormalTok{  colada17=}\ControlFlowTok{function}\NormalTok{(d1,d2,n1,n2,simtot)}
+\NormalTok{  \{}
+  \CommentTok{#n1: sample size, per cell, study 1}
+  \CommentTok{#n2: sample size, per cell, study 2}
+  \CommentTok{#d1: simple effect M1-M2}
+  \CommentTok{#d2: moderated effect M3-M4, full elimination of effect implies d2=0}
+  \CommentTok{#simtot: how many simulations to run}
+  \CommentTok{#Here we will store results}
+\NormalTok{      p1=}\KeywordTok{c}\NormalTok{()    }\CommentTok{#p-values for Study 1}
+\NormalTok{      p2=}\KeywordTok{c}\NormalTok{()    }\CommentTok{#p-values for Study 2}
+  \ControlFlowTok{for}\NormalTok{(i }\ControlFlowTok{in} \DecValTok{1}\OperatorTok{:}\NormalTok{simtot) \{}
+    \CommentTok{#draw data 4 samples}
+\NormalTok{    y1=}\KeywordTok{rnorm}\NormalTok{(}\DataTypeTok{n=}\KeywordTok{max}\NormalTok{(n1,n2),}\DataTypeTok{mean=}\NormalTok{d1)}
+\NormalTok{    y2=}\KeywordTok{rnorm}\NormalTok{(}\DataTypeTok{n=}\KeywordTok{max}\NormalTok{(n1,n2))}
+\NormalTok{    y3=}\KeywordTok{rnorm}\NormalTok{(}\DataTypeTok{n=}\KeywordTok{max}\NormalTok{(n1,n2),}\DataTypeTok{mean=}\NormalTok{d2)}
+\NormalTok{    y4=}\KeywordTok{rnorm}\NormalTok{(}\DataTypeTok{n=}\KeywordTok{max}\NormalTok{(n1,n2))}
+    
+    \CommentTok{#GET DATA READY FOR ANOVA  }
+\NormalTok{      y=}\KeywordTok{c}\NormalTok{(y1,y2,y3,y4)          }\CommentTok{#the d.v.}
+\NormalTok{      nrep=}\KeywordTok{rep}\NormalTok{(n2,}\DecValTok{4}\NormalTok{)          }
+\NormalTok{      A=}\KeywordTok{rep}\NormalTok{(}\KeywordTok{c}\NormalTok{(}\DecValTok{1}\NormalTok{,}\DecValTok{1}\NormalTok{,}\DecValTok{0}\NormalTok{,}\DecValTok{0}\NormalTok{),}\DataTypeTok{times=}\NormalTok{nrep) }
+\NormalTok{      B=}\KeywordTok{rep}\NormalTok{(}\KeywordTok{c}\NormalTok{(}\DecValTok{1}\NormalTok{,}\DecValTok{0}\NormalTok{,}\DecValTok{1}\NormalTok{,}\DecValTok{0}\NormalTok{),}\DataTypeTok{times=}\NormalTok{nrep)}
+    
+    \CommentTok{#STUDY 1}
+\NormalTok{      p1.k=}\KeywordTok{t.test}\NormalTok{(y1[}\DecValTok{1}\OperatorTok{:}\NormalTok{n1],y2[}\DecValTok{1}\OperatorTok{:}\NormalTok{n1],}\DataTypeTok{var.equal=}\OtherTok{TRUE}\NormalTok{)}\OperatorTok{$}\NormalTok{p.value  }\CommentTok{#Do a t-test on the first n1 observations}
+    
+    \CommentTok{#STUDY 2}
+\NormalTok{      p2.k=}\KeywordTok{anova}\NormalTok{(}\KeywordTok{lm}\NormalTok{(y }\OperatorTok{~}\StringTok{ }\NormalTok{A }\OperatorTok{*}\StringTok{ }\NormalTok{B))[}\StringTok{"A:B"}\NormalTok{, }\StringTok{"Pr(>F)"}\NormalTok{]             }\CommentTok{#Do anova, keep p-value of the interaction}
+        
+      \CommentTok{#Store the results}
+\NormalTok{      p1=}\KeywordTok{c}\NormalTok{(p1,p1.k)}
+\NormalTok{      p2=}\KeywordTok{c}\NormalTok{(p2,p2.k)}
+    
+\NormalTok{      \}}
+  
+  \CommentTok{#What share off comparisons are significant}
+\NormalTok{    power1=}\KeywordTok{sum}\NormalTok{(p1}\OperatorTok{<=}\NormalTok{.}\DecValTok{05}\NormalTok{)}\OperatorTok{/}\NormalTok{simtot  }\CommentTok{#Simple test using estimate of variance from 2 cells only}
+\NormalTok{    power2=}\KeywordTok{sum}\NormalTok{(p2}\OperatorTok{<=}\NormalTok{.}\DecValTok{05}\NormalTok{)}\OperatorTok{/}\NormalTok{simtot  }\CommentTok{#Interaction}
+  
+    \KeywordTok{cat}\NormalTok{(}\StringTok{"}\CharTok{\textbackslash{}n}\StringTok{Study 1 is powered to:"}\NormalTok{,}\KeywordTok{round}\NormalTok{(power1,}\DecValTok{2}\NormalTok{))}
+    \KeywordTok{cat}\NormalTok{(}\StringTok{"}\CharTok{\textbackslash{}n}\StringTok{Study 2 is powered to:"}\NormalTok{,}\KeywordTok{round}\NormalTok{(power2,}\DecValTok{2}\NormalTok{))}
+  
+\NormalTok{    \}}
+    
+    
+\CommentTok{#Same power for 2n regardless of n and d}
+  \KeywordTok{colada17}\NormalTok{(}\DataTypeTok{simtot=}\DecValTok{2000}\NormalTok{, }\DataTypeTok{n1=}\DecValTok{20}\NormalTok{,}\DataTypeTok{n2=}\DecValTok{40}\NormalTok{,}\DataTypeTok{d1=}\DecValTok{1}\NormalTok{,}\DataTypeTok{d2=}\DecValTok{0}\NormalTok{)  }
+\end{Highlighting}
+\end{Shaded}
+
+\begin{verbatim}
+## 
+## Study 1 is powered to: 0.87
+## Study 2 is powered to: 0.9
+\end{verbatim}
+
+\begin{Shaded}
+\begin{Highlighting}[]
+  \KeywordTok{colada17}\NormalTok{(}\DataTypeTok{simtot=}\DecValTok{2000}\NormalTok{, }\DataTypeTok{n1=}\DecValTok{50}\NormalTok{,}\DataTypeTok{n2=}\DecValTok{100}\NormalTok{,}\DataTypeTok{d1=}\NormalTok{.}\DecValTok{3}\NormalTok{,}\DataTypeTok{d2=}\DecValTok{0}\NormalTok{)}
+\end{Highlighting}
+\end{Shaded}
+
+\begin{verbatim}
+## 
+## Study 1 is powered to: 0.33
+## Study 2 is powered to: 0.3
+\end{verbatim}
+
+\begin{Shaded}
+\begin{Highlighting}[]
+  \KeywordTok{colada17}\NormalTok{(}\DataTypeTok{simtot=}\DecValTok{2000}\NormalTok{, }\DataTypeTok{n1=}\DecValTok{150}\NormalTok{,}\DataTypeTok{n2=}\DecValTok{300}\NormalTok{,}\DataTypeTok{d1=}\NormalTok{.}\DecValTok{25}\NormalTok{,}\DataTypeTok{d2=}\DecValTok{0}\NormalTok{)}
+\end{Highlighting}
+\end{Shaded}
+
+\begin{verbatim}
+## 
+## Study 1 is powered to: 0.58
+## Study 2 is powered to: 0.59
+\end{verbatim}
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\CommentTok{#Need 4n if effect is 70% attenuated}
+  \KeywordTok{colada17}\NormalTok{(}\DataTypeTok{simtot=}\DecValTok{2000}\NormalTok{, }\DataTypeTok{n1=}\DecValTok{25}\NormalTok{,}\DataTypeTok{n2=}\DecValTok{100}\NormalTok{,}\DataTypeTok{d1=}\NormalTok{.}\DecValTok{5}\NormalTok{, }\DataTypeTok{d2=}\NormalTok{.}\DecValTok{3}\OperatorTok{*}\NormalTok{.}\DecValTok{5}\NormalTok{)}
+\end{Highlighting}
+\end{Shaded}
+
+\begin{verbatim}
+## 
+## Study 1 is powered to: 0.39
+## Study 2 is powered to: 0.41
+\end{verbatim}
+
+\begin{Shaded}
+\begin{Highlighting}[]
+  \KeywordTok{colada17}\NormalTok{(}\DataTypeTok{simtot=}\DecValTok{2000}\NormalTok{, }\DataTypeTok{n1=}\DecValTok{50}\NormalTok{,}\DataTypeTok{n2=}\DecValTok{200}\NormalTok{,}\DataTypeTok{d1=}\NormalTok{.}\DecValTok{5}\NormalTok{, }\DataTypeTok{d2=}\NormalTok{.}\DecValTok{3}\OperatorTok{*}\NormalTok{.}\DecValTok{5}\NormalTok{)}
+\end{Highlighting}
+\end{Shaded}
+
+\begin{verbatim}
+## 
+## Study 1 is powered to: 0.7
+## Study 2 is powered to: 0.68
+\end{verbatim}
+
+\begin{Shaded}
+\begin{Highlighting}[]
+  \KeywordTok{colada17}\NormalTok{(}\DataTypeTok{simtot=}\DecValTok{2000}\NormalTok{, }\DataTypeTok{n1=}\DecValTok{22}\NormalTok{,}\DataTypeTok{n2=}\DecValTok{88}\NormalTok{,}\DataTypeTok{d1=}\NormalTok{.}\DecValTok{41}\NormalTok{, }\DataTypeTok{d2=}\NormalTok{.}\DecValTok{3}\OperatorTok{*}\NormalTok{.}\DecValTok{41}\NormalTok{)}
+\end{Highlighting}
+\end{Shaded}
+
+\begin{verbatim}
+## 
+## Study 1 is powered to: 0.26
+## Study 2 is powered to: 0.27
+\end{verbatim}
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\CommentTok{#underpowered if run with the same n}
+\KeywordTok{colada17}\NormalTok{(}\DataTypeTok{simtot=}\NormalTok{nsims, }\DataTypeTok{n1=}\DecValTok{20}\NormalTok{,}\DataTypeTok{n2=}\DecValTok{20}\NormalTok{,}\DataTypeTok{d1=}\DecValTok{1}\NormalTok{,}\DataTypeTok{d2=}\DecValTok{0}\NormalTok{)  }
+\end{Highlighting}
+\end{Shaded}
+
+\begin{verbatim}
+## 
+## Study 1 is powered to: 0.87
+## Study 2 is powered to: 0.53
+\end{verbatim}
+
+And we can reproduce the results using the ANOVA\_power function.
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\NormalTok{alpha_level <-}\StringTok{ }\FloatTok{0.05} \CommentTok{#We set the alpha level at 0.05. }
+\NormalTok{power_result <-}\StringTok{ }\KeywordTok{ANOVA_power}\NormalTok{(design_result, }\DataTypeTok{alpha_level =}\NormalTok{ alpha_level, }\DataTypeTok{nsims =}\NormalTok{ nsims)}
+\end{Highlighting}
+\end{Shaded}
+
+\begin{verbatim}
+## Power and Effect sizes for ANOVA tests
+##                    power effect_size
+## anova_fruit          100      0.8631
+## anova_hunger         100      0.8637
+## anova_fruit:hunger   100      0.8622
+## 
+## Power and Effect sizes for contrasts
+##                                                                  power
+## p_fruit_apple_hunger_no hunger_fruit_apple_hunger_very hungry        5
+## p_fruit_apple_hunger_no hunger_fruit_banana_hunger_no hunger         3
+## p_fruit_apple_hunger_no hunger_fruit_banana_hunger_very hungry     100
+## p_fruit_apple_hunger_very hungry_fruit_banana_hunger_no hunger       5
+## p_fruit_apple_hunger_very hungry_fruit_banana_hunger_very hungry   100
+## p_fruit_banana_hunger_no hunger_fruit_banana_hunger_very hungry    100
+##                                                                  effect_size
+## p_fruit_apple_hunger_no hunger_fruit_apple_hunger_very hungry       0.033070
+## p_fruit_apple_hunger_no hunger_fruit_banana_hunger_no hunger        0.023914
+## p_fruit_apple_hunger_no hunger_fruit_banana_hunger_very hungry     10.036278
+## p_fruit_apple_hunger_very hungry_fruit_banana_hunger_no hunger     -0.009534
+## p_fruit_apple_hunger_very hungry_fruit_banana_hunger_very hungry    9.872160
+## p_fruit_banana_hunger_no hunger_fruit_banana_hunger_very hungry    10.099645
+\end{verbatim}
+
+We see we get the same power for the anova\_fruit:hunger interaction and for the simple effect p\_fruit\_apple\_hunger\_very hungry\_fruit\_banana\_hunger\_very hungry as the simulations by Uri Simonsohn in his blog post.
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\CommentTok{#Same power for 2n regardless of n and d}
+\KeywordTok{colada17}\NormalTok{(}\DataTypeTok{simtot =} \DecValTok{10000}\NormalTok{, }\DataTypeTok{n1 =} \DecValTok{20}\NormalTok{, }\DataTypeTok{n2 =} \DecValTok{40}\NormalTok{, }\DataTypeTok{d1 =} \DecValTok{1}\NormalTok{, }\DataTypeTok{d2 =} \DecValTok{0}\NormalTok{)  }
+\end{Highlighting}
+\end{Shaded}
+
+\begin{verbatim}
+## 
+## Study 1 is powered to: 0.87
+## Study 2 is powered to: 0.88
+\end{verbatim}
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\KeywordTok{colada17}\NormalTok{(}\DataTypeTok{simtot =} \DecValTok{10000}\NormalTok{, }\DataTypeTok{n1 =} \DecValTok{50}\NormalTok{, }\DataTypeTok{n2 =} \DecValTok{100}\NormalTok{, }\DataTypeTok{d1 =} \FloatTok{.3}\NormalTok{, }\DataTypeTok{d2 =} \DecValTok{0}\NormalTok{)}
+\end{Highlighting}
+\end{Shaded}
+
+\begin{verbatim}
+## 
+## Study 1 is powered to: 0.32
+## Study 2 is powered to: 0.31
+\end{verbatim}
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\KeywordTok{colada17}\NormalTok{(}\DataTypeTok{simtot =} \DecValTok{10000}\NormalTok{, }\DataTypeTok{n1 =} \DecValTok{150}\NormalTok{, }\DataTypeTok{n2 =} \DecValTok{300}\NormalTok{, }\DataTypeTok{d1 =} \FloatTok{.25}\NormalTok{, }\DataTypeTok{d2 =} \DecValTok{0}\NormalTok{)}
+\end{Highlighting}
+\end{Shaded}
+
+\begin{verbatim}
+## 
+## Study 1 is powered to: 0.58
+## Study 2 is powered to: 0.59
+\end{verbatim}
+
+We can also reproduce the last example by adjusting the means and standard deviation. With 150 people, and a Cohen's d of 0.25 (the difference is 5, the sd 20, so 5/20 = 0.25) we should reproduce the power for the simple effect.
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\NormalTok{string <-}\StringTok{ "2b*2b"}
+\NormalTok{n <-}\StringTok{ }\DecValTok{150}
+\NormalTok{mu <-}\StringTok{ }\KeywordTok{c}\NormalTok{(}\DecValTok{20}\NormalTok{, }\DecValTok{20}\NormalTok{, }\DecValTok{20}\NormalTok{, }\DecValTok{25}\NormalTok{) }\CommentTok{#All means are equal - so there is no real difference.}
+\CommentTok{# Enter means in the order that matches the labels below.}
+\NormalTok{sd <-}\StringTok{ }\DecValTok{20}
+\NormalTok{labelnames <-}\StringTok{ }\KeywordTok{c}\NormalTok{(}\StringTok{"fruit"}\NormalTok{, }\StringTok{"apple"}\NormalTok{, }\StringTok{"banana"}\NormalTok{, }\StringTok{"hunger"}\NormalTok{, }\StringTok{"no hunger"}\NormalTok{, }\StringTok{"very hungry"}\NormalTok{) }\CommentTok{#}
+\CommentTok{# the label names should be in the order of the means specified above.}
+\NormalTok{design_result <-}\StringTok{ }\KeywordTok{ANOVA_design}\NormalTok{(}\DataTypeTok{design =}\NormalTok{ string,}
+                   \DataTypeTok{n =}\NormalTok{ n, }
+                   \DataTypeTok{mu =}\NormalTok{ mu, }
+                   \DataTypeTok{sd =}\NormalTok{ sd, }
+                   \DataTypeTok{labelnames =}\NormalTok{ labelnames)}
+\end{Highlighting}
+\end{Shaded}
+
+\includegraphics{SuperpowerValidation_files/figure-latex/unnamed-chunk-74-1.pdf}
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\NormalTok{alpha_level <-}\StringTok{ }\FloatTok{0.05} \CommentTok{#We set the alpha level at 0.05. }
+\NormalTok{power_result <-}\StringTok{ }\KeywordTok{ANOVA_power}\NormalTok{(design_result, }\DataTypeTok{alpha_level =}\NormalTok{ alpha_level, }\DataTypeTok{nsims =}\NormalTok{ nsims)}
+\end{Highlighting}
+\end{Shaded}
+
+\begin{verbatim}
+## Power and Effect sizes for ANOVA tests
+##                    power effect_size
+## anova_fruit           33    0.005426
+## anova_hunger          38    0.006345
+## anova_fruit:hunger    30    0.005728
+## 
+## Power and Effect sizes for contrasts
+##                                                                  power
+## p_fruit_apple_hunger_no hunger_fruit_apple_hunger_very hungry        5
+## p_fruit_apple_hunger_no hunger_fruit_banana_hunger_no hunger         6
+## p_fruit_apple_hunger_no hunger_fruit_banana_hunger_very hungry      53
+## p_fruit_apple_hunger_very hungry_fruit_banana_hunger_no hunger       5
+## p_fruit_apple_hunger_very hungry_fruit_banana_hunger_very hungry    63
+## p_fruit_banana_hunger_no hunger_fruit_banana_hunger_very hungry     69
+##                                                                  effect_size
+## p_fruit_apple_hunger_no hunger_fruit_apple_hunger_very hungry       0.007274
+## p_fruit_apple_hunger_no hunger_fruit_banana_hunger_no hunger       -0.009399
+## p_fruit_apple_hunger_no hunger_fruit_banana_hunger_very hungry      0.256463
+## p_fruit_apple_hunger_very hungry_fruit_banana_hunger_no hunger     -0.016857
+## p_fruit_apple_hunger_very hungry_fruit_banana_hunger_very hungry    0.249103
+## p_fruit_banana_hunger_no hunger_fruit_banana_hunger_very hungry     0.266276
+\end{verbatim}
+
+And changing the sample size to 300 should reproduce the power for the interaction in the ANOVA.
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\NormalTok{string <-}\StringTok{ "2b*2b"}
+\NormalTok{n <-}\StringTok{ }\DecValTok{300}
+\NormalTok{mu <-}\StringTok{ }\KeywordTok{c}\NormalTok{(}\DecValTok{20}\NormalTok{, }\DecValTok{20}\NormalTok{, }\DecValTok{20}\NormalTok{, }\DecValTok{25}\NormalTok{) }\CommentTok{#All means are equal - so there is no real difference.}
+\CommentTok{# Enter means in the order that matches the labels below.}
+\NormalTok{sd <-}\StringTok{ }\DecValTok{20}
+\NormalTok{labelnames <-}\StringTok{ }\KeywordTok{c}\NormalTok{(}\StringTok{"fruit"}\NormalTok{, }\StringTok{"apple"}\NormalTok{, }\StringTok{"banana"}\NormalTok{, }\StringTok{"hunger"}\NormalTok{, }\StringTok{"no hunger"}\NormalTok{, }\StringTok{"very hungry"}\NormalTok{) }\CommentTok{#}
+\CommentTok{# the label names should be in the order of the means specified above.}
+\NormalTok{design_result <-}\StringTok{ }\KeywordTok{ANOVA_design}\NormalTok{(}\DataTypeTok{design =}\NormalTok{ string,}
+                   \DataTypeTok{n =}\NormalTok{ n, }
+                   \DataTypeTok{mu =}\NormalTok{ mu, }
+                   \DataTypeTok{sd =}\NormalTok{ sd, }
+                   \DataTypeTok{labelnames =}\NormalTok{ labelnames)}
+\end{Highlighting}
+\end{Shaded}
+
+\includegraphics{SuperpowerValidation_files/figure-latex/unnamed-chunk-75-1.pdf}
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\NormalTok{alpha_level <-}\StringTok{ }\FloatTok{0.05} \CommentTok{#We set the alpha level at 0.05. }
+\NormalTok{power_result <-}\StringTok{ }\KeywordTok{ANOVA_power}\NormalTok{(design_result, }\DataTypeTok{alpha_level =}\NormalTok{ alpha_level, }\DataTypeTok{nsims =}\NormalTok{ nsims)}
+\end{Highlighting}
+\end{Shaded}
+
+\begin{verbatim}
+## Power and Effect sizes for ANOVA tests
+##                    power effect_size
+## anova_fruit           63    0.004449
+## anova_hunger          64    0.005619
+## anova_fruit:hunger    53    0.004759
+## 
+## Power and Effect sizes for contrasts
+##                                                                  power
+## p_fruit_apple_hunger_no hunger_fruit_apple_hunger_very hungry        8
+## p_fruit_apple_hunger_no hunger_fruit_banana_hunger_no hunger         4
+## p_fruit_apple_hunger_no hunger_fruit_banana_hunger_very hungry      86
+## p_fruit_apple_hunger_very hungry_fruit_banana_hunger_no hunger       7
+## p_fruit_apple_hunger_very hungry_fruit_banana_hunger_very hungry    86
+## p_fruit_banana_hunger_no hunger_fruit_banana_hunger_very hungry     89
+##                                                                  effect_size
+## p_fruit_apple_hunger_no hunger_fruit_apple_hunger_very hungry       0.010926
+## p_fruit_apple_hunger_no hunger_fruit_banana_hunger_no hunger       -0.002831
+## p_fruit_apple_hunger_no hunger_fruit_banana_hunger_very hungry      0.258490
+## p_fruit_apple_hunger_very hungry_fruit_banana_hunger_no hunger     -0.013783
+## p_fruit_apple_hunger_very hungry_fruit_banana_hunger_very hungry    0.246630
+## p_fruit_banana_hunger_no hunger_fruit_banana_hunger_very hungry     0.261495
+\end{verbatim}
+
+Now if we look at the power analysis table for the last simulation, we see that the power for the ANOVA is the same for the main effect of fruit, the main effect of hunger, and the main effect of the interaction. All the effect sizes are equal as well. We can understand why if we look at the means in a 2x2 table:
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\NormalTok{mean_mat <-}\StringTok{ }\KeywordTok{t}\NormalTok{(}\KeywordTok{matrix}\NormalTok{(mu, }
+                     \DataTypeTok{nrow =} \DecValTok{2}\NormalTok{,}
+                     \DataTypeTok{ncol =} \DecValTok{2}\NormalTok{)) }\CommentTok{#Create a mean matrix}
+\KeywordTok{rownames}\NormalTok{(mean_mat) <-}\StringTok{ }\KeywordTok{c}\NormalTok{(}\StringTok{"apple"}\NormalTok{, }\StringTok{"banana"}\NormalTok{)}
+\KeywordTok{colnames}\NormalTok{(mean_mat) <-}\StringTok{ }\KeywordTok{c}\NormalTok{(}\StringTok{"no hunger"}\NormalTok{, }\StringTok{"very hungry"}\NormalTok{)}
+\NormalTok{mean_mat}
+\end{Highlighting}
+\end{Shaded}
+
+\begin{verbatim}
+##        no hunger very hungry
+## apple         20          20
+## banana        20          25
+\end{verbatim}
+
+The first main effect tests the marginal means if we sum over rows, 22.5 vs 20.
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\KeywordTok{rowMeans}\NormalTok{(mean_mat)}
+\end{Highlighting}
+\end{Shaded}
+
+\begin{verbatim}
+##  apple banana 
+##   20.0   22.5
+\end{verbatim}
+
+The second main effect tests the marginal means over the rows, which is also 22.5 vs 20.
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\KeywordTok{colMeans}\NormalTok{(mean_mat)}
+\end{Highlighting}
+\end{Shaded}
+
+\begin{verbatim}
+##   no hunger very hungry 
+##        20.0        22.5
+\end{verbatim}
+
+The interaction tests whether the average effect of hunger on liking fruit differs in the presence of bananas. In the presence of bananas the effect of hunger on the desireability of fruit is 5 scalepoints. The average effect (that we get from the marginal means) of hunger on fruit desireability is 2.5 (22.5-20). In other words, the interaction tests whether the difference effect between hunger and no hunger is different in the presence of an apple versus in the presence of a banana.
+
+Mathematically the interaction effect is computed as the difference between a cell mean and the grand mean, the marginal mean in row i and the grand mean, and the marginal mean in column j and grand mean. For example, for the very hungry-banana condition this is 25 (the value in the cell) - (21.25 {[}the grand mean{]} + 1.25 {[}the marginal mean in row 2, 22.5, minus the grand mean of 21.25{]} + 1.25 {[}the marginal mean in column 2, 22.5, minus the grand mean of 21.25{]}). 25 - (21.25 + (22.5-21.25) + (22.5-21.25)) = 1.25.
+
+We can repeat this for every cell, and get for no hunger-apple: 20 - (21.25 + (20-21.25) + (20-21.25)) = 1.25, for very hungry apple: 20 - (21.25 + (22.5-21.25) + (20-21.25)) = 1.25, and no hunger-banana: 20 - (21.25 + (20-21.25) + (22.5-21.25)) = 1.25. These values are used to calculate the sum of squares.
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\NormalTok{a1 <-}\StringTok{ }\NormalTok{mean_mat[}\DecValTok{1}\NormalTok{,}\DecValTok{1}\NormalTok{] }\OperatorTok{-}\StringTok{ }\NormalTok{(}\KeywordTok{mean}\NormalTok{(mean_mat) }\OperatorTok{+}\StringTok{ }\NormalTok{(}\KeywordTok{mean}\NormalTok{(mean_mat[}\DecValTok{1}\NormalTok{,]) }\OperatorTok{-}\StringTok{ }\KeywordTok{mean}\NormalTok{(mean_mat)) }\OperatorTok{+}\StringTok{ }\NormalTok{(}\KeywordTok{mean}\NormalTok{(mean_mat[,}\DecValTok{1}\NormalTok{]) }\OperatorTok{-}\StringTok{ }\KeywordTok{mean}\NormalTok{(mean_mat)))}
+\NormalTok{a2 <-}\StringTok{ }\NormalTok{mean_mat[}\DecValTok{1}\NormalTok{,}\DecValTok{2}\NormalTok{] }\OperatorTok{-}\StringTok{ }\NormalTok{(}\KeywordTok{mean}\NormalTok{(mean_mat) }\OperatorTok{+}\StringTok{ }\NormalTok{(}\KeywordTok{mean}\NormalTok{(mean_mat[}\DecValTok{1}\NormalTok{,]) }\OperatorTok{-}\StringTok{ }\KeywordTok{mean}\NormalTok{(mean_mat)) }\OperatorTok{+}\StringTok{ }\NormalTok{(}\KeywordTok{mean}\NormalTok{(mean_mat[,}\DecValTok{2}\NormalTok{]) }\OperatorTok{-}\StringTok{ }\KeywordTok{mean}\NormalTok{(mean_mat)))}
+\NormalTok{b1 <-}\StringTok{ }\NormalTok{mean_mat[}\DecValTok{2}\NormalTok{,}\DecValTok{1}\NormalTok{] }\OperatorTok{-}\StringTok{ }\NormalTok{(}\KeywordTok{mean}\NormalTok{(mean_mat) }\OperatorTok{+}\StringTok{ }\NormalTok{(}\KeywordTok{mean}\NormalTok{(mean_mat[}\DecValTok{2}\NormalTok{,]) }\OperatorTok{-}\StringTok{ }\KeywordTok{mean}\NormalTok{(mean_mat)) }\OperatorTok{+}\StringTok{ }\NormalTok{(}\KeywordTok{mean}\NormalTok{(mean_mat[,}\DecValTok{1}\NormalTok{]) }\OperatorTok{-}\StringTok{ }\KeywordTok{mean}\NormalTok{(mean_mat)))}
+\NormalTok{b2 <-}\StringTok{ }\NormalTok{mean_mat[}\DecValTok{2}\NormalTok{,}\DecValTok{2}\NormalTok{] }\OperatorTok{-}\StringTok{ }\NormalTok{(}\KeywordTok{mean}\NormalTok{(mean_mat) }\OperatorTok{+}\StringTok{ }\NormalTok{(}\KeywordTok{mean}\NormalTok{(mean_mat[}\DecValTok{2}\NormalTok{,]) }\OperatorTok{-}\StringTok{ }\KeywordTok{mean}\NormalTok{(mean_mat)) }\OperatorTok{+}\StringTok{ }\NormalTok{(}\KeywordTok{mean}\NormalTok{(mean_mat[,}\DecValTok{2}\NormalTok{]) }\OperatorTok{-}\StringTok{ }\KeywordTok{mean}\NormalTok{(mean_mat)))}
+\NormalTok{SS_ab <-}\StringTok{ }\NormalTok{n }\OperatorTok{*}\StringTok{ }\KeywordTok{sum}\NormalTok{(}\KeywordTok{c}\NormalTok{(a1, a2, b1, b2)}\OperatorTok{^}\DecValTok{2}\NormalTok{)}
+\end{Highlighting}
+\end{Shaded}
+
+The sum of squares is dependent on the sample size, as can be seen in the code above. The larger the sample size, the larger the sum of squares, and therefore (all else equal) the larger the \emph{F}-statistic, and the smaller the \emph{p}-value. We see from the simulations that all three tests have the same effect size, and therefore the same power.
+
+Interactions can have more power than main effects if the effect size of the interaction is larger than the effect size of the main effects. An example of this is a cross-over interaction. For example, let's take a 2x2 matrix of means with a crossover interaction:
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\NormalTok{mu <-}\StringTok{ }\KeywordTok{c}\NormalTok{(}\DecValTok{25}\NormalTok{, }\DecValTok{20}\NormalTok{, }\DecValTok{20}\NormalTok{, }\DecValTok{25}\NormalTok{)}
+\NormalTok{mean_mat <-}\StringTok{ }\KeywordTok{t}\NormalTok{(}\KeywordTok{matrix}\NormalTok{(mu, }
+                     \DataTypeTok{nrow =} \DecValTok{2}\NormalTok{,}
+                     \DataTypeTok{ncol =} \DecValTok{2}\NormalTok{)) }\CommentTok{#Create a mean matrix}
+\KeywordTok{rownames}\NormalTok{(mean_mat) <-}\StringTok{ }\KeywordTok{c}\NormalTok{(}\StringTok{"apple"}\NormalTok{, }\StringTok{"banana"}\NormalTok{)}
+\KeywordTok{colnames}\NormalTok{(mean_mat) <-}\StringTok{ }\KeywordTok{c}\NormalTok{(}\StringTok{"no hunger"}\NormalTok{, }\StringTok{"very hungry"}\NormalTok{)}
+\NormalTok{mean_mat}
+\end{Highlighting}
+\end{Shaded}
+
+\begin{verbatim}
+##        no hunger very hungry
+## apple         25          20
+## banana        20          25
+\end{verbatim}
+
+Neither of the main effects is now significant, as the marginal means are 22.5 vs 22.5 for both main effects. The interaction is much stronger, however. We are testing whether the average effect of hunger on the desireability of fruit is different in the presence of bananas. Since the average effect is 0, and the effect of hunger on the desireability of bananas is 5, so the effect size is now twice as large.
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\NormalTok{string <-}\StringTok{ "2b*2b"}
+\NormalTok{n <-}\StringTok{ }\DecValTok{300}
+\NormalTok{mu <-}\StringTok{ }\KeywordTok{c}\NormalTok{(}\DecValTok{25}\NormalTok{, }\DecValTok{20}\NormalTok{, }\DecValTok{20}\NormalTok{, }\DecValTok{25}\NormalTok{) }\CommentTok{#All means are equal - so there is no real difference.}
+\CommentTok{# Enter means in the order that matches the labels below.}
+\NormalTok{sd <-}\StringTok{ }\DecValTok{20}
+\NormalTok{labelnames <-}\StringTok{ }\KeywordTok{c}\NormalTok{(}\StringTok{"fruit"}\NormalTok{, }\StringTok{"apple"}\NormalTok{, }\StringTok{"banana"}\NormalTok{, }\StringTok{"hunger"}\NormalTok{, }\StringTok{"no hunger"}\NormalTok{, }\StringTok{"very hungry"}\NormalTok{) }\CommentTok{#}
+\CommentTok{# the label names should be in the order of the means specified above.}
+\NormalTok{design_result <-}\StringTok{ }\KeywordTok{ANOVA_design}\NormalTok{(}\DataTypeTok{design =}\NormalTok{ string,}
+                   \DataTypeTok{n =}\NormalTok{ n, }
+                   \DataTypeTok{mu =}\NormalTok{ mu, }
+                   \DataTypeTok{sd =}\NormalTok{ sd, }
+                   \DataTypeTok{labelnames =}\NormalTok{ labelnames)}
+\end{Highlighting}
+\end{Shaded}
+
+\includegraphics{SuperpowerValidation_files/figure-latex/unnamed-chunk-81-1.pdf}
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\NormalTok{alpha_level <-}\StringTok{ }\FloatTok{0.05} \CommentTok{#We set the alpha level at 0.05. }
+\NormalTok{power_result <-}\StringTok{ }\KeywordTok{ANOVA_power}\NormalTok{(design_result, }\DataTypeTok{alpha_level =}\NormalTok{ alpha_level, }\DataTypeTok{nsims =}\NormalTok{ nsims)}
+\end{Highlighting}
+\end{Shaded}
+
+\begin{verbatim}
+## Power and Effect sizes for ANOVA tests
+##                    power effect_size
+## anova_fruit            5   0.0009895
+## anova_hunger           6   0.0006749
+## anova_fruit:hunger    99   0.0166921
+## 
+## Power and Effect sizes for contrasts
+##                                                                  power
+## p_fruit_apple_hunger_no hunger_fruit_apple_hunger_very hungry       90
+## p_fruit_apple_hunger_no hunger_fruit_banana_hunger_no hunger        87
+## p_fruit_apple_hunger_no hunger_fruit_banana_hunger_very hungry       8
+## p_fruit_apple_hunger_very hungry_fruit_banana_hunger_no hunger       5
+## p_fruit_apple_hunger_very hungry_fruit_banana_hunger_very hungry    84
+## p_fruit_banana_hunger_no hunger_fruit_banana_hunger_very hungry     90
+##                                                                  effect_size
+## p_fruit_apple_hunger_no hunger_fruit_apple_hunger_very hungry     -0.2516739
+## p_fruit_apple_hunger_no hunger_fruit_banana_hunger_no hunger      -0.2552283
+## p_fruit_apple_hunger_no hunger_fruit_banana_hunger_very hungry     0.0008431
+## p_fruit_apple_hunger_very hungry_fruit_banana_hunger_no hunger    -0.0041340
+## p_fruit_apple_hunger_very hungry_fruit_banana_hunger_very hungry   0.2532954
+## p_fruit_banana_hunger_no hunger_fruit_banana_hunger_very hungry    0.2570198
+\end{verbatim}
+
+We can also reproduce the power analysis using the anlytic function:
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\NormalTok{power_analytic <-}\StringTok{ }\KeywordTok{power_twoway_between}\NormalTok{(design_result)}
+\NormalTok{power_analytic}\OperatorTok{$}\NormalTok{power_A}
+\end{Highlighting}
+\end{Shaded}
+
+\begin{verbatim}
+## [1] 0.05
+\end{verbatim}
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\NormalTok{power_analytic}\OperatorTok{$}\NormalTok{power_B}
+\end{Highlighting}
+\end{Shaded}
+
+\begin{verbatim}
+## [1] 0.05
+\end{verbatim}
+
+\hypertarget{analytic-power-functions}{%
+\chapter{Analytic Power Functions}\label{analytic-power-functions}}
+
+For some designs it is possible to calculate power analytically, using closed functions.
+
+\hypertarget{one-way-between-subject-anova}{%
+\section{One-Way Between Subject ANOVA}\label{one-way-between-subject-anova}}
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\NormalTok{string <-}\StringTok{ "4b"}
+\NormalTok{n <-}\StringTok{ }\DecValTok{60}
+\NormalTok{mu <-}\StringTok{ }\KeywordTok{c}\NormalTok{(}\DecValTok{80}\NormalTok{, }\DecValTok{82}\NormalTok{, }\DecValTok{82}\NormalTok{, }\DecValTok{86}\NormalTok{) }\CommentTok{#All means are equal - so there is no real difference.}
+\CommentTok{# Enter means in the order that matches the labels below.}
+\NormalTok{sd <-}\StringTok{ }\DecValTok{10}
+\NormalTok{labelnames <-}\StringTok{ }\KeywordTok{c}\NormalTok{(}\StringTok{"Factor_A"}\NormalTok{, }\StringTok{"a1"}\NormalTok{, }\StringTok{"a2"}\NormalTok{, }\StringTok{"a3"}\NormalTok{, }\StringTok{"a4"}\NormalTok{) }\CommentTok{#}
+\CommentTok{# the label names should be in the order of the means specified above.}
+\NormalTok{design_result <-}\StringTok{ }\KeywordTok{ANOVA_design}\NormalTok{(}\DataTypeTok{design =}\NormalTok{ string,}
+                   \DataTypeTok{n =}\NormalTok{ n, }
+                   \DataTypeTok{mu =}\NormalTok{ mu, }
+                   \DataTypeTok{sd =}\NormalTok{ sd, }
+                   \DataTypeTok{labelnames =}\NormalTok{ labelnames)}
+\end{Highlighting}
+\end{Shaded}
+
+\includegraphics{SuperpowerValidation_files/figure-latex/unnamed-chunk-83-1.pdf}
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\NormalTok{power_result <-}\StringTok{ }\KeywordTok{ANOVA_power}\NormalTok{(design_result, }\DataTypeTok{alpha_level =} \FloatTok{0.05}\NormalTok{, }\DataTypeTok{nsims =}\NormalTok{ nsims)}
+\end{Highlighting}
+\end{Shaded}
+
+\begin{verbatim}
+## Power and Effect sizes for ANOVA tests
+##                power effect_size
+## anova_Factor_A    84     0.05683
+## 
+## Power and Effect sizes for contrasts
+##                           power effect_size
+## p_Factor_A_a1_Factor_A_a2    21    0.218427
+## p_Factor_A_a1_Factor_A_a3    20    0.227226
+## p_Factor_A_a1_Factor_A_a4    92    0.608481
+## p_Factor_A_a2_Factor_A_a3     6    0.007324
+## p_Factor_A_a2_Factor_A_a4    52    0.391843
+## p_Factor_A_a3_Factor_A_a4    51    0.382210
+\end{verbatim}
+
+We can also calculate power analytically with our own function.
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\KeywordTok{power_oneway_between}\NormalTok{(design_result)}\OperatorTok{$}\NormalTok{power }\CommentTok{#using default alpha level of .05}
+\end{Highlighting}
+\end{Shaded}
+
+\begin{verbatim}
+## [1] 0.8121291
+\end{verbatim}
+
+This is a generalized function for One-Way ANOVA's for any number of groups. It is in part based on code provided with the excellent book by Aberson (2019) Applied Power Analysis for the Behavioral Sciences (but Aberson's code allows for different n per condition, and different sd per condition).
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\KeywordTok{anova1f_4}\NormalTok{(}\DataTypeTok{m1 =} \DecValTok{80}\NormalTok{, }\DataTypeTok{m2 =} \DecValTok{82}\NormalTok{, }\DataTypeTok{m3 =} \DecValTok{82}\NormalTok{, }\DataTypeTok{m4 =} \DecValTok{86}\NormalTok{,}
+          \DataTypeTok{s1 =} \DecValTok{10}\NormalTok{, }\DataTypeTok{s2 =} \DecValTok{10}\NormalTok{, }\DataTypeTok{s3 =} \DecValTok{10}\NormalTok{, }\DataTypeTok{s4 =} \DecValTok{10}\NormalTok{,}
+          \DataTypeTok{n1 =} \DecValTok{60}\NormalTok{, }\DataTypeTok{n2 =} \DecValTok{60}\NormalTok{, }\DataTypeTok{n3 =} \DecValTok{60}\NormalTok{, }\DataTypeTok{n4 =} \DecValTok{60}\NormalTok{,}
+          \DataTypeTok{alpha =} \FloatTok{.05}\NormalTok{)}
+\end{Highlighting}
+\end{Shaded}
+
+We can also use the function in the pwr package. Note that we need to calculate f to use this function, which is based on the means and sd, as illustrated in the formulas above.
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\KeywordTok{pwr.anova.test}\NormalTok{(}\DataTypeTok{n =} \DecValTok{60}\NormalTok{,}
+               \DataTypeTok{k =} \DecValTok{4}\NormalTok{,}
+               \DataTypeTok{f =} \FloatTok{0.2179449}\NormalTok{,}
+               \DataTypeTok{sig.level =} \FloatTok{0.05}\NormalTok{)}
+\end{Highlighting}
+\end{Shaded}
+
+\begin{verbatim}
+## 
+##      Balanced one-way analysis of variance power calculation 
+## 
+##               k = 4
+##               n = 60
+##               f = 0.2179449
+##       sig.level = 0.05
+##           power = 0.8121289
+## 
+## NOTE: n is number in each group
+\end{verbatim}
+
+Finally, G*Power provides the option to calculate f from the means, sd and n for the cells. It can then be used to calculate power.
+
+\includegraphics{screenshots/gpower_13.png}
+
+\hypertarget{two-way-between-subject-interaction}{%
+\section{Two-way Between Subject Interaction}\label{two-way-between-subject-interaction}}
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\NormalTok{string <-}\StringTok{ "2b*2b"}
+\NormalTok{n <-}\StringTok{ }\DecValTok{20}
+\NormalTok{mu <-}\StringTok{ }\KeywordTok{c}\NormalTok{(}\DecValTok{20}\NormalTok{, }\DecValTok{20}\NormalTok{, }\DecValTok{20}\NormalTok{, }\DecValTok{25}\NormalTok{) }
+\CommentTok{# Enter means in the order that matches the labels below.}
+\NormalTok{sd <-}\StringTok{ }\DecValTok{5}
+\NormalTok{labelnames <-}\StringTok{ }\KeywordTok{c}\NormalTok{(}\StringTok{"A"}\NormalTok{, }\StringTok{"a1"}\NormalTok{, }\StringTok{"a2"}\NormalTok{, }\StringTok{"B"}\NormalTok{, }\StringTok{"b1"}\NormalTok{, }\StringTok{"b2"}\NormalTok{) }\CommentTok{#}
+\CommentTok{# the label names should be in the order of the means specified above.}
+\NormalTok{design_result <-}\StringTok{ }\KeywordTok{ANOVA_design}\NormalTok{(}\DataTypeTok{design =}\NormalTok{ string,}
+                   \DataTypeTok{n =}\NormalTok{ n, }
+                   \DataTypeTok{mu =}\NormalTok{ mu, }
+                   \DataTypeTok{sd =}\NormalTok{ sd, }
+                   \DataTypeTok{labelnames =}\NormalTok{ labelnames)}
+\end{Highlighting}
+\end{Shaded}
+
+\includegraphics{SuperpowerValidation_files/figure-latex/unnamed-chunk-87-1.pdf}
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\NormalTok{power_result <-}\StringTok{ }\KeywordTok{ANOVA_power}\NormalTok{(design_result, }\DataTypeTok{alpha_level =} \FloatTok{0.05}\NormalTok{, }\DataTypeTok{nsims =}\NormalTok{ nsims)}
+\end{Highlighting}
+\end{Shaded}
+
+\begin{verbatim}
+## Power and Effect sizes for ANOVA tests
+##           power effect_size
+## anova_A      65     0.08011
+## anova_B      61     0.07314
+## anova_A:B    60     0.06963
+## 
+## Power and Effect sizes for contrasts
+##                       power effect_size
+## p_A_a1_B_b1_A_a1_B_b2     6     0.01091
+## p_A_a1_B_b1_A_a2_B_b1     4     0.04024
+## p_A_a1_B_b1_A_a2_B_b2    88     1.06041
+## p_A_a1_B_b2_A_a2_B_b1     4     0.02876
+## p_A_a1_B_b2_A_a2_B_b2    88     1.03465
+## p_A_a2_B_b1_A_a2_B_b2    87     1.00829
+\end{verbatim}
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\NormalTok{power_res <-}\StringTok{ }\KeywordTok{power_twoway_between}\NormalTok{(design_result) }\CommentTok{#using default alpha level of .05}
+\NormalTok{power_res}\OperatorTok{$}\NormalTok{power_A}
+\end{Highlighting}
+\end{Shaded}
+
+\begin{verbatim}
+## [1] 0.5978655
+\end{verbatim}
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\NormalTok{power_res}\OperatorTok{$}\NormalTok{power_B}
+\end{Highlighting}
+\end{Shaded}
+
+\begin{verbatim}
+## [1] 0.5978655
+\end{verbatim}
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\NormalTok{power_res}\OperatorTok{$}\NormalTok{power_AB}
+\end{Highlighting}
+\end{Shaded}
+
+\begin{verbatim}
+## [1] 0.5978655
+\end{verbatim}
+
+We can use the function by Aberson, 2019, as well.
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\KeywordTok{anova2x2}\NormalTok{(}\DataTypeTok{m1.1=}\DecValTok{20}\NormalTok{,}
+         \DataTypeTok{m1.2=}\DecValTok{20}\NormalTok{,}
+         \DataTypeTok{m2.1=}\DecValTok{20}\NormalTok{,}
+         \DataTypeTok{m2.2=}\DecValTok{25}\NormalTok{, }
+         \DataTypeTok{s1.1=}\DecValTok{5}\NormalTok{,}
+         \DataTypeTok{s1.2=}\DecValTok{5}\NormalTok{,}
+         \DataTypeTok{s2.1=}\DecValTok{5}\NormalTok{,}
+         \DataTypeTok{s2.2=}\DecValTok{5}\NormalTok{,}
+         \DataTypeTok{n1.1=}\DecValTok{20}\NormalTok{,}
+         \DataTypeTok{n1.2=}\DecValTok{20}\NormalTok{,}
+         \DataTypeTok{n2.1=}\DecValTok{20}\NormalTok{,}
+         \DataTypeTok{n2.2=}\DecValTok{20}\NormalTok{, }
+         \DataTypeTok{alpha=}\NormalTok{.}\DecValTok{05}\NormalTok{, }
+         \DataTypeTok{all=}\StringTok{"OFF"}\NormalTok{)}
+\end{Highlighting}
+\end{Shaded}
+
+\hypertarget{x3-between-subject-anova}{%
+\section{3x3 Between Subject ANOVA}\label{x3-between-subject-anova}}
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\NormalTok{string <-}\StringTok{ "3b*3b"}
+\NormalTok{n <-}\StringTok{ }\DecValTok{20}
+\NormalTok{mu <-}\StringTok{ }\KeywordTok{c}\NormalTok{(}\DecValTok{20}\NormalTok{, }\DecValTok{20}\NormalTok{, }\DecValTok{20}\NormalTok{, }\DecValTok{20}\NormalTok{, }\DecValTok{20}\NormalTok{, }\DecValTok{20}\NormalTok{, }\DecValTok{20}\NormalTok{, }\DecValTok{20}\NormalTok{, }\DecValTok{25}\NormalTok{) }\CommentTok{#All means are equal - so there is no real difference.}
+\CommentTok{# Enter means in the order that matches the labels below.}
+\NormalTok{sd <-}\StringTok{ }\DecValTok{5}
+\NormalTok{labelnames <-}\StringTok{ }\KeywordTok{c}\NormalTok{(}\StringTok{"Factor_A"}\NormalTok{, }\StringTok{"a1"}\NormalTok{, }\StringTok{"a2"}\NormalTok{, }\StringTok{"a3"}\NormalTok{, }\StringTok{"Factor_B"}\NormalTok{, }\StringTok{"b1"}\NormalTok{, }\StringTok{"b2"}\NormalTok{, }\StringTok{"b3"}\NormalTok{) }\CommentTok{#}
+\CommentTok{# the label names should be in the order of the means specified above.}
+\NormalTok{design_result <-}\StringTok{ }\KeywordTok{ANOVA_design}\NormalTok{(}\DataTypeTok{design =}\NormalTok{ string,}
+                   \DataTypeTok{n =}\NormalTok{ n, }
+                   \DataTypeTok{mu =}\NormalTok{ mu, }
+                   \DataTypeTok{sd =}\NormalTok{ sd, }
+                   \DataTypeTok{labelnames =}\NormalTok{ labelnames)}
+\end{Highlighting}
+\end{Shaded}
+
+\includegraphics{SuperpowerValidation_files/figure-latex/unnamed-chunk-90-1.pdf}
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\NormalTok{power_result <-}\StringTok{ }\KeywordTok{ANOVA_power}\NormalTok{(design_result, }\DataTypeTok{alpha_level =} \FloatTok{0.05}\NormalTok{, }\DataTypeTok{nsims =}\NormalTok{ nsims)}
+\end{Highlighting}
+\end{Shaded}
+
+\begin{verbatim}
+## Power and Effect sizes for ANOVA tests
+##                         power effect_size
+## anova_Factor_A             40     0.03563
+## anova_Factor_B             43     0.03753
+## anova_Factor_A:Factor_B    61     0.06852
+## 
+## Power and Effect sizes for contrasts
+##                                                   power effect_size
+## p_Factor_A_a1_Factor_B_b1_Factor_A_a1_Factor_B_b2     6  -0.0024935
+## p_Factor_A_a1_Factor_B_b1_Factor_A_a1_Factor_B_b3     3   0.0484236
+## p_Factor_A_a1_Factor_B_b1_Factor_A_a2_Factor_B_b1     5   0.0123203
+## p_Factor_A_a1_Factor_B_b1_Factor_A_a2_Factor_B_b2     3   0.0033535
+## p_Factor_A_a1_Factor_B_b1_Factor_A_a2_Factor_B_b3     6  -0.0097273
+## p_Factor_A_a1_Factor_B_b1_Factor_A_a3_Factor_B_b1     1   0.0183040
+## p_Factor_A_a1_Factor_B_b1_Factor_A_a3_Factor_B_b2     5   0.0085122
+## p_Factor_A_a1_Factor_B_b1_Factor_A_a3_Factor_B_b3    87   1.0117743
+## p_Factor_A_a1_Factor_B_b2_Factor_A_a1_Factor_B_b3     5   0.0501841
+## p_Factor_A_a1_Factor_B_b2_Factor_A_a2_Factor_B_b1     7   0.0106398
+## p_Factor_A_a1_Factor_B_b2_Factor_A_a2_Factor_B_b2     9   0.0038071
+## p_Factor_A_a1_Factor_B_b2_Factor_A_a2_Factor_B_b3     5  -0.0116012
+## p_Factor_A_a1_Factor_B_b2_Factor_A_a3_Factor_B_b1     2   0.0195116
+## p_Factor_A_a1_Factor_B_b2_Factor_A_a3_Factor_B_b2     5   0.0007596
+## p_Factor_A_a1_Factor_B_b2_Factor_A_a3_Factor_B_b3    82   1.0134672
+## p_Factor_A_a1_Factor_B_b3_Factor_A_a2_Factor_B_b1     4  -0.0379532
+## p_Factor_A_a1_Factor_B_b3_Factor_A_a2_Factor_B_b2     5  -0.0490203
+## p_Factor_A_a1_Factor_B_b3_Factor_A_a2_Factor_B_b3     6  -0.0591611
+## p_Factor_A_a1_Factor_B_b3_Factor_A_a3_Factor_B_b1     5  -0.0286974
+## p_Factor_A_a1_Factor_B_b3_Factor_A_a3_Factor_B_b2     7  -0.0425004
+## p_Factor_A_a1_Factor_B_b3_Factor_A_a3_Factor_B_b3    86   0.9577216
+## p_Factor_A_a2_Factor_B_b1_Factor_A_a2_Factor_B_b2     2  -0.0074014
+## p_Factor_A_a2_Factor_B_b1_Factor_A_a2_Factor_B_b3     7  -0.0216996
+## p_Factor_A_a2_Factor_B_b1_Factor_A_a3_Factor_B_b1     7   0.0105310
+## p_Factor_A_a2_Factor_B_b1_Factor_A_a3_Factor_B_b2     6   0.0045423
+## p_Factor_A_a2_Factor_B_b1_Factor_A_a3_Factor_B_b3    83   1.0019800
+## p_Factor_A_a2_Factor_B_b2_Factor_A_a2_Factor_B_b3     9  -0.0133881
+## p_Factor_A_a2_Factor_B_b2_Factor_A_a3_Factor_B_b1     7   0.0229581
+## p_Factor_A_a2_Factor_B_b2_Factor_A_a3_Factor_B_b2     4   0.0101205
+## p_Factor_A_a2_Factor_B_b2_Factor_A_a3_Factor_B_b3    86   1.0049495
+## p_Factor_A_a2_Factor_B_b3_Factor_A_a3_Factor_B_b1     9   0.0375630
+## p_Factor_A_a2_Factor_B_b3_Factor_A_a3_Factor_B_b2     4   0.0203393
+## p_Factor_A_a2_Factor_B_b3_Factor_A_a3_Factor_B_b3    84   1.0411899
+## p_Factor_A_a3_Factor_B_b1_Factor_A_a3_Factor_B_b2     2  -0.0170923
+## p_Factor_A_a3_Factor_B_b1_Factor_A_a3_Factor_B_b3    82   0.9962469
+## p_Factor_A_a3_Factor_B_b2_Factor_A_a3_Factor_B_b3    81   1.0041388
+\end{verbatim}
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\NormalTok{power_res <-}\StringTok{ }\KeywordTok{power_twoway_between}\NormalTok{(design_result) }\CommentTok{#using default alpha level of .05}
+\NormalTok{power_res}\OperatorTok{$}\NormalTok{power_A}
+\end{Highlighting}
+\end{Shaded}
+
+\begin{verbatim}
+## [1] 0.4486306
+\end{verbatim}
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\NormalTok{power_res}\OperatorTok{$}\NormalTok{power_B}
+\end{Highlighting}
+\end{Shaded}
+
+\begin{verbatim}
+## [1] 0.4486306
+\end{verbatim}
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\NormalTok{power_res}\OperatorTok{$}\NormalTok{power_AB}
+\end{Highlighting}
+\end{Shaded}
+
+\begin{verbatim}
+## [1] 0.6434127
+\end{verbatim}
+
+\hypertarget{two-by-two-anova-within-design-1}{%
+\section{Two by two ANOVA, within design}\label{two-by-two-anova-within-design-1}}
+
+Potvin \& Schutz (2000) simulate a wide range of repeated measure designs. The give an example of a 3x3 design, with the following correlation matrix:
+
+\includegraphics{screenshots/PS2000.png}
+
+Variances were set to 1 (so all covariance matrices in their simulations were identical). In this specific example, the white fields are related to the correlation for the A main effect (these cells have the same level for B, but different levels of A). The grey cells are related to the main effect of B (the cells have the same level of A, but different levels of B). Finally, the black cells are related to the AxB interaction (they have different levels of A and B). The diagonal (all 1) relate to cells with the same levels of A and B.
+
+Potvin \& Schulz (2000) examine power for 2x2 within ANOVA designs and develop approximations of the error variance. For a design with 2 within factors (A and B) these are:
+
+For the main effect of A:
+\(\sigma _ { e } ^ { 2 } = \sigma ^ { 2 } ( 1 - \overline { \rho } _ { A } ) + \sigma ^ { 2 } ( q - 1 ) ( \overline { \rho } _ { B } - \overline { \rho } _ { AB } )\)
+
+For the main effectof B:
+\(\sigma _ { e } ^ { 2 } = \sigma ^ { 2 } ( 1 - \overline { \rho } _ { B } ) + \sigma ^ { 2 } ( p - 1 ) ( \overline { \rho } _ { A } - \overline { \rho } _ { A B } )\)
+
+For the interaction between A and B:
+\(\sigma _ { e } ^ { 2 } = \sigma ^ { 2 } ( 1 - \rho _ { \max } ) - \sigma ^ { 2 } ( \overline { \rho } _ { \min } - \overline { \rho } _ { AB } )\)
+
+We first simulate a within subjects 2x2 ANOVA design.
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\NormalTok{mu =}\StringTok{ }\KeywordTok{c}\NormalTok{(}\DecValTok{2}\NormalTok{,}\DecValTok{1}\NormalTok{,}\DecValTok{4}\NormalTok{,}\DecValTok{2}\NormalTok{) }
+\NormalTok{n <-}\StringTok{ }\DecValTok{20}
+\NormalTok{sd <-}\StringTok{ }\DecValTok{5}
+\NormalTok{r <-}\StringTok{ }\KeywordTok{c}\NormalTok{(}
+  \FloatTok{0.8}\NormalTok{, }\FloatTok{0.5}\NormalTok{, }\FloatTok{0.4}\NormalTok{,}
+       \FloatTok{0.4}\NormalTok{, }\FloatTok{0.5}\NormalTok{,}
+            \FloatTok{0.8}
+\NormalTok{  )}
+\NormalTok{string =}\StringTok{ "2w*2w"}
+\NormalTok{labelnames =}\StringTok{ }\KeywordTok{c}\NormalTok{(}\StringTok{"A"}\NormalTok{, }\StringTok{"a1"}\NormalTok{, }\StringTok{"a2"}\NormalTok{, }\StringTok{"B"}\NormalTok{, }\StringTok{"b1"}\NormalTok{, }\StringTok{"b2"}\NormalTok{)}
+\NormalTok{design_result <-}\StringTok{ }\KeywordTok{ANOVA_design}\NormalTok{(}\DataTypeTok{design =}\NormalTok{ string,}
+                              \DataTypeTok{n =}\NormalTok{ n, }
+                              \DataTypeTok{mu =}\NormalTok{ mu, }
+                              \DataTypeTok{sd =}\NormalTok{ sd, }
+                              \DataTypeTok{r =}\NormalTok{ r, }
+                              \DataTypeTok{labelnames =}\NormalTok{ labelnames)}
+\end{Highlighting}
+\end{Shaded}
+
+\includegraphics{SuperpowerValidation_files/figure-latex/unnamed-chunk-92-1.pdf}
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\NormalTok{simulation_result <-}\StringTok{ }\KeywordTok{ANOVA_power}\NormalTok{(design_result, }\DataTypeTok{alpha_level =} \FloatTok{0.05}\NormalTok{, }\DataTypeTok{nsims =}\NormalTok{ nsims)}
+\end{Highlighting}
+\end{Shaded}
+
+\begin{verbatim}
+## Power and Effect sizes for ANOVA tests
+##           power effect_size
+## anova_A      31      0.1433
+## anova_B      65      0.2631
+## anova_A:B    24      0.1165
+## 
+## Power and Effect sizes for contrasts
+##                       power effect_size
+## p_A_a1_B_b1_A_a1_B_b2    23    -0.34478
+## p_A_a1_B_b1_A_a2_B_b1    42     0.41916
+## p_A_a1_B_b1_A_a2_B_b2     7     0.01247
+## p_A_a1_B_b2_A_a2_B_b1    65     0.58137
+## p_A_a1_B_b2_A_a2_B_b2    15     0.22130
+## p_A_a2_B_b1_A_a2_B_b2    80    -0.64982
+## 
+## Within-Subject Factors Included: Check MANOVA Results
+\end{verbatim}
+
+We can use the \texttt{ANOVA\_exact} function to evaluate this design.
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\NormalTok{power_res <-}\StringTok{ }\KeywordTok{ANOVA_exact}\NormalTok{(}\DataTypeTok{design_result =}\NormalTok{ design_result)}
+\end{Highlighting}
+\end{Shaded}
+
+\begin{verbatim}
+## Power and Effect sizes for ANOVA tests
+##     power partial_eta_squared cohen_f non_centrality
+## A   26.92              0.0952  0.3244              2
+## B   64.23              0.2400  0.5620              6
+## A:B 26.92              0.0952  0.3244              2
+## 
+## Power and Effect sizes for contrasts
+##                       power effect_size
+## p_A_a1_B_b1_A_a1_B_b2 26.92     -0.3162
+## p_A_a1_B_b1_A_a2_B_b1 39.70      0.4000
+## p_A_a1_B_b1_A_a2_B_b2  5.00      0.0000
+## p_A_a1_B_b2_A_a2_B_b1 64.23      0.5477
+## p_A_a1_B_b2_A_a2_B_b2 13.60      0.2000
+## p_A_a2_B_b1_A_a2_B_b2 76.52     -0.6325
+\end{verbatim}
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\NormalTok{power_res}\OperatorTok{$}\NormalTok{power_A}
+\end{Highlighting}
+\end{Shaded}
+
+\begin{verbatim}
+## NULL
+\end{verbatim}
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\NormalTok{power_res}\OperatorTok{$}\NormalTok{power_B}
+\end{Highlighting}
+\end{Shaded}
+
+\begin{verbatim}
+## NULL
+\end{verbatim}
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\NormalTok{power_res}\OperatorTok{$}\NormalTok{power_AB}
+\end{Highlighting}
+\end{Shaded}
+
+\begin{verbatim}
+## NULL
+\end{verbatim}
+
+We can use the code by Abelson (2019) to produce the same results.
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\KeywordTok{win2F}\NormalTok{(}\DataTypeTok{m1.1=}\DecValTok{2}\NormalTok{, }\DataTypeTok{m2.1=}\DecValTok{1}\NormalTok{, }\DataTypeTok{m1.2=}\DecValTok{4}\NormalTok{, }\DataTypeTok{m2.2=}\DecValTok{2}\NormalTok{, }
+      \DataTypeTok{s1.1=}\DecValTok{5}\NormalTok{, }\DataTypeTok{s2.1=}\DecValTok{5}\NormalTok{, }\DataTypeTok{s1.2=}\DecValTok{5}\NormalTok{, }\DataTypeTok{s2.2=}\DecValTok{5}\NormalTok{, }
+      \DataTypeTok{r12=}\FloatTok{0.8}\NormalTok{, }\DataTypeTok{r13=}\FloatTok{0.5}\NormalTok{, }\DataTypeTok{r14=}\FloatTok{0.4}\NormalTok{, }
+               \DataTypeTok{r23=}\FloatTok{0.4}\NormalTok{, }\DataTypeTok{r24=}\FloatTok{0.5}\NormalTok{, }
+                        \DataTypeTok{r34=}\FloatTok{0.8}\NormalTok{,}
+      \DataTypeTok{n=}\DecValTok{20}\NormalTok{)}
+\end{Highlighting}
+\end{Shaded}
+
+\hypertarget{power-curves}{%
+\chapter{Power curves}\label{power-curves}}
+
+Power is calculated for a specific value of an effect size, alpha level, and sample size. Because you often do not know the true effect size, it often makes more sense to think of the power curve as a function of the size of the effect. Although power curves can be calculated based on simulations for any design, we will use the analytic solution to calculate the power of ANOVA designs because these calculations are much faster. The basic approach is to calculate power for a specific pattern of means, a specific effect size, a given alpha level, and a specific pattern of correlations. This is one example:
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\CommentTok{#2x2 design}
+\NormalTok{string =}\StringTok{ "2w*2w"}
+\NormalTok{mu =}\StringTok{ }\KeywordTok{c}\NormalTok{(}\DecValTok{0}\NormalTok{,}\DecValTok{0}\NormalTok{,}\DecValTok{0}\NormalTok{,}\FloatTok{0.5}\NormalTok{)}
+\NormalTok{n <-}\StringTok{ }\DecValTok{20}
+\NormalTok{sd <-}\StringTok{ }\DecValTok{1}
+\NormalTok{r <-}\StringTok{ }\FloatTok{0.5}
+\NormalTok{labelnames =}\StringTok{ }\KeywordTok{c}\NormalTok{(}\StringTok{"A"}\NormalTok{, }\StringTok{"a1"}\NormalTok{, }\StringTok{"a2"}\NormalTok{, }\StringTok{"B"}\NormalTok{, }\StringTok{"b1"}\NormalTok{, }\StringTok{"b2"}\NormalTok{)}
+\NormalTok{design_result <-}\StringTok{ }\KeywordTok{ANOVA_design}\NormalTok{(}\DataTypeTok{design =}\NormalTok{ string,}
+                              \DataTypeTok{n =}\NormalTok{ n, }
+                              \DataTypeTok{mu =}\NormalTok{ mu, }
+                              \DataTypeTok{sd =}\NormalTok{ sd, }
+                              \DataTypeTok{r =}\NormalTok{ r, }
+                              \DataTypeTok{labelnames =}\NormalTok{ labelnames)}
+\end{Highlighting}
+\end{Shaded}
+
+\includegraphics{SuperpowerValidation_files/figure-latex/unnamed-chunk-95-1.pdf}
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\NormalTok{power_res <-}\StringTok{ }\KeywordTok{ANOVA_exact}\NormalTok{(design_result)}
+\end{Highlighting}
+\end{Shaded}
+
+\begin{verbatim}
+## Power and Effect sizes for ANOVA tests
+##     power partial_eta_squared cohen_f non_centrality
+## A   32.36              0.1163  0.3627            2.5
+## B   32.36              0.1163  0.3627            2.5
+## A:B 32.36              0.1163  0.3627            2.5
+## 
+## Power and Effect sizes for contrasts
+##                       power effect_size
+## p_A_a1_B_b1_A_a1_B_b2  5.00         0.0
+## p_A_a1_B_b1_A_a2_B_b1  5.00         0.0
+## p_A_a1_B_b1_A_a2_B_b2 56.45         0.5
+## p_A_a1_B_b2_A_a2_B_b1  5.00         0.0
+## p_A_a1_B_b2_A_a2_B_b2 56.45         0.5
+## p_A_a2_B_b1_A_a2_B_b2 56.45         0.5
+\end{verbatim}
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\NormalTok{power_res}\OperatorTok{$}\NormalTok{main_results}
+\end{Highlighting}
+\end{Shaded}
+
+\begin{verbatim}
+##     power partial_eta_squared cohen_f non_centrality
+## A   32.36              0.1163  0.3627            2.5
+## B   32.36              0.1163  0.3627            2.5
+## A:B 32.36              0.1163  0.3627            2.5
+\end{verbatim}
+
+We can make these calculations for a range of sample sizes, to get a power curve. We created a simple function that performs these calculations across a range of sample sizes (from n = 2 to max\_, a variable you can specify in the function).
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\NormalTok{p_a <-}\StringTok{ }\KeywordTok{plot_power}\NormalTok{(design_result,}
+                      \DataTypeTok{max_n =} \DecValTok{50}\NormalTok{)}
+\end{Highlighting}
+\end{Shaded}
+
+\includegraphics{SuperpowerValidation_files/figure-latex/unnamed-chunk-96-1.pdf}
+
+\hypertarget{explore-increase-in-effect-size-for-moderated-interactions.}{%
+\chapter{Explore increase in effect size for moderated interactions.}\label{explore-increase-in-effect-size-for-moderated-interactions.}}
+
+The design has means 0, 0, 0, 0, with one cell increasing by 0.1, up to 0, 0, 0, 0.5. The standard deviation is set to 1. The correlation between all variables is 0.5.
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\NormalTok{string <-}\StringTok{ "2w*2w"}
+\NormalTok{labelnames =}\StringTok{ }\KeywordTok{c}\NormalTok{(}\StringTok{"A"}\NormalTok{, }\StringTok{"a1"}\NormalTok{, }\StringTok{"a2"}\NormalTok{, }\StringTok{"B"}\NormalTok{, }\StringTok{"b1"}\NormalTok{, }\StringTok{"b2"}\NormalTok{)}
+\NormalTok{design_result <-}\StringTok{ }\KeywordTok{ANOVA_design}\NormalTok{(}\DataTypeTok{design =}\NormalTok{ string,}
+                              \DataTypeTok{n =} \DecValTok{20}\NormalTok{, }
+                              \DataTypeTok{mu =} \KeywordTok{c}\NormalTok{(}\DecValTok{0}\NormalTok{,}\DecValTok{0}\NormalTok{,}\DecValTok{0}\NormalTok{,}\FloatTok{0.0}\NormalTok{), }
+                              \DataTypeTok{sd =} \DecValTok{1}\NormalTok{, }
+                              \DataTypeTok{r =} \FloatTok{0.5}\NormalTok{, }
+                              \DataTypeTok{labelnames =}\NormalTok{ labelnames)}
+\end{Highlighting}
+\end{Shaded}
+
+\includegraphics{SuperpowerValidation_files/figure-latex/unnamed-chunk-97-1.pdf}
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\NormalTok{p_a <-}\StringTok{ }\KeywordTok{plot_power}\NormalTok{(design_result,}
+                      \DataTypeTok{max_n =} \DecValTok{100}\NormalTok{)}
+\end{Highlighting}
+\end{Shaded}
+
+\includegraphics{SuperpowerValidation_files/figure-latex/unnamed-chunk-97-2.pdf}
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\NormalTok{design_result <-}\StringTok{ }\KeywordTok{ANOVA_design}\NormalTok{(}\DataTypeTok{design =}\NormalTok{ string,}
+                              \DataTypeTok{n =} \DecValTok{20}\NormalTok{, }
+                              \DataTypeTok{mu =} \KeywordTok{c}\NormalTok{(}\DecValTok{0}\NormalTok{,}\DecValTok{0}\NormalTok{,}\DecValTok{0}\NormalTok{,}\FloatTok{0.1}\NormalTok{), }
+                              \DataTypeTok{sd =} \DecValTok{1}\NormalTok{, }
+                              \DataTypeTok{r =} \FloatTok{0.5}\NormalTok{, }
+                              \DataTypeTok{labelnames =}\NormalTok{ labelnames)}
+\end{Highlighting}
+\end{Shaded}
+
+\includegraphics{SuperpowerValidation_files/figure-latex/unnamed-chunk-97-3.pdf}
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\NormalTok{p_b <-}\StringTok{ }\KeywordTok{plot_power}\NormalTok{(design_result,}
+                      \DataTypeTok{max_n =} \DecValTok{100}\NormalTok{)}
+\end{Highlighting}
+\end{Shaded}
+
+\includegraphics{SuperpowerValidation_files/figure-latex/unnamed-chunk-97-4.pdf}
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\NormalTok{design_result <-}\StringTok{ }\KeywordTok{ANOVA_design}\NormalTok{(}\DataTypeTok{design =}\NormalTok{ string,}
+                              \DataTypeTok{n =} \DecValTok{20}\NormalTok{, }
+                              \DataTypeTok{mu =} \KeywordTok{c}\NormalTok{(}\DecValTok{0}\NormalTok{,}\DecValTok{0}\NormalTok{,}\DecValTok{0}\NormalTok{,}\FloatTok{0.2}\NormalTok{), }
+                              \DataTypeTok{sd =} \DecValTok{1}\NormalTok{, }
+                              \DataTypeTok{r =} \FloatTok{0.5}\NormalTok{, }
+                              \DataTypeTok{labelnames =}\NormalTok{ labelnames)}
+\end{Highlighting}
+\end{Shaded}
+
+\includegraphics{SuperpowerValidation_files/figure-latex/unnamed-chunk-97-5.pdf}
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\NormalTok{p_c <-}\StringTok{ }\KeywordTok{plot_power}\NormalTok{(design_result,}
+                      \DataTypeTok{max_n =} \DecValTok{100}\NormalTok{)}
+\end{Highlighting}
+\end{Shaded}
+
+\includegraphics{SuperpowerValidation_files/figure-latex/unnamed-chunk-97-6.pdf}
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\NormalTok{design_result <-}\StringTok{ }\KeywordTok{ANOVA_design}\NormalTok{(}\DataTypeTok{design =}\NormalTok{ string,}
+                              \DataTypeTok{n =} \DecValTok{20}\NormalTok{, }
+                              \DataTypeTok{mu =} \KeywordTok{c}\NormalTok{(}\DecValTok{0}\NormalTok{,}\DecValTok{0}\NormalTok{,}\DecValTok{0}\NormalTok{,}\FloatTok{0.3}\NormalTok{), }
+                              \DataTypeTok{sd =} \DecValTok{1}\NormalTok{, }
+                              \DataTypeTok{r =} \FloatTok{0.5}\NormalTok{, }
+                              \DataTypeTok{labelnames =}\NormalTok{ labelnames)}
+\end{Highlighting}
+\end{Shaded}
+
+\includegraphics{SuperpowerValidation_files/figure-latex/unnamed-chunk-97-7.pdf}
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\NormalTok{p_d <-}\StringTok{ }\KeywordTok{plot_power}\NormalTok{(design_result,}
+                      \DataTypeTok{max_n =} \DecValTok{100}\NormalTok{)}
+\end{Highlighting}
+\end{Shaded}
+
+\includegraphics{SuperpowerValidation_files/figure-latex/unnamed-chunk-97-8.pdf}
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\NormalTok{design_result <-}\StringTok{ }\KeywordTok{ANOVA_design}\NormalTok{(}\DataTypeTok{design =}\NormalTok{ string,}
+                              \DataTypeTok{n =} \DecValTok{20}\NormalTok{, }
+                              \DataTypeTok{mu =} \KeywordTok{c}\NormalTok{(}\DecValTok{0}\NormalTok{,}\DecValTok{0}\NormalTok{,}\DecValTok{0}\NormalTok{,}\FloatTok{0.4}\NormalTok{), }
+                              \DataTypeTok{sd =} \DecValTok{1}\NormalTok{, }
+                              \DataTypeTok{r =} \FloatTok{0.5}\NormalTok{, }
+                              \DataTypeTok{labelnames =}\NormalTok{ labelnames)}
+\end{Highlighting}
+\end{Shaded}
+
+\includegraphics{SuperpowerValidation_files/figure-latex/unnamed-chunk-97-9.pdf}
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\NormalTok{p_e <-}\StringTok{ }\KeywordTok{plot_power}\NormalTok{(design_result,}
+                      \DataTypeTok{max_n =} \DecValTok{100}\NormalTok{)}
+\end{Highlighting}
+\end{Shaded}
+
+\includegraphics{SuperpowerValidation_files/figure-latex/unnamed-chunk-97-10.pdf}
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\NormalTok{design_result <-}\StringTok{ }\KeywordTok{ANOVA_design}\NormalTok{(}\DataTypeTok{design =}\NormalTok{ string,}
+                              \DataTypeTok{n =} \DecValTok{20}\NormalTok{, }
+                              \DataTypeTok{mu =} \KeywordTok{c}\NormalTok{(}\DecValTok{0}\NormalTok{,}\DecValTok{0}\NormalTok{,}\DecValTok{0}\NormalTok{,}\FloatTok{0.5}\NormalTok{), }
+                              \DataTypeTok{sd =} \DecValTok{1}\NormalTok{, }
+                              \DataTypeTok{r =} \FloatTok{0.5}\NormalTok{, }
+                              \DataTypeTok{labelnames =}\NormalTok{ labelnames)}
+\end{Highlighting}
+\end{Shaded}
+
+\includegraphics{SuperpowerValidation_files/figure-latex/unnamed-chunk-97-11.pdf}
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\NormalTok{p_f <-}\StringTok{ }\KeywordTok{plot_power}\NormalTok{(design_result,}
+                      \DataTypeTok{max_n =} \DecValTok{100}\NormalTok{)}
+\end{Highlighting}
+\end{Shaded}
+
+\includegraphics{SuperpowerValidation_files/figure-latex/unnamed-chunk-97-12.pdf}
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\CommentTok{# Create long format dataframe }
+\CommentTok{#zzz <- rbind(p_a$power_df, p_b$power_df, p_c$power_df, p_d$power_df, p_e$power_df, p_f$power_df)}
+\CommentTok{#zzz <- cbind(zzz,seq(1,length(zzz$design)))}
+\CommentTok{#colnames(zzz)[1] <- "design"}
+\CommentTok{#colnames(zzz)[6] <- "ID"}
+\CommentTok{#zzz <- melt(zzz, id.vars = c("ID", "design", "n_vec"), measure.vars = c("power_A", "power_B", "power_AB"))}
+\CommentTok{# Plot data using facets, split by factors and interaction, and design}
+\CommentTok{#ggplot(data=zzz, aes(x = n_vec, y = value)) +}
+\CommentTok{#  geom_line( size=1.5) +}
+\CommentTok{#  scale_x_continuous(limits = c(0, max(zzz$n_vec))) + }
+\CommentTok{#  scale_y_continuous(limits = c(0, 100)) +}
+\CommentTok{#  theme_bw() +}
+\CommentTok{#  labs(x="Sample size", y = "Power") +}
+\CommentTok{#  facet_grid(design~variable)}
+\end{Highlighting}
+\end{Shaded}
+
+\hypertarget{explore-increase-in-effect-size-for-cross-over-interactions.}{%
+\section{Explore increase in effect size for cross-over interactions.}\label{explore-increase-in-effect-size-for-cross-over-interactions.}}
+
+The design has means 0, 0, 0, 0, with two cells increasing by 0.1, up to 0.5, 0, 0, 0.5. The standard deviation is set to 1. The correlation between all variables is 0.5.
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\NormalTok{design_result <-}\StringTok{ }\KeywordTok{ANOVA_design}\NormalTok{(}\DataTypeTok{design =}\NormalTok{ string,}
+                              \DataTypeTok{n =} \DecValTok{20}\NormalTok{, }
+                              \DataTypeTok{mu =} \KeywordTok{c}\NormalTok{(}\DecValTok{0}\NormalTok{,}\DecValTok{0}\NormalTok{,}\DecValTok{0}\NormalTok{,}\FloatTok{0.0}\NormalTok{), }
+                              \DataTypeTok{sd =} \DecValTok{1}\NormalTok{, }
+                              \DataTypeTok{r =} \FloatTok{0.5}\NormalTok{, }
+                              \DataTypeTok{labelnames =}\NormalTok{ labelnames)}
+\end{Highlighting}
+\end{Shaded}
+
+\includegraphics{SuperpowerValidation_files/figure-latex/unnamed-chunk-98-1.pdf}
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\NormalTok{p_a <-}\StringTok{ }\KeywordTok{plot_power}\NormalTok{(design_result,}
+                      \DataTypeTok{max_n =} \DecValTok{100}\NormalTok{)}
+\end{Highlighting}
+\end{Shaded}
+
+\includegraphics{SuperpowerValidation_files/figure-latex/unnamed-chunk-98-2.pdf}
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\NormalTok{design_result <-}\StringTok{ }\KeywordTok{ANOVA_design}\NormalTok{(}\DataTypeTok{design =}\NormalTok{ string,}
+                              \DataTypeTok{n =} \DecValTok{20}\NormalTok{, }
+                              \DataTypeTok{mu =} \KeywordTok{c}\NormalTok{(}\FloatTok{0.1}\NormalTok{,}\DecValTok{0}\NormalTok{,}\DecValTok{0}\NormalTok{,}\FloatTok{0.1}\NormalTok{), }
+                              \DataTypeTok{sd =} \DecValTok{1}\NormalTok{, }
+                              \DataTypeTok{r =} \FloatTok{0.5}\NormalTok{, }
+                              \DataTypeTok{labelnames =}\NormalTok{ labelnames)}
+\end{Highlighting}
+\end{Shaded}
+
+\includegraphics{SuperpowerValidation_files/figure-latex/unnamed-chunk-98-3.pdf}
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\NormalTok{p_b <-}\StringTok{ }\KeywordTok{plot_power}\NormalTok{(design_result,}
+                      \DataTypeTok{max_n =} \DecValTok{100}\NormalTok{)}
+\end{Highlighting}
+\end{Shaded}
+
+\includegraphics{SuperpowerValidation_files/figure-latex/unnamed-chunk-98-4.pdf}
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\NormalTok{design_result <-}\StringTok{ }\KeywordTok{ANOVA_design}\NormalTok{(}\DataTypeTok{design =}\NormalTok{ string,}
+                              \DataTypeTok{n =} \DecValTok{20}\NormalTok{, }
+                              \DataTypeTok{mu =} \KeywordTok{c}\NormalTok{(}\FloatTok{0.2}\NormalTok{,}\DecValTok{0}\NormalTok{,}\DecValTok{0}\NormalTok{,}\FloatTok{0.2}\NormalTok{), }
+                              \DataTypeTok{sd =} \DecValTok{1}\NormalTok{, }
+                              \DataTypeTok{r =} \FloatTok{0.5}\NormalTok{, }
+                              \DataTypeTok{labelnames =}\NormalTok{ labelnames)}
+\end{Highlighting}
+\end{Shaded}
+
+\includegraphics{SuperpowerValidation_files/figure-latex/unnamed-chunk-98-5.pdf}
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\NormalTok{p_c <-}\StringTok{ }\KeywordTok{plot_power}\NormalTok{(design_result,}
+                      \DataTypeTok{max_n =} \DecValTok{100}\NormalTok{)}
+\end{Highlighting}
+\end{Shaded}
+
+\includegraphics{SuperpowerValidation_files/figure-latex/unnamed-chunk-98-6.pdf}
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\NormalTok{design_result <-}\StringTok{ }\KeywordTok{ANOVA_design}\NormalTok{(}\DataTypeTok{design =}\NormalTok{ string,}
+                              \DataTypeTok{n =} \DecValTok{20}\NormalTok{, }
+                              \DataTypeTok{mu =} \KeywordTok{c}\NormalTok{(}\FloatTok{0.3}\NormalTok{,}\DecValTok{0}\NormalTok{,}\DecValTok{0}\NormalTok{,}\FloatTok{0.3}\NormalTok{), }
+                              \DataTypeTok{sd =} \DecValTok{1}\NormalTok{, }
+                              \DataTypeTok{r =} \FloatTok{0.5}\NormalTok{, }
+                              \DataTypeTok{labelnames =}\NormalTok{ labelnames)}
+\end{Highlighting}
+\end{Shaded}
+
+\includegraphics{SuperpowerValidation_files/figure-latex/unnamed-chunk-98-7.pdf}
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\NormalTok{p_d <-}\StringTok{ }\KeywordTok{plot_power}\NormalTok{(design_result,}
+                      \DataTypeTok{max_n =} \DecValTok{100}\NormalTok{)}
+\end{Highlighting}
+\end{Shaded}
+
+\includegraphics{SuperpowerValidation_files/figure-latex/unnamed-chunk-98-8.pdf}
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\NormalTok{design_result <-}\StringTok{ }\KeywordTok{ANOVA_design}\NormalTok{(}\DataTypeTok{design =}\NormalTok{ string,}
+                              \DataTypeTok{n =} \DecValTok{20}\NormalTok{, }
+                              \DataTypeTok{mu =} \KeywordTok{c}\NormalTok{(}\FloatTok{0.4}\NormalTok{,}\DecValTok{0}\NormalTok{,}\DecValTok{0}\NormalTok{,}\FloatTok{0.4}\NormalTok{), }
+                              \DataTypeTok{sd =} \DecValTok{1}\NormalTok{, }
+                              \DataTypeTok{r =} \FloatTok{0.5}\NormalTok{, }
+                              \DataTypeTok{labelnames =}\NormalTok{ labelnames)}
+\end{Highlighting}
+\end{Shaded}
+
+\includegraphics{SuperpowerValidation_files/figure-latex/unnamed-chunk-98-9.pdf}
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\NormalTok{p_e <-}\StringTok{ }\KeywordTok{plot_power}\NormalTok{(design_result,}
+                      \DataTypeTok{max_n =} \DecValTok{100}\NormalTok{)}
+\end{Highlighting}
+\end{Shaded}
+
+\includegraphics{SuperpowerValidation_files/figure-latex/unnamed-chunk-98-10.pdf}
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\NormalTok{design_result <-}\StringTok{ }\KeywordTok{ANOVA_design}\NormalTok{(}\DataTypeTok{design =}\NormalTok{ string,}
+                              \DataTypeTok{n =} \DecValTok{20}\NormalTok{, }
+                              \DataTypeTok{mu =} \KeywordTok{c}\NormalTok{(}\FloatTok{0.5}\NormalTok{,}\DecValTok{0}\NormalTok{,}\DecValTok{0}\NormalTok{,}\FloatTok{0.5}\NormalTok{), }
+                              \DataTypeTok{sd =} \DecValTok{1}\NormalTok{, }
+                              \DataTypeTok{r =} \FloatTok{0.5}\NormalTok{, }
+                              \DataTypeTok{labelnames =}\NormalTok{ labelnames)}
+\end{Highlighting}
+\end{Shaded}
+
+\includegraphics{SuperpowerValidation_files/figure-latex/unnamed-chunk-98-11.pdf}
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\NormalTok{p_f <-}\StringTok{ }\KeywordTok{plot_power}\NormalTok{(design_result,}
+                      \DataTypeTok{max_n =} \DecValTok{100}\NormalTok{)}
+\end{Highlighting}
+\end{Shaded}
+
+\includegraphics{SuperpowerValidation_files/figure-latex/unnamed-chunk-98-12.pdf}
+
+\hypertarget{explore-increase-in-correlation-in-moderated-interactions.}{%
+\section{Explore increase in correlation in moderated interactions.}\label{explore-increase-in-correlation-in-moderated-interactions.}}
+
+The design has means 0, 0, 0, 0.3. The standard deviation is set to 1. The correlation between all variables increases from 0.5 to 0.9.
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\NormalTok{string <-}\StringTok{ "2w*2w"}
+\NormalTok{labelnames =}\StringTok{ }\KeywordTok{c}\NormalTok{(}\StringTok{"A"}\NormalTok{, }\StringTok{"a1"}\NormalTok{, }\StringTok{"a2"}\NormalTok{, }\StringTok{"B"}\NormalTok{, }\StringTok{"b1"}\NormalTok{, }\StringTok{"b2"}\NormalTok{)}
+\NormalTok{design_result <-}\StringTok{ }\KeywordTok{ANOVA_design}\NormalTok{(}\DataTypeTok{design =}\NormalTok{ string,}
+                              \DataTypeTok{n =} \DecValTok{20}\NormalTok{, }
+                              \DataTypeTok{mu =} \KeywordTok{c}\NormalTok{(}\DecValTok{0}\NormalTok{,}\DecValTok{0}\NormalTok{,}\DecValTok{0}\NormalTok{,}\FloatTok{0.3}\NormalTok{), }
+                              \DataTypeTok{sd =} \DecValTok{1}\NormalTok{, }
+                              \DataTypeTok{r =} \FloatTok{0.0}\NormalTok{, }
+                              \DataTypeTok{labelnames =}\NormalTok{ labelnames)}
+\end{Highlighting}
+\end{Shaded}
+
+\includegraphics{SuperpowerValidation_files/figure-latex/unnamed-chunk-99-1.pdf}
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\NormalTok{p_a <-}\StringTok{ }\KeywordTok{plot_power}\NormalTok{(design_result,}
+                      \DataTypeTok{max_n =} \DecValTok{100}\NormalTok{)}
+\end{Highlighting}
+\end{Shaded}
+
+\includegraphics{SuperpowerValidation_files/figure-latex/unnamed-chunk-99-2.pdf}
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\NormalTok{design_result <-}\StringTok{ }\KeywordTok{ANOVA_design}\NormalTok{(}\DataTypeTok{design =}\NormalTok{ string,}
+                              \DataTypeTok{n =} \DecValTok{20}\NormalTok{, }
+                              \DataTypeTok{mu =} \KeywordTok{c}\NormalTok{(}\DecValTok{0}\NormalTok{,}\DecValTok{0}\NormalTok{,}\DecValTok{0}\NormalTok{,}\FloatTok{0.3}\NormalTok{), }
+                              \DataTypeTok{sd =} \DecValTok{1}\NormalTok{, }
+                              \DataTypeTok{r =} \FloatTok{0.1}\NormalTok{, }
+                              \DataTypeTok{labelnames =}\NormalTok{ labelnames)}
+\end{Highlighting}
+\end{Shaded}
+
+\includegraphics{SuperpowerValidation_files/figure-latex/unnamed-chunk-99-3.pdf}
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\NormalTok{p_b <-}\StringTok{ }\KeywordTok{plot_power}\NormalTok{(design_result,}
+                      \DataTypeTok{max_n =} \DecValTok{100}\NormalTok{)}
+\end{Highlighting}
+\end{Shaded}
+
+\includegraphics{SuperpowerValidation_files/figure-latex/unnamed-chunk-99-4.pdf}
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\NormalTok{design_result <-}\StringTok{ }\KeywordTok{ANOVA_design}\NormalTok{(}\DataTypeTok{design =}\NormalTok{ string,}
+                              \DataTypeTok{n =} \DecValTok{20}\NormalTok{, }
+                              \DataTypeTok{mu =} \KeywordTok{c}\NormalTok{(}\DecValTok{0}\NormalTok{,}\DecValTok{0}\NormalTok{,}\DecValTok{0}\NormalTok{,}\FloatTok{0.3}\NormalTok{), }
+                              \DataTypeTok{sd =} \DecValTok{1}\NormalTok{, }
+                              \DataTypeTok{r =} \FloatTok{0.3}\NormalTok{, }
+                              \DataTypeTok{labelnames =}\NormalTok{ labelnames)}
+\end{Highlighting}
+\end{Shaded}
+
+\includegraphics{SuperpowerValidation_files/figure-latex/unnamed-chunk-99-5.pdf}
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\NormalTok{p_c <-}\StringTok{ }\KeywordTok{plot_power}\NormalTok{(design_result,}
+                      \DataTypeTok{max_n =} \DecValTok{100}\NormalTok{)}
+\end{Highlighting}
+\end{Shaded}
+
+\includegraphics{SuperpowerValidation_files/figure-latex/unnamed-chunk-99-6.pdf}
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\NormalTok{design_result <-}\StringTok{ }\KeywordTok{ANOVA_design}\NormalTok{(}\DataTypeTok{design =}\NormalTok{ string,}
+                              \DataTypeTok{n =} \DecValTok{20}\NormalTok{, }
+                              \DataTypeTok{mu =} \KeywordTok{c}\NormalTok{(}\DecValTok{0}\NormalTok{,}\DecValTok{0}\NormalTok{,}\DecValTok{0}\NormalTok{,}\FloatTok{0.3}\NormalTok{), }
+                              \DataTypeTok{sd =} \DecValTok{1}\NormalTok{, }
+                              \DataTypeTok{r =} \FloatTok{0.5}\NormalTok{, }
+                              \DataTypeTok{labelnames =}\NormalTok{ labelnames)}
+\end{Highlighting}
+\end{Shaded}
+
+\includegraphics{SuperpowerValidation_files/figure-latex/unnamed-chunk-99-7.pdf}
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\NormalTok{p_d <-}\StringTok{ }\KeywordTok{plot_power}\NormalTok{(design_result,}
+                      \DataTypeTok{max_n =} \DecValTok{100}\NormalTok{)}
+\end{Highlighting}
+\end{Shaded}
+
+\includegraphics{SuperpowerValidation_files/figure-latex/unnamed-chunk-99-8.pdf}
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\NormalTok{design_result <-}\StringTok{ }\KeywordTok{ANOVA_design}\NormalTok{(}\DataTypeTok{design =}\NormalTok{ string,}
+                              \DataTypeTok{n =} \DecValTok{20}\NormalTok{, }
+                              \DataTypeTok{mu =} \KeywordTok{c}\NormalTok{(}\DecValTok{0}\NormalTok{,}\DecValTok{0}\NormalTok{,}\DecValTok{0}\NormalTok{,}\FloatTok{0.3}\NormalTok{), }
+                              \DataTypeTok{sd =} \DecValTok{1}\NormalTok{, }
+                              \DataTypeTok{r =} \FloatTok{0.7}\NormalTok{, }
+                              \DataTypeTok{labelnames =}\NormalTok{ labelnames)}
+\end{Highlighting}
+\end{Shaded}
+
+\includegraphics{SuperpowerValidation_files/figure-latex/unnamed-chunk-99-9.pdf}
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\NormalTok{p_e <-}\StringTok{ }\KeywordTok{plot_power}\NormalTok{(design_result,}
+                      \DataTypeTok{max_n =} \DecValTok{100}\NormalTok{)}
+\end{Highlighting}
+\end{Shaded}
+
+\includegraphics{SuperpowerValidation_files/figure-latex/unnamed-chunk-99-10.pdf}
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\NormalTok{design_result <-}\StringTok{ }\KeywordTok{ANOVA_design}\NormalTok{(}\DataTypeTok{design =}\NormalTok{ string,}
+                              \DataTypeTok{n =} \DecValTok{20}\NormalTok{, }
+                              \DataTypeTok{mu =} \KeywordTok{c}\NormalTok{(}\DecValTok{0}\NormalTok{,}\DecValTok{0}\NormalTok{,}\DecValTok{0}\NormalTok{,}\FloatTok{0.3}\NormalTok{), }
+                              \DataTypeTok{sd =} \DecValTok{1}\NormalTok{, }
+                              \DataTypeTok{r =} \FloatTok{0.9}\NormalTok{, }
+                              \DataTypeTok{labelnames =}\NormalTok{ labelnames)}
+\end{Highlighting}
+\end{Shaded}
+
+\includegraphics{SuperpowerValidation_files/figure-latex/unnamed-chunk-99-11.pdf}
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\NormalTok{p_f <-}\StringTok{ }\KeywordTok{plot_power}\NormalTok{(design_result,}
+                      \DataTypeTok{max_n =} \DecValTok{100}\NormalTok{)}
+\end{Highlighting}
+\end{Shaded}
+
+\includegraphics{SuperpowerValidation_files/figure-latex/unnamed-chunk-99-12.pdf}
+
+\hypertarget{increasing-correlation-in-on-factor-decreases-power-in-second-factor}{%
+\section{Increasing correlation in on factor decreases power in second factor}\label{increasing-correlation-in-on-factor-decreases-power-in-second-factor}}
+
+As Potvin and Schutz (2000) write: ``The more important finding with respect to the effect of \emph{r} on power relates to the effect of the correlations associated with one factor on the power of the test of the main effect of the other factor. Specifically, if the correlations among the levels of B are larger than those within the AB matrix (i.e., \emph{r}B - \emph{r}AB \textgreater{} 0.0), there is a reduction in the power for the test of the A effect (and the test on B is similarly affected by the A correlations).''
+We see this in the plots below. As the correlation of the A factor increases from 0.4 to 0.9, we see the power for the main effect of factor B decreases.
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\NormalTok{string <-}\StringTok{ "2w*2w"}
+\NormalTok{labelnames =}\StringTok{ }\KeywordTok{c}\NormalTok{(}\StringTok{"A"}\NormalTok{, }\StringTok{"a1"}\NormalTok{, }\StringTok{"a2"}\NormalTok{, }\StringTok{"B"}\NormalTok{, }\StringTok{"b1"}\NormalTok{, }\StringTok{"b2"}\NormalTok{)}
+\NormalTok{design_result <-}\StringTok{ }\KeywordTok{ANOVA_design}\NormalTok{(}\DataTypeTok{design =}\NormalTok{ string,}
+                              \DataTypeTok{n =} \DecValTok{20}\NormalTok{, }
+                              \DataTypeTok{mu =} \KeywordTok{c}\NormalTok{(}\DecValTok{0}\NormalTok{,}\DecValTok{0}\NormalTok{,}\DecValTok{0}\NormalTok{,}\FloatTok{0.3}\NormalTok{), }
+                              \DataTypeTok{sd =} \DecValTok{1}\NormalTok{, }
+\NormalTok{                              r <-}\StringTok{ }\KeywordTok{c}\NormalTok{(}
+                                \FloatTok{0.4}\NormalTok{, }\FloatTok{0.4}\NormalTok{, }\FloatTok{0.4}\NormalTok{,}
+                                \FloatTok{0.4}\NormalTok{, }\FloatTok{0.4}\NormalTok{,}
+                                \FloatTok{0.4}\NormalTok{),}
+                              \DataTypeTok{labelnames =}\NormalTok{ labelnames)}
+\end{Highlighting}
+\end{Shaded}
+
+\includegraphics{SuperpowerValidation_files/figure-latex/unnamed-chunk-100-1.pdf}
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\NormalTok{p_a <-}\StringTok{ }\KeywordTok{plot_power}\NormalTok{(design_result,}
+                      \DataTypeTok{max_n =} \DecValTok{100}\NormalTok{)}
+\end{Highlighting}
+\end{Shaded}
+
+\includegraphics{SuperpowerValidation_files/figure-latex/unnamed-chunk-100-2.pdf}
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\NormalTok{design_result <-}\StringTok{ }\KeywordTok{ANOVA_design}\NormalTok{(}\DataTypeTok{design =}\NormalTok{ string,}
+                              \DataTypeTok{n =} \DecValTok{20}\NormalTok{, }
+                              \DataTypeTok{mu =} \KeywordTok{c}\NormalTok{(}\DecValTok{0}\NormalTok{,}\DecValTok{0}\NormalTok{,}\DecValTok{0}\NormalTok{,}\FloatTok{0.3}\NormalTok{), }
+                              \DataTypeTok{sd =} \DecValTok{1}\NormalTok{, }
+\NormalTok{                              r <-}\StringTok{ }\KeywordTok{c}\NormalTok{(}
+                                \FloatTok{0.5}\NormalTok{, }\FloatTok{0.4}\NormalTok{, }\FloatTok{0.4}\NormalTok{,}
+                                \FloatTok{0.4}\NormalTok{, }\FloatTok{0.4}\NormalTok{,}
+                                \FloatTok{0.5}\NormalTok{),}
+                              \DataTypeTok{labelnames =}\NormalTok{ labelnames)}
+\end{Highlighting}
+\end{Shaded}
+
+\includegraphics{SuperpowerValidation_files/figure-latex/unnamed-chunk-100-3.pdf}
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\NormalTok{p_b <-}\StringTok{ }\KeywordTok{plot_power}\NormalTok{(design_result,}
+                      \DataTypeTok{max_n =} \DecValTok{100}\NormalTok{)}
+\end{Highlighting}
+\end{Shaded}
+
+\includegraphics{SuperpowerValidation_files/figure-latex/unnamed-chunk-100-4.pdf}
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\NormalTok{design_result <-}\StringTok{ }\KeywordTok{ANOVA_design}\NormalTok{(}\DataTypeTok{design =}\NormalTok{ string,}
+                              \DataTypeTok{n =} \DecValTok{20}\NormalTok{, }
+                              \DataTypeTok{mu =} \KeywordTok{c}\NormalTok{(}\DecValTok{0}\NormalTok{,}\DecValTok{0}\NormalTok{,}\DecValTok{0}\NormalTok{,}\FloatTok{0.3}\NormalTok{), }
+                              \DataTypeTok{sd =} \DecValTok{1}\NormalTok{, }
+\NormalTok{                              r <-}\StringTok{ }\KeywordTok{c}\NormalTok{(}
+                                \FloatTok{0.6}\NormalTok{, }\FloatTok{0.4}\NormalTok{, }\FloatTok{0.4}\NormalTok{,}
+                                \FloatTok{0.4}\NormalTok{, }\FloatTok{0.4}\NormalTok{,}
+                                \FloatTok{0.6}\NormalTok{),}
+                              \DataTypeTok{labelnames =}\NormalTok{ labelnames)}
+\end{Highlighting}
+\end{Shaded}
+
+\includegraphics{SuperpowerValidation_files/figure-latex/unnamed-chunk-100-5.pdf}
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\NormalTok{p_c <-}\StringTok{ }\KeywordTok{plot_power}\NormalTok{(design_result,}
+                      \DataTypeTok{max_n =} \DecValTok{100}\NormalTok{)}
+\end{Highlighting}
+\end{Shaded}
+
+\includegraphics{SuperpowerValidation_files/figure-latex/unnamed-chunk-100-6.pdf}
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\NormalTok{design_result <-}\StringTok{ }\KeywordTok{ANOVA_design}\NormalTok{(}\DataTypeTok{design =}\NormalTok{ string,}
+                              \DataTypeTok{n =} \DecValTok{20}\NormalTok{, }
+                              \DataTypeTok{mu =} \KeywordTok{c}\NormalTok{(}\DecValTok{0}\NormalTok{,}\DecValTok{0}\NormalTok{,}\DecValTok{0}\NormalTok{,}\FloatTok{0.3}\NormalTok{), }
+                              \DataTypeTok{sd =} \DecValTok{1}\NormalTok{, }
+\NormalTok{                              r <-}\StringTok{ }\KeywordTok{c}\NormalTok{(}
+                                \FloatTok{0.7}\NormalTok{, }\FloatTok{0.4}\NormalTok{, }\FloatTok{0.4}\NormalTok{,}
+                                \FloatTok{0.4}\NormalTok{, }\FloatTok{0.4}\NormalTok{,}
+                                \FloatTok{0.7}\NormalTok{), }
+                              \DataTypeTok{labelnames =}\NormalTok{ labelnames)}
+\end{Highlighting}
+\end{Shaded}
+
+\includegraphics{SuperpowerValidation_files/figure-latex/unnamed-chunk-100-7.pdf}
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\NormalTok{p_d <-}\StringTok{ }\KeywordTok{plot_power}\NormalTok{(design_result,}
+                      \DataTypeTok{max_n =} \DecValTok{100}\NormalTok{)}
+\end{Highlighting}
+\end{Shaded}
+
+\includegraphics{SuperpowerValidation_files/figure-latex/unnamed-chunk-100-8.pdf}
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\NormalTok{design_result <-}\StringTok{ }\KeywordTok{ANOVA_design}\NormalTok{(}\DataTypeTok{design =}\NormalTok{ string,}
+                              \DataTypeTok{n =} \DecValTok{20}\NormalTok{, }
+                              \DataTypeTok{mu =} \KeywordTok{c}\NormalTok{(}\DecValTok{0}\NormalTok{,}\DecValTok{0}\NormalTok{,}\DecValTok{0}\NormalTok{,}\FloatTok{0.3}\NormalTok{), }
+                              \DataTypeTok{sd =} \DecValTok{1}\NormalTok{, }
+\NormalTok{                              r <-}\StringTok{ }\KeywordTok{c}\NormalTok{(}
+                                \FloatTok{0.8}\NormalTok{, }\FloatTok{0.4}\NormalTok{, }\FloatTok{0.4}\NormalTok{,}
+                                \FloatTok{0.4}\NormalTok{, }\FloatTok{0.4}\NormalTok{,}
+                                \FloatTok{0.8}\NormalTok{), }
+                              \DataTypeTok{labelnames =}\NormalTok{ labelnames)}
+\end{Highlighting}
+\end{Shaded}
+
+\includegraphics{SuperpowerValidation_files/figure-latex/unnamed-chunk-100-9.pdf}
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\NormalTok{p_e <-}\StringTok{ }\KeywordTok{plot_power}\NormalTok{(design_result,}
+                      \DataTypeTok{max_n =} \DecValTok{100}\NormalTok{)}
+\end{Highlighting}
+\end{Shaded}
+
+\includegraphics{SuperpowerValidation_files/figure-latex/unnamed-chunk-100-10.pdf}
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\NormalTok{design_result <-}\StringTok{ }\KeywordTok{ANOVA_design}\NormalTok{(}\DataTypeTok{design =}\NormalTok{ string,}
+                              \DataTypeTok{n =} \DecValTok{20}\NormalTok{, }
+                              \DataTypeTok{mu =} \KeywordTok{c}\NormalTok{(}\DecValTok{0}\NormalTok{,}\DecValTok{0}\NormalTok{,}\DecValTok{0}\NormalTok{,}\FloatTok{0.3}\NormalTok{), }
+                              \DataTypeTok{sd =} \DecValTok{1}\NormalTok{, }
+\NormalTok{                              r <-}\StringTok{ }\KeywordTok{c}\NormalTok{(}
+                                \FloatTok{0.9}\NormalTok{, }\FloatTok{0.4}\NormalTok{, }\FloatTok{0.4}\NormalTok{,}
+                                \FloatTok{0.4}\NormalTok{, }\FloatTok{0.4}\NormalTok{,}
+                                \FloatTok{0.9}\NormalTok{), }
+                              \DataTypeTok{labelnames =}\NormalTok{ labelnames)}
+\end{Highlighting}
+\end{Shaded}
+
+\includegraphics{SuperpowerValidation_files/figure-latex/unnamed-chunk-100-11.pdf}
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\NormalTok{p_f <-}\StringTok{ }\KeywordTok{plot_power}\NormalTok{(design_result,}
+                      \DataTypeTok{max_n =} \DecValTok{100}\NormalTok{)}
+\end{Highlighting}
+\end{Shaded}
+
+\includegraphics{SuperpowerValidation_files/figure-latex/unnamed-chunk-100-12.pdf}
 
 \bibliography{book.bib,packages.bib}
 

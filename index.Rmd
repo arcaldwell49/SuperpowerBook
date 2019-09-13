@@ -12,11 +12,6 @@ description: "This is a minimal example of using the bookdown package to write a
 
 This is a compilation of validation documents for `Superpower` written in **Markdown** and compiled by **Bookdown**.
 
-```{r eval=FALSE}
-install.packages("bookdown")
-# or the development version
-# devtools::install_github("rstudio/bookdown")
-```
 
 
 ```{r include=FALSE}
@@ -29,3 +24,19 @@ knitr::write_bib(c(
 # Introduction
 
 Below we have included various examples of the performance of `Superpower` against other R packages and statistical programs (such as GPower).
+
+```{r setup, include=FALSE}
+knitr::opts_chunk$set(echo = TRUE)
+nsims <- 100 #set number of simulations
+require(mvtnorm, quietly = TRUE)
+require(MASS, quietly = TRUE)
+require(afex, quietly = TRUE)
+require(emmeans, quietly = TRUE)
+require(ggplot2, quietly = TRUE)
+require(gridExtra, quietly = TRUE)
+require(reshape2, quietly = TRUE)
+require(pwr, quietly = TRUE)
+library(lsr)
+# Install functions from GitHub by running the code below:
+library(Superpower)
+```

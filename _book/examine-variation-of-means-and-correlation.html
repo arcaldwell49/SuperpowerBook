@@ -1,0 +1,392 @@
+<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml" lang="" xml:lang="">
+<head>
+
+  <meta charset="utf-8" />
+  <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+  <title>Chapter 9 Examine variation of means and correlation | Validation of Superpower</title>
+  <meta name="description" content="This is a minimal example of using the bookdown package to write a book. The output format for this example is bookdown::gitbook." />
+  <meta name="generator" content="bookdown 0.10 and GitBook 2.6.7" />
+
+  <meta property="og:title" content="Chapter 9 Examine variation of means and correlation | Validation of Superpower" />
+  <meta property="og:type" content="book" />
+  
+  
+  <meta property="og:description" content="This is a minimal example of using the bookdown package to write a book. The output format for this example is bookdown::gitbook." />
+  
+
+  <meta name="twitter:card" content="summary" />
+  <meta name="twitter:title" content="Chapter 9 Examine variation of means and correlation | Validation of Superpower" />
+  
+  <meta name="twitter:description" content="This is a minimal example of using the bookdown package to write a book. The output format for this example is bookdown::gitbook." />
+  
+
+<meta name="author" content="Aaron Caldwell &amp; Daniël Lakens" />
+
+
+<meta name="date" content="2019-09-12" />
+
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <meta name="apple-mobile-web-app-capable" content="yes" />
+  <meta name="apple-mobile-web-app-status-bar-style" content="black" />
+  
+  
+<link rel="prev" href="mixed-anova-part-2.html">
+<link rel="next" href="mixed-anova-part-3.html">
+<script src="libs/jquery-2.2.3/jquery.min.js"></script>
+<link href="libs/gitbook-2.6.7/css/style.css" rel="stylesheet" />
+<link href="libs/gitbook-2.6.7/css/plugin-table.css" rel="stylesheet" />
+<link href="libs/gitbook-2.6.7/css/plugin-bookdown.css" rel="stylesheet" />
+<link href="libs/gitbook-2.6.7/css/plugin-highlight.css" rel="stylesheet" />
+<link href="libs/gitbook-2.6.7/css/plugin-search.css" rel="stylesheet" />
+<link href="libs/gitbook-2.6.7/css/plugin-fontsettings.css" rel="stylesheet" />
+
+
+
+
+
+
+
+
+
+<style type="text/css">
+a.sourceLine { display: inline-block; line-height: 1.25; }
+a.sourceLine { pointer-events: none; color: inherit; text-decoration: inherit; }
+a.sourceLine:empty { height: 1.2em; }
+.sourceCode { overflow: visible; }
+code.sourceCode { white-space: pre; position: relative; }
+div.sourceCode { margin: 1em 0; }
+pre.sourceCode { margin: 0; }
+@media screen {
+div.sourceCode { overflow: auto; }
+}
+@media print {
+code.sourceCode { white-space: pre-wrap; }
+a.sourceLine { text-indent: -1em; padding-left: 1em; }
+}
+pre.numberSource a.sourceLine
+  { position: relative; left: -4em; }
+pre.numberSource a.sourceLine::before
+  { content: attr(title);
+    position: relative; left: -1em; text-align: right; vertical-align: baseline;
+    border: none; pointer-events: all; display: inline-block;
+    -webkit-touch-callout: none; -webkit-user-select: none;
+    -khtml-user-select: none; -moz-user-select: none;
+    -ms-user-select: none; user-select: none;
+    padding: 0 4px; width: 4em;
+    color: #aaaaaa;
+  }
+pre.numberSource { margin-left: 3em; border-left: 1px solid #aaaaaa;  padding-left: 4px; }
+div.sourceCode
+  {  }
+@media screen {
+a.sourceLine::before { text-decoration: underline; }
+}
+code span.al { color: #ff0000; font-weight: bold; } /* Alert */
+code span.an { color: #60a0b0; font-weight: bold; font-style: italic; } /* Annotation */
+code span.at { color: #7d9029; } /* Attribute */
+code span.bn { color: #40a070; } /* BaseN */
+code span.bu { } /* BuiltIn */
+code span.cf { color: #007020; font-weight: bold; } /* ControlFlow */
+code span.ch { color: #4070a0; } /* Char */
+code span.cn { color: #880000; } /* Constant */
+code span.co { color: #60a0b0; font-style: italic; } /* Comment */
+code span.cv { color: #60a0b0; font-weight: bold; font-style: italic; } /* CommentVar */
+code span.do { color: #ba2121; font-style: italic; } /* Documentation */
+code span.dt { color: #902000; } /* DataType */
+code span.dv { color: #40a070; } /* DecVal */
+code span.er { color: #ff0000; font-weight: bold; } /* Error */
+code span.ex { } /* Extension */
+code span.fl { color: #40a070; } /* Float */
+code span.fu { color: #06287e; } /* Function */
+code span.im { } /* Import */
+code span.in { color: #60a0b0; font-weight: bold; font-style: italic; } /* Information */
+code span.kw { color: #007020; font-weight: bold; } /* Keyword */
+code span.op { color: #666666; } /* Operator */
+code span.ot { color: #007020; } /* Other */
+code span.pp { color: #bc7a00; } /* Preprocessor */
+code span.sc { color: #4070a0; } /* SpecialChar */
+code span.ss { color: #bb6688; } /* SpecialString */
+code span.st { color: #4070a0; } /* String */
+code span.va { color: #19177c; } /* Variable */
+code span.vs { color: #4070a0; } /* VerbatimString */
+code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warning */
+</style>
+
+<link rel="stylesheet" href="style.css" type="text/css" />
+</head>
+
+<body>
+
+
+
+  <div class="book without-animation with-summary font-size-2 font-family-1" data-basepath=".">
+
+    <div class="book-summary">
+      <nav role="navigation">
+
+<ul class="summary">
+<li><a href="./">A Minimal Book Example</a></li>
+
+<li class="divider"></li>
+<li class="chapter" data-level="1" data-path="index.html"><a href="index.html"><i class="fa fa-check"></i><b>1</b> Introduction</a></li>
+<li class="chapter" data-level="2" data-path="intro.html"><a href="intro.html"><i class="fa fa-check"></i><b>2</b> One-way ANOVA Part 1</a><ul>
+<li class="chapter" data-level="2.1" data-path="intro.html"><a href="intro.html#validation-of-power-in-one-way-anova"><i class="fa fa-check"></i><b>2.1</b> Validation of Power in One-Way ANOVA</a></li>
+<li class="chapter" data-level="2.2" data-path="intro.html"><a href="intro.html#two-conditions"><i class="fa fa-check"></i><b>2.2</b> Two conditions</a></li>
+</ul></li>
+<li class="chapter" data-level="3" data-path="one-way-anova-part-2.html"><a href="one-way-anova-part-2.html"><i class="fa fa-check"></i><b>3</b> One-way ANOVA Part 2</a><ul>
+<li class="chapter" data-level="3.1" data-path="one-way-anova-part-2.html"><a href="one-way-anova-part-2.html#validation-of-power-in-one-way-anova-with-brysbaert-example"><i class="fa fa-check"></i><b>3.1</b> Validation of Power in One-Way ANOVA with Brysbaert example</a><ul>
+<li class="chapter" data-level="3.1.1" data-path="one-way-anova-part-2.html"><a href="one-way-anova-part-2.html#three-conditions"><i class="fa fa-check"></i><b>3.1.1</b> Three conditions</a></li>
+</ul></li>
+<li class="chapter" data-level="3.2" data-path="one-way-anova-part-2.html"><a href="one-way-anova-part-2.html#power-for-simple-effects"><i class="fa fa-check"></i><b>3.2</b> Power for simple effects</a></li>
+<li class="chapter" data-level="3.3" data-path="one-way-anova-part-2.html"><a href="one-way-anova-part-2.html#one-way-anova-part-3"><i class="fa fa-check"></i><b>3.3</b> One-way ANOVA Part 3</a></li>
+<li class="chapter" data-level="3.4" data-path="one-way-anova-part-2.html"><a href="one-way-anova-part-2.html#three-conditions-replication"><i class="fa fa-check"></i><b>3.4</b> Three conditions replication</a></li>
+<li class="chapter" data-level="3.5" data-path="one-way-anova-part-2.html"><a href="one-way-anova-part-2.html#variation-1"><i class="fa fa-check"></i><b>3.5</b> Variation 1</a></li>
+<li class="chapter" data-level="3.6" data-path="one-way-anova-part-2.html"><a href="one-way-anova-part-2.html#three-conditions-replication-1"><i class="fa fa-check"></i><b>3.6</b> Three conditions replication</a></li>
+<li class="chapter" data-level="3.7" data-path="one-way-anova-part-2.html"><a href="one-way-anova-part-2.html#variation-2"><i class="fa fa-check"></i><b>3.7</b> Variation 2</a></li>
+<li class="chapter" data-level="3.8" data-path="one-way-anova-part-2.html"><a href="one-way-anova-part-2.html#three-conditions-replication-2"><i class="fa fa-check"></i><b>3.8</b> Three conditions replication</a></li>
+</ul></li>
+<li class="chapter" data-level="4" data-path="repeated-measures-anova-part-1.html"><a href="repeated-measures-anova-part-1.html"><i class="fa fa-check"></i><b>4</b> Repeated Measures-ANOVA Part 1</a><ul>
+<li class="chapter" data-level="4.1" data-path="repeated-measures-anova-part-1.html"><a href="repeated-measures-anova-part-1.html#two-conditions-medium-effect-size"><i class="fa fa-check"></i><b>4.1</b> Two conditions, medium effect size</a></li>
+</ul></li>
+<li class="chapter" data-level="5" data-path="repeated-measures-anova-part-2.html"><a href="repeated-measures-anova-part-2.html"><i class="fa fa-check"></i><b>5</b> Repeated Measures-ANOVA Part 2</a><ul>
+<li class="chapter" data-level="5.1" data-path="repeated-measures-anova-part-2.html"><a href="repeated-measures-anova-part-2.html#the-relation-between-cohens-f-and-cohens-d"><i class="fa fa-check"></i><b>5.1</b> The relation between Cohen’s f and Cohen’s d</a></li>
+<li class="chapter" data-level="5.2" data-path="repeated-measures-anova-part-2.html"><a href="repeated-measures-anova-part-2.html#three-within-conditions-medium-effect-size"><i class="fa fa-check"></i><b>5.2</b> Three within conditions, medium effect size</a></li>
+</ul></li>
+<li class="chapter" data-level="6" data-path="repeated-measures-anova-part-3.html"><a href="repeated-measures-anova-part-3.html"><i class="fa fa-check"></i><b>6</b> Repeated Measures-ANOVA Part 3</a><ul>
+<li class="chapter" data-level="6.1" data-path="repeated-measures-anova-part-3.html"><a href="repeated-measures-anova-part-3.html#reproducing-brysbaert"><i class="fa fa-check"></i><b>6.1</b> Reproducing Brysbaert</a></li>
+<li class="chapter" data-level="6.2" data-path="repeated-measures-anova-part-3.html"><a href="repeated-measures-anova-part-3.html#reproducing-brysbaert-variation-1-changing-correlation"><i class="fa fa-check"></i><b>6.2</b> Reproducing Brysbaert Variation 1 Changing Correlation</a></li>
+</ul></li>
+<li class="chapter" data-level="7" data-path="mixed-anova-part-1.html"><a href="mixed-anova-part-1.html"><i class="fa fa-check"></i><b>7</b> Mixed ANOVA Part 1</a><ul>
+<li class="chapter" data-level="7.1" data-path="mixed-anova-part-1.html"><a href="mixed-anova-part-1.html#two-by-two-anova-within-between-design"><i class="fa fa-check"></i><b>7.1</b> Two by two ANOVA, within-between design</a></li>
+<li class="chapter" data-level="7.2" data-path="mixed-anova-part-1.html"><a href="mixed-anova-part-1.html#two-by-two-anova-within-between-design-variation-1"><i class="fa fa-check"></i><b>7.2</b> Two by two ANOVA, within-between design Variation 1</a></li>
+</ul></li>
+<li class="chapter" data-level="8" data-path="mixed-anova-part-2.html"><a href="mixed-anova-part-2.html"><i class="fa fa-check"></i><b>8</b> Mixed ANOVA Part 2</a><ul>
+<li class="chapter" data-level="8.1" data-path="mixed-anova-part-2.html"><a href="mixed-anova-part-2.html#two-by-two-anova-within-within-design"><i class="fa fa-check"></i><b>8.1</b> Two by two ANOVA, within-within design</a></li>
+</ul></li>
+<li class="chapter" data-level="9" data-path="examine-variation-of-means-and-correlation.html"><a href="examine-variation-of-means-and-correlation.html"><i class="fa fa-check"></i><b>9</b> Examine variation of means and correlation</a></li>
+<li class="chapter" data-level="10" data-path="mixed-anova-part-3.html"><a href="mixed-anova-part-3.html"><i class="fa fa-check"></i><b>10</b> Mixed ANOVA Part 3</a><ul>
+<li class="chapter" data-level="10.1" data-path="mixed-anova-part-3.html"><a href="mixed-anova-part-3.html#two-by-two-anova-within-design"><i class="fa fa-check"></i><b>10.1</b> Two by two ANOVA, within design</a></li>
+</ul></li>
+<li class="chapter" data-level="11" data-path="simple-example-2x2-within-design.html"><a href="simple-example-2x2-within-design.html"><i class="fa fa-check"></i><b>11</b> Simple example: 2x2 within design</a></li>
+<li class="divider"></li>
+<li><a href="https://github.com/rstudio/bookdown" target="blank">Published with bookdown</a></li>
+
+</ul>
+
+      </nav>
+    </div>
+
+    <div class="book-body">
+      <div class="body-inner">
+        <div class="book-header" role="navigation">
+          <h1>
+            <i class="fa fa-circle-o-notch fa-spin"></i><a href="./">Validation of Superpower</a>
+          </h1>
+        </div>
+
+        <div class="page-wrapper" tabindex="-1" role="main">
+          <div class="page-inner">
+
+            <section class="normal" id="section-">
+<div id="examine-variation-of-means-and-correlation" class="section level1">
+<h1><span class="header-section-number">Chapter 9</span> Examine variation of means and correlation</h1>
+<pre class="sourceCode r"><code class="sourceCode r"><span class="co"># define the parameters</span>
+mu =<span class="st"> </span><span class="kw">c</span>(<span class="dv">700</span>, <span class="dv">670</span>, <span class="dv">690</span>, <span class="dv">750</span>) <span class="co"># true effects (in this case, a double dissociation)</span>
+sigma =<span class="st"> </span><span class="dv">150</span>  <span class="co"># population standard deviation</span>
+rho =<span class="st"> </span><span class="fl">0.4</span> <span class="co"># correlation between repeated measures</span>
+nsubs =<span class="st"> </span><span class="dv">25</span> <span class="co"># how many subjects?</span>
+nsims =<span class="st"> </span>nsims <span class="co"># how many simulation replicates?</span>
+ 
+<span class="co"># create 2 factors representing the 2 independent variables</span>
+cond =<span class="st"> </span><span class="kw">data.frame</span>(
+  <span class="dt">X1 =</span> <span class="kw">rep</span>(<span class="kw">factor</span>(letters[<span class="dv">1</span><span class="op">:</span><span class="dv">2</span>]), nsubs <span class="op">*</span><span class="st"> </span><span class="dv">2</span>),
+  <span class="dt">X2 =</span> <span class="kw">rep</span>(<span class="kw">factor</span>(letters[<span class="dv">1</span><span class="op">:</span><span class="dv">2</span>]), nsubs, <span class="dt">each=</span><span class="dv">2</span>))
+ 
+<span class="co"># create a subjects factor</span>
+subject =<span class="st"> </span><span class="kw">factor</span>(<span class="kw">sort</span>(<span class="kw">rep</span>(<span class="dv">1</span><span class="op">:</span>nsubs, <span class="dv">4</span>)))
+ 
+<span class="co"># combine above into the design matrix</span>
+dm =<span class="st"> </span><span class="kw">data.frame</span>(subject, cond)</code></pre>
+<p>Build Sigma: the population variance-covariance matrix</p>
+<pre class="sourceCode r"><code class="sourceCode r"><span class="co"># create k x k matrix populated with sigma</span>
+sigma.mat &lt;-<span class="st"> </span><span class="kw">rep</span>(sigma, <span class="dv">4</span>)
+S &lt;-<span class="st"> </span><span class="kw">matrix</span>(sigma.mat, <span class="dt">ncol=</span><span class="kw">length</span>(sigma.mat), <span class="dt">nrow=</span><span class="kw">length</span>(sigma.mat))
+ 
+<span class="co"># compute covariance between measures</span>
+Sigma &lt;-<span class="st"> </span><span class="kw">t</span>(S) <span class="op">*</span><span class="st"> </span>S <span class="op">*</span><span class="st"> </span>rho  
+ 
+<span class="co"># put the variances on the diagonal </span>
+<span class="kw">diag</span>(Sigma) &lt;-<span class="st"> </span>sigma<span class="op">^</span><span class="dv">2</span>  </code></pre>
+<p>Run the simulation</p>
+<pre class="sourceCode r"><code class="sourceCode r"><span class="co"># stack &#39;nsims&#39; individual data frames into one large data frame</span>
+df =<span class="st"> </span>dm[<span class="kw">rep</span>(<span class="kw">seq_len</span>(<span class="kw">nrow</span>(dm)), nsims), ]
+ 
+<span class="co"># add an index column to track the simulation run</span>
+df<span class="op">$</span>simID =<span class="st"> </span><span class="kw">sort</span>(<span class="kw">rep</span>(<span class="kw">seq_len</span>(nsims), <span class="kw">nrow</span>(dm)))
+ 
+<span class="co"># sample the observed data from a multivariate normal distribution</span>
+<span class="co"># using MASS::mvrnorm with the parameters mu and Sigma created earlier</span>
+<span class="co"># and bind to the existing df</span>
+ 
+<span class="kw">require</span>(MASS)
+make.y =<span class="st"> </span><span class="kw">expression</span>(<span class="kw">as.vector</span>(<span class="kw">t</span>(<span class="kw">mvrnorm</span>(nsubs, mu, Sigma))))
+df<span class="op">$</span>y =<span class="st"> </span><span class="kw">as.vector</span>(<span class="kw">replicate</span>(nsims, <span class="kw">eval</span>(make.y)))             
+ 
+<span class="co"># use do(), the general purpose complement to the specialized data </span>
+<span class="co"># manipulation functions available in dplyr, to run the ANOVA on</span>
+<span class="co"># each section of the grouped data frame created by group_by</span>
+ 
+<span class="kw">require</span>(dplyr)
+<span class="kw">require</span>(car)
+<span class="kw">require</span>(broom)
+ 
+mods &lt;-<span class="st"> </span>df <span class="op">%&gt;%</span><span class="st"> </span>
+<span class="st">  </span><span class="kw">group_by</span>(simID) <span class="op">%&gt;%</span><span class="st"> </span>
+<span class="st">    </span><span class="kw">do</span>(<span class="dt">model =</span> <span class="kw">aov</span>(y <span class="op">~</span><span class="st"> </span>X1 <span class="op">*</span><span class="st"> </span>X2 <span class="op">+</span><span class="st"> </span><span class="kw">Error</span>(subject <span class="op">/</span><span class="st"> </span>(X1<span class="op">*</span>X2)), <span class="dt">qr=</span><span class="ot">FALSE</span>, <span class="dt">data =</span> .)) 
+ 
+<span class="co"># extract p-values for each effect and store in a data frame</span>
+p =<span class="st"> </span><span class="kw">data.frame</span>(
+  mods <span class="op">%&gt;%</span><span class="st"> </span><span class="kw">do</span>(<span class="kw">as.data.frame</span>(<span class="kw">tidy</span>(.<span class="op">$</span>model[[<span class="dv">3</span>]])<span class="op">$</span>p.value[<span class="dv">1</span>])),
+  mods <span class="op">%&gt;%</span><span class="st"> </span><span class="kw">do</span>(<span class="kw">as.data.frame</span>(<span class="kw">tidy</span>(.<span class="op">$</span>model[[<span class="dv">4</span>]])<span class="op">$</span>p.value[<span class="dv">1</span>])),
+  mods <span class="op">%&gt;%</span><span class="st"> </span><span class="kw">do</span>(<span class="kw">as.data.frame</span>(<span class="kw">tidy</span>(.<span class="op">$</span>model[[<span class="dv">5</span>]])<span class="op">$</span>p.value[<span class="dv">1</span>])))
+<span class="kw">colnames</span>(p) =<span class="st"> </span><span class="kw">c</span>(<span class="st">&#39;X1&#39;</span>,<span class="st">&#39;X2&#39;</span>,<span class="st">&#39;Interaction&#39;</span>)</code></pre>
+<p>The empirical power is easy to compute, it’s just the proportion of simulation runs where p &lt;. 05.</p>
+<pre class="sourceCode r"><code class="sourceCode r">power.res =<span class="st"> </span><span class="kw">apply</span>(<span class="kw">as.matrix</span>(p), <span class="dv">2</span>, 
+  <span class="cf">function</span>(x) <span class="kw">round</span>(<span class="kw">mean</span>(<span class="kw">ifelse</span>(x <span class="op">&lt;</span><span class="st"> </span><span class="fl">.05</span>, <span class="dv">1</span>, <span class="dv">0</span>) <span class="op">*</span><span class="st"> </span><span class="dv">100</span>),<span class="dv">2</span>))
+power.res</code></pre>
+<pre><code>##          X1          X2 Interaction 
+##          10          29          41</code></pre>
+<p>Visualize the distributions of p-values</p>
+<pre class="sourceCode r"><code class="sourceCode r"><span class="co"># plot the known effects</span>
+<span class="kw">require</span>(ggplot2)
+<span class="kw">require</span>(gridExtra)
+ 
+means =<span class="st"> </span><span class="kw">data.frame</span>(cond[<span class="dv">1</span><span class="op">:</span><span class="dv">4</span>, ], mu, <span class="dt">SE =</span> sigma <span class="op">/</span><span class="st"> </span><span class="kw">sqrt</span>(nsubs))
+plt1 =<span class="st"> </span><span class="kw">ggplot</span>(means, <span class="kw">aes</span>(<span class="dt">y =</span> mu, <span class="dt">x =</span> X1, <span class="dt">fill=</span>X2)) <span class="op">+</span>
+<span class="st">  </span><span class="kw">geom_bar</span>(<span class="dt">position =</span> <span class="kw">position_dodge</span>(), <span class="dt">stat=</span><span class="st">&quot;identity&quot;</span>) <span class="op">+</span>
+<span class="st">  </span><span class="kw">geom_errorbar</span>(<span class="kw">aes</span>(<span class="dt">ymin =</span> mu<span class="op">-</span>SE, <span class="dt">ymax =</span> mu<span class="op">+</span>SE), 
+    <span class="dt">position =</span> <span class="kw">position_dodge</span>(<span class="dt">width=</span><span class="fl">0.9</span>), <span class="dt">size=</span>.<span class="dv">6</span>, <span class="dt">width=</span>.<span class="dv">3</span>) <span class="op">+</span>
+<span class="st">  </span><span class="kw">coord_cartesian</span>(<span class="dt">ylim=</span><span class="kw">c</span>((.<span class="dv">7</span><span class="op">*</span><span class="kw">min</span>(mu)), <span class="fl">1.2</span><span class="op">*</span><span class="kw">max</span>(mu))) <span class="op">+</span>
+<span class="st">  </span><span class="kw">theme_bw</span>()
+ 
+<span class="co"># melt the data into a ggplot friendly &#39;long&#39; format</span>
+<span class="kw">require</span>(reshape2)
+plotData &lt;-<span class="st"> </span><span class="kw">melt</span>(p, <span class="dt">value.name =</span> <span class="st">&#39;p&#39;</span>)
+ 
+<span class="co"># plot each of the p-value distributions on a log scale</span>
+<span class="kw">options</span>(<span class="dt">scipen =</span> <span class="dv">999</span>) <span class="co"># &#39;turn off&#39; scientific notation</span>
+plt2 =<span class="st"> </span><span class="kw">ggplot</span>(plotData, <span class="kw">aes</span>(<span class="dt">x =</span> p)) <span class="op">+</span>
+<span class="st">    </span><span class="kw">scale_x_log10</span>(<span class="dt">breaks=</span><span class="kw">c</span>(<span class="dv">1</span>, <span class="fl">0.05</span>, <span class="fl">0.001</span>), 
+                  <span class="dt">labels=</span><span class="kw">c</span>(<span class="dv">1</span>, <span class="fl">0.05</span>, <span class="fl">0.001</span>)) <span class="op">+</span>
+<span class="st">    </span><span class="kw">geom_histogram</span>(<span class="dt">colour =</span> <span class="st">&quot;darkblue&quot;</span>, <span class="dt">fill =</span> <span class="st">&quot;white&quot;</span>) <span class="op">+</span>
+<span class="st">    </span><span class="kw">geom_vline</span>(<span class="dt">xintercept =</span> <span class="fl">0.05</span>, <span class="dt">colour=</span><span class="st">&#39;red&#39;</span>) <span class="op">+</span>
+<span class="st">    </span><span class="kw">facet_grid</span>(variable <span class="op">~</span><span class="st"> </span>.) <span class="op">+</span>
+<span class="st">    </span><span class="kw">labs</span>(<span class="dt">x =</span> <span class="kw">expression</span>(Log[<span class="dv">10</span>]<span class="op">~</span>P)) <span class="op">+</span>
+<span class="st">    </span><span class="kw">theme</span>(<span class="dt">axis.text.x =</span> <span class="kw">element_text</span>(<span class="dt">color=</span><span class="st">&#39;black&#39;</span>, <span class="dt">size=</span><span class="dv">7</span>))
+ 
+<span class="co"># arrange plots side by side and print</span>
+<span class="kw">grid.arrange</span>(plt1, plt2, <span class="dt">nrow=</span><span class="dv">1</span>)</code></pre>
+<p><img src="SuperpowerValidation_files/figure-html/unnamed-chunk-60-1.png" width="672" /></p>
+<p>We can reproduce this simulation:</p>
+<pre class="sourceCode r"><code class="sourceCode r">mu =<span class="st"> </span><span class="kw">c</span>(<span class="dv">700</span>, <span class="dv">670</span>, <span class="dv">690</span>, <span class="dv">750</span>) <span class="co"># true effects (in this case, a double dissociation)</span>
+sigma =<span class="st"> </span><span class="dv">150</span>  <span class="co"># population standard deviation</span>
+n &lt;-<span class="st"> </span><span class="dv">25</span>
+sd &lt;-<span class="st"> </span><span class="dv">150</span>
+r &lt;-<span class="st"> </span><span class="fl">0.4</span>
+string =<span class="st"> &quot;2w*2w&quot;</span>
+alpha_level &lt;-<span class="st"> </span><span class="fl">0.05</span>
+labelnames =<span class="st"> </span><span class="kw">c</span>(<span class="st">&quot;age&quot;</span>, <span class="st">&quot;old&quot;</span>, <span class="st">&quot;young&quot;</span>, <span class="st">&quot;color&quot;</span>, <span class="st">&quot;blue&quot;</span>, <span class="st">&quot;red&quot;</span>)
+design_result &lt;-<span class="st"> </span><span class="kw">ANOVA_design</span>(<span class="dt">design =</span> string,
+                              <span class="dt">n =</span> n, 
+                              <span class="dt">mu =</span> mu, 
+                              <span class="dt">sd =</span> sd, 
+                              <span class="dt">r =</span> r, 
+                              <span class="dt">labelnames =</span> labelnames)</code></pre>
+<p><img src="SuperpowerValidation_files/figure-html/unnamed-chunk-61-1.png" width="672" /></p>
+<pre class="sourceCode r"><code class="sourceCode r">simulation_result &lt;-<span class="st"> </span><span class="kw">ANOVA_power</span>(design_result, <span class="dt">alpha =</span> <span class="fl">0.05</span>, <span class="dt">nsims =</span> nsims)</code></pre>
+<pre><code>## Power and Effect sizes for ANOVA tests
+##                 power effect_size
+## anova_age          30     0.09942
+## anova_color        11     0.05502
+## anova_age:color    48     0.17020
+## 
+## Power and Effect sizes for contrasts
+##                                            power effect_size
+## p_age_old_color_blue_age_old_color_red        16     -0.2024
+## p_age_old_color_blue_age_young_color_blue     10     -0.1023
+## p_age_old_color_blue_age_young_color_red      27      0.2866
+## p_age_old_color_red_age_young_color_blue       9      0.1037
+## p_age_old_color_red_age_young_color_red       65      0.4888
+## p_age_young_color_blue_age_young_color_red    46      0.3913
+## 
+## Within-Subject Factors Included: Check MANOVA Results</code></pre>
+
+</div>
+            </section>
+
+          </div>
+        </div>
+      </div>
+<a href="mixed-anova-part-2.html" class="navigation navigation-prev " aria-label="Previous page"><i class="fa fa-angle-left"></i></a>
+<a href="mixed-anova-part-3.html" class="navigation navigation-next " aria-label="Next page"><i class="fa fa-angle-right"></i></a>
+    </div>
+  </div>
+<script src="libs/gitbook-2.6.7/js/app.min.js"></script>
+<script src="libs/gitbook-2.6.7/js/lunr.js"></script>
+<script src="libs/gitbook-2.6.7/js/plugin-search.js"></script>
+<script src="libs/gitbook-2.6.7/js/plugin-sharing.js"></script>
+<script src="libs/gitbook-2.6.7/js/plugin-fontsettings.js"></script>
+<script src="libs/gitbook-2.6.7/js/plugin-bookdown.js"></script>
+<script src="libs/gitbook-2.6.7/js/jquery.highlight.js"></script>
+<script>
+gitbook.require(["gitbook"], function(gitbook) {
+gitbook.start({
+"sharing": {
+"github": false,
+"facebook": true,
+"twitter": true,
+"google": false,
+"linkedin": false,
+"weibo": false,
+"instapaper": false,
+"vk": false,
+"all": ["facebook", "google", "twitter", "linkedin", "weibo", "instapaper"]
+},
+"fontsettings": {
+"theme": "white",
+"family": "sans",
+"size": 2
+},
+"edit": {
+"link": null,
+"text": null
+},
+"history": {
+"link": null,
+"text": null
+},
+"download": ["SuperpowerValidation.pdf", "SuperpowerValidation.epub"],
+"toc": {
+"collapse": "subsection"
+}
+});
+});
+</script>
+
+<!-- dynamically load mathjax for compatibility with self-contained -->
+<script>
+  (function () {
+    var script = document.createElement("script");
+    script.type = "text/javascript";
+    var src = "true";
+    if (src === "" || src === "true") src = "https://mathjax.rstudio.com/latest/MathJax.js?config=TeX-MML-AM_CHTML";
+    if (location.protocol !== "file:" && /^https?:/.test(src))
+      src = src.replace(/^https?:/, '');
+    script.src = src;
+    document.getElementsByTagName("head")[0].appendChild(script);
+  })();
+</script>
+</body>
+
+</html>
