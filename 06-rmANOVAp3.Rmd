@@ -1,4 +1,4 @@
-# Repeated Measures-ANOVA Part 3
+## Repeated Measures-ANOVA Part 3
 
 We first repeat the simulation by Brysbaert:
 
@@ -76,6 +76,12 @@ design_result <- ANOVA_design(design = design,
                    r = r, 
                    labelnames = labelnames)
 ANOVA_power(design_result, nsims = nsims)
+```
+
+And we can again replicate this with the `ANOVA_exact` function.
+
+```{r , message=FALSE, warning=FALSE}
+ANOVA_exact(design_result)
 ```
 
 #Results
@@ -162,7 +168,8 @@ sd <- 1
 r <- 0.6
 labelnames <- c("speed", "fast", "medium", "slow")
 ```
-We create the within design, and run the simulation
+
+We create the within design, and run the simulation.
 
 ```{r, message=FALSE, warning=FALSE}
 design_result <- ANOVA_design(design = design,
@@ -174,6 +181,12 @@ design_result <- ANOVA_design(design = design,
 ANOVA_power(design_result, nsims = nsims)
 ```
 
-Again, this is similar to g*power for the ANOVA:
+We replicate this with `ANOVA_exact`.
+
+```{r, message=FALSE, warning=FALSE}
+ANOVA_exact(design_result)
+```
+
+Again, this is similar to G*Power for the ANOVA:
 
 ![](screenshots/gpower_4.png)

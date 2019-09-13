@@ -164,22 +164,31 @@ design_result <- ANOVA_design(design = string,
 simulation_result <- ANOVA_power(design_result, alpha_level = 0.05, nsims = nsims)
 ```
 
-We can use the `ANOVA_exact` function to evaluate this design. 
+We can use the `ANOVA_exact` function to evaluate this design since there is not a analytic solution in `Superpower`. 
 
 ```{r}
 power_res <- ANOVA_exact(design_result = design_result)
-power_res$power_A
-power_res$power_B
-power_res$power_AB
+power_res$main_results
 ```
 
-We can use the code by Abelson (2019) to produce the same results.
+We can use `pwr2ppl` by Aberson (2019) to produce the same results.
 
 ```{r}
-win2F(m1.1=2, m2.1=1, m1.2=4, m2.2=2, 
-      s1.1=5, s2.1=5, s1.2=5, s2.2=5, 
-      r12=0.8, r13=0.5, r14=0.4, 
-               r23=0.4, r24=0.5, 
-                        r34=0.8,
-      n=20)
+win2F(
+  m1.1 = 2,
+  m2.1 = 1,
+  m1.2 = 4,
+  m2.2 = 2,
+  s1.1 = 5,
+  s2.1 = 5,
+  s1.2 = 5,
+  s2.2 = 5,
+  r12 = 0.8,
+  r13 = 0.5,
+  r14 = 0.4,
+  r23 = 0.4,
+  r24 = 0.5,
+  r34 = 0.8,
+  n = 20
+)
 ```

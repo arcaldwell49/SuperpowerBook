@@ -1,4 +1,4 @@
-# Power curves
+# Power Curve
 
 Power is calculated for a specific value of an effect size, alpha level, and sample size. Because you often do not know the true effect size, it often makes more sense to think of the power curve as a function of the size of the effect. Although power curves can be calculated based on simulations for any design, we will use the analytic solution to calculate the power of ANOVA designs because these calculations are much faster. The basic approach is to calculate power for a specific pattern of means, a specific effect size, a given alpha level, and a specific pattern of correlations. This is one example:
 
@@ -10,21 +10,25 @@ n <- 20
 sd <- 1
 r <- 0.5
 labelnames = c("A", "a1", "a2", "B", "b1", "b2")
+
 design_result <- ANOVA_design(design = string,
                               n = n, 
                               mu = mu, 
                               sd = sd, 
                               r = r, 
                               labelnames = labelnames)
+
 power_res <- ANOVA_exact(design_result)
+
 power_res$main_results
 ```
 
-We can make these calculations for a range of sample sizes, to get a power curve. We created a simple function that performs these calculations across a range of sample sizes (from n = 2 to max_, a variable you can specify in the function). 
+We can make these calculations for a range of sample sizes, to get a power curve. We created a simple function that performs these calculations across a range of sample sizes (from n = 3 to max_, a variable you can specify in the function). 
 
 ```{r}
 p_a <- plot_power(design_result,
                       max_n = 50)
+p_a$plot_ANOVA
 ```
 
 # Explore increase in effect size for moderated interactions.
@@ -42,6 +46,8 @@ design_result <- ANOVA_design(design = string,
                               labelnames = labelnames)
 p_a <- plot_power(design_result,
                       max_n = 100)
+p_a$power_df$effect <- 0
+
 design_result <- ANOVA_design(design = string,
                               n = 20, 
                               mu = c(0,0,0,0.1), 
@@ -50,6 +56,9 @@ design_result <- ANOVA_design(design = string,
                               labelnames = labelnames)
 p_b <- plot_power(design_result,
                       max_n = 100)
+
+p_b$power_df$effect <- 0.1
+
 design_result <- ANOVA_design(design = string,
                               n = 20, 
                               mu = c(0,0,0,0.2), 
@@ -58,6 +67,9 @@ design_result <- ANOVA_design(design = string,
                               labelnames = labelnames)
 p_c <- plot_power(design_result,
                       max_n = 100)
+
+p_c$power_df$effect <- 0.2
+
 design_result <- ANOVA_design(design = string,
                               n = 20, 
                               mu = c(0,0,0,0.3), 
@@ -66,6 +78,9 @@ design_result <- ANOVA_design(design = string,
                               labelnames = labelnames)
 p_d <- plot_power(design_result,
                       max_n = 100)
+
+p_d$power_df$effect <- 0.3
+
 design_result <- ANOVA_design(design = string,
                               n = 20, 
                               mu = c(0,0,0,0.4), 
@@ -74,6 +89,9 @@ design_result <- ANOVA_design(design = string,
                               labelnames = labelnames)
 p_e <- plot_power(design_result,
                       max_n = 100)
+
+p_e$power_df$effect <- 0.4
+
 design_result <- ANOVA_design(design = string,
                               n = 20, 
                               mu = c(0,0,0,0.5), 
@@ -82,20 +100,18 @@ design_result <- ANOVA_design(design = string,
                               labelnames = labelnames)
 p_f <- plot_power(design_result,
                       max_n = 100)
-# Create long format dataframe 
-#zzz <- rbind(p_a$power_df, p_b$power_df, p_c$power_df, p_d$power_df, p_e$power_df, p_f$power_df)
-#zzz <- cbind(zzz,seq(1,length(zzz$design)))
-#colnames(zzz)[1] <- "design"
-#colnames(zzz)[6] <- "ID"
-#zzz <- melt(zzz, id.vars = c("ID", "design", "n_vec"), measure.vars = c("power_A", "power_B", "power_AB"))
-# Plot data using facets, split by factors and interaction, and design
-#ggplot(data=zzz, aes(x = n_vec, y = value)) +
-#  geom_line( size=1.5) +
-#  scale_x_continuous(limits = c(0, max(zzz$n_vec))) + 
-#  scale_y_continuous(limits = c(0, 100)) +
-#  theme_bw() +
-#  labs(x="Sample size", y = "Power") +
-#  facet_grid(design~variable)
+
+p_f$power_df$effect <- 0.5
+
+
+plot_data <- rbind(p_a$power_df, p_b$power_df, p_c$power_df, p_d$power_df, p_e$power_df, p_f$power_df)
+
+ggplot(plot_data, aes(x=n, y=`A:B`,color = as.factor(effect))) +
+  geom_line(size = 1.5) +
+  labs(color = "Effect Size") +
+  scale_color_viridis_d()
+
+
 ```
 
 ## Explore increase in effect size for cross-over interactions.
@@ -111,6 +127,8 @@ design_result <- ANOVA_design(design = string,
                               labelnames = labelnames)
 p_a <- plot_power(design_result,
                       max_n = 100)
+p_a$power_df$effect <- 0
+
 design_result <- ANOVA_design(design = string,
                               n = 20, 
                               mu = c(0.1,0,0,0.1), 
@@ -119,6 +137,9 @@ design_result <- ANOVA_design(design = string,
                               labelnames = labelnames)
 p_b <- plot_power(design_result,
                       max_n = 100)
+
+p_b$power_df$effect <- 0.1
+
 design_result <- ANOVA_design(design = string,
                               n = 20, 
                               mu = c(0.2,0,0,0.2), 
@@ -127,6 +148,9 @@ design_result <- ANOVA_design(design = string,
                               labelnames = labelnames)
 p_c <- plot_power(design_result,
                       max_n = 100)
+
+p_c$power_df$effect <- 0.2
+
 design_result <- ANOVA_design(design = string,
                               n = 20, 
                               mu = c(0.3,0,0,0.3), 
@@ -135,6 +159,9 @@ design_result <- ANOVA_design(design = string,
                               labelnames = labelnames)
 p_d <- plot_power(design_result,
                       max_n = 100)
+
+p_d$power_df$effect <- 0.3
+
 design_result <- ANOVA_design(design = string,
                               n = 20, 
                               mu = c(0.4,0,0,0.4), 
@@ -143,6 +170,10 @@ design_result <- ANOVA_design(design = string,
                               labelnames = labelnames)
 p_e <- plot_power(design_result,
                       max_n = 100)
+
+p_e$power_df$effect <- 0.4
+
+
 design_result <- ANOVA_design(design = string,
                               n = 20, 
                               mu = c(0.5,0,0,0.5), 
@@ -152,11 +183,20 @@ design_result <- ANOVA_design(design = string,
 p_f <- plot_power(design_result,
                       max_n = 100)
 
+p_f$power_df$effect <- 0.5
+
+plot_data <- rbind(p_a$power_df, p_b$power_df, p_c$power_df, p_d$power_df, p_e$power_df, p_f$power_df)
+
+ggplot(plot_data, aes(x=n, y=`A:B`,color = as.factor(effect))) +
+  geom_line(size = 1.5) +
+  labs(color = "Effect Size") +
+  scale_color_viridis_d()
+
 ```
 
 ## Explore increase in correlation in moderated interactions.
 
-The design has means 0, 0, 0, 0.3. The standard deviation is set to 1. The correlation between all variables increases from 0.5 to 0.9. 
+The design has means 0, 0, 0, 0.3. The standard deviation is set to 1. The correlation between all variables increases from 0 to 0.9. 
 
 ```{r, fig.height = 10, fig.width = 7}
 string <- "2w*2w"
@@ -169,6 +209,10 @@ design_result <- ANOVA_design(design = string,
                               labelnames = labelnames)
 p_a <- plot_power(design_result,
                       max_n = 100)
+
+p_a$power_df$correlation <- 0.0 
+
+
 design_result <- ANOVA_design(design = string,
                               n = 20, 
                               mu = c(0,0,0,0.3), 
@@ -177,6 +221,10 @@ design_result <- ANOVA_design(design = string,
                               labelnames = labelnames)
 p_b <- plot_power(design_result,
                       max_n = 100)
+
+p_b$power_df$correlation <- 0.1
+
+
 design_result <- ANOVA_design(design = string,
                               n = 20, 
                               mu = c(0,0,0,0.3), 
@@ -185,6 +233,10 @@ design_result <- ANOVA_design(design = string,
                               labelnames = labelnames)
 p_c <- plot_power(design_result,
                       max_n = 100)
+
+p_c$power_df$correlation <- 0.3
+
+
 design_result <- ANOVA_design(design = string,
                               n = 20, 
                               mu = c(0,0,0,0.3), 
@@ -193,6 +245,10 @@ design_result <- ANOVA_design(design = string,
                               labelnames = labelnames)
 p_d <- plot_power(design_result,
                       max_n = 100)
+
+p_d$power_df$correlation <- 0.5
+
+
 design_result <- ANOVA_design(design = string,
                               n = 20, 
                               mu = c(0,0,0,0.3), 
@@ -201,6 +257,10 @@ design_result <- ANOVA_design(design = string,
                               labelnames = labelnames)
 p_e <- plot_power(design_result,
                       max_n = 100)
+
+p_e$power_df$correlation <- 0.7
+
+
 design_result <- ANOVA_design(design = string,
                               n = 20, 
                               mu = c(0,0,0,0.3), 
@@ -209,6 +269,15 @@ design_result <- ANOVA_design(design = string,
                               labelnames = labelnames)
 p_f <- plot_power(design_result,
                       max_n = 100)
+
+p_f$power_df$correlation <- 0.9
+
+plot_data <- rbind(p_a$power_df, p_b$power_df, p_c$power_df, p_d$power_df, p_e$power_df, p_f$power_df)
+
+ggplot(plot_data, aes(x=n, y=`A:B`,color = as.factor(correlation))) +
+  geom_line(size = 1.5) +
+  labs(color = "Correlation") +
+  scale_color_viridis_d()
 
 ```
 
@@ -231,6 +300,9 @@ design_result <- ANOVA_design(design = string,
                               labelnames = labelnames)
 p_a <- plot_power(design_result,
                       max_n = 100)
+
+p_a$power_df$corr_diff <- 0
+
 design_result <- ANOVA_design(design = string,
                               n = 20, 
                               mu = c(0,0,0,0.3), 
@@ -242,6 +314,10 @@ design_result <- ANOVA_design(design = string,
                               labelnames = labelnames)
 p_b <- plot_power(design_result,
                       max_n = 100)
+
+p_b$power_df$corr_diff <- 0.1
+
+
 design_result <- ANOVA_design(design = string,
                               n = 20, 
                               mu = c(0,0,0,0.3), 
@@ -253,6 +329,9 @@ design_result <- ANOVA_design(design = string,
                               labelnames = labelnames)
 p_c <- plot_power(design_result,
                       max_n = 100)
+
+p_c$power_df$corr_diff <- 0.2
+
 design_result <- ANOVA_design(design = string,
                               n = 20, 
                               mu = c(0,0,0,0.3), 
@@ -264,6 +343,9 @@ design_result <- ANOVA_design(design = string,
                               labelnames = labelnames)
 p_d <- plot_power(design_result,
                       max_n = 100)
+
+p_d$power_df$corr_diff <- 0.3
+
 design_result <- ANOVA_design(design = string,
                               n = 20, 
                               mu = c(0,0,0,0.3), 
@@ -275,6 +357,9 @@ design_result <- ANOVA_design(design = string,
                               labelnames = labelnames)
 p_e <- plot_power(design_result,
                       max_n = 100)
+
+p_e$power_df$corr_diff <- 0.4
+
 design_result <- ANOVA_design(design = string,
                               n = 20, 
                               mu = c(0,0,0,0.3), 
@@ -286,5 +371,22 @@ design_result <- ANOVA_design(design = string,
                               labelnames = labelnames)
 p_f <- plot_power(design_result,
                       max_n = 100)
+
+p_f$power_df$corr_diff <- 0.5
+
+plot_data <- rbind(p_a$power_df, p_b$power_df, p_c$power_df, p_d$power_df, p_e$power_df, p_f$power_df)
+
+
+ggplot(plot_data, aes(x=n, y=`A`,color = as.factor(corr_diff))) +
+  geom_line(size = 1.5) +
+  labs(color = "Difference in Correlation") +
+  scale_color_viridis_d()
+
+ggplot(plot_data, aes(x=n, y=`B`,color = as.factor(corr_diff))) +
+  geom_line(size = 1.5) +
+  labs(color = "Difference in Correlation") +
+  scale_color_viridis_d()
+
+
 
 ```

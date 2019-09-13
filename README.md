@@ -1,1 +1,5 @@
-This is a minimal example of a book based on R Markdown and **bookdown** (https://github.com/rstudio/bookdown). Please see the page "Get Started" at https://bookdown.org/ for how to compile this example.
+This is a repository hosting the documents that compose the validation book for the `Superpower` R package.
+
+# Starts a new chapter
+## Is a level-1 heading in a chapter
+### Is a level-2 heading in a chapter

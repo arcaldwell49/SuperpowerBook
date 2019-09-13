@@ -1,8 +1,10 @@
-# Repeated Measures-ANOVA Part 1
+# Repeated Measures-ANOVA 
+
+## Part 1
 
 In a repeated measures design multiple observations are collected from the same participants. In the simplest case, where there are two repeated observations, a repeated measures ANOVA equals a dependent or paired *t*-test. The difference compared to a between subject design is that repeated measures can be correlated, and in psychology, they often are. Let's first explore the impact of this correlation on the power of a repeated measures ANOVA.
 
-## Two conditions, medium effect size
+### Two conditions, medium effect size
 
 To illustrate the effect of correated observations, we start by simulating data for a medium effect size for a dependent (or paired, or within-subject) *t*-test. Let's first look at G*power. If we want to perform an a-priori power analysis, we are asked to fill in the effect size dz. As Cohen (1988) writes, "The Z subscript is used to emphasize the fact that our raw score unit is no longer X or Y, but Z", where Z are the difference scores of X-Y. 
 
@@ -105,5 +107,7 @@ ANOVA_power(design_result, nsims = nsims)
 ```{r}
 #relation dz and f for within designs 
 f <- 0.5*0.6454972
-# Entering this f in G*power, with a correlation of 0.5, yields the same as entering f = 0.25 and correlation = 0.7. 
+#  
 ```
+
+Entering this f in G*power, with a correlation of 0.5, yields the same as entering `f = 0.25` and `correlation = 0.7`.
