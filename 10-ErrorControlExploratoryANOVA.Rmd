@@ -4,7 +4,7 @@ In a 2X2X2 design, an ANOVA will give the test results for three main effects, t
 
 
 
-```{r}
+```{r error_control}
 string <- "2b*2b*2b"
 n <- 50
 mu <- c(20, 20, 20, 20, 20, 20, 20, 20) #All means are equal - so there is no real difference.
@@ -25,6 +25,7 @@ power_result <- ANOVA_power(design_result,
                             alpha_level = alpha_level, 
                             p_adjust = p_adjust,
                             nsims = nsims)
+exact_result <- ANOVA_exact(design_result, alpha_level = alpha_level)
 ```
 
 When there is no true effect, we formally do not have 'power' (which is defined as the probability of finding p < $\alpha$ if there is a true effect to be found) so the power column should be read as the 'Type 1 error rate'. Because we have saved the power simulation in the 'power_result' object, we can perform calculations on the 'sim_data' dataframe that is stored. This dataframe contains the results for the nsims simulations (e.g., 10000 rows if you ran 10000 simulations) and stores the p-values and effect size estimates for each ANOVA. The first 7 columns are the p-values for the ANOVA, first the main effects of condition 1, 2, and 3, then three two-way interactions, and finally the threeway interaction.
@@ -80,6 +81,8 @@ power_result <- ANOVA_power(design_result,
                             alpha_level = alpha_level,
                             p_adjust = p_adjust,
                             nsims = nsims)
+
+exact_result <- ANOVA_exact(design_result, alpha_level = alpha_level)
 ```
 
 If we now calculate the overall Type 1 error rate:

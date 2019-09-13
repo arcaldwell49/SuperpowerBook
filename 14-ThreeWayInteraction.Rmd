@@ -4,7 +4,7 @@ There are almost no software solutions that allow researchers to perform power a
 
 Let's start with a 2x2x2 between subjects design. We collect 50 participants in each between participant condition (so 400 participants in total - 50x2x2x2). 
 
-```{r}
+```{r start_threewayinteraction}
 # With 2x2x2 designs, the names for paired comparisons can become very long. 
 # So here I abbreviate terms: Size, Color, and Cognitive Load, have values:
 # b = big, s = small, g = green, r = red, pres = present, abs = absent.  
@@ -17,6 +17,9 @@ design_result <- ANOVA_design(design = "2b*2b*2b", #describe the design
                               labelnames = labelnames) #names of labels
 # Power based on simulations
 ANOVA_power(design_result, nsims = nsims)
+
+# Power based on exact simulation
+exact_result <- ANOVA_exact(design_result)
 #Analytical power calculation
 power_analytic <- power_threeway_between(design_result)
 power_analytic$power_A
@@ -64,7 +67,9 @@ design_result <- ANOVA_design(design = string,
                    sd = sd, 
                    labelnames = labelnames)
 # Power based on simulations
-ANOVA_power(design_result, nsims = nsims)
+simulation_result <- ANOVA_power(design_result, nsims = nsims)
+# Power based on exact simulation
+exact_result <- ANOVA_exact(design_result)
 # Power based on analytical solution
 power_oneway_between(design_result)$power #using default alpha level of .05
 ```
@@ -83,7 +88,9 @@ design_result <- ANOVA_design(design = string,
                    sd = sd, 
                    labelnames = labelnames)
 # Power based on simulations
-ANOVA_power(design_result, nsims = nsims)
+simulation_result <- ANOVA_power(design_result, nsims = nsims)
+# Power based on exact simulation
+exact_result <- ANOVA_exact(design_result)
 # Power based on analytical solution
 power_res <- power_twoway_between(design_result) #using default alpha level of .05
 power_res$power_A
@@ -107,7 +114,9 @@ design_result <- ANOVA_design(design = string,
                    sd = sd, 
                    labelnames = labelnames)
 # Power for the given N in the design_result
-ANOVA_power(design_result, nsims = nsims)
+simulation_result <- ANOVA_power(design_result, nsims = nsims)
+# Exact simulation
+exact_result <- ANOVA_exact(design_result, alpha_level = alpha_level)
 #Analytical power calculation
 power_analytic <- power_threeway_between(design_result)
 power_analytic$power_A
@@ -126,9 +135,8 @@ power_analytic$eta_p_2_BC
 power_analytic$eta_p_2_ABC
 ```
 
-In addition, ## Cohen's f for Three-way Interactions
 
-The power for interactions depends on Cohen's f, the alpha level, the sample size, and the degrees of freedom. 
+The power for interactions depends on Cohen's *f*, the alpha level, the sample size, and the degrees of freedom. 
 
 ```{r}
 # With 2x2x2 designs, the names for paired comparisons can become very long. 
@@ -137,12 +145,12 @@ The power for interactions depends on Cohen's f, the alpha level, the sample siz
 labelnames <- c("Size", "b", "s", "x", "Color", "g", "r", 
                 "Load", "pres", "abs") #
 design_result <- ANOVA_design(design = "3b*2b*2b", #describe the design
-                              n = 10, #sample size per group 
+                              n = 15, #sample size per group 
                               mu = c(20, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 20), #pattern of means
                               sd = 20, #standard deviation
                               labelnames = labelnames) #names of labels
-# Power based on simulations
-# ANOVA_power(design_result, nsims = nsims)
+# Power based on exact simulations
+exact_result <- ANOVA_exact(design_result)
 #Analytical power calculation
 power_analytic <- power_threeway_between(design_result)
 power_analytic$power_A
@@ -165,8 +173,8 @@ design_result <- ANOVA_design(design = "2b*2b", #describe the design
                               mu = c(0, 0, 0, 10), #pattern of means
                               sd = 10, #standard deviation
                               labelnames = labelnames) #names of labels
-# Power based on simulations
-# ANOVA_power(design_result, nsims = nsims)
+# Power based on exact simulations
+exact_result <- ANOVA_exact(design_result)
 #Analytical power calculation
 power_analytic <- power_twoway_between(design_result)
 power_analytic$power_A
@@ -183,8 +191,8 @@ design_result <- ANOVA_design(design = "2b", #describe the design
                               mu = c(0, 5), #pattern of means
                               sd = 10, #standard deviation
                               labelnames = labelnames) #names of labels
-# Power based on simulations
-# ANOVA_power(design_result, nsims = nsims)
+# Power based on exact simulations
+exact_result <- ANOVA_exact(design_result)
 #Analytical power calculation
 power_analytic <- power_oneway_between(design_result)
 power_analytic$power

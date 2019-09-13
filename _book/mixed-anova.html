@@ -1,0 +1,843 @@
+<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml" lang="" xml:lang="">
+<head>
+
+  <meta charset="utf-8" />
+  <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+  <title>Chapter 4 Mixed ANOVA | Validation of Superpower</title>
+  <meta name="description" content="This is a minimal example of using the bookdown package to write a book. The output format for this example is bookdown::gitbook." />
+  <meta name="generator" content="bookdown 0.13 and GitBook 2.6.7" />
+
+  <meta property="og:title" content="Chapter 4 Mixed ANOVA | Validation of Superpower" />
+  <meta property="og:type" content="book" />
+  
+  
+  <meta property="og:description" content="This is a minimal example of using the bookdown package to write a book. The output format for this example is bookdown::gitbook." />
+  
+
+  <meta name="twitter:card" content="summary" />
+  <meta name="twitter:title" content="Chapter 4 Mixed ANOVA | Validation of Superpower" />
+  
+  <meta name="twitter:description" content="This is a minimal example of using the bookdown package to write a book. The output format for this example is bookdown::gitbook." />
+  
+
+<meta name="author" content="Aaron Caldwell &amp; Daniël Lakens" />
+
+
+<meta name="date" content="2019-09-13" />
+
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <meta name="apple-mobile-web-app-capable" content="yes" />
+  <meta name="apple-mobile-web-app-status-bar-style" content="black" />
+  
+  
+<link rel="prev" href="repeated-measures-anova.html"/>
+<link rel="next" href="error-control-in-exploratory-anova.html"/>
+<script src="libs/jquery-2.2.3/jquery.min.js"></script>
+<link href="libs/gitbook-2.6.7/css/style.css" rel="stylesheet" />
+<link href="libs/gitbook-2.6.7/css/plugin-table.css" rel="stylesheet" />
+<link href="libs/gitbook-2.6.7/css/plugin-bookdown.css" rel="stylesheet" />
+<link href="libs/gitbook-2.6.7/css/plugin-highlight.css" rel="stylesheet" />
+<link href="libs/gitbook-2.6.7/css/plugin-search.css" rel="stylesheet" />
+<link href="libs/gitbook-2.6.7/css/plugin-fontsettings.css" rel="stylesheet" />
+
+
+
+
+
+
+
+
+
+<style type="text/css">
+a.sourceLine { display: inline-block; line-height: 1.25; }
+a.sourceLine { pointer-events: none; color: inherit; text-decoration: inherit; }
+a.sourceLine:empty { height: 1.2em; }
+.sourceCode { overflow: visible; }
+code.sourceCode { white-space: pre; position: relative; }
+pre.sourceCode { margin: 0; }
+@media screen {
+div.sourceCode { overflow: auto; }
+}
+@media print {
+code.sourceCode { white-space: pre-wrap; }
+a.sourceLine { text-indent: -1em; padding-left: 1em; }
+}
+pre.numberSource a.sourceLine
+  { position: relative; left: -4em; }
+pre.numberSource a.sourceLine::before
+  { content: attr(title);
+    position: relative; left: -1em; text-align: right; vertical-align: baseline;
+    border: none; pointer-events: all; display: inline-block;
+    -webkit-touch-callout: none; -webkit-user-select: none;
+    -khtml-user-select: none; -moz-user-select: none;
+    -ms-user-select: none; user-select: none;
+    padding: 0 4px; width: 4em;
+    color: #aaaaaa;
+  }
+pre.numberSource { margin-left: 3em; border-left: 1px solid #aaaaaa;  padding-left: 4px; }
+div.sourceCode
+  {  }
+@media screen {
+a.sourceLine::before { text-decoration: underline; }
+}
+code span.al { color: #ff0000; font-weight: bold; } /* Alert */
+code span.an { color: #60a0b0; font-weight: bold; font-style: italic; } /* Annotation */
+code span.at { color: #7d9029; } /* Attribute */
+code span.bn { color: #40a070; } /* BaseN */
+code span.bu { } /* BuiltIn */
+code span.cf { color: #007020; font-weight: bold; } /* ControlFlow */
+code span.ch { color: #4070a0; } /* Char */
+code span.cn { color: #880000; } /* Constant */
+code span.co { color: #60a0b0; font-style: italic; } /* Comment */
+code span.cv { color: #60a0b0; font-weight: bold; font-style: italic; } /* CommentVar */
+code span.do { color: #ba2121; font-style: italic; } /* Documentation */
+code span.dt { color: #902000; } /* DataType */
+code span.dv { color: #40a070; } /* DecVal */
+code span.er { color: #ff0000; font-weight: bold; } /* Error */
+code span.ex { } /* Extension */
+code span.fl { color: #40a070; } /* Float */
+code span.fu { color: #06287e; } /* Function */
+code span.im { } /* Import */
+code span.in { color: #60a0b0; font-weight: bold; font-style: italic; } /* Information */
+code span.kw { color: #007020; font-weight: bold; } /* Keyword */
+code span.op { color: #666666; } /* Operator */
+code span.ot { color: #007020; } /* Other */
+code span.pp { color: #bc7a00; } /* Preprocessor */
+code span.sc { color: #4070a0; } /* SpecialChar */
+code span.ss { color: #bb6688; } /* SpecialString */
+code span.st { color: #4070a0; } /* String */
+code span.va { color: #19177c; } /* Variable */
+code span.vs { color: #4070a0; } /* VerbatimString */
+code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warning */
+</style>
+
+<link rel="stylesheet" href="style.css" type="text/css" />
+</head>
+
+<body>
+
+
+
+  <div class="book without-animation with-summary font-size-2 font-family-1" data-basepath=".">
+
+    <div class="book-summary">
+      <nav role="navigation">
+
+<ul class="summary">
+<li><a href="./">A Minimal Book Example</a></li>
+
+<li class="divider"></li>
+<li class="chapter" data-level="1" data-path="index.html"><a href="index.html"><i class="fa fa-check"></i><b>1</b> Introduction</a></li>
+<li class="chapter" data-level="2" data-path="one-way-anova.html"><a href="one-way-anova.html"><i class="fa fa-check"></i><b>2</b> One-way ANOVA</a><ul>
+<li class="chapter" data-level="2.1" data-path="one-way-anova.html"><a href="one-way-anova.html#validation-of-power-in-one-way-anova-part-1"><i class="fa fa-check"></i><b>2.1</b> Validation of Power in One-Way ANOVA Part 1</a><ul>
+<li class="chapter" data-level="2.1.1" data-path="one-way-anova.html"><a href="one-way-anova.html#two-conditions"><i class="fa fa-check"></i><b>2.1.1</b> Two conditions</a></li>
+</ul></li>
+<li class="chapter" data-level="2.2" data-path="one-way-anova.html"><a href="one-way-anova.html#one-way-anova-part-2-brysbaert-example"><i class="fa fa-check"></i><b>2.2</b> One-way ANOVA Part 2: Brysbaert example</a><ul>
+<li class="chapter" data-level="2.2.1" data-path="one-way-anova.html"><a href="one-way-anova.html#three-conditions"><i class="fa fa-check"></i><b>2.2.1</b> Three conditions</a></li>
+<li class="chapter" data-level="2.2.2" data-path="one-way-anova.html"><a href="one-way-anova.html#power-for-simple-effects"><i class="fa fa-check"></i><b>2.2.2</b> Power for simple effects</a></li>
+</ul></li>
+<li class="chapter" data-level="2.3" data-path="one-way-anova.html"><a href="one-way-anova.html#one-way-anova-part-3"><i class="fa fa-check"></i><b>2.3</b> One-way ANOVA Part 3</a><ul>
+<li class="chapter" data-level="2.3.1" data-path="one-way-anova.html"><a href="one-way-anova.html#three-conditions-replication"><i class="fa fa-check"></i><b>2.3.1</b> Three conditions replication</a></li>
+<li class="chapter" data-level="2.3.2" data-path="one-way-anova.html"><a href="one-way-anova.html#variation-1"><i class="fa fa-check"></i><b>2.3.2</b> Variation 1</a></li>
+<li class="chapter" data-level="2.3.3" data-path="one-way-anova.html"><a href="one-way-anova.html#three-conditions-replication-1"><i class="fa fa-check"></i><b>2.3.3</b> Three conditions replication</a></li>
+<li class="chapter" data-level="2.3.4" data-path="one-way-anova.html"><a href="one-way-anova.html#variation-2"><i class="fa fa-check"></i><b>2.3.4</b> Variation 2</a></li>
+<li class="chapter" data-level="2.3.5" data-path="one-way-anova.html"><a href="one-way-anova.html#three-conditions-replication-2"><i class="fa fa-check"></i><b>2.3.5</b> Three conditions replication</a></li>
+</ul></li>
+</ul></li>
+<li class="chapter" data-level="3" data-path="repeated-measures-anova.html"><a href="repeated-measures-anova.html"><i class="fa fa-check"></i><b>3</b> Repeated Measures-ANOVA</a><ul>
+<li class="chapter" data-level="3.1" data-path="repeated-measures-anova.html"><a href="repeated-measures-anova.html#part-1"><i class="fa fa-check"></i><b>3.1</b> Part 1</a><ul>
+<li class="chapter" data-level="3.1.1" data-path="repeated-measures-anova.html"><a href="repeated-measures-anova.html#two-conditions-medium-effect-size"><i class="fa fa-check"></i><b>3.1.1</b> Two conditions, medium effect size</a></li>
+</ul></li>
+<li class="chapter" data-level="3.2" data-path="repeated-measures-anova.html"><a href="repeated-measures-anova.html#repeated-measures-anova-part-2"><i class="fa fa-check"></i><b>3.2</b> Repeated Measures-ANOVA Part 2</a><ul>
+<li class="chapter" data-level="3.2.1" data-path="repeated-measures-anova.html"><a href="repeated-measures-anova.html#the-relation-between-cohens-f-and-cohens-d"><i class="fa fa-check"></i><b>3.2.1</b> The relation between Cohen’s f and Cohen’s d</a></li>
+<li class="chapter" data-level="3.2.2" data-path="repeated-measures-anova.html"><a href="repeated-measures-anova.html#three-within-conditions-medium-effect-size"><i class="fa fa-check"></i><b>3.2.2</b> Three within conditions, medium effect size</a></li>
+</ul></li>
+<li class="chapter" data-level="3.3" data-path="repeated-measures-anova.html"><a href="repeated-measures-anova.html#repeated-measures-anova-part-3"><i class="fa fa-check"></i><b>3.3</b> Repeated Measures-ANOVA Part 3</a></li>
+<li class="chapter" data-level="3.4" data-path="repeated-measures-anova.html"><a href="repeated-measures-anova.html#reproducing-brysbaert"><i class="fa fa-check"></i><b>3.4</b> Reproducing Brysbaert</a></li>
+<li class="chapter" data-level="3.5" data-path="repeated-measures-anova.html"><a href="repeated-measures-anova.html#reproducing-brysbaert-variation-1-changing-correlation"><i class="fa fa-check"></i><b>3.5</b> Reproducing Brysbaert Variation 1 Changing Correlation</a></li>
+</ul></li>
+<li class="chapter" data-level="4" data-path="mixed-anova.html"><a href="mixed-anova.html"><i class="fa fa-check"></i><b>4</b> Mixed ANOVA</a><ul>
+<li class="chapter" data-level="4.1" data-path="mixed-anova.html"><a href="mixed-anova.html#part-1-two-by-two-anova-within-between-design"><i class="fa fa-check"></i><b>4.1</b> Part 1: Two by two ANOVA, within-between design</a><ul>
+<li class="chapter" data-level="4.1.1" data-path="mixed-anova.html"><a href="mixed-anova.html#two-by-two-anova-within-between-design-variation-1"><i class="fa fa-check"></i><b>4.1.1</b> Two by two ANOVA, within-between design Variation 1</a></li>
+</ul></li>
+<li class="chapter" data-level="4.2" data-path="mixed-anova.html"><a href="mixed-anova.html#part-2-two-by-two-anova-within-within-design"><i class="fa fa-check"></i><b>4.2</b> Part 2: Two by two ANOVA, within-within design</a><ul>
+<li class="chapter" data-level="4.2.1" data-path="mixed-anova.html"><a href="mixed-anova.html#examine-variation-of-means-and-correlation"><i class="fa fa-check"></i><b>4.2.1</b> Examine variation of means and correlation</a></li>
+</ul></li>
+<li class="chapter" data-level="4.3" data-path="mixed-anova.html"><a href="mixed-anova.html#part-3-two-by-two-anova-within-design"><i class="fa fa-check"></i><b>4.3</b> Part 3: Two by two ANOVA, within design</a></li>
+<li class="chapter" data-level="4.4" data-path="mixed-anova.html"><a href="mixed-anova.html#simple-example-2x2-within-design"><i class="fa fa-check"></i><b>4.4</b> Simple example: 2x2 within design</a></li>
+</ul></li>
+<li class="chapter" data-level="5" data-path="error-control-in-exploratory-anova.html"><a href="error-control-in-exploratory-anova.html"><i class="fa fa-check"></i><b>5</b> Error Control in Exploratory ANOVA</a></li>
+<li class="chapter" data-level="6" data-path="power-for-interactions.html"><a href="power-for-interactions.html"><i class="fa fa-check"></i><b>6</b> Power for Interactions</a></li>
+<li class="chapter" data-level="7" data-path="analytic-power-functions.html"><a href="analytic-power-functions.html"><i class="fa fa-check"></i><b>7</b> Analytic Power Functions</a><ul>
+<li class="chapter" data-level="7.1" data-path="analytic-power-functions.html"><a href="analytic-power-functions.html#one-way-between-subject-anova"><i class="fa fa-check"></i><b>7.1</b> One-Way Between Subject ANOVA</a></li>
+<li class="chapter" data-level="7.2" data-path="analytic-power-functions.html"><a href="analytic-power-functions.html#two-way-between-subject-interaction"><i class="fa fa-check"></i><b>7.2</b> Two-way Between Subject Interaction</a></li>
+<li class="chapter" data-level="7.3" data-path="analytic-power-functions.html"><a href="analytic-power-functions.html#x3-between-subject-anova"><i class="fa fa-check"></i><b>7.3</b> 3x3 Between Subject ANOVA</a></li>
+<li class="chapter" data-level="7.4" data-path="analytic-power-functions.html"><a href="analytic-power-functions.html#two-by-two-anova-within-design"><i class="fa fa-check"></i><b>7.4</b> Two by two ANOVA, within design</a></li>
+</ul></li>
+<li class="chapter" data-level="8" data-path="power-curve.html"><a href="power-curve.html"><i class="fa fa-check"></i><b>8</b> Power Curve</a></li>
+<li class="chapter" data-level="9" data-path="explore-increase-in-effect-size-for-moderated-interactions-.html"><a href="explore-increase-in-effect-size-for-moderated-interactions-.html"><i class="fa fa-check"></i><b>9</b> Explore increase in effect size for moderated interactions.</a><ul>
+<li class="chapter" data-level="9.1" data-path="explore-increase-in-effect-size-for-moderated-interactions-.html"><a href="explore-increase-in-effect-size-for-moderated-interactions-.html#explore-increase-in-effect-size-for-cross-over-interactions."><i class="fa fa-check"></i><b>9.1</b> Explore increase in effect size for cross-over interactions.</a></li>
+<li class="chapter" data-level="9.2" data-path="explore-increase-in-effect-size-for-moderated-interactions-.html"><a href="explore-increase-in-effect-size-for-moderated-interactions-.html#explore-increase-in-correlation-in-moderated-interactions."><i class="fa fa-check"></i><b>9.2</b> Explore increase in correlation in moderated interactions.</a></li>
+<li class="chapter" data-level="9.3" data-path="explore-increase-in-effect-size-for-moderated-interactions-.html"><a href="explore-increase-in-effect-size-for-moderated-interactions-.html#increasing-correlation-in-on-factor-decreases-power-in-second-factor"><i class="fa fa-check"></i><b>9.3</b> Increasing correlation in on factor decreases power in second factor</a></li>
+</ul></li>
+<li class="chapter" data-level="10" data-path="analytic-power-for-three-way-interactions.html"><a href="analytic-power-for-three-way-interactions.html"><i class="fa fa-check"></i><b>10</b> Analytic Power for Three-way Interactions</a></li>
+<li class="chapter" data-level="11" data-path="power-for-design-variations.html"><a href="power-for-design-variations.html"><i class="fa fa-check"></i><b>11</b> Power for Design Variations</a><ul>
+<li class="chapter" data-level="11.1" data-path="power-for-design-variations.html"><a href="power-for-design-variations.html#within-designs"><i class="fa fa-check"></i><b>11.1</b> Within Designs</a></li>
+</ul></li>
+<li class="chapter" data-level="12" data-path="setting-the-correlation-matrix.html"><a href="setting-the-correlation-matrix.html"><i class="fa fa-check"></i><b>12</b> Setting the Correlation Matrix</a></li>
+<li class="chapter" data-level="13" data-path="validation-of-effect-size-estimates-for-one-way-anova.html"><a href="validation-of-effect-size-estimates-for-one-way-anova.html"><i class="fa fa-check"></i><b>13</b> Validation of Effect Size Estimates for One-Way ANOVA</a><ul>
+<li class="chapter" data-level="13.1" data-path="validation-of-effect-size-estimates-for-one-way-anova.html"><a href="validation-of-effect-size-estimates-for-one-way-anova.html#three-conditions-small-effect-size"><i class="fa fa-check"></i><b>13.1</b> Three conditions, small effect size</a></li>
+<li class="chapter" data-level="13.2" data-path="validation-of-effect-size-estimates-for-one-way-anova.html"><a href="validation-of-effect-size-estimates-for-one-way-anova.html#four-conditions-medium-effect-size"><i class="fa fa-check"></i><b>13.2</b> Four conditions, medium effect size</a></li>
+<li class="chapter" data-level="13.3" data-path="validation-of-effect-size-estimates-for-one-way-anova.html"><a href="validation-of-effect-size-estimates-for-one-way-anova.html#two-conditions-large-effect-size"><i class="fa fa-check"></i><b>13.3</b> Two conditions, large effect size</a></li>
+</ul></li>
+<li class="divider"></li>
+<li><a href="https://github.com/rstudio/bookdown" target="blank">Published with bookdown</a></li>
+
+</ul>
+
+      </nav>
+    </div>
+
+    <div class="book-body">
+      <div class="body-inner">
+        <div class="book-header" role="navigation">
+          <h1>
+            <i class="fa fa-circle-o-notch fa-spin"></i><a href="./">Validation of Superpower</a>
+          </h1>
+        </div>
+
+        <div class="page-wrapper" tabindex="-1" role="main">
+          <div class="page-inner">
+
+            <section class="normal" id="section-">
+<div id="mixed-anova" class="section level1">
+<h1><span class="header-section-number">Chapter 4</span> Mixed ANOVA</h1>
+<div id="part-1-two-by-two-anova-within-between-design" class="section level2">
+<h2><span class="header-section-number">4.1</span> Part 1: Two by two ANOVA, within-between design</h2>
+<p>We can simulate a Two-Way ANOVA with a specific alpha, sample size and effect size, to achieve a specified statistical power. We wil try to reproduce the power analysis by g*power for an F-test, ANOVA: Repeated measures, within-between interaction.</p>
+<p><img src="screenshots/gpower_5.png" /></p>
+<p>For the 2-way interaction, the result should be a power of 91.25% is we have a total samplesize of 46. Since we have 2 groups in the between factor that means the sample size per group is 2 (and both these groups collect 2 repeated measures).</p>
+<div class="sourceCode" id="cb185"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb185-1" title="1">mu &lt;-<span class="st"> </span><span class="kw">c</span>(<span class="op">-</span><span class="fl">0.25</span>, <span class="fl">0.25</span>, <span class="fl">0.25</span>, <span class="fl">-0.25</span>)</a>
+<a class="sourceLine" id="cb185-2" title="2">n &lt;-<span class="st"> </span><span class="dv">23</span></a>
+<a class="sourceLine" id="cb185-3" title="3">sd &lt;-<span class="st"> </span><span class="dv">1</span></a>
+<a class="sourceLine" id="cb185-4" title="4">r &lt;-<span class="st"> </span><span class="fl">0.5</span></a>
+<a class="sourceLine" id="cb185-5" title="5">string =<span class="st"> &quot;2w*2b&quot;</span></a>
+<a class="sourceLine" id="cb185-6" title="6">alpha_level &lt;-<span class="st"> </span><span class="fl">0.05</span></a>
+<a class="sourceLine" id="cb185-7" title="7">labelnames =<span class="st"> </span><span class="kw">c</span>(<span class="st">&quot;age&quot;</span>, <span class="st">&quot;old&quot;</span>, <span class="st">&quot;young&quot;</span>, <span class="st">&quot;color&quot;</span>, <span class="st">&quot;blue&quot;</span>, <span class="st">&quot;red&quot;</span>)</a>
+<a class="sourceLine" id="cb185-8" title="8">design_result &lt;-<span class="st"> </span><span class="kw">ANOVA_design</span>(<span class="dt">design =</span> string,</a>
+<a class="sourceLine" id="cb185-9" title="9">                              <span class="dt">n =</span> n, </a>
+<a class="sourceLine" id="cb185-10" title="10">                              <span class="dt">mu =</span> mu, </a>
+<a class="sourceLine" id="cb185-11" title="11">                              <span class="dt">sd =</span> sd, </a>
+<a class="sourceLine" id="cb185-12" title="12">                              <span class="dt">r =</span> r, </a>
+<a class="sourceLine" id="cb185-13" title="13">                              <span class="dt">labelnames =</span> labelnames)</a>
+<a class="sourceLine" id="cb185-14" title="14">simulation_result &lt;-<span class="st"> </span><span class="kw">ANOVA_power</span>(design_result, <span class="dt">alpha =</span> <span class="fl">0.05</span>, <span class="dt">nsims =</span> nsims)</a></code></pre></div>
+<pre><code>## Power and Effect sizes for ANOVA tests
+##                 power effect_size
+## anova_color         4     0.02128
+## anova_age           6     0.02369
+## anova_color:age    93     0.21081
+## 
+## Power and Effect sizes for contrasts
+##                                            power effect_size
+## p_age_old_color_blue_age_old_color_red        39     0.54754
+## p_age_old_color_blue_age_young_color_blue     72     0.53079
+## p_age_old_color_blue_age_young_color_red       8     0.06901
+## p_age_old_color_red_age_young_color_blue       5    -0.02431
+## p_age_old_color_red_age_young_color_red       66    -0.49280
+## p_age_young_color_blue_age_young_color_red    31    -0.45320
+## 
+## Within-Subject Factors Included: Check MANOVA Results</code></pre>
+<div class="sourceCode" id="cb187"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb187-1" title="1">exact_result &lt;-<span class="st"> </span><span class="kw">ANOVA_exact</span>(design_result, <span class="dt">alpha_level =</span> alpha_level)</a></code></pre></div>
+<pre><code>## Power and Effect sizes for ANOVA tests
+##           power partial_eta_squared cohen_f non_centrality
+## color      5.00              0.0000  0.0000            0.0
+## age        5.00              0.0000  0.0000            0.0
+## color:age 91.25              0.2072  0.5112           11.5
+## 
+## Power and Effect sizes for contrasts
+##                                            power effect_size
+## p_age_old_color_blue_age_old_color_red     38.17         0.5
+## p_age_old_color_blue_age_young_color_blue  63.02         0.5
+## p_age_old_color_blue_age_young_color_red    5.00         0.0
+## p_age_old_color_red_age_young_color_blue    5.00         0.0
+## p_age_old_color_red_age_young_color_red    63.02        -0.5
+## p_age_young_color_blue_age_young_color_red 38.17        -0.5</code></pre>
+<div id="two-by-two-anova-within-between-design-variation-1" class="section level3">
+<h3><span class="header-section-number">4.1.1</span> Two by two ANOVA, within-between design Variation 1</h3>
+<p>We can simulate the same Two-Way ANOVA increasing the correlation to 0.7.</p>
+<p><img src="screenshots/gpower_6.png" /></p>
+<div class="sourceCode" id="cb189"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb189-1" title="1">mu &lt;-<span class="st"> </span><span class="kw">c</span>(<span class="op">-</span><span class="fl">0.25</span>, <span class="fl">0.25</span>, <span class="fl">0.25</span>, <span class="fl">-0.25</span>)</a>
+<a class="sourceLine" id="cb189-2" title="2">n &lt;-<span class="st"> </span><span class="dv">23</span></a>
+<a class="sourceLine" id="cb189-3" title="3">sd &lt;-<span class="st"> </span><span class="dv">1</span></a>
+<a class="sourceLine" id="cb189-4" title="4">r &lt;-<span class="st"> </span><span class="fl">0.7</span></a>
+<a class="sourceLine" id="cb189-5" title="5">string =<span class="st"> &quot;2w*2b&quot;</span></a>
+<a class="sourceLine" id="cb189-6" title="6">alpha_level &lt;-<span class="st"> </span><span class="fl">0.05</span></a>
+<a class="sourceLine" id="cb189-7" title="7">labelnames =<span class="st"> </span><span class="kw">c</span>(<span class="st">&quot;age&quot;</span>, <span class="st">&quot;old&quot;</span>, <span class="st">&quot;young&quot;</span>, <span class="st">&quot;color&quot;</span>, <span class="st">&quot;blue&quot;</span>, <span class="st">&quot;red&quot;</span>)</a>
+<a class="sourceLine" id="cb189-8" title="8">design_result &lt;-<span class="st"> </span><span class="kw">ANOVA_design</span>(<span class="dt">design =</span> string,</a>
+<a class="sourceLine" id="cb189-9" title="9">                              <span class="dt">n =</span> n, </a>
+<a class="sourceLine" id="cb189-10" title="10">                              <span class="dt">mu =</span> mu, </a>
+<a class="sourceLine" id="cb189-11" title="11">                              <span class="dt">sd =</span> sd, </a>
+<a class="sourceLine" id="cb189-12" title="12">                              <span class="dt">r =</span> r, </a>
+<a class="sourceLine" id="cb189-13" title="13">                              <span class="dt">labelnames =</span> labelnames)</a>
+<a class="sourceLine" id="cb189-14" title="14">simulation_result &lt;-<span class="st"> </span><span class="kw">ANOVA_power</span>(design_result, <span class="dt">alpha =</span> <span class="fl">0.05</span>, <span class="dt">nsims =</span> nsims)</a></code></pre></div>
+<pre><code>## Power and Effect sizes for ANOVA tests
+##                 power effect_size
+## anova_color         3     0.01755
+## anova_age           4     0.02484
+## anova_color:age   100     0.31609
+## 
+## Power and Effect sizes for contrasts
+##                                            power effect_size
+## p_age_old_color_blue_age_old_color_red        36    0.529558
+## p_age_old_color_blue_age_young_color_blue     85    0.661656
+## p_age_old_color_blue_age_young_color_red       2    0.003045
+## p_age_old_color_red_age_young_color_blue       3   -0.024063
+## p_age_old_color_red_age_young_color_red       83   -0.700824
+## p_age_young_color_blue_age_young_color_red    36   -0.496350
+## 
+## Within-Subject Factors Included: Check MANOVA Results</code></pre>
+<div class="sourceCode" id="cb191"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb191-1" title="1">exact_result &lt;-<span class="st"> </span><span class="kw">ANOVA_exact</span>(design_result, <span class="dt">alpha_level =</span> alpha_level)</a></code></pre></div>
+<pre><code>## Power and Effect sizes for ANOVA tests
+##           power partial_eta_squared cohen_f non_centrality
+## color      5.00              0.0000    0.00         0.0000
+## age        5.00              0.0000    0.00         0.0000
+## color:age 98.98              0.3034    0.66        19.1667
+## 
+## Power and Effect sizes for contrasts
+##                                            power effect_size
+## p_age_old_color_blue_age_old_color_red     38.17      0.5000
+## p_age_old_color_blue_age_young_color_blue  84.09      0.6455
+## p_age_old_color_blue_age_young_color_red    5.00      0.0000
+## p_age_old_color_red_age_young_color_blue    5.00      0.0000
+## p_age_old_color_red_age_young_color_red    84.09     -0.6455
+## p_age_young_color_blue_age_young_color_red 38.17     -0.5000</code></pre>
+
+</div>
+</div>
+<div id="part-2-two-by-two-anova-within-within-design" class="section level2">
+<h2><span class="header-section-number">4.2</span> Part 2: Two by two ANOVA, within-within design</h2>
+<p>We can simulate a 2x2 ANOVA, both factors manipulated within participants, with a specific sample size and effect size, to achieve a desired statistical power.</p>
+<p>As Potvin &amp; Schutz (2000) explain, analytic procedures for a two-factor repeated measures ANOVA do not seem to exist. The main problem is quantifying the error variance (the denominator when calculating lambda or Cohen’s f). Simulation based aproaches provide a solution.</p>
+<p>We can reproduce the simulation coded by <a href="https://cognitivedatascientist.com/2015/12/14/power-simulation-in-r-the-repeated-measures-anova-5/">Ben Amsel</a></p>
+<div class="sourceCode" id="cb193"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb193-1" title="1">knitr<span class="op">::</span>opts_chunk<span class="op">$</span><span class="kw">set</span>(<span class="dt">echo=</span><span class="ot">TRUE</span>, <span class="dt">warning=</span><span class="ot">FALSE</span>, <span class="dt">message=</span><span class="ot">FALSE</span>)</a>
+<a class="sourceLine" id="cb193-2" title="2"> </a>
+<a class="sourceLine" id="cb193-3" title="3"><span class="co"># define the parameters</span></a>
+<a class="sourceLine" id="cb193-4" title="4">mu =<span class="st"> </span><span class="kw">c</span>(<span class="dv">700</span>, <span class="dv">670</span>, <span class="dv">670</span>, <span class="dv">700</span>) <span class="co"># true effects (in this case, a double dissociation)</span></a>
+<a class="sourceLine" id="cb193-5" title="5">sigma =<span class="st"> </span><span class="dv">150</span>  <span class="co"># population standard deviation</span></a>
+<a class="sourceLine" id="cb193-6" title="6">rho =<span class="st"> </span><span class="fl">0.75</span> <span class="co"># correlation between repeated measures</span></a>
+<a class="sourceLine" id="cb193-7" title="7">nsubs =<span class="st"> </span><span class="dv">25</span> <span class="co"># how many subjects?</span></a>
+<a class="sourceLine" id="cb193-8" title="8">nsims =<span class="st"> </span>nsims <span class="co"># how many simulation replicates?</span></a>
+<a class="sourceLine" id="cb193-9" title="9"> </a>
+<a class="sourceLine" id="cb193-10" title="10"><span class="co"># create 2 factors representing the 2 independent variables</span></a>
+<a class="sourceLine" id="cb193-11" title="11">cond =<span class="st"> </span><span class="kw">data.frame</span>(</a>
+<a class="sourceLine" id="cb193-12" title="12">  <span class="dt">X1 =</span> <span class="kw">rep</span>(<span class="kw">factor</span>(letters[<span class="dv">1</span><span class="op">:</span><span class="dv">2</span>]), nsubs <span class="op">*</span><span class="st"> </span><span class="dv">2</span>),</a>
+<a class="sourceLine" id="cb193-13" title="13">  <span class="dt">X2 =</span> <span class="kw">rep</span>(<span class="kw">factor</span>(letters[<span class="dv">1</span><span class="op">:</span><span class="dv">2</span>]), nsubs, <span class="dt">each=</span><span class="dv">2</span>))</a>
+<a class="sourceLine" id="cb193-14" title="14"> </a>
+<a class="sourceLine" id="cb193-15" title="15"><span class="co"># create a subjects factor</span></a>
+<a class="sourceLine" id="cb193-16" title="16">subject =<span class="st"> </span><span class="kw">factor</span>(<span class="kw">sort</span>(<span class="kw">rep</span>(<span class="dv">1</span><span class="op">:</span>nsubs, <span class="dv">4</span>)))</a>
+<a class="sourceLine" id="cb193-17" title="17"> </a>
+<a class="sourceLine" id="cb193-18" title="18"><span class="co"># combine above into the design matrix</span></a>
+<a class="sourceLine" id="cb193-19" title="19">dm =<span class="st"> </span><span class="kw">data.frame</span>(subject, cond)</a></code></pre></div>
+<p>Build Sigma: the population variance-covariance matrix</p>
+<div class="sourceCode" id="cb194"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb194-1" title="1"><span class="co"># create k x k matrix populated with sigma</span></a>
+<a class="sourceLine" id="cb194-2" title="2">sigma.mat &lt;-<span class="st"> </span><span class="kw">rep</span>(sigma, <span class="dv">4</span>)</a>
+<a class="sourceLine" id="cb194-3" title="3">S &lt;-<span class="st"> </span><span class="kw">matrix</span>(sigma.mat, <span class="dt">ncol=</span><span class="kw">length</span>(sigma.mat), <span class="dt">nrow=</span><span class="kw">length</span>(sigma.mat))</a>
+<a class="sourceLine" id="cb194-4" title="4"> </a>
+<a class="sourceLine" id="cb194-5" title="5"><span class="co"># compute covariance between measures</span></a>
+<a class="sourceLine" id="cb194-6" title="6">Sigma &lt;-<span class="st"> </span><span class="kw">t</span>(S) <span class="op">*</span><span class="st"> </span>S <span class="op">*</span><span class="st"> </span>rho  </a>
+<a class="sourceLine" id="cb194-7" title="7"> </a>
+<a class="sourceLine" id="cb194-8" title="8"><span class="co"># put the variances on the diagonal </span></a>
+<a class="sourceLine" id="cb194-9" title="9"><span class="kw">diag</span>(Sigma) &lt;-<span class="st"> </span>sigma<span class="op">^</span><span class="dv">2</span>  </a></code></pre></div>
+<p>Run the simulation</p>
+<div class="sourceCode" id="cb195"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb195-1" title="1"><span class="co"># stack &#39;nsims&#39; individual data frames into one large data frame</span></a>
+<a class="sourceLine" id="cb195-2" title="2">df =<span class="st"> </span>dm[<span class="kw">rep</span>(<span class="kw">seq_len</span>(<span class="kw">nrow</span>(dm)), nsims), ]</a>
+<a class="sourceLine" id="cb195-3" title="3"> </a>
+<a class="sourceLine" id="cb195-4" title="4"><span class="co"># add an index column to track the simulation run</span></a>
+<a class="sourceLine" id="cb195-5" title="5">df<span class="op">$</span>simID =<span class="st"> </span><span class="kw">sort</span>(<span class="kw">rep</span>(<span class="kw">seq_len</span>(nsims), <span class="kw">nrow</span>(dm)))</a>
+<a class="sourceLine" id="cb195-6" title="6"> </a>
+<a class="sourceLine" id="cb195-7" title="7"><span class="co"># sample the observed data from a multivariate normal distribution</span></a>
+<a class="sourceLine" id="cb195-8" title="8"><span class="co"># using MASS::mvrnorm with the parameters mu and Sigma created earlier</span></a>
+<a class="sourceLine" id="cb195-9" title="9"><span class="co"># and bind to the existing df</span></a>
+<a class="sourceLine" id="cb195-10" title="10"> </a>
+<a class="sourceLine" id="cb195-11" title="11"><span class="kw">require</span>(MASS)</a>
+<a class="sourceLine" id="cb195-12" title="12">make.y =<span class="st"> </span><span class="kw">expression</span>(<span class="kw">as.vector</span>(<span class="kw">t</span>(<span class="kw">mvrnorm</span>(nsubs, mu, Sigma))))</a>
+<a class="sourceLine" id="cb195-13" title="13">df<span class="op">$</span>y =<span class="st"> </span><span class="kw">as.vector</span>(<span class="kw">replicate</span>(nsims, <span class="kw">eval</span>(make.y)))             </a>
+<a class="sourceLine" id="cb195-14" title="14"> </a>
+<a class="sourceLine" id="cb195-15" title="15"><span class="co"># use do(), the general purpose complement to the specialized data </span></a>
+<a class="sourceLine" id="cb195-16" title="16"><span class="co"># manipulation functions available in dplyr, to run the ANOVA on</span></a>
+<a class="sourceLine" id="cb195-17" title="17"><span class="co"># each section of the grouped data frame created by group_by</span></a>
+<a class="sourceLine" id="cb195-18" title="18"> </a>
+<a class="sourceLine" id="cb195-19" title="19"><span class="kw">require</span>(dplyr)</a>
+<a class="sourceLine" id="cb195-20" title="20"><span class="kw">require</span>(car)</a>
+<a class="sourceLine" id="cb195-21" title="21"><span class="kw">require</span>(broom)</a>
+<a class="sourceLine" id="cb195-22" title="22"> </a>
+<a class="sourceLine" id="cb195-23" title="23">mods &lt;-<span class="st"> </span>df <span class="op">%&gt;%</span><span class="st"> </span></a>
+<a class="sourceLine" id="cb195-24" title="24"><span class="st">  </span><span class="kw">group_by</span>(simID) <span class="op">%&gt;%</span><span class="st"> </span></a>
+<a class="sourceLine" id="cb195-25" title="25"><span class="st">    </span><span class="kw">do</span>(<span class="dt">model =</span> <span class="kw">aov</span>(y <span class="op">~</span><span class="st"> </span>X1 <span class="op">*</span><span class="st"> </span>X2 <span class="op">+</span><span class="st"> </span><span class="kw">Error</span>(subject <span class="op">/</span><span class="st"> </span>(X1<span class="op">*</span>X2)), <span class="dt">qr=</span><span class="ot">FALSE</span>, <span class="dt">data =</span> .)) </a>
+<a class="sourceLine" id="cb195-26" title="26"> </a>
+<a class="sourceLine" id="cb195-27" title="27"><span class="co"># extract p-values for each effect and store in a data frame</span></a>
+<a class="sourceLine" id="cb195-28" title="28">p =<span class="st"> </span><span class="kw">data.frame</span>(</a>
+<a class="sourceLine" id="cb195-29" title="29">  mods <span class="op">%&gt;%</span><span class="st"> </span><span class="kw">do</span>(<span class="kw">as.data.frame</span>(<span class="kw">tidy</span>(.<span class="op">$</span>model[[<span class="dv">3</span>]])<span class="op">$</span>p.value[<span class="dv">1</span>])),</a>
+<a class="sourceLine" id="cb195-30" title="30">  mods <span class="op">%&gt;%</span><span class="st"> </span><span class="kw">do</span>(<span class="kw">as.data.frame</span>(<span class="kw">tidy</span>(.<span class="op">$</span>model[[<span class="dv">4</span>]])<span class="op">$</span>p.value[<span class="dv">1</span>])),</a>
+<a class="sourceLine" id="cb195-31" title="31">  mods <span class="op">%&gt;%</span><span class="st"> </span><span class="kw">do</span>(<span class="kw">as.data.frame</span>(<span class="kw">tidy</span>(.<span class="op">$</span>model[[<span class="dv">5</span>]])<span class="op">$</span>p.value[<span class="dv">1</span>])))</a>
+<a class="sourceLine" id="cb195-32" title="32"><span class="kw">colnames</span>(p) =<span class="st"> </span><span class="kw">c</span>(<span class="st">&#39;X1&#39;</span>,<span class="st">&#39;X2&#39;</span>,<span class="st">&#39;Interaction&#39;</span>)</a></code></pre></div>
+<p>The empirical power is easy to compute, it’s just the proportion of simulation runs where p &lt;. 05.</p>
+<div class="sourceCode" id="cb196"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb196-1" title="1">power.res =<span class="st"> </span><span class="kw">apply</span>(<span class="kw">as.matrix</span>(p), <span class="dv">2</span>, </a>
+<a class="sourceLine" id="cb196-2" title="2">  <span class="cf">function</span>(x) <span class="kw">round</span>(<span class="kw">mean</span>(<span class="kw">ifelse</span>(x <span class="op">&lt;</span><span class="st"> </span><span class="fl">.05</span>, <span class="dv">1</span>, <span class="dv">0</span>) <span class="op">*</span><span class="st"> </span><span class="dv">100</span>),<span class="dv">2</span>))</a>
+<a class="sourceLine" id="cb196-3" title="3">power.res</a></code></pre></div>
+<pre><code>##          X1          X2 Interaction 
+##           3           7          46</code></pre>
+<p>Visualize the distributions of p-values</p>
+<div class="sourceCode" id="cb198"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb198-1" title="1"><span class="co"># plot the known effects</span></a>
+<a class="sourceLine" id="cb198-2" title="2"><span class="kw">require</span>(ggplot2)</a>
+<a class="sourceLine" id="cb198-3" title="3"><span class="kw">require</span>(gridExtra)</a>
+<a class="sourceLine" id="cb198-4" title="4"> </a>
+<a class="sourceLine" id="cb198-5" title="5">means =<span class="st"> </span><span class="kw">data.frame</span>(cond[<span class="dv">1</span><span class="op">:</span><span class="dv">4</span>, ], mu, <span class="dt">SE =</span> sigma <span class="op">/</span><span class="st"> </span><span class="kw">sqrt</span>(nsubs))</a>
+<a class="sourceLine" id="cb198-6" title="6">plt1 =<span class="st"> </span><span class="kw">ggplot</span>(means, <span class="kw">aes</span>(<span class="dt">y =</span> mu, <span class="dt">x =</span> X1, <span class="dt">fill=</span>X2)) <span class="op">+</span></a>
+<a class="sourceLine" id="cb198-7" title="7"><span class="st">  </span><span class="kw">geom_bar</span>(<span class="dt">position =</span> <span class="kw">position_dodge</span>(), <span class="dt">stat=</span><span class="st">&quot;identity&quot;</span>) <span class="op">+</span></a>
+<a class="sourceLine" id="cb198-8" title="8"><span class="st">  </span><span class="kw">geom_errorbar</span>(<span class="kw">aes</span>(<span class="dt">ymin =</span> mu<span class="op">-</span>SE, <span class="dt">ymax =</span> mu<span class="op">+</span>SE), </a>
+<a class="sourceLine" id="cb198-9" title="9">    <span class="dt">position =</span> <span class="kw">position_dodge</span>(<span class="dt">width=</span><span class="fl">0.9</span>), <span class="dt">size=</span>.<span class="dv">6</span>, <span class="dt">width=</span>.<span class="dv">3</span>) <span class="op">+</span></a>
+<a class="sourceLine" id="cb198-10" title="10"><span class="st">  </span><span class="kw">coord_cartesian</span>(<span class="dt">ylim=</span><span class="kw">c</span>((.<span class="dv">7</span><span class="op">*</span><span class="kw">min</span>(mu)), <span class="fl">1.2</span><span class="op">*</span><span class="kw">max</span>(mu))) <span class="op">+</span></a>
+<a class="sourceLine" id="cb198-11" title="11"><span class="st">  </span><span class="kw">theme_bw</span>()</a>
+<a class="sourceLine" id="cb198-12" title="12"> </a>
+<a class="sourceLine" id="cb198-13" title="13"><span class="co"># melt the data into a ggplot friendly &#39;long&#39; format</span></a>
+<a class="sourceLine" id="cb198-14" title="14"><span class="kw">require</span>(reshape2)</a>
+<a class="sourceLine" id="cb198-15" title="15">plotData &lt;-<span class="st"> </span><span class="kw">melt</span>(p, <span class="dt">value.name =</span> <span class="st">&#39;p&#39;</span>)</a>
+<a class="sourceLine" id="cb198-16" title="16"> </a>
+<a class="sourceLine" id="cb198-17" title="17"><span class="co"># plot each of the p-value distributions on a log scale</span></a>
+<a class="sourceLine" id="cb198-18" title="18"><span class="kw">options</span>(<span class="dt">scipen =</span> <span class="dv">999</span>) <span class="co"># &#39;turn off&#39; scientific notation</span></a>
+<a class="sourceLine" id="cb198-19" title="19">plt2 =<span class="st"> </span><span class="kw">ggplot</span>(plotData, <span class="kw">aes</span>(<span class="dt">x =</span> p)) <span class="op">+</span></a>
+<a class="sourceLine" id="cb198-20" title="20"><span class="st">    </span><span class="kw">scale_x_log10</span>(<span class="dt">breaks=</span><span class="kw">c</span>(<span class="dv">1</span>, <span class="fl">0.05</span>, <span class="fl">0.001</span>), </a>
+<a class="sourceLine" id="cb198-21" title="21">                  <span class="dt">labels=</span><span class="kw">c</span>(<span class="dv">1</span>, <span class="fl">0.05</span>, <span class="fl">0.001</span>)) <span class="op">+</span></a>
+<a class="sourceLine" id="cb198-22" title="22"><span class="st">    </span><span class="kw">geom_histogram</span>(<span class="dt">colour =</span> <span class="st">&quot;darkblue&quot;</span>, <span class="dt">fill =</span> <span class="st">&quot;white&quot;</span>) <span class="op">+</span></a>
+<a class="sourceLine" id="cb198-23" title="23"><span class="st">    </span><span class="kw">geom_vline</span>(<span class="dt">xintercept =</span> <span class="fl">0.05</span>, <span class="dt">colour=</span><span class="st">&#39;red&#39;</span>) <span class="op">+</span></a>
+<a class="sourceLine" id="cb198-24" title="24"><span class="st">    </span><span class="kw">facet_grid</span>(variable <span class="op">~</span><span class="st"> </span>.) <span class="op">+</span></a>
+<a class="sourceLine" id="cb198-25" title="25"><span class="st">    </span><span class="kw">labs</span>(<span class="dt">x =</span> <span class="kw">expression</span>(Log[<span class="dv">10</span>]<span class="op">~</span>P)) <span class="op">+</span></a>
+<a class="sourceLine" id="cb198-26" title="26"><span class="st">    </span><span class="kw">theme</span>(<span class="dt">axis.text.x =</span> <span class="kw">element_text</span>(<span class="dt">color=</span><span class="st">&#39;black&#39;</span>, <span class="dt">size=</span><span class="dv">7</span>))</a>
+<a class="sourceLine" id="cb198-27" title="27"> </a>
+<a class="sourceLine" id="cb198-28" title="28"><span class="co"># arrange plots side by side and print</span></a>
+<a class="sourceLine" id="cb198-29" title="29"><span class="kw">grid.arrange</span>(plt1, plt2, <span class="dt">nrow=</span><span class="dv">1</span>)</a></code></pre></div>
+<p><img src="SuperpowerValidation_files/figure-html/unnamed-chunk-51-1.png" width="672" /></p>
+<p>We can reproduce this simulation:</p>
+<div class="sourceCode" id="cb199"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb199-1" title="1">mu =<span class="st"> </span><span class="kw">c</span>(<span class="dv">700</span>, <span class="dv">670</span>, <span class="dv">670</span>, <span class="dv">700</span>) <span class="co"># true effects (in this case, a double dissociation)</span></a>
+<a class="sourceLine" id="cb199-2" title="2">sigma =<span class="st"> </span><span class="dv">150</span>  <span class="co"># population standard deviation</span></a>
+<a class="sourceLine" id="cb199-3" title="3">n &lt;-<span class="st"> </span><span class="dv">25</span></a>
+<a class="sourceLine" id="cb199-4" title="4">sd &lt;-<span class="st"> </span><span class="dv">150</span></a>
+<a class="sourceLine" id="cb199-5" title="5">r &lt;-<span class="st"> </span><span class="fl">0.75</span></a>
+<a class="sourceLine" id="cb199-6" title="6">string =<span class="st"> &quot;2w*2w&quot;</span></a>
+<a class="sourceLine" id="cb199-7" title="7">alpha_level &lt;-<span class="st"> </span><span class="fl">0.05</span></a>
+<a class="sourceLine" id="cb199-8" title="8">labelnames =<span class="st"> </span><span class="kw">c</span>(<span class="st">&quot;age&quot;</span>, <span class="st">&quot;old&quot;</span>, <span class="st">&quot;young&quot;</span>, <span class="st">&quot;color&quot;</span>, <span class="st">&quot;blue&quot;</span>, <span class="st">&quot;red&quot;</span>)</a>
+<a class="sourceLine" id="cb199-9" title="9">design_result &lt;-<span class="st"> </span><span class="kw">ANOVA_design</span>(<span class="dt">design =</span> string,</a>
+<a class="sourceLine" id="cb199-10" title="10">                              <span class="dt">n =</span> n, </a>
+<a class="sourceLine" id="cb199-11" title="11">                              <span class="dt">mu =</span> mu, </a>
+<a class="sourceLine" id="cb199-12" title="12">                              <span class="dt">sd =</span> sd, </a>
+<a class="sourceLine" id="cb199-13" title="13">                              <span class="dt">r =</span> r, </a>
+<a class="sourceLine" id="cb199-14" title="14">                              <span class="dt">labelnames =</span> labelnames)</a>
+<a class="sourceLine" id="cb199-15" title="15">simulation_result &lt;-<span class="st"> </span><span class="kw">ANOVA_power</span>(design_result, <span class="dt">alpha =</span> <span class="fl">0.05</span>, <span class="dt">nsims =</span> nsims)</a></code></pre></div>
+<pre><code>## Power and Effect sizes for ANOVA tests
+##                 power effect_size
+## anova_age           4     0.04233
+## anova_color         6     0.04183
+## anova_age:color    46     0.15644
+## 
+## Power and Effect sizes for contrasts
+##                                            power effect_size
+## p_age_old_color_blue_age_old_color_red        24    -0.29667
+## p_age_old_color_blue_age_young_color_blue     15    -0.26334
+## p_age_old_color_blue_age_young_color_red       3     0.02407
+## p_age_old_color_red_age_young_color_blue       6     0.02558
+## p_age_old_color_red_age_young_color_red       35     0.32715
+## p_age_young_color_blue_age_young_color_red    24     0.29095
+## 
+## Within-Subject Factors Included: Check MANOVA Results</code></pre>
+<div class="sourceCode" id="cb201"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb201-1" title="1">exact_result &lt;-<span class="st"> </span><span class="kw">ANOVA_exact</span>(design_result, <span class="dt">alpha_level =</span> alpha_level)</a></code></pre></div>
+<pre><code>## Power and Effect sizes for ANOVA tests
+##           power partial_eta_squared cohen_f non_centrality
+## age         5.0              0.0000  0.0000              0
+## color       5.0              0.0000  0.0000              0
+## age:color  48.4              0.1429  0.4082              4
+## 
+## Power and Effect sizes for contrasts
+##                                            power effect_size
+## p_age_old_color_blue_age_old_color_red      27.4     -0.2828
+## p_age_old_color_blue_age_young_color_blue   27.4     -0.2828
+## p_age_old_color_blue_age_young_color_red     5.0      0.0000
+## p_age_old_color_red_age_young_color_blue     5.0      0.0000
+## p_age_old_color_red_age_young_color_red     27.4      0.2828
+## p_age_young_color_blue_age_young_color_red  27.4      0.2828</code></pre>
+<p>The simulations yield closely matching results.</p>
+<div id="examine-variation-of-means-and-correlation" class="section level3">
+<h3><span class="header-section-number">4.2.1</span> Examine variation of means and correlation</h3>
+<div class="sourceCode" id="cb203"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb203-1" title="1"><span class="co"># define the parameters</span></a>
+<a class="sourceLine" id="cb203-2" title="2">mu =<span class="st"> </span><span class="kw">c</span>(<span class="dv">700</span>, <span class="dv">670</span>, <span class="dv">690</span>, <span class="dv">750</span>) <span class="co"># true effects (in this case, a double dissociation)</span></a>
+<a class="sourceLine" id="cb203-3" title="3">sigma =<span class="st"> </span><span class="dv">150</span>  <span class="co"># population standard deviation</span></a>
+<a class="sourceLine" id="cb203-4" title="4">rho =<span class="st"> </span><span class="fl">0.4</span> <span class="co"># correlation between repeated measures</span></a>
+<a class="sourceLine" id="cb203-5" title="5">nsubs =<span class="st"> </span><span class="dv">25</span> <span class="co"># how many subjects?</span></a>
+<a class="sourceLine" id="cb203-6" title="6">nsims =<span class="st"> </span>nsims <span class="co"># how many simulation replicates?</span></a>
+<a class="sourceLine" id="cb203-7" title="7"> </a>
+<a class="sourceLine" id="cb203-8" title="8"><span class="co"># create 2 factors representing the 2 independent variables</span></a>
+<a class="sourceLine" id="cb203-9" title="9">cond =<span class="st"> </span><span class="kw">data.frame</span>(</a>
+<a class="sourceLine" id="cb203-10" title="10">  <span class="dt">X1 =</span> <span class="kw">rep</span>(<span class="kw">factor</span>(letters[<span class="dv">1</span><span class="op">:</span><span class="dv">2</span>]), nsubs <span class="op">*</span><span class="st"> </span><span class="dv">2</span>),</a>
+<a class="sourceLine" id="cb203-11" title="11">  <span class="dt">X2 =</span> <span class="kw">rep</span>(<span class="kw">factor</span>(letters[<span class="dv">1</span><span class="op">:</span><span class="dv">2</span>]), nsubs, <span class="dt">each=</span><span class="dv">2</span>))</a>
+<a class="sourceLine" id="cb203-12" title="12"> </a>
+<a class="sourceLine" id="cb203-13" title="13"><span class="co"># create a subjects factor</span></a>
+<a class="sourceLine" id="cb203-14" title="14">subject =<span class="st"> </span><span class="kw">factor</span>(<span class="kw">sort</span>(<span class="kw">rep</span>(<span class="dv">1</span><span class="op">:</span>nsubs, <span class="dv">4</span>)))</a>
+<a class="sourceLine" id="cb203-15" title="15"> </a>
+<a class="sourceLine" id="cb203-16" title="16"><span class="co"># combine above into the design matrix</span></a>
+<a class="sourceLine" id="cb203-17" title="17">dm =<span class="st"> </span><span class="kw">data.frame</span>(subject, cond)</a></code></pre></div>
+<p>Build Sigma: the population variance-covariance matrix</p>
+<div class="sourceCode" id="cb204"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb204-1" title="1"><span class="co"># create k x k matrix populated with sigma</span></a>
+<a class="sourceLine" id="cb204-2" title="2">sigma.mat &lt;-<span class="st"> </span><span class="kw">rep</span>(sigma, <span class="dv">4</span>)</a>
+<a class="sourceLine" id="cb204-3" title="3">S &lt;-<span class="st"> </span><span class="kw">matrix</span>(sigma.mat, <span class="dt">ncol=</span><span class="kw">length</span>(sigma.mat), <span class="dt">nrow=</span><span class="kw">length</span>(sigma.mat))</a>
+<a class="sourceLine" id="cb204-4" title="4"> </a>
+<a class="sourceLine" id="cb204-5" title="5"><span class="co"># compute covariance between measures</span></a>
+<a class="sourceLine" id="cb204-6" title="6">Sigma &lt;-<span class="st"> </span><span class="kw">t</span>(S) <span class="op">*</span><span class="st"> </span>S <span class="op">*</span><span class="st"> </span>rho  </a>
+<a class="sourceLine" id="cb204-7" title="7"> </a>
+<a class="sourceLine" id="cb204-8" title="8"><span class="co"># put the variances on the diagonal </span></a>
+<a class="sourceLine" id="cb204-9" title="9"><span class="kw">diag</span>(Sigma) &lt;-<span class="st"> </span>sigma<span class="op">^</span><span class="dv">2</span>  </a></code></pre></div>
+<p>Run the simulation</p>
+<div class="sourceCode" id="cb205"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb205-1" title="1"><span class="co"># stack &#39;nsims&#39; individual data frames into one large data frame</span></a>
+<a class="sourceLine" id="cb205-2" title="2">df =<span class="st"> </span>dm[<span class="kw">rep</span>(<span class="kw">seq_len</span>(<span class="kw">nrow</span>(dm)), nsims), ]</a>
+<a class="sourceLine" id="cb205-3" title="3"> </a>
+<a class="sourceLine" id="cb205-4" title="4"><span class="co"># add an index column to track the simulation run</span></a>
+<a class="sourceLine" id="cb205-5" title="5">df<span class="op">$</span>simID =<span class="st"> </span><span class="kw">sort</span>(<span class="kw">rep</span>(<span class="kw">seq_len</span>(nsims), <span class="kw">nrow</span>(dm)))</a>
+<a class="sourceLine" id="cb205-6" title="6"> </a>
+<a class="sourceLine" id="cb205-7" title="7"><span class="co"># sample the observed data from a multivariate normal distribution</span></a>
+<a class="sourceLine" id="cb205-8" title="8"><span class="co"># using MASS::mvrnorm with the parameters mu and Sigma created earlier</span></a>
+<a class="sourceLine" id="cb205-9" title="9"><span class="co"># and bind to the existing df</span></a>
+<a class="sourceLine" id="cb205-10" title="10"> </a>
+<a class="sourceLine" id="cb205-11" title="11"><span class="kw">require</span>(MASS)</a>
+<a class="sourceLine" id="cb205-12" title="12">make.y =<span class="st"> </span><span class="kw">expression</span>(<span class="kw">as.vector</span>(<span class="kw">t</span>(<span class="kw">mvrnorm</span>(nsubs, mu, Sigma))))</a>
+<a class="sourceLine" id="cb205-13" title="13">df<span class="op">$</span>y =<span class="st"> </span><span class="kw">as.vector</span>(<span class="kw">replicate</span>(nsims, <span class="kw">eval</span>(make.y)))             </a>
+<a class="sourceLine" id="cb205-14" title="14"> </a>
+<a class="sourceLine" id="cb205-15" title="15"><span class="co"># use do(), the general purpose complement to the specialized data </span></a>
+<a class="sourceLine" id="cb205-16" title="16"><span class="co"># manipulation functions available in dplyr, to run the ANOVA on</span></a>
+<a class="sourceLine" id="cb205-17" title="17"><span class="co"># each section of the grouped data frame created by group_by</span></a>
+<a class="sourceLine" id="cb205-18" title="18"> </a>
+<a class="sourceLine" id="cb205-19" title="19"><span class="kw">require</span>(dplyr)</a>
+<a class="sourceLine" id="cb205-20" title="20"><span class="kw">require</span>(car)</a>
+<a class="sourceLine" id="cb205-21" title="21"><span class="kw">require</span>(broom)</a>
+<a class="sourceLine" id="cb205-22" title="22"> </a>
+<a class="sourceLine" id="cb205-23" title="23">mods &lt;-<span class="st"> </span>df <span class="op">%&gt;%</span><span class="st"> </span></a>
+<a class="sourceLine" id="cb205-24" title="24"><span class="st">  </span><span class="kw">group_by</span>(simID) <span class="op">%&gt;%</span><span class="st"> </span></a>
+<a class="sourceLine" id="cb205-25" title="25"><span class="st">    </span><span class="kw">do</span>(<span class="dt">model =</span> <span class="kw">aov</span>(y <span class="op">~</span><span class="st"> </span>X1 <span class="op">*</span><span class="st"> </span>X2 <span class="op">+</span><span class="st"> </span><span class="kw">Error</span>(subject <span class="op">/</span><span class="st"> </span>(X1<span class="op">*</span>X2)), <span class="dt">qr=</span><span class="ot">FALSE</span>, <span class="dt">data =</span> .)) </a>
+<a class="sourceLine" id="cb205-26" title="26"> </a>
+<a class="sourceLine" id="cb205-27" title="27"><span class="co"># extract p-values for each effect and store in a data frame</span></a>
+<a class="sourceLine" id="cb205-28" title="28">p =<span class="st"> </span><span class="kw">data.frame</span>(</a>
+<a class="sourceLine" id="cb205-29" title="29">  mods <span class="op">%&gt;%</span><span class="st"> </span><span class="kw">do</span>(<span class="kw">as.data.frame</span>(<span class="kw">tidy</span>(.<span class="op">$</span>model[[<span class="dv">3</span>]])<span class="op">$</span>p.value[<span class="dv">1</span>])),</a>
+<a class="sourceLine" id="cb205-30" title="30">  mods <span class="op">%&gt;%</span><span class="st"> </span><span class="kw">do</span>(<span class="kw">as.data.frame</span>(<span class="kw">tidy</span>(.<span class="op">$</span>model[[<span class="dv">4</span>]])<span class="op">$</span>p.value[<span class="dv">1</span>])),</a>
+<a class="sourceLine" id="cb205-31" title="31">  mods <span class="op">%&gt;%</span><span class="st"> </span><span class="kw">do</span>(<span class="kw">as.data.frame</span>(<span class="kw">tidy</span>(.<span class="op">$</span>model[[<span class="dv">5</span>]])<span class="op">$</span>p.value[<span class="dv">1</span>])))</a>
+<a class="sourceLine" id="cb205-32" title="32"><span class="kw">colnames</span>(p) =<span class="st"> </span><span class="kw">c</span>(<span class="st">&#39;X1&#39;</span>,<span class="st">&#39;X2&#39;</span>,<span class="st">&#39;Interaction&#39;</span>)</a></code></pre></div>
+<p>The empirical power is easy to compute, it’s just the proportion of simulation runs where p &lt;. 05.</p>
+<div class="sourceCode" id="cb206"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb206-1" title="1">power.res =<span class="st"> </span><span class="kw">apply</span>(<span class="kw">as.matrix</span>(p), <span class="dv">2</span>, </a>
+<a class="sourceLine" id="cb206-2" title="2">  <span class="cf">function</span>(x) <span class="kw">round</span>(<span class="kw">mean</span>(<span class="kw">ifelse</span>(x <span class="op">&lt;</span><span class="st"> </span><span class="fl">.05</span>, <span class="dv">1</span>, <span class="dv">0</span>) <span class="op">*</span><span class="st"> </span><span class="dv">100</span>),<span class="dv">2</span>))</a>
+<a class="sourceLine" id="cb206-3" title="3">power.res</a></code></pre></div>
+<pre><code>##          X1          X2 Interaction 
+##          10          24          50</code></pre>
+<p>Visualize the distributions of p-values</p>
+<div class="sourceCode" id="cb208"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb208-1" title="1"><span class="co"># plot the known effects</span></a>
+<a class="sourceLine" id="cb208-2" title="2"><span class="kw">require</span>(ggplot2)</a>
+<a class="sourceLine" id="cb208-3" title="3"><span class="kw">require</span>(gridExtra)</a>
+<a class="sourceLine" id="cb208-4" title="4"> </a>
+<a class="sourceLine" id="cb208-5" title="5">means =<span class="st"> </span><span class="kw">data.frame</span>(cond[<span class="dv">1</span><span class="op">:</span><span class="dv">4</span>, ], mu, <span class="dt">SE =</span> sigma <span class="op">/</span><span class="st"> </span><span class="kw">sqrt</span>(nsubs))</a>
+<a class="sourceLine" id="cb208-6" title="6">plt1 =<span class="st"> </span><span class="kw">ggplot</span>(means, <span class="kw">aes</span>(<span class="dt">y =</span> mu, <span class="dt">x =</span> X1, <span class="dt">fill=</span>X2)) <span class="op">+</span></a>
+<a class="sourceLine" id="cb208-7" title="7"><span class="st">  </span><span class="kw">geom_bar</span>(<span class="dt">position =</span> <span class="kw">position_dodge</span>(), <span class="dt">stat=</span><span class="st">&quot;identity&quot;</span>) <span class="op">+</span></a>
+<a class="sourceLine" id="cb208-8" title="8"><span class="st">  </span><span class="kw">geom_errorbar</span>(<span class="kw">aes</span>(<span class="dt">ymin =</span> mu<span class="op">-</span>SE, <span class="dt">ymax =</span> mu<span class="op">+</span>SE), </a>
+<a class="sourceLine" id="cb208-9" title="9">    <span class="dt">position =</span> <span class="kw">position_dodge</span>(<span class="dt">width=</span><span class="fl">0.9</span>), <span class="dt">size=</span>.<span class="dv">6</span>, <span class="dt">width=</span>.<span class="dv">3</span>) <span class="op">+</span></a>
+<a class="sourceLine" id="cb208-10" title="10"><span class="st">  </span><span class="kw">coord_cartesian</span>(<span class="dt">ylim=</span><span class="kw">c</span>((.<span class="dv">7</span><span class="op">*</span><span class="kw">min</span>(mu)), <span class="fl">1.2</span><span class="op">*</span><span class="kw">max</span>(mu))) <span class="op">+</span></a>
+<a class="sourceLine" id="cb208-11" title="11"><span class="st">  </span><span class="kw">theme_bw</span>()</a>
+<a class="sourceLine" id="cb208-12" title="12"> </a>
+<a class="sourceLine" id="cb208-13" title="13"><span class="co"># melt the data into a ggplot friendly &#39;long&#39; format</span></a>
+<a class="sourceLine" id="cb208-14" title="14"><span class="kw">require</span>(reshape2)</a>
+<a class="sourceLine" id="cb208-15" title="15">plotData &lt;-<span class="st"> </span><span class="kw">melt</span>(p, <span class="dt">value.name =</span> <span class="st">&#39;p&#39;</span>)</a>
+<a class="sourceLine" id="cb208-16" title="16"> </a>
+<a class="sourceLine" id="cb208-17" title="17"><span class="co"># plot each of the p-value distributions on a log scale</span></a>
+<a class="sourceLine" id="cb208-18" title="18"><span class="kw">options</span>(<span class="dt">scipen =</span> <span class="dv">999</span>) <span class="co"># &#39;turn off&#39; scientific notation</span></a>
+<a class="sourceLine" id="cb208-19" title="19">plt2 =<span class="st"> </span><span class="kw">ggplot</span>(plotData, <span class="kw">aes</span>(<span class="dt">x =</span> p)) <span class="op">+</span></a>
+<a class="sourceLine" id="cb208-20" title="20"><span class="st">    </span><span class="kw">scale_x_log10</span>(<span class="dt">breaks=</span><span class="kw">c</span>(<span class="dv">1</span>, <span class="fl">0.05</span>, <span class="fl">0.001</span>), </a>
+<a class="sourceLine" id="cb208-21" title="21">                  <span class="dt">labels=</span><span class="kw">c</span>(<span class="dv">1</span>, <span class="fl">0.05</span>, <span class="fl">0.001</span>)) <span class="op">+</span></a>
+<a class="sourceLine" id="cb208-22" title="22"><span class="st">    </span><span class="kw">geom_histogram</span>(<span class="dt">colour =</span> <span class="st">&quot;darkblue&quot;</span>, <span class="dt">fill =</span> <span class="st">&quot;white&quot;</span>) <span class="op">+</span></a>
+<a class="sourceLine" id="cb208-23" title="23"><span class="st">    </span><span class="kw">geom_vline</span>(<span class="dt">xintercept =</span> <span class="fl">0.05</span>, <span class="dt">colour=</span><span class="st">&#39;red&#39;</span>) <span class="op">+</span></a>
+<a class="sourceLine" id="cb208-24" title="24"><span class="st">    </span><span class="kw">facet_grid</span>(variable <span class="op">~</span><span class="st"> </span>.) <span class="op">+</span></a>
+<a class="sourceLine" id="cb208-25" title="25"><span class="st">    </span><span class="kw">labs</span>(<span class="dt">x =</span> <span class="kw">expression</span>(Log[<span class="dv">10</span>]<span class="op">~</span>P)) <span class="op">+</span></a>
+<a class="sourceLine" id="cb208-26" title="26"><span class="st">    </span><span class="kw">theme</span>(<span class="dt">axis.text.x =</span> <span class="kw">element_text</span>(<span class="dt">color=</span><span class="st">&#39;black&#39;</span>, <span class="dt">size=</span><span class="dv">7</span>))</a>
+<a class="sourceLine" id="cb208-27" title="27"> </a>
+<a class="sourceLine" id="cb208-28" title="28"><span class="co"># arrange plots side by side and print</span></a>
+<a class="sourceLine" id="cb208-29" title="29"><span class="kw">grid.arrange</span>(plt1, plt2, <span class="dt">nrow=</span><span class="dv">1</span>)</a></code></pre></div>
+<p><img src="SuperpowerValidation_files/figure-html/unnamed-chunk-57-1.png" width="672" /></p>
+<p>We can reproduce this simulation:</p>
+<div class="sourceCode" id="cb209"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb209-1" title="1">mu =<span class="st"> </span><span class="kw">c</span>(<span class="dv">700</span>, <span class="dv">670</span>, <span class="dv">690</span>, <span class="dv">750</span>) <span class="co"># true effects (in this case, a double dissociation)</span></a>
+<a class="sourceLine" id="cb209-2" title="2">sigma =<span class="st"> </span><span class="dv">150</span>  <span class="co"># population standard deviation</span></a>
+<a class="sourceLine" id="cb209-3" title="3">n &lt;-<span class="st"> </span><span class="dv">25</span></a>
+<a class="sourceLine" id="cb209-4" title="4">sd &lt;-<span class="st"> </span><span class="dv">150</span></a>
+<a class="sourceLine" id="cb209-5" title="5">r &lt;-<span class="st"> </span><span class="fl">0.4</span></a>
+<a class="sourceLine" id="cb209-6" title="6">string =<span class="st"> &quot;2w*2w&quot;</span></a>
+<a class="sourceLine" id="cb209-7" title="7">alpha_level &lt;-<span class="st"> </span><span class="fl">0.05</span></a>
+<a class="sourceLine" id="cb209-8" title="8">labelnames =<span class="st"> </span><span class="kw">c</span>(<span class="st">&quot;age&quot;</span>, <span class="st">&quot;old&quot;</span>, <span class="st">&quot;young&quot;</span>, <span class="st">&quot;color&quot;</span>, <span class="st">&quot;blue&quot;</span>, <span class="st">&quot;red&quot;</span>)</a>
+<a class="sourceLine" id="cb209-9" title="9">design_result &lt;-<span class="st"> </span><span class="kw">ANOVA_design</span>(<span class="dt">design =</span> string,</a>
+<a class="sourceLine" id="cb209-10" title="10">                              <span class="dt">n =</span> n, </a>
+<a class="sourceLine" id="cb209-11" title="11">                              <span class="dt">mu =</span> mu, </a>
+<a class="sourceLine" id="cb209-12" title="12">                              <span class="dt">sd =</span> sd, </a>
+<a class="sourceLine" id="cb209-13" title="13">                              <span class="dt">r =</span> r, </a>
+<a class="sourceLine" id="cb209-14" title="14">                              <span class="dt">labelnames =</span> labelnames)</a>
+<a class="sourceLine" id="cb209-15" title="15">simulation_result &lt;-<span class="st"> </span><span class="kw">ANOVA_power</span>(design_result, <span class="dt">alpha =</span> <span class="fl">0.05</span>, <span class="dt">nsims =</span> nsims)</a></code></pre></div>
+<pre><code>## Power and Effect sizes for ANOVA tests
+##                 power effect_size
+## anova_age          29     0.11059
+## anova_color         7     0.05329
+## anova_age:color    40     0.14755
+## 
+## Power and Effect sizes for contrasts
+##                                            power effect_size
+## p_age_old_color_blue_age_old_color_red        11    -0.15676
+## p_age_old_color_blue_age_young_color_blue      7    -0.06659
+## p_age_old_color_blue_age_young_color_red      37     0.31531
+## p_age_old_color_red_age_young_color_blue       6     0.09607
+## p_age_old_color_red_age_young_color_red       63     0.47374
+## p_age_young_color_blue_age_young_color_red    44     0.38897
+## 
+## Within-Subject Factors Included: Check MANOVA Results</code></pre>
+<div class="sourceCode" id="cb211"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb211-1" title="1">exact_result &lt;-<span class="st"> </span><span class="kw">ANOVA_exact</span>(design_result, <span class="dt">alpha_level =</span> alpha_level)</a></code></pre></div>
+<pre><code>## Power and Effect sizes for ANOVA tests
+##           power partial_eta_squared cohen_f non_centrality
+## age       30.40              0.0864  0.3074         2.2685
+## color      9.51              0.0171  0.1318         0.4167
+## age:color 45.98              0.1351  0.3953         3.7500
+## 
+## Power and Effect sizes for contrasts
+##                                            power effect_size
+## p_age_old_color_blue_age_old_color_red     14.16     -0.1826
+## p_age_old_color_blue_age_young_color_blue   5.98     -0.0609
+## p_age_old_color_blue_age_young_color_red   30.91      0.3043
+## p_age_old_color_red_age_young_color_blue    9.00      0.1217
+## p_age_old_color_red_age_young_color_red    64.66      0.4869
+## p_age_young_color_blue_age_young_color_red 41.80      0.3651</code></pre>
+
+</div>
+</div>
+<div id="part-3-two-by-two-anova-within-design" class="section level2">
+<h2><span class="header-section-number">4.3</span> Part 3: Two by two ANOVA, within design</h2>
+<p>Potvin &amp; Schutz (2000) simulate a wide range of repeated measure designs. The give an example of a 3x3 design, with the following correlation matrix:</p>
+<p><img src="screenshots/PS2000.png" /></p>
+<p>Variances were set to 1 (so all covariance matrices in their simulations were identical). In this specific example, the white fields are related to the correlation for the A main effect (these cells have the same level for B, but different levels of A). The grey cells are related to the main effect of B (the cells have the same level of A, but different levels of B). Finally, the black cells are related to the AxB interaction (they have different levels of A and B). The diagonal (all 1) relate to cells with the same levels of A and B.</p>
+<p>Potvin &amp; Schulz (2000) examine power for 2x2 within ANOVA designs and develop approximations of the error variance. For a design with 2 within factors (A and B) these are:</p>
+<p>For the main effect of A:
+<span class="math inline">\(\sigma _ { e } ^ { 2 } = \sigma ^ { 2 } ( 1 - \overline { \rho } _ { A } ) + \sigma ^ { 2 } ( q - 1 ) ( \overline { \rho } _ { B } - \overline { \rho } _ { AB } )\)</span></p>
+<p>For the main effectof B:
+<span class="math inline">\(\sigma _ { e } ^ { 2 } = \sigma ^ { 2 } ( 1 - \overline { \rho } _ { B } ) + \sigma ^ { 2 } ( p - 1 ) ( \overline { \rho } _ { A } - \overline { \rho } _ { A B } )\)</span></p>
+<p>For the interaction between A and B:
+<span class="math inline">\(\sigma _ { e } ^ { 2 } = \sigma ^ { 2 } ( 1 - \rho _ { \max } ) - \sigma ^ { 2 } ( \overline { \rho } _ { \min } - \overline { \rho } _ { AB } )\)</span></p>
+</div>
+<div id="simple-example-2x2-within-design" class="section level2">
+<h2><span class="header-section-number">4.4</span> Simple example: 2x2 within design</h2>
+<p>It is difficult to just come up with a positive definite covariance matrix. The best way to achieve this is to get the correlations from a pilot study. Indeed, it should be rather difficult to know which correlations to fill in without some pilot data.</p>
+<p>We try to get the formulas in Potvin and Schutz (2000) working. <strong>Below, I manage for the main effects, but not for the interaction</strong>.</p>
+<div class="sourceCode" id="cb213"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb213-1" title="1">mu =<span class="st"> </span><span class="kw">c</span>(<span class="dv">2</span>,<span class="dv">1</span>,<span class="dv">4</span>,<span class="dv">2</span>) </a>
+<a class="sourceLine" id="cb213-2" title="2">n &lt;-<span class="st"> </span><span class="dv">20</span></a>
+<a class="sourceLine" id="cb213-3" title="3">sd &lt;-<span class="st"> </span><span class="dv">5</span></a>
+<a class="sourceLine" id="cb213-4" title="4">r &lt;-<span class="st"> </span><span class="kw">c</span>(</a>
+<a class="sourceLine" id="cb213-5" title="5">  <span class="fl">0.8</span>, <span class="fl">0.4</span>, <span class="fl">0.4</span>,</a>
+<a class="sourceLine" id="cb213-6" title="6">       <span class="fl">0.4</span>, <span class="fl">0.4</span>,</a>
+<a class="sourceLine" id="cb213-7" title="7">            <span class="fl">0.8</span></a>
+<a class="sourceLine" id="cb213-8" title="8">  )</a>
+<a class="sourceLine" id="cb213-9" title="9">string =<span class="st"> &quot;2w*2w&quot;</span></a>
+<a class="sourceLine" id="cb213-10" title="10">alpha_level &lt;-<span class="st"> </span><span class="fl">0.05</span></a>
+<a class="sourceLine" id="cb213-11" title="11"></a>
+<a class="sourceLine" id="cb213-12" title="12">labelnames =<span class="st"> </span><span class="kw">c</span>(<span class="st">&quot;A&quot;</span>, <span class="st">&quot;a1&quot;</span>, <span class="st">&quot;a2&quot;</span>, <span class="st">&quot;B&quot;</span>, <span class="st">&quot;b1&quot;</span>, <span class="st">&quot;b2&quot;</span>)</a>
+<a class="sourceLine" id="cb213-13" title="13">design_result &lt;-<span class="st"> </span><span class="kw">ANOVA_design</span>(<span class="dt">design =</span> string,</a>
+<a class="sourceLine" id="cb213-14" title="14">                              <span class="dt">n =</span> n, </a>
+<a class="sourceLine" id="cb213-15" title="15">                              <span class="dt">mu =</span> mu, </a>
+<a class="sourceLine" id="cb213-16" title="16">                              <span class="dt">sd =</span> sd, </a>
+<a class="sourceLine" id="cb213-17" title="17">                              <span class="dt">r =</span> r, </a>
+<a class="sourceLine" id="cb213-18" title="18">                              <span class="dt">labelnames =</span> labelnames)</a>
+<a class="sourceLine" id="cb213-19" title="19">simulation_result &lt;-<span class="st"> </span><span class="kw">ANOVA_power</span>(design_result, <span class="dt">alpha =</span> <span class="fl">0.05</span>, <span class="dt">nsims =</span> <span class="dv">1000</span>)</a></code></pre></div>
+<pre><code>## Power and Effect sizes for ANOVA tests
+##           power effect_size
+## anova_A    24.2     0.12176
+## anova_B    81.8     0.33480
+## anova_A:B  13.9     0.08989
+## 
+## Power and Effect sizes for contrasts
+##                       power effect_size
+## p_A_a1_B_b1_A_a1_B_b2  29.0   -0.334720
+## p_A_a1_B_b1_A_a2_B_b1  34.5    0.376563
+## p_A_a1_B_b1_A_a2_B_b2   4.9   -0.003557
+## p_A_a1_B_b2_A_a2_B_b1  63.5    0.568743
+## p_A_a1_B_b2_A_a2_B_b2  12.3    0.188264
+## p_A_a2_B_b1_A_a2_B_b2  77.0   -0.660495
+## 
+## Within-Subject Factors Included: Check MANOVA Results</code></pre>
+<p>Result simulation after 100000 simulations</p>
+<p>simulation_result &lt;- ANOVA_power(design_result, alpha = 0.05, nsims = 100000)
+Power and Effect sizes for ANOVA tests
+power effect size
+anova_A 26.849 0.0984
+anova_B 64.091 0.2452
+anova_A:B 26.875 0.0983</p>
+<p>Power and Effect sizes for contrasts
+power effect size
+p_A_a1_B_b1_A_a1_B_b2 27.052 -0.3298
+p_A_a1_B_b1_A_a2_B_b1 39.637 0.4162
+p_A_a1_B_b1_A_a2_B_b2 4.983 -0.0005
+p_A_a1_B_b2_A_a2_B_b1 64.252 0.5699
+p_A_a1_B_b2_A_a2_B_b2 13.479 0.2077
+p_A_a2_B_b1_A_a2_B_b2 76.622 -0.6597</p>
+<p>We can try to use the formula in Potvin &amp; Schutz (2000).</p>
+<div class="sourceCode" id="cb215"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb215-1" title="1">k &lt;-<span class="st"> </span><span class="dv">1</span> <span class="co">#one group (because all factors are within)</span></a>
+<a class="sourceLine" id="cb215-2" title="2">rho_A &lt;-<span class="st"> </span><span class="fl">0.5</span> <span class="co">#mean r for factor A</span></a>
+<a class="sourceLine" id="cb215-3" title="3">rho_B &lt;-<span class="st"> </span><span class="fl">0.8</span> <span class="co">#mean r for factor B</span></a>
+<a class="sourceLine" id="cb215-4" title="4">rho_AB &lt;-<span class="st"> </span><span class="fl">0.4</span> <span class="co">#mean r for factor AB</span></a>
+<a class="sourceLine" id="cb215-5" title="5">alpha &lt;-<span class="st"> </span><span class="fl">0.05</span></a>
+<a class="sourceLine" id="cb215-6" title="6">sigma &lt;-<span class="st"> </span>sd</a>
+<a class="sourceLine" id="cb215-7" title="7">m_A &lt;-<span class="st"> </span><span class="dv">2</span> <span class="co">#levels factor A</span></a>
+<a class="sourceLine" id="cb215-8" title="8">variance_e_A &lt;-<span class="st"> </span>sigma<span class="op">^</span><span class="dv">2</span> <span class="op">*</span><span class="st"> </span>(<span class="dv">1</span> <span class="op">-</span><span class="st"> </span>rho_A) <span class="op">+</span><span class="st"> </span>sigma<span class="op">^</span><span class="dv">2</span> <span class="op">*</span><span class="st"> </span>(m_A <span class="op">-</span><span class="st"> </span><span class="dv">1</span>) <span class="op">*</span><span class="st"> </span>(rho_B <span class="op">-</span><span class="st"> </span>rho_AB) <span class="co">#Variance A</span></a>
+<a class="sourceLine" id="cb215-9" title="9">variance_e_A</a></code></pre></div>
+<pre><code>## [1] 22.5</code></pre>
+<div class="sourceCode" id="cb217"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb217-1" title="1">m_B &lt;-<span class="st"> </span><span class="dv">2</span> <span class="co">#levels factor B</span></a>
+<a class="sourceLine" id="cb217-2" title="2">variance_e_B &lt;-<span class="st"> </span>sigma<span class="op">^</span><span class="dv">2</span> <span class="op">*</span><span class="st"> </span>(<span class="dv">1</span> <span class="op">-</span><span class="st"> </span>rho_B) <span class="op">+</span><span class="st"> </span>sigma<span class="op">^</span><span class="dv">2</span> <span class="op">*</span><span class="st"> </span>(m_B <span class="op">-</span><span class="st"> </span><span class="dv">1</span>) <span class="op">*</span><span class="st"> </span>(rho_A <span class="op">-</span><span class="st"> </span>rho_AB) <span class="co">#Variance B</span></a>
+<a class="sourceLine" id="cb217-3" title="3">variance_e_B</a></code></pre></div>
+<pre><code>## [1] 7.5</code></pre>
+<div class="sourceCode" id="cb219"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb219-1" title="1">variance_e_AB &lt;-<span class="st"> </span>sigma<span class="op">^</span><span class="dv">2</span> <span class="op">*</span><span class="st"> </span>(<span class="dv">1</span> <span class="op">-</span><span class="st"> </span><span class="kw">max</span>(rho_A, rho_B)) <span class="op">-</span><span class="st"> </span>sigma<span class="op">^</span><span class="dv">2</span> <span class="op">*</span><span class="st"> </span>(<span class="kw">min</span>(rho_A, rho_B) <span class="op">-</span><span class="st"> </span>rho_AB) <span class="co">#Variance AB</span></a>
+<a class="sourceLine" id="cb219-2" title="2">variance_e_AB</a></code></pre></div>
+<pre><code>## [1] 2.5</code></pre>
+<div class="sourceCode" id="cb221"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb221-1" title="1">mean_mat &lt;-<span class="st"> </span><span class="kw">t</span>(<span class="kw">matrix</span>(mu, <span class="dt">nrow =</span> m_B,<span class="dt">ncol =</span> m_A)) <span class="co">#Create a mean matrix</span></a>
+<a class="sourceLine" id="cb221-2" title="2">mean_mat</a></code></pre></div>
+<pre><code>##      [,1] [,2]
+## [1,]    2    1
+## [2,]    4    2</code></pre>
+<div class="sourceCode" id="cb223"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb223-1" title="1"><span class="co"># Potving &amp; Schutz, 2000, formula 2, p. 348</span></a>
+<a class="sourceLine" id="cb223-2" title="2"><span class="co"># For main effect A</span></a>
+<a class="sourceLine" id="cb223-3" title="3">lambda_A &lt;-<span class="st"> </span>n <span class="op">*</span><span class="st"> </span>m_A <span class="op">*</span><span class="st"> </span><span class="kw">sum</span>((<span class="kw">rowMeans</span>(mean_mat) <span class="op">-</span><span class="st"> </span><span class="kw">mean</span>(<span class="kw">rowMeans</span>(mean_mat))) <span class="op">^</span><span class="st"> </span><span class="dv">2</span>) <span class="op">/</span><span class="st"> </span>variance_e_A </a>
+<a class="sourceLine" id="cb223-4" title="4">lambda_A</a></code></pre></div>
+<pre><code>## [1] 2</code></pre>
+<div class="sourceCode" id="cb225"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb225-1" title="1">df1 &lt;-<span class="st"> </span>(m_A <span class="op">-</span><span class="st"> </span><span class="dv">1</span>) <span class="co">#calculate degrees of freedom 1 - ignoring the * e sphericity correction</span></a>
+<a class="sourceLine" id="cb225-2" title="2">df2 &lt;-<span class="st"> </span>(n <span class="op">-</span><span class="st"> </span>k) <span class="op">*</span><span class="st"> </span>(m_A <span class="op">-</span><span class="st"> </span><span class="dv">1</span>) <span class="co">#calculate degrees of freedom 2</span></a>
+<a class="sourceLine" id="cb225-3" title="3">F_critical &lt;-<span class="st"> </span><span class="kw">qf</span>(alpha, <span class="co"># critical F-vaue</span></a>
+<a class="sourceLine" id="cb225-4" title="4">                 df1,</a>
+<a class="sourceLine" id="cb225-5" title="5">                 df2, </a>
+<a class="sourceLine" id="cb225-6" title="6">                 <span class="dt">lower.tail =</span> <span class="ot">FALSE</span>) </a>
+<a class="sourceLine" id="cb225-7" title="7">pow_A &lt;-<span class="st"> </span><span class="kw">pf</span>(<span class="kw">qf</span>(alpha, <span class="co">#power </span></a>
+<a class="sourceLine" id="cb225-8" title="8">             df1, </a>
+<a class="sourceLine" id="cb225-9" title="9">             df2, </a>
+<a class="sourceLine" id="cb225-10" title="10">             <span class="dt">lower.tail =</span> <span class="ot">FALSE</span>), </a>
+<a class="sourceLine" id="cb225-11" title="11">          df1, </a>
+<a class="sourceLine" id="cb225-12" title="12">          df2, </a>
+<a class="sourceLine" id="cb225-13" title="13">          lambda_A, </a>
+<a class="sourceLine" id="cb225-14" title="14">          <span class="dt">lower.tail =</span> <span class="ot">FALSE</span>)</a>
+<a class="sourceLine" id="cb225-15" title="15">lambda_B &lt;-<span class="st"> </span>n <span class="op">*</span><span class="st"> </span>m_B <span class="op">*</span><span class="st"> </span><span class="kw">sum</span>((<span class="kw">colMeans</span>(mean_mat) <span class="op">-</span><span class="st"> </span><span class="kw">mean</span>(<span class="kw">colMeans</span>(mean_mat))) <span class="op">^</span><span class="st"> </span><span class="dv">2</span>) <span class="op">/</span><span class="st"> </span>variance_e_B </a>
+<a class="sourceLine" id="cb225-16" title="16">lambda_B</a></code></pre></div>
+<pre><code>## [1] 6</code></pre>
+<div class="sourceCode" id="cb227"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb227-1" title="1">df1 &lt;-<span class="st"> </span>(m_B <span class="op">-</span><span class="st"> </span><span class="dv">1</span>) <span class="co">#calculate degrees of freedom 1</span></a>
+<a class="sourceLine" id="cb227-2" title="2">df2 &lt;-<span class="st"> </span>(n <span class="op">-</span><span class="st"> </span>k) <span class="op">*</span><span class="st"> </span>(m_B <span class="op">-</span><span class="st"> </span><span class="dv">1</span>) <span class="co">#calculate degrees of freedom 2</span></a>
+<a class="sourceLine" id="cb227-3" title="3">F_critical &lt;-<span class="st"> </span><span class="kw">qf</span>(alpha, <span class="co"># critical F-vaue</span></a>
+<a class="sourceLine" id="cb227-4" title="4">                 df1,</a>
+<a class="sourceLine" id="cb227-5" title="5">                 df2,</a>
+<a class="sourceLine" id="cb227-6" title="6">                 <span class="dt">lower.tail =</span> <span class="ot">FALSE</span>) </a>
+<a class="sourceLine" id="cb227-7" title="7">pow_B &lt;-<span class="st"> </span><span class="kw">pf</span>(<span class="kw">qf</span>(alpha, <span class="co">#power </span></a>
+<a class="sourceLine" id="cb227-8" title="8">             df1, </a>
+<a class="sourceLine" id="cb227-9" title="9">             df2, </a>
+<a class="sourceLine" id="cb227-10" title="10">             <span class="dt">lower.tail =</span> <span class="ot">FALSE</span>), </a>
+<a class="sourceLine" id="cb227-11" title="11">          df1, </a>
+<a class="sourceLine" id="cb227-12" title="12">          df2, </a>
+<a class="sourceLine" id="cb227-13" title="13">          lambda_B, </a>
+<a class="sourceLine" id="cb227-14" title="14">          <span class="dt">lower.tail =</span> <span class="ot">FALSE</span>)</a>
+<a class="sourceLine" id="cb227-15" title="15">pow_A</a></code></pre></div>
+<pre><code>## [1] 0.2691752</code></pre>
+<div class="sourceCode" id="cb229"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb229-1" title="1">pow_B</a></code></pre></div>
+<pre><code>## [1] 0.6422587</code></pre>
+<p>We see the 26.9 and 64.2 correspond to the results of the simulation quite closely.</p>
+<div class="sourceCode" id="cb231"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb231-1" title="1"><span class="co">#This (or the variance calculation above) does not work. </span></a>
+<a class="sourceLine" id="cb231-2" title="2">lambda_AB &lt;-<span class="st"> </span>n <span class="op">*</span><span class="st"> </span><span class="kw">sum</span>((</a>
+<a class="sourceLine" id="cb231-3" title="3">  mean_mat <span class="op">-</span><span class="st"> </span><span class="kw">rowMeans</span>(mean_mat) <span class="op">-</span><span class="st"> </span><span class="kw">colMeans</span>(mean_mat) <span class="op">+</span><span class="st"> </span><span class="kw">mean</span>(mean_mat)</a>
+<a class="sourceLine" id="cb231-4" title="4">  ) <span class="op">^</span><span class="st"> </span><span class="dv">2</span>) <span class="op">/</span><span class="st"> </span>variance_e_AB </a>
+<a class="sourceLine" id="cb231-5" title="5">lambda_AB</a></code></pre></div>
+<pre><code>## [1] 38</code></pre>
+<div class="sourceCode" id="cb233"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb233-1" title="1">df1 &lt;-<span class="st"> </span>(m_A <span class="op">-</span><span class="st"> </span><span class="dv">1</span>)<span class="op">*</span>(m_B <span class="op">-</span><span class="st"> </span><span class="dv">1</span>)  <span class="co">#calculate degrees of freedom 1</span></a>
+<a class="sourceLine" id="cb233-2" title="2">df2 &lt;-<span class="st"> </span>(n <span class="op">-</span><span class="st"> </span>k) <span class="op">*</span><span class="st"> </span>(m_A <span class="op">-</span><span class="st"> </span><span class="dv">1</span>) <span class="op">*</span><span class="st"> </span>(m_B <span class="op">-</span><span class="st"> </span><span class="dv">1</span>) <span class="co">#calculate degrees of freedom 2</span></a>
+<a class="sourceLine" id="cb233-3" title="3">F_critical &lt;-<span class="st"> </span><span class="kw">qf</span>(alpha, <span class="co"># critical F-vaue</span></a>
+<a class="sourceLine" id="cb233-4" title="4">                 df1,</a>
+<a class="sourceLine" id="cb233-5" title="5">                 df2, </a>
+<a class="sourceLine" id="cb233-6" title="6">                 <span class="dt">lower.tail =</span> <span class="ot">FALSE</span>) </a>
+<a class="sourceLine" id="cb233-7" title="7">pow &lt;-<span class="st"> </span><span class="kw">pf</span>(<span class="kw">qf</span>(alpha, <span class="co">#power </span></a>
+<a class="sourceLine" id="cb233-8" title="8">             df1, </a>
+<a class="sourceLine" id="cb233-9" title="9">             df2, </a>
+<a class="sourceLine" id="cb233-10" title="10">             <span class="dt">lower.tail =</span> <span class="ot">FALSE</span>), </a>
+<a class="sourceLine" id="cb233-11" title="11">          df1, </a>
+<a class="sourceLine" id="cb233-12" title="12">          df2, </a>
+<a class="sourceLine" id="cb233-13" title="13">          lambda_AB, </a>
+<a class="sourceLine" id="cb233-14" title="14">          <span class="dt">lower.tail =</span> <span class="ot">FALSE</span>)</a>
+<a class="sourceLine" id="cb233-15" title="15">pow</a></code></pre></div>
+<pre><code>## [1] 0.9999458</code></pre>
+<p>Maybe the simulation is not correct for the interaction, or the formula is not correctly programmed.</p>
+
+</div>
+</div>
+            </section>
+
+          </div>
+        </div>
+      </div>
+<a href="repeated-measures-anova.html" class="navigation navigation-prev " aria-label="Previous page"><i class="fa fa-angle-left"></i></a>
+<a href="error-control-in-exploratory-anova.html" class="navigation navigation-next " aria-label="Next page"><i class="fa fa-angle-right"></i></a>
+    </div>
+  </div>
+<script src="libs/gitbook-2.6.7/js/app.min.js"></script>
+<script src="libs/gitbook-2.6.7/js/lunr.js"></script>
+<script src="libs/gitbook-2.6.7/js/plugin-search.js"></script>
+<script src="libs/gitbook-2.6.7/js/plugin-sharing.js"></script>
+<script src="libs/gitbook-2.6.7/js/plugin-fontsettings.js"></script>
+<script src="libs/gitbook-2.6.7/js/plugin-bookdown.js"></script>
+<script src="libs/gitbook-2.6.7/js/jquery.highlight.js"></script>
+<script>
+gitbook.require(["gitbook"], function(gitbook) {
+gitbook.start({
+"sharing": {
+"github": false,
+"facebook": true,
+"twitter": true,
+"google": false,
+"linkedin": false,
+"weibo": false,
+"instapaper": false,
+"vk": false,
+"all": ["facebook", "google", "twitter", "linkedin", "weibo", "instapaper"]
+},
+"fontsettings": {
+"theme": "white",
+"family": "sans",
+"size": 2
+},
+"edit": {
+"link": null,
+"text": null
+},
+"history": {
+"link": null,
+"text": null
+},
+"download": ["SuperpowerValidation.pdf", "SuperpowerValidation.epub"],
+"toc": {
+"collapse": "subsection"
+}
+});
+});
+</script>
+
+<!-- dynamically load mathjax for compatibility with self-contained -->
+<script>
+  (function () {
+    var script = document.createElement("script");
+    script.type = "text/javascript";
+    var src = "true";
+    if (src === "" || src === "true") src = "https://mathjax.rstudio.com/latest/MathJax.js?config=TeX-MML-AM_CHTML";
+    if (location.protocol !== "file:")
+      if (/^https?:/.test(src))
+        src = src.replace(/^https?:/, '');
+    script.src = src;
+    document.getElementsByTagName("head")[0].appendChild(script);
+  })();
+</script>
+</body>
+
+</html>

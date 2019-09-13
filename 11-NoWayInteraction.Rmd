@@ -100,6 +100,7 @@ And we can reproduce the results using the ANOVA_power function.
 ```{r}
 alpha_level <- 0.05 #We set the alpha level at 0.05. 
 power_result <- ANOVA_power(design_result, alpha_level = alpha_level, nsims = nsims)
+exact_result <- ANOVA_exact(design_result, alpha_level = alpha_level)
 ```
 
 We see we get the same power for the anova_fruit:hunger interaction and for the simple effect p_fruit_apple_hunger_very hungry_fruit_banana_hunger_very hungry as the simulations by Uri Simonsohn in his blog post. 
@@ -128,6 +129,7 @@ design_result <- ANOVA_design(design = string,
                    labelnames = labelnames)
 alpha_level <- 0.05 #We set the alpha level at 0.05. 
 power_result <- ANOVA_power(design_result, alpha_level = alpha_level, nsims = nsims)
+exact_result <- ANOVA_exact(design_result, alpha_level = alpha_level)
 ```
 
 And changing the sample size to 300 should reproduce the power for the interaction in the ANOVA. 
@@ -147,6 +149,7 @@ design_result <- ANOVA_design(design = string,
                    labelnames = labelnames)
 alpha_level <- 0.05 #We set the alpha level at 0.05. 
 power_result <- ANOVA_power(design_result, alpha_level = alpha_level, nsims = nsims)
+exact_result <- ANOVA_exact(design_result, alpha_level = alpha_level)
 ```
 
 Now if we look at the power analysis table for the last simulation, we see that the power for the ANOVA is the same for the main effect of fruit, the main effect of hunger, and the main effect of the interaction. All the effect sizes are equal as well. We can understand why if we look at the means in a 2x2 table:
@@ -217,6 +220,7 @@ design_result <- ANOVA_design(design = string,
                    labelnames = labelnames)
 alpha_level <- 0.05 #We set the alpha level at 0.05. 
 power_result <- ANOVA_power(design_result, alpha_level = alpha_level, nsims = nsims)
+exact_result <- ANOVA_exact(design_result, alpha_level = alpha_level)
 ```
 
 We can also reproduce the power analysis using the anlytic function:

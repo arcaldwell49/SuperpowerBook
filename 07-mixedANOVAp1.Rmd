@@ -8,7 +8,7 @@ We can simulate a Two-Way ANOVA with a specific alpha, sample size and effect si
 
 For the 2-way interaction, the result should be a power of 91.25% is we have a total samplesize of 46. Since we have 2 groups in the between factor that means the sample size per group is 2 (and both these groups collect 2 repeated measures). 
 
-```{r}
+```{r start_mixedANOVA}
 mu <- c(-0.25, 0.25, 0.25, -0.25)
 n <- 23
 sd <- 1
@@ -23,6 +23,7 @@ design_result <- ANOVA_design(design = string,
                               r = r, 
                               labelnames = labelnames)
 simulation_result <- ANOVA_power(design_result, alpha = 0.05, nsims = nsims)
+exact_result <- ANOVA_exact(design_result, alpha_level = alpha_level)
 ```
 
 ### Two by two ANOVA, within-between design Variation 1
@@ -47,4 +48,5 @@ design_result <- ANOVA_design(design = string,
                               r = r, 
                               labelnames = labelnames)
 simulation_result <- ANOVA_power(design_result, alpha = 0.05, nsims = nsims)
+exact_result <- ANOVA_exact(design_result, alpha_level = alpha_level)
 ```

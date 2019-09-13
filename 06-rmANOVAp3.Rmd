@@ -1,4 +1,4 @@
-## Repeated Measures-ANOVA Part 3
+## Part 3
 
 We first repeat the simulation by Brysbaert:
 
@@ -75,7 +75,8 @@ design_result <- ANOVA_design(design = design,
                    sd = sd, 
                    r = r, 
                    labelnames = labelnames)
-ANOVA_power(design_result, nsims = nsims)
+simulation_result <- ANOVA_power(design_result, nsims = nsims)
+
 ```
 
 And we can again replicate this with the `ANOVA_exact` function.
@@ -84,7 +85,7 @@ And we can again replicate this with the `ANOVA_exact` function.
 ANOVA_exact(design_result)
 ```
 
-#Results
+### Results
 
 The results of the simulation are very similar. Power for the ANOVA *F*-test is around 95.2%. For the three paired t-tests, power is around 92.7. This is in line with the a-priori power analysis when using g*power:
 
@@ -108,7 +109,7 @@ The Cohen´s f is `r f`. We can enter the f (using the default 'as in G*Power 3.
 ![](screenshots/gpower_3.png)
 
 
-## Reproducing Brysbaert Variation 1 Changing Correlation
+### Reproducing Brysbaert Variation 1: Changing Correlation
 
 ```{r}
 # give sample size

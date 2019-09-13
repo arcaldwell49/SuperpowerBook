@@ -1,4 +1,4 @@
-## One-way ANOVA Part 2: Brysbaert example
+## Part 2
 
 
 ### Three conditions
@@ -23,7 +23,8 @@ design_result <- ANOVA_design(design = string,
 alpha_level <- 0.05
 # You should think carefully about how to justify your alpha level.
 # We will give some examples later, but for now, use 0.05.
-ANOVA_power(design_result, alpha_level = alpha_level, nsims = nsims)
+simulation_result <- ANOVA_power(design_result, alpha_level = alpha_level, nsims = nsims)
+exact_result <- ANOVA_exact(design_result, alpha_level = alpha_level)
 #should yield
 #0.3983064
 #0.5205162
@@ -99,7 +100,8 @@ design_result <- ANOVA_design(design = string,
                    mu = mu, 
                    sd = sd, 
                    labelnames = labelnames)
-ANOVA_power(design_result, alpha_level = alpha_level, nsims = nsims)
+simulation_result <- ANOVA_power(design_result, alpha_level = alpha_level, nsims = nsims)
+exact_result <- ANOVA_exact(design_result, alpha_level = alpha_level)
 ```
 
 The simulation confirms that for the *F*-test for the ANOVA we have 90% power. This is also what g*power tells us what would happen based on a post-hoc power analysis with an f of 0.2934417, 3 groups, 150 participants in total (50 in each between subject condition), and an alpha of 5%. 

@@ -1,25 +1,6 @@
-# Validation of effect size estimates for One-Way ANOVA
+# Validation of Effect Size Estimates for One-Way ANOVA
 
 Using the formulas below, we can calculate the means for between designs with one factor (One-Way ANOVA). Using the formula also used in Albers & Lakens (2018), we can determine the means that should yield a specified effect sizes (expressed in Cohen's f).
-
-```{r}
-mu_from_ES <- function(K, ES){ # provides the vector of population means for a given population ES and nr of groups
-  f2 <- ES / (1 - ES)
-  if (K == 2) {
-  a <- sqrt(f2)
-  muvec <- c(-a, a)
-  }
-  if (K == 3) {
-  a <- sqrt(3 * f2 / 2)
-  muvec <- c(-a, 0, a)
-  }
-  if (K == 4) {
-  a <- sqrt(f2)
-  muvec <- c(-a,-a, a, a)
-  } # note: function gives error when K not 2,3,4. But we don't need other K.
-  return(muvec)
-}
-```
 
 Eta-squared (idential to partial eta-squared for One-Way ANOVA's) has benchmarks of .0099, .0588, and .1379 for small, medium, and large effect sizes (cohen, 1988). 
 
@@ -27,7 +8,7 @@ Eta-squared (idential to partial eta-squared for One-Way ANOVA's) has benchmarks
 
 We can simulate a one-factor anova setting means to achieve a certain effect size. Eta-squared is biased. Thus, the eta-squared we calculate based on the observed data overestimates the population effect size. This bias is largest for smaller sample sizes. Thus, to test whether the simulation yields the expected effect size, we use extremele large sample sizes in each between subject condition (n = 5000). This simulation should yield a small effect size (0.099)
 
-```{r}
+```{r effect_size}
 K <- 3
 ES <- .0099
 mu <- mu_from_ES(K = K, ES = ES)
@@ -44,7 +25,8 @@ design_result <- ANOVA_design(design = string,
                    sd = sd, 
                    r = r, 
                    labelnames = c("factor1", "level1", "level2", "level3"))
-ANOVA_power(design_result, nsims = nsims)
+simulation_result <- ANOVA_power(design_result, nsims = nsims)
+exact_result <- ANOVA_exact(design_result, alpha_level = alpha_level)
 ```
 
 The resulting effect size estimate from the simulation is very close to 0.0099
@@ -72,7 +54,8 @@ design_result <- ANOVA_design(design = string,
                    sd = sd, 
                    r = r, 
                    labelnames = c("factor1", "level1", "level2", "level3", "level4"))
-ANOVA_power(design_result, nsims = nsims)
+simulation_result <- ANOVA_power(design_result, nsims = nsims)
+exact_result <- ANOVA_exact(design_result, alpha_level = alpha_level)
 ```
 
 Results are very close to 0.588. 
@@ -98,7 +81,8 @@ design_result <- ANOVA_design(design = string,
                    sd = sd, 
                    r = r, 
                    labelnames = c("factor1", "level1", "level2"))
-ANOVA_power(design_result, nsims = nsims)
+simulation_result <- ANOVA_power(design_result, nsims = nsims)
+exact_result <- ANOVA_exact(design_result, alpha_level = alpha_level)
 ```
 
 The results are very close to is simulation should yield a small effect size (0.1379).

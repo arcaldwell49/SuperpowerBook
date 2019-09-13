@@ -67,7 +67,9 @@ design_result <- ANOVA_design(design = design,
                    r = r, 
                    labelnames = labelnames)
 alpha_level <- 0.05
-ANOVA_power(design_result, nsims = nsims)
+simulation_result <- ANOVA_power(design_result, nsims = nsims)
+
+exact_result <- ANOVA_exact(design_result, alpha_level = alpha_level)
 ```
 
 The results of the simulation are indeed very close to 96.9%. We can see this is in line with the power estimate from Gpower: 

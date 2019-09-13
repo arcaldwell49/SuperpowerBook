@@ -4,11 +4,11 @@
 
   <meta charset="utf-8" />
   <meta http-equiv="X-UA-Compatible" content="IE=edge" />
-  <title>Chapter 12 Setting the Correlation Matrix | Validation of Superpower</title>
+  <title>Chapter 8 Power Curve | Validation of Superpower</title>
   <meta name="description" content="This is a minimal example of using the bookdown package to write a book. The output format for this example is bookdown::gitbook." />
   <meta name="generator" content="bookdown 0.13 and GitBook 2.6.7" />
 
-  <meta property="og:title" content="Chapter 12 Setting the Correlation Matrix | Validation of Superpower" />
+  <meta property="og:title" content="Chapter 8 Power Curve | Validation of Superpower" />
   <meta property="og:type" content="book" />
   
   
@@ -16,7 +16,7 @@
   
 
   <meta name="twitter:card" content="summary" />
-  <meta name="twitter:title" content="Chapter 12 Setting the Correlation Matrix | Validation of Superpower" />
+  <meta name="twitter:title" content="Chapter 8 Power Curve | Validation of Superpower" />
   
   <meta name="twitter:description" content="This is a minimal example of using the bookdown package to write a book. The output format for this example is bookdown::gitbook." />
   
@@ -31,8 +31,8 @@
   <meta name="apple-mobile-web-app-status-bar-style" content="black" />
   
   
-<link rel="prev" href="power-for-design-variations.html"/>
-<link rel="next" href="validation-of-effect-size-estimates-for-one-way-anova.html"/>
+<link rel="prev" href="analytic-power-functions.html"/>
+<link rel="next" href="explore-increase-in-effect-size-for-moderated-interactions-.html"/>
 <script src="libs/jquery-2.2.3/jquery.min.js"></script>
 <link href="libs/gitbook-2.6.7/css/style.css" rel="stylesheet" />
 <link href="libs/gitbook-2.6.7/css/plugin-table.css" rel="stylesheet" />
@@ -211,55 +211,57 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
           <div class="page-inner">
 
             <section class="normal" id="section-">
-<div id="setting-the-correlation-matrix" class="section level1">
-<h1><span class="header-section-number">Chapter 12</span> Setting the Correlation Matrix</h1>
-<p>In a 2x2 design, with factors A and B, each with 2 levels, there are 6 possible comparisons that can be made.</p>
-<ol style="list-style-type: decimal">
-<li>A1 vs. A2</li>
-<li>A1 vs. B1</li>
-<li>A1 vs. B2</li>
-<li>A2 vs. B1</li>
-<li>A2 vs. B2</li>
-<li>B1 vs. B2</li>
-</ol>
-<p>The number of possible comparisons is the product of the levels of all factors squared minus the product of all factors, divided by two. For a 2x2 design where each factor has two levels, this is:</p>
-<div class="sourceCode" id="cb613"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb613-1" title="1">(((<span class="dv">2</span> <span class="op">*</span><span class="st"> </span><span class="dv">2</span>) <span class="op">^</span><span class="st"> </span><span class="dv">2</span>) <span class="op">-</span><span class="st"> </span>(<span class="dv">2</span> <span class="op">*</span><span class="st"> </span><span class="dv">2</span>))<span class="op">/</span><span class="dv">2</span></a></code></pre></div>
-<pre><code>## [1] 6</code></pre>
-<p>The number of possible comparisons increases rapidly when adding factors and levels for each factor. For example, for a 2x2x4 design it is:</p>
-<div class="sourceCode" id="cb615"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb615-1" title="1">(((<span class="dv">2</span> <span class="op">*</span><span class="st"> </span><span class="dv">2</span> <span class="op">*</span><span class="st"> </span><span class="dv">4</span>) <span class="op">^</span><span class="st"> </span><span class="dv">2</span>) <span class="op">-</span><span class="st"> </span>(<span class="dv">2</span> <span class="op">*</span><span class="st"> </span><span class="dv">2</span> <span class="op">*</span><span class="st"> </span><span class="dv">4</span>))<span class="op">/</span><span class="dv">2</span></a></code></pre></div>
-<pre><code>## [1] 120</code></pre>
-<p>Each of these comparisons can have their own correlation if the factor is manipulated within subjects (if the factor is manipulated between subjects the correlation is 0). These correlations determine the covariance matrix. Potvin and Schutz (2000) surveyed statistical tools for power analysis and conclude that most software packages are limited to one factor repeated measure designs and do not provide power calculations for within designs with multiple factor (which is still true for software such as G*Power). Furthermore, software solutions which were available at the time (DATASIM by Bradley, Russel, &amp; Reeve, 1996) required researchers to assume correlations were of the same magnitude for all within factors, which is not always realistic. If you do not want to assume equal correlations for all paired comparisons, you can specify the correlation for each possible comparison.</p>
-<p>The order in which the correlations are entered in the vector should match the covariance matrix.
-The order for a 2x2 design is given in the 6 item list above. The general pattern is that the matrix is filled from top to bottom, and left to right, illustrated by the increasing correlations in the table below.</p>
-<pre><code>         a1_b1           a1_b2           a2_b1           a2_b2</code></pre>
-<p>a1_b1 1.00 0.91 0.92 0.93
-a1_b2 0.91 1.00 0.94 0.95
-a2_b1 0.92 0.94 1.00 0.96
-a2_b2 0.93 0.95 0.9 1.00</p>
-<p>The diagonal is generated dynamically (based on the standard deviation).</p>
-<p>We would enter this correlation matrix as:</p>
-<div class="sourceCode" id="cb618"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb618-1" title="1">design_result &lt;-<span class="st"> </span><span class="kw">ANOVA_design</span>(<span class="dt">design =</span> <span class="st">&quot;2w*2w&quot;</span>,</a>
-<a class="sourceLine" id="cb618-2" title="2">                              <span class="dt">n =</span> <span class="dv">80</span>,</a>
-<a class="sourceLine" id="cb618-3" title="3">                              <span class="dt">mu =</span> <span class="kw">c</span>(<span class="fl">1.1</span>, <span class="fl">1.2</span>, <span class="fl">1.3</span>, <span class="fl">1.4</span>),</a>
-<a class="sourceLine" id="cb618-4" title="4">                              <span class="dt">sd =</span> <span class="dv">1</span>,</a>
-<a class="sourceLine" id="cb618-5" title="5">                              r &lt;-<span class="st"> </span><span class="kw">c</span>(<span class="fl">0.91</span>, <span class="fl">0.92</span>, <span class="fl">0.93</span>, <span class="fl">0.94</span>, <span class="fl">0.95</span>, <span class="fl">0.96</span>),</a>
-<a class="sourceLine" id="cb618-6" title="6">                              <span class="dt">labelnames =</span> <span class="kw">c</span>(<span class="st">&quot;color&quot;</span>, <span class="st">&quot;red&quot;</span>, <span class="st">&quot;blue&quot;</span>, <span class="st">&quot;speed&quot;</span>, <span class="st">&quot;fast&quot;</span>, <span class="st">&quot;slow&quot;</span>))</a></code></pre></div>
-<p>We can check the correlation matrix by asking for it from the design_result object to check if it was entered the way we wanted:</p>
-<div class="sourceCode" id="cb619"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb619-1" title="1">design_result<span class="op">$</span>cor_mat</a></code></pre></div>
-<pre><code>##           red_fast red_slow blue_fast blue_slow
-## red_fast      1.00     0.91      0.92      0.93
-## red_slow      0.91     1.00      0.94      0.95
-## blue_fast     0.92     0.94      1.00      0.96
-## blue_slow     0.93     0.95      0.96      1.00</code></pre>
-
+<div id="power-curve" class="section level1">
+<h1><span class="header-section-number">Chapter 8</span> Power Curve</h1>
+<p>Power is calculated for a specific value of an effect size, alpha level, and sample size. Because you often do not know the true effect size, it often makes more sense to think of the power curve as a function of the size of the effect. Although power curves can be calculated based on simulations for any design, we will use the analytic solution to calculate the power of ANOVA designs because these calculations are much faster. The basic approach is to calculate power for a specific pattern of means, a specific effect size, a given alpha level, and a specific pattern of correlations. This is one example:</p>
+<div class="sourceCode" id="cb336"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb336-1" title="1"><span class="co">#2x2 design</span></a>
+<a class="sourceLine" id="cb336-2" title="2">string =<span class="st"> &quot;2w*2w&quot;</span></a>
+<a class="sourceLine" id="cb336-3" title="3">mu =<span class="st"> </span><span class="kw">c</span>(<span class="dv">0</span>,<span class="dv">0</span>,<span class="dv">0</span>,<span class="fl">0.5</span>)</a>
+<a class="sourceLine" id="cb336-4" title="4">n &lt;-<span class="st"> </span><span class="dv">20</span></a>
+<a class="sourceLine" id="cb336-5" title="5">sd &lt;-<span class="st"> </span><span class="dv">1</span></a>
+<a class="sourceLine" id="cb336-6" title="6">r &lt;-<span class="st"> </span><span class="fl">0.5</span></a>
+<a class="sourceLine" id="cb336-7" title="7">labelnames =<span class="st"> </span><span class="kw">c</span>(<span class="st">&quot;A&quot;</span>, <span class="st">&quot;a1&quot;</span>, <span class="st">&quot;a2&quot;</span>, <span class="st">&quot;B&quot;</span>, <span class="st">&quot;b1&quot;</span>, <span class="st">&quot;b2&quot;</span>)</a>
+<a class="sourceLine" id="cb336-8" title="8"></a>
+<a class="sourceLine" id="cb336-9" title="9">design_result &lt;-<span class="st"> </span><span class="kw">ANOVA_design</span>(<span class="dt">design =</span> string,</a>
+<a class="sourceLine" id="cb336-10" title="10">                              <span class="dt">n =</span> n, </a>
+<a class="sourceLine" id="cb336-11" title="11">                              <span class="dt">mu =</span> mu, </a>
+<a class="sourceLine" id="cb336-12" title="12">                              <span class="dt">sd =</span> sd, </a>
+<a class="sourceLine" id="cb336-13" title="13">                              <span class="dt">r =</span> r, </a>
+<a class="sourceLine" id="cb336-14" title="14">                              <span class="dt">labelnames =</span> labelnames)</a>
+<a class="sourceLine" id="cb336-15" title="15"></a>
+<a class="sourceLine" id="cb336-16" title="16">power_res &lt;-<span class="st"> </span><span class="kw">ANOVA_exact</span>(design_result)</a></code></pre></div>
+<pre><code>## Power and Effect sizes for ANOVA tests
+##     power partial_eta_squared cohen_f non_centrality
+## A   32.36              0.1163  0.3627            2.5
+## B   32.36              0.1163  0.3627            2.5
+## A:B 32.36              0.1163  0.3627            2.5
+## 
+## Power and Effect sizes for contrasts
+##                       power effect_size
+## p_A_a1_B_b1_A_a1_B_b2  5.00         0.0
+## p_A_a1_B_b1_A_a2_B_b1  5.00         0.0
+## p_A_a1_B_b1_A_a2_B_b2 56.45         0.5
+## p_A_a1_B_b2_A_a2_B_b1  5.00         0.0
+## p_A_a1_B_b2_A_a2_B_b2 56.45         0.5
+## p_A_a2_B_b1_A_a2_B_b2 56.45         0.5</code></pre>
+<div class="sourceCode" id="cb338"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb338-1" title="1">power_res<span class="op">$</span>main_results</a></code></pre></div>
+<pre><code>##     power partial_eta_squared cohen_f non_centrality
+## A   32.36              0.1163  0.3627            2.5
+## B   32.36              0.1163  0.3627            2.5
+## A:B 32.36              0.1163  0.3627            2.5</code></pre>
+<p>We can make these calculations for a range of sample sizes, to get a power curve. We created a simple function that performs these calculations across a range of sample sizes (from n = 3 to max_, a variable you can specify in the function).</p>
+<div class="sourceCode" id="cb340"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb340-1" title="1">p_a &lt;-<span class="st"> </span><span class="kw">plot_power</span>(design_result,</a>
+<a class="sourceLine" id="cb340-2" title="2">                      <span class="dt">max_n =</span> <span class="dv">50</span>)</a>
+<a class="sourceLine" id="cb340-3" title="3">p_a<span class="op">$</span>plot_ANOVA</a></code></pre></div>
+<p><img src="SuperpowerValidation_files/figure-html/unnamed-chunk-93-1.png" width="672" /></p>
 </div>
             </section>
 
           </div>
         </div>
       </div>
-<a href="power-for-design-variations.html" class="navigation navigation-prev " aria-label="Previous page"><i class="fa fa-angle-left"></i></a>
-<a href="validation-of-effect-size-estimates-for-one-way-anova.html" class="navigation navigation-next " aria-label="Next page"><i class="fa fa-angle-right"></i></a>
+<a href="analytic-power-functions.html" class="navigation navigation-prev " aria-label="Previous page"><i class="fa fa-angle-left"></i></a>
+<a href="explore-increase-in-effect-size-for-moderated-interactions-.html" class="navigation navigation-next " aria-label="Next page"><i class="fa fa-angle-right"></i></a>
     </div>
   </div>
 <script src="libs/gitbook-2.6.7/js/app.min.js"></script>

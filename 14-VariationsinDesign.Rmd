@@ -4,7 +4,7 @@ Researchers might consider what the effects on the statistical power of their de
 
 In a One-Way ANOVA adding a condition means, for example, going from a 1x2 to a 1x3 design. For example, in addition to a control and intensive training condition, we add a light training condition. 
 
-```{r}
+```{r variations_in_design}
 string <- "2b"
 n <- 50
 mu <- c(80, 86) #All means are equal - so there is no real difference.
@@ -20,7 +20,8 @@ power_oneway_between(design_result)$power
 power_oneway_between(design_result)$Cohen_f
 power_oneway_between(design_result)$eta_p_2
 
-ANOVA_power(design_result, nsims = nsims)
+sim_result <- ANOVA_power(design_result, nsims = nsims)
+exact_result <- ANOVA_exact(design_result)
 ```
 
 We now addd a condition. Let's assume the 'light training' condition falls in between the other two means. 
@@ -48,6 +49,8 @@ design_result <- ANOVA_design(design = string,
 power_oneway_between(design_result)$power
 power_oneway_between(design_result)$Cohen_f
 power_oneway_between(design_result)$eta_p_2
+
+exact_result <- ANOVA_exact(design_result)
 
 ```
 
@@ -187,6 +190,8 @@ design_result <- ANOVA_design(design = string,
                    sd = sd, 
                    labelnames = labelnames)
 power_oneway_within(design_result)$power
+
+exact_result <- ANOVA_exact(design_result)
 ```
 
 We see power is ever so slightly less than for the between subject design. This is due to the loss in degrees of freedom, which is 2(n-1) for between designs, and n-1 for within designs. But as the correlation increases, the power advantage of within designs becomes stronger. 
@@ -203,6 +208,8 @@ design_result <- ANOVA_design(design = string,
                    sd = sd, 
                    labelnames = labelnames)
 power_oneway_within(design_result)$power
+
+exact_result <- ANOVA_exact(design_result)
 ```
 
 When we add a a condition in a within design where we expect the mean to be identical to the grand mean, we again see that the power decreases. This similarly shows that adding a condition that equals the grand mean to a within subject design does not come for free, but has a power cost. 
