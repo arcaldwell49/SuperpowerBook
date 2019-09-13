@@ -1,0 +1,631 @@
+<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml" lang="" xml:lang="">
+<head>
+
+  <meta charset="utf-8" />
+  <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+  <title>Chapter 16 Analytic Power for Three-way Interactions | Validation of Superpower</title>
+  <meta name="description" content="This is a minimal example of using the bookdown package to write a book. The output format for this example is bookdown::gitbook." />
+  <meta name="generator" content="bookdown 0.10 and GitBook 2.6.7" />
+
+  <meta property="og:title" content="Chapter 16 Analytic Power for Three-way Interactions | Validation of Superpower" />
+  <meta property="og:type" content="book" />
+  
+  
+  <meta property="og:description" content="This is a minimal example of using the bookdown package to write a book. The output format for this example is bookdown::gitbook." />
+  
+
+  <meta name="twitter:card" content="summary" />
+  <meta name="twitter:title" content="Chapter 16 Analytic Power for Three-way Interactions | Validation of Superpower" />
+  
+  <meta name="twitter:description" content="This is a minimal example of using the bookdown package to write a book. The output format for this example is bookdown::gitbook." />
+  
+
+<meta name="author" content="Aaron Caldwell &amp; Daniël Lakens" />
+
+
+<meta name="date" content="2019-09-12" />
+
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <meta name="apple-mobile-web-app-capable" content="yes" />
+  <meta name="apple-mobile-web-app-status-bar-style" content="black" />
+  
+  
+<link rel="prev" href="explore-increase-in-effect-size-for-moderated-interactions-.html">
+<link rel="next" href="power-for-design-variations.html">
+<script src="libs/jquery-2.2.3/jquery.min.js"></script>
+<link href="libs/gitbook-2.6.7/css/style.css" rel="stylesheet" />
+<link href="libs/gitbook-2.6.7/css/plugin-table.css" rel="stylesheet" />
+<link href="libs/gitbook-2.6.7/css/plugin-bookdown.css" rel="stylesheet" />
+<link href="libs/gitbook-2.6.7/css/plugin-highlight.css" rel="stylesheet" />
+<link href="libs/gitbook-2.6.7/css/plugin-search.css" rel="stylesheet" />
+<link href="libs/gitbook-2.6.7/css/plugin-fontsettings.css" rel="stylesheet" />
+
+
+
+
+
+
+
+
+
+<style type="text/css">
+a.sourceLine { display: inline-block; line-height: 1.25; }
+a.sourceLine { pointer-events: none; color: inherit; text-decoration: inherit; }
+a.sourceLine:empty { height: 1.2em; }
+.sourceCode { overflow: visible; }
+code.sourceCode { white-space: pre; position: relative; }
+div.sourceCode { margin: 1em 0; }
+pre.sourceCode { margin: 0; }
+@media screen {
+div.sourceCode { overflow: auto; }
+}
+@media print {
+code.sourceCode { white-space: pre-wrap; }
+a.sourceLine { text-indent: -1em; padding-left: 1em; }
+}
+pre.numberSource a.sourceLine
+  { position: relative; left: -4em; }
+pre.numberSource a.sourceLine::before
+  { content: attr(title);
+    position: relative; left: -1em; text-align: right; vertical-align: baseline;
+    border: none; pointer-events: all; display: inline-block;
+    -webkit-touch-callout: none; -webkit-user-select: none;
+    -khtml-user-select: none; -moz-user-select: none;
+    -ms-user-select: none; user-select: none;
+    padding: 0 4px; width: 4em;
+    color: #aaaaaa;
+  }
+pre.numberSource { margin-left: 3em; border-left: 1px solid #aaaaaa;  padding-left: 4px; }
+div.sourceCode
+  {  }
+@media screen {
+a.sourceLine::before { text-decoration: underline; }
+}
+code span.al { color: #ff0000; font-weight: bold; } /* Alert */
+code span.an { color: #60a0b0; font-weight: bold; font-style: italic; } /* Annotation */
+code span.at { color: #7d9029; } /* Attribute */
+code span.bn { color: #40a070; } /* BaseN */
+code span.bu { } /* BuiltIn */
+code span.cf { color: #007020; font-weight: bold; } /* ControlFlow */
+code span.ch { color: #4070a0; } /* Char */
+code span.cn { color: #880000; } /* Constant */
+code span.co { color: #60a0b0; font-style: italic; } /* Comment */
+code span.cv { color: #60a0b0; font-weight: bold; font-style: italic; } /* CommentVar */
+code span.do { color: #ba2121; font-style: italic; } /* Documentation */
+code span.dt { color: #902000; } /* DataType */
+code span.dv { color: #40a070; } /* DecVal */
+code span.er { color: #ff0000; font-weight: bold; } /* Error */
+code span.ex { } /* Extension */
+code span.fl { color: #40a070; } /* Float */
+code span.fu { color: #06287e; } /* Function */
+code span.im { } /* Import */
+code span.in { color: #60a0b0; font-weight: bold; font-style: italic; } /* Information */
+code span.kw { color: #007020; font-weight: bold; } /* Keyword */
+code span.op { color: #666666; } /* Operator */
+code span.ot { color: #007020; } /* Other */
+code span.pp { color: #bc7a00; } /* Preprocessor */
+code span.sc { color: #4070a0; } /* SpecialChar */
+code span.ss { color: #bb6688; } /* SpecialString */
+code span.st { color: #4070a0; } /* String */
+code span.va { color: #19177c; } /* Variable */
+code span.vs { color: #4070a0; } /* VerbatimString */
+code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warning */
+</style>
+
+<link rel="stylesheet" href="style.css" type="text/css" />
+</head>
+
+<body>
+
+
+
+  <div class="book without-animation with-summary font-size-2 font-family-1" data-basepath=".">
+
+    <div class="book-summary">
+      <nav role="navigation">
+
+<ul class="summary">
+<li><a href="./">A Minimal Book Example</a></li>
+
+<li class="divider"></li>
+<li class="chapter" data-level="1" data-path="index.html"><a href="index.html"><i class="fa fa-check"></i><b>1</b> Introduction</a></li>
+<li class="chapter" data-level="2" data-path="intro.html"><a href="intro.html"><i class="fa fa-check"></i><b>2</b> One-way ANOVA Part 1</a><ul>
+<li class="chapter" data-level="2.1" data-path="intro.html"><a href="intro.html#validation-of-power-in-one-way-anova"><i class="fa fa-check"></i><b>2.1</b> Validation of Power in One-Way ANOVA</a></li>
+<li class="chapter" data-level="2.2" data-path="intro.html"><a href="intro.html#two-conditions"><i class="fa fa-check"></i><b>2.2</b> Two conditions</a></li>
+</ul></li>
+<li class="chapter" data-level="3" data-path="one-way-anova-part-2.html"><a href="one-way-anova-part-2.html"><i class="fa fa-check"></i><b>3</b> One-way ANOVA Part 2</a><ul>
+<li class="chapter" data-level="3.1" data-path="one-way-anova-part-2.html"><a href="one-way-anova-part-2.html#validation-of-power-in-one-way-anova-with-brysbaert-example"><i class="fa fa-check"></i><b>3.1</b> Validation of Power in One-Way ANOVA with Brysbaert example</a><ul>
+<li class="chapter" data-level="3.1.1" data-path="one-way-anova-part-2.html"><a href="one-way-anova-part-2.html#three-conditions"><i class="fa fa-check"></i><b>3.1.1</b> Three conditions</a></li>
+</ul></li>
+<li class="chapter" data-level="3.2" data-path="one-way-anova-part-2.html"><a href="one-way-anova-part-2.html#power-for-simple-effects"><i class="fa fa-check"></i><b>3.2</b> Power for simple effects</a></li>
+</ul></li>
+<li class="chapter" data-level="4" data-path="one-way-anova-part-3.html"><a href="one-way-anova-part-3.html"><i class="fa fa-check"></i><b>4</b> One-way ANOVA Part 3</a><ul>
+<li class="chapter" data-level="4.1" data-path="one-way-anova-part-3.html"><a href="one-way-anova-part-3.html#three-conditions-replication"><i class="fa fa-check"></i><b>4.1</b> Three conditions replication</a></li>
+<li class="chapter" data-level="4.2" data-path="one-way-anova-part-3.html"><a href="one-way-anova-part-3.html#variation-1"><i class="fa fa-check"></i><b>4.2</b> Variation 1</a></li>
+<li class="chapter" data-level="4.3" data-path="one-way-anova-part-3.html"><a href="one-way-anova-part-3.html#three-conditions-replication-1"><i class="fa fa-check"></i><b>4.3</b> Three conditions replication</a></li>
+<li class="chapter" data-level="4.4" data-path="one-way-anova-part-3.html"><a href="one-way-anova-part-3.html#variation-2"><i class="fa fa-check"></i><b>4.4</b> Variation 2</a></li>
+<li class="chapter" data-level="4.5" data-path="one-way-anova-part-3.html"><a href="one-way-anova-part-3.html#three-conditions-replication-2"><i class="fa fa-check"></i><b>4.5</b> Three conditions replication</a></li>
+</ul></li>
+<li class="chapter" data-level="5" data-path="repeated-measures-anova-part-1.html"><a href="repeated-measures-anova-part-1.html"><i class="fa fa-check"></i><b>5</b> Repeated Measures-ANOVA Part 1</a><ul>
+<li class="chapter" data-level="5.1" data-path="repeated-measures-anova-part-1.html"><a href="repeated-measures-anova-part-1.html#two-conditions-medium-effect-size"><i class="fa fa-check"></i><b>5.1</b> Two conditions, medium effect size</a></li>
+</ul></li>
+<li class="chapter" data-level="6" data-path="repeated-measures-anova-part-2.html"><a href="repeated-measures-anova-part-2.html"><i class="fa fa-check"></i><b>6</b> Repeated Measures-ANOVA Part 2</a><ul>
+<li class="chapter" data-level="6.1" data-path="repeated-measures-anova-part-2.html"><a href="repeated-measures-anova-part-2.html#the-relation-between-cohens-f-and-cohens-d"><i class="fa fa-check"></i><b>6.1</b> The relation between Cohen’s f and Cohen’s d</a></li>
+<li class="chapter" data-level="6.2" data-path="repeated-measures-anova-part-2.html"><a href="repeated-measures-anova-part-2.html#three-within-conditions-medium-effect-size"><i class="fa fa-check"></i><b>6.2</b> Three within conditions, medium effect size</a></li>
+</ul></li>
+<li class="chapter" data-level="7" data-path="repeated-measures-anova-part-3.html"><a href="repeated-measures-anova-part-3.html"><i class="fa fa-check"></i><b>7</b> Repeated Measures-ANOVA Part 3</a><ul>
+<li class="chapter" data-level="7.1" data-path="repeated-measures-anova-part-3.html"><a href="repeated-measures-anova-part-3.html#reproducing-brysbaert"><i class="fa fa-check"></i><b>7.1</b> Reproducing Brysbaert</a></li>
+<li class="chapter" data-level="7.2" data-path="repeated-measures-anova-part-3.html"><a href="repeated-measures-anova-part-3.html#reproducing-brysbaert-variation-1-changing-correlation"><i class="fa fa-check"></i><b>7.2</b> Reproducing Brysbaert Variation 1 Changing Correlation</a></li>
+</ul></li>
+<li class="chapter" data-level="8" data-path="mixed-anova-part-1.html"><a href="mixed-anova-part-1.html"><i class="fa fa-check"></i><b>8</b> Mixed ANOVA Part 1</a><ul>
+<li class="chapter" data-level="8.1" data-path="mixed-anova-part-1.html"><a href="mixed-anova-part-1.html#two-by-two-anova-within-between-design"><i class="fa fa-check"></i><b>8.1</b> Two by two ANOVA, within-between design</a></li>
+<li class="chapter" data-level="8.2" data-path="mixed-anova-part-1.html"><a href="mixed-anova-part-1.html#two-by-two-anova-within-between-design-variation-1"><i class="fa fa-check"></i><b>8.2</b> Two by two ANOVA, within-between design Variation 1</a></li>
+</ul></li>
+<li class="chapter" data-level="9" data-path="mixed-anova-part-2.html"><a href="mixed-anova-part-2.html"><i class="fa fa-check"></i><b>9</b> Mixed ANOVA Part 2</a><ul>
+<li class="chapter" data-level="9.1" data-path="mixed-anova-part-2.html"><a href="mixed-anova-part-2.html#two-by-two-anova-within-within-design"><i class="fa fa-check"></i><b>9.1</b> Two by two ANOVA, within-within design</a></li>
+<li class="chapter" data-level="9.2" data-path="mixed-anova-part-2.html"><a href="mixed-anova-part-2.html#examine-variation-of-means-and-correlation"><i class="fa fa-check"></i><b>9.2</b> Examine variation of means and correlation</a></li>
+</ul></li>
+<li class="chapter" data-level="10" data-path="mixed-anova-part-3.html"><a href="mixed-anova-part-3.html"><i class="fa fa-check"></i><b>10</b> Mixed ANOVA Part 3</a><ul>
+<li class="chapter" data-level="10.1" data-path="mixed-anova-part-3.html"><a href="mixed-anova-part-3.html#two-by-two-anova-within-design"><i class="fa fa-check"></i><b>10.1</b> Two by two ANOVA, within design</a></li>
+<li class="chapter" data-level="10.2" data-path="mixed-anova-part-3.html"><a href="mixed-anova-part-3.html#simple-example-2x2-within-design"><i class="fa fa-check"></i><b>10.2</b> Simple example: 2x2 within design</a></li>
+</ul></li>
+<li class="chapter" data-level="11" data-path="error-control-in-exploratory-anova.html"><a href="error-control-in-exploratory-anova.html"><i class="fa fa-check"></i><b>11</b> Error Control in Exploratory ANOVA</a></li>
+<li class="chapter" data-level="12" data-path="power-in-interactions.html"><a href="power-in-interactions.html"><i class="fa fa-check"></i><b>12</b> Power in Interactions</a></li>
+<li class="chapter" data-level="13" data-path="analytic-power-functions.html"><a href="analytic-power-functions.html"><i class="fa fa-check"></i><b>13</b> Analytic Power Functions</a><ul>
+<li class="chapter" data-level="13.1" data-path="analytic-power-functions.html"><a href="analytic-power-functions.html#one-way-between-subject-anova"><i class="fa fa-check"></i><b>13.1</b> One-Way Between Subject ANOVA</a></li>
+<li class="chapter" data-level="13.2" data-path="analytic-power-functions.html"><a href="analytic-power-functions.html#two-way-between-subject-interaction"><i class="fa fa-check"></i><b>13.2</b> Two-way Between Subject Interaction</a></li>
+<li class="chapter" data-level="13.3" data-path="analytic-power-functions.html"><a href="analytic-power-functions.html#x3-between-subject-anova"><i class="fa fa-check"></i><b>13.3</b> 3x3 Between Subject ANOVA</a></li>
+<li class="chapter" data-level="13.4" data-path="analytic-power-functions.html"><a href="analytic-power-functions.html#two-by-two-anova-within-design-1"><i class="fa fa-check"></i><b>13.4</b> Two by two ANOVA, within design</a></li>
+</ul></li>
+<li class="chapter" data-level="14" data-path="power-curves.html"><a href="power-curves.html"><i class="fa fa-check"></i><b>14</b> Power curves</a></li>
+<li class="chapter" data-level="15" data-path="explore-increase-in-effect-size-for-moderated-interactions-.html"><a href="explore-increase-in-effect-size-for-moderated-interactions-.html"><i class="fa fa-check"></i><b>15</b> Explore increase in effect size for moderated interactions.</a><ul>
+<li class="chapter" data-level="15.1" data-path="explore-increase-in-effect-size-for-moderated-interactions-.html"><a href="explore-increase-in-effect-size-for-moderated-interactions-.html#explore-increase-in-effect-size-for-cross-over-interactions."><i class="fa fa-check"></i><b>15.1</b> Explore increase in effect size for cross-over interactions.</a></li>
+<li class="chapter" data-level="15.2" data-path="explore-increase-in-effect-size-for-moderated-interactions-.html"><a href="explore-increase-in-effect-size-for-moderated-interactions-.html#explore-increase-in-correlation-in-moderated-interactions."><i class="fa fa-check"></i><b>15.2</b> Explore increase in correlation in moderated interactions.</a></li>
+<li class="chapter" data-level="15.3" data-path="explore-increase-in-effect-size-for-moderated-interactions-.html"><a href="explore-increase-in-effect-size-for-moderated-interactions-.html#increasing-correlation-in-on-factor-decreases-power-in-second-factor"><i class="fa fa-check"></i><b>15.3</b> Increasing correlation in on factor decreases power in second factor</a></li>
+</ul></li>
+<li class="chapter" data-level="16" data-path="analytic-power-for-three-way-interactions.html"><a href="analytic-power-for-three-way-interactions.html"><i class="fa fa-check"></i><b>16</b> Analytic Power for Three-way Interactions</a></li>
+<li class="chapter" data-level="17" data-path="power-for-design-variations.html"><a href="power-for-design-variations.html"><i class="fa fa-check"></i><b>17</b> Power for Design Variations</a><ul>
+<li class="chapter" data-level="17.1" data-path="power-for-design-variations.html"><a href="power-for-design-variations.html#within-designs"><i class="fa fa-check"></i><b>17.1</b> Within Designs</a></li>
+</ul></li>
+<li class="chapter" data-level="18" data-path="setting-the-correlation-matrix.html"><a href="setting-the-correlation-matrix.html"><i class="fa fa-check"></i><b>18</b> Setting the Correlation Matrix</a></li>
+<li class="chapter" data-level="19" data-path="validation-of-effect-size-estimates-for-one-way-anova.html"><a href="validation-of-effect-size-estimates-for-one-way-anova.html"><i class="fa fa-check"></i><b>19</b> Validation of effect size estimates for One-Way ANOVA</a><ul>
+<li class="chapter" data-level="19.1" data-path="validation-of-effect-size-estimates-for-one-way-anova.html"><a href="validation-of-effect-size-estimates-for-one-way-anova.html#three-conditions-small-effect-size"><i class="fa fa-check"></i><b>19.1</b> Three conditions, small effect size</a></li>
+<li class="chapter" data-level="19.2" data-path="validation-of-effect-size-estimates-for-one-way-anova.html"><a href="validation-of-effect-size-estimates-for-one-way-anova.html#four-conditions-medium-effect-size"><i class="fa fa-check"></i><b>19.2</b> Four conditions, medium effect size</a></li>
+<li class="chapter" data-level="19.3" data-path="validation-of-effect-size-estimates-for-one-way-anova.html"><a href="validation-of-effect-size-estimates-for-one-way-anova.html#two-conditions-large-effect-size"><i class="fa fa-check"></i><b>19.3</b> Two conditions, large effect size</a></li>
+</ul></li>
+<li class="divider"></li>
+<li><a href="https://github.com/rstudio/bookdown" target="blank">Published with bookdown</a></li>
+
+</ul>
+
+      </nav>
+    </div>
+
+    <div class="book-body">
+      <div class="body-inner">
+        <div class="book-header" role="navigation">
+          <h1>
+            <i class="fa fa-circle-o-notch fa-spin"></i><a href="./">Validation of Superpower</a>
+          </h1>
+        </div>
+
+        <div class="page-wrapper" tabindex="-1" role="main">
+          <div class="page-inner">
+
+            <section class="normal" id="section-">
+<div id="analytic-power-for-three-way-interactions" class="section level1">
+<h1><span class="header-section-number">Chapter 16</span> Analytic Power for Three-way Interactions</h1>
+<p>There are almost no software solutions that allow researchers to perform power anaysis for more complex designs. Through simulation, it is relatively straightforward to examine the power for designs with multiple factors with many levels.</p>
+<p>Let’s start with a 2x2x2 between subjects design. We collect 50 participants in each between participant condition (so 400 participants in total - 50x2x2x2).</p>
+<pre class="sourceCode r"><code class="sourceCode r"><span class="co"># With 2x2x2 designs, the names for paired comparisons can become very long. </span>
+<span class="co"># So here I abbreviate terms: Size, Color, and Cognitive Load, have values:</span>
+<span class="co"># b = big, s = small, g = green, r = red, pres = present, abs = absent.  </span>
+labelnames &lt;-<span class="st"> </span><span class="kw">c</span>(<span class="st">&quot;Size&quot;</span>, <span class="st">&quot;b&quot;</span>, <span class="st">&quot;s&quot;</span>, <span class="st">&quot;Color&quot;</span>, <span class="st">&quot;g&quot;</span>, <span class="st">&quot;r&quot;</span>, 
+                <span class="st">&quot;Load&quot;</span>, <span class="st">&quot;pres&quot;</span>, <span class="st">&quot;abs&quot;</span>) <span class="co">#</span>
+design_result &lt;-<span class="st"> </span><span class="kw">ANOVA_design</span>(<span class="dt">design =</span> <span class="st">&quot;2b*2b*2b&quot;</span>, <span class="co">#describe the design</span>
+                              <span class="dt">n =</span> <span class="dv">50</span>, <span class="co">#sample size per group </span>
+                              <span class="dt">mu =</span> <span class="kw">c</span>(<span class="dv">2</span>, <span class="dv">2</span>, <span class="dv">6</span>, <span class="dv">1</span>, <span class="dv">6</span>, <span class="dv">6</span>, <span class="dv">1</span>, <span class="dv">8</span>), <span class="co">#pattern of means</span>
+                              <span class="dt">sd =</span> <span class="dv">10</span>, <span class="co">#standard deviation</span>
+                              <span class="dt">labelnames =</span> labelnames) <span class="co">#names of labels</span></code></pre>
+<p><img src="SuperpowerValidation_files/figure-html/unnamed-chunk-101-1.png" width="672" /></p>
+<pre class="sourceCode r"><code class="sourceCode r"><span class="co"># Power based on simulations</span>
+<span class="kw">ANOVA_power</span>(design_result, <span class="dt">nsims =</span> nsims)</code></pre>
+<pre><code>## Power and Effect sizes for ANOVA tests
+##                       power effect_size
+## anova_Size               63    0.016929
+## anova_Color               2    0.002308
+## anova_Load               10    0.003602
+## anova_Size:Color         31    0.007368
+## anova_Size:Load          86    0.024536
+## anova_Color:Load          4    0.002590
+## anova_Size:Color:Load    87    0.023564
+## 
+## Power and Effect sizes for contrasts
+##                                                     power effect_size
+## p_Size_b_Color_g_Load_pres_Size_b_Color_g_Load_abs      2    0.019598
+## p_Size_b_Color_g_Load_pres_Size_b_Color_r_Load_pres    50    0.402859
+## p_Size_b_Color_g_Load_pres_Size_b_Color_r_Load_abs      8   -0.089062
+## p_Size_b_Color_g_Load_pres_Size_s_Color_g_Load_pres    49    0.382984
+## p_Size_b_Color_g_Load_pres_Size_s_Color_g_Load_abs     49    0.410650
+## p_Size_b_Color_g_Load_pres_Size_s_Color_r_Load_pres     8   -0.099875
+## p_Size_b_Color_g_Load_pres_Size_s_Color_r_Load_abs     86    0.603041
+## p_Size_b_Color_g_Load_abs_Size_b_Color_r_Load_pres     48    0.385502
+## p_Size_b_Color_g_Load_abs_Size_b_Color_r_Load_abs       7   -0.108546
+## p_Size_b_Color_g_Load_abs_Size_s_Color_g_Load_pres     48    0.362219
+## p_Size_b_Color_g_Load_abs_Size_s_Color_g_Load_abs      49    0.391373
+## p_Size_b_Color_g_Load_abs_Size_s_Color_r_Load_pres     10   -0.118443
+## p_Size_b_Color_g_Load_abs_Size_s_Color_r_Load_abs      85    0.583840
+## p_Size_b_Color_r_Load_pres_Size_b_Color_r_Load_abs     69   -0.493544
+## p_Size_b_Color_r_Load_pres_Size_s_Color_g_Load_pres     8   -0.024318
+## p_Size_b_Color_r_Load_pres_Size_s_Color_g_Load_abs      3    0.005824
+## p_Size_b_Color_r_Load_pres_Size_s_Color_r_Load_pres    64   -0.501662
+## p_Size_b_Color_r_Load_pres_Size_s_Color_r_Load_abs     17    0.200785
+## p_Size_b_Color_r_Load_abs_Size_s_Color_g_Load_pres     63    0.475281
+## p_Size_b_Color_r_Load_abs_Size_s_Color_g_Load_abs      73    0.504676
+## p_Size_b_Color_r_Load_abs_Size_s_Color_r_Load_pres      5   -0.009259
+## p_Size_b_Color_r_Load_abs_Size_s_Color_r_Load_abs      93    0.697113
+## p_Size_s_Color_g_Load_pres_Size_s_Color_g_Load_abs      5    0.030724
+## p_Size_s_Color_g_Load_pres_Size_s_Color_r_Load_pres    69   -0.479548
+## p_Size_s_Color_g_Load_pres_Size_s_Color_r_Load_abs     23    0.226363
+## p_Size_s_Color_g_Load_abs_Size_s_Color_r_Load_pres     72   -0.507466
+## p_Size_s_Color_g_Load_abs_Size_s_Color_r_Load_abs      12    0.194912
+## p_Size_s_Color_r_Load_pres_Size_s_Color_r_Load_abs     92    0.698191</code></pre>
+<pre class="sourceCode r"><code class="sourceCode r"><span class="co">#Analytical power calculation</span>
+power_analytic &lt;-<span class="st"> </span><span class="kw">power_threeway_between</span>(design_result)
+power_analytic<span class="op">$</span>power_A</code></pre>
+<pre><code>## [1] 0.7033333</code></pre>
+<pre class="sourceCode r"><code class="sourceCode r">power_analytic<span class="op">$</span>power_B</code></pre>
+<pre><code>## [1] 0.05</code></pre>
+<pre class="sourceCode r"><code class="sourceCode r">power_analytic<span class="op">$</span>power_C</code></pre>
+<pre><code>## [1] 0.07895539</code></pre>
+<pre class="sourceCode r"><code class="sourceCode r">power_analytic<span class="op">$</span>power_AB</code></pre>
+<pre><code>## [1] 0.3217471</code></pre>
+<pre class="sourceCode r"><code class="sourceCode r">power_analytic<span class="op">$</span>power_AC</code></pre>
+<pre><code>## [1] 0.8491491</code></pre>
+<pre class="sourceCode r"><code class="sourceCode r">power_analytic<span class="op">$</span>power_BC</code></pre>
+<pre><code>## [1] 0.07895539</code></pre>
+<pre class="sourceCode r"><code class="sourceCode r">power_analytic<span class="op">$</span>power_ABC</code></pre>
+<pre><code>## [1] 0.8491491</code></pre>
+<pre class="sourceCode r"><code class="sourceCode r">power_analytic<span class="op">$</span>eta_p_<span class="dv">2</span>_A</code></pre>
+<pre><code>## [1] 0.01538462</code></pre>
+<pre class="sourceCode r"><code class="sourceCode r">power_analytic<span class="op">$</span>eta_p_<span class="dv">2</span>_B</code></pre>
+<pre><code>## [1] 0</code></pre>
+<pre class="sourceCode r"><code class="sourceCode r">power_analytic<span class="op">$</span>eta_p_<span class="dv">2</span>_C</code></pre>
+<pre><code>## [1] 0.0006246096</code></pre>
+<pre class="sourceCode r"><code class="sourceCode r">power_analytic<span class="op">$</span>eta_p_<span class="dv">2</span>_AB</code></pre>
+<pre><code>## [1] 0.005593536</code></pre>
+<pre class="sourceCode r"><code class="sourceCode r">power_analytic<span class="op">$</span>eta_p_<span class="dv">2</span>_AC</code></pre>
+<pre><code>## [1] 0.02200489</code></pre>
+<pre class="sourceCode r"><code class="sourceCode r">power_analytic<span class="op">$</span>eta_p_<span class="dv">2</span>_BC</code></pre>
+<pre><code>## [1] 0.0006246096</code></pre>
+<pre class="sourceCode r"><code class="sourceCode r">power_analytic<span class="op">$</span>eta_p_<span class="dv">2</span>_ABC</code></pre>
+<pre><code>## [1] 0.02200489</code></pre>
+<p>We can also confirm the power analysis in GPower. GPower allows you to compute the power for a three-way interaction - if you know the Cohen’s f value to enter. Cohen’s f is calculated based on the means for the interaction, the sum of squares of the effect, and the sum of squares of the errors. This is quite a challenge by hand, but we can simulate the results, or use the analytical solution we programmed to get Cohen’s f for the pattern of means that we specified.</p>
+<pre class="sourceCode r"><code class="sourceCode r"><span class="co"># The power for the AC interaction (Size x Load) is 0.873535. </span>
+power_analytic<span class="op">$</span>power_AC</code></pre>
+<pre><code>## [1] 0.8491491</code></pre>
+<pre class="sourceCode r"><code class="sourceCode r"><span class="co"># We can enter the Cohen&#39;s f for this interaction. </span>
+power_analytic<span class="op">$</span>Cohen_f_AC</code></pre>
+<pre><code>## [1] 0.15</code></pre>
+<pre class="sourceCode r"><code class="sourceCode r"><span class="co"># We can double check the calculated lambda</span>
+power_analytic<span class="op">$</span>lambda_AC</code></pre>
+<pre><code>## [1] 9</code></pre>
+<pre class="sourceCode r"><code class="sourceCode r"><span class="co"># We can double check the critical F value</span>
+power_analytic<span class="op">$</span>F_critical_AC</code></pre>
+<pre><code>## [1] 3.864929</code></pre>
+<p><img src="screenshots/gpower_8.png" /></p>
+<p>A Three-Way ANOVA builds on the same principles as a One_Way ANOVA. We look at whether the differences between groups are large, compared to the standard deviation. For the main effects we simply have 2 groups of 200 participants, and 2 means. If the population standard deviations are identical across groups, this is not in any way different from a One-Way ANOVA. Indeed, we can show this by simulating a One-Way ANOVA, where instead of 8 conditions, we have two conditions, and we average over the 4 groups of the other two factors. For example, for the main effect of size above can be computed analytically. There might be a small difference in the degrees of freedom of the two tests, or it is just random variation (And it will disappear when repeating the simulation 1000.000 times instead of 100.000.</p>
+<pre class="sourceCode r"><code class="sourceCode r">string &lt;-<span class="st"> &quot;2b&quot;</span>
+n &lt;-<span class="st"> </span><span class="dv">200</span>
+mu &lt;-<span class="st"> </span><span class="kw">c</span>(<span class="kw">mean</span>(<span class="kw">c</span>(<span class="dv">2</span>, <span class="dv">2</span>, <span class="dv">6</span>, <span class="dv">1</span>)), <span class="kw">mean</span>(<span class="kw">c</span>(<span class="dv">6</span>, <span class="dv">6</span>, <span class="dv">1</span>, <span class="dv">8</span>)))
+sd &lt;-<span class="st"> </span><span class="dv">10</span>
+labelnames &lt;-<span class="st"> </span><span class="kw">c</span>(<span class="st">&quot;Size&quot;</span>, <span class="st">&quot;big&quot;</span>, <span class="st">&quot;small&quot;</span>)
+design_result &lt;-<span class="st"> </span><span class="kw">ANOVA_design</span>(<span class="dt">design =</span> string,
+                   <span class="dt">n =</span> n, 
+                   <span class="dt">mu =</span> mu, 
+                   <span class="dt">sd =</span> sd, 
+                   <span class="dt">labelnames =</span> labelnames)</code></pre>
+<p><img src="SuperpowerValidation_files/figure-html/unnamed-chunk-103-1.png" width="672" /></p>
+<pre class="sourceCode r"><code class="sourceCode r"><span class="co"># Power based on simulations</span>
+<span class="kw">ANOVA_power</span>(design_result, <span class="dt">nsims =</span> nsims)</code></pre>
+<pre><code>## Power and Effect sizes for ANOVA tests
+##            power effect_size
+## anova_Size    77     0.01912
+## 
+## Power and Effect sizes for contrasts
+##                       power effect_size
+## p_Size_big_Size_small    77      0.2624</code></pre>
+<pre class="sourceCode r"><code class="sourceCode r"><span class="co"># Power based on analytical solution</span>
+<span class="kw">power_oneway_between</span>(design_result)<span class="op">$</span>power <span class="co">#using default alpha level of .05</span></code></pre>
+<pre><code>## [1] 0.7033333</code></pre>
+<p>Similarly, we can create a 2 factor design where we average over the third factor, and recreate the power analysis for the Two-Way interaction. For example, we can group over the Cognitive Load condition, and look at the Size by Color Interaction:</p>
+<pre class="sourceCode r"><code class="sourceCode r">string &lt;-<span class="st"> &quot;2b*2b&quot;</span>
+n &lt;-<span class="st"> </span><span class="dv">100</span>
+mu &lt;-<span class="st"> </span><span class="kw">c</span>(<span class="kw">mean</span>(<span class="kw">c</span>(<span class="dv">1</span>, <span class="dv">1</span>)), <span class="kw">mean</span>(<span class="kw">c</span>(<span class="dv">6</span>, <span class="dv">1</span>)), <span class="kw">mean</span>(<span class="kw">c</span>(<span class="dv">6</span>, <span class="dv">6</span>)), <span class="kw">mean</span>(<span class="kw">c</span>(<span class="dv">1</span>, <span class="dv">6</span>)))
+sd &lt;-<span class="st"> </span><span class="dv">10</span>
+labelnames &lt;-<span class="st"> </span><span class="kw">c</span>(<span class="st">&quot;Size&quot;</span>, <span class="st">&quot;big&quot;</span>, <span class="st">&quot;small&quot;</span>, <span class="st">&quot;Color&quot;</span>, <span class="st">&quot;green&quot;</span>, <span class="st">&quot;red&quot;</span>)
+design_result &lt;-<span class="st"> </span><span class="kw">ANOVA_design</span>(<span class="dt">design =</span> string,
+                   <span class="dt">n =</span> n, 
+                   <span class="dt">mu =</span> mu, 
+                   <span class="dt">sd =</span> sd, 
+                   <span class="dt">labelnames =</span> labelnames)</code></pre>
+<p><img src="SuperpowerValidation_files/figure-html/unnamed-chunk-104-1.png" width="672" /></p>
+<pre class="sourceCode r"><code class="sourceCode r"><span class="co"># Power based on simulations</span>
+<span class="kw">ANOVA_power</span>(design_result, <span class="dt">nsims =</span> nsims)</code></pre>
+<pre><code>## Power and Effect sizes for ANOVA tests
+##                  power effect_size
+## anova_Size          67    0.017473
+## anova_Color          3    0.002299
+## anova_Size:Color    72    0.017495
+## 
+## Power and Effect sizes for contrasts
+##                                               power effect_size
+## p_Size_big_Color_green_Size_big_Color_red        45    0.258803
+## p_Size_big_Color_green_Size_small_Color_green    92    0.500702
+## p_Size_big_Color_green_Size_small_Color_red      40    0.255210
+## p_Size_big_Color_red_Size_small_Color_green      37    0.242556
+## p_Size_big_Color_red_Size_small_Color_red         3   -0.000875
+## p_Size_small_Color_green_Size_small_Color_red    37   -0.244851</code></pre>
+<pre class="sourceCode r"><code class="sourceCode r"><span class="co"># Power based on analytical solution</span>
+power_res &lt;-<span class="st"> </span><span class="kw">power_twoway_between</span>(design_result) <span class="co">#using default alpha level of .05</span>
+power_res<span class="op">$</span>power_A</code></pre>
+<pre><code>## [1] 0.7033228</code></pre>
+<pre class="sourceCode r"><code class="sourceCode r">power_res<span class="op">$</span>power_B</code></pre>
+<pre><code>## [1] 0.05</code></pre>
+<pre class="sourceCode r"><code class="sourceCode r">power_res<span class="op">$</span>power_AB</code></pre>
+<pre><code>## [1] 0.7033228</code></pre>
+<pre class="sourceCode r"><code class="sourceCode r">string &lt;-<span class="st"> &quot;2b*2b*2b&quot;</span>
+n &lt;-<span class="st"> </span><span class="dv">50</span>
+mu &lt;-<span class="st"> </span><span class="kw">c</span>(<span class="dv">5</span>, <span class="dv">3</span>, <span class="dv">2</span>, <span class="dv">6</span>, <span class="dv">1</span>, <span class="dv">4</span>, <span class="dv">3</span>, <span class="dv">1</span>) 
+sd &lt;-<span class="st"> </span><span class="dv">10</span>
+r &lt;-<span class="st"> </span><span class="fl">0.0</span>
+labelnames &lt;-<span class="st"> </span><span class="kw">c</span>(<span class="st">&quot;Size&quot;</span>, <span class="st">&quot;big&quot;</span>, <span class="st">&quot;small&quot;</span>, <span class="st">&quot;Color&quot;</span>, <span class="st">&quot;green&quot;</span>, <span class="st">&quot;red&quot;</span>, 
+                <span class="st">&quot;CognitiveLoad&quot;</span>, <span class="st">&quot;present&quot;</span>, <span class="st">&quot;absent&quot;</span>) <span class="co">#</span>
+design_result &lt;-<span class="st"> </span><span class="kw">ANOVA_design</span>(<span class="dt">design =</span> string,
+                   <span class="dt">n =</span> n, 
+                   <span class="dt">mu =</span> mu, 
+                   <span class="dt">sd =</span> sd, 
+                   <span class="dt">labelnames =</span> labelnames)</code></pre>
+<p><img src="SuperpowerValidation_files/figure-html/unnamed-chunk-105-1.png" width="672" /></p>
+<pre class="sourceCode r"><code class="sourceCode r"><span class="co"># Power for the given N in the design_result</span>
+<span class="kw">ANOVA_power</span>(design_result, <span class="dt">nsims =</span> nsims)</code></pre>
+<pre><code>## Power and Effect sizes for ANOVA tests
+##                                power effect_size
+## anova_Size                        31    0.008192
+## anova_Color                        4    0.002462
+## anova_CognitiveLoad                5    0.003247
+## anova_Size:Color                   4    0.002095
+## anova_Size:CognitiveLoad           8    0.002904
+## anova_Color:CognitiveLoad          8    0.003242
+## anova_Size:Color:CognitiveLoad    79    0.020705
+## 
+## Power and Effect sizes for contrasts
+##                                                                                            power
+## p_Size_big_Color_green_CognitiveLoad_present_Size_big_Color_green_CognitiveLoad_absent        17
+## p_Size_big_Color_green_CognitiveLoad_present_Size_big_Color_red_CognitiveLoad_present         37
+## p_Size_big_Color_green_CognitiveLoad_present_Size_big_Color_red_CognitiveLoad_absent           4
+## p_Size_big_Color_green_CognitiveLoad_present_Size_small_Color_green_CognitiveLoad_present     41
+## p_Size_big_Color_green_CognitiveLoad_present_Size_small_Color_green_CognitiveLoad_absent       6
+## p_Size_big_Color_green_CognitiveLoad_present_Size_small_Color_red_CognitiveLoad_present       15
+## p_Size_big_Color_green_CognitiveLoad_present_Size_small_Color_red_CognitiveLoad_absent        47
+## p_Size_big_Color_green_CognitiveLoad_absent_Size_big_Color_red_CognitiveLoad_present           8
+## p_Size_big_Color_green_CognitiveLoad_absent_Size_big_Color_red_CognitiveLoad_absent           27
+## p_Size_big_Color_green_CognitiveLoad_absent_Size_small_Color_green_CognitiveLoad_present      14
+## p_Size_big_Color_green_CognitiveLoad_absent_Size_small_Color_green_CognitiveLoad_absent        5
+## p_Size_big_Color_green_CognitiveLoad_absent_Size_small_Color_red_CognitiveLoad_present         1
+## p_Size_big_Color_green_CognitiveLoad_absent_Size_small_Color_red_CognitiveLoad_absent         11
+## p_Size_big_Color_red_CognitiveLoad_present_Size_big_Color_red_CognitiveLoad_absent            57
+## p_Size_big_Color_red_CognitiveLoad_present_Size_small_Color_green_CognitiveLoad_present        6
+## p_Size_big_Color_red_CognitiveLoad_present_Size_small_Color_green_CognitiveLoad_absent        14
+## p_Size_big_Color_red_CognitiveLoad_present_Size_small_Color_red_CognitiveLoad_present         13
+## p_Size_big_Color_red_CognitiveLoad_present_Size_small_Color_red_CognitiveLoad_absent           3
+## p_Size_big_Color_red_CognitiveLoad_absent_Size_small_Color_green_CognitiveLoad_present        63
+## p_Size_big_Color_red_CognitiveLoad_absent_Size_small_Color_green_CognitiveLoad_absent         14
+## p_Size_big_Color_red_CognitiveLoad_absent_Size_small_Color_red_CognitiveLoad_present          24
+## p_Size_big_Color_red_CognitiveLoad_absent_Size_small_Color_red_CognitiveLoad_absent           65
+## p_Size_small_Color_green_CognitiveLoad_present_Size_small_Color_green_CognitiveLoad_absent    30
+## p_Size_small_Color_green_CognitiveLoad_present_Size_small_Color_red_CognitiveLoad_present     21
+## p_Size_small_Color_green_CognitiveLoad_present_Size_small_Color_red_CognitiveLoad_absent       4
+## p_Size_small_Color_green_CognitiveLoad_absent_Size_small_Color_red_CognitiveLoad_present       7
+## p_Size_small_Color_green_CognitiveLoad_absent_Size_small_Color_red_CognitiveLoad_absent       27
+## p_Size_small_Color_red_CognitiveLoad_present_Size_small_Color_red_CognitiveLoad_absent        13
+##                                                                                            effect_size
+## p_Size_big_Color_green_CognitiveLoad_present_Size_big_Color_green_CognitiveLoad_absent       -0.199435
+## p_Size_big_Color_green_CognitiveLoad_present_Size_big_Color_red_CognitiveLoad_present        -0.327821
+## p_Size_big_Color_green_CognitiveLoad_present_Size_big_Color_red_CognitiveLoad_absent          0.091900
+## p_Size_big_Color_green_CognitiveLoad_present_Size_small_Color_green_CognitiveLoad_present    -0.388231
+## p_Size_big_Color_green_CognitiveLoad_present_Size_small_Color_green_CognitiveLoad_absent     -0.113090
+## p_Size_big_Color_green_CognitiveLoad_present_Size_small_Color_red_CognitiveLoad_present      -0.181153
+## p_Size_big_Color_green_CognitiveLoad_present_Size_small_Color_red_CognitiveLoad_absent       -0.384417
+## p_Size_big_Color_green_CognitiveLoad_absent_Size_big_Color_red_CognitiveLoad_present         -0.125157
+## p_Size_big_Color_green_CognitiveLoad_absent_Size_big_Color_red_CognitiveLoad_absent           0.285572
+## p_Size_big_Color_green_CognitiveLoad_absent_Size_small_Color_green_CognitiveLoad_present     -0.189428
+## p_Size_big_Color_green_CognitiveLoad_absent_Size_small_Color_green_CognitiveLoad_absent       0.086774
+## p_Size_big_Color_green_CognitiveLoad_absent_Size_small_Color_red_CognitiveLoad_present        0.019532
+## p_Size_big_Color_green_CognitiveLoad_absent_Size_small_Color_red_CognitiveLoad_absent        -0.181283
+## p_Size_big_Color_red_CognitiveLoad_present_Size_big_Color_red_CognitiveLoad_absent            0.413751
+## p_Size_big_Color_red_CognitiveLoad_present_Size_small_Color_green_CognitiveLoad_present      -0.062832
+## p_Size_big_Color_red_CognitiveLoad_present_Size_small_Color_green_CognitiveLoad_absent        0.214611
+## p_Size_big_Color_red_CognitiveLoad_present_Size_small_Color_red_CognitiveLoad_present         0.149236
+## p_Size_big_Color_red_CognitiveLoad_present_Size_small_Color_red_CognitiveLoad_absent         -0.056144
+## p_Size_big_Color_red_CognitiveLoad_absent_Size_small_Color_green_CognitiveLoad_present       -0.471494
+## p_Size_big_Color_red_CognitiveLoad_absent_Size_small_Color_green_CognitiveLoad_absent        -0.200476
+## p_Size_big_Color_red_CognitiveLoad_absent_Size_small_Color_red_CognitiveLoad_present         -0.268195
+## p_Size_big_Color_red_CognitiveLoad_absent_Size_small_Color_red_CognitiveLoad_absent          -0.465961
+## p_Size_small_Color_green_CognitiveLoad_present_Size_small_Color_green_CognitiveLoad_absent    0.275549
+## p_Size_small_Color_green_CognitiveLoad_present_Size_small_Color_red_CognitiveLoad_present     0.209476
+## p_Size_small_Color_green_CognitiveLoad_present_Size_small_Color_red_CognitiveLoad_absent      0.005871
+## p_Size_small_Color_green_CognitiveLoad_absent_Size_small_Color_red_CognitiveLoad_present     -0.065421
+## p_Size_small_Color_green_CognitiveLoad_absent_Size_small_Color_red_CognitiveLoad_absent      -0.268585
+## p_Size_small_Color_red_CognitiveLoad_present_Size_small_Color_red_CognitiveLoad_absent       -0.201696</code></pre>
+<pre class="sourceCode r"><code class="sourceCode r"><span class="co">#Analytical power calculation</span>
+power_analytic &lt;-<span class="st"> </span><span class="kw">power_threeway_between</span>(design_result)
+power_analytic<span class="op">$</span>power_A</code></pre>
+<pre><code>## [1] 0.415306</code></pre>
+<pre class="sourceCode r"><code class="sourceCode r">power_analytic<span class="op">$</span>power_B</code></pre>
+<pre><code>## [1] 0.05715533</code></pre>
+<pre class="sourceCode r"><code class="sourceCode r">power_analytic<span class="op">$</span>power_C</code></pre>
+<pre><code>## [1] 0.1161827</code></pre>
+<pre class="sourceCode r"><code class="sourceCode r">power_analytic<span class="op">$</span>power_AB</code></pre>
+<pre><code>## [1] 0.05715533</code></pre>
+<pre class="sourceCode r"><code class="sourceCode r">power_analytic<span class="op">$</span>power_AC</code></pre>
+<pre><code>## [1] 0.05715533</code></pre>
+<pre class="sourceCode r"><code class="sourceCode r">power_analytic<span class="op">$</span>power_BC</code></pre>
+<pre><code>## [1] 0.05715533</code></pre>
+<pre class="sourceCode r"><code class="sourceCode r">power_analytic<span class="op">$</span>power_ABC</code></pre>
+<pre><code>## [1] 0.7833036</code></pre>
+<pre class="sourceCode r"><code class="sourceCode r">power_analytic<span class="op">$</span>eta_p_<span class="dv">2</span>_A</code></pre>
+<pre><code>## [1] 0.007598077</code></pre>
+<pre class="sourceCode r"><code class="sourceCode r">power_analytic<span class="op">$</span>eta_p_<span class="dv">2</span>_B</code></pre>
+<pre><code>## [1] 0.0001562256</code></pre>
+<pre class="sourceCode r"><code class="sourceCode r">power_analytic<span class="op">$</span>eta_p_<span class="dv">2</span>_C</code></pre>
+<pre><code>## [1] 0.001404275</code></pre>
+<pre class="sourceCode r"><code class="sourceCode r">power_analytic<span class="op">$</span>eta_p_<span class="dv">2</span>_AB</code></pre>
+<pre><code>## [1] 0.0001562256</code></pre>
+<pre class="sourceCode r"><code class="sourceCode r">power_analytic<span class="op">$</span>eta_p_<span class="dv">2</span>_AC</code></pre>
+<pre><code>## [1] 0.0001562256</code></pre>
+<pre class="sourceCode r"><code class="sourceCode r">power_analytic<span class="op">$</span>eta_p_<span class="dv">2</span>_BC</code></pre>
+<pre><code>## [1] 0.0001562256</code></pre>
+<pre class="sourceCode r"><code class="sourceCode r">power_analytic<span class="op">$</span>eta_p_<span class="dv">2</span>_ABC</code></pre>
+<pre><code>## [1] 0.01855544</code></pre>
+<p>In addition, ## Cohen’s f for Three-way Interactions</p>
+<p>The power for interactions depends on Cohen’s f, the alpha level, the sample size, and the degrees of freedom.</p>
+<pre class="sourceCode r"><code class="sourceCode r"><span class="co"># With 2x2x2 designs, the names for paired comparisons can become very long. </span>
+<span class="co"># So here the sample sizI abbreviate terms: Size, Color, and Cognitive Load, have values:</span>
+<span class="co"># b = big, s = small, g = green, r = red, pres = present, abs = absent.  </span>
+labelnames &lt;-<span class="st"> </span><span class="kw">c</span>(<span class="st">&quot;Size&quot;</span>, <span class="st">&quot;b&quot;</span>, <span class="st">&quot;s&quot;</span>, <span class="st">&quot;x&quot;</span>, <span class="st">&quot;Color&quot;</span>, <span class="st">&quot;g&quot;</span>, <span class="st">&quot;r&quot;</span>, 
+                <span class="st">&quot;Load&quot;</span>, <span class="st">&quot;pres&quot;</span>, <span class="st">&quot;abs&quot;</span>) <span class="co">#</span>
+design_result &lt;-<span class="st"> </span><span class="kw">ANOVA_design</span>(<span class="dt">design =</span> <span class="st">&quot;3b*2b*2b&quot;</span>, <span class="co">#describe the design</span>
+                              <span class="dt">n =</span> <span class="dv">10</span>, <span class="co">#sample size per group </span>
+                              <span class="dt">mu =</span> <span class="kw">c</span>(<span class="dv">20</span>, <span class="dv">0</span>, <span class="dv">0</span>, <span class="dv">0</span>, <span class="dv">0</span>, <span class="dv">0</span>, <span class="dv">0</span>, <span class="dv">0</span>, <span class="dv">0</span>, <span class="dv">0</span>, <span class="dv">0</span>, <span class="dv">20</span>), <span class="co">#pattern of means</span>
+                              <span class="dt">sd =</span> <span class="dv">20</span>, <span class="co">#standard deviation</span>
+                              <span class="dt">labelnames =</span> labelnames) <span class="co">#names of labels</span></code></pre>
+<p><img src="SuperpowerValidation_files/figure-html/unnamed-chunk-106-1.png" width="672" /></p>
+<pre class="sourceCode r"><code class="sourceCode r"><span class="co"># Power based on simulations</span>
+<span class="co"># ANOVA_power(design_result, nsims = nsims)</span>
+<span class="co">#Analytical power calculation</span>
+power_analytic &lt;-<span class="st"> </span><span class="kw">power_threeway_between</span>(design_result)
+power_analytic<span class="op">$</span>power_A</code></pre>
+<pre><code>## [1] 0.05</code></pre>
+<pre class="sourceCode r"><code class="sourceCode r">power_analytic<span class="op">$</span>power_B</code></pre>
+<pre><code>## [1] 0.05</code></pre>
+<pre class="sourceCode r"><code class="sourceCode r">power_analytic<span class="op">$</span>power_C</code></pre>
+<pre><code>## [1] 0.3478125</code></pre>
+<pre class="sourceCode r"><code class="sourceCode r">power_analytic<span class="op">$</span>power_AB</code></pre>
+<pre><code>## [1] 0.2414317</code></pre>
+<pre class="sourceCode r"><code class="sourceCode r">power_analytic<span class="op">$</span>power_AC</code></pre>
+<pre><code>## [1] 0.4928984</code></pre>
+<pre class="sourceCode r"><code class="sourceCode r">power_analytic<span class="op">$</span>power_BC</code></pre>
+<pre><code>## [1] 0.7752085</code></pre>
+<pre class="sourceCode r"><code class="sourceCode r">power_analytic<span class="op">$</span>power_ABC</code></pre>
+<pre><code>## [1] NaN</code></pre>
+<pre class="sourceCode r"><code class="sourceCode r">power_analytic<span class="op">$</span>eta_p_<span class="dv">2</span>_A</code></pre>
+<pre><code>## [1] 0</code></pre>
+<pre class="sourceCode r"><code class="sourceCode r">power_analytic<span class="op">$</span>Cohen_f_A</code></pre>
+<pre><code>## [1] 0</code></pre>
+<p>We see that a pattern of means of 0, 0, 0, 0, 0, 0, 0, 20 for a 2x2x2 interaction equals a Cohen’s f of 0.25.</p>
+<pre class="sourceCode r"><code class="sourceCode r">labelnames &lt;-<span class="st"> </span><span class="kw">c</span>(<span class="st">&quot;Size&quot;</span>, <span class="st">&quot;b&quot;</span>, <span class="st">&quot;s&quot;</span>, <span class="st">&quot;Color&quot;</span>, <span class="st">&quot;g&quot;</span>, <span class="st">&quot;r&quot;</span>)
+design_result &lt;-<span class="st"> </span><span class="kw">ANOVA_design</span>(<span class="dt">design =</span> <span class="st">&quot;2b*2b&quot;</span>, <span class="co">#describe the design</span>
+                              <span class="dt">n =</span> <span class="dv">10</span>, <span class="co">#sample size per group </span>
+                              <span class="dt">mu =</span> <span class="kw">c</span>(<span class="dv">0</span>, <span class="dv">0</span>, <span class="dv">0</span>, <span class="dv">10</span>), <span class="co">#pattern of means</span>
+                              <span class="dt">sd =</span> <span class="dv">10</span>, <span class="co">#standard deviation</span>
+                              <span class="dt">labelnames =</span> labelnames) <span class="co">#names of labels</span></code></pre>
+<p><img src="SuperpowerValidation_files/figure-html/unnamed-chunk-107-1.png" width="672" /></p>
+<pre class="sourceCode r"><code class="sourceCode r"><span class="co"># Power based on simulations</span>
+<span class="co"># ANOVA_power(design_result, nsims = nsims)</span>
+<span class="co">#Analytical power calculation</span>
+power_analytic &lt;-<span class="st"> </span><span class="kw">power_twoway_between</span>(design_result)
+power_analytic<span class="op">$</span>power_A</code></pre>
+<pre><code>## [1] 0.3371329</code></pre>
+<pre class="sourceCode r"><code class="sourceCode r">power_analytic<span class="op">$</span>eta_p_<span class="dv">2</span>_A</code></pre>
+<pre><code>## [1] 0.05882353</code></pre>
+<pre class="sourceCode r"><code class="sourceCode r">power_analytic<span class="op">$</span>Cohen_f_A</code></pre>
+<pre><code>## [1] 0.25</code></pre>
+<p>Cohen’s f is twice as large for a 2x2 design with the same mean value in one of four cells. In a 2 factor between design.</p>
+<pre class="sourceCode r"><code class="sourceCode r">labelnames &lt;-<span class="st"> </span><span class="kw">c</span>(<span class="st">&quot;Size&quot;</span>, <span class="st">&quot;b&quot;</span>, <span class="st">&quot;s&quot;</span>)
+design_result &lt;-<span class="st"> </span><span class="kw">ANOVA_design</span>(<span class="dt">design =</span> <span class="st">&quot;2b&quot;</span>, <span class="co">#describe the design</span>
+                              <span class="dt">n =</span> <span class="dv">10</span>, <span class="co">#sample size per group </span>
+                              <span class="dt">mu =</span> <span class="kw">c</span>(<span class="dv">0</span>, <span class="dv">5</span>), <span class="co">#pattern of means</span>
+                              <span class="dt">sd =</span> <span class="dv">10</span>, <span class="co">#standard deviation</span>
+                              <span class="dt">labelnames =</span> labelnames) <span class="co">#names of labels</span></code></pre>
+<p><img src="SuperpowerValidation_files/figure-html/unnamed-chunk-108-1.png" width="672" /></p>
+<pre class="sourceCode r"><code class="sourceCode r"><span class="co"># Power based on simulations</span>
+<span class="co"># ANOVA_power(design_result, nsims = nsims)</span>
+<span class="co">#Analytical power calculation</span>
+power_analytic &lt;-<span class="st"> </span><span class="kw">power_oneway_between</span>(design_result)
+power_analytic<span class="op">$</span>power</code></pre>
+<pre><code>## [1] 0.1850957</code></pre>
+<pre class="sourceCode r"><code class="sourceCode r">power_analytic<span class="op">$</span>eta_p_<span class="dv">2</span></code></pre>
+<pre><code>## [1] 0.05882353</code></pre>
+<pre class="sourceCode r"><code class="sourceCode r">power_analytic<span class="op">$</span>Cohen_f</code></pre>
+<pre><code>## [1] 0.25</code></pre>
+
+</div>
+            </section>
+
+          </div>
+        </div>
+      </div>
+<a href="explore-increase-in-effect-size-for-moderated-interactions-.html" class="navigation navigation-prev " aria-label="Previous page"><i class="fa fa-angle-left"></i></a>
+<a href="power-for-design-variations.html" class="navigation navigation-next " aria-label="Next page"><i class="fa fa-angle-right"></i></a>
+    </div>
+  </div>
+<script src="libs/gitbook-2.6.7/js/app.min.js"></script>
+<script src="libs/gitbook-2.6.7/js/lunr.js"></script>
+<script src="libs/gitbook-2.6.7/js/plugin-search.js"></script>
+<script src="libs/gitbook-2.6.7/js/plugin-sharing.js"></script>
+<script src="libs/gitbook-2.6.7/js/plugin-fontsettings.js"></script>
+<script src="libs/gitbook-2.6.7/js/plugin-bookdown.js"></script>
+<script src="libs/gitbook-2.6.7/js/jquery.highlight.js"></script>
+<script>
+gitbook.require(["gitbook"], function(gitbook) {
+gitbook.start({
+"sharing": {
+"github": false,
+"facebook": true,
+"twitter": true,
+"google": false,
+"linkedin": false,
+"weibo": false,
+"instapaper": false,
+"vk": false,
+"all": ["facebook", "google", "twitter", "linkedin", "weibo", "instapaper"]
+},
+"fontsettings": {
+"theme": "white",
+"family": "sans",
+"size": 2
+},
+"edit": {
+"link": null,
+"text": null
+},
+"history": {
+"link": null,
+"text": null
+},
+"download": ["SuperpowerValidation.pdf", "SuperpowerValidation.epub"],
+"toc": {
+"collapse": "subsection"
+}
+});
+});
+</script>
+
+<!-- dynamically load mathjax for compatibility with self-contained -->
+<script>
+  (function () {
+    var script = document.createElement("script");
+    script.type = "text/javascript";
+    var src = "true";
+    if (src === "" || src === "true") src = "https://mathjax.rstudio.com/latest/MathJax.js?config=TeX-MML-AM_CHTML";
+    if (location.protocol !== "file:" && /^https?:/.test(src))
+      src = src.replace(/^https?:/, '');
+    script.src = src;
+    document.getElementsByTagName("head")[0].appendChild(script);
+  })();
+</script>
+</body>
+
+</html>
