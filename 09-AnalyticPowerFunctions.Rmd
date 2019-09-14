@@ -1,5 +1,3 @@
-
-
 # Analytic Power Functions
 
 ```{r import_aberson, include=FALSE}
@@ -13,7 +11,8 @@ For some designs it is possible to calculate power analytically, using closed fu
 ```{r}
 string <- "4b"
 n <- 60
-mu <- c(80, 82, 82, 86) #All means are equal - so there is no real difference.
+mu <- c(80, 82, 82, 86) 
+#All means are equal - so there is no real difference.
 # Enter means in the order that matches the labels below.
 sd <- 10
 labelnames <- c("Factor_A", "a1", "a2", "a3", "a4") #
@@ -23,13 +22,15 @@ design_result <- ANOVA_design(design = string,
                    mu = mu, 
                    sd = sd, 
                    labelnames = labelnames)
-power_result <- ANOVA_power(design_result, alpha_level = 0.05, nsims = nsims)
+power_result <- ANOVA_exact(design_result, alpha_level = 0.05)
 ```
 
 We can also calculate power analytically with a `Superpower` function.
 
 ```{r}
-power_oneway_between(design_result)$power #using default alpha level of .05
+#using default alpha level of .05
+power_oneway_between(design_result)$power 
+
 ```
 
 This is a generalized function for One-Way ANOVA's for any number of groups. It is in part based on code provided with the excellent book by Aberson (2019) Applied Power Analysis for the Behavioral Sciences (but Aberson's code allows for different n per condition, and different sd per condition).
@@ -62,8 +63,9 @@ n <- 20
 mu <- c(20, 20, 20, 25) 
 # Enter means in the order that matches the labels below.
 sd <- 5
-labelnames <- c("A", "a1", "a2", "B", "b1", "b2") #
+labelnames <- c("A", "a1", "a2", "B", "b1", "b2") 
 # the label names should be in the order of the means specified above.
+
 design_result <- ANOVA_design(design = string,
                    n = n, 
                    mu = mu, 

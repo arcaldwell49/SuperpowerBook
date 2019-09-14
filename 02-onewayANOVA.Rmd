@@ -26,7 +26,9 @@ design_result <- ANOVA_design(design = string,
 alpha_level <- 0.05
 # You should think carefully about how to justify your alpha level.
 # We will give some examples later, but for now, use 0.05.
-ANOVA_power(design_result, alpha_level = alpha_level, nsims = nsims)
+simulation_result <- ANOVA_power(design_result, alpha_level = alpha_level, nsims = nsims)
+
+exact_result <- ANOVA_exact(design_result)
 ```
 
 The result shows that we have exactly the same power for the ANOVA, as we have for the *t*-test. This is because when there are only two groups, these tests are mathematically identical. In a study with 100 participants, we would have quite low power (around 67.7%). An ANOVA with 2 groups is identical to a *t*-test. For our example, Cohen's d (the standardized mean difference) is 2.2/6.4, or d = 0.34375 for the difference between the control condition and pets, which we can use to easily compute the expected power for these simple comparisons using the pwr package.
@@ -91,10 +93,12 @@ design_result <- ANOVA_design(
   sd = sd,
   labelnames = labelnames
   )
-  simulation_result <-
-  ANOVA_power(design_result, alpha_level = alpha_level, nsims = nsims)
-  exact_result <-
-  ANOVA_exact(design_result, alpha_level = alpha_level)
+
+simulation_result <- ANOVA_power(design_result, 
+                                 alpha_level = alpha_level, 
+                                 nsims = nsims)
+
+exact_result <- ANOVA_exact(design_result)
   
 ```
 
@@ -131,19 +135,23 @@ sd = sd,
 labelnames = labelnames
 )
 alpha_level <- 0.05
-power_result <-
-ANOVA_power(design_result, alpha_level = alpha_level, nsims = nsims)
-exact_result <-
-ANOVA_exact(design_result, alpha_level = alpha_level)
+
+simulation_result <- ANOVA_power(design_result, 
+                                 alpha_level = alpha_level, 
+                                 nsims = nsims)
+
+exact_result <- ANOVA_exact(design_result)
 ```
-We stored the result from the power analysis in an object. This allows us to request plots (which are not printed automatically) showing the *p*-value distribution. If we request power_result$plot1 we get the p-value distribution for the ANOVA:
+We stored the result from the power analysis in an object. This allows us to request plots (which are not printed automatically) showing the *p*-value distribution. If we request `simulation_result$plot1` we get the p-value distribution for the ANOVA:
 
 ```{r}
-power_result$plot1
+simulation_result$plot1
 ```
-If we request power_result$plot2 we get the p-value distribution for the paired comparisons (in this case only one):
+
+If we request `simulation_result$plot2` we get the p-value distribution for the paired comparisons (in this case only one):
+
 ```{r}
-power_result$plot2
+simulation_result$plot2
 ```
 
 ## Part 2
@@ -173,10 +181,13 @@ labelnames = labelnames
 alpha_level <- 0.05
 # You should think carefully about how to justify your alpha level.
 # We will give some examples later, but for now, use 0.05.
-simulation_result <-
-ANOVA_power(design_result, alpha_level = alpha_level, nsims = nsims)
-exact_result <-
-ANOVA_exact(design_result, alpha_level = alpha_level)
+simulation_result <- ANOVA_power(design_result, 
+                                 alpha_level = alpha_level, 
+                                 nsims = nsims)
+
+exact_result <- ANOVA_exact(design_result)
+
+
 #should yield
 #0.3983064
 #0.5205162
@@ -263,10 +274,12 @@ design_result <- ANOVA_design(
   sd = sd,
   labelnames = labelnames
   )
-  simulation_result <-
-  ANOVA_power(design_result, alpha_level = alpha_level, nsims = nsims)
-  exact_result <-
-  ANOVA_exact(design_result, alpha_level = alpha_level)
+
+simulation_result <- ANOVA_power(design_result, 
+                                 alpha_level = alpha_level, 
+                                 nsims = nsims)
+
+exact_result <- ANOVA_exact(design_result)
 ```
 
 The simulation confirms that for the *F*-test for the ANOVA we have 90% power. This is also what g*power tells us what would happen based on a post-hoc power analysis with an f of 0.2934417, 3 groups, 150 participants in total (50 in each between subject condition), and an alpha of 5%. 
@@ -428,7 +441,11 @@ design_result <- ANOVA_design(
   labelnames = c("factor1", "level1", "level2", "level3")
   )
 
-  ANOVA_power(design_result, nsims = nsims)
+simulation_result <- ANOVA_power(design_result, 
+                                 alpha_level = alpha_level,
+                                 nsims = nsims)
+
+exact_result <- ANOVA_exact(design_result)
 ```
 
 ### Variation 1
@@ -508,7 +525,11 @@ design_result <- ANOVA_design(
   labelnames = c("factor1", "level1", "level2", "level3")
   )
 
-  ANOVA_power(design_result, nsims = nsims)
+simulation_result <- ANOVA_power(design_result, 
+                                 alpha_level = alpha_level, 
+                                 nsims = nsims)
+
+exact_result <- ANOVA_exact(design_result)
 ```
 
 ### Variation 2
@@ -583,7 +604,11 @@ design_result <- ANOVA_design(
   labelnames = c("factor1", "level1", "level2", "level3")
   )
 
-  ANOVA_power(design_result, nsims = nsims)
+simulation_result <- ANOVA_power(design_result, 
+                                 alpha_level = alpha_level, 
+                                 nsims = nsims)
+
+exact_result <- ANOVA_exact(design_result)
 ```
 
 ## Effect Size Estimates for One-Way ANOVA
@@ -616,10 +641,11 @@ design_result <- ANOVA_design(
   labelnames = c("factor1", "level1", "level2", "level3")
   )
 
-  simulation_result <- ANOVA_power(design_result, nsims = nsims)
-  
-  exact_result <-
-  ANOVA_exact(design_result, alpha_level = alpha_level)
+simulation_result <- ANOVA_power(design_result, 
+                                 alpha_level = alpha_level, 
+                                 nsims = nsims)
+
+exact_result <- ANOVA_exact(design_result)
 ```
 
 The resulting effect size estimate from the simulation is very close to 0.0099
@@ -678,8 +704,12 @@ design_result <- ANOVA_design(design = string,
                    sd = sd, 
                    r = r, 
                    labelnames = c("factor1", "level1", "level2"))
-simulation_result <- ANOVA_power(design_result, nsims = nsims)
-exact_result <- ANOVA_exact(design_result, alpha_level = alpha_level)
+
+simulation_result <- ANOVA_power(design_result, 
+                                 alpha_level = alpha_level, 
+                                 nsims = nsims)
+
+exact_result <- ANOVA_exact(design_result)
 ```
 
 The results are very close to is simulation should yield a small effect size (0.1379).

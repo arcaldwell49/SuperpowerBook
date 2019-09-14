@@ -20,6 +20,7 @@ ANOVA_power(design_result, nsims = nsims)
 
 # Power based on exact simulation
 exact_result <- ANOVA_exact(design_result)
+
 #Analytical power calculation
 power_analytic <- power_threeway_between(design_result)
 power_analytic$power_A
@@ -87,6 +88,7 @@ design_result <- ANOVA_design(design = string,
                    mu = mu, 
                    sd = sd, 
                    labelnames = labelnames)
+
 # Power based on simulations
 simulation_result <- ANOVA_power(design_result, nsims = nsims)
 # Power based on exact simulation
@@ -113,6 +115,7 @@ design_result <- ANOVA_design(design = string,
                    mu = mu, 
                    sd = sd, 
                    labelnames = labelnames)
+
 # Power for the given N in the design_result
 simulation_result <- ANOVA_power(design_result, nsims = nsims)
 # Exact simulation
@@ -140,15 +143,18 @@ The power for interactions depends on Cohen's *f*, the alpha level, the sample s
 
 ```{r}
 # With 2x2x2 designs, the names for paired comparisons can become very long. 
-# So here the sample sizI abbreviate terms: Size, Color, and Cognitive Load, have values:
+# So here the sample size abbreviate terms
+# Size, Color, and Cognitive Load, have values:
 # b = big, s = small, g = green, r = red, pres = present, abs = absent.  
 labelnames <- c("Size", "b", "s", "x", "Color", "g", "r", 
                 "Load", "pres", "abs") #
 design_result <- ANOVA_design(design = "3b*2b*2b", #describe the design
                               n = 15, #sample size per group 
-                              mu = c(20, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 20), #pattern of means
-                              sd = 20, #standard deviation
-                              labelnames = labelnames) #names of labels
+                              mu = c(20, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 20), 
+                              
+                              sd = 20, #
+                              labelnames = labelnames) 
+
 # Power based on exact simulations
 exact_result <- ANOVA_exact(design_result)
 #Analytical power calculation
@@ -173,6 +179,7 @@ design_result <- ANOVA_design(design = "2b*2b", #describe the design
                               mu = c(0, 0, 0, 10), #pattern of means
                               sd = 10, #standard deviation
                               labelnames = labelnames) #names of labels
+
 # Power based on exact simulations
 exact_result <- ANOVA_exact(design_result)
 #Analytical power calculation
@@ -191,6 +198,7 @@ design_result <- ANOVA_design(design = "2b", #describe the design
                               mu = c(0, 5), #pattern of means
                               sd = 10, #standard deviation
                               labelnames = labelnames) #names of labels
+
 # Power based on exact simulations
 exact_result <- ANOVA_exact(design_result)
 #Analytical power calculation
