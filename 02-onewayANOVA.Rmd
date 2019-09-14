@@ -1,0 +1,685 @@
+# One-way ANOVA 
+
+## Part 1
+
+Using the formula also used in Albers & Lakens (2018), we can determine the means that should yield a specified effect sizes (expressed in Cohen's f). Eta-squared (identical to partial eta-squared for One-Way ANOVA's) has benchmarks of .0099, .0588, and .1379 for small, medium, and large effect sizes (Cohen, 1988). Athough these benchmarks are quite random, and researchers should only use such benchmarks for power analyses as a last resort, we will demonstrate a-priori power analysis for these values. 
+
+### Two conditions
+
+Imagine we aim to design a study to test the hypothesis that giving people a pet to take care of will increase their life satisfaction. We have a control condition, and a condition where people get a pet, and randomly assign participants to either condition. We can simulate a One-Way ANOVA with a specified alpha, sample size, and effect size, on see the statistical power we would have for the ANOVA and the follow-up comparisons. We expect pets to increase life-satisfaction compared to the control condition. Based on work by Pavot and Diener (1993) we believe that we can expect responses on the life-satifaction scale to have a mean of approximately 24 in our population, with a standard deviation of 6.4. We expect having a pet increases life satisfaction with approximately 2.2 scale points for participants who get a pet. 200 participants in total, with 100 participants in each condition. But before we proceed with the data collection, we examine the statistical power our design would have to detect the differences we predict.
+
+```{r start_one_way}
+string <- "2b"
+n <- 100
+# We are thinking of running 50 peope in each condition
+mu <- c(24, 26.2)
+# Enter means in the order that matches the labels below.
+# In this case, control, cat, dog. 
+sd <- 6.4
+labelnames <- c("condition", "control", "pet") #
+# the label names should be in the order of the means specified above.
+design_result <- ANOVA_design(design = string,
+                   n = n, 
+                   mu = mu, 
+                   sd = sd, 
+                   labelnames = labelnames)
+alpha_level <- 0.05
+# You should think carefully about how to justify your alpha level.
+# We will give some examples later, but for now, use 0.05.
+ANOVA_power(design_result, alpha_level = alpha_level, nsims = nsims)
+```
+
+The result shows that we have exactly the same power for the ANOVA, as we have for the *t*-test. This is because when there are only two groups, these tests are mathematically identical. In a study with 100 participants, we would have quite low power (around 67.7%). An ANOVA with 2 groups is identical to a *t*-test. For our example, Cohen's d (the standardized mean difference) is 2.2/6.4, or d = 0.34375 for the difference between the control condition and pets, which we can use to easily compute the expected power for these simple comparisons using the pwr package.
+
+```{r}
+pwr.t.test(d = 2.2/6.4,
+           n = 100,
+           sig.level = 0.05,
+           type="two.sample",
+           alternative="two.sided")$power
+```
+
+We can also directly compute Cohen's f from Cohen's d for two groups, as Cohen (1988) describes, because f = 1/2d. So f = 0.5*0.34375 = 0.171875. And indeed, power analysis using the pwr package yields the same result using the `pwr.anova.test` as the `power.t.test`.
+
+```{r}
+K <- 2
+n <- 100
+f <- 0.171875
+pwr.anova.test(n = n,
+               k = K,
+               f = f,
+               sig.level = alpha_level)$power
+```
+
+This analysis tells us that running the study with 100 participants in each condition is too likely to *not* yield a significant test result, even if our expected pattern of differences is true.  This is not optimal. 
+
+Let's mathematically explore which pattern of means we would need to expect to habe 90% power for the ANOVA with 50 participants in each group. We can use the pwr package in R to compute a sensitivity analysis that tells us the effect size, in Cohen's f, that we are able to detect with 3 groups and 50 partiicpants in each group, in order to achive 90% power with an alpha level of 5%. 
+
+```{r}
+K <- 2
+n <- 100
+sd <- 6.4
+r <- 0
+#Calculate f when running simulation
+f <- pwr.anova.test(n = n,
+                    k = K,
+                    power = 0.9,
+                    sig.level = alpha_level)$f
+f
+```
+This sensitivity analysis shows we have 90% power in our planned design to detect effects of Cohen's f of 0.2303587. Benchmarks by Cohen (1988) for small, medium, and large Cohen's f values are 0.1, 0.25, and 0.4, which correspond to eta-squared values of small (.0099), medium (.0588), and large (.1379), in line with d = .2, .5, or .8. So, at least based on these benchmarks, we have 90% power to detect effects that are slightly below a medium effect benchmark.
+
+```{r}
+f2 <- f^2
+ES <- f2/(f2+1)
+ES
+```
+Expressed in eta-squared, we can detect values of eta-squared = 0.05 or larger. 
+
+```{r}
+mu <- mu_from_ES(K = K, ES = ES)
+mu <- mu * sd
+mu
+```
+We can compute a pattern of means, given a standard deviation of 6.4, that would give us an effect size of f = 0.23, or eta-squared of 0.05. We should be able to accomplish this is the means are -1.474295 and 1.474295. We can use these values to confirm the ANOVA has 90% power.
+
+```{r}
+design_result <- ANOVA_design(
+  design = string,
+  n = n,
+  mu = mu,
+  sd = sd,
+  labelnames = labelnames
+  )
+  simulation_result <-
+  ANOVA_power(design_result, alpha_level = alpha_level, nsims = nsims)
+  exact_result <-
+  ANOVA_exact(design_result, alpha_level = alpha_level)
+  
+```
+
+The simulation confirms that for the *F*-test for the ANOVA we have 90% power. This is also what g*power tells us what would happen based on a post-hoc power analysis with an f of 0.2303587, 2 groups, 200 participants in total (100 in each between subject condition), and an alpha of 5%. 
+
+![](screenshots/gpower_8.png)
+If we return to our expected means, how many participants do we need for sufficient power? Given the expected difference and standard deviation, d = 0.34375, and f = 0.171875. We can perform an a-priori power analysis for this simple case, which tells us we need 179 participants in each group (we can't split people in parts, and thus always round a power analysis upward), or 358 in total.
+
+```{r}
+K <- 2
+power <- 0.9
+f <- 0.171875
+pwr.anova.test(power = power,
+               k = K,
+               f = f,
+               sig.level = alpha_level)
+```
+If we re-run the simulation with this sample size, we indeed have 90% power.
+
+```{r}
+string <- "2b"
+n <- 179
+mu <- c(24, 26.2)
+# Enter means in the order that matches the labels below.
+# In this case, control, pet.
+sd <- 6.4
+labelnames <- c("condition", "control", "pet") #
+# the label names should be in the order of the means specified above.
+design_result <- ANOVA_design(
+design = string,
+n = n,
+mu = mu,
+sd = sd,
+labelnames = labelnames
+)
+alpha_level <- 0.05
+power_result <-
+ANOVA_power(design_result, alpha_level = alpha_level, nsims = nsims)
+exact_result <-
+ANOVA_exact(design_result, alpha_level = alpha_level)
+```
+We stored the result from the power analysis in an object. This allows us to request plots (which are not printed automatically) showing the *p*-value distribution. If we request power_result$plot1 we get the p-value distribution for the ANOVA:
+
+```{r}
+power_result$plot1
+```
+If we request power_result$plot2 we get the p-value distribution for the paired comparisons (in this case only one):
+```{r}
+power_result$plot2
+```
+
+## Part 2
+
+
+### Three conditions
+
+Imagine we aim to design a study to test the hypothesis that giving people a pet to take care of will increase their life satisfaction. We have a control condition, a 'cat' pet condition, and a 'dog' pet condition. We can simulate a One-Way ANOVA with a specified alpha, sample size, and effect size, on see the statistical power we would have for the ANOVA and the follow-up comparisons. We expect all pets to increase life-satisfaction compared to the control condition. Obviously, we also expect the people who are in the 'dog' pet condition to have even greater life-satisfaction than people in the 'cat' pet condition. Based on work by Pavot and Diener (1993) we believe that we can expect responses on the life-satifaction scale to have a mean of approximately 24 in our population, with a standard deviation of 6.4. We expect having a pet increases life satisfaction with approximately 2.2 scale points for participants who get a cat, and 2.6 scale points for participants who get a dog. We initially consider collecting data from 150 participants in total, with 50 participants in each condition. But before we proceed with the data collection, we examine the statistical power our design would have to detect the differences we predict.
+
+```{r}
+string <- "3b"
+n <- 50
+# We are thinking of running 50 peope in each condition
+mu <- c(24, 26.2, 26.6)
+# Enter means in the order that matches the labels below.
+# In this case, control, cat, dog.
+sd <- 6.4
+labelnames <- c("condition", "control", "cat", "dog") #
+# the label names should be in the order of the means specified above.
+design_result <- ANOVA_design(
+design = string,
+n = n,
+mu = mu,
+sd = sd,
+labelnames = labelnames
+)
+alpha_level <- 0.05
+# You should think carefully about how to justify your alpha level.
+# We will give some examples later, but for now, use 0.05.
+simulation_result <-
+ANOVA_power(design_result, alpha_level = alpha_level, nsims = nsims)
+exact_result <-
+ANOVA_exact(design_result, alpha_level = alpha_level)
+#should yield
+#0.3983064
+#0.5205162
+#0.06104044
+```
+
+The result shows that you would have quite low power with 50 participants, both for the overall ANOVA (just around 50% power), as for the follow up comparisons (approximately 40% power for the control vs cat condition, around 50% for the control vs dogs condition, and a really low power (around 6%, just above the Type 1 error rate of 5%) for the expected difference between cats and dogs. 
+
+### Power for simple effects
+
+We are typically not just interested in the ANOVA, but also in follow up comparisons. In this case, we would perform a *t*-test comparing the control condition against the cat and dog condition, and we would compare the cat and dog conditions against each other, in independent *t*-tests. 
+
+For our example, Cohen's d (the standardized mean difference) is 2.2/6.4, or d = 0.34375 for the difference between the control condition and cats, 2.6/6.4 of d = 0.40625 for the difference between the control condition and dogs, and 0.4/6.4 or d = 0.0625 for the difference between cats and dogs as pets. 
+
+We can easily compute the expected power for these simple comparisons using the pwr package.
+
+```{r}
+pwr.t.test(
+  d = 2.2 / 6.4,
+  n = 50,
+  sig.level = 0.05,
+  type = "two.sample",
+  alternative = "two.sided"
+  )$power
+
+  pwr.t.test(
+  d = 2.6 / 6.4,
+  n = 50,
+  sig.level = 0.05,
+  type = "two.sample",
+  alternative = "two.sided"
+  )$power
+  
+  pwr.t.test(
+  d = 0.4 / 6.4,
+  n = 50,
+  sig.level = 0.05,
+  type = "two.sample",
+  alternative = "two.sided"
+  )$power
+  
+```
+
+This analysis tells us that running the study with 50 participants in each condition is more likely to *not* yield a significant test result, even if our expected pattern of differences is true, than that we will observe a *p*-value smaller than our alpha level. This is not optimal. 
+
+Let's mathematically explore which pattern of means we would need to expect to habe 90% power for the ANOVA with 50 participants in each group. We can use the pwr package in R to compute a sensitivity analysis that tells us the effect size, in Cohen's f, that we are able to detect with 3 groups and 50 partiicpants in each group, in order to achive 90% power with an alpha level of 5%. 
+
+```{r}
+K <- 3
+n <- 50
+sd <- 6.4
+r <- 0
+#Calculate f when running simulation
+f <- pwr.anova.test(n = n,
+                    k = K,
+                    power = 0.9,
+                    sig.level = alpha_level)$f
+f
+```
+
+This sensitivity analysis shows we have 90% power in our planned design to detect effects of Cohen's f of 0.2934417. Benchmarks by Cohen (1988) for small, medium, and large Cohen's f values are 0.1, 0.25, and 0.4, which correspond to eta-squared values of small (.0099), medium (.0588), and large (.1379), in line with d = .2, .5, or .8. So, at least based on these benchmarks, we have 90% power to detect effects that are somewhat sizeable.
+
+```{r}
+f2 <- f^2
+ES <- f2 / (f2 + 1)
+ES
+```
+
+Expressed in eta-squared, we can detect values of eta-squared = 0.0793 or larger. 
+
+```{r}
+mu <- mu_from_ES(K = K, ES = ES)
+mu <- mu * sd
+mu
+```
+
+We can compute a pattern of means, given a standard deviation of 6.4, that would give us an effect size of f = 0.2934, or eta-squared of 0.0793. We should be able to accomplish this is the means are -2.300104, 0.000000, and 2.300104. We can use these values to confirm the ANOVA has 90% power.
+
+```{r}
+design_result <- ANOVA_design(
+  design = string,
+  n = n,
+  mu = mu,
+  sd = sd,
+  labelnames = labelnames
+  )
+  simulation_result <-
+  ANOVA_power(design_result, alpha_level = alpha_level, nsims = nsims)
+  exact_result <-
+  ANOVA_exact(design_result, alpha_level = alpha_level)
+```
+
+The simulation confirms that for the *F*-test for the ANOVA we have 90% power. This is also what g*power tells us what would happen based on a post-hoc power analysis with an f of 0.2934417, 3 groups, 150 participants in total (50 in each between subject condition), and an alpha of 5%. 
+
+![](screenshots/gpower_7.png)
+
+We can also compute the power for the ANOVA and simple effects in R with the pwr package. The calculated effect sizes and power match those from the simulation.
+
+```{r}
+K <- 3
+n <- 50
+sd <- 6.4
+f <- 0.2934417
+pwr.anova.test(
+n = n,
+k = K,
+f = f,
+sig.level = alpha_level
+)$power
+d <- 2.300104 / 6.4
+d
+pwr.t.test(
+d = 2.300104 / 6.4,
+n = 50,
+sig.level = 0.05,
+type = "two.sample",
+alternative = "two.sided"
+)$power
+d <- 2 * 2.300104 / 6.4
+d
+pwr.t.test(
+d = d,
+n = 50,
+sig.level = 0.05,
+type = "two.sample",
+alternative = "two.sided"
+)$power
+```
+
+We can also compare the results against the analytic solution by Aberson (2019).
+
+First, load the function for a 3-way ANOVA from the `pwr2ppl` package.
+
+Then we use the function to calculate power.
+
+```{r}
+#Initial example, low power
+anova1f_3(
+m1 = 24,
+m2 = 26.2,
+m3 = 26.6,
+s1 = 6.4,
+s2 = 6.4,
+s3 = 6.4,
+n1 = 50,
+n2 = 50,
+n3 = 50,
+alpha = .05
+)
+#From: Aberson, Christopher L. Applied Power Analysis for the Behavioral Sciences, 2nd Edition.
+# $Power [1] 0.4769468
+#Later example, based on larger mean difference
+anova1f_3(
+m1 = -2.300104,
+m2 = 0,
+m3 = 2.300104,
+s1 = 6.4,
+s2 = 6.4,
+s3 = 6.4,
+n1 = 50,
+n2 = 50,
+n3 = 50,
+alpha = .05
+)
+# $Power [1] 0.9000112
+```
+
+## Part 3
+
+We first repeat the simulation by Brysbaert:
+
+```{r}
+# Simulations to estimate the power of an ANOVA with three unrelated groups
+# the effect between the two extreme groups is set to d = .4, 
+# the effect for the third group is d = .4 (see below for other situations)
+# we use the built-in aov-test command
+# give sample sizes (all samples sizes are equal)
+N = 90
+# give effect size d
+d1 = .4 # difference between the extremes
+d2 = .4 # third condition goes with the highest extreme
+# give number of simulations
+nSim = nsims
+# give alpha levels
+# alpha level for the omnibus ANOVA
+alpha1 = .05 
+#alpha level for three post hoc one-tailed t-tests Bonferroni correction
+alpha2 = .05 
+
+# create vectors to store p-values
+p1 <- numeric(nSim) #p-value omnibus ANOVA
+p2 <- numeric(nSim) #p-value first post hoc test
+p3 <- numeric(nSim) #p-value second post hoc test
+p4 <- numeric(nSim) #p-value third post hoc test
+pes1 <- numeric(nSim) #partial eta-squared
+pes2 <- numeric(nSim) #partial eta-squared two extreme conditions
+library(lsr)
+for (i in 1:nSim) {
+#for each simulated experiment
+
+x <- rnorm(n = N, mean = 0, sd = 1)
+y <- rnorm(n = N, mean = d1, sd = 1)
+z <- rnorm(n = N, mean = d2, sd = 1)
+data = c(x, y, z)
+groups = factor(rep(letters[24:26], each = N))
+test <- aov(data ~ groups)
+pes1[i] <- etaSquared(test)[1, 2]
+p1[i] <- summary(test)[[1]][["Pr(>F)"]][[1]]
+p2[i] <- t.test(x, y)$p.value
+p3[i] <- t.test(x, z)$p.value
+p4[i] <- t.test(y, z)$p.value
+data = c(x, y)
+groups = factor(rep(letters[24:25], each = N))
+test <- aov(data ~ groups)
+pes2[i] <- etaSquared(test)[1, 2]
+}
+
+# results are as predicted when omnibus ANOVA is significant,
+# t-tests are significant between x and y plus x and z; 
+# not significant between y and z
+# printing all unique tests (adjusted code by DL)
+sum(p1 < alpha1) / nSim
+sum(p2 < alpha2) / nSim
+sum(p3 < alpha2) / nSim
+sum(p4 < alpha2) / nSim
+mean(pes1)
+mean(pes2)
+```
+
+
+### Three conditions replication
+
+
+```{r}
+K <- 3
+mu <- c(0, 0.4, 0.4)
+n <- 90
+sd <- 1
+r <- 0
+design = paste(K, "b", sep = "")
+```
+
+```{r, message=FALSE, warning=FALSE}
+design_result <- ANOVA_design(
+  design = string,
+  n = n,
+  mu = mu,
+  sd = sd,
+  labelnames = c("factor1", "level1", "level2", "level3")
+  )
+
+  ANOVA_power(design_result, nsims = nsims)
+```
+
+### Variation 1
+
+```{r}
+# give sample sizes (all samples sizes are equal)
+N = 145
+# give effect size d
+d1 = .4 #difference between the extremes
+d2 = .0 #third condition goes with the highest extreme
+# give number of simulations
+nSim = nsims
+# give alpha levels
+#alpha level for the omnibus ANOVA
+alpha1 = .05 
+#alpha level for three post hoc one-tailed t-tests Bonferroni correction
+alpha2 = .05 
+
+# create vectors to store p-values
+p1 <- numeric(nSim) #p-value omnibus ANOVA
+p2 <- numeric(nSim) #p-value first post hoc test
+p3 <- numeric(nSim) #p-value second post hoc test
+p4 <- numeric(nSim) #p-value third post hoc test
+pes1 <- numeric(nSim) #partial eta-squared
+pes2 <- numeric(nSim) #partial eta-squared two extreme conditions
+library(lsr)
+for (i in 1:nSim) {
+#for each simulated experiment
+
+x <- rnorm(n = N, mean = 0, sd = 1)
+y <- rnorm(n = N, mean = d1, sd = 1)
+z <- rnorm(n = N, mean = d2, sd = 1)
+data = c(x, y, z)
+groups = factor(rep(letters[24:26], each = N))
+test <- aov(data ~ groups)
+pes1[i] <- etaSquared(test)[1, 2]
+p1[i] <- summary(test)[[1]][["Pr(>F)"]][[1]]
+p2[i] <- t.test(x, y)$p.value
+p3[i] <- t.test(x, z)$p.value
+p4[i] <- t.test(y, z)$p.value
+data = c(x, y)
+groups = factor(rep(letters[24:25], each = N))
+test <- aov(data ~ groups)
+pes2[i] <- etaSquared(test)[1, 2]
+}
+
+# results are as predicted when omnibus ANOVA is significant, 
+# t-tests are significant between x and y plus x and z; 
+# not significant between y and z
+# printing all unique tests (adjusted code by DL)
+sum(p1 < alpha1) / nSim
+sum(p2 < alpha2) / nSim
+sum(p3 < alpha2) / nSim
+sum(p4 < alpha2) / nSim
+mean(pes1)
+mean(pes2)
+```
+
+### Three conditions replication
+
+
+```{r}
+K <- 3
+mu <- c(0, 0.4, 0.0)
+n <- 145
+sd <- 1
+r <- 0
+design = paste(K, "b", sep = "")
+```
+
+```{r, message=FALSE, warning=FALSE}
+design_result <- ANOVA_design(
+  design = string,
+  n = n,
+  mu = mu,
+  sd = sd,
+  labelnames = c("factor1", "level1", "level2", "level3")
+  )
+
+  ANOVA_power(design_result, nsims = nsims)
+```
+
+### Variation 2
+
+
+```{r}
+# give sample sizes (all samples sizes are equal)
+N = 82
+# give effect size d
+d1 = .4 #difference between the extremes
+d2 = .2 #third condition goes with the highest extreme
+# give number of simulations
+nSim = nsims
+# give alpha levels
+#alpha level for the omnibus ANOVA
+alpha1 = .05 
+#alpha level for three post hoc one-tailed t-tests Bonferroni correction
+alpha2 = .05 
+
+# create vectors to store p-values
+p1 <- numeric(nSim) #p-value omnibus ANOVA
+p2 <- numeric(nSim) #p-value first post hoc test
+p3 <- numeric(nSim) #p-value second post hoc test
+p4 <- numeric(nSim) #p-value third post hoc test
+pes1 <- numeric(nSim) #partial eta-squared
+pes2 <- numeric(nSim) #partial eta-squared two extreme conditions
+library(lsr)
+for (i in 1:nSim) {
+#for each simulated experiment
+
+x <- rnorm(n = N, mean = 0, sd = 1)
+y <- rnorm(n = N, mean = d1, sd = 1)
+z <- rnorm(n = N, mean = d2, sd = 1)
+data = c(x, y, z)
+groups = factor(rep(letters[24:26], each = N))
+test <- aov(data ~ groups)
+pes1[i] <- etaSquared(test)[1, 2]
+p1[i] <- summary(test)[[1]][["Pr(>F)"]][[1]]
+p2[i] <- t.test(x, y)$p.value
+p3[i] <- t.test(x, z)$p.value
+p4[i] <- t.test(y, z)$p.value
+data = c(x, y)
+groups = factor(rep(letters[24:25], each = N))
+test <- aov(data ~ groups)
+pes2[i] <- etaSquared(test)[1, 2]
+}
+
+sum(p1 < alpha1) / nSim
+sum(p2 < alpha2) / nSim
+sum(p3 < alpha2) / nSim
+sum(p4 < alpha2) / nSim
+mean(pes1)
+mean(pes2)
+```
+
+### Three conditions replication
+
+```{r}
+K <- 3
+mu <- c(0, 0.4, 0.2)
+n <- 82
+sd <- 1
+design = paste(K, "b", sep = "")
+```
+
+```{r, message=FALSE, warning=FALSE}
+design_result <- ANOVA_design(
+  design = string,
+  n = n,
+  mu = mu,
+  sd = sd,
+  labelnames = c("factor1", "level1", "level2", "level3")
+  )
+
+  ANOVA_power(design_result, nsims = nsims)
+```
+
+## Effect Size Estimates for One-Way ANOVA
+
+Using the formulas below, we can calculate the means for between designs with one factor (One-Way ANOVA). Using the formula also used in Albers & Lakens (2018), we can determine the means that should yield a specified effect sizes (expressed in Cohen's f).
+
+Eta-squared (idential to partial eta-squared for One-Way ANOVA's) has benchmarks of .0099, .0588, and .1379 for small, medium, and large effect sizes (cohen, 1988). 
+
+### Three conditions, small effect size
+
+We can simulate a one-factor anova setting means to achieve a certain effect size. Eta-squared is biased. Thus, the eta-squared we calculate based on the observed data overestimates the population effect size. This bias is largest for smaller sample sizes. Thus, to test whether the simulation yields the expected effect size, we use extremele large sample sizes in each between subject condition (n = 5000). This simulation should yield a small effect size (0.099)
+
+```{r effect_size}
+K <- 3
+ES <- .0099
+mu <- mu_from_ES(K = K, ES = ES)
+n <- 5000
+sd <- 1
+r <- 0
+string = paste(K,"b",sep = "")
+```
+
+```{r, message=FALSE, warning=FALSE}
+design_result <- ANOVA_design(
+  design = string,
+  n = n,
+  mu = mu,
+  sd = sd,
+  r = r,
+  labelnames = c("factor1", "level1", "level2", "level3")
+  )
+
+  simulation_result <- ANOVA_power(design_result, nsims = nsims)
+  
+  exact_result <-
+  ANOVA_exact(design_result, alpha_level = alpha_level)
+```
+
+The resulting effect size estimate from the simulation is very close to 0.0099
+
+### Four conditions, medium effect size
+
+This simulation should yield a medium effect size (0.588) across four independent conditions.
+
+```{r}
+K <- 4
+ES <- .0588
+mu <- mu_from_ES(K = K, ES = ES)
+n <- 5000
+sd <- 1
+r <- 0
+string = paste(K,"b",sep = "")
+```
+
+
+
+```{r, message=FALSE, warning=FALSE}
+design_result <- ANOVA_design(
+  design = string,
+  n = n,
+  mu = mu,
+  sd = sd,
+  r = r,
+  labelnames = c("factor1", "level1", "level2", "level3", "level4")
+  )
+
+simulation_result <- ANOVA_power(design_result, nsims = nsims)
+  
+exact_result <- ANOVA_exact(design_result, alpha_level = alpha_level)
+```
+
+Results are very close to 0.588. 
+
+### Two conditions, large effect size
+
+We can simulate a one-factor anova that should yield a large effect size (0.1379) across two conditions. 
+
+```{r}
+K <- 2
+ES <- .1379
+mu <- mu_from_ES(K = K, ES = ES)
+n <- 5000
+sd <- 1
+r <- 0
+string = paste(K,"b",sep = "")
+```
+
+```{r, message=FALSE, warning=FALSE}
+design_result <- ANOVA_design(design = string,
+                   n = n, 
+                   mu = mu, 
+                   sd = sd, 
+                   r = r, 
+                   labelnames = c("factor1", "level1", "level2"))
+simulation_result <- ANOVA_power(design_result, nsims = nsims)
+exact_result <- ANOVA_exact(design_result, alpha_level = alpha_level)
+```
+
+The results are very close to is simulation should yield a small effect size (0.1379).

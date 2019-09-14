@@ -10,7 +10,7 @@ link-citations: yes
 description: "This is a book describing the capabilities of the Superpower R package."
 ---
 
-This is a compilation of documents for `Superpower` R package written in **Markdown** and compiled by **Bookdown**.
+This is a compilation of documents for [Superpower](https://github.com/arcaldwell49/Superpower) R package written in **Markdown** and compiled by **Bookdown**.
 
 
 
@@ -23,22 +23,30 @@ knitr::write_bib(c(
 
 # Introduction
 
+The goal of `Superpower` is to easily simulate factorial designs and empirically calculate power using a simulation approach. 
+The R package is intended to be utilized for prospective (a priori) power analysis. Please don't be silly and compute [post hoc power](https://discourse.datamethods.org/t/reference-collection-to-push-back-against-common-statistical-myths/1787). 
+
+This package, and book, expect readers to have some familiarity with R. However, we have created [two Shiny apps](http://shiny.ieis.tue.nl/anova_power/) (one for ANOVA_power and one for ANOVA) to help use these functions if you are not familiar with R.
+
 In this book we will display a variety of ways the `Superpower` package can be used for power analysis and sample size planning for factorial experimental designs. We also included various examples of the performance of `Superpower` against other R packages (e.g., `pwr2ppl` and `pwr`) and statistical programs (such as G*Power). All uses of the `ANOVA_power` function have been run with 100000 iterations (`nsims = 100000`). If there is anything `Superpower
 
 ```{r setup, include=FALSE}
 knitr::opts_chunk$set(echo = TRUE)
-nsims <- 100 #set number of simulations RESET BEFORE PUBLICATION TO 100.000
-require(mvtnorm, quietly = TRUE)
-require(MASS, quietly = TRUE)
-require(afex, quietly = TRUE)
-require(emmeans, quietly = TRUE)
-require(ggplot2, quietly = TRUE)
-require(gridExtra, quietly = TRUE)
-require(reshape2, quietly = TRUE)
-require(pwr, quietly = TRUE)
+#set number of simulations RESET BEFORE PUBLICATION TO 100.000
+nsims <- 100 
+library(mvtnorm)
+library(MASS)
+library(afex)
+library(emmeans)
+library(gridExtra)
+library(reshape2)
+library(pwr)
 library(pwr2ppl)
 library(lsr)
 library(viridis)
-# Install functions from GitHub by running the code below:
+library(broom)
+library(car)
+library(tidyverse)
 library(Superpower)
 ```
+
