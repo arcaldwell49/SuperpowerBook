@@ -126,7 +126,7 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
       <nav role="navigation">
 
 <ul class="summary">
-<li><a href="./">A Minimal Book Example</a></li>
+<li><a href="./">Superpower</a></li>
 
 <li class="divider"></li>
 <li class="chapter" data-level="1" data-path="index.html"><a href="index.html"><i class="fa fa-check"></i><b>1</b> Introduction</a></li>
@@ -298,34 +298,34 @@ design_result &lt;-<span class="st"> </span><span class="kw">ANOVA_design</span>
 <span class="co">#Same power for 2n regardless of n and d</span>
   <span class="kw">colada17</span>(<span class="dt">simtot=</span><span class="dv">2000</span>, <span class="dt">n1=</span><span class="dv">20</span>,<span class="dt">n2=</span><span class="dv">40</span>,<span class="dt">d1=</span><span class="dv">1</span>,<span class="dt">d2=</span><span class="dv">0</span>)  </code></pre>
 <pre><code>## 
-## Study 1 is powered to: 0.87
+## Study 1 is powered to: 0.88
 ## Study 2 is powered to: 0.88</code></pre>
 <pre class="sourceCode r"><code class="sourceCode r">  <span class="kw">colada17</span>(<span class="dt">simtot=</span><span class="dv">2000</span>, <span class="dt">n1=</span><span class="dv">50</span>,<span class="dt">n2=</span><span class="dv">100</span>,<span class="dt">d1=</span>.<span class="dv">3</span>,<span class="dt">d2=</span><span class="dv">0</span>)</code></pre>
 <pre><code>## 
-## Study 1 is powered to: 0.3
-## Study 2 is powered to: 0.31</code></pre>
+## Study 1 is powered to: 0.31
+## Study 2 is powered to: 0.33</code></pre>
 <pre class="sourceCode r"><code class="sourceCode r">  <span class="kw">colada17</span>(<span class="dt">simtot=</span><span class="dv">2000</span>, <span class="dt">n1=</span><span class="dv">150</span>,<span class="dt">n2=</span><span class="dv">300</span>,<span class="dt">d1=</span>.<span class="dv">25</span>,<span class="dt">d2=</span><span class="dv">0</span>)</code></pre>
 <pre><code>## 
-## Study 1 is powered to: 0.59
-## Study 2 is powered to: 0.59</code></pre>
+## Study 1 is powered to: 0.58
+## Study 2 is powered to: 0.57</code></pre>
 <pre class="sourceCode r"><code class="sourceCode r"><span class="co">#Need 4n if effect is 70% attenuated</span>
   <span class="kw">colada17</span>(<span class="dt">simtot=</span><span class="dv">2000</span>, <span class="dt">n1=</span><span class="dv">25</span>,<span class="dt">n2=</span><span class="dv">100</span>,<span class="dt">d1=</span>.<span class="dv">5</span>, <span class="dt">d2=</span>.<span class="dv">3</span><span class="op">*</span>.<span class="dv">5</span>)</code></pre>
 <pre><code>## 
-## Study 1 is powered to: 0.42
-## Study 2 is powered to: 0.42</code></pre>
+## Study 1 is powered to: 0.39
+## Study 2 is powered to: 0.43</code></pre>
 <pre class="sourceCode r"><code class="sourceCode r">  <span class="kw">colada17</span>(<span class="dt">simtot=</span><span class="dv">2000</span>, <span class="dt">n1=</span><span class="dv">50</span>,<span class="dt">n2=</span><span class="dv">200</span>,<span class="dt">d1=</span>.<span class="dv">5</span>, <span class="dt">d2=</span>.<span class="dv">3</span><span class="op">*</span>.<span class="dv">5</span>)</code></pre>
 <pre><code>## 
-## Study 1 is powered to: 0.72
+## Study 1 is powered to: 0.68
 ## Study 2 is powered to: 0.69</code></pre>
 <pre class="sourceCode r"><code class="sourceCode r">  <span class="kw">colada17</span>(<span class="dt">simtot=</span><span class="dv">2000</span>, <span class="dt">n1=</span><span class="dv">22</span>,<span class="dt">n2=</span><span class="dv">88</span>,<span class="dt">d1=</span>.<span class="dv">41</span>, <span class="dt">d2=</span>.<span class="dv">3</span><span class="op">*</span>.<span class="dv">41</span>)</code></pre>
 <pre><code>## 
-## Study 1 is powered to: 0.26
-## Study 2 is powered to: 0.26</code></pre>
+## Study 1 is powered to: 0.27
+## Study 2 is powered to: 0.27</code></pre>
 <pre class="sourceCode r"><code class="sourceCode r"><span class="co">#underpowered if run with the same n</span>
 <span class="kw">colada17</span>(<span class="dt">simtot=</span>nsims, <span class="dt">n1=</span><span class="dv">20</span>,<span class="dt">n2=</span><span class="dv">20</span>,<span class="dt">d1=</span><span class="dv">1</span>,<span class="dt">d2=</span><span class="dv">0</span>)  </code></pre>
 <pre><code>## 
-## Study 1 is powered to: 0.89
-## Study 2 is powered to: 0.62</code></pre>
+## Study 1 is powered to: 0.87
+## Study 2 is powered to: 0.6</code></pre>
 <p>And we can reproduce the results using the ANOVA_power function.</p>
 <pre class="sourceCode r"><code class="sourceCode r">alpha_level &lt;-<span class="st"> </span><span class="fl">0.05</span> <span class="co">#We set the alpha level at 0.05. </span>
 
@@ -355,16 +355,16 @@ exact_result &lt;-<span class="st"> </span><span class="kw">ANOVA_exact</span>(d
 <pre class="sourceCode r"><code class="sourceCode r"><span class="co">#Same power for 2n regardless of n and d</span>
 <span class="kw">colada17</span>(<span class="dt">simtot =</span> <span class="dv">10000</span>, <span class="dt">n1 =</span> <span class="dv">20</span>, <span class="dt">n2 =</span> <span class="dv">40</span>, <span class="dt">d1 =</span> <span class="dv">1</span>, <span class="dt">d2 =</span> <span class="dv">0</span>)  </code></pre>
 <pre><code>## 
-## Study 1 is powered to: 0.87
+## Study 1 is powered to: 0.86
 ## Study 2 is powered to: 0.88</code></pre>
 <pre class="sourceCode r"><code class="sourceCode r"><span class="kw">colada17</span>(<span class="dt">simtot =</span> <span class="dv">10000</span>, <span class="dt">n1 =</span> <span class="dv">50</span>, <span class="dt">n2 =</span> <span class="dv">100</span>, <span class="dt">d1 =</span> <span class="fl">.3</span>, <span class="dt">d2 =</span> <span class="dv">0</span>)</code></pre>
 <pre><code>## 
 ## Study 1 is powered to: 0.32
-## Study 2 is powered to: 0.33</code></pre>
+## Study 2 is powered to: 0.32</code></pre>
 <pre class="sourceCode r"><code class="sourceCode r"><span class="kw">colada17</span>(<span class="dt">simtot =</span> <span class="dv">10000</span>, <span class="dt">n1 =</span> <span class="dv">150</span>, <span class="dt">n2 =</span> <span class="dv">300</span>, <span class="dt">d1 =</span> <span class="fl">.25</span>, <span class="dt">d2 =</span> <span class="dv">0</span>)</code></pre>
 <pre><code>## 
 ## Study 1 is powered to: 0.58
-## Study 2 is powered to: 0.58</code></pre>
+## Study 2 is powered to: 0.59</code></pre>
 <p>We can also reproduce the last example by adjusting the means and standard deviation. With 150 people, and a Cohen’s d of 0.25 (the difference is 5, the sd 20, so 5/20 = 0.25) we should reproduce the power for the simple effect.</p>
 <pre class="sourceCode r"><code class="sourceCode r">string &lt;-<span class="st"> &quot;2b*2b&quot;</span>
 n &lt;-<span class="st"> </span><span class="dv">150</span>
@@ -385,7 +385,7 @@ exact_result &lt;-<span class="st"> </span><span class="kw">ANOVA_exact</span>(d
 <pre><code>## Power and Effect sizes for ANOVA tests
 ##              power partial_eta_squared cohen_f non_centrality
 ## fruit        33.33              0.0039  0.0627         2.3437
-## hunger       33.33              0.0039  0.0627         2.3437
+## hunger       33.33              0.0039  0.0627         2.3438
 ## fruit:hunger 33.33              0.0039  0.0627         2.3437
 ## 
 ## Power and Effect sizes for contrasts

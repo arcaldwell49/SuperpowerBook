@@ -26,9 +26,20 @@ design_result <- ANOVA_design(design = string,
 alpha_level <- 0.05
 # You should think carefully about how to justify your alpha level.
 # We will give some examples later, but for now, use 0.05.
-simulation_result <- ANOVA_power(design_result, alpha_level = alpha_level, nsims = nsims)
+simulation_result <- ANOVA_power(design_result, 
+                                 alpha_level = alpha_level, 
+                                 nsims = nsims,
+                                 verbose = FALSE)
 
-exact_result <- ANOVA_exact(design_result)
+knitr::kable(simulation_result$main_results,
+             caption = "Simulated ANOVA Result")
+
+exact_result <- ANOVA_exact(design_result,
+                            alpha_level = alpha_level,
+                            verbose = FALSE)
+
+knitr::kable(exact_result$main_results,
+             caption = "Exact ANOVA Result")
 ```
 
 The result shows that we have exactly the same power for the ANOVA, as we have for the *t*-test. This is because when there are only two groups, these tests are mathematically identical. In a study with 100 participants, we would have quite low power (around 67.7%). An ANOVA with 2 groups is identical to a *t*-test. For our example, Cohen's d (the standardized mean difference) is 2.2/6.4, or d = 0.34375 for the difference between the control condition and pets, which we can use to easily compute the expected power for these simple comparisons using the pwr package.
@@ -37,8 +48,8 @@ The result shows that we have exactly the same power for the ANOVA, as we have f
 pwr.t.test(d = 2.2/6.4,
            n = 100,
            sig.level = 0.05,
-           type="two.sample",
-           alternative="two.sided")$power
+           type = "two.sample",
+           alternative = "two.sided")$power
 ```
 
 We can also directly compute Cohen's f from Cohen's d for two groups, as Cohen (1988) describes, because f = 1/2d. So f = 0.5*0.34375 = 0.171875. And indeed, power analysis using the pwr package yields the same result using the `pwr.anova.test` as the `power.t.test`.
@@ -73,7 +84,7 @@ This sensitivity analysis shows we have 90% power in our planned design to detec
 
 ```{r}
 f2 <- f^2
-ES <- f2/(f2+1)
+ES <- f2 / (f2 + 1)
 ES
 ```
 Expressed in eta-squared, we can detect values of eta-squared = 0.05 or larger. 
@@ -96,9 +107,18 @@ design_result <- ANOVA_design(
 
 simulation_result <- ANOVA_power(design_result, 
                                  alpha_level = alpha_level, 
-                                 nsims = nsims)
+                                 nsims = nsims,
+                                 verbose = FALSE)
 
-exact_result <- ANOVA_exact(design_result)
+knitr::kable(simulation_result$main_results,
+             caption = "Simulated ANOVA Result")
+
+exact_result <- ANOVA_exact(design_result,
+                            alpha_level = alpha_level,
+                            verbose = FALSE)
+
+knitr::kable(exact_result$main_results,
+             caption = "Exact ANOVA Result")
   
 ```
 
@@ -138,19 +158,28 @@ alpha_level <- 0.05
 
 simulation_result <- ANOVA_power(design_result, 
                                  alpha_level = alpha_level, 
-                                 nsims = nsims)
+                                 nsims = nsims,
+                                 verbose = FALSE)
 
-exact_result <- ANOVA_exact(design_result)
+knitr::kable(simulation_result$main_results,
+             caption = "Simulated ANOVA Result")
+
+exact_result <- ANOVA_exact(design_result,
+                            alpha_level = alpha_level,
+                            verbose = FALSE)
+
+knitr::kable(exact_result$main_results,
+             caption = "Exact ANOVA Result")
 ```
 We stored the result from the power analysis in an object. This allows us to request plots (which are not printed automatically) showing the *p*-value distribution. If we request `simulation_result$plot1` we get the p-value distribution for the ANOVA:
 
-```{r}
+```{r echo=FALSE}
 simulation_result$plot1
 ```
 
 If we request `simulation_result$plot2` we get the p-value distribution for the paired comparisons (in this case only one):
 
-```{r}
+```{r echo=FALSE}
 simulation_result$plot2
 ```
 
@@ -183,15 +212,21 @@ alpha_level <- 0.05
 # We will give some examples later, but for now, use 0.05.
 simulation_result <- ANOVA_power(design_result, 
                                  alpha_level = alpha_level, 
-                                 nsims = nsims)
+                                 nsims = nsims,
+                                 verbose = FALSE)
 
-exact_result <- ANOVA_exact(design_result)
+knitr::kable(simulation_result$main_results,
+             caption = "Simulated ANOVA Result")
+
+exact_result <- ANOVA_exact(design_result,
+                            alpha_level = alpha_level,
+                            verbose = FALSE)
+
+knitr::kable(exact_result$main_results,
+             caption = "Exact ANOVA Result")
 
 
-#should yield
-#0.3983064
-#0.5205162
-#0.06104044
+
 ```
 
 The result shows that you would have quite low power with 50 participants, both for the overall ANOVA (just around 50% power), as for the follow up comparisons (approximately 40% power for the control vs cat condition, around 50% for the control vs dogs condition, and a really low power (around 6%, just above the Type 1 error rate of 5%) for the expected difference between cats and dogs. 
@@ -277,9 +312,18 @@ design_result <- ANOVA_design(
 
 simulation_result <- ANOVA_power(design_result, 
                                  alpha_level = alpha_level, 
-                                 nsims = nsims)
+                                 nsims = nsims,
+                                 verbose = FALSE)
 
-exact_result <- ANOVA_exact(design_result)
+knitr::kable(simulation_result$main_results,
+             caption = "Simulated ANOVA Result")
+
+exact_result <- ANOVA_exact(design_result,
+                            alpha_level = alpha_level,
+                            verbose = FALSE)
+
+knitr::kable(exact_result$main_results,
+             caption = "Exact ANOVA Result")
 ```
 
 The simulation confirms that for the *F*-test for the ANOVA we have 90% power. This is also what g*power tells us what would happen based on a post-hoc power analysis with an f of 0.2934417, 3 groups, 150 participants in total (50 in each between subject condition), and an alpha of 5%. 
@@ -442,10 +486,19 @@ design_result <- ANOVA_design(
   )
 
 simulation_result <- ANOVA_power(design_result, 
-                                 alpha_level = alpha_level,
-                                 nsims = nsims)
+                                 alpha_level = alpha_level, 
+                                 nsims = nsims,
+                                 verbose = FALSE)
 
-exact_result <- ANOVA_exact(design_result)
+knitr::kable(simulation_result$main_results,
+             caption = "Simulated ANOVA Result")
+
+exact_result <- ANOVA_exact(design_result,
+                            alpha_level = alpha_level,
+                            verbose = FALSE)
+
+knitr::kable(exact_result$main_results,
+             caption = "Exact ANOVA Result")
 ```
 
 ### Variation 1
@@ -527,9 +580,18 @@ design_result <- ANOVA_design(
 
 simulation_result <- ANOVA_power(design_result, 
                                  alpha_level = alpha_level, 
-                                 nsims = nsims)
+                                 nsims = nsims,
+                                 verbose = FALSE)
 
-exact_result <- ANOVA_exact(design_result)
+knitr::kable(simulation_result$main_results,
+             caption = "Simulated ANOVA Result")
+
+exact_result <- ANOVA_exact(design_result,
+                            alpha_level = alpha_level,
+                            verbose = FALSE)
+
+knitr::kable(exact_result$main_results,
+             caption = "Exact ANOVA Result")
 ```
 
 ### Variation 2
@@ -606,14 +668,23 @@ design_result <- ANOVA_design(
 
 simulation_result <- ANOVA_power(design_result, 
                                  alpha_level = alpha_level, 
-                                 nsims = nsims)
+                                 nsims = nsims,
+                                 verbose = FALSE)
 
-exact_result <- ANOVA_exact(design_result)
+knitr::kable(simulation_result$main_results,
+             caption = "Simulated ANOVA Result")
+
+exact_result <- ANOVA_exact(design_result,
+                            alpha_level = alpha_level,
+                            verbose = FALSE)
+
+knitr::kable(exact_result$main_results,
+             caption = "Exact ANOVA Result")
 ```
 
 ## Effect Size Estimates for One-Way ANOVA
 
-Using the formulas below, we can calculate the means for between designs with one factor (One-Way ANOVA). Using the formula also used in Albers & Lakens (2018), we can determine the means that should yield a specified effect sizes (expressed in Cohen's f).
+Using the formulas below, we can calculate the means for between designs with one factor (one-way ANOVA). Using the formula also used in Albers & Lakens (2018), we can determine the means that should yield a specified effect sizes (expressed in Cohen's f).
 
 Eta-squared (idential to partial eta-squared for One-Way ANOVA's) has benchmarks of .0099, .0588, and .1379 for small, medium, and large effect sizes (cohen, 1988). 
 
@@ -643,9 +714,18 @@ design_result <- ANOVA_design(
 
 simulation_result <- ANOVA_power(design_result, 
                                  alpha_level = alpha_level, 
-                                 nsims = nsims)
+                                 nsims = nsims,
+                                 verbose = FALSE)
 
-exact_result <- ANOVA_exact(design_result)
+knitr::kable(simulation_result$main_results,
+             caption = "Simulated ANOVA Result")
+
+exact_result <- ANOVA_exact(design_result,
+                            alpha_level = alpha_level,
+                            verbose = FALSE)
+
+knitr::kable(exact_result$main_results,
+             caption = "Exact ANOVA Result")
 ```
 
 The resulting effect size estimate from the simulation is very close to 0.0099
@@ -676,9 +756,20 @@ design_result <- ANOVA_design(
   labelnames = c("factor1", "level1", "level2", "level3", "level4")
   )
 
-simulation_result <- ANOVA_power(design_result, nsims = nsims)
-  
-exact_result <- ANOVA_exact(design_result, alpha_level = alpha_level)
+simulation_result <- ANOVA_power(design_result, 
+                                 alpha_level = alpha_level, 
+                                 nsims = nsims,
+                                 verbose = FALSE)
+
+knitr::kable(simulation_result$main_results,
+             caption = "Simulated ANOVA Result")
+
+exact_result <- ANOVA_exact(design_result,
+                            alpha_level = alpha_level,
+                            verbose = FALSE)
+
+knitr::kable(exact_result$main_results,
+             caption = "Exact ANOVA Result")
 ```
 
 Results are very close to 0.588. 
@@ -707,9 +798,18 @@ design_result <- ANOVA_design(design = string,
 
 simulation_result <- ANOVA_power(design_result, 
                                  alpha_level = alpha_level, 
-                                 nsims = nsims)
+                                 nsims = nsims,
+                                 verbose = FALSE)
 
-exact_result <- ANOVA_exact(design_result)
+knitr::kable(simulation_result$main_results,
+             caption = "Simulated ANOVA Result")
+
+exact_result <- ANOVA_exact(design_result,
+                            alpha_level = alpha_level,
+                            verbose = FALSE)
+
+knitr::kable(exact_result$main_results,
+             caption = "Exact ANOVA Result")
 ```
 
 The results are very close to is simulation should yield a small effect size (0.1379).

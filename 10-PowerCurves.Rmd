@@ -18,9 +18,12 @@ design_result <- ANOVA_design(design = string,
                               r = r, 
                               labelnames = labelnames)
 
-power_res <- ANOVA_exact(design_result)
+exact_result <- ANOVA_exact(design_result,
+                            alpha_level = alpha_level,
+                            verbose = FALSE)
 
-power_res$main_results
+knitr::kable(exact_result$main_results,
+             caption = "Exact ANOVA Result")
 ```
 
 We can make these calculations for a range of sample sizes, to get a power curve. We created a simple function that performs these calculations across a range of sample sizes (from n = 3 to max_, a variable you can specify in the function). 
@@ -35,7 +38,7 @@ p_a$plot_ANOVA
 
 The design has means 0, 0, 0, 0, with one cell increasing by 0.1, up to 0, 0, 0, 0.5. The standard deviation is set to 1. The correlation between all variables is 0.5. 
 
-```{r, fig.height = 10, fig.width = 7}
+```{r, fig.height = 10, fig.width = 7, echo = FALSE}
 string <- "2w*2w"
 labelnames = c("A", "a1", "a2", "B", "b1", "b2")
 design_result <- ANOVA_design(design = string,
@@ -104,9 +107,10 @@ p_f <- plot_power(design_result,
 p_f$power_df$effect <- 0.5
 
 
-plot_data <- rbind(p_a$power_df, p_b$power_df, p_c$power_df, p_d$power_df, p_e$power_df, p_f$power_df)
+plot_data <- rbind(p_a$power_df, p_b$power_df, p_c$power_df, 
+                   p_d$power_df, p_e$power_df, p_f$power_df)
 
-ggplot(plot_data, aes(x=n, y=`A:B`,color = as.factor(effect))) +
+ggplot(plot_data, aes(x = n, y = `A:B`,color = as.factor(effect))) +
   geom_line(size = 1.5) +
   labs(color = "Effect Size") +
   scale_color_viridis_d()
@@ -118,7 +122,7 @@ ggplot(plot_data, aes(x=n, y=`A:B`,color = as.factor(effect))) +
 
 The design has means 0, 0, 0, 0, with two cells increasing by 0.1, up to 0.5, 0, 0, 0.5. The standard deviation is set to 1. The correlation between all variables is 0.5. 
 
-```{r, fig.height = 10, fig.width = 7}
+```{r, fig.height = 10, fig.width = 7, echo = FALSE}
 design_result <- ANOVA_design(design = string,
                               n = 20, 
                               mu = c(0,0,0,0.0), 
@@ -185,9 +189,10 @@ p_f <- plot_power(design_result,
 
 p_f$power_df$effect <- 0.5
 
-plot_data <- rbind(p_a$power_df, p_b$power_df, p_c$power_df, p_d$power_df, p_e$power_df, p_f$power_df)
+plot_data <- rbind(p_a$power_df, p_b$power_df, p_c$power_df,
+                   p_d$power_df, p_e$power_df, p_f$power_df)
 
-ggplot(plot_data, aes(x=n, y=`A:B`,color = as.factor(effect))) +
+ggplot(plot_data, aes(x = n, y = `A:B`,color = as.factor(effect))) +
   geom_line(size = 1.5) +
   labs(color = "Effect Size") +
   scale_color_viridis_d()
@@ -198,7 +203,7 @@ ggplot(plot_data, aes(x=n, y=`A:B`,color = as.factor(effect))) +
 
 The design has means 0, 0, 0, 0.3. The standard deviation is set to 1. The correlation between all variables increases from 0 to 0.9. 
 
-```{r, fig.height = 10, fig.width = 7}
+```{r, fig.height = 10, fig.width = 7, echo = FALSE}
 string <- "2w*2w"
 labelnames = c("A", "a1", "a2", "B", "b1", "b2")
 design_result <- ANOVA_design(design = string,
@@ -272,9 +277,10 @@ p_f <- plot_power(design_result,
 
 p_f$power_df$correlation <- 0.9
 
-plot_data <- rbind(p_a$power_df, p_b$power_df, p_c$power_df, p_d$power_df, p_e$power_df, p_f$power_df)
+plot_data <- rbind(p_a$power_df, p_b$power_df, 
+                   p_c$power_df, p_d$power_df, p_e$power_df, p_f$power_df)
 
-ggplot(plot_data, aes(x=n, y=`A:B`,color = as.factor(correlation))) +
+ggplot(plot_data, aes(x = n, y = `A:B`, color = as.factor(correlation))) +
   geom_line(size = 1.5) +
   labs(color = "Correlation") +
   scale_color_viridis_d()
@@ -286,7 +292,7 @@ ggplot(plot_data, aes(x=n, y=`A:B`,color = as.factor(correlation))) +
 
 As Potvin and Schutz (2000) write: "The more important finding with respect to the effect of *r* on power relates to the effect of the correlations associated with one factor on the power of the test of the main effect of the other factor. Specifically, if the correlations among the levels of B are larger than those within the AB matrix (i.e., *r*B - *r*AB > 0.0), there is a reduction in the power for the test of the A effect (and the test on B is similarly affected by the A correlations)."
 We see this in the plots below. As the correlation of the A factor increases from 0.4 to 0.9, we see the power for the main effect of factor B decreases.
-```{r, fig.height = 10, fig.width = 7}
+```{r, fig.height = 10, fig.width = 7, echo = FALSE}
 string <- "2w*2w"
 labelnames = c("A", "a1", "a2", "B", "b1", "b2")
 design_result <- ANOVA_design(design = string,
@@ -374,19 +380,13 @@ p_f <- plot_power(design_result,
 
 p_f$power_df$corr_diff <- 0.5
 
-plot_data <- rbind(p_a$power_df, p_b$power_df, p_c$power_df, p_d$power_df, p_e$power_df, p_f$power_df)
+plot_data <- rbind(p_a$power_df, p_b$power_df, p_c$power_df, 
+                   p_d$power_df, p_e$power_df, p_f$power_df)
 
 
-ggplot(plot_data, aes(x=n, y=`A`,color = as.factor(corr_diff))) +
+ggplot(plot_data, aes(x = n, y = `A`, color = as.factor(corr_diff))) +
   geom_line(size = 1.5) +
   labs(color = "Difference in Correlation") +
   scale_color_viridis_d()
-
-ggplot(plot_data, aes(x=n, y=`B`,color = as.factor(corr_diff))) +
-  geom_line(size = 1.5) +
-  labs(color = "Difference in Correlation") +
-  scale_color_viridis_d()
-
-
 
 ```

@@ -15,11 +15,21 @@ design_result <- ANOVA_design(design = "2b*2b*2b", #describe the design
                               mu = c(2, 2, 6, 1, 6, 6, 1, 8), #pattern of means
                               sd = 10, #standard deviation
                               labelnames = labelnames) #names of labels
-# Power based on simulations
-ANOVA_power(design_result, nsims = nsims)
 
-# Power based on exact simulation
-exact_result <- ANOVA_exact(design_result)
+simulation_result <- ANOVA_power(design_result, 
+                                 alpha_level = alpha_level, 
+                                 nsims = nsims,
+                                 verbose = FALSE)
+
+knitr::kable(simulation_result$main_results,
+             caption = "Simulated ANOVA Result")
+
+exact_result <- ANOVA_exact(design_result,
+                            alpha_level = alpha_level,
+                            verbose = FALSE)
+
+knitr::kable(exact_result$main_results,
+             caption = "Exact ANOVA Result")
 
 #Analytical power calculation
 power_analytic <- power_threeway_between(design_result)
@@ -67,10 +77,22 @@ design_result <- ANOVA_design(design = string,
                    mu = mu, 
                    sd = sd, 
                    labelnames = labelnames)
-# Power based on simulations
-simulation_result <- ANOVA_power(design_result, nsims = nsims)
-# Power based on exact simulation
-exact_result <- ANOVA_exact(design_result)
+
+simulation_result <- ANOVA_power(design_result, 
+                                 alpha_level = alpha_level, 
+                                 nsims = nsims,
+                                 verbose = FALSE)
+
+knitr::kable(simulation_result$main_results,
+             caption = "Simulated ANOVA Result")
+
+exact_result <- ANOVA_exact(design_result,
+                            alpha_level = alpha_level,
+                            verbose = FALSE)
+
+knitr::kable(exact_result$main_results,
+             caption = "Exact ANOVA Result")
+
 # Power based on analytical solution
 power_oneway_between(design_result)$power #using default alpha level of .05
 ```
@@ -89,10 +111,21 @@ design_result <- ANOVA_design(design = string,
                    sd = sd, 
                    labelnames = labelnames)
 
-# Power based on simulations
-simulation_result <- ANOVA_power(design_result, nsims = nsims)
-# Power based on exact simulation
-exact_result <- ANOVA_exact(design_result)
+simulation_result <- ANOVA_power(design_result, 
+                                 alpha_level = alpha_level, 
+                                 nsims = nsims,
+                                 verbose = FALSE)
+
+knitr::kable(simulation_result$main_results,
+             caption = "Simulated ANOVA Result")
+
+exact_result <- ANOVA_exact(design_result,
+                            alpha_level = alpha_level,
+                            verbose = FALSE)
+
+knitr::kable(exact_result$main_results,
+             caption = "Exact ANOVA Result")
+
 # Power based on analytical solution
 power_res <- power_twoway_between(design_result) #using default alpha level of .05
 power_res$power_A
@@ -116,10 +149,21 @@ design_result <- ANOVA_design(design = string,
                    sd = sd, 
                    labelnames = labelnames)
 
-# Power for the given N in the design_result
-simulation_result <- ANOVA_power(design_result, nsims = nsims)
-# Exact simulation
-exact_result <- ANOVA_exact(design_result, alpha_level = alpha_level)
+simulation_result <- ANOVA_power(design_result, 
+                                 alpha_level = alpha_level, 
+                                 nsims = nsims,
+                                 verbose = FALSE)
+
+knitr::kable(simulation_result$main_results,
+             caption = "Simulated ANOVA Result")
+
+exact_result <- ANOVA_exact(design_result,
+                            alpha_level = alpha_level,
+                            verbose = FALSE)
+
+knitr::kable(exact_result$main_results,
+             caption = "Exact ANOVA Result")
+
 #Analytical power calculation
 power_analytic <- power_threeway_between(design_result)
 power_analytic$power_A

@@ -1,4 +1,4 @@
-# Repeated Measures-ANOVA 
+# Repeated Measures ANOVA 
 
 ## Part 1
 
@@ -60,21 +60,35 @@ r <- 0.5
 alpha = 0.05
 f <- 0.25
 f2 <- f^2
-ES <- f2/(f2+1)
+ES <- f2/(f2 + 1)
 ES
 mu <- mu_from_ES(K = K, ES = ES)
-design =paste(K,"w",sep="")
+design = paste(K,"w",sep = "")
 labelnames <- c("speed", "fast", "slow")
+
 design_result <- ANOVA_design(design = design,
                    n = n, 
                    mu = mu, 
                    sd = sd, 
                    r = r, 
                    labelnames = labelnames)
-alpha_level <- 0.05
-simulation_result <- ANOVA_power(design_result, nsims = nsims)
 
-exact_result <- ANOVA_exact(design_result, alpha_level = alpha_level)
+alpha_level <- 0.05
+
+simulation_result <- ANOVA_power(design_result, 
+                                 alpha_level = alpha_level, 
+                                 nsims = nsims,
+                                 verbose = FALSE)
+
+knitr::kable(simulation_result$main_results,
+             caption = "Simulated ANOVA Result")
+
+exact_result <- ANOVA_exact(design_result,
+                            alpha_level = alpha_level,
+                            verbose = FALSE)
+
+knitr::kable(exact_result$main_results,
+             caption = "Exact ANOVA Result")
 ```
 
 The results of the simulation are indeed very close to 80.777%. Note that the simulation calculates Cohen's dz effect sizes for paired comparisons - which here given the correlation of 0.5 is also 0.5 for a medium effect size. 
@@ -89,10 +103,10 @@ r <- 0.7
 alpha = 0.05
 f <- 0.25
 f2 <- f^2
-ES <- f2/(f2+1)
+ES <- f2/(f2 + 1)
 ES
 mu <- mu_from_ES(K = K, ES = ES)
-design = paste(K,"w",sep="")
+design = paste(K,"w",sep = "")
 labelnames <- c("speed", "fast", "slow")
 design_result <- ANOVA_design(design = design,
                    n = n, 
@@ -105,9 +119,20 @@ alpha_level <- 0.05
 
 design_result$sigmatrix
 
-simulation_result <- ANOVA_power(design_result, nsims = nsims)
+simulation_result <- ANOVA_power(design_result, 
+                                 alpha_level = alpha_level, 
+                                 nsims = nsims,
+                                 verbose = FALSE)
 
-exact_result <- ANOVA_exact(design_result, alpha_level = alpha_level)
+knitr::kable(simulation_result$main_results,
+             caption = "Simulated ANOVA Result")
+
+exact_result <- ANOVA_exact(design_result,
+                            alpha_level = alpha_level,
+                            verbose = FALSE)
+
+knitr::kable(exact_result$main_results,
+             caption = "Exact ANOVA Result")
 
 ```
 
@@ -141,12 +166,13 @@ Imagine we have a within-subject experiment with 3 conditions. We ask people wha
 ```{r}
 mu <- c(3.8, 4.2, 4.3)
 sd <- 0.9
-f <- sqrt(sum((mu-mean(mu))^2)/length(mu))/sd #Cohen, 1988, formula 8.2.1 and 8.2.2
-f
-r <- 0.7
-(4.2-3.8)/0.9/sqrt(2*(1-r))
-(4.3-3.8)/0.9/sqrt(2*(1-r))
-(4.3-4.2)/0.9/sqrt(2*(1-r))
+f <- sqrt(sum((mu - mean(mu)) ^ 2) / length(mu)) / sd 
+#Cohen, 1988, formula 8.2.1 and 8.2.2
+  f
+  r <- 0.7
+  (4.2 - 3.8) / 0.9 / sqrt(2 * (1 - r))
+  (4.3 - 3.8) / 0.9 / sqrt(2 * (1 - r))
+  (4.3 - 4.2) / 0.9 / sqrt(2 * (1 - r))
 ```
 
 The relation between Cohen's d or dz and Cohen's f becomes more difficult when there are multiple groups, because the relationship depends on the pattern of the means. Cohen (1988) presents calculations for three patterns, minimal variability (for example, for 5 means: -0.25, 0, 0, 0, 0.25), medium variability (for example, for 5 means: -0.25, -0.25, 0.25, 0.25, 0.25 or -0.25, -0.25, -0.25, 0.25, 0.25). For these three patterns, formula's are available that compute Cohen's f from Cohen's d, where d is the effect size calculated for the difference between the largest and smallest mean (if the largest mean is 0.25 and the smallest mean is -0.25, 0.25 - -0.25 = 0.5, so d is 0.5 divided by the standard deviation of 0.9). In our example, d would be (4.3-3.8)/0.9 = 0.5555556. If we divide this value by sqrt(2*(1-r)) we have dz = 0.5555556/0.7745967 = 0.7172191. 
@@ -194,9 +220,20 @@ design_result <- ANOVA_design(design = design,
 
 alpha_level <- 0.05
 
-simulation_result <- ANOVA_power(design_result, nsims = nsims)
+simulation_result <- ANOVA_power(design_result, 
+                                 alpha_level = alpha_level, 
+                                 nsims = nsims,
+                                 verbose = FALSE)
 
-exact_result <- ANOVA_exact(design_result, alpha_level = alpha_level)
+knitr::kable(simulation_result$main_results,
+             caption = "Simulated ANOVA Result")
+
+exact_result <- ANOVA_exact(design_result,
+                            alpha_level = alpha_level,
+                            verbose = FALSE)
+
+knitr::kable(exact_result$main_results,
+             caption = "Exact ANOVA Result")
 ```
 
 The results of the simulation are indeed very close to 96.9%. We can see this is in line with the power estimate from Gpower: 
@@ -224,6 +261,7 @@ design_result <- ANOVA_design(design = design,
                    sd = sd, 
                    r = r, 
                    labelnames = labelnames)
+
 power_oneway_within(design_result)$power
 power_oneway_within(design_result)$eta_p_2
 power_oneway_within(design_result)$eta_p_2_SPSS
@@ -265,7 +303,7 @@ library('MASS')
 rho <- cbind(c(1, r, r), c(r, 1, r), c(r, r, 1))
 # define participant codes
 part <- paste("part",seq(1:N))
-for(i in 1:nSim) {
+for (i in 1:nSim) {
   #for each simulated experiment
   # setWinProgressBar(pb, i, title=paste(round(i/nSim*100, 1), "% done"))
   data = mvrnorm(n = N,
@@ -315,14 +353,22 @@ design_result <- ANOVA_design(design = design,
                    sd = sd, 
                    r = r, 
                    labelnames = labelnames)
-simulation_result <- ANOVA_power(design_result, nsims = nsims)
 
-```
+simulation_result <- ANOVA_power(design_result, 
+                                 alpha_level = alpha_level, 
+                                 nsims = nsims,
+                                 verbose = FALSE)
 
-And we can again replicate this with the `ANOVA_exact` function.
+knitr::kable(simulation_result$main_results,
+             caption = "Simulated ANOVA Result")
 
-```{r , message=FALSE, warning=FALSE}
-ANOVA_exact(design_result)
+exact_result <- ANOVA_exact(design_result,
+                            alpha_level = alpha_level,
+                            verbose = FALSE)
+
+knitr::kable(exact_result$main_results,
+             caption = "Exact ANOVA Result")
+
 ```
 
 ### Results
@@ -423,14 +469,24 @@ design_result <- ANOVA_design(design = design,
                    sd = sd, 
                    r = r, 
                    labelnames = labelnames)
-ANOVA_power(design_result, nsims = nsims)
+
+simulation_result <- ANOVA_power(design_result, 
+                                 alpha_level = alpha_level, 
+                                 nsims = nsims,
+                                 verbose = FALSE)
+
+knitr::kable(simulation_result$main_results,
+             caption = "Simulated ANOVA Result")
+
+exact_result <- ANOVA_exact(design_result,
+                            alpha_level = alpha_level,
+                            verbose = FALSE)
+
+knitr::kable(exact_result$main_results,
+             caption = "Exact ANOVA Result")
 ```
 
-We replicate this with `ANOVA_exact`.
 
-```{r, message=FALSE, warning=FALSE}
-ANOVA_exact(design_result)
-```
 
 Again, this is similar to G*Power for the ANOVA:
 

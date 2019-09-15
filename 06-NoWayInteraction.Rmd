@@ -5,16 +5,19 @@ In the 17th Data Colada blog post titled [No-way Interactions](http://datacolada
 ```{r}
 string <- "2b*2b"
 n <- 20
-mu <- c(20, 20, 20, 25) #All means are equal - so there is no real difference.
+# All means are equal - so there is no real difference.
 # Enter means in the order that matches the labels below.
+mu <- c(20, 20, 20, 25) 
 sd <- 0.5
-labelnames <- c("fruit", "apple", "banana", "hunger", "no hunger", "very hungry") #
+labelnames <- c("fruit", "apple", "banana", 
+                "hunger", "no hunger", "very hungry") #
 # the label names should be in the order of the means specified above.
 design_result <- ANOVA_design(design = string,
                    n = n, 
                    mu = mu, 
                    sd = sd, 
-                   labelnames = labelnames)
+                   labelnames = labelnames,
+                   plot = TRUE)
 ```
 
 We can reproduce the simulations in the Data Colada blog post, using the original code.
@@ -25,54 +28,62 @@ We can reproduce the simulations in the Data Colada blog post, using the origina
 #Written by Uri Simonsohn, March 2014
 #
 #
-#In DataColada[17] I propose that 2x2 interaction studies need 2x the sample size
+#In DataColada[17] 
+# I propose that 2x2 interaction studies need 2x the sample size
 #http://datacolada.org/2014/03/10/17-no-way-interactions
 #In a companion ,pdf I show the simple math behind it
 #
 #
 #Simulations are often more persuasive than math, so here it goes.
-#I run simulations that compute power for 2 and 4 cell design, the latter testing the interaction
-###################################################################################################
-#Create function that computes power of Studies 1 and 2, where Study 1  has 2 cells and tests a simple effect
+#I run simulations that compute power for 2 and 4 cell design, 
+# the latter testing the interaction
+###############################################################################
+#Create function that computes power of Studies 1 and 2, 
+# where Study 1  has 2 cells and tests a simple effect
 #and Study 2 has 4 cells and tests the interaction
-  colada17=function(d1,d2,n1,n2,simtot)
+colada17 = function(d1,d2,n1,n2,simtot)
   {
   #n1: sample size, per cell, study 1
   #n2: sample size, per cell, study 2
   #d1: simple effect M1-M2
-  #d2: moderated effect M3-M4, full elimination of effect implies d2=0
+  #d2: moderated effect M3-M4, 
+  # full elimination of effect implies d2=0
   #simtot: how many simulations to run
   #Here we will store results
-      p1=c()    #p-values for Study 1
-      p2=c()    #p-values for Study 2
-  for(i in 1:simtot) {
+      p1 = c()    #p-values for Study 1
+      p2 = c()    #p-values for Study 2
+  for (i in 1:simtot) {
     #draw data 4 samples
-    y1=rnorm(n=max(n1,n2),mean=d1)
-    y2=rnorm(n=max(n1,n2))
-    y3=rnorm(n=max(n1,n2),mean=d2)
-    y4=rnorm(n=max(n1,n2))
+    y1 = rnorm(n = max(n1, n2), mean = d1)
+    y2 = rnorm(n = max(n1, n2))
+    y3 = rnorm(n = max(n1, n2), mean = d2)
+    y4 = rnorm(n = max(n1, n2))
     
     #GET DATA READY FOR ANOVA  
-      y=c(y1,y2,y3,y4)          #the d.v.
-      nrep=rep(n2,4)          
-      A=rep(c(1,1,0,0),times=nrep) 
-      B=rep(c(1,0,1,0),times=nrep)
+    y = c(y1, y2, y3, y4)          #the d.v.
+    nrep = rep(n2, 4)
+    A = rep(c(1, 1, 0, 0), times = nrep)
+    B = rep(c(1, 0, 1, 0), times = nrep)
     
     #STUDY 1
-      p1.k=t.test(y1[1:n1],y2[1:n1],var.equal=TRUE)$p.value  #Do a t-test on the first n1 observations
+      #Do a t-test on the first n1 observations
+      p1.k = t.test(y1[1:n1], y2[1:n1], var.equal = TRUE)$p.value  
     
     #STUDY 2
-      p2.k=anova(lm(y ~ A * B))["A:B", "Pr(>F)"]             #Do anova, keep p-value of the interaction
+      #Do anova, keep p-value of the interaction
+      p2.k = anova(lm(y ~ A * B))["A:B", "Pr(>F)"]             
         
       #Store the results
-      p1=c(p1,p1.k)
-      p2=c(p2,p2.k)
+      p1 = c(p1, p1.k)
+      p2 = c(p2, p2.k)
     
       }
   
   #What share off comparisons are significant
-    power1=sum(p1<=.05)/simtot  #Simple test using estimate of variance from 2 cells only
-    power2=sum(p2<=.05)/simtot  #Interaction
+      #Simple test using estimate of variance from 2 cells only
+      power1 = sum(p1 <= .05) / simtot  
+      #Interaction
+      power2 = sum(p2 <= .05) / simtot  
   
     cat("\nStudy 1 is powered to:",round(power1,2))
     cat("\nStudy 2 is powered to:",round(power2,2))
@@ -81,26 +92,70 @@ We can reproduce the simulations in the Data Colada blog post, using the origina
     
 	
 #Same power for 2n regardless of n and d
-  colada17(simtot=2000, n1=20,n2=40,d1=1,d2=0)  
-  colada17(simtot=2000, n1=50,n2=100,d1=.3,d2=0)
-  colada17(simtot=2000, n1=150,n2=300,d1=.25,d2=0)
+  colada17(simtot = 2000, n1 = 20, n2 = 40, d1 = 1, d2 = 0)  
+  colada17(simtot = 2000, n1 = 50, n2 = 100, d1 = .3, d2 = 0)
+  colada17(simtot = 2000, n1 = 150, n2 = 300, d1 = .25, d2 = 0)
 #Need 4n if effect is 70% attenuated
-  colada17(simtot=2000, n1=25,n2=100,d1=.5, d2=.3*.5)
-  colada17(simtot=2000, n1=50,n2=200,d1=.5, d2=.3*.5)
-  colada17(simtot=2000, n1=22,n2=88,d1=.41, d2=.3*.41)
+  colada17(simtot = 2000, n1 = 25, n2 = 100, d1 = .5, d2 = .3 * .5)
+  colada17(simtot = 2000, n1 = 50, n2 = 200, d1 = .5, d2 = .3 * .5)
+  colada17(simtot = 2000, n1 = 22, n2 = 88, d1 = .41, d2 = .3 * .41)
 ```
 
 ```{r}
 #underpowered if run with the same n
-colada17(simtot=nsims, n1=20,n2=20,d1=1,d2=0)  
+colada17(simtot = nsims, n1 = 20, n2 = 20, d1 = 1, d2 = 0)  
 ```
 
-And we can reproduce the results using the ANOVA_power function.
+And we can reproduce the results using the ANOVA_exact function.
 
 ```{r}
+#Study 1
+string <- "2b*2b"
+n <- 10
+# All means are equal - so there is no real difference.
+# Enter means in the order that matches the labels below.
+mu <- c(1, 2, 1, 2) 
+sd <- 1
+
+# the label names should be in the order of the means specified above.
+design_result <- ANOVA_design(design = string,
+                   n = n, 
+                   mu = mu, 
+                   sd = sd, 
+                   plot = TRUE)
+
 alpha_level <- 0.05 #We set the alpha level at 0.05. 
 
-exact_result <- ANOVA_exact(design_result, alpha_level = alpha_level)
+exact_result <- ANOVA_exact(design_result, 
+                            alpha_level = alpha_level,
+                            verbose = FALSE)
+
+knitr::kable(exact_result$main_results[2,], 
+             caption = "ANOVA Results")
+
+#Study 2
+string <- "2b*2b"
+n <- 20
+# All means are equal - so there is no real difference.
+# Enter means in the order that matches the labels below.
+mu <- c(1, 2, 1, 3) 
+sd <- 1
+
+# the label names should be in the order of the means specified above.
+design_result <- ANOVA_design(design = string,
+                   n = n, 
+                   mu = mu, 
+                   sd = sd, 
+                   plot = TRUE)
+
+alpha_level <- 0.05 #We set the alpha level at 0.05. 
+
+exact_result <- ANOVA_exact(design_result, 
+                            alpha_level = alpha_level,
+                            verbose = FALSE)
+
+knitr::kable(exact_result$main_results[3,], 
+             caption = "ANOVA Results")
 ```
 
 We see we get the same power for the anova_fruit:hunger interaction and for the simple effect p_fruit_apple_hunger_very hungry_fruit_banana_hunger_very hungry as the simulations by Uri Simonsohn in his blog post. 
@@ -120,7 +175,8 @@ n <- 150
 mu <- c(20, 20, 20, 25) #All means are equal - so there is no real difference.
 # Enter means in the order that matches the labels below.
 sd <- 20
-labelnames <- c("fruit", "apple", "banana", "hunger", "no hunger", "very hungry") #
+labelnames <- c("fruit", "apple", "banana", 
+                "hunger", "no hunger", "very hungry") #
 # the label names should be in the order of the means specified above.
 design_result <- ANOVA_design(design = string,
                    n = n, 
@@ -129,7 +185,12 @@ design_result <- ANOVA_design(design = string,
                    labelnames = labelnames)
 alpha_level <- 0.05 #We set the alpha level at 0.05. 
 
-exact_result <- ANOVA_exact(design_result, alpha_level = alpha_level)
+exact_result <- ANOVA_exact(design_result, 
+                            alpha_level = alpha_level,
+                            verbose = FALSE)
+
+knitr::kable(exact_result$main_results[2,], 
+             caption = "ANOVA Results")
 ```
 
 And changing the sample size to 300 should reproduce the power for the interaction in the ANOVA. 
@@ -140,7 +201,8 @@ n <- 300
 mu <- c(20, 20, 20, 25) #All means are equal - so there is no real difference.
 # Enter means in the order that matches the labels below.
 sd <- 20
-labelnames <- c("fruit", "apple", "banana", "hunger", "no hunger", "very hungry") #
+labelnames <- c("fruit", "apple", "banana", 
+                "hunger", "no hunger", "very hungry") #
 # the label names should be in the order of the means specified above.
 design_result <- ANOVA_design(design = string,
                    n = n, 
@@ -150,6 +212,9 @@ design_result <- ANOVA_design(design = string,
 alpha_level <- 0.05 #We set the alpha level at 0.05. 
 
 exact_result <- ANOVA_exact(design_result, alpha_level = alpha_level)
+
+knitr::kable(exact_result$main_results[3,], 
+             caption = "ANOVA Results")
 ```
 
 Now if we look at the power analysis table for the last simulation, we see that the power for the ANOVA is the same for the main effect of fruit, the main effect of hunger, and the main effect of the interaction. All the effect sizes are equal as well. We can understand why if we look at the means in a 2x2 table:
@@ -182,10 +247,19 @@ Mathematically the interaction effect is computed as the difference between a ce
 We can repeat this for every cell, and get for no hunger-apple: 20 - (21.25 + (20-21.25) + (20-21.25)) = 1.25, for very hungry apple: 20 - (21.25 + (22.5-21.25) + (20-21.25)) = 1.25, and no hunger-banana: 20 - (21.25 + (20-21.25) + (22.5-21.25)) = 1.25. These values are used to calculate the sum of squares.
 
 ```{r}
-a1 <- mean_mat[1,1] - (mean(mean_mat) + (mean(mean_mat[1,]) - mean(mean_mat)) + (mean(mean_mat[,1]) - mean(mean_mat)))
-a2 <- mean_mat[1,2] - (mean(mean_mat) + (mean(mean_mat[1,]) - mean(mean_mat)) + (mean(mean_mat[,2]) - mean(mean_mat)))
-b1 <- mean_mat[2,1] - (mean(mean_mat) + (mean(mean_mat[2,]) - mean(mean_mat)) + (mean(mean_mat[,1]) - mean(mean_mat)))
-b2 <- mean_mat[2,2] - (mean(mean_mat) + (mean(mean_mat[2,]) - mean(mean_mat)) + (mean(mean_mat[,2]) - mean(mean_mat)))
+a1 <- mean_mat[1,1] - (mean(mean_mat) + 
+                         (mean(mean_mat[1,]) - mean(mean_mat)) + 
+                         (mean(mean_mat[,1]) - mean(mean_mat)))
+a2 <- mean_mat[1,2] - (mean(mean_mat) + 
+                         (mean(mean_mat[1,]) - mean(mean_mat)) + 
+                         (mean(mean_mat[,2]) - mean(mean_mat)))
+b1 <- mean_mat[2,1] - (mean(mean_mat) + 
+                         (mean(mean_mat[2,]) - mean(mean_mat)) + 
+                         (mean(mean_mat[,1]) - mean(mean_mat)))
+b2 <- mean_mat[2,2] - (mean(mean_mat) + 
+                         (mean(mean_mat[2,]) - mean(mean_mat)) + 
+                         (mean(mean_mat[,2]) - mean(mean_mat)))
+
 SS_ab <- n * sum(c(a1, a2, b1, b2)^2)
 ```
 
@@ -211,7 +285,8 @@ n <- 300
 mu <- c(25, 20, 20, 25) #All means are equal - so there is no real difference.
 # Enter means in the order that matches the labels below.
 sd <- 20
-labelnames <- c("fruit", "apple", "banana", "hunger", "no hunger", "very hungry") #
+labelnames <- c("fruit", "apple", "banana", 
+                "hunger", "no hunger", "very hungry") #
 # the label names should be in the order of the means specified above.
 design_result <- ANOVA_design(design = string,
                    n = n, 
@@ -220,14 +295,19 @@ design_result <- ANOVA_design(design = string,
                    labelnames = labelnames)
 alpha_level <- 0.05 #We set the alpha level at 0.05. 
 
-exact_result <- ANOVA_exact(design_result, alpha_level = alpha_level)
+exact_result <- ANOVA_exact(design_result, 
+                            alpha_level = alpha_level,
+                            verbose = FALSE)
+
+knitr::kable(exact_result$main_results, 
+             caption = "ANOVA Results")
 ```
 
-We can also reproduce the power analysis using the anlytic function:
+We can also reproduce the power analysis using the analytic function:
 
 ```{r}
 power_analytic <- power_twoway_between(design_result)
 power_analytic$power_A
 power_analytic$power_B
-
+power_analytic$power_AB
 ```

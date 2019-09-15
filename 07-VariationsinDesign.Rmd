@@ -20,9 +20,20 @@ power_oneway_between(design_result)$power
 power_oneway_between(design_result)$Cohen_f
 power_oneway_between(design_result)$eta_p_2
 
-sim_result <- ANOVA_power(design_result, nsims = nsims)
+simulation_result <- ANOVA_power(design_result, 
+                                 alpha_level = alpha_level, 
+                                 nsims = nsims,
+                                 verbose = FALSE)
 
-exact_result <- ANOVA_exact(design_result)
+knitr::kable(simulation_result$main_results,
+             caption = "Simulated ANOVA Result")
+
+exact_result <- ANOVA_exact(design_result,
+                            alpha_level = alpha_level,
+                            verbose = FALSE)
+
+knitr::kable(exact_result$main_results,
+             caption = "Exact ANOVA Result")
 ```
 
 We now addd a condition. Let's assume the 'light training' condition falls in between the other two means. 
@@ -58,7 +69,13 @@ power_oneway_between(design_result)$power
 power_oneway_between(design_result)$Cohen_f
 power_oneway_between(design_result)$eta_p_2
 
-exact_result <- ANOVA_exact(design_result)
+
+exact_result <- ANOVA_exact(design_result,
+                            alpha_level = alpha_level,
+                            verbose = FALSE)
+
+knitr::kable(exact_result$main_results,
+             caption = "Exact ANOVA Result")
 
 ```
 
@@ -211,7 +228,12 @@ labelnames = labelnames
 
 power_oneway_within(design_result)$power
 
-exact_result <- ANOVA_exact(design_result)
+exact_result <- ANOVA_exact(design_result,
+                            alpha_level = alpha_level,
+                            verbose = FALSE)
+
+knitr::kable(exact_result$main_results,
+             caption = "Exact ANOVA Result")
 ```
 
 We see power is ever so slightly less than for the between subject design. This is due to the loss in degrees of freedom, which is 2(n-1) for between designs, and n-1 for within designs. But as the correlation increases, the power advantage of within designs becomes stronger. 
@@ -238,7 +260,12 @@ labelnames = labelnames
 
 power_oneway_within(design_result)$power
 
-exact_result <- ANOVA_exact(design_result)
+exact_result <- ANOVA_exact(design_result,
+                            alpha_level = alpha_level,
+                            verbose = FALSE)
+
+knitr::kable(exact_result$main_results,
+             caption = "Exact ANOVA Result")
 ```
 
 When we add a a condition in a within design where we expect the mean to be identical to the grand mean, we again see that the power decreases. This similarly shows that adding a condition that equals the grand mean to a within subject design does not come for free, but has a power cost. 

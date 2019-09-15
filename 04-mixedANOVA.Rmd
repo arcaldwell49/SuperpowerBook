@@ -1,6 +1,7 @@
 # Mixed ANOVA 
 
 ## Part 1
+
 ### Two by two ANOVA, within-between design
 
 We can simulate a Two-Way ANOVA with a specific alpha, sample size and effect size, to achieve a specified statistical power. We wil try to reproduce the power analysis by g*power for an F-test, ANOVA: Repeated measures, within-between interaction. 
@@ -27,17 +28,26 @@ r = r,
 labelnames = labelnames
 )
 
-simulation_result <-
-ANOVA_power(design_result, alpha_level = 0.05, nsims = nsims)
+simulation_result <- ANOVA_power(design_result, 
+                                 alpha_level = alpha_level, 
+                                 nsims = nsims,
+                                 verbose = FALSE)
 
-exact_result <-
-ANOVA_exact(design_result, alpha_level = alpha_level)
+knitr::kable(simulation_result$main_results,
+             caption = "Simulated ANOVA Result")
+
+exact_result <- ANOVA_exact(design_result,
+                            alpha_level = alpha_level,
+                            verbose = FALSE)
+
+knitr::kable(exact_result$main_results,
+             caption = "Exact ANOVA Result")
 
 ```
 
 ### Two by two ANOVA, within-between design Variation 1
 
-We can simulate the same Two-Way ANOVA increasing the correlation to 0.7. 
+We can simulate the same two-way ANOVA increasing the correlation to 0.7. 
 
 ![](screenshots/gpower_6.png)
 
@@ -58,10 +68,19 @@ design_result <- ANOVA_design(design = string,
                               labelnames = labelnames)
 
 simulation_result <- ANOVA_power(design_result, 
-                                 alpha_level = 0.05,
-                                 nsims = nsims)
+                                 alpha_level = alpha_level, 
+                                 nsims = nsims,
+                                 verbose = FALSE)
 
-exact_result <- ANOVA_exact(design_result, alpha_level = alpha_level)
+knitr::kable(simulation_result$main_results,
+             caption = "Simulated ANOVA Result")
+
+exact_result <- ANOVA_exact(design_result,
+                            alpha_level = alpha_level,
+                            verbose = FALSE)
+
+knitr::kable(exact_result$main_results,
+             caption = "Exact ANOVA Result")
 ```
 
 
@@ -138,7 +157,8 @@ df$y = as.vector(replicate(nsims, eval(make.y)))
 
 mods <- df %>%
   group_by(simID) %>%
-  do(model = aov(y ~ X1 * X2 + Error(subject / (X1 * X2)), qr = FALSE, data = .)) 
+  do(model = aov(y ~ X1 * X2 + Error(subject / (X1 * X2)), 
+                 qr = FALSE, data = .)) 
  
 # extract p-values for each effect and store in a data frame
 p = data.frame(
@@ -160,8 +180,7 @@ Visualize the distributions of p-values
 
 ```{r}
 # plot the known effects
-require(ggplot2)
-require(gridExtra)
+
  
 means = data.frame(cond[1:4,], mu, SE = sigma / sqrt(nsubs))
 plt1 = ggplot(means, aes(y = mu, x = X1, fill = X2)) +
@@ -176,7 +195,7 @@ coord_cartesian(ylim = c((.7 * min(mu)), 1.2 * max(mu))) +
 theme_bw()
 
 # melt the data into a ggplot friendly 'long' format
-require(reshape2)
+
 plotData <- melt(p, value.name = 'p')
 
 # plot each of the p-value distributions on a log scale
@@ -213,11 +232,19 @@ design_result <- ANOVA_design(design = string,
                               labelnames = labelnames)
 
 simulation_result <- ANOVA_power(design_result, 
-                                 alpha_level = 0.05, 
-                                 nsims = nsims)
+                                 alpha_level = alpha_level, 
+                                 nsims = nsims,
+                                 verbose = FALSE)
+
+knitr::kable(simulation_result$main_results,
+             caption = "Simulated ANOVA Result")
 
 exact_result <- ANOVA_exact(design_result,
-                            alpha_level = alpha_level)
+                            alpha_level = alpha_level,
+                            verbose = FALSE)
+
+knitr::kable(exact_result$main_results,
+             caption = "Exact ANOVA Result")
 ```
 
 The simulations yield closely matching results.
@@ -274,7 +301,7 @@ df$simID = sort(rep(seq_len(nsims), nrow(dm)))
 # using MASS::mvrnorm with the parameters mu and Sigma created earlier
 # and bind to the existing df
  
-require(MASS)
+
 make.y = expression(as.vector(t(mvrnorm(nsubs, mu, Sigma))))
 df$y = as.vector(replicate(nsims, eval(make.y)))             
  
@@ -282,10 +309,7 @@ df$y = as.vector(replicate(nsims, eval(make.y)))
 # manipulation functions available in dplyr, to run the ANOVA on
 # each section of the grouped data frame created by group_by
  
-require(dplyr)
-require(car)
-require(broom)
- 
+
 mods <- df %>%
   group_by(simID) %>%
   do(model = aov(y ~ X1 * X2 + Error(subject / (X1 * X2)), 
@@ -416,7 +440,20 @@ design_result <- ANOVA_design(design = string,
                               r = r, 
                               labelnames = labelnames)
 
-exact_result <- ANOVA_exact(design_result)
+simulation_result <- ANOVA_power(design_result, 
+                                 alpha_level = alpha_level, 
+                                 nsims = nsims,
+                                 verbose = FALSE)
+
+knitr::kable(simulation_result$main_results,
+             caption = "Simulated ANOVA Result")
+
+exact_result <- ANOVA_exact(design_result,
+                            alpha_level = alpha_level,
+                            verbose = FALSE)
+
+knitr::kable(exact_result$main_results,
+             caption = "Exact ANOVA Result")
 ```
 
 
@@ -449,7 +486,8 @@ variance_e_B <- sigma^2 * (1 - rho_B) + sigma^2 * (m_B - 1) * (rho_A - rho_AB)
 variance_e_B
 
 variance_e_AB <-
-  (sigma ^ 2 * (1 - max(rho_A, rho_B)) - sigma ^ 2 * (min(rho_A, rho_B) - rho_AB)) 
+  (sigma ^ 2 * (1 - max(rho_A, rho_B)) - 
+     sigma ^ 2 * (min(rho_A, rho_B) - rho_AB)) 
 #Variance AB
 variance_e_AB
 
@@ -460,7 +498,8 @@ mean_mat
 # Potving & Schutz, 2000, formula 2, p. 348
 # For main effect A
 lambda_A <-
-  n * m_A * sum((rowMeans(mean_mat) - mean(rowMeans(mean_mat))) ^ 2) / variance_e_A
+  n * m_A * sum((rowMeans(mean_mat) - 
+                   mean(rowMeans(mean_mat))) ^ 2) / variance_e_A
   lambda_A
 
 #calculate degrees of freedom 1 - ignoring the * e sphericity correction
@@ -483,7 +522,8 @@ pow_A <- pf(qf(alpha, #power
           lower.tail = FALSE)
 
 lambda_B <-
-  n * m_B * sum((colMeans(mean_mat) - mean(colMeans(mean_mat))) ^ 2) / variance_e_B 
+  n * m_B * sum((colMeans(mean_mat) - 
+                   mean(colMeans(mean_mat))) ^ 2) / variance_e_B 
 lambda_B
 
 df1 <- (m_B - 1) #calculate degrees of freedom 1

@@ -15,14 +15,21 @@ mu <- c(80, 82, 82, 86)
 #All means are equal - so there is no real difference.
 # Enter means in the order that matches the labels below.
 sd <- 10
-labelnames <- c("Factor_A", "a1", "a2", "a3", "a4") #
+labelnames <- c("Factor_A", "a1", "a2", "a3", "a4") 
 # the label names should be in the order of the means specified above.
 design_result <- ANOVA_design(design = string,
                    n = n, 
                    mu = mu, 
                    sd = sd, 
                    labelnames = labelnames)
-power_result <- ANOVA_exact(design_result, alpha_level = 0.05)
+
+
+exact_result <- ANOVA_exact(design_result,
+                            alpha_level = alpha_level,
+                            verbose = FALSE)
+
+knitr::kable(exact_result$main_results,
+             caption = "Exact ANOVA Result")
 ```
 
 We can also calculate power analytically with a `Superpower` function.
@@ -74,11 +81,17 @@ design_result <- ANOVA_design(design = string,
 
 
 
-exact_result <- ANOVA_exact(design_result, alpha_level = alpha_level)
+exact_result <- ANOVA_exact(design_result,
+                            alpha_level = alpha_level,
+                            verbose = FALSE)
+
+knitr::kable(exact_result$main_results,
+             caption = "Exact ANOVA Result")
 ```
 
 ```{r}
-power_res <- power_twoway_between(design_result) #using default alpha level of .05
+#using default alpha level of .05
+power_res <- power_twoway_between(design_result) 
 power_res$power_A
 power_res$power_B
 power_res$power_AB
@@ -87,20 +100,20 @@ power_res$power_AB
 We can use the function by Aberson, 2019, as well. 
 
 ```{r}
-anova2x2(m1.1=20,
-         m1.2=20,
-         m2.1=20,
-         m2.2=25, 
-         s1.1=5,
-         s1.2=5,
-         s2.1=5,
-         s2.2=5,
-         n1.1=20,
-         n1.2=20,
-         n2.1=20,
-         n2.2=20, 
-         alpha=.05, 
-         all="OFF")
+anova2x2(m1.1 = 20,
+         m1.2 = 20,
+         m2.1 = 20,
+         m2.2 = 25,
+         s1.1 = 5,
+         s1.2 = 5,
+         s2.1 = 5,
+         s2.2 = 5,
+         n1.1 = 20,
+         n1.2 = 20,
+         n2.1 = 20,
+         n2.2 = 20,
+         alpha = .05,
+         all = "OFF")
 ```
 
 ## 3x3 Between Subject ANOVA
@@ -108,10 +121,11 @@ anova2x2(m1.1=20,
 ```{r}
 string <- "3b*3b"
 n <- 20
-mu <- c(20, 20, 20, 20, 20, 20, 20, 20, 25) #All means are equal - so there is no real difference.
+#All means are equal - so there is no real difference.
+mu <- c(20, 20, 20, 20, 20, 20, 20, 20, 25) 
 # Enter means in the order that matches the labels below.
 sd <- 5
-labelnames <- c("Factor_A", "a1", "a2", "a3", "Factor_B", "b1", "b2", "b3") #
+labelnames <- c("Factor_A", "a1", "a2", "a3", "Factor_B", "b1", "b2", "b3") 
 # the label names should be in the order of the means specified above.
 design_result <- ANOVA_design(design = string,
                    n = n, 
@@ -121,11 +135,17 @@ design_result <- ANOVA_design(design = string,
 
 
 
-exact_result <- ANOVA_exact(design_result, alpha_level = alpha_level)
+exact_result <- ANOVA_exact(design_result,
+                            alpha_level = alpha_level,
+                            verbose = FALSE)
+
+knitr::kable(exact_result$main_results,
+             caption = "Exact ANOVA Result")
 ```
 
 ```{r}
-power_res <- power_twoway_between(design_result) #using default alpha level of .05
+#using default alpha level of .05
+power_res <- power_twoway_between(design_result) 
 power_res$power_A
 power_res$power_B
 power_res$power_AB
@@ -170,7 +190,12 @@ design_result <- ANOVA_design(design = string,
                               r = r, 
                               labelnames = labelnames)
 
-exact_result <- ANOVA_exact(design_result, alpha_level = alpha_level)
+exact_result <- ANOVA_exact(design_result,
+                            alpha_level = alpha_level,
+                            verbose = FALSE)
+
+knitr::kable(exact_result$main_results,
+             caption = "Exact ANOVA Result")
 ```
 
 We can use the `ANOVA_exact` function to evaluate this design since there is not a analytic solution in `Superpower`. 
