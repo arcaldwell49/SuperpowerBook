@@ -37,10 +37,10 @@ f <- pwr.anova.test(n = n,
                     sig.level = alpha_level)$f
 f2 <- f^2
 ES <- f2 / (f2 + 1)
-ES
+
 mu <- mu_from_ES(K = K, ES = ES)
 mu <- mu * sd
-mu
+
 
 design_result <- ANOVA_design(
   design = string,
