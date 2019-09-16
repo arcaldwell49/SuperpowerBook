@@ -4,11 +4,11 @@
 
   <meta charset="utf-8" />
   <meta http-equiv="X-UA-Compatible" content="IE=edge" />
-  <title>Chapter 4 Repeated Measures-ANOVA | The Superpower R Package: Capabilities and Validation</title>
+  <title>Chapter 4 Repeated Measures ANOVA | The Superpower R Package: Capabilities and Validation</title>
   <meta name="description" content="This is a book describing the capabilities of the Superpower R package." />
   <meta name="generator" content="bookdown 0.10 and GitBook 2.6.7" />
 
-  <meta property="og:title" content="Chapter 4 Repeated Measures-ANOVA | The Superpower R Package: Capabilities and Validation" />
+  <meta property="og:title" content="Chapter 4 Repeated Measures ANOVA | The Superpower R Package: Capabilities and Validation" />
   <meta property="og:type" content="book" />
   
   
@@ -16,7 +16,7 @@
   
 
   <meta name="twitter:card" content="summary" />
-  <meta name="twitter:title" content="Chapter 4 Repeated Measures-ANOVA | The Superpower R Package: Capabilities and Validation" />
+  <meta name="twitter:title" content="Chapter 4 Repeated Measures ANOVA | The Superpower R Package: Capabilities and Validation" />
   
   <meta name="twitter:description" content="This is a book describing the capabilities of the Superpower R package." />
   
@@ -24,7 +24,7 @@
 <meta name="author" content="Aaron Caldwell &amp; Daniël Lakens" />
 
 
-<meta name="date" content="2019-09-13" />
+<meta name="date" content="2019-09-15" />
 
   <meta name="viewport" content="width=device-width, initial-scale=1" />
   <meta name="apple-mobile-web-app-capable" content="yes" />
@@ -131,7 +131,14 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 <li class="divider"></li>
 <li class="chapter" data-level="1" data-path="index.html"><a href="index.html"><i class="fa fa-check"></i><b>1</b> Introduction</a></li>
 <li class="chapter" data-level="2" data-path="the-experimental-design.html"><a href="the-experimental-design.html"><i class="fa fa-check"></i><b>2</b> The Experimental Design</a><ul>
-<li class="chapter" data-level="2.1" data-path="the-experimental-design.html"><a href="the-experimental-design.html#correlation-matrix"><i class="fa fa-check"></i><b>2.1</b> Correlation Matrix</a></li>
+<li class="chapter" data-level="2.1" data-path="the-experimental-design.html"><a href="the-experimental-design.html#anova_design-function"><i class="fa fa-check"></i><b>2.1</b> ANOVA_design function</a><ul>
+<li class="chapter" data-level="2.1.1" data-path="the-experimental-design.html"><a href="the-experimental-design.html#specifying-the-design-using-design"><i class="fa fa-check"></i><b>2.1.1</b> Specifying the design using ‘design’</a></li>
+<li class="chapter" data-level="2.1.2" data-path="the-experimental-design.html"><a href="the-experimental-design.html#specifying-the-means-using-mu"><i class="fa fa-check"></i><b>2.1.2</b> Specifying the means using ‘mu’</a></li>
+<li class="chapter" data-level="2.1.3" data-path="the-experimental-design.html"><a href="the-experimental-design.html#specifying-label-names"><i class="fa fa-check"></i><b>2.1.3</b> Specifying label names</a></li>
+<li class="chapter" data-level="2.1.4" data-path="the-experimental-design.html"><a href="the-experimental-design.html#specifying-the-correlation"><i class="fa fa-check"></i><b>2.1.4</b> Specifying the correlation</a></li>
+<li class="chapter" data-level="2.1.5" data-path="the-experimental-design.html"><a href="the-experimental-design.html#specifying-the-sample-size"><i class="fa fa-check"></i><b>2.1.5</b> Specifying the sample size</a></li>
+<li class="chapter" data-level="2.1.6" data-path="the-experimental-design.html"><a href="the-experimental-design.html#specifying-the-standard-deviation"><i class="fa fa-check"></i><b>2.1.6</b> Specifying the standard deviation</a></li>
+</ul></li>
 </ul></li>
 <li class="chapter" data-level="3" data-path="one-way-anova.html"><a href="one-way-anova.html"><i class="fa fa-check"></i><b>3</b> One-way ANOVA</a><ul>
 <li class="chapter" data-level="3.1" data-path="one-way-anova.html"><a href="one-way-anova.html#part-1"><i class="fa fa-check"></i><b>3.1</b> Part 1</a><ul>
@@ -154,7 +161,7 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 <li class="chapter" data-level="3.4.3" data-path="one-way-anova.html"><a href="one-way-anova.html#two-conditions-large-effect-size"><i class="fa fa-check"></i><b>3.4.3</b> Two conditions, large effect size</a></li>
 </ul></li>
 </ul></li>
-<li class="chapter" data-level="4" data-path="repeated-measures-anova.html"><a href="repeated-measures-anova.html"><i class="fa fa-check"></i><b>4</b> Repeated Measures-ANOVA</a><ul>
+<li class="chapter" data-level="4" data-path="repeated-measures-anova.html"><a href="repeated-measures-anova.html"><i class="fa fa-check"></i><b>4</b> Repeated Measures ANOVA</a><ul>
 <li class="chapter" data-level="4.1" data-path="repeated-measures-anova.html"><a href="repeated-measures-anova.html#part-1-1"><i class="fa fa-check"></i><b>4.1</b> Part 1</a><ul>
 <li class="chapter" data-level="4.1.1" data-path="repeated-measures-anova.html"><a href="repeated-measures-anova.html#two-conditions-medium-effect-size"><i class="fa fa-check"></i><b>4.1.1</b> Two conditions, medium effect size</a></li>
 </ul></li>
@@ -198,6 +205,20 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 <li class="chapter" data-level="12.2" data-path="explore-increase-in-effect-size-for-moderated-interactions-.html"><a href="explore-increase-in-effect-size-for-moderated-interactions-.html#explore-increase-in-correlation-in-moderated-interactions."><i class="fa fa-check"></i><b>12.2</b> Explore increase in correlation in moderated interactions.</a></li>
 <li class="chapter" data-level="12.3" data-path="explore-increase-in-effect-size-for-moderated-interactions-.html"><a href="explore-increase-in-effect-size-for-moderated-interactions-.html#increasing-correlation-in-on-factor-decreases-power-in-second-factor"><i class="fa fa-check"></i><b>12.3</b> Increasing correlation in on factor decreases power in second factor</a></li>
 </ul></li>
+<li class="chapter" data-level="13" data-path="appendix-1-direct-comparison-to-pwr2ppl.html"><a href="appendix-1-direct-comparison-to-pwr2ppl.html"><i class="fa fa-check"></i><b>13</b> Appendix 1: Direct Comparison to <code>pwr2ppl</code></a><ul>
+<li class="chapter" data-level="13.1" data-path="appendix-1-direct-comparison-to-pwr2ppl.html"><a href="appendix-1-direct-comparison-to-pwr2ppl.html#examples-from-chapter-5"><i class="fa fa-check"></i><b>13.1</b> Examples from Chapter 5</a><ul>
+<li class="chapter" data-level="13.1.1" data-path="appendix-1-direct-comparison-to-pwr2ppl.html"><a href="appendix-1-direct-comparison-to-pwr2ppl.html#example-5.15.2"><i class="fa fa-check"></i><b>13.1.1</b> Example 5.1/5.2</a></li>
+<li class="chapter" data-level="13.1.2" data-path="appendix-1-direct-comparison-to-pwr2ppl.html"><a href="appendix-1-direct-comparison-to-pwr2ppl.html#example-5.3"><i class="fa fa-check"></i><b>13.1.2</b> Example 5.3</a></li>
+</ul></li>
+<li class="chapter" data-level="13.2" data-path="appendix-1-direct-comparison-to-pwr2ppl.html"><a href="appendix-1-direct-comparison-to-pwr2ppl.html#examples-from-chapter-6"><i class="fa fa-check"></i><b>13.2</b> Examples from Chapter 6</a><ul>
+<li class="chapter" data-level="13.2.1" data-path="appendix-1-direct-comparison-to-pwr2ppl.html"><a href="appendix-1-direct-comparison-to-pwr2ppl.html#example-from-table-6.2"><i class="fa fa-check"></i><b>13.2.1</b> Example from Table 6.2</a></li>
+<li class="chapter" data-level="13.2.2" data-path="appendix-1-direct-comparison-to-pwr2ppl.html"><a href="appendix-1-direct-comparison-to-pwr2ppl.html#example-from-table-6.6"><i class="fa fa-check"></i><b>13.2.2</b> Example from Table 6.6</a></li>
+<li class="chapter" data-level="13.2.3" data-path="appendix-1-direct-comparison-to-pwr2ppl.html"><a href="appendix-1-direct-comparison-to-pwr2ppl.html#example-from-table-6.8"><i class="fa fa-check"></i><b>13.2.3</b> Example from Table 6.8</a></li>
+</ul></li>
+<li class="chapter" data-level="13.3" data-path="appendix-1-direct-comparison-to-pwr2ppl.html"><a href="appendix-1-direct-comparison-to-pwr2ppl.html#example-from-chapter-7"><i class="fa fa-check"></i><b>13.3</b> Example from Chapter 7</a><ul>
+<li class="chapter" data-level="13.3.1" data-path="appendix-1-direct-comparison-to-pwr2ppl.html"><a href="appendix-1-direct-comparison-to-pwr2ppl.html#from-table-7.2"><i class="fa fa-check"></i><b>13.3.1</b> From Table 7.2</a></li>
+</ul></li>
+</ul></li>
 <li class="divider"></li>
 <li><a href="https://github.com/rstudio/bookdown" target="blank">Published with bookdown</a></li>
 
@@ -219,7 +240,7 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 
             <section class="normal" id="section-">
 <div id="repeated-measures-anova" class="section level1">
-<h1><span class="header-section-number">Chapter 4</span> Repeated Measures-ANOVA</h1>
+<h1><span class="header-section-number">Chapter 4</span> Repeated Measures ANOVA</h1>
 <div id="part-1-1" class="section level2">
 <h2><span class="header-section-number">4.1</span> Part 1</h2>
 <p>In a repeated measures design multiple observations are collected from the same participants. In the simplest case, where there are two repeated observations, a repeated measures ANOVA equals a dependent or paired <em>t</em>-test. The difference compared to a between subject design is that repeated measures can be correlated, and in psychology, they often are. Let’s first explore the impact of this correlation on the power of a repeated measures ANOVA.</p>
@@ -280,38 +301,73 @@ r &lt;-<span class="st"> </span><span class="fl">0.5</span>
 alpha =<span class="st"> </span><span class="fl">0.05</span>
 f &lt;-<span class="st"> </span><span class="fl">0.25</span>
 f2 &lt;-<span class="st"> </span>f<span class="op">^</span><span class="dv">2</span>
-ES &lt;-<span class="st"> </span>f2<span class="op">/</span>(f2<span class="op">+</span><span class="dv">1</span>)
+ES &lt;-<span class="st"> </span>f2<span class="op">/</span>(f2 <span class="op">+</span><span class="st"> </span><span class="dv">1</span>)
 ES</code></pre>
 <pre><code>## [1] 0.05882353</code></pre>
 <pre class="sourceCode r"><code class="sourceCode r">mu &lt;-<span class="st"> </span><span class="kw">mu_from_ES</span>(<span class="dt">K =</span> K, <span class="dt">ES =</span> ES)
-design =<span class="kw">paste</span>(K,<span class="st">&quot;w&quot;</span>,<span class="dt">sep=</span><span class="st">&quot;&quot;</span>)
+design =<span class="st"> </span><span class="kw">paste</span>(K,<span class="st">&quot;w&quot;</span>,<span class="dt">sep =</span> <span class="st">&quot;&quot;</span>)
 labelnames &lt;-<span class="st"> </span><span class="kw">c</span>(<span class="st">&quot;speed&quot;</span>, <span class="st">&quot;fast&quot;</span>, <span class="st">&quot;slow&quot;</span>)
+
 design_result &lt;-<span class="st"> </span><span class="kw">ANOVA_design</span>(<span class="dt">design =</span> design,
                    <span class="dt">n =</span> n, 
                    <span class="dt">mu =</span> mu, 
                    <span class="dt">sd =</span> sd, 
                    <span class="dt">r =</span> r, 
-                   <span class="dt">labelnames =</span> labelnames)</code></pre>
-<p><img src="SuperpowerValidation_files/figure-html/unnamed-chunk-37-1.png" width="672" /></p>
-<pre class="sourceCode r"><code class="sourceCode r">alpha_level &lt;-<span class="st"> </span><span class="fl">0.05</span>
-simulation_result &lt;-<span class="st"> </span><span class="kw">ANOVA_power</span>(design_result, <span class="dt">nsims =</span> nsims)</code></pre>
-<pre><code>## Power and Effect sizes for ANOVA tests
-##             power effect_size
-## anova_speed 80.07      0.2164
-## 
-## Power and Effect sizes for contrasts
-##                         power effect_size
-## p_speed_fast_speed_slow 80.07       0.512
-## 
-## Within-Subject Factors Included: Check MANOVA Results</code></pre>
-<pre class="sourceCode r"><code class="sourceCode r">exact_result &lt;-<span class="st"> </span><span class="kw">ANOVA_exact</span>(design_result, <span class="dt">alpha_level =</span> alpha_level)</code></pre>
-<pre><code>## Power and Effect sizes for ANOVA tests
-##       power partial_eta_squared cohen_f non_centrality
-## speed 80.78              0.2048  0.5075            8.5
-## 
-## Power and Effect sizes for contrasts
-##                         power effect_size
-## p_speed_fast_speed_slow 80.78         0.5</code></pre>
+                   <span class="dt">labelnames =</span> labelnames)
+
+alpha_level &lt;-<span class="st"> </span><span class="fl">0.05</span>
+
+simulation_result &lt;-<span class="st"> </span><span class="kw">ANOVA_power</span>(design_result, 
+                                 <span class="dt">alpha_level =</span> alpha_level, 
+                                 <span class="dt">nsims =</span> nsims,
+                                 <span class="dt">verbose =</span> <span class="ot">FALSE</span>)
+
+knitr<span class="op">::</span><span class="kw">kable</span>(simulation_result<span class="op">$</span>main_results,
+             <span class="dt">caption =</span> <span class="st">&quot;Simulated ANOVA Result&quot;</span>)</code></pre>
+<table>
+<caption><span id="tab:unnamed-chunk-39">Table 4.1: </span>Simulated ANOVA Result</caption>
+<thead>
+<tr class="header">
+<th></th>
+<th align="right">power</th>
+<th align="right">effect_size</th>
+</tr>
+</thead>
+<tbody>
+<tr class="odd">
+<td>anova_speed</td>
+<td align="right">80.67</td>
+<td align="right">0.215466</td>
+</tr>
+</tbody>
+</table>
+<pre class="sourceCode r"><code class="sourceCode r">exact_result &lt;-<span class="st"> </span><span class="kw">ANOVA_exact</span>(design_result,
+                            <span class="dt">alpha_level =</span> alpha_level,
+                            <span class="dt">verbose =</span> <span class="ot">FALSE</span>)
+
+knitr<span class="op">::</span><span class="kw">kable</span>(exact_result<span class="op">$</span>main_results,
+             <span class="dt">caption =</span> <span class="st">&quot;Exact ANOVA Result&quot;</span>)</code></pre>
+<table>
+<caption><span id="tab:unnamed-chunk-39">Table 4.1: </span>Exact ANOVA Result</caption>
+<thead>
+<tr class="header">
+<th></th>
+<th align="right">power</th>
+<th align="right">partial_eta_squared</th>
+<th align="right">cohen_f</th>
+<th align="right">non_centrality</th>
+</tr>
+</thead>
+<tbody>
+<tr class="odd">
+<td>speed</td>
+<td align="right">80.78</td>
+<td align="right">0.2048</td>
+<td align="right">0.5075</td>
+<td align="right">8.5</td>
+</tr>
+</tbody>
+</table>
 <p>The results of the simulation are indeed very close to 80.777%. Note that the simulation calculates Cohen’s dz effect sizes for paired comparisons - which here given the correlation of 0.5 is also 0.5 for a medium effect size.</p>
 <p>We should see a larger dz if we increase the correlation, keeping the sample size the same, following the example in Gpower above. We repeat the simulation, and the only difference is a correlation between dependent variables of 0.7. This should yield an effect size dz = 0.6454972.</p>
 <pre class="sourceCode r"><code class="sourceCode r">K &lt;-<span class="st"> </span><span class="dv">2</span>
@@ -321,43 +377,76 @@ r &lt;-<span class="st"> </span><span class="fl">0.7</span>
 alpha =<span class="st"> </span><span class="fl">0.05</span>
 f &lt;-<span class="st"> </span><span class="fl">0.25</span>
 f2 &lt;-<span class="st"> </span>f<span class="op">^</span><span class="dv">2</span>
-ES &lt;-<span class="st"> </span>f2<span class="op">/</span>(f2<span class="op">+</span><span class="dv">1</span>)
+ES &lt;-<span class="st"> </span>f2<span class="op">/</span>(f2 <span class="op">+</span><span class="st"> </span><span class="dv">1</span>)
 ES</code></pre>
 <pre><code>## [1] 0.05882353</code></pre>
 <pre class="sourceCode r"><code class="sourceCode r">mu &lt;-<span class="st"> </span><span class="kw">mu_from_ES</span>(<span class="dt">K =</span> K, <span class="dt">ES =</span> ES)
-design =<span class="st"> </span><span class="kw">paste</span>(K,<span class="st">&quot;w&quot;</span>,<span class="dt">sep=</span><span class="st">&quot;&quot;</span>)
+design =<span class="st"> </span><span class="kw">paste</span>(K,<span class="st">&quot;w&quot;</span>,<span class="dt">sep =</span> <span class="st">&quot;&quot;</span>)
 labelnames &lt;-<span class="st"> </span><span class="kw">c</span>(<span class="st">&quot;speed&quot;</span>, <span class="st">&quot;fast&quot;</span>, <span class="st">&quot;slow&quot;</span>)
 design_result &lt;-<span class="st"> </span><span class="kw">ANOVA_design</span>(<span class="dt">design =</span> design,
                    <span class="dt">n =</span> n, 
                    <span class="dt">mu =</span> mu, 
                    <span class="dt">sd =</span> sd, 
                    <span class="dt">r =</span> r, 
-                   <span class="dt">labelnames =</span> labelnames)</code></pre>
-<p><img src="SuperpowerValidation_files/figure-html/unnamed-chunk-38-1.png" width="672" /></p>
-<pre class="sourceCode r"><code class="sourceCode r">alpha_level &lt;-<span class="st"> </span><span class="fl">0.05</span>
+                   <span class="dt">labelnames =</span> labelnames)
+
+alpha_level &lt;-<span class="st"> </span><span class="fl">0.05</span>
 
 design_result<span class="op">$</span>sigmatrix</code></pre>
 <pre><code>##      fast slow
 ## fast  1.0  0.7
 ## slow  0.7  1.0</code></pre>
-<pre class="sourceCode r"><code class="sourceCode r">simulation_result &lt;-<span class="st"> </span><span class="kw">ANOVA_power</span>(design_result, <span class="dt">nsims =</span> nsims)</code></pre>
-<pre><code>## Power and Effect sizes for ANOVA tests
-##             power effect_size
-## anova_speed 80.13      0.3144
-## 
-## Power and Effect sizes for contrasts
-##                         power effect_size
-## p_speed_fast_speed_slow 80.13      0.6703
-## 
-## Within-Subject Factors Included: Check MANOVA Results</code></pre>
-<pre class="sourceCode r"><code class="sourceCode r">exact_result &lt;-<span class="st"> </span><span class="kw">ANOVA_exact</span>(design_result, <span class="dt">alpha_level =</span> alpha_level)</code></pre>
-<pre><code>## Power and Effect sizes for ANOVA tests
-##       power partial_eta_squared cohen_f non_centrality
-## speed 80.33              0.3043  0.6614           8.75
-## 
-## Power and Effect sizes for contrasts
-##                         power effect_size
-## p_speed_fast_speed_slow 80.33      0.6455</code></pre>
+<pre class="sourceCode r"><code class="sourceCode r">simulation_result &lt;-<span class="st"> </span><span class="kw">ANOVA_power</span>(design_result, 
+                                 <span class="dt">alpha_level =</span> alpha_level, 
+                                 <span class="dt">nsims =</span> nsims,
+                                 <span class="dt">verbose =</span> <span class="ot">FALSE</span>)
+
+knitr<span class="op">::</span><span class="kw">kable</span>(simulation_result<span class="op">$</span>main_results,
+             <span class="dt">caption =</span> <span class="st">&quot;Simulated ANOVA Result&quot;</span>)</code></pre>
+<table>
+<caption><span id="tab:unnamed-chunk-40">Table 4.2: </span>Simulated ANOVA Result</caption>
+<thead>
+<tr class="header">
+<th></th>
+<th align="right">power</th>
+<th align="right">effect_size</th>
+</tr>
+</thead>
+<tbody>
+<tr class="odd">
+<td>anova_speed</td>
+<td align="right">80.48</td>
+<td align="right">0.3137769</td>
+</tr>
+</tbody>
+</table>
+<pre class="sourceCode r"><code class="sourceCode r">exact_result &lt;-<span class="st"> </span><span class="kw">ANOVA_exact</span>(design_result,
+                            <span class="dt">alpha_level =</span> alpha_level,
+                            <span class="dt">verbose =</span> <span class="ot">FALSE</span>)
+
+knitr<span class="op">::</span><span class="kw">kable</span>(exact_result<span class="op">$</span>main_results,
+             <span class="dt">caption =</span> <span class="st">&quot;Exact ANOVA Result&quot;</span>)</code></pre>
+<table>
+<caption><span id="tab:unnamed-chunk-40">Table 4.2: </span>Exact ANOVA Result</caption>
+<thead>
+<tr class="header">
+<th></th>
+<th align="right">power</th>
+<th align="right">partial_eta_squared</th>
+<th align="right">cohen_f</th>
+<th align="right">non_centrality</th>
+</tr>
+</thead>
+<tbody>
+<tr class="odd">
+<td>speed</td>
+<td align="right">80.33</td>
+<td align="right">0.3043</td>
+<td align="right">0.6614</td>
+<td align="right">8.75</td>
+</tr>
+</tbody>
+</table>
 <pre class="sourceCode r"><code class="sourceCode r"><span class="co">#relation dz and f for within designs </span>
 f &lt;-<span class="st"> </span><span class="fl">0.5</span><span class="op">*</span><span class="fl">0.6454972</span>
 <span class="co">#  </span></code></pre>
@@ -377,15 +466,16 @@ f &lt;-<span class="st"> </span><span class="fl">0.5</span><span class="op">*</s
 <p>Imagine we have a within-subject experiment with 3 conditions. We ask people what they mood is when their alarm clock wakes them up, when they wake up naturally on a week day, and when they wake up naturally on a weekend day. Based on pilot data, we expect the means (on a 7 point validated mood scale) are 3.8, 4.2, and 4.3. The standard deviation is 0.9, and the correlation between the dependent measurements is 0.7. We can calculate Cohen’s f for the ANOVA, and Cohen’s dz for the contrasts:</p>
 <pre class="sourceCode r"><code class="sourceCode r">mu &lt;-<span class="st"> </span><span class="kw">c</span>(<span class="fl">3.8</span>, <span class="fl">4.2</span>, <span class="fl">4.3</span>)
 sd &lt;-<span class="st"> </span><span class="fl">0.9</span>
-f &lt;-<span class="st"> </span><span class="kw">sqrt</span>(<span class="kw">sum</span>((mu<span class="op">-</span><span class="kw">mean</span>(mu))<span class="op">^</span><span class="dv">2</span>)<span class="op">/</span><span class="kw">length</span>(mu))<span class="op">/</span>sd <span class="co">#Cohen, 1988, formula 8.2.1 and 8.2.2</span>
-f</code></pre>
+f &lt;-<span class="st"> </span><span class="kw">sqrt</span>(<span class="kw">sum</span>((mu <span class="op">-</span><span class="st"> </span><span class="kw">mean</span>(mu)) <span class="op">^</span><span class="st"> </span><span class="dv">2</span>) <span class="op">/</span><span class="st"> </span><span class="kw">length</span>(mu)) <span class="op">/</span><span class="st"> </span>sd 
+<span class="co">#Cohen, 1988, formula 8.2.1 and 8.2.2</span>
+  f</code></pre>
 <pre><code>## [1] 0.2400274</code></pre>
-<pre class="sourceCode r"><code class="sourceCode r">r &lt;-<span class="st"> </span><span class="fl">0.7</span>
-(<span class="fl">4.2-3.8</span>)<span class="op">/</span><span class="fl">0.9</span><span class="op">/</span><span class="kw">sqrt</span>(<span class="dv">2</span><span class="op">*</span>(<span class="dv">1</span><span class="op">-</span>r))</code></pre>
+<pre class="sourceCode r"><code class="sourceCode r">  r &lt;-<span class="st"> </span><span class="fl">0.7</span>
+  (<span class="fl">4.2</span> <span class="op">-</span><span class="st"> </span><span class="fl">3.8</span>) <span class="op">/</span><span class="st"> </span><span class="fl">0.9</span> <span class="op">/</span><span class="st"> </span><span class="kw">sqrt</span>(<span class="dv">2</span> <span class="op">*</span><span class="st"> </span>(<span class="dv">1</span> <span class="op">-</span><span class="st"> </span>r))</code></pre>
 <pre><code>## [1] 0.5737753</code></pre>
-<pre class="sourceCode r"><code class="sourceCode r">(<span class="fl">4.3-3.8</span>)<span class="op">/</span><span class="fl">0.9</span><span class="op">/</span><span class="kw">sqrt</span>(<span class="dv">2</span><span class="op">*</span>(<span class="dv">1</span><span class="op">-</span>r))</code></pre>
+<pre class="sourceCode r"><code class="sourceCode r">  (<span class="fl">4.3</span> <span class="op">-</span><span class="st"> </span><span class="fl">3.8</span>) <span class="op">/</span><span class="st"> </span><span class="fl">0.9</span> <span class="op">/</span><span class="st"> </span><span class="kw">sqrt</span>(<span class="dv">2</span> <span class="op">*</span><span class="st"> </span>(<span class="dv">1</span> <span class="op">-</span><span class="st"> </span>r))</code></pre>
 <pre><code>## [1] 0.7172191</code></pre>
-<pre class="sourceCode r"><code class="sourceCode r">(<span class="fl">4.3-4.2</span>)<span class="op">/</span><span class="fl">0.9</span><span class="op">/</span><span class="kw">sqrt</span>(<span class="dv">2</span><span class="op">*</span>(<span class="dv">1</span><span class="op">-</span>r))</code></pre>
+<pre class="sourceCode r"><code class="sourceCode r">  (<span class="fl">4.3</span> <span class="op">-</span><span class="st"> </span><span class="fl">4.2</span>) <span class="op">/</span><span class="st"> </span><span class="fl">0.9</span> <span class="op">/</span><span class="st"> </span><span class="kw">sqrt</span>(<span class="dv">2</span> <span class="op">*</span><span class="st"> </span>(<span class="dv">1</span> <span class="op">-</span><span class="st"> </span>r))</code></pre>
 <pre><code>## [1] 0.1434438</code></pre>
 <p>The relation between Cohen’s d or dz and Cohen’s f becomes more difficult when there are multiple groups, because the relationship depends on the pattern of the means. Cohen (1988) presents calculations for three patterns, minimal variability (for example, for 5 means: -0.25, 0, 0, 0, 0.25), medium variability (for example, for 5 means: -0.25, -0.25, 0.25, 0.25, 0.25 or -0.25, -0.25, -0.25, 0.25, 0.25). For these three patterns, formula’s are available that compute Cohen’s f from Cohen’s d, where d is the effect size calculated for the difference between the largest and smallest mean (if the largest mean is 0.25 and the smallest mean is -0.25, 0.25 - -0.25 = 0.5, so d is 0.5 divided by the standard deviation of 0.9). In our example, d would be (4.3-3.8)/0.9 = 0.5555556. If we divide this value by sqrt(2*(1-r)) we have dz = 0.5555556/0.7745967 = 0.7172191.</p>
 <p>I have created a custom function that will calculate f from d, based on a specification of one of the three patterns of means. Our pattern is most similar (but not identical) to a maximum variability pattern (two means are high, one is lower). So we could attempt to calculate f from d (0.5555556), by calculating d from the largest and smallest mean:</p>
@@ -423,32 +513,61 @@ design_result &lt;-<span class="st"> </span><span class="kw">ANOVA_design</span>
                    <span class="dt">mu =</span> mu, 
                    <span class="dt">sd =</span> sd, 
                    <span class="dt">r =</span> r, 
-                   <span class="dt">labelnames =</span> labelnames)</code></pre>
-<p><img src="SuperpowerValidation_files/figure-html/unnamed-chunk-42-1.png" width="672" /></p>
-<pre class="sourceCode r"><code class="sourceCode r">alpha_level &lt;-<span class="st"> </span><span class="fl">0.05</span>
+                   <span class="dt">labelnames =</span> labelnames)
 
-simulation_result &lt;-<span class="st"> </span><span class="kw">ANOVA_power</span>(design_result, <span class="dt">nsims =</span> nsims)</code></pre>
-<pre><code>## Power and Effect sizes for ANOVA tests
-##             power effect_size
-## anova_speed 97.01      0.3467
-## 
-## Power and Effect sizes for contrasts
-##                           power effect_size
-## p_speed_fast_speed_medium 53.59      0.5057
-## p_speed_fast_speed_slow   98.46      1.0091
-## p_speed_medium_speed_slow 53.56      0.5051
-## 
-## Within-Subject Factors Included: Check MANOVA Results</code></pre>
-<pre class="sourceCode r"><code class="sourceCode r">exact_result &lt;-<span class="st"> </span><span class="kw">ANOVA_exact</span>(design_result, <span class="dt">alpha_level =</span> alpha_level)</code></pre>
-<pre><code>## Power and Effect sizes for ANOVA tests
-##       power partial_eta_squared cohen_f non_centrality
-## speed 96.92              0.3304  0.7024          18.75
-## 
-## Power and Effect sizes for contrasts
-##                           power effect_size
-## p_speed_fast_speed_medium 53.79      0.4841
-## p_speed_fast_speed_slow   98.39      0.9682
-## p_speed_medium_speed_slow 53.79      0.4841</code></pre>
+alpha_level &lt;-<span class="st"> </span><span class="fl">0.05</span>
+
+simulation_result &lt;-<span class="st"> </span><span class="kw">ANOVA_power</span>(design_result, 
+                                 <span class="dt">alpha_level =</span> alpha_level, 
+                                 <span class="dt">nsims =</span> nsims,
+                                 <span class="dt">verbose =</span> <span class="ot">FALSE</span>)
+
+knitr<span class="op">::</span><span class="kw">kable</span>(simulation_result<span class="op">$</span>main_results,
+             <span class="dt">caption =</span> <span class="st">&quot;Simulated ANOVA Result&quot;</span>)</code></pre>
+<table>
+<caption><span id="tab:unnamed-chunk-44">Table 4.3: </span>Simulated ANOVA Result</caption>
+<thead>
+<tr class="header">
+<th></th>
+<th align="right">power</th>
+<th align="right">effect_size</th>
+</tr>
+</thead>
+<tbody>
+<tr class="odd">
+<td>anova_speed</td>
+<td align="right">97.24</td>
+<td align="right">0.3454646</td>
+</tr>
+</tbody>
+</table>
+<pre class="sourceCode r"><code class="sourceCode r">exact_result &lt;-<span class="st"> </span><span class="kw">ANOVA_exact</span>(design_result,
+                            <span class="dt">alpha_level =</span> alpha_level,
+                            <span class="dt">verbose =</span> <span class="ot">FALSE</span>)
+
+knitr<span class="op">::</span><span class="kw">kable</span>(exact_result<span class="op">$</span>main_results,
+             <span class="dt">caption =</span> <span class="st">&quot;Exact ANOVA Result&quot;</span>)</code></pre>
+<table>
+<caption><span id="tab:unnamed-chunk-44">Table 4.3: </span>Exact ANOVA Result</caption>
+<thead>
+<tr class="header">
+<th></th>
+<th align="right">power</th>
+<th align="right">partial_eta_squared</th>
+<th align="right">cohen_f</th>
+<th align="right">non_centrality</th>
+</tr>
+</thead>
+<tbody>
+<tr class="odd">
+<td>speed</td>
+<td align="right">96.92</td>
+<td align="right">0.3304</td>
+<td align="right">0.7024</td>
+<td align="right">18.75</td>
+</tr>
+</tbody>
+</table>
 <p>The results of the simulation are indeed very close to 96.9%. We can see this is in line with the power estimate from Gpower:</p>
 <p><img src="screenshots/gpower_12.png" /></p>
 <p>We can also validate this by creating the code to do a power analysis in R from scratch:</p>
@@ -470,10 +589,10 @@ design_result &lt;-<span class="st"> </span><span class="kw">ANOVA_design</span>
                    <span class="dt">mu =</span> mu, 
                    <span class="dt">sd =</span> sd, 
                    <span class="dt">r =</span> r, 
-                   <span class="dt">labelnames =</span> labelnames)</code></pre>
-<p><img src="SuperpowerValidation_files/figure-html/unnamed-chunk-43-1.png" width="672" /></p>
-<pre class="sourceCode r"><code class="sourceCode r"><span class="kw">power_oneway_within</span>(design_result)<span class="op">$</span>power</code></pre>
-<pre><code>## [1] 0.9691634</code></pre>
+                   <span class="dt">labelnames =</span> labelnames)
+
+<span class="kw">power_oneway_within</span>(design_result)<span class="op">$</span>power</code></pre>
+<pre><code>## [1] 96.91634</code></pre>
 <pre class="sourceCode r"><code class="sourceCode r"><span class="kw">power_oneway_within</span>(design_result)<span class="op">$</span>eta_p_<span class="dv">2</span></code></pre>
 <pre><code>## [1] 0.05882353</code></pre>
 <pre class="sourceCode r"><code class="sourceCode r"><span class="kw">power_oneway_within</span>(design_result)<span class="op">$</span>eta_p_<span class="dv">2</span>_SPSS</code></pre>
@@ -514,7 +633,7 @@ p4 &lt;-<span class="st"> </span><span class="kw">numeric</span>(nSim) <span cla
 rho &lt;-<span class="st"> </span><span class="kw">cbind</span>(<span class="kw">c</span>(<span class="dv">1</span>, r, r), <span class="kw">c</span>(r, <span class="dv">1</span>, r), <span class="kw">c</span>(r, r, <span class="dv">1</span>))
 <span class="co"># define participant codes</span>
 part &lt;-<span class="st"> </span><span class="kw">paste</span>(<span class="st">&quot;part&quot;</span>,<span class="kw">seq</span>(<span class="dv">1</span><span class="op">:</span>N))
-<span class="cf">for</span>(i <span class="cf">in</span> <span class="dv">1</span><span class="op">:</span>nSim) {
+<span class="cf">for</span> (i <span class="cf">in</span> <span class="dv">1</span><span class="op">:</span>nSim) {
   <span class="co">#for each simulated experiment</span>
   <span class="co"># setWinProgressBar(pb, i, title=paste(round(i/nSim*100, 1), &quot;% done&quot;))</span>
   data =<span class="st"> </span><span class="kw">mvrnorm</span>(<span class="dt">n =</span> N,
@@ -536,13 +655,13 @@ part &lt;-<span class="st"> </span><span class="kw">paste</span>(<span class="st
 <span class="co">#close(pb)#close progress bar</span>
 <span class="co">#printing all unique tests (adjusted code by DL)</span>
 <span class="kw">sum</span>(p1 <span class="op">&lt;</span><span class="st"> </span>alpha1) <span class="op">/</span><span class="st"> </span>nSim</code></pre>
-<pre><code>## [1] 0.9521</code></pre>
+<pre><code>## [1] 0.9523</code></pre>
 <pre class="sourceCode r"><code class="sourceCode r"><span class="kw">sum</span>(p2 <span class="op">&lt;</span><span class="st"> </span>alpha2) <span class="op">/</span><span class="st"> </span>nSim</code></pre>
-<pre><code>## [1] 0.9288</code></pre>
+<pre><code>## [1] 0.9286</code></pre>
 <pre class="sourceCode r"><code class="sourceCode r"><span class="kw">sum</span>(p3 <span class="op">&lt;</span><span class="st"> </span>alpha2) <span class="op">/</span><span class="st"> </span>nSim</code></pre>
-<pre><code>## [1] 0.9273</code></pre>
+<pre><code>## [1] 0.9278</code></pre>
 <pre class="sourceCode r"><code class="sourceCode r"><span class="kw">sum</span>(p4 <span class="op">&lt;</span><span class="st"> </span>alpha2) <span class="op">/</span><span class="st"> </span>nSim</code></pre>
-<pre><code>## [1] 0.0478</code></pre>
+<pre><code>## [1] 0.0493</code></pre>
 </div>
 <div id="reproducing-brysbaert" class="section level2">
 <h2><span class="header-section-number">4.4</span> Reproducing Brysbaert</h2>
@@ -559,31 +678,59 @@ labelnames &lt;-<span class="st"> </span><span class="kw">c</span>(<span class="
                    <span class="dt">mu =</span> mu, 
                    <span class="dt">sd =</span> sd, 
                    <span class="dt">r =</span> r, 
-                   <span class="dt">labelnames =</span> labelnames)</code></pre>
-<p><img src="SuperpowerValidation_files/figure-html/unnamed-chunk-46-1.png" width="672" /></p>
-<pre class="sourceCode r"><code class="sourceCode r">simulation_result &lt;-<span class="st"> </span><span class="kw">ANOVA_power</span>(design_result, <span class="dt">nsims =</span> nsims)</code></pre>
-<pre><code>## Power and Effect sizes for ANOVA tests
-##             power effect_size
-## anova_speed 95.75      0.1077
-## 
-## Power and Effect sizes for contrasts
-##                           power effect_size
-## p_speed_fast_speed_medium 92.49   0.4049809
-## p_speed_fast_speed_slow   93.26   0.4048337
-## p_speed_medium_speed_slow  5.08  -0.0003567
-## 
-## Within-Subject Factors Included: Check MANOVA Results</code></pre>
-<p>And we can again replicate this with the <code>ANOVA_exact</code> function.</p>
-<pre class="sourceCode r"><code class="sourceCode r"><span class="kw">ANOVA_exact</span>(design_result)</code></pre>
-<pre><code>## Power and Effect sizes for ANOVA tests
-##       power partial_eta_squared cohen_f non_centrality
-## speed 95.29              0.0976  0.3288             16
-## 
-## Power and Effect sizes for contrasts
-##                           power effect_size
-## p_speed_fast_speed_medium 92.77         0.4
-## p_speed_fast_speed_slow   92.77         0.4
-## p_speed_medium_speed_slow  5.00         0.0</code></pre>
+                   <span class="dt">labelnames =</span> labelnames)
+
+simulation_result &lt;-<span class="st"> </span><span class="kw">ANOVA_power</span>(design_result, 
+                                 <span class="dt">alpha_level =</span> alpha_level, 
+                                 <span class="dt">nsims =</span> nsims,
+                                 <span class="dt">verbose =</span> <span class="ot">FALSE</span>)
+
+knitr<span class="op">::</span><span class="kw">kable</span>(simulation_result<span class="op">$</span>main_results,
+             <span class="dt">caption =</span> <span class="st">&quot;Simulated ANOVA Result&quot;</span>)</code></pre>
+<table>
+<caption><span id="tab:unnamed-chunk-48">Table 4.4: </span>Simulated ANOVA Result</caption>
+<thead>
+<tr class="header">
+<th></th>
+<th align="right">power</th>
+<th align="right">effect_size</th>
+</tr>
+</thead>
+<tbody>
+<tr class="odd">
+<td>anova_speed</td>
+<td align="right">95.37</td>
+<td align="right">0.1077687</td>
+</tr>
+</tbody>
+</table>
+<pre class="sourceCode r"><code class="sourceCode r">exact_result &lt;-<span class="st"> </span><span class="kw">ANOVA_exact</span>(design_result,
+                            <span class="dt">alpha_level =</span> alpha_level,
+                            <span class="dt">verbose =</span> <span class="ot">FALSE</span>)
+
+knitr<span class="op">::</span><span class="kw">kable</span>(exact_result<span class="op">$</span>main_results,
+             <span class="dt">caption =</span> <span class="st">&quot;Exact ANOVA Result&quot;</span>)</code></pre>
+<table>
+<caption><span id="tab:unnamed-chunk-48">Table 4.4: </span>Exact ANOVA Result</caption>
+<thead>
+<tr class="header">
+<th></th>
+<th align="right">power</th>
+<th align="right">partial_eta_squared</th>
+<th align="right">cohen_f</th>
+<th align="right">non_centrality</th>
+</tr>
+</thead>
+<tbody>
+<tr class="odd">
+<td>speed</td>
+<td align="right">95.29</td>
+<td align="right">0.0976</td>
+<td align="right">0.3288</td>
+<td align="right">16</td>
+</tr>
+</tbody>
+</table>
 <div id="results" class="section level3">
 <h3><span class="header-section-number">4.4.1</span> Results</h3>
 <p>The results of the simulation are very similar. Power for the ANOVA <em>F</em>-test is around 95.2%. For the three paired t-tests, power is around 92.7. This is in line with the a-priori power analysis when using g*power:</p>
@@ -650,13 +797,13 @@ part &lt;-<span class="st"> </span><span class="kw">paste</span>(<span class="st
 }
 
 <span class="kw">sum</span>(p1 <span class="op">&lt;</span><span class="st"> </span>alpha1) <span class="op">/</span><span class="st"> </span>nSim</code></pre>
-<pre><code>## [1] 0.9834</code></pre>
+<pre><code>## [1] 0.9839</code></pre>
 <pre class="sourceCode r"><code class="sourceCode r"><span class="kw">sum</span>(p2 <span class="op">&lt;</span><span class="st"> </span>alpha2) <span class="op">/</span><span class="st"> </span>nSim</code></pre>
-<pre><code>## [1] 0.9672</code></pre>
+<pre><code>## [1] 0.9713</code></pre>
 <pre class="sourceCode r"><code class="sourceCode r"><span class="kw">sum</span>(p3 <span class="op">&lt;</span><span class="st"> </span>alpha2) <span class="op">/</span><span class="st"> </span>nSim</code></pre>
-<pre><code>## [1] 0.9685</code></pre>
+<pre><code>## [1] 0.9692</code></pre>
 <pre class="sourceCode r"><code class="sourceCode r"><span class="kw">sum</span>(p4 <span class="op">&lt;</span><span class="st"> </span>alpha2) <span class="op">/</span><span class="st"> </span>nSim</code></pre>
-<pre><code>## [1] 0.0497</code></pre>
+<pre><code>## [1] 0.0474</code></pre>
 <pre class="sourceCode r"><code class="sourceCode r">design &lt;-<span class="st"> &quot;3w&quot;</span>
 n &lt;-<span class="st"> </span><span class="dv">75</span>
 mu &lt;-<span class="st"> </span><span class="kw">c</span>(<span class="dv">0</span>, <span class="fl">0.4</span>, <span class="fl">0.4</span>)
@@ -669,31 +816,59 @@ labelnames &lt;-<span class="st"> </span><span class="kw">c</span>(<span class="
                    <span class="dt">mu =</span> mu, 
                    <span class="dt">sd =</span> sd, 
                    <span class="dt">r =</span> r, 
-                   <span class="dt">labelnames =</span> labelnames)</code></pre>
-<p><img src="SuperpowerValidation_files/figure-html/unnamed-chunk-51-1.png" width="672" /></p>
-<pre class="sourceCode r"><code class="sourceCode r"><span class="kw">ANOVA_power</span>(design_result, <span class="dt">nsims =</span> nsims)</code></pre>
-<pre><code>## Power and Effect sizes for ANOVA tests
-##             power effect_size
-## anova_speed 98.44      0.1283
-## 
-## Power and Effect sizes for contrasts
-##                           power effect_size
-## p_speed_fast_speed_medium 96.97    0.451562
-## p_speed_fast_speed_slow   96.82    0.451945
-## p_speed_medium_speed_slow  5.07    0.000243
-## 
-## Within-Subject Factors Included: Check MANOVA Results</code></pre>
-<p>We replicate this with <code>ANOVA_exact</code>.</p>
-<pre class="sourceCode r"><code class="sourceCode r"><span class="kw">ANOVA_exact</span>(design_result)</code></pre>
-<pre><code>## Power and Effect sizes for ANOVA tests
-##       power partial_eta_squared cohen_f non_centrality
-## speed 98.35               0.119  0.3676             20
-## 
-## Power and Effect sizes for contrasts
-##                           power effect_size
-## p_speed_fast_speed_medium 96.87      0.4472
-## p_speed_fast_speed_slow   96.87      0.4472
-## p_speed_medium_speed_slow  5.00      0.0000</code></pre>
+                   <span class="dt">labelnames =</span> labelnames)
+
+simulation_result &lt;-<span class="st"> </span><span class="kw">ANOVA_power</span>(design_result, 
+                                 <span class="dt">alpha_level =</span> alpha_level, 
+                                 <span class="dt">nsims =</span> nsims,
+                                 <span class="dt">verbose =</span> <span class="ot">FALSE</span>)
+
+knitr<span class="op">::</span><span class="kw">kable</span>(simulation_result<span class="op">$</span>main_results,
+             <span class="dt">caption =</span> <span class="st">&quot;Simulated ANOVA Result&quot;</span>)</code></pre>
+<table>
+<caption><span id="tab:unnamed-chunk-52">Table 4.5: </span>Simulated ANOVA Result</caption>
+<thead>
+<tr class="header">
+<th></th>
+<th align="right">power</th>
+<th align="right">effect_size</th>
+</tr>
+</thead>
+<tbody>
+<tr class="odd">
+<td>anova_speed</td>
+<td align="right">98.38</td>
+<td align="right">0.1287478</td>
+</tr>
+</tbody>
+</table>
+<pre class="sourceCode r"><code class="sourceCode r">exact_result &lt;-<span class="st"> </span><span class="kw">ANOVA_exact</span>(design_result,
+                            <span class="dt">alpha_level =</span> alpha_level,
+                            <span class="dt">verbose =</span> <span class="ot">FALSE</span>)
+
+knitr<span class="op">::</span><span class="kw">kable</span>(exact_result<span class="op">$</span>main_results,
+             <span class="dt">caption =</span> <span class="st">&quot;Exact ANOVA Result&quot;</span>)</code></pre>
+<table>
+<caption><span id="tab:unnamed-chunk-52">Table 4.5: </span>Exact ANOVA Result</caption>
+<thead>
+<tr class="header">
+<th></th>
+<th align="right">power</th>
+<th align="right">partial_eta_squared</th>
+<th align="right">cohen_f</th>
+<th align="right">non_centrality</th>
+</tr>
+</thead>
+<tbody>
+<tr class="odd">
+<td>speed</td>
+<td align="right">98.35</td>
+<td align="right">0.119</td>
+<td align="right">0.3676</td>
+<td align="right">20</td>
+</tr>
+</tbody>
+</table>
 <p>Again, this is similar to G*Power for the ANOVA:</p>
 <p><img src="screenshots/gpower_4.png" /></p>
 
