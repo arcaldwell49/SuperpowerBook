@@ -2,12 +2,13 @@
 
 Researchers might consider what the effects on the statistical power of their design is, when they add participants. Participants can be added to an additional condition, or to the existing design. 
 
-In a One-Way ANOVA adding a condition means, for example, going from a 1x2 to a 1x3 design. For example, in addition to a control and intensive training condition, we add a light training condition. 
+In a one-way ANOVA adding a condition means, for example, going from a 1x2 to a 1x3 design. For example, in addition to a control and intensive training condition, we add a light training condition. 
 
 ```{r variations_in_design}
 string <- "2b"
 n <- 50
-mu <- c(80, 86) #All means are equal - so there is no real difference.
+#All means are equal - so there is no real difference.
+mu <- c(80, 86) 
 sd <- 10
 labelnames <- c("Condition", "control", "intensive_training") 
 design_result <- ANOVA_design(design = string,
@@ -24,14 +25,22 @@ simulation_result <- ANOVA_power(design_result,
                                  alpha_level = alpha_level, 
                                  nsims = nsims,
                                  verbose = FALSE)
+```
 
+```{r echo = FALSE}
 knitr::kable(simulation_result$main_results,
              caption = "Simulated ANOVA Result")
+```
 
+
+```{r}
 exact_result <- ANOVA_exact(design_result,
                             alpha_level = alpha_level,
                             verbose = FALSE)
+```
 
+
+```{r echo = FALSE}
 knitr::kable(exact_result$main_results,
              caption = "Exact ANOVA Result")
 ```
@@ -73,7 +82,9 @@ power_oneway_between(design_result)$eta_p_2
 exact_result <- ANOVA_exact(design_result,
                             alpha_level = alpha_level,
                             verbose = FALSE)
+```
 
+```{r echo = FALSE}
 knitr::kable(exact_result$main_results,
              caption = "Exact ANOVA Result")
 
@@ -227,11 +238,15 @@ labelnames = labelnames
 )
 
 power_oneway_within(design_result)$power
+```
 
+```{r}
 exact_result <- ANOVA_exact(design_result,
                             alpha_level = alpha_level,
                             verbose = FALSE)
+```
 
+```{r echo = FALSE}
 knitr::kable(exact_result$main_results,
              caption = "Exact ANOVA Result")
 ```
@@ -259,11 +274,15 @@ labelnames = labelnames
 )
 
 power_oneway_within(design_result)$power
+```
 
+```{r}
 exact_result <- ANOVA_exact(design_result,
                             alpha_level = alpha_level,
                             verbose = FALSE)
+```
 
+```{r echo=FALSE}
 knitr::kable(exact_result$main_results,
              caption = "Exact ANOVA Result")
 ```
@@ -313,6 +332,7 @@ power_oneway_within(design_result)$Cohen_f
 power_oneway_within(design_result)$Cohen_f_SPSS
 power_oneway_within(design_result)$lambda
 power_oneway_within(design_result)$F_critical
+
 string <- "4w"
 mu <-
 c(0, 0, 0, 5) #All means are equal - so there is no real difference.
@@ -332,6 +352,7 @@ power_oneway_within(design_result)$Cohen_f
 power_oneway_within(design_result)$Cohen_f_SPSS
 power_oneway_within(design_result)$lambda
 power_oneway_within(design_result)$F_critical
+
 string <- "5w"
 mu <-
 c(0, 0, 0, 0, 5) 
@@ -352,6 +373,7 @@ power_oneway_within(design_result)$Cohen_f
 power_oneway_within(design_result)$Cohen_f_SPSS
 power_oneway_within(design_result)$lambda
 power_oneway_within(design_result)$F_critical
+
 string <- "6w"
 mu <- c(0, 0, 0, 0, 0, 5) 
 #All means are equal - so there is no real difference.
@@ -370,6 +392,7 @@ power_oneway_within(design_result)$Cohen_f
 power_oneway_within(design_result)$Cohen_f_SPSS
 power_oneway_within(design_result)$lambda
 power_oneway_within(design_result)$F_critical
+
 string <- "7w"
 mu <- c(0, 0, 0, 0, 0, 0, 5) 
 #All means are equal - so there is no real difference.

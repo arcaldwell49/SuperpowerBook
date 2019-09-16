@@ -1,36 +1,53 @@
-# Analytic Power for Three-way Interactions
+# Power for Three-way Interactions
 
 There are almost no software solutions that allow researchers to perform power anaysis for more complex designs. Through simulation, it is relatively straightforward to examine the power for designs with multiple factors with many levels. 
 
 Let's start with a 2x2x2 between subjects design. We collect 50 participants in each between participant condition (so 400 participants in total - 50x2x2x2). 
 
 ```{r start_threewayinteraction}
-# With 2x2x2 designs, the names for paired comparisons can become very long. 
-# So here I abbreviate terms: Size, Color, and Cognitive Load, have values:
-# b = big, s = small, g = green, r = red, pres = present, abs = absent.  
+# With 2x2x2 designs, 
+# the names for paired comparisons can become very long. 
+# So here I abbreviate terms: 
+#   Size, Color, and Cognitive Load, have values:
+# b = big, s = small, g = green, 
+# r = red, pres = present, abs = absent.  
 labelnames <- c("Size", "b", "s", "Color", "g", "r", 
                 "Load", "pres", "abs") #
-design_result <- ANOVA_design(design = "2b*2b*2b", #describe the design
-                              n = 50, #sample size per group 
-                              mu = c(2, 2, 6, 1, 6, 6, 1, 8), #pattern of means
+design_result <- ANOVA_design(design = "2b*2b*2b", 
+                              #sample size per group 
+                              n = 50, 
+                              #pattern of means
+                              mu = c(2, 2, 6, 1, 6, 6, 1, 8), 
                               sd = 10, #standard deviation
-                              labelnames = labelnames) #names of labels
+                              labelnames = labelnames) 
 
 simulation_result <- ANOVA_power(design_result, 
                                  alpha_level = alpha_level, 
                                  nsims = nsims,
                                  verbose = FALSE)
+```
 
+```{r echo=FALSE}
 knitr::kable(simulation_result$main_results,
              caption = "Simulated ANOVA Result")
+```
 
+
+```{r}
 exact_result <- ANOVA_exact(design_result,
                             alpha_level = alpha_level,
                             verbose = FALSE)
+```
 
+
+```{r echo=FALSE}
 knitr::kable(exact_result$main_results,
              caption = "Exact ANOVA Result")
+```
 
+
+
+```{r}
 #Analytical power calculation
 power_analytic <- power_threeway_between(design_result)
 power_analytic$power_A
@@ -82,19 +99,31 @@ simulation_result <- ANOVA_power(design_result,
                                  alpha_level = alpha_level, 
                                  nsims = nsims,
                                  verbose = FALSE)
+```
 
+```{r echo=FALSE}
 knitr::kable(simulation_result$main_results,
              caption = "Simulated ANOVA Result")
+```
 
+
+```{r}
 exact_result <- ANOVA_exact(design_result,
                             alpha_level = alpha_level,
                             verbose = FALSE)
+```
 
+
+```{r echo=FALSE}
 knitr::kable(exact_result$main_results,
              caption = "Exact ANOVA Result")
+```
 
+
+
+```{r}
 # Power based on analytical solution
-power_oneway_between(design_result)$power #using default alpha level of .05
+power_oneway_between(design_result)$power 
 ```
 
 Similarly, we can create a 2 factor design where we average over the third factor, and recreate the power analysis for the Two-Way interaction. For example, we can group over the Cognitive Load condition, and look at the Size by Color Interaction:
@@ -115,19 +144,31 @@ simulation_result <- ANOVA_power(design_result,
                                  alpha_level = alpha_level, 
                                  nsims = nsims,
                                  verbose = FALSE)
+```
 
+```{r echo=FALSE}
 knitr::kable(simulation_result$main_results,
              caption = "Simulated ANOVA Result")
+```
 
+
+```{r}
 exact_result <- ANOVA_exact(design_result,
                             alpha_level = alpha_level,
                             verbose = FALSE)
+```
 
+
+```{r echo=FALSE}
 knitr::kable(exact_result$main_results,
              caption = "Exact ANOVA Result")
+```
 
+
+
+```{r}
 # Power based on analytical solution
-power_res <- power_twoway_between(design_result) #using default alpha level of .05
+power_res <- power_twoway_between(design_result) 
 power_res$power_A
 power_res$power_B
 power_res$power_AB
@@ -153,17 +194,25 @@ simulation_result <- ANOVA_power(design_result,
                                  alpha_level = alpha_level, 
                                  nsims = nsims,
                                  verbose = FALSE)
+```
 
+```{r echo=FALSE}
 knitr::kable(simulation_result$main_results,
              caption = "Simulated ANOVA Result")
+```
 
+```{r}
 exact_result <- ANOVA_exact(design_result,
                             alpha_level = alpha_level,
                             verbose = FALSE)
+```
 
+```{r echo=FALSE}
 knitr::kable(exact_result$main_results,
              caption = "Exact ANOVA Result")
+```
 
+```{r}
 #Analytical power calculation
 power_analytic <- power_threeway_between(design_result)
 power_analytic$power_A
@@ -186,21 +235,32 @@ power_analytic$eta_p_2_ABC
 The power for interactions depends on Cohen's *f*, the alpha level, the sample size, and the degrees of freedom. 
 
 ```{r}
-# With 2x2x2 designs, the names for paired comparisons can become very long. 
+# With 2x2x2 designs, 
+# the names for paired comparisons can become very long. 
 # So here the sample size abbreviate terms
 # Size, Color, and Cognitive Load, have values:
-# b = big, s = small, g = green, r = red, pres = present, abs = absent.  
+# b = big, s = small, g = green, 
+# r = red, pres = present, abs = absent.  
 labelnames <- c("Size", "b", "s", "x", "Color", "g", "r", 
                 "Load", "pres", "abs") #
-design_result <- ANOVA_design(design = "3b*2b*2b", #describe the design
-                              n = 15, #sample size per group 
-                              mu = c(20, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 20), 
+design_result <- ANOVA_design(design = "3b*2b*2b", 
+                              n = 15, 
+                              mu = c(20, 0, 0, 0, 0, 
+                                     0, 0, 0, 0, 0, 0, 20), 
                               
-                              sd = 20, #
+                              sd = 20, 
                               labelnames = labelnames) 
 
 # Power based on exact simulations
-exact_result <- ANOVA_exact(design_result)
+exact_result <- ANOVA_exact(design_result,
+                            verbose = FALSE)
+```
+
+```{r echo = FALSE}
+knitr::kable(exact_result$main_results, caption = "Exact ANOVA Result")
+```
+
+```{r}
 #Analytical power calculation
 power_analytic <- power_threeway_between(design_result)
 power_analytic$power_A
@@ -218,14 +278,22 @@ We see that a pattern of means of 0, 0, 0, 0, 0, 0, 0, 20 for a 2x2x2 interactio
 
 ```{r}
 labelnames <- c("Size", "b", "s", "Color", "g", "r")
-design_result <- ANOVA_design(design = "2b*2b", #describe the design
-                              n = 10, #sample size per group 
-                              mu = c(0, 0, 0, 10), #pattern of means
-                              sd = 10, #standard deviation
-                              labelnames = labelnames) #names of labels
+design_result <- ANOVA_design(design = "2b*2b", 
+                              n = 10, 
+                              mu = c(0, 0, 0, 10), 
+                              sd = 10, 
+                              labelnames = labelnames) 
 
 # Power based on exact simulations
-exact_result <- ANOVA_exact(design_result)
+exact_result <- ANOVA_exact(design_result,
+                            verbose = FALSE)
+```
+
+```{r echo = FALSE}
+knitr::kable(exact_result$main_results, caption = "Exact ANOVA Result")
+```
+
+```{r}
 #Analytical power calculation
 power_analytic <- power_twoway_between(design_result)
 power_analytic$power_A
@@ -237,14 +305,23 @@ Cohen's f is twice as large for a 2x2 design with the same mean value in one of 
 
 ```{r}
 labelnames <- c("Size", "b", "s")
-design_result <- ANOVA_design(design = "2b", #describe the design
-                              n = 10, #sample size per group 
-                              mu = c(0, 5), #pattern of means
-                              sd = 10, #standard deviation
-                              labelnames = labelnames) #names of labels
+design_result <- ANOVA_design(design = "2b", 
+                              n = 10,  
+                              mu = c(0, 5), 
+                              sd = 10, 
+                              labelnames = labelnames) 
 
 # Power based on exact simulations
-exact_result <- ANOVA_exact(design_result)
+exact_result <- ANOVA_exact(design_result,
+                            verbose = FALSE)
+```
+
+```{r echo = FALSE}
+knitr::kable(exact_result$main_results, caption = "Exact ANOVA Result")
+```
+
+
+```{r }
 #Analytical power calculation
 power_analytic <- power_oneway_between(design_result)
 power_analytic$power

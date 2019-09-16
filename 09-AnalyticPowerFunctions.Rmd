@@ -1,8 +1,6 @@
 # Analytic Power Functions
 
-```{r import_aberson, include=FALSE}
-library(pwr2ppl)
-```
+
 
 For some designs it is possible to calculate power analytically, using closed functions. 
 
@@ -27,6 +25,9 @@ design_result <- ANOVA_design(design = string,
 exact_result <- ANOVA_exact(design_result,
                             alpha_level = alpha_level,
                             verbose = FALSE)
+```
+
+```{r echo = FALSE}
 
 knitr::kable(exact_result$main_results,
              caption = "Exact ANOVA Result")
@@ -84,7 +85,9 @@ design_result <- ANOVA_design(design = string,
 exact_result <- ANOVA_exact(design_result,
                             alpha_level = alpha_level,
                             verbose = FALSE)
+```
 
+```{r echo=FALSE}
 knitr::kable(exact_result$main_results,
              caption = "Exact ANOVA Result")
 ```
@@ -138,6 +141,9 @@ design_result <- ANOVA_design(design = string,
 exact_result <- ANOVA_exact(design_result,
                             alpha_level = alpha_level,
                             verbose = FALSE)
+```
+
+```{r echo=FALSE}
 
 knitr::kable(exact_result$main_results,
              caption = "Exact ANOVA Result")
@@ -193,15 +199,20 @@ design_result <- ANOVA_design(design = string,
 exact_result <- ANOVA_exact(design_result,
                             alpha_level = alpha_level,
                             verbose = FALSE)
+```
+
+```{r echo = FALSE}
 
 knitr::kable(exact_result$main_results,
              caption = "Exact ANOVA Result")
 ```
 
 We can use the `ANOVA_exact` function to evaluate this design since there is not a analytic solution in `Superpower`. 
-
 ```{r}
 power_res <- ANOVA_exact(design_result = design_result)
+```
+
+```{r echo = FALSE}
 power_res$main_results
 ```
 

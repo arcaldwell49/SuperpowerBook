@@ -32,14 +32,22 @@ simulation_result <- ANOVA_power(design_result,
                                  alpha_level = alpha_level, 
                                  nsims = nsims,
                                  verbose = FALSE)
+```
 
+```{r echo=FALSE}
 knitr::kable(simulation_result$main_results,
              caption = "Simulated ANOVA Result")
+```
 
+
+```{r}
 exact_result <- ANOVA_exact(design_result,
                             alpha_level = alpha_level,
                             verbose = FALSE)
+```
 
+
+```{r echo = FALSE}
 knitr::kable(exact_result$main_results,
              caption = "Exact ANOVA Result")
 
@@ -71,14 +79,21 @@ simulation_result <- ANOVA_power(design_result,
                                  alpha_level = alpha_level, 
                                  nsims = nsims,
                                  verbose = FALSE)
+```
 
+```{r echo=FALSE}
 knitr::kable(simulation_result$main_results,
              caption = "Simulated ANOVA Result")
+```
 
+```{r}
 exact_result <- ANOVA_exact(design_result,
                             alpha_level = alpha_level,
                             verbose = FALSE)
+```
 
+
+```{r echo=FALSE}
 knitr::kable(exact_result$main_results,
              caption = "Exact ANOVA Result")
 ```
@@ -143,7 +158,7 @@ df = dm[rep(seq_len(nrow(dm)), nsims), ]
 df$simID = sort(rep(seq_len(nsims), nrow(dm)))
  
 # sample the observed data from a multivariate normal distribution
-# using MASS::mvrnorm with the parameters mu and Sigma created earlier
+# using MASS::mvrnorm with the mu and Sigma created earlier
 # and bind to the existing df
  
 
@@ -216,7 +231,8 @@ grid.arrange(plt1, plt2, nrow = 1)
 We can reproduce this simulation:
 
 ```{r}
-mu = c(700, 670, 670, 700) # true effects (in this case, a double dissociation)
+# true effects (in this case, a double dissociation)
+mu = c(700, 670, 670, 700) 
 sigma = 150  # population standard deviation
 n <- 25
 sd <- 150
@@ -235,14 +251,20 @@ simulation_result <- ANOVA_power(design_result,
                                  alpha_level = alpha_level, 
                                  nsims = nsims,
                                  verbose = FALSE)
+```
 
+```{r echo = FALSE}
 knitr::kable(simulation_result$main_results,
              caption = "Simulated ANOVA Result")
+```
 
+```{r}
 exact_result <- ANOVA_exact(design_result,
                             alpha_level = alpha_level,
                             verbose = FALSE)
+```
 
+```{r echo=FALSE}
 knitr::kable(exact_result$main_results,
              caption = "Exact ANOVA Result")
 ```
@@ -254,7 +276,8 @@ The simulations yield closely matching results.
 
 ```{r}
 # define the parameters
-mu = c(700, 670, 690, 750) # true effects (in this case, a double dissociation)
+# true effects (in this case, a double dissociation)
+mu = c(700, 670, 690, 750) 
 sigma = 150  # population standard deviation
 rho = 0.4 # correlation between repeated measures
 nsubs = 25 # how many subjects?
@@ -298,7 +321,7 @@ df = dm[rep(seq_len(nrow(dm)), nsims), ]
 df$simID = sort(rep(seq_len(nsims), nrow(dm)))
  
 # sample the observed data from a multivariate normal distribution
-# using MASS::mvrnorm with the parameters mu and Sigma created earlier
+# using MASS::mvrnorm with the mu and Sigma created earlier
 # and bind to the existing df
  
 
@@ -316,7 +339,8 @@ mods <- df %>%
                  qr = FALSE, data = .))
   
   # extract p-values for each effect and store in a data frame
-  p = data.frame(mods %>% do(as.data.frame(tidy(.$model[[3]])$p.value[1])),
+  p = data.frame(mods %>% 
+                   do(as.data.frame(tidy(.$model[[3]])$p.value[1])),
   mods %>% do(as.data.frame(tidy(.$model[[4]])$p.value[1])),
   mods %>% do(as.data.frame(tidy(.$model[[5]])$p.value[1])))
   colnames(p) = c('X1', 'X2', 'Interaction')
@@ -369,7 +393,8 @@ grid.arrange(plt1, plt2, nrow = 1)
 We can reproduce this simulation:
 
 ```{r}
-mu = c(700, 670, 690, 750) # true effects (in this case, a double dissociation)
+# true effects (in this case, a double dissociation)
+mu = c(700, 670, 690, 750) 
 sigma = 150  # population standard deviation
 n <- 25
 sd <- 150
@@ -387,8 +412,21 @@ design_result <- ANOVA_design(design = string,
 simulation_result <- ANOVA_power(design_result, 
                                  alpha_level = 0.05, 
                                  nsims = nsims)
+```
 
+```{r echo=FALSE}
+knitr::kable(simulation_result$main_results,
+             caption = "Simulated ANOVA Result")
+```
+
+
+```{r}
 exact_result <- ANOVA_exact(design_result, alpha_level = alpha_level)
+```
+
+```{r echo=FALSE}
+knitr::kable(exact_result$main_results,
+             caption = "Exact ANOVA Result")
 ```
 
 
@@ -444,14 +482,20 @@ simulation_result <- ANOVA_power(design_result,
                                  alpha_level = alpha_level, 
                                  nsims = nsims,
                                  verbose = FALSE)
+```
 
+```{r echo=FALSE}
 knitr::kable(simulation_result$main_results,
              caption = "Simulated ANOVA Result")
+```
 
+```{r}
 exact_result <- ANOVA_exact(design_result,
                             alpha_level = alpha_level,
                             verbose = FALSE)
+```
 
+```{r echo=FALSE}
 knitr::kable(exact_result$main_results,
              caption = "Exact ANOVA Result")
 ```
@@ -475,13 +519,15 @@ sigma <- sd
 
 m_A <- 2 #levels factor A
 
-variance_e_A <- sigma^2 * (1 - rho_A) + sigma^2 * (m_A - 1) * (rho_B - rho_AB) 
+variance_e_A <- sigma^2 * (1 - rho_A) + 
+  sigma^2 * (m_A - 1) * (rho_B - rho_AB) 
 #Variance A
 variance_e_A
 
 m_B <- 2 #levels factor B
 
-variance_e_B <- sigma^2 * (1 - rho_B) + sigma^2 * (m_B - 1) * (rho_A - rho_AB)
+variance_e_B <- sigma^2 * (1 - rho_B) + 
+  sigma^2 * (m_B - 1) * (rho_A - rho_AB)
 #Variance B
 variance_e_B
 
@@ -502,7 +548,7 @@ lambda_A <-
                    mean(rowMeans(mean_mat))) ^ 2) / variance_e_A
   lambda_A
 
-#calculate degrees of freedom 1 - ignoring the * e sphericity correction
+#calculate degrees of freedom 1 - ignoring the sphericity correction
 df1 <- (m_A - 1) 
 
 df2 <- (n - k) * (m_A - 1) #calculate degrees of freedom 2
