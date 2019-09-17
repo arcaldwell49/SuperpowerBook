@@ -178,7 +178,8 @@ exact_result <- ANOVA_exact(design_result,
                             verbose = FALSE)
 
 knitr::kable(exact_result$main_results[2,], 
-             caption = "ANOVA Results")
+             caption = "ANOVA Results")%>%
+  kable_styling(latex_options = "hold_position")
 
 #Study 2
 string <- "2b*2b"
@@ -202,7 +203,8 @@ exact_result <- ANOVA_exact(design_result,
                             verbose = FALSE)
 
 knitr::kable(exact_result$main_results[3,], 
-             caption = "ANOVA Results")
+             caption = "ANOVA Results")%>%
+  kable_styling(latex_options = "hold_position")
 ```
 
 We see we get the same power for the anova_fruit:hunger interaction and for the simple effect p_fruit_apple_hunger_very hungry_fruit_banana_hunger_very hungry as the simulations by Uri Simonsohn in his blog post. 
@@ -255,7 +257,8 @@ exact_result <- ANOVA_exact(design_result,
                             verbose = FALSE)
 
 knitr::kable(exact_result$main_results[2,], 
-             caption = "ANOVA Results")
+             caption = "ANOVA Results")%>%
+  kable_styling(latex_options = "hold_position")
 ```
 
 And changing the sample size to 300 should reproduce the power for the interaction in the ANOVA. 
@@ -279,7 +282,8 @@ alpha_level <- 0.05 #We set the alpha level at 0.05.
 exact_result <- ANOVA_exact(design_result, alpha_level = alpha_level)
 
 knitr::kable(exact_result$main_results[3,], 
-             caption = "ANOVA Results")
+             caption = "ANOVA Results")%>%
+  kable_styling(latex_options = "hold_position")
 ```
 
 Now if we look at the power analysis table for the last simulation, we see that the power for the ANOVA is the same for the main effect of fruit, the main effect of hunger, and the main effect of the interaction. All the effect sizes are equal as well. We can understand why if we look at the means in a 2x2 table:
@@ -365,7 +369,8 @@ exact_result <- ANOVA_exact(design_result,
                             verbose = FALSE)
 
 knitr::kable(exact_result$main_results, 
-             caption = "ANOVA Results")
+             caption = "ANOVA Results")%>%
+  kable_styling(latex_options = "hold_position")
 ```
 
 We can also reproduce the power analysis using the analytic function:

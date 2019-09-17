@@ -6,7 +6,7 @@ load("data/oneway_data.RData")
 
 ## Part 1
 
-Using the formula also used in Albers & Lakens (2018), we can determine the means that should yield a specified effect sizes (expressed in Cohen's f). Eta-squared (identical to partial eta-squared for One-Way ANOVA's) has benchmarks of .0099, .0588, and .1379 for small, medium, and large effect sizes (Cohen, 1988). Athough these benchmarks are quite random, and researchers should only use such benchmarks for power analyses as a last resort, we will demonstrate an a-priori power analysis for these values. 
+Using the formula also used in Albers & Lakens (2018), we can determine the means that should yield a specified effect sizes (expressed in Cohen's *f*). Eta-squared (identical to partial eta-squared for One-Way ANOVA's) has benchmarks of .0099, .0588, and .1379 for small, medium, and large effect sizes (Cohen, 1988). Athough these benchmarks are quite random, and researchers should only use such benchmarks for power analyses as a last resort, we will demonstrate an a-priori power analysis for these values. 
 
 ### Two conditions
 
@@ -71,7 +71,7 @@ pwr.t.test(d = 2.2/6.4,
            alternative = "two.sided")$power
 ```
 
-We can also directly compute Cohen's f from Cohen's d for two groups, as Cohen (1988) describes, because f = 1/2d. So f = 0.5*0.34375 = 0.171875. And indeed, power analysis using the pwr package yields the same result using the `pwr.anova.test` as the `power.t.test`.
+We can also directly compute Cohen's *f* from Cohen's d for two groups, as Cohen (1988) describes, because f = 1/2d. So f = 0.5*0.34375 = 0.171875. And indeed, power analysis using the pwr package yields the same result using the `pwr.anova.test` as the `power.t.test`.
 
 ```{r}
 K <- 2
@@ -85,7 +85,7 @@ pwr.anova.test(n = n,
 
 This analysis tells us that running the study with 100 participants in each condition is too likely to *not* yield a significant test result, even if our expected pattern of differences is true.  This is not optimal. 
 
-Let's mathematically explore which pattern of means we would need to expect to habe 90% power for the ANOVA with 50 participants in each group. We can use the pwr package in R to compute a sensitivity analysis that tells us the effect size, in Cohen's f, that we are able to detect with 3 groups and 50 partiicpants in each group, in order to achive 90% power with an alpha level of 5%. 
+Let's mathematically explore which pattern of means we would need to expect to habe 90% power for the ANOVA with 50 participants in each group. We can use the pwr package in R to compute a sensitivity analysis that tells us the effect size, in Cohen's *f*, that we are able to detect with 3 groups and 50 partiicpants in each group, in order to achive 90% power with an alpha level of 5%. 
 
 ```{r}
 K <- 2
@@ -99,7 +99,7 @@ f <- pwr.anova.test(n = n,
                     sig.level = alpha_level)$f
 f
 ```
-This sensitivity analysis shows we have 90% power in our planned design to detect effects of Cohen's f of 0.2303587. Benchmarks by Cohen (1988) for small, medium, and large Cohen's f values are 0.1, 0.25, and 0.4, which correspond to eta-squared values of small (.0099), medium (.0588), and large (.1379), in line with d = .2, .5, or .8. So, at least based on these benchmarks, we have 90% power to detect effects that are slightly below a medium effect benchmark.
+This sensitivity analysis shows we have 90% power in our planned design to detect effects of Cohen's *f* of 0.2303587. Benchmarks by Cohen (1988) for small, medium, and large Cohen's *f* values are 0.1, 0.25, and 0.4, which correspond to eta-squared values of small (.0099), medium (.0588), and large (.1379), in line with d = .2, .5, or .8. So, at least based on these benchmarks, we have 90% power to detect effects that are slightly below a medium effect benchmark.
 
 ```{r}
 f2 <- f^2
@@ -321,7 +321,7 @@ pwr.t.test(
 
 This analysis tells us that running the study with 50 participants in each condition is more likely to *not* yield a significant test result, even if our expected pattern of differences is true, than that we will observe a *p*-value smaller than our alpha level. This is not optimal. 
 
-Let's mathematically explore which pattern of means we would need to expect to habe 90% power for the ANOVA with 50 participants in each group. We can use the pwr package in R to compute a sensitivity analysis that tells us the effect size, in Cohen's f, that we are able to detect with 3 groups and 50 partiicpants in each group, in order to achive 90% power with an alpha level of 5%. 
+Let's mathematically explore which pattern of means we would need to expect to habe 90% power for the ANOVA with 50 participants in each group. We can use the pwr package in R to compute a sensitivity analysis that tells us the effect size, in Cohen's *f*, that we are able to detect with 3 groups and 50 partiicpants in each group, in order to achive 90% power with an alpha level of 5%. 
 
 ```{r}
 K <- 3
@@ -336,7 +336,7 @@ f <- pwr.anova.test(n = n,
 f
 ```
 
-This sensitivity analysis shows we have 90% power in our planned design to detect effects of Cohen's f of 0.2934417. Benchmarks by Cohen (1988) for small, medium, and large Cohen's f values are 0.1, 0.25, and 0.4, which correspond to eta-squared values of small (.0099), medium (.0588), and large (.1379), in line with d = .2, .5, or .8. So, at least based on these benchmarks, we have 90% power to detect effects that are somewhat sizeable.
+This sensitivity analysis shows we have 90% power in our planned design to detect effects of Cohen's *f* of 0.2934417. Benchmarks by Cohen (1988) for small, medium, and large Cohen's *f* values are 0.1, 0.25, and 0.4, which correspond to eta-squared values of small (.0099), medium (.0588), and large (.1379), in line with d = .2, .5, or .8. So, at least based on these benchmarks, we have 90% power to detect effects that are somewhat sizeable.
 
 ```{r}
 f2 <- f^2
@@ -599,6 +599,7 @@ knitr::kable(exact_result$main_results,
   kable_styling(latex_options = "hold_position")
 ```
 
+
 ### Variation 1
 
 ```{r eval=FALSE}
@@ -844,9 +845,9 @@ knitr::kable(exact_result$main_results,
 
 ## Effect Size Estimates for One-Way ANOVA
 
-Using the formulas below, we can calculate the means for between designs with one factor (one-way ANOVA). Using the formula also used in Albers & Lakens (2018), we can determine the means that should yield a specified effect sizes (expressed in Cohen's f).
+Using the formulas below, we can calculate the means for between designs with one factor (one-way ANOVA). Using the formula also used in Albers & Lakens (2018), we can determine the means that should yield a specified effect sizes (expressed in Cohen's *f*).
 
-Eta-squared (idential to partial eta-squared for One-Way ANOVA's) has benchmarks of .0099, .0588, and .1379 for small, medium, and large effect sizes (cohen, 1988). 
+Eta-squared (idential to partial eta-squared for one-way ANOVA's) has benchmarks of .0099, .0588, and .1379 for small, medium, and large effect sizes (cohen, 1988). 
 
 ### Three conditions, small effect size
 

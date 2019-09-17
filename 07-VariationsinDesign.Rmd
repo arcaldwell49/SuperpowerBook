@@ -32,7 +32,8 @@ simulation_result <- ANOVA_power(design_result,
 
 ```{r echo = FALSE}
 knitr::kable(simulation_result_7.1$main_results,
-             caption = "Simulated ANOVA Result")
+             caption = "Simulated ANOVA Result")%>%
+  kable_styling(latex_options = "hold_position")
 ```
 
 
@@ -45,7 +46,8 @@ exact_result <- ANOVA_exact(design_result,
 
 ```{r echo = FALSE}
 knitr::kable(exact_result$main_results,
-             caption = "Exact ANOVA Result")
+             caption = "Exact ANOVA Result")%>%
+  kable_styling(latex_options = "hold_position")
 ```
 
 We now addd a condition. Let's assume the 'light training' condition falls in between the other two means. 
@@ -89,7 +91,8 @@ exact_result <- ANOVA_exact(design_result,
 
 ```{r echo = FALSE}
 knitr::kable(exact_result$main_results,
-             caption = "Exact ANOVA Result")
+             caption = "Exact ANOVA Result") %>%
+  kable_styling(latex_options = "hold_position")
 
 ```
 
@@ -251,7 +254,8 @@ exact_result <- ANOVA_exact(design_result,
 
 ```{r echo = FALSE}
 knitr::kable(exact_result$main_results,
-             caption = "Exact ANOVA Result")
+             caption = "Exact ANOVA Result")%>%
+  kable_styling(latex_options = "hold_position")
 ```
 
 We see power is ever so slightly less than for the between subject design. This is due to the loss in degrees of freedom, which is 2(n-1) for between designs, and n-1 for within designs. But as the correlation increases, the power advantage of within designs becomes stronger. 
@@ -287,7 +291,8 @@ exact_result <- ANOVA_exact(design_result,
 
 ```{r echo=FALSE}
 knitr::kable(exact_result$main_results,
-             caption = "Exact ANOVA Result")
+             caption = "Exact ANOVA Result")%>%
+  kable_styling(latex_options = "hold_position")
 ```
 
 When we add a a condition in a within design where we expect the mean to be identical to the grand mean, we again see that the power decreases. This similarly shows that adding a condition that equals the grand mean to a within subject design does not come for free, but has a power cost. 

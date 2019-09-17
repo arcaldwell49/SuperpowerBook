@@ -1,10 +1,8 @@
 # Analytic Power Functions
 
-
-
 For some designs it is possible to calculate power analytically, using closed functions. 
 
-## One-Way Between Subject ANOVA
+## One-Way Between Subjects ANOVA
 
 ```{r}
 string <- "4b"
@@ -30,7 +28,8 @@ exact_result <- ANOVA_exact(design_result,
 ```{r echo = FALSE}
 
 knitr::kable(exact_result$main_results,
-             caption = "Exact ANOVA Result")
+             caption = "Exact ANOVA Result")%>%
+  kable_styling(latex_options = "hold_position")
 ```
 
 We can also calculate power analytically with a `Superpower` function.
@@ -41,7 +40,7 @@ power_oneway_between(design_result)$power
 
 ```
 
-This is a generalized function for One-Way ANOVA's for any number of groups. It is in part based on code provided with the excellent book by Aberson (2019) Applied Power Analysis for the Behavioral Sciences (but Aberson's code allows for different n per condition, and different sd per condition).
+This is a generalized function for One-Way ANOVA's for any number of groups. It is in part based on code from the `pwr2ppl` package (but Aberson's code allows for different n per condition, and different sd per condition).
 
 ```{r}
 anova1f_4(m1 = 80, m2 = 82, m3 = 82, m4 = 86,
@@ -89,7 +88,8 @@ exact_result <- ANOVA_exact(design_result,
 
 ```{r echo=FALSE}
 knitr::kable(exact_result$main_results,
-             caption = "Exact ANOVA Result")
+             caption = "Exact ANOVA Result")%>%
+  kable_styling(latex_options = "hold_position")
 ```
 
 ```{r}
@@ -146,7 +146,8 @@ exact_result <- ANOVA_exact(design_result,
 ```{r echo=FALSE}
 
 knitr::kable(exact_result$main_results,
-             caption = "Exact ANOVA Result")
+             caption = "Exact ANOVA Result")%>%
+  kable_styling(latex_options = "hold_position")
 ```
 
 ```{r}
@@ -202,9 +203,9 @@ exact_result <- ANOVA_exact(design_result,
 ```
 
 ```{r echo = FALSE}
-
 knitr::kable(exact_result$main_results,
-             caption = "Exact ANOVA Result")
+             caption = "Exact ANOVA Result")%>%
+  kable_styling(latex_options = "hold_position")
 ```
 
 We can use the `ANOVA_exact` function to evaluate this design since there is not a analytic solution in `Superpower`. 
