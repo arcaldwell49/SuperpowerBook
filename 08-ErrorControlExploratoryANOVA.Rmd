@@ -43,7 +43,7 @@ When there is no true effect, we formally do not have 'power' (which is defined 
 We can calculate the number of significant results for each test (which should be 5%) by counting the number of significant p-values in each of the 7 rows:
 
 ```{r}
-apply(as.matrix(simulation_result$sim_data[(1:7)]), 2, 
+apply(as.matrix(simulation_result_8.1$sim_data[(1:7)]), 2, 
     function(x) round(mean(ifelse(x < alpha_level, 1, 0) * 100),4))
 ```
 
@@ -52,7 +52,7 @@ This is the Type 1 error rate for each test. When we talk about error rate infla
 To calculate this error rate we do not just add the 7 error rates (so 7 * 5% - 35%). Instead, we calculate the probability that there will be at least one significant result in an ANOVA we perform. Some ANOVA results will have multiple significant results, just due to the Type 1 error rate (e.g., a significant result for the three-way interaction, and for the main effect of condition 1) but such an ANOVA is counted only once. If we calculate this percentage from our simulations, we see the number is indeed very close to 1-(0.95)^7 = 30%.  
 
 ```{r}
-sum(apply(as.matrix(simulation_result$sim_data[(1:7)]), 1, 
+sum(apply(as.matrix(simulation_result_8.1$sim_data[(1:7)]), 1, 
     function(x) 
       round(mean(ifelse(x < alpha_level, 1, 0) * 100),4)) > 0)/nsims*100
 ```
@@ -107,7 +107,7 @@ knitr::kable(simulation_result_8.2$pc_results, caption = "Pairwise Results")
 ```
 
 ```{r}
-sum(apply(as.matrix(simulation_result$sim_data[(1:7)]), 1, 
+sum(apply(as.matrix(simulation_result_8.2$sim_data[(1:7)]), 1, 
     function(x) 
       round(mean(ifelse(x < alpha_level, 1, 0) * 100),4)) > 0)/nsims*100
 ```

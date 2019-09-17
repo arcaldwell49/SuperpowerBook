@@ -40,7 +40,8 @@ simulation_result <- ANOVA_power(design_result,
 
 ```{r echo = FALSE}
 knitr::kable(simulation_result_2.1$main_results,
-             caption = "Simulated ANOVA Result")
+             caption = "Simulated ANOVA Result") %>%
+  kable_styling(latex_options = "HOLD_position")
 ```
 
 
@@ -212,13 +213,13 @@ knitr::kable(exact_result$main_results,
 We stored the result from the power analysis in an object. This allows us to request plots (which are not printed automatically) showing the *p*-value distribution. If we request `simulation_result$plot1` we get the p-value distribution for the ANOVA:
 
 ```{r echo=FALSE}
-simulation_result$plot1
+simulation_result_2.5$plot1
 ```
 
 If we request `simulation_result$plot2` we get the p-value distribution for the paired comparisons (in this case only one):
 
 ```{r echo=FALSE}
-simulation_result$plot2
+simulation_result_2.5$plot2
 ```
 
 ## Part 2
@@ -494,7 +495,6 @@ pes2 <- numeric(nSim) #partial eta-squared two extreme conditions
 
 ```{r}
 for (i in 1:nSim) {
-#for each simulated experiment
 
 x <- rnorm(n = N, mean = 0, sd = 1)
 y <- rnorm(n = N, mean = d1, sd = 1)
@@ -604,7 +604,7 @@ pes2 <- numeric(nSim) #partial eta-squared two extreme conditions
 
 ```{r}
 for (i in 1:nSim) {
-#for each simulated experiment
+
 
 x <- rnorm(n = N, mean = 0, sd = 1)
 y <- rnorm(n = N, mean = d1, sd = 1)
@@ -709,12 +709,12 @@ p2 <- numeric(nSim) #p-value first post hoc test
 p3 <- numeric(nSim) #p-value second post hoc test
 p4 <- numeric(nSim) #p-value third post hoc test
 pes1 <- numeric(nSim) #partial eta-squared
-
-for (i in 1:nSim) {
-#for each simulated experiment
 ```
 
 ```{r}
+for (i in 1:nSim) {
+#for each simulated experiment
+
 x <- rnorm(n = N, mean = 0, sd = 1)
 y <- rnorm(n = N, mean = d1, sd = 1)
 z <- rnorm(n = N, mean = d2, sd = 1)
