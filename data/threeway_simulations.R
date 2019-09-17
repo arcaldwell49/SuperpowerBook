@@ -83,3 +83,17 @@ simulation_result_5.7 <- ANOVA_power(design_result,
                                  alpha_level = alpha_level, 
                                  nsims = nsims,
                                  verbose = FALSE)
+
+simulation_result_5.1$plot1 <- NULL
+simulation_result_5.1$plot2 <- NULL
+
+simulation_result_5.3$plot1 <- NULL
+simulation_result_5.3$plot2 <- NULL
+
+simulation_result_5.5$plot1 <- NULL
+simulation_result_5.5$plot2 <- NULL
+simulation_result_5.5$sim_data <- NULL
+simulation_result_5.5$pc_results <- NULL
+
+simulation_result_5.7$plot1 <- NULL
+simulation_result_5.7$plot2 <- NULL
