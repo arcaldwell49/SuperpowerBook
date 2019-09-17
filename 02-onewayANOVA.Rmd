@@ -1,4 +1,4 @@
-# One-way ANOVA 
+# One-Way ANOVA 
 ```{r include=FALSE}
 load("data/oneway_data.RData")
 ```
@@ -6,11 +6,11 @@ load("data/oneway_data.RData")
 
 ## Part 1
 
-Using the formula also used in Albers & Lakens (2018), we can determine the means that should yield a specified effect sizes (expressed in Cohen's f). Eta-squared (identical to partial eta-squared for One-Way ANOVA's) has benchmarks of .0099, .0588, and .1379 for small, medium, and large effect sizes (Cohen, 1988). Athough these benchmarks are quite random, and researchers should only use such benchmarks for power analyses as a last resort, we will demonstrate a-priori power analysis for these values. 
+Using the formula also used in Albers & Lakens (2018), we can determine the means that should yield a specified effect sizes (expressed in Cohen's f). Eta-squared (identical to partial eta-squared for One-Way ANOVA's) has benchmarks of .0099, .0588, and .1379 for small, medium, and large effect sizes (Cohen, 1988). Athough these benchmarks are quite random, and researchers should only use such benchmarks for power analyses as a last resort, we will demonstrate an a-priori power analysis for these values. 
 
 ### Two conditions
 
-Imagine we aim to design a study to test the hypothesis that giving people a pet to take care of will increase their life satisfaction. We have a control condition, and a condition where people get a pet, and randomly assign participants to either condition. We can simulate a One-Way ANOVA with a specified alpha, sample size, and effect size, on see the statistical power we would have for the ANOVA and the follow-up comparisons. We expect pets to increase life-satisfaction compared to the control condition. Based on work by Pavot and Diener (1993) we believe that we can expect responses on the life-satifaction scale to have a mean of approximately 24 in our population, with a standard deviation of 6.4. We expect having a pet increases life satisfaction with approximately 2.2 scale points for participants who get a pet. 200 participants in total, with 100 participants in each condition. But before we proceed with the data collection, we examine the statistical power our design would have to detect the differences we predict.
+Imagine we aim to design a study to test the hypothesis that giving people a pet to take care of will increase their life satisfaction. We have a control condition, and a condition where people get a pet, and randomly assign participants to either condition. We can simulate a one-way ANOVA with a specified alpha, sample size, and effect size, on see the statistical power we would have for the ANOVA and the follow-up comparisons. We expect pets to increase life-satisfaction compared to the control condition. Based on work by Pavot and Diener (1993) we believe that we can expect responses on the life-satifaction scale to have a mean of approximately 24 in our population, with a standard deviation of 6.4. We expect having a pet increases life satisfaction with approximately 2.2 scale points for participants who get a pet. 200 participants in total, with 100 participants in each condition. But before we proceed with the data collection, we examine the statistical power our design would have to detect the differences we predict.
 
 ```{r start_one_way}
 string <- "2b"
@@ -41,7 +41,7 @@ simulation_result <- ANOVA_power(design_result,
 ```{r echo = FALSE}
 knitr::kable(simulation_result_2.1$main_results,
              caption = "Simulated ANOVA Result") %>%
-  kable_styling(latex_options = "HOLD_position")
+  kable_styling(latex_options = "hold_position")
 ```
 
 
@@ -462,7 +462,7 @@ alpha = .05
 
 We first repeat the simulation by Brysbaert:
 
-```{r}
+```{r brysbaert_loop_1, eval=FALSE}
 # Simulations to estimate the power of an ANOVA 
 #with three unrelated groups
 # the effect between the two extreme groups is set to d = .4, 
@@ -483,7 +483,7 @@ alpha1 = .05
 alpha2 = .05 
 ```
 
-```{r}
+```{r eval=FALSE}
 # create vectors to store p-values
 p1 <- numeric(nSim) #p-value omnibus ANOVA
 p2 <- numeric(nSim) #p-value first post hoc test
@@ -493,7 +493,7 @@ pes1 <- numeric(nSim) #partial eta-squared
 pes2 <- numeric(nSim) #partial eta-squared two extreme conditions
 ```
 
-```{r}
+```{r eval=FALSE}
 for (i in 1:nSim) {
 
 x <- rnorm(n = N, mean = 0, sd = 1)
@@ -514,7 +514,7 @@ pes2[i] <- etaSquared(test)[1, 2]
 }
 ```
 
-```{r }
+```{r eval=FALSE}
 # results are as predicted when omnibus ANOVA is significant,
 # t-tests are significant between x and y plus x and z; 
 # not significant between y and z
@@ -526,7 +526,20 @@ sum(p4 < alpha2) / nSim
 mean(pes1)
 mean(pes2)
 ```
-
+```{r include=FALSE}
+#p1
+p1_1 
+#p2
+p2_1 
+#p3
+p3_1 
+#4
+p4_1 
+#pes1
+pes1_1 
+#pes2
+pes2_1 
+```
 
 ### Three conditions replication
 
@@ -577,7 +590,7 @@ knitr::kable(exact_result$main_results,
 
 ### Variation 1
 
-```{r}
+```{r eval=FALSE}
 # give sample sizes (all samples sizes are equal)
 N = 145
 # give effect size d
@@ -592,7 +605,7 @@ alpha1 = .05
 alpha2 = .05 
 ```
 
-```{r}
+```{r eval=FALSE}
 # create vectors to store p-values
 p1 <- numeric(nSim) #p-value omnibus ANOVA
 p2 <- numeric(nSim) #p-value first post hoc test
@@ -602,7 +615,7 @@ pes1 <- numeric(nSim) #partial eta-squared
 pes2 <- numeric(nSim) #partial eta-squared two extreme conditions
 ```
 
-```{r}
+```{r eval=FALSE}
 for (i in 1:nSim) {
 
 
@@ -624,7 +637,7 @@ pes2[i] <- etaSquared(test)[1, 2]
 }
 ```
 
-```{r}
+```{r eval=FALSE}
 # results are as predicted when omnibus ANOVA is significant, 
 # t-tests are significant between x and y plus x and z; 
 # not significant between y and z
@@ -635,6 +648,20 @@ sum(p3 < alpha2) / nSim
 sum(p4 < alpha2) / nSim
 mean(pes1)
 mean(pes2)
+```
+```{r include=FALSE}
+#p1
+p1_2 
+#p2
+p2_2 
+#p3
+p3_2 
+#4
+p4_2 
+#pes1
+pes1_2 
+#pes2
+pes2_2 
 ```
 
 ### Three conditions replication
@@ -687,7 +714,7 @@ knitr::kable(exact_result$main_results,
 ### Variation 2
 
 
-```{r}
+```{r eval=FALSE}
 # give sample sizes (all samples sizes are equal)
 N = 82
 # give effect size d
@@ -702,7 +729,7 @@ alpha1 = .05
 alpha2 = .05 
 ```
 
-```{r}
+```{r eval=FALSE}
 # create vectors to store p-values
 p1 <- numeric(nSim) #p-value omnibus ANOVA
 p2 <- numeric(nSim) #p-value first post hoc test
@@ -711,7 +738,7 @@ p4 <- numeric(nSim) #p-value third post hoc test
 pes1 <- numeric(nSim) #partial eta-squared
 ```
 
-```{r}
+```{r eval=FALSE}
 for (i in 1:nSim) {
 #for each simulated experiment
 
@@ -733,13 +760,27 @@ pes2[i] <- etaSquared(test)[1, 2]
 }
 ```
 
-```{r}
+```{r eval=FALSE}
 sum(p1 < alpha1) / nSim
 sum(p2 < alpha2) / nSim
 sum(p3 < alpha2) / nSim
 sum(p4 < alpha2) / nSim
 mean(pes1)
 mean(pes2)
+```
+```{r include=FALSE}
+#p1
+p1_3 
+#p2
+p2_3 
+#p3
+p3_3 
+#4
+p4_3 
+#pes1
+pes1_3 
+#pes2
+pes2_3 
 ```
 
 ### Three conditions replication

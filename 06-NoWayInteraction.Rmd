@@ -1,4 +1,7 @@
 # Power for Interactions
+```{r include = FALSE}
+load("data/noway_data.RData")
+```
 
 In the 17th Data Colada blog post titled [No-way Interactions](http://datacolada.org/17) Uri Simonsohn discusses how a moderated interaction (the effect is there in one condition, but disappears in another condition) requires at least twice as many subjects per cell as a study that simply aims to show the simple effect. For example, see the plot below. Assume the score on the vertical axis is desire for fruit, as a function of the fruit that is available (an apple or a banana) and how hungry people are (not, or very). We see there is a difference between the participants desire for a banana compared to an apple, but only for participants who are very hungry. The point that is made is that you need twice as many participants in each cell to have power for the interaction, as you need for the simple effect. 
 
@@ -92,19 +95,63 @@ colada17 = function(d1,d2,n1,n2,simtot)
     
 	
 #Same power for 2n regardless of n and d
+```
+```{r eval = FALSE}
   colada17(simtot = 2000, n1 = 20, n2 = 40, d1 = 1, d2 = 0)  
+```
+```{r include=FALSE}
+  cat("\nStudy 1 is powered to:",round(colada_1$power1,2))
+  cat("\nStudy 2 is powered to:",round(colada_1$power2,2))
+```
+```{r eval = FALSE}
   colada17(simtot = 2000, n1 = 50, n2 = 100, d1 = .3, d2 = 0)
+```
+```{r include=FALSE}
+  cat("\nStudy 1 is powered to:",round(colada_2$power1,2))
+  cat("\nStudy 2 is powered to:",round(colada_2$power2,2))
+```
+```{r eval = FALSE}
   colada17(simtot = 2000, n1 = 150, n2 = 300, d1 = .25, d2 = 0)
-#Need 4n if effect is 70% attenuated
-  colada17(simtot = 2000, n1 = 25, n2 = 100, d1 = .5, d2 = .3 * .5)
-  colada17(simtot = 2000, n1 = 50, n2 = 200, d1 = .5, d2 = .3 * .5)
-  colada17(simtot = 2000, n1 = 22, n2 = 88, d1 = .41, d2 = .3 * .41)
+```
+```{r include=FALSE}
+  cat("\nStudy 1 is powered to:",round(colada_3$power1,2))
+  cat("\nStudy 2 is powered to:",round(colada_3$power2,2))
 ```
 
-```{r}
+
+```{r eval = FALSE}
+#Need 4n if effect is 70% attenuated
+  colada17(simtot = 2000, n1 = 25, n2 = 100, d1 = .5, d2 = .3 * .5)
+```
+```{r include=FALSE}
+  cat("\nStudy 1 is powered to:",round(colada_4$power1,2))
+  cat("\nStudy 2 is powered to:",round(colada_4$power2,2))
+```
+```{r eval = FALSE}
+  colada17(simtot = 2000, n1 = 50, n2 = 200, d1 = .5, d2 = .3 * .5)
+```
+```{r include=FALSE}
+  cat("\nStudy 1 is powered to:",round(colada_5$power1,2))
+  cat("\nStudy 2 is powered to:",round(colada_5$power2,2))
+```
+```{r eval = FALSE}
+  colada17(simtot = 2000, n1 = 22, n2 = 88, d1 = .41, d2 = .3 * .41)
+```
+```{r include=FALSE}
+  cat("\nStudy 1 is powered to:",round(colada_6$power1,2))
+  cat("\nStudy 2 is powered to:",round(colada_6$power2,2))
+```
+
+```{r eval=FALSE}
 #underpowered if run with the same n
 colada17(simtot = nsims, n1 = 20, n2 = 20, d1 = 1, d2 = 0)  
 ```
+
+```{r include=FALSE}
+  cat("\nStudy 1 is powered to:",round(colada_7$power1,2))
+  cat("\nStudy 2 is powered to:",round(colada_7$power2,2))
+```
+
 
 And we can reproduce the results using the ANOVA_exact function.
 
@@ -160,11 +207,29 @@ knitr::kable(exact_result$main_results[3,],
 
 We see we get the same power for the anova_fruit:hunger interaction and for the simple effect p_fruit_apple_hunger_very hungry_fruit_banana_hunger_very hungry as the simulations by Uri Simonsohn in his blog post. 
 
-```{r}
+```{r eval=FALSE}
 #Same power for 2n regardless of n and d
 colada17(simtot = 10000, n1 = 20, n2 = 40, d1 = 1, d2 = 0)  
+
+colada17(simtot = 10000, n1 = 20, n2 = 40, d1 = 1, d2 = 0) 
+```
+```{r include=FALSE}
+  cat("\nStudy 1 is powered to:",round(colada_8$power1,2))
+  cat("\nStudy 2 is powered to:",round(colada_8$power2,2))
+```
+```{r eval=FALSE}
 colada17(simtot = 10000, n1 = 50, n2 = 100, d1 = .3, d2 = 0)
+```
+```{r include=FALSE}
+  cat("\nStudy 1 is powered to:",round(colada_9$power1,2))
+  cat("\nStudy 2 is powered to:",round(colada_9$power2,2))
+```
+```{r eval = FALSE}
 colada17(simtot = 10000, n1 = 150, n2 = 300, d1 = .25, d2 = 0)
+```
+```{r include=FALSE}
+  cat("\nStudy 1 is powered to:",round(colada_10$power1,2))
+  cat("\nStudy 2 is powered to:",round(colada_10$power2,2))
 ```
 
 We can also reproduce the last example by adjusting the means and standard deviation. With 150 people, and a Cohen's d of 0.25 (the difference is 5, the sd 20, so 5/20 = 0.25) we should reproduce the power for the simple effect.
