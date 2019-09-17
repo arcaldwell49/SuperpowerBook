@@ -1,5 +1,7 @@
 # Power for Three-way Interactions
-
+```{r include=FALSE}
+load("data/threeway_data.RData")
+```
 There are almost no software solutions that allow researchers to perform power anaysis for more complex designs. Through simulation, it is relatively straightforward to examine the power for designs with multiple factors with many levels. 
 
 Let's start with a 2x2x2 between subjects design. We collect 50 participants in each between participant condition (so 400 participants in total - 50x2x2x2). 
@@ -20,7 +22,8 @@ design_result <- ANOVA_design(design = "2b*2b*2b",
                               mu = c(2, 2, 6, 1, 6, 6, 1, 8), 
                               sd = 10, #standard deviation
                               labelnames = labelnames) 
-
+```
+```{r eval=FALSE}
 simulation_result <- ANOVA_power(design_result, 
                                  alpha_level = alpha_level, 
                                  nsims = nsims,
@@ -28,7 +31,7 @@ simulation_result <- ANOVA_power(design_result,
 ```
 
 ```{r echo=FALSE}
-knitr::kable(simulation_result$main_results,
+knitr::kable(simulation_result_5.1$main_results,
              caption = "Simulated ANOVA Result")
 ```
 
@@ -94,7 +97,8 @@ design_result <- ANOVA_design(design = string,
                    mu = mu, 
                    sd = sd, 
                    labelnames = labelnames)
-
+```
+```{r eval=FALSE}
 simulation_result <- ANOVA_power(design_result, 
                                  alpha_level = alpha_level, 
                                  nsims = nsims,
@@ -102,7 +106,7 @@ simulation_result <- ANOVA_power(design_result,
 ```
 
 ```{r echo=FALSE}
-knitr::kable(simulation_result$main_results,
+knitr::kable(simulation_result_5.3$main_results,
              caption = "Simulated ANOVA Result")
 ```
 
@@ -139,7 +143,8 @@ design_result <- ANOVA_design(design = string,
                    mu = mu, 
                    sd = sd, 
                    labelnames = labelnames)
-
+```
+```{r eval=FALSE}
 simulation_result <- ANOVA_power(design_result, 
                                  alpha_level = alpha_level, 
                                  nsims = nsims,
@@ -147,7 +152,7 @@ simulation_result <- ANOVA_power(design_result,
 ```
 
 ```{r echo=FALSE}
-knitr::kable(simulation_result$main_results,
+knitr::kable(simulation_result_5.5$main_results,
              caption = "Simulated ANOVA Result")
 ```
 
@@ -182,14 +187,16 @@ n <- 50
 mu <- c(5, 3, 2, 6, 1, 4, 3, 1) 
 sd <- 10
 r <- 0.0
-labelnames <- c("Size", "big", "small", "Color", "green", "red", 
-                "CognitiveLoad", "present", "absent") #
+labelnames <- c("Size", "big", "small", 
+                "Color", "green", "red", 
+                "CognitiveLoad", "present", "absent") 
 design_result <- ANOVA_design(design = string,
                    n = n, 
                    mu = mu, 
                    sd = sd, 
                    labelnames = labelnames)
-
+```
+```{r eval=FALSE}
 simulation_result <- ANOVA_power(design_result, 
                                  alpha_level = alpha_level, 
                                  nsims = nsims,
@@ -197,7 +204,7 @@ simulation_result <- ANOVA_power(design_result,
 ```
 
 ```{r echo=FALSE}
-knitr::kable(simulation_result$main_results,
+knitr::kable(simulation_result_5.7$main_results,
              caption = "Simulated ANOVA Result")
 ```
 

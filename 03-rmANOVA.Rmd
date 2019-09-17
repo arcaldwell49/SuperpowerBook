@@ -1,5 +1,7 @@
 # Repeated Measures ANOVA 
-
+```{r include=FALSE}
+load("data/rmANOVA_data.RData")
+```
 ## Part 1
 
 In a repeated measures design multiple observations are collected from the same participants. In the simplest case, where there are two repeated observations, a repeated measures ANOVA equals a dependent or paired *t*-test. The difference compared to a between subject design is that repeated measures can be correlated, and in psychology, they often are. Let's first explore the impact of this correlation on the power of a repeated measures ANOVA.
@@ -74,19 +76,26 @@ design_result <- ANOVA_design(design = design,
                    labelnames = labelnames)
 
 alpha_level <- 0.05
-
+```
+```{r eval = FALSE}
 simulation_result <- ANOVA_power(design_result, 
                                  alpha_level = alpha_level, 
                                  nsims = nsims,
                                  verbose = FALSE)
+```
 
-knitr::kable(simulation_result$main_results,
+```{r echo = FALSE}
+knitr::kable(simulation_result_3.1$main_results,
              caption = "Simulated ANOVA Result")
+```
 
+```{r echo = FALSE}
 exact_result <- ANOVA_exact(design_result,
                             alpha_level = alpha_level,
                             verbose = FALSE)
+```
 
+```{r echo = FALSE}
 knitr::kable(exact_result$main_results,
              caption = "Exact ANOVA Result")
 ```
@@ -118,7 +127,8 @@ design_result <- ANOVA_design(design = design,
 alpha_level <- 0.05
 
 design_result$sigmatrix
-
+```
+```{r eval=FALSE}
 simulation_result <- ANOVA_power(design_result, 
                                  alpha_level = alpha_level, 
                                  nsims = nsims,
@@ -126,7 +136,7 @@ simulation_result <- ANOVA_power(design_result,
 ```
 
 ```{r echo = FALSE}
-knitr::kable(simulation_result$main_results,
+knitr::kable(simulation_result_3.3$main_results,
              caption = "Simulated ANOVA Result")
 ```
 
@@ -227,7 +237,8 @@ design_result <- ANOVA_design(design = design,
                    labelnames = labelnames)
 
 alpha_level <- 0.05
-
+```
+```{r eval=FALSE}
 simulation_result <- ANOVA_power(design_result, 
                                  alpha_level = alpha_level, 
                                  nsims = nsims,
@@ -236,7 +247,7 @@ simulation_result <- ANOVA_power(design_result,
 
 
 ```{r echo = FALSE}
-knitr::kable(simulation_result$main_results,
+knitr::kable(simulation_result_3.5$main_results,
              caption = "Simulated ANOVA Result")
 ```
 
@@ -306,15 +317,16 @@ nSim = nsims
 # give alpha levels
 alpha1 = .05 #alpha level for the omnibus ANOVA
 alpha2 = .05 #also adjusted from original by DL
+```
 
+```{r}
 
 # create vectors to store p-values
 p1 <- numeric(nSim) #p-value omnibus ANOVA
 p2 <- numeric(nSim) #p-value first post hoc test
 p3 <- numeric(nSim) #p-value second post hoc test
 p4 <- numeric(nSim) #p-value third post hoc test
-# open library MASS
-library('MASS')
+
 # define correlation matrix
 rho <- cbind(c(1, r, r), c(r, 1, r), c(r, r, 1))
 # define participant codes
@@ -338,7 +350,9 @@ for (i in 1:nSim) {
   p3[i] <- t.test(data[, 1], data[, 3], paired = TRUE)$p.value
   p4[i] <- t.test(data[, 2], data[, 3], paired = TRUE)$p.value
 }
+```
 
+```{r}
 #printing all unique tests (adjusted code by DL)
 sum(p1 < alpha1) / nSim
 sum(p2 < alpha2) / nSim
@@ -369,7 +383,8 @@ design_result <- ANOVA_design(design = design,
                    sd = sd, 
                    r = r, 
                    labelnames = labelnames)
-
+```
+```{r eval=FALSE}
 simulation_result <- ANOVA_power(design_result, 
                                  alpha_level = alpha_level, 
                                  nsims = nsims,
@@ -377,7 +392,7 @@ simulation_result <- ANOVA_power(design_result,
 ```
 
 ```{r echo=FALSE}
-knitr::kable(simulation_result$main_results,
+knitr::kable(simulation_result_3.7$main_results,
              caption = "Simulated ANOVA Result")
 ```
 
@@ -437,14 +452,15 @@ nSim = nsims
 # give alpha levels
 alpha1 = .05 #alpha level for the omnibus ANOVA
 alpha2 = .05 #also adjusted from original by DL
+```
 
+```{r}
 # create vectors to store p-values
 p1 <- numeric(nSim) #p-value omnibus ANOVA
 p2 <- numeric(nSim) #p-value first post hoc test
 p3 <- numeric(nSim) #p-value second post hoc test
 p4 <- numeric(nSim) #p-value third post hoc test
-# open library MASS
-library('MASS')
+
 # define correlation matrix
 rho <- cbind(c(1, r, r), c(r, 1, r), c(r, r, 1))
 # define participant codes
@@ -469,7 +485,9 @@ for (i in 1:nSim) {
   p3[i] <- t.test(data[, 1], data[, 3], paired = TRUE)$p.value
   p4[i] <- t.test(data[, 2], data[, 3], paired = TRUE)$p.value
 }
+```
 
+```{r}
 sum(p1 < alpha1) / nSim
 sum(p2 < alpha2) / nSim
 sum(p3 < alpha2) / nSim
@@ -482,7 +500,8 @@ n <- 75
 mu <- c(0, 0.4, 0.4)
 sd <- 1
 r <- 0.6
-labelnames <- c("speed", "fast", "medium", "slow")
+labelnames <- c("SPEED", 
+                "fast", "medium", "slow")
 ```
 
 We create the within design, and run the simulation.
@@ -494,7 +513,8 @@ design_result <- ANOVA_design(design = design,
                    sd = sd, 
                    r = r, 
                    labelnames = labelnames)
-
+```
+```{r eval=FALSE}
 simulation_result <- ANOVA_power(design_result, 
                                  alpha_level = alpha_level, 
                                  nsims = nsims,
@@ -502,7 +522,7 @@ simulation_result <- ANOVA_power(design_result,
 ```
 
 ```{r echo=FALSE}
-knitr::kable(simulation_result$main_results,
+knitr::kable(simulation_result_3.9$main_results,
              caption = "Simulated ANOVA Result")
 ```
 

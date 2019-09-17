@@ -1,5 +1,7 @@
 # Error Control in Exploratory ANOVA
-
+```{r}
+load("data/error_data.RData")
+```
 In a 2 x 2 x 2 design, an ANOVA will give the test results for three main effects, three two-way interactions, and one three-way interaction. That’s 7 statistical tests. The probability of making at least one Type 1 error in a single 2 x 2 x 2 ANOVA is 1-(0.95)^7 = 30%.
 
 
@@ -24,14 +26,16 @@ design_result <- ANOVA_design(design = string,
                    labelnames = labelnames)
 alpha_level <- 0.05
 #We set the alpha level at 0.05. 
-
+```
+```{r eval=FALSE}
 simulation_result <- ANOVA_power(design_result,
                                  alpha_level = alpha_level,
                                  verbose = FALSE)
 ```
 
 ```{r echo=FALSE}
-knitr::kable(simulation_result$main_result)
+knitr::kable(simulation_result_8.1$main_result,
+             caption = "Simulated ANOVA Result")
 ```
 
 When there is no true effect, we formally do not have 'power' (which is defined as the probability of finding p < $\alpha$ if there is a true effect to be found) so the power column should be read as the 'Type 1 error rate'. Because we have saved the power simulation in the 'simulation_result' object, we can perform calculations on the 'sim_data' dataframe that is stored. This dataframe contains the results for the nsims simulations (e.g., 10000 rows if you ran 10000 simulations) and stores the p-values and effect size estimates for each ANOVA. The first 7 columns are the p-values for the ANOVA, first the main effects of condition 1, 2, and 3, then three two-way interactions, and finally the threeway interaction.
@@ -86,8 +90,8 @@ design_result <- ANOVA_design(design = string,
                    sd = sd, 
                    labelnames = labelnames)
 alpha_level <- 0.05
-
-
+```
+```{r eval=FALSE}
 simulation_result <- ANOVA_power(design_result, 
                                  alpha_level = alpha_level,
                                  p_adjust = p_adjust,
@@ -95,11 +99,11 @@ simulation_result <- ANOVA_power(design_result,
 ```
 
 ```{r echo = FALSE}
-knitr::kable(simulation_result$main_results, caption = "ANOVA Results")
+knitr::kable(simulation_result_8.2$main_results, caption = "ANOVA Results")
 ```
 
 ```{r echo = FALSE}
-knitr::kable(simulation_result$pc_results, caption = "Pairwise Results")
+knitr::kable(simulation_result_8.2$pc_results, caption = "Pairwise Results")
 ```
 
 ```{r}

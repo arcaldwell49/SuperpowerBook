@@ -1,5 +1,7 @@
 # Effect of Varying Designs on Power
-
+```{r}
+load("data/variation_data.RData")
+```
 Researchers might consider what the effects on the statistical power of their design is, when they add participants. Participants can be added to an additional condition, or to the existing design. 
 
 In a one-way ANOVA adding a condition means, for example, going from a 1x2 to a 1x3 design. For example, in addition to a control and intensive training condition, we add a light training condition. 
@@ -20,7 +22,8 @@ design_result <- ANOVA_design(design = string,
 power_oneway_between(design_result)$power
 power_oneway_between(design_result)$Cohen_f
 power_oneway_between(design_result)$eta_p_2
-
+```
+```{r eval=FALSE}
 simulation_result <- ANOVA_power(design_result, 
                                  alpha_level = alpha_level, 
                                  nsims = nsims,
@@ -28,7 +31,7 @@ simulation_result <- ANOVA_power(design_result,
 ```
 
 ```{r echo = FALSE}
-knitr::kable(simulation_result$main_results,
+knitr::kable(simulation_result_7.1$main_results,
              caption = "Simulated ANOVA Result")
 ```
 

@@ -1,5 +1,7 @@
 # Mixed ANOVA 
-
+```{r include=FALSE}
+load(data/mixed_data.RData)
+```
 ## Part 1
 
 ### Two by two ANOVA, within-between design
@@ -28,6 +30,8 @@ r = r,
 labelnames = labelnames
 )
 
+```
+```{r eval=FALSE}
 simulation_result <- ANOVA_power(design_result, 
                                  alpha_level = alpha_level, 
                                  nsims = nsims,
@@ -35,7 +39,7 @@ simulation_result <- ANOVA_power(design_result,
 ```
 
 ```{r echo=FALSE}
-knitr::kable(simulation_result$main_results,
+knitr::kable(simulation_result_4.1$main_results,
              caption = "Simulated ANOVA Result")
 ```
 
@@ -74,7 +78,8 @@ design_result <- ANOVA_design(design = string,
                               sd = sd, 
                               r = r, 
                               labelnames = labelnames)
-
+```
+```{r eval=FALSE}
 simulation_result <- ANOVA_power(design_result, 
                                  alpha_level = alpha_level, 
                                  nsims = nsims,
@@ -82,7 +87,7 @@ simulation_result <- ANOVA_power(design_result,
 ```
 
 ```{r echo=FALSE}
-knitr::kable(simulation_result$main_results,
+knitr::kable(simulation_result_4.3$main_results,
              caption = "Simulated ANOVA Result")
 ```
 
@@ -246,7 +251,8 @@ design_result <- ANOVA_design(design = string,
                               sd = sd, 
                               r = r, 
                               labelnames = labelnames)
-
+```
+```{r eval=FALSE}
 simulation_result <- ANOVA_power(design_result, 
                                  alpha_level = alpha_level, 
                                  nsims = nsims,
@@ -254,7 +260,7 @@ simulation_result <- ANOVA_power(design_result,
 ```
 
 ```{r echo = FALSE}
-knitr::kable(simulation_result$main_results,
+knitr::kable(simulation_result_4.5$main_results,
              caption = "Simulated ANOVA Result")
 ```
 
@@ -401,21 +407,24 @@ sd <- 150
 r <- 0.4
 string = "2w*2w"
 alpha_level <- 0.05
-labelnames = c("age", "old", "young", "color", "blue", "red")
+labelnames = c("AGE", "old", "young", 
+               "COLOR", "blue", "red")
+
 design_result <- ANOVA_design(design = string,
                               n = n, 
                               mu = mu, 
                               sd = sd, 
                               r = r, 
                               labelnames = labelnames)
-
+```
+```{r eval=FALSE}
 simulation_result <- ANOVA_power(design_result, 
                                  alpha_level = 0.05, 
                                  nsims = nsims)
 ```
 
 ```{r echo=FALSE}
-knitr::kable(simulation_result$main_results,
+knitr::kable(simulation_result_4.7$main_results,
              caption = "Simulated ANOVA Result")
 ```
 
@@ -477,7 +486,8 @@ design_result <- ANOVA_design(design = string,
                               sd = sd, 
                               r = r, 
                               labelnames = labelnames)
-
+```
+```{r eval=FALSE}
 simulation_result <- ANOVA_power(design_result, 
                                  alpha_level = alpha_level, 
                                  nsims = nsims,
@@ -485,7 +495,7 @@ simulation_result <- ANOVA_power(design_result,
 ```
 
 ```{r echo=FALSE}
-knitr::kable(simulation_result$main_results,
+knitr::kable(simulation_result_4.9$main_results,
              caption = "Simulated ANOVA Result")
 ```
 
