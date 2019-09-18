@@ -419,7 +419,8 @@ sum(p2 < alpha2) / nSim
 sum(p3 < alpha2) / nSim
 sum(p4 < alpha2) / nSim
 ```
-```{r include = FALSE}
+
+```{r echo=FALSE}
 #p1
 p1_1
 #p2
@@ -503,7 +504,7 @@ f <- sqrt(sum((mu - mean(mu)) ^ 2) / length(mu)) / sd
 # For Cohen's d we use the difference, 2-1 = 1. 
 ```
 
-The Cohen´s f is `r f`. We can enter the f (using the default 'as in G*Power 3.0' in the option window) and enter a sample size of 75, number of groups as 1, number of measurements as 3, correlation as 0.5. This yields: 
+The Cohen´s *f* is `r f`. We can enter the *f* (using the default 'as in G*Power 3.0' in the option window) and enter a sample size of 75, number of groups as 1, number of measurements as 3, correlation as 0.5. This yields: 
 
 ![](screenshots/gpower_3.png)
 
@@ -564,7 +565,7 @@ sum(p2 < alpha2) / nSim
 sum(p3 < alpha2) / nSim
 sum(p4 < alpha2) / nSim
 ```
-```{r include = FALSE}
+```{r echo = FALSE}
 #p1
 p1_2
 #p2
@@ -585,7 +586,7 @@ labelnames <- c("SPEED",
                 "fast", "medium", "slow")
 ```
 
-We create the within design, and run the simulation.
+We create the 3-level repeated measures design, and run the simulation.
 
 ```{r, message=FALSE, warning=FALSE}
 design_result <- ANOVA_design(design = design,
@@ -643,9 +644,7 @@ As Potvin & Schutz (2000) explain, analytic procedures for a two-factor repeated
 
 We can reproduce the simulation coded by [Ben Amsel](https://cognitivedatascientist.com/2015/12/14/power-simulation-in-r-the-repeated-measures-anova-5/)
 
-```{r}
-knitr::opts_chunk$set(echo = TRUE, warning = FALSE, message = FALSE)
- 
+```{r echo = TRUE, warning = FALSE, message = FALSE}
 # define the parameters
 # true effects (in this case, a double dissociation)
 mu = c(700, 670, 670, 700) 
@@ -667,7 +666,7 @@ dm = data.frame(subject, cond)
 
 Build Sigma: the population variance-covariance matrix
 
-```{r}
+```{r echo = TRUE, warning = FALSE, message = FALSE}
 # create k x k matrix populated with sigma
 sigma.mat <- rep(sigma, 4)
 S <-
@@ -717,17 +716,17 @@ p_val_1 = data.frame(
 colnames(p_val_1) = c('X1','X2','Interaction')
 ```
 
-The empirical power is easy to compute, it's just the proportion of simulation runs where p <. 05.
+The empirical power is easy to compute, it's just the proportion of simulation runs where *p* < .05.
 
-```{r}
+```{r echo = TRUE, warning = FALSE, message = FALSE}
 power.res = apply(as.matrix(p_val_1), 2, 
   function(x) round(mean(ifelse(x < .05, 1, 0) * 100),2))
 power.res
 ```
 
-Visualize the distributions of p-values
+Visualize the distributions of *p*-values
 
-```{r}
+```{r echo = TRUE, warning = FALSE, message = FALSE}
 # plot the known effects
 
  
@@ -764,7 +763,7 @@ grid.arrange(plt1, plt2, nrow = 1)
 
 We can reproduce this simulation:
 
-```{r}
+```{r echo = TRUE, warning = FALSE, message = FALSE}
 # true effects (in this case, a double dissociation)
 mu = c(700, 670, 670, 700) 
 sigma = 150  # population standard deviation
@@ -811,7 +810,7 @@ The simulations yield closely matching results.
 
 ### Examine variation of means and correlation
 
-```{r}
+```{r echo = TRUE, warning = FALSE, message = FALSE}
 # define the parameters
 # true effects (in this case, a double dissociation)
 mu = c(700, 670, 690, 750) 
@@ -833,7 +832,7 @@ dm = data.frame(subject, cond)
 
 Build Sigma: the population variance-covariance matrix
 
-```{r}
+```{r echo = TRUE, warning = FALSE, message = FALSE}
 # create k x k matrix populated with sigma
 sigma.mat <- rep(sigma, 4)
 S <-
@@ -885,17 +884,15 @@ mods <- df %>%
 
 The empirical power is easy to compute, it's just the proportion of simulation runs where p <. 05.
 
-```{r}
+```{r echo = TRUE, warning = FALSE, message = FALSE}
 power.res = apply(as.matrix(p_val_2), 2, 
   function(x) round(mean(ifelse(x < .05, 1, 0) * 100),2))
 power.res
 ```
 
-Visualize the distributions of p-values
+Visualize the distributions of *p*-values
 
-```{r}
-
-
+```{r echo = TRUE, warning = FALSE, message = FALSE}
 means = data.frame(cond[1:4,], mu, SE = sigma / sqrt(nsubs))
 plt1 = ggplot(means, aes(y = mu, x = X1, fill = X2)) +
 geom_bar(position = position_dodge(), stat = "identity") +
@@ -929,7 +926,7 @@ grid.arrange(plt1, plt2, nrow = 1)
 
 We can reproduce this simulation:
 
-```{r}
+```{r echo = TRUE, warning = FALSE, message = FALSE}
 # true effects (in this case, a double dissociation)
 mu = c(700, 670, 690, 750) 
 sigma = 150  # population standard deviation
@@ -972,195 +969,4 @@ knitr::kable(exact_result$main_results,
 ```
 
 
-## Part 5
-
-### Two by two ANOVA, within design
-
-Potvin & Schutz (2000) simulate a wide range of repeated measure designs. The give an example of a 3x3 design, with the following correlation matrix:
-
-![](screenshots/PS2000.png)
-
-Variances were set to 1 (so all covariance matrices in their simulations were identical). In this specific example, the white fields are related to the correlation for the A main effect (these cells have the same level for B, but different levels of A). The grey cells are related to the main effect of B (the cells have the same level of A, but different levels of B). Finally, the black cells are related to the AxB interaction (they have different levels of A and B). The diagonal (all 1) relate to cells with the same levels of A and B. 
-
-Potvin & Schulz (2000) examine power for 2x2 within ANOVA designs and develop approximations of the error variance. For a design with 2 within factors (A and B) these are: 
-
-For the main effect of A:
-$\sigma _ { e } ^ { 2 } = \sigma ^ { 2 } ( 1 - \overline { \rho } _ { A } ) + \sigma ^ { 2 } ( q - 1 ) ( \overline { \rho } _ { B } - \overline { \rho } _ { AB } )$
-
-For the main effectof B:
-$\sigma _ { e } ^ { 2 } = \sigma ^ { 2 } ( 1 - \overline { \rho } _ { B } ) + \sigma ^ { 2 } ( p - 1 ) ( \overline { \rho } _ { A } - \overline { \rho } _ { A B } )$
-
-For the interaction between A and B:
-$\sigma _ { e } ^ { 2 } = \sigma ^ { 2 } ( 1 - \rho _ { \max } ) - \sigma ^ { 2 } ( \overline { \rho } _ { \min } - \overline { \rho } _ { AB } )$
  
-It is difficult to just come up with a positive definite covariance matrix. The best way to achieve this is to get the correlations from a pilot study. Indeed, it should be rather difficult to know which correlations to fill in without some pilot data.
-
-We try to get the formulas in Potvin and Schutz (2000) working. **Below, I manage for the main effects, but not for the interaction**. 
-
-```{r}
-mu = c(2,1,4,2) 
-n <- 20
-sd <- 5
-r <- c(
-  0.8, 0.4, 0.4,
-       0.4, 0.4,
-            0.8
-  )
-string = "2w*2w"
-alpha_level <- 0.05
-labelnames = c("A", "a1", "a2", "B", "b1", "b2")
-
-design_result <- ANOVA_design(design = string,
-                              n = n, 
-                              mu = mu, 
-                              sd = sd, 
-                              r = r, 
-                              labelnames = labelnames)
-```
-```{r eval=FALSE}
-simulation_result <- ANOVA_power(design_result, 
-                                 alpha_level = alpha_level, 
-                                 nsims = nsims,
-                                 verbose = FALSE)
-```
-
-```{r echo=FALSE}
-knitr::kable(simulation_result_4.9$main_results,
-             caption = "Simulated ANOVA Result")%>%
-  kable_styling(latex_options = "hold_position")
-```
-
-```{r}
-exact_result <- ANOVA_exact(design_result,
-                            alpha_level = alpha_level,
-                            verbose = FALSE)
-```
-
-```{r echo=FALSE}
-knitr::kable(exact_result$main_results,
-             caption = "Exact ANOVA Result")%>%
-  kable_styling(latex_options = "hold_position")
-```
-
-
-
-We can try to use the formula in Potvin & Schutz (2000).
-
-```{r}
-k <- 1 #one group (because all factors are within)
-
-rho_A <- 0.5 #mean r for factor A
-
-rho_B <- 0.8 #mean r for factor B
-
-rho_AB <- 0.4 #mean r for factor AB
-
-alpha <- 0.05
-
-sigma <- sd
-
-m_A <- 2 #levels factor A
-
-variance_e_A <- sigma^2 * (1 - rho_A) + 
-  sigma^2 * (m_A - 1) * (rho_B - rho_AB) 
-#Variance A
-variance_e_A
-
-m_B <- 2 #levels factor B
-
-variance_e_B <- sigma^2 * (1 - rho_B) + 
-  sigma^2 * (m_B - 1) * (rho_A - rho_AB)
-#Variance B
-variance_e_B
-
-variance_e_AB <-
-  (sigma ^ 2 * (1 - max(rho_A, rho_B)) - 
-     sigma ^ 2 * (min(rho_A, rho_B) - rho_AB)) 
-#Variance AB
-variance_e_AB
-
-#Create a mean matrix
-mean_mat <- t(matrix(mu, nrow = m_B,ncol = m_A)) 
-mean_mat
-
-# Potving & Schutz, 2000, formula 2, p. 348
-# For main effect A
-lambda_A <-
-  n * m_A * sum((rowMeans(mean_mat) - 
-                   mean(rowMeans(mean_mat))) ^ 2) / variance_e_A
-  lambda_A
-
-#calculate degrees of freedom 1 - ignoring the sphericity correction
-df1 <- (m_A - 1) 
-
-df2 <- (n - k) * (m_A - 1) #calculate degrees of freedom 2
-
-F_critical <- qf(alpha, # critical F-vaue
-                 df1,
-                 df2, 
-                 lower.tail = FALSE) 
-
-pow_A <- pf(qf(alpha, #power 
-             df1, 
-             df2, 
-             lower.tail = FALSE), 
-          df1, 
-          df2, 
-          lambda_A, 
-          lower.tail = FALSE)
-
-lambda_B <-
-  n * m_B * sum((colMeans(mean_mat) - 
-                   mean(colMeans(mean_mat))) ^ 2) / variance_e_B 
-lambda_B
-
-df1 <- (m_B - 1) #calculate degrees of freedom 1
-
-df2 <- (n - k) * (m_B - 1) #calculate degrees of freedom 2
-
-F_critical <- qf(alpha, # critical F-vaue
-                 df1,
-                 df2,
-                 lower.tail = FALSE) 
-
-pow_B <- pf(qf(alpha, #power 
-             df1, 
-             df2, 
-             lower.tail = FALSE), 
-          df1, 
-          df2, 
-          lambda_B, 
-          lower.tail = FALSE)
-
-pow_A
-pow_B
-```
-We see the 26.9 and 64.2 correspond to the results of the simulation quite closely. 
-
-```{r}
-#This (or the variance calculation above) does not work.
-lambda_AB <- n * sum((
-mean_mat - rowMeans(mean_mat) - colMeans(mean_mat) + mean(mean_mat)
-) ^ 2) / variance_e_AB
-lambda_AB
-df1 <- (m_A - 1) * (m_B - 1)  #calculate degrees of freedom 1
-df2 <-
-(n - k) * (m_A - 1) * (m_B - 1) #calculate degrees of freedom 2
-F_critical <- qf(alpha, # critical F-vaue
-df1,
-df2,
-lower.tail = FALSE)
-
-pow <- pf(qf(alpha, #power
-df1,
-df2,
-lower.tail = FALSE),
-df1,
-df2,
-lambda_AB,
-lower.tail = FALSE)
-
-pow
-```
-
-Maybe the simulation is not correct for the interaction, or the formula is not correctly programmed. 
