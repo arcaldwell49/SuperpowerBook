@@ -1,7 +1,7 @@
 # The Experimental Design
 
-This section introduces how `Superpower` sets up the design of each power analysis.
-Currently, this pacakge only provides power analysis for ANOVA and for repeated measures MANOVA.
+This section introduces how `Superpower` allows the user to specify their experimental design.
+Currently, this pacakge only provides power analysis for ANOVA and for repeated measures MANOVA so all designs are defined by the `ANOVA_design` function.
 
 ## ANOVA_design function
 
@@ -27,7 +27,7 @@ An example of a `2b*3w` design is a group of people in one condition who get a d
 
 ### Specifying the means using 'mu'
 
-Note that for each cell in the design, a mean must be provided. Thus, for a "2b*3w" design, 6 means need to be entered. 
+Note that for each cell in the design, a mean must be provided. Thus, for a `2b*3w` design, **6** (i.e., 2*3=6) means need to be entered. 
 
 Means need to be entered in the correct order. ANOVA_design outputs a plot so you can check if you entered all means as you intended. Always carefully check if the plot that is generated matches your expectations. 
 
@@ -46,7 +46,7 @@ If your design has just one factor, just enter the means in the same order as th
 
 So if you enter the means 1, 2, 3, 4, 5, 6, 7, 8 the first 4 means correspond to level 1 of factor 1, the second 4 means correspond to level 2 of factor 1. Within the first 4 means, the first 2 correspond to level 1 of factor 2, and within those 2 means, the first corresponds to level 1 of factor 3.
 
-The plot below visualizes means from 1 to 8 being entered in a vector: mu = c(1, 2, 3, 4, 5, 6, 7, 8) so you can see how the basic ordering works.
+The plot below visualizes means from 1 to 8 being entered in a vector: `mu = c(1, 2, 3, 4, 5, 6, 7, 8)` so you can see how the basic ordering works.
 
 ```{r, fig.width=7, fig.height=4, echo=FALSE, message=FALSE, warning=FALSE}
 design_result <- ANOVA_design(design = "2b*2w*2b",
@@ -63,18 +63,18 @@ To make sure the plots and tables with simulation results are easy to interpret,
 
 For the 2x3 design we have been using as an example, where there are 2 factors (condition and time of measurement), the first with 2 levels (placebo vs. medicine) and the second with three levels (time1, time2, and time3) we would enter the labels as follows: 
 
-c("condition", "placebo", "medicine", "time", "time1", "time2", "time3")
+`c("condition", "placebo", "medicine", "time", "time1", "time2", "time3")`
 
-As you can see, you follow the order of the design (`2b*3w`), and first write the **FACTOR** label (condition) followed by the levels of that factor (placebo and medicine). Then you write the second factor name (time) followed by the three labels for each **LEVEL** (time1, time2, time3). **Do not use spaces in the names (so not "time 1" but "time1" or "time_1").**
+As you can see, you follow the order of the design (`2b*3w`), and first write the **FACTOR** label (condition) followed by the levels of that factor (placebo and medicine). Then you write the second factor name (time) followed by the three labels for each **LEVEL** (time1, time2, time3). **Do not use spaces or special characters in the names (so not "time 1" or "time_1" but "time1").**
 
 Some examples:
 
 1. One within factor (time with 2 levels), 2w: 
-  + `c("time", "morning", "evening")`
+`c("time", "morning", "evening")`
 2. Two between factors (time and group, each with 2 levels), 2b*2b: 
-  + `c("time", "morning", "evening", "group", "control", "experimental")`
+`c("time", "morning", "evening", "group", "control", "experimental")`
 3. Two between factors (time and group, first with 4 levels, second with 2 levels), 4b*2b: 
-  + `c("time", "morning", "afternoon" ,"evening", "night", "group", "control", "experimental")`
+`c("time", "morning", "afternoon" ,"evening", "night", "group", "control", "experimental")`
 
 ### Specifying the correlation 
 

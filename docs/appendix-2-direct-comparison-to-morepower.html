@@ -1,0 +1,571 @@
+<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml" lang="" xml:lang="">
+<head>
+
+  <meta charset="utf-8" />
+  <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+  <title>Chapter 12 Appendix 2: Direct Comparison to MOREpower | The Superpower R Package: Capabilities and Validation</title>
+  <meta name="description" content="This is a book describing the capabilities of the Superpower R package." />
+  <meta name="generator" content="bookdown 0.10 and GitBook 2.6.7" />
+
+  <meta property="og:title" content="Chapter 12 Appendix 2: Direct Comparison to MOREpower | The Superpower R Package: Capabilities and Validation" />
+  <meta property="og:type" content="book" />
+  
+  
+  <meta property="og:description" content="This is a book describing the capabilities of the Superpower R package." />
+  
+
+  <meta name="twitter:card" content="summary" />
+  <meta name="twitter:title" content="Chapter 12 Appendix 2: Direct Comparison to MOREpower | The Superpower R Package: Capabilities and Validation" />
+  
+  <meta name="twitter:description" content="This is a book describing the capabilities of the Superpower R package." />
+  
+
+<meta name="author" content="Aaron R. Caldwell &amp; Daniël Lakens" />
+
+
+<meta name="date" content="2019-09-18" />
+
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <meta name="apple-mobile-web-app-capable" content="yes" />
+  <meta name="apple-mobile-web-app-status-bar-style" content="black" />
+  
+  
+<link rel="prev" href="appendix-1-direct-comparison-to-pwr2ppl.html">
+
+<script src="libs/jquery-2.2.3/jquery.min.js"></script>
+<link href="libs/gitbook-2.6.7/css/style.css" rel="stylesheet" />
+<link href="libs/gitbook-2.6.7/css/plugin-table.css" rel="stylesheet" />
+<link href="libs/gitbook-2.6.7/css/plugin-bookdown.css" rel="stylesheet" />
+<link href="libs/gitbook-2.6.7/css/plugin-highlight.css" rel="stylesheet" />
+<link href="libs/gitbook-2.6.7/css/plugin-search.css" rel="stylesheet" />
+<link href="libs/gitbook-2.6.7/css/plugin-fontsettings.css" rel="stylesheet" />
+
+
+
+
+
+
+
+<script src="libs/kePrint-0.0.1/kePrint.js"></script>
+
+
+<style type="text/css">
+a.sourceLine { display: inline-block; line-height: 1.25; }
+a.sourceLine { pointer-events: none; color: inherit; text-decoration: inherit; }
+a.sourceLine:empty { height: 1.2em; }
+.sourceCode { overflow: visible; }
+code.sourceCode { white-space: pre; position: relative; }
+div.sourceCode { margin: 1em 0; }
+pre.sourceCode { margin: 0; }
+@media screen {
+div.sourceCode { overflow: auto; }
+}
+@media print {
+code.sourceCode { white-space: pre-wrap; }
+a.sourceLine { text-indent: -1em; padding-left: 1em; }
+}
+pre.numberSource a.sourceLine
+  { position: relative; left: -4em; }
+pre.numberSource a.sourceLine::before
+  { content: attr(title);
+    position: relative; left: -1em; text-align: right; vertical-align: baseline;
+    border: none; pointer-events: all; display: inline-block;
+    -webkit-touch-callout: none; -webkit-user-select: none;
+    -khtml-user-select: none; -moz-user-select: none;
+    -ms-user-select: none; user-select: none;
+    padding: 0 4px; width: 4em;
+    color: #aaaaaa;
+  }
+pre.numberSource { margin-left: 3em; border-left: 1px solid #aaaaaa;  padding-left: 4px; }
+div.sourceCode
+  {  }
+@media screen {
+a.sourceLine::before { text-decoration: underline; }
+}
+code span.al { color: #ff0000; font-weight: bold; } /* Alert */
+code span.an { color: #60a0b0; font-weight: bold; font-style: italic; } /* Annotation */
+code span.at { color: #7d9029; } /* Attribute */
+code span.bn { color: #40a070; } /* BaseN */
+code span.bu { } /* BuiltIn */
+code span.cf { color: #007020; font-weight: bold; } /* ControlFlow */
+code span.ch { color: #4070a0; } /* Char */
+code span.cn { color: #880000; } /* Constant */
+code span.co { color: #60a0b0; font-style: italic; } /* Comment */
+code span.cv { color: #60a0b0; font-weight: bold; font-style: italic; } /* CommentVar */
+code span.do { color: #ba2121; font-style: italic; } /* Documentation */
+code span.dt { color: #902000; } /* DataType */
+code span.dv { color: #40a070; } /* DecVal */
+code span.er { color: #ff0000; font-weight: bold; } /* Error */
+code span.ex { } /* Extension */
+code span.fl { color: #40a070; } /* Float */
+code span.fu { color: #06287e; } /* Function */
+code span.im { } /* Import */
+code span.in { color: #60a0b0; font-weight: bold; font-style: italic; } /* Information */
+code span.kw { color: #007020; font-weight: bold; } /* Keyword */
+code span.op { color: #666666; } /* Operator */
+code span.ot { color: #007020; } /* Other */
+code span.pp { color: #bc7a00; } /* Preprocessor */
+code span.sc { color: #4070a0; } /* SpecialChar */
+code span.ss { color: #bb6688; } /* SpecialString */
+code span.st { color: #4070a0; } /* String */
+code span.va { color: #19177c; } /* Variable */
+code span.vs { color: #4070a0; } /* VerbatimString */
+code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warning */
+</style>
+
+<link rel="stylesheet" href="style.css" type="text/css" />
+</head>
+
+<body>
+
+
+
+  <div class="book without-animation with-summary font-size-2 font-family-1" data-basepath=".">
+
+    <div class="book-summary">
+      <nav role="navigation">
+
+<ul class="summary">
+<li><a href="./">Superpower</a></li>
+
+<li class="divider"></li>
+<li class="chapter" data-level="" data-path="index.html"><a href="index.html"><i class="fa fa-check"></i>Preface</a></li>
+<li class="chapter" data-level="1" data-path="the-experimental-design.html"><a href="the-experimental-design.html"><i class="fa fa-check"></i><b>1</b> The Experimental Design</a><ul>
+<li class="chapter" data-level="1.1" data-path="the-experimental-design.html"><a href="the-experimental-design.html#anova_design-function"><i class="fa fa-check"></i><b>1.1</b> ANOVA_design function</a><ul>
+<li class="chapter" data-level="1.1.1" data-path="the-experimental-design.html"><a href="the-experimental-design.html#specifying-the-design-using-design"><i class="fa fa-check"></i><b>1.1.1</b> Specifying the design using ‘design’</a></li>
+<li class="chapter" data-level="1.1.2" data-path="the-experimental-design.html"><a href="the-experimental-design.html#specifying-the-means-using-mu"><i class="fa fa-check"></i><b>1.1.2</b> Specifying the means using ‘mu’</a></li>
+<li class="chapter" data-level="1.1.3" data-path="the-experimental-design.html"><a href="the-experimental-design.html#specifying-label-names"><i class="fa fa-check"></i><b>1.1.3</b> Specifying label names</a></li>
+<li class="chapter" data-level="1.1.4" data-path="the-experimental-design.html"><a href="the-experimental-design.html#specifying-the-correlation"><i class="fa fa-check"></i><b>1.1.4</b> Specifying the correlation</a></li>
+<li class="chapter" data-level="1.1.5" data-path="the-experimental-design.html"><a href="the-experimental-design.html#specifying-the-sample-size"><i class="fa fa-check"></i><b>1.1.5</b> Specifying the sample size</a></li>
+<li class="chapter" data-level="1.1.6" data-path="the-experimental-design.html"><a href="the-experimental-design.html#specifying-the-standard-deviation"><i class="fa fa-check"></i><b>1.1.6</b> Specifying the standard deviation</a></li>
+</ul></li>
+</ul></li>
+<li class="chapter" data-level="2" data-path="one-way-anova.html"><a href="one-way-anova.html"><i class="fa fa-check"></i><b>2</b> One-Way ANOVA</a><ul>
+<li class="chapter" data-level="2.1" data-path="one-way-anova.html"><a href="one-way-anova.html#part-1"><i class="fa fa-check"></i><b>2.1</b> Part 1</a><ul>
+<li class="chapter" data-level="2.1.1" data-path="one-way-anova.html"><a href="one-way-anova.html#two-conditions"><i class="fa fa-check"></i><b>2.1.1</b> Two conditions</a></li>
+</ul></li>
+<li class="chapter" data-level="2.2" data-path="one-way-anova.html"><a href="one-way-anova.html#part-2"><i class="fa fa-check"></i><b>2.2</b> Part 2</a><ul>
+<li class="chapter" data-level="2.2.1" data-path="one-way-anova.html"><a href="one-way-anova.html#three-conditions"><i class="fa fa-check"></i><b>2.2.1</b> Three conditions</a></li>
+<li class="chapter" data-level="2.2.2" data-path="one-way-anova.html"><a href="one-way-anova.html#power-for-simple-effects"><i class="fa fa-check"></i><b>2.2.2</b> Power for simple effects</a></li>
+</ul></li>
+<li class="chapter" data-level="2.3" data-path="one-way-anova.html"><a href="one-way-anova.html#part-3"><i class="fa fa-check"></i><b>2.3</b> Part 3</a><ul>
+<li class="chapter" data-level="2.3.1" data-path="one-way-anova.html"><a href="one-way-anova.html#three-conditions-replication"><i class="fa fa-check"></i><b>2.3.1</b> Three conditions replication</a></li>
+<li class="chapter" data-level="2.3.2" data-path="one-way-anova.html"><a href="one-way-anova.html#variation-1"><i class="fa fa-check"></i><b>2.3.2</b> Variation 1</a></li>
+<li class="chapter" data-level="2.3.3" data-path="one-way-anova.html"><a href="one-way-anova.html#three-conditions-replication-1"><i class="fa fa-check"></i><b>2.3.3</b> Three conditions replication</a></li>
+<li class="chapter" data-level="2.3.4" data-path="one-way-anova.html"><a href="one-way-anova.html#variation-2"><i class="fa fa-check"></i><b>2.3.4</b> Variation 2</a></li>
+<li class="chapter" data-level="2.3.5" data-path="one-way-anova.html"><a href="one-way-anova.html#three-conditions-replication-2"><i class="fa fa-check"></i><b>2.3.5</b> Three conditions replication</a></li>
+</ul></li>
+<li class="chapter" data-level="2.4" data-path="one-way-anova.html"><a href="one-way-anova.html#effect-size-estimates-for-one-way-anova"><i class="fa fa-check"></i><b>2.4</b> Effect Size Estimates for One-Way ANOVA</a><ul>
+<li class="chapter" data-level="2.4.1" data-path="one-way-anova.html"><a href="one-way-anova.html#three-conditions-small-effect-size"><i class="fa fa-check"></i><b>2.4.1</b> Three conditions, small effect size</a></li>
+<li class="chapter" data-level="2.4.2" data-path="one-way-anova.html"><a href="one-way-anova.html#four-conditions-medium-effect-size"><i class="fa fa-check"></i><b>2.4.2</b> Four conditions, medium effect size</a></li>
+<li class="chapter" data-level="2.4.3" data-path="one-way-anova.html"><a href="one-way-anova.html#two-conditions-large-effect-size"><i class="fa fa-check"></i><b>2.4.3</b> Two conditions, large effect size</a></li>
+</ul></li>
+</ul></li>
+<li class="chapter" data-level="3" data-path="repeated-measures-anova.html"><a href="repeated-measures-anova.html"><i class="fa fa-check"></i><b>3</b> Repeated Measures ANOVA</a><ul>
+<li class="chapter" data-level="3.1" data-path="repeated-measures-anova.html"><a href="repeated-measures-anova.html#part-1-1"><i class="fa fa-check"></i><b>3.1</b> Part 1</a><ul>
+<li class="chapter" data-level="3.1.1" data-path="repeated-measures-anova.html"><a href="repeated-measures-anova.html#two-conditions-medium-effect-size"><i class="fa fa-check"></i><b>3.1.1</b> Two conditions, medium effect size</a></li>
+</ul></li>
+<li class="chapter" data-level="3.2" data-path="repeated-measures-anova.html"><a href="repeated-measures-anova.html#part-2-1"><i class="fa fa-check"></i><b>3.2</b> Part 2</a><ul>
+<li class="chapter" data-level="3.2.1" data-path="repeated-measures-anova.html"><a href="repeated-measures-anova.html#the-relation-between-cohens-f-and-cohens-d"><i class="fa fa-check"></i><b>3.2.1</b> The relation between Cohen’s *f and Cohen’s d</a></li>
+<li class="chapter" data-level="3.2.2" data-path="repeated-measures-anova.html"><a href="repeated-measures-anova.html#three-within-conditions-medium-effect-size"><i class="fa fa-check"></i><b>3.2.2</b> Three within conditions, medium effect size</a></li>
+</ul></li>
+<li class="chapter" data-level="3.3" data-path="repeated-measures-anova.html"><a href="repeated-measures-anova.html#part-3-1"><i class="fa fa-check"></i><b>3.3</b> Part 3</a><ul>
+<li class="chapter" data-level="3.3.1" data-path="repeated-measures-anova.html"><a href="repeated-measures-anova.html#reproducing-brysbaerts-examples"><i class="fa fa-check"></i><b>3.3.1</b> Reproducing Brysbaert’s Examples</a></li>
+<li class="chapter" data-level="3.3.2" data-path="repeated-measures-anova.html"><a href="repeated-measures-anova.html#reproducing-brysbaert-variation-1-changing-correlation"><i class="fa fa-check"></i><b>3.3.2</b> Reproducing Brysbaert Variation 1: Changing Correlation</a></li>
+</ul></li>
+<li class="chapter" data-level="3.4" data-path="repeated-measures-anova.html"><a href="repeated-measures-anova.html#part-4"><i class="fa fa-check"></i><b>3.4</b> Part 4</a><ul>
+<li class="chapter" data-level="3.4.1" data-path="repeated-measures-anova.html"><a href="repeated-measures-anova.html#two-by-two-anova-within-within-design"><i class="fa fa-check"></i><b>3.4.1</b> Two by two ANOVA, within-within design</a></li>
+<li class="chapter" data-level="3.4.2" data-path="repeated-measures-anova.html"><a href="repeated-measures-anova.html#examine-variation-of-means-and-correlation"><i class="fa fa-check"></i><b>3.4.2</b> Examine variation of means and correlation</a></li>
+</ul></li>
+</ul></li>
+<li class="chapter" data-level="4" data-path="mixed-anova.html"><a href="mixed-anova.html"><i class="fa fa-check"></i><b>4</b> Mixed ANOVA</a><ul>
+<li class="chapter" data-level="4.1" data-path="mixed-anova.html"><a href="mixed-anova.html#two-by-two-anova-within-between-design"><i class="fa fa-check"></i><b>4.1</b> Two by two ANOVA, within-between design</a><ul>
+<li class="chapter" data-level="4.1.1" data-path="mixed-anova.html"><a href="mixed-anova.html#two-by-two-anova-within-between-design-variation-1"><i class="fa fa-check"></i><b>4.1.1</b> Two by two ANOVA, within-between design Variation 1</a></li>
+</ul></li>
+</ul></li>
+<li class="chapter" data-level="5" data-path="power-for-three-way-interactions.html"><a href="power-for-three-way-interactions.html"><i class="fa fa-check"></i><b>5</b> Power for Three-way Interactions</a></li>
+<li class="chapter" data-level="6" data-path="the-no-way-interactions.html"><a href="the-no-way-interactions.html"><i class="fa fa-check"></i><b>6</b> The ‘No-Way’ Interactions</a></li>
+<li class="chapter" data-level="7" data-path="effect-of-varying-designs-on-power.html"><a href="effect-of-varying-designs-on-power.html"><i class="fa fa-check"></i><b>7</b> Effect of Varying Designs on Power</a><ul>
+<li class="chapter" data-level="7.1" data-path="effect-of-varying-designs-on-power.html"><a href="effect-of-varying-designs-on-power.html#within-designs"><i class="fa fa-check"></i><b>7.1</b> Within Designs</a></li>
+</ul></li>
+<li class="chapter" data-level="8" data-path="error-control-in-exploratory-anova.html"><a href="error-control-in-exploratory-anova.html"><i class="fa fa-check"></i><b>8</b> Error Control in Exploratory ANOVA</a></li>
+<li class="chapter" data-level="9" data-path="analytic-power-functions.html"><a href="analytic-power-functions.html"><i class="fa fa-check"></i><b>9</b> Analytic Power Functions</a><ul>
+<li class="chapter" data-level="9.1" data-path="analytic-power-functions.html"><a href="analytic-power-functions.html#one-way-between-subjects-anova"><i class="fa fa-check"></i><b>9.1</b> One-Way Between Subjects ANOVA</a></li>
+<li class="chapter" data-level="9.2" data-path="analytic-power-functions.html"><a href="analytic-power-functions.html#two-way-between-subject-interaction"><i class="fa fa-check"></i><b>9.2</b> Two-way Between Subject Interaction</a></li>
+<li class="chapter" data-level="9.3" data-path="analytic-power-functions.html"><a href="analytic-power-functions.html#x3-between-subject-anova"><i class="fa fa-check"></i><b>9.3</b> 3x3 Between Subject ANOVA</a></li>
+<li class="chapter" data-level="9.4" data-path="analytic-power-functions.html"><a href="analytic-power-functions.html#two-by-two-anova-within-design"><i class="fa fa-check"></i><b>9.4</b> Two by two ANOVA, within design</a></li>
+</ul></li>
+<li class="chapter" data-level="10" data-path="power-curve.html"><a href="power-curve.html"><i class="fa fa-check"></i><b>10</b> Power Curve</a><ul>
+<li class="chapter" data-level="10.1" data-path="power-curve.html"><a href="power-curve.html#explore-increase-in-effect-size-for-moderated-interactions."><i class="fa fa-check"></i><b>10.1</b> Explore increase in effect size for moderated interactions.</a></li>
+<li class="chapter" data-level="10.2" data-path="power-curve.html"><a href="power-curve.html#explore-increase-in-effect-size-for-cross-over-interactions."><i class="fa fa-check"></i><b>10.2</b> Explore increase in effect size for cross-over interactions.</a></li>
+<li class="chapter" data-level="10.3" data-path="power-curve.html"><a href="power-curve.html#explore-increase-in-correlation-in-moderated-interactions."><i class="fa fa-check"></i><b>10.3</b> Explore increase in correlation in moderated interactions.</a></li>
+<li class="chapter" data-level="10.4" data-path="power-curve.html"><a href="power-curve.html#increasing-correlation-in-on-factor-decreases-power-in-second-factor"><i class="fa fa-check"></i><b>10.4</b> Increasing correlation in on factor decreases power in second factor</a></li>
+</ul></li>
+<li class="chapter" data-level="11" data-path="appendix-1-direct-comparison-to-pwr2ppl.html"><a href="appendix-1-direct-comparison-to-pwr2ppl.html"><i class="fa fa-check"></i><b>11</b> Appendix 1: Direct Comparison to pwr2ppl</a><ul>
+<li class="chapter" data-level="11.1" data-path="appendix-1-direct-comparison-to-pwr2ppl.html"><a href="appendix-1-direct-comparison-to-pwr2ppl.html#examples-from-chapter-5"><i class="fa fa-check"></i><b>11.1</b> Examples from Chapter 5</a><ul>
+<li class="chapter" data-level="11.1.1" data-path="appendix-1-direct-comparison-to-pwr2ppl.html"><a href="appendix-1-direct-comparison-to-pwr2ppl.html#example-5.15.2"><i class="fa fa-check"></i><b>11.1.1</b> Example 5.1/5.2</a></li>
+<li class="chapter" data-level="11.1.2" data-path="appendix-1-direct-comparison-to-pwr2ppl.html"><a href="appendix-1-direct-comparison-to-pwr2ppl.html#example-5.3"><i class="fa fa-check"></i><b>11.1.2</b> Example 5.3</a></li>
+</ul></li>
+<li class="chapter" data-level="11.2" data-path="appendix-1-direct-comparison-to-pwr2ppl.html"><a href="appendix-1-direct-comparison-to-pwr2ppl.html#examples-from-chapter-6"><i class="fa fa-check"></i><b>11.2</b> Examples from Chapter 6</a><ul>
+<li class="chapter" data-level="11.2.1" data-path="appendix-1-direct-comparison-to-pwr2ppl.html"><a href="appendix-1-direct-comparison-to-pwr2ppl.html#example-from-table-6.2"><i class="fa fa-check"></i><b>11.2.1</b> Example from Table 6.2</a></li>
+<li class="chapter" data-level="11.2.2" data-path="appendix-1-direct-comparison-to-pwr2ppl.html"><a href="appendix-1-direct-comparison-to-pwr2ppl.html#example-from-table-6.6"><i class="fa fa-check"></i><b>11.2.2</b> Example from Table 6.6</a></li>
+<li class="chapter" data-level="11.2.3" data-path="appendix-1-direct-comparison-to-pwr2ppl.html"><a href="appendix-1-direct-comparison-to-pwr2ppl.html#example-from-table-6.8"><i class="fa fa-check"></i><b>11.2.3</b> Example from Table 6.8</a></li>
+</ul></li>
+<li class="chapter" data-level="11.3" data-path="appendix-1-direct-comparison-to-pwr2ppl.html"><a href="appendix-1-direct-comparison-to-pwr2ppl.html#example-from-chapter-7"><i class="fa fa-check"></i><b>11.3</b> Example from Chapter 7</a><ul>
+<li class="chapter" data-level="11.3.1" data-path="appendix-1-direct-comparison-to-pwr2ppl.html"><a href="appendix-1-direct-comparison-to-pwr2ppl.html#from-table-7.2"><i class="fa fa-check"></i><b>11.3.1</b> From Table 7.2</a></li>
+</ul></li>
+</ul></li>
+<li class="chapter" data-level="12" data-path="appendix-2-direct-comparison-to-morepower.html"><a href="appendix-2-direct-comparison-to-morepower.html"><i class="fa fa-check"></i><b>12</b> Appendix 2: Direct Comparison to MOREpower</a></li>
+<li class="divider"></li>
+<li><a href="https://github.com/rstudio/bookdown" target="blank">Published with bookdown</a></li>
+
+</ul>
+
+      </nav>
+    </div>
+
+    <div class="book-body">
+      <div class="body-inner">
+        <div class="book-header" role="navigation">
+          <h1>
+            <i class="fa fa-circle-o-notch fa-spin"></i><a href="./">The Superpower R Package: Capabilities and Validation</a>
+          </h1>
+        </div>
+
+        <div class="page-wrapper" tabindex="-1" role="main">
+          <div class="page-inner">
+
+            <section class="normal" id="section-">
+<div id="appendix-2-direct-comparison-to-morepower" class="section level1">
+<h1><span class="header-section-number">Chapter 12</span> Appendix 2: Direct Comparison to MOREpower</h1>
+<p>MOREpower 6.0 by Jamie I. D. Campbell is standalone software for power analysis for ANOVA, t-tests, correlations, and tests of proportions. It outperforms G*power, in that it allows researchers to perform power analyses for a much wider range of designs. It allows a maximum of 9 levels per factor. Users can solve for N, power or effect size. An ANOVA effect size may be specified in terms of the effect-related variance explained (partial eta-squared) or in terms of a test statistic (F, mean square treatment [MST], or t).</p>
+<p>Compared to Superpower, it does not provide all tests at once, it does not provide simple comparisons, it does not incorporate corrections for multiple comparisons, and it does not allow users to enter the means, sd’s, and correlations.</p>
+<p>We can replicate the independent t-test example in MOREpower:</p>
+<pre class="sourceCode r"><code class="sourceCode r">string &lt;-<span class="st"> &quot;2b&quot;</span>
+n &lt;-<span class="st"> </span><span class="dv">100</span>
+mu &lt;-<span class="st"> </span><span class="kw">c</span>(<span class="dv">24</span>, <span class="fl">26.2</span>)
+sd &lt;-<span class="st"> </span><span class="fl">6.4</span>
+labelnames &lt;-<span class="st"> </span><span class="kw">c</span>(<span class="st">&quot;condition&quot;</span>, <span class="st">&quot;control&quot;</span>, <span class="st">&quot;pet&quot;</span>) <span class="co">#</span>
+<span class="co"># the label names should be in the order of the means specified above.</span>
+design_result &lt;-<span class="st"> </span><span class="kw">ANOVA_design</span>(<span class="dt">design =</span> string,
+                              <span class="dt">n =</span> n,
+                              <span class="dt">mu =</span> mu,
+                              <span class="dt">sd =</span> sd,
+                              <span class="dt">labelnames =</span> labelnames)
+alpha_level &lt;-<span class="st"> </span><span class="fl">0.05</span>
+
+exact_result &lt;-<span class="st"> </span><span class="kw">ANOVA_exact</span>(design_result,
+                            <span class="dt">alpha_level =</span> alpha_level,
+                            <span class="dt">verbose =</span> <span class="ot">TRUE</span>)</code></pre>
+<pre><code>## Power and Effect sizes for ANOVA tests
+##           power partial_eta_squared cohen_f non_centrality
+## condition 67.69               0.029  0.1727         5.9082
+## 
+## Power and Effect sizes for contrasts
+##                                   power effect_size
+## p_condition_control_condition_pet 67.69      0.3437</code></pre>
+<pre class="sourceCode r"><code class="sourceCode r">exact_result<span class="op">$</span>main_result<span class="op">$</span>partial_eta_squared</code></pre>
+<pre><code>## [1] 0.029</code></pre>
+<pre class="sourceCode r"><code class="sourceCode r">exact_result<span class="op">$</span>main_result<span class="op">$</span>power</code></pre>
+<pre><code>## [1] 67.69</code></pre>
+<p><img src="screenshots/morepower_1.png" /></p>
+<p>We see the power estimates almost perfectly align with MOREpower if we enter partial eta-squared of 0.02897482, sample = 200 (MOREpower requires entering the total N, not N per condition).</p>
+<p>We can also replicate the dependent t-test example in MOREpower.</p>
+<pre class="sourceCode r"><code class="sourceCode r">K &lt;-<span class="st"> </span><span class="dv">2</span>
+n &lt;-<span class="st"> </span><span class="dv">34</span>
+sd &lt;-<span class="st"> </span><span class="dv">1</span>
+r &lt;-<span class="st"> </span><span class="fl">0.5</span>
+alpha =<span class="st"> </span><span class="fl">0.05</span>
+f &lt;-<span class="st"> </span><span class="fl">0.25</span>
+f2 &lt;-<span class="st"> </span>f<span class="op">^</span><span class="dv">2</span>
+ES &lt;-<span class="st"> </span>f2<span class="op">/</span>(f2 <span class="op">+</span><span class="st"> </span><span class="dv">1</span>)
+ES</code></pre>
+<pre><code>## [1] 0.05882353</code></pre>
+<pre class="sourceCode r"><code class="sourceCode r">mu &lt;-<span class="st"> </span><span class="kw">mu_from_ES</span>(<span class="dt">K =</span> K, <span class="dt">ES =</span> ES)
+design =<span class="st"> </span><span class="kw">paste</span>(K,<span class="st">&quot;w&quot;</span>,<span class="dt">sep =</span> <span class="st">&quot;&quot;</span>)
+labelnames &lt;-<span class="st"> </span><span class="kw">c</span>(<span class="st">&quot;speed&quot;</span>, <span class="st">&quot;fast&quot;</span>, <span class="st">&quot;slow&quot;</span>)
+
+design_result &lt;-<span class="st"> </span><span class="kw">ANOVA_design</span>(<span class="dt">design =</span> design,
+                   <span class="dt">n =</span> n, 
+                   <span class="dt">mu =</span> mu, 
+                   <span class="dt">sd =</span> sd, 
+                   <span class="dt">r =</span> r, 
+                   <span class="dt">labelnames =</span> labelnames)
+
+alpha_level &lt;-<span class="st"> </span><span class="fl">0.05</span>
+
+exact_result &lt;-<span class="st"> </span><span class="kw">ANOVA_exact</span>(design_result,
+                            <span class="dt">alpha_level =</span> alpha_level,
+                            <span class="dt">verbose =</span> <span class="ot">TRUE</span>)</code></pre>
+<pre><code>## Power and Effect sizes for ANOVA tests
+##       power partial_eta_squared cohen_f non_centrality
+## speed 80.78              0.2048  0.5075            8.5
+## 
+## Power and Effect sizes for contrasts
+##                         power effect_size
+## p_speed_fast_speed_slow 80.78         0.5</code></pre>
+<pre class="sourceCode r"><code class="sourceCode r">exact_result<span class="op">$</span>main_result<span class="op">$</span>partial_eta_squared</code></pre>
+<pre><code>## [1] 0.2048</code></pre>
+<pre class="sourceCode r"><code class="sourceCode r">exact_result<span class="op">$</span>main_result<span class="op">$</span>power</code></pre>
+<pre><code>## [1] 80.78</code></pre>
+<p><img src="screenshots/morepower_2.png" /></p>
+<p>We can also replicate the 3-group within ANOVA example in MOREpower.</p>
+<pre class="sourceCode r"><code class="sourceCode r">K &lt;-<span class="st"> </span><span class="dv">3</span>
+n &lt;-<span class="st"> </span><span class="dv">20</span>
+sd &lt;-<span class="st"> </span><span class="dv">1</span>
+r &lt;-<span class="st"> </span><span class="fl">0.8</span>
+alpha =<span class="st"> </span><span class="fl">0.05</span>
+f &lt;-<span class="st"> </span><span class="fl">0.25</span>
+f2 &lt;-<span class="st"> </span>f<span class="op">^</span><span class="dv">2</span>
+ES &lt;-<span class="st"> </span>f2 <span class="op">/</span><span class="st"> </span>(f2 <span class="op">+</span><span class="st"> </span><span class="dv">1</span>)
+ES</code></pre>
+<pre><code>## [1] 0.05882353</code></pre>
+<pre class="sourceCode r"><code class="sourceCode r">mu &lt;-<span class="st"> </span><span class="kw">mu_from_ES</span>(<span class="dt">K =</span> K, <span class="dt">ES =</span> ES)
+
+design =<span class="st"> </span><span class="kw">paste</span>(K, <span class="st">&quot;w&quot;</span>, <span class="dt">sep =</span> <span class="st">&quot;&quot;</span>)
+labelnames &lt;-<span class="st"> </span><span class="kw">c</span>(<span class="st">&quot;speed&quot;</span>, <span class="st">&quot;fast&quot;</span>, <span class="st">&quot;medium&quot;</span>, <span class="st">&quot;slow&quot;</span>)
+design_result &lt;-<span class="st"> </span><span class="kw">ANOVA_design</span>(<span class="dt">design =</span> design,
+                   <span class="dt">n =</span> n, 
+                   <span class="dt">mu =</span> mu, 
+                   <span class="dt">sd =</span> sd, 
+                   <span class="dt">r =</span> r, 
+                   <span class="dt">labelnames =</span> labelnames)
+
+alpha_level &lt;-<span class="st"> </span><span class="fl">0.05</span>
+
+exact_result &lt;-<span class="st"> </span><span class="kw">ANOVA_exact</span>(design_result,
+                            <span class="dt">alpha_level =</span> alpha_level,
+                            <span class="dt">verbose =</span> <span class="ot">TRUE</span>)</code></pre>
+<pre><code>## Power and Effect sizes for ANOVA tests
+##       power partial_eta_squared cohen_f non_centrality
+## speed 96.92              0.3304  0.7024          18.75
+## 
+## Power and Effect sizes for contrasts
+##                           power effect_size
+## p_speed_fast_speed_medium 53.79      0.4841
+## p_speed_fast_speed_slow   98.39      0.9682
+## p_speed_medium_speed_slow 53.79      0.4841</code></pre>
+<pre class="sourceCode r"><code class="sourceCode r"><span class="co">#MSE, for MOREpower</span>
+exact_result[[<span class="st">&quot;aov_result&quot;</span>]][[<span class="st">&quot;anova_table&quot;</span>]]</code></pre>
+<pre><code>## Anova Table (Type 3 tests)
+## 
+## Response: y
+##       num Df den Df MSE     F    pes    Pr(&gt;F)    
+## speed      2     38 0.2 9.375 0.3304 0.0004904 ***
+## ---
+## Signif. codes:  0 &#39;***&#39; 0.001 &#39;**&#39; 0.01 &#39;*&#39; 0.05 &#39;.&#39; 0.1 &#39; &#39; 1</code></pre>
+<pre class="sourceCode r"><code class="sourceCode r"><span class="co">#POWER</span>
+exact_result<span class="op">$</span>main_result<span class="op">$</span>power</code></pre>
+<pre><code>## [1] 96.92</code></pre>
+<p><img src="screenshots/morepower_3.png" /></p>
+<p>We can reproduce the 2x2 ANOVA example in MOREpower.</p>
+<pre class="sourceCode r"><code class="sourceCode r">mu =<span class="st"> </span><span class="kw">c</span>(<span class="dv">700</span>, <span class="dv">670</span>, <span class="dv">670</span>, <span class="dv">700</span>) 
+sigma =<span class="st"> </span><span class="dv">150</span>  <span class="co"># population standard deviation</span>
+n &lt;-<span class="st"> </span><span class="dv">25</span>
+sd &lt;-<span class="st"> </span><span class="dv">150</span>
+r &lt;-<span class="st"> </span><span class="fl">0.75</span>
+string =<span class="st"> &quot;2w*2w&quot;</span>
+alpha_level &lt;-<span class="st"> </span><span class="fl">0.05</span>
+labelnames =<span class="st"> </span><span class="kw">c</span>(<span class="st">&quot;age&quot;</span>, <span class="st">&quot;old&quot;</span>, <span class="st">&quot;young&quot;</span>, <span class="st">&quot;color&quot;</span>, <span class="st">&quot;blue&quot;</span>, <span class="st">&quot;red&quot;</span>)
+design_result &lt;-<span class="st"> </span><span class="kw">ANOVA_design</span>(<span class="dt">design =</span> string,
+                              <span class="dt">n =</span> n, 
+                              <span class="dt">mu =</span> mu, 
+                              <span class="dt">sd =</span> sd, 
+                              <span class="dt">r =</span> r, 
+                              <span class="dt">labelnames =</span> labelnames)
+
+simulation_result &lt;-<span class="st"> </span><span class="kw">ANOVA_exact</span>(design_result, 
+                                 <span class="dt">alpha_level =</span> alpha_level, 
+                                 <span class="dt">verbose =</span> <span class="ot">TRUE</span>)</code></pre>
+<pre><code>## Power and Effect sizes for ANOVA tests
+##           power partial_eta_squared cohen_f non_centrality
+## age         5.0              0.0000  0.0000              0
+## color       5.0              0.0000  0.0000              0
+## age:color  48.4              0.1429  0.4082              4
+## 
+## Power and Effect sizes for contrasts
+##                                            power effect_size
+## p_age_old_color_blue_age_old_color_red      27.4     -0.2828
+## p_age_old_color_blue_age_young_color_blue   27.4     -0.2828
+## p_age_old_color_blue_age_young_color_red     5.0      0.0000
+## p_age_old_color_red_age_young_color_blue     5.0      0.0000
+## p_age_old_color_red_age_young_color_red     27.4      0.2828
+## p_age_young_color_blue_age_young_color_red  27.4      0.2828</code></pre>
+<pre class="sourceCode r"><code class="sourceCode r">simulation_result<span class="op">$</span>main_result<span class="op">$</span>partial_eta_squared[<span class="dv">3</span>]</code></pre>
+<pre><code>## [1] 0.1429</code></pre>
+<p>This result reproduces the analysis in MOREpower, for a 2x2 within design, with a sample of 25, and eta-squared of 0.1428571.</p>
+<p><img src="screenshots/morepower_4.png" /></p>
+<p>Let’s replicate the 2x2x2 full between analysis (total N = 400, effects sizes differ for each test):</p>
+<pre class="sourceCode r"><code class="sourceCode r"><span class="co"># With 2x2x2 designs,</span>
+<span class="co"># the names for paired comparisons can become very long.</span>
+<span class="co"># So here I abbreviate terms:</span>
+<span class="co"># Size, Color, and Cognitive Load, have values:</span>
+<span class="co"># b = big, s = small, g = green,</span>
+<span class="co"># r = red, pres = present, abs = absent.</span>
+labelnames &lt;-<span class="st"> </span><span class="kw">c</span>(<span class="st">&quot;Size&quot;</span>, <span class="st">&quot;b&quot;</span>, <span class="st">&quot;s&quot;</span>, <span class="st">&quot;Color&quot;</span>, <span class="st">&quot;g&quot;</span>, <span class="st">&quot;r&quot;</span>,
+                <span class="st">&quot;Load&quot;</span>, <span class="st">&quot;pres&quot;</span>, <span class="st">&quot;abs&quot;</span>) <span class="co">#</span>
+design_result &lt;-<span class="st"> </span><span class="kw">ANOVA_design</span>(<span class="dt">design =</span> <span class="st">&quot;2b*2b*2b&quot;</span>,
+                              <span class="co">#sample size per group</span>
+                              <span class="dt">n =</span> <span class="dv">50</span>,
+                              <span class="co">#pattern of means</span>
+                              <span class="dt">mu =</span> <span class="kw">c</span>(<span class="dv">2</span>, <span class="dv">2</span>, <span class="dv">6</span>, <span class="dv">1</span>, <span class="dv">6</span>, <span class="dv">6</span>, <span class="dv">1</span>, <span class="dv">8</span>),
+                              <span class="dt">sd =</span> <span class="dv">10</span>, <span class="co">#standard deviation</span>
+                              <span class="dt">labelnames =</span> labelnames)
+
+exact_result &lt;-<span class="st"> </span><span class="kw">ANOVA_exact</span>(design_result,
+                            <span class="dt">alpha_level =</span> alpha_level,
+                            <span class="dt">verbose =</span> <span class="ot">TRUE</span>)</code></pre>
+<pre><code>## Power and Effect sizes for ANOVA tests
+##                 power partial_eta_squared cohen_f non_centrality
+## Size            70.33              0.0157  0.1263           6.25
+## Color            5.00              0.0000  0.0000           0.00
+## Load             7.90              0.0006  0.0253           0.25
+## Size:Color      32.17              0.0057  0.0758           2.25
+## Size:Load       84.91              0.0224  0.1515           9.00
+## Color:Load       7.90              0.0006  0.0253           0.25
+## Size:Color:Load 84.91              0.0224  0.1515           9.00
+## 
+## Power and Effect sizes for contrasts
+##                                                     power effect_size
+## p_Size_b_Color_g_Load_pres_Size_b_Color_g_Load_abs   5.00         0.0
+## p_Size_b_Color_g_Load_pres_Size_b_Color_r_Load_pres 50.82         0.4
+## p_Size_b_Color_g_Load_pres_Size_b_Color_r_Load_abs   7.85        -0.1
+## p_Size_b_Color_g_Load_pres_Size_s_Color_g_Load_pres 50.82         0.4
+## p_Size_b_Color_g_Load_pres_Size_s_Color_g_Load_abs  50.82         0.4
+## p_Size_b_Color_g_Load_pres_Size_s_Color_r_Load_pres  7.85        -0.1
+## p_Size_b_Color_g_Load_pres_Size_s_Color_r_Load_abs  84.39         0.6
+## p_Size_b_Color_g_Load_abs_Size_b_Color_r_Load_pres  50.82         0.4
+## p_Size_b_Color_g_Load_abs_Size_b_Color_r_Load_abs    7.85        -0.1
+## p_Size_b_Color_g_Load_abs_Size_s_Color_g_Load_pres  50.82         0.4
+## p_Size_b_Color_g_Load_abs_Size_s_Color_g_Load_abs   50.82         0.4
+## p_Size_b_Color_g_Load_abs_Size_s_Color_r_Load_pres   7.85        -0.1
+## p_Size_b_Color_g_Load_abs_Size_s_Color_r_Load_abs   84.39         0.6
+## p_Size_b_Color_r_Load_pres_Size_b_Color_r_Load_abs  69.69        -0.5
+## p_Size_b_Color_r_Load_pres_Size_s_Color_g_Load_pres  5.00         0.0
+## p_Size_b_Color_r_Load_pres_Size_s_Color_g_Load_abs   5.00         0.0
+## p_Size_b_Color_r_Load_pres_Size_s_Color_r_Load_pres 69.69        -0.5
+## p_Size_b_Color_r_Load_pres_Size_s_Color_r_Load_abs  16.77         0.2
+## p_Size_b_Color_r_Load_abs_Size_s_Color_g_Load_pres  69.69         0.5
+## p_Size_b_Color_r_Load_abs_Size_s_Color_g_Load_abs   69.69         0.5
+## p_Size_b_Color_r_Load_abs_Size_s_Color_r_Load_pres   5.00         0.0
+## p_Size_b_Color_r_Load_abs_Size_s_Color_r_Load_abs   93.39         0.7
+## p_Size_s_Color_g_Load_pres_Size_s_Color_g_Load_abs   5.00         0.0
+## p_Size_s_Color_g_Load_pres_Size_s_Color_r_Load_pres 69.69        -0.5
+## p_Size_s_Color_g_Load_pres_Size_s_Color_r_Load_abs  16.77         0.2
+## p_Size_s_Color_g_Load_abs_Size_s_Color_r_Load_pres  69.69        -0.5
+## p_Size_s_Color_g_Load_abs_Size_s_Color_r_Load_abs   16.77         0.2
+## p_Size_s_Color_r_Load_pres_Size_s_Color_r_Load_abs  93.39         0.7</code></pre>
+<pre class="sourceCode r"><code class="sourceCode r">exact_result<span class="op">$</span>main_result<span class="op">$</span>partial_eta_squared</code></pre>
+<pre><code>## [1] 0.0157 0.0000 0.0006 0.0057 0.0224 0.0006 0.0224</code></pre>
+<p>This result is nicely reproduced in MOREpower, both for the 2x2 effects, and the 2x2x2 between effects.</p>
+<p><img src="screenshots/morepower_5.png" /></p>
+<p>And finally, let’s replicate the 2x2 full within analysis.</p>
+<pre class="sourceCode r"><code class="sourceCode r">mu =<span class="st"> </span><span class="kw">c</span>(<span class="dv">2</span>,<span class="dv">1</span>,<span class="dv">4</span>,<span class="dv">2</span>)
+n &lt;-<span class="st"> </span><span class="dv">20</span>
+sd &lt;-<span class="st"> </span><span class="dv">5</span>
+r &lt;-<span class="st"> </span><span class="kw">c</span>(
+  <span class="fl">0.8</span>, <span class="fl">0.5</span>, <span class="fl">0.4</span>,
+  <span class="fl">0.4</span>, <span class="fl">0.5</span>,
+  <span class="fl">0.8</span>
+)
+string =<span class="st"> &quot;2w*2w&quot;</span>
+labelnames =<span class="st"> </span><span class="kw">c</span>(<span class="st">&quot;A&quot;</span>, <span class="st">&quot;a1&quot;</span>, <span class="st">&quot;a2&quot;</span>, <span class="st">&quot;B&quot;</span>, <span class="st">&quot;b1&quot;</span>, <span class="st">&quot;b2&quot;</span>)
+design_result &lt;-<span class="st"> </span><span class="kw">ANOVA_design</span>(<span class="dt">design =</span> string,
+                              <span class="dt">n =</span> n,
+                              <span class="dt">mu =</span> mu,
+                              <span class="dt">sd =</span> sd,
+                              <span class="dt">r =</span> r,
+                              <span class="dt">labelnames =</span> labelnames)
+exact_result &lt;-<span class="st"> </span><span class="kw">ANOVA_exact</span>(design_result,
+                            <span class="dt">alpha_level =</span> alpha_level,
+                            <span class="dt">verbose =</span> <span class="ot">TRUE</span>)</code></pre>
+<pre><code>## Power and Effect sizes for ANOVA tests
+##     power partial_eta_squared cohen_f non_centrality
+## A   26.92              0.0952  0.3244              2
+## B   64.23              0.2400  0.5620              6
+## A:B 26.92              0.0952  0.3244              2
+## 
+## Power and Effect sizes for contrasts
+##                       power effect_size
+## p_A_a1_B_b1_A_a1_B_b2 26.92     -0.3162
+## p_A_a1_B_b1_A_a2_B_b1 39.70      0.4000
+## p_A_a1_B_b1_A_a2_B_b2  5.00      0.0000
+## p_A_a1_B_b2_A_a2_B_b1 64.23      0.5477
+## p_A_a1_B_b2_A_a2_B_b2 13.60      0.2000
+## p_A_a2_B_b1_A_a2_B_b2 76.52     -0.6325</code></pre>
+<pre class="sourceCode r"><code class="sourceCode r">exact_result<span class="op">$</span>main_result<span class="op">$</span>partial_eta_squared</code></pre>
+<pre><code>## [1] 0.0952 0.2400 0.0952</code></pre>
+<pre class="sourceCode r"><code class="sourceCode r">exact_result<span class="op">$</span>main_result<span class="op">$</span>power</code></pre>
+<pre><code>## [1] 26.92 64.23 26.92</code></pre>
+<p>This result is also reproduced in MOREpower, both for the main effect, and the 2x2 within interaction effect.</p>
+<p><img src="screenshots/morepower_6.png" /></p>
+
+</div>
+            </section>
+
+          </div>
+        </div>
+      </div>
+<a href="appendix-1-direct-comparison-to-pwr2ppl.html" class="navigation navigation-prev navigation-unique" aria-label="Previous page"><i class="fa fa-angle-left"></i></a>
+
+    </div>
+  </div>
+<script src="libs/gitbook-2.6.7/js/app.min.js"></script>
+<script src="libs/gitbook-2.6.7/js/lunr.js"></script>
+<script src="libs/gitbook-2.6.7/js/plugin-search.js"></script>
+<script src="libs/gitbook-2.6.7/js/plugin-sharing.js"></script>
+<script src="libs/gitbook-2.6.7/js/plugin-fontsettings.js"></script>
+<script src="libs/gitbook-2.6.7/js/plugin-bookdown.js"></script>
+<script src="libs/gitbook-2.6.7/js/jquery.highlight.js"></script>
+<script>
+gitbook.require(["gitbook"], function(gitbook) {
+gitbook.start({
+"sharing": {
+"github": false,
+"facebook": true,
+"twitter": true,
+"google": false,
+"linkedin": false,
+"weibo": false,
+"instapaper": false,
+"vk": false,
+"all": ["facebook", "google", "twitter", "linkedin", "weibo", "instapaper"]
+},
+"fontsettings": {
+"theme": "white",
+"family": "sans",
+"size": 2
+},
+"edit": {
+"link": null,
+"text": null
+},
+"history": {
+"link": null,
+"text": null
+},
+"download": ["SuperpowerValidation.pdf", "SuperpowerValidation.epub"],
+"toc": {
+"collapse": "subsection"
+}
+});
+});
+</script>
+
+<!-- dynamically load mathjax for compatibility with self-contained -->
+<script>
+  (function () {
+    var script = document.createElement("script");
+    script.type = "text/javascript";
+    var src = "true";
+    if (src === "" || src === "true") src = "https://mathjax.rstudio.com/latest/MathJax.js?config=TeX-MML-AM_CHTML";
+    if (location.protocol !== "file:" && /^https?:/.test(src))
+      src = src.replace(/^https?:/, '');
+    script.src = src;
+    document.getElementsByTagName("head")[0].appendChild(script);
+  })();
+</script>
+</body>
+
+</html>

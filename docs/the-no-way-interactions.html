@@ -1,0 +1,848 @@
+<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml" lang="" xml:lang="">
+<head>
+
+  <meta charset="utf-8" />
+  <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+  <title>Chapter 6 The ‘No-Way’ Interactions | The Superpower R Package: Capabilities and Validation</title>
+  <meta name="description" content="This is a book describing the capabilities of the Superpower R package." />
+  <meta name="generator" content="bookdown 0.10 and GitBook 2.6.7" />
+
+  <meta property="og:title" content="Chapter 6 The ‘No-Way’ Interactions | The Superpower R Package: Capabilities and Validation" />
+  <meta property="og:type" content="book" />
+  
+  
+  <meta property="og:description" content="This is a book describing the capabilities of the Superpower R package." />
+  
+
+  <meta name="twitter:card" content="summary" />
+  <meta name="twitter:title" content="Chapter 6 The ‘No-Way’ Interactions | The Superpower R Package: Capabilities and Validation" />
+  
+  <meta name="twitter:description" content="This is a book describing the capabilities of the Superpower R package." />
+  
+
+<meta name="author" content="Aaron R. Caldwell &amp; Daniël Lakens" />
+
+
+<meta name="date" content="2019-09-18" />
+
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <meta name="apple-mobile-web-app-capable" content="yes" />
+  <meta name="apple-mobile-web-app-status-bar-style" content="black" />
+  
+  
+<link rel="prev" href="power-for-three-way-interactions.html">
+<link rel="next" href="effect-of-varying-designs-on-power.html">
+<script src="libs/jquery-2.2.3/jquery.min.js"></script>
+<link href="libs/gitbook-2.6.7/css/style.css" rel="stylesheet" />
+<link href="libs/gitbook-2.6.7/css/plugin-table.css" rel="stylesheet" />
+<link href="libs/gitbook-2.6.7/css/plugin-bookdown.css" rel="stylesheet" />
+<link href="libs/gitbook-2.6.7/css/plugin-highlight.css" rel="stylesheet" />
+<link href="libs/gitbook-2.6.7/css/plugin-search.css" rel="stylesheet" />
+<link href="libs/gitbook-2.6.7/css/plugin-fontsettings.css" rel="stylesheet" />
+
+
+
+
+
+
+
+<script src="libs/kePrint-0.0.1/kePrint.js"></script>
+
+
+<style type="text/css">
+a.sourceLine { display: inline-block; line-height: 1.25; }
+a.sourceLine { pointer-events: none; color: inherit; text-decoration: inherit; }
+a.sourceLine:empty { height: 1.2em; }
+.sourceCode { overflow: visible; }
+code.sourceCode { white-space: pre; position: relative; }
+div.sourceCode { margin: 1em 0; }
+pre.sourceCode { margin: 0; }
+@media screen {
+div.sourceCode { overflow: auto; }
+}
+@media print {
+code.sourceCode { white-space: pre-wrap; }
+a.sourceLine { text-indent: -1em; padding-left: 1em; }
+}
+pre.numberSource a.sourceLine
+  { position: relative; left: -4em; }
+pre.numberSource a.sourceLine::before
+  { content: attr(title);
+    position: relative; left: -1em; text-align: right; vertical-align: baseline;
+    border: none; pointer-events: all; display: inline-block;
+    -webkit-touch-callout: none; -webkit-user-select: none;
+    -khtml-user-select: none; -moz-user-select: none;
+    -ms-user-select: none; user-select: none;
+    padding: 0 4px; width: 4em;
+    color: #aaaaaa;
+  }
+pre.numberSource { margin-left: 3em; border-left: 1px solid #aaaaaa;  padding-left: 4px; }
+div.sourceCode
+  {  }
+@media screen {
+a.sourceLine::before { text-decoration: underline; }
+}
+code span.al { color: #ff0000; font-weight: bold; } /* Alert */
+code span.an { color: #60a0b0; font-weight: bold; font-style: italic; } /* Annotation */
+code span.at { color: #7d9029; } /* Attribute */
+code span.bn { color: #40a070; } /* BaseN */
+code span.bu { } /* BuiltIn */
+code span.cf { color: #007020; font-weight: bold; } /* ControlFlow */
+code span.ch { color: #4070a0; } /* Char */
+code span.cn { color: #880000; } /* Constant */
+code span.co { color: #60a0b0; font-style: italic; } /* Comment */
+code span.cv { color: #60a0b0; font-weight: bold; font-style: italic; } /* CommentVar */
+code span.do { color: #ba2121; font-style: italic; } /* Documentation */
+code span.dt { color: #902000; } /* DataType */
+code span.dv { color: #40a070; } /* DecVal */
+code span.er { color: #ff0000; font-weight: bold; } /* Error */
+code span.ex { } /* Extension */
+code span.fl { color: #40a070; } /* Float */
+code span.fu { color: #06287e; } /* Function */
+code span.im { } /* Import */
+code span.in { color: #60a0b0; font-weight: bold; font-style: italic; } /* Information */
+code span.kw { color: #007020; font-weight: bold; } /* Keyword */
+code span.op { color: #666666; } /* Operator */
+code span.ot { color: #007020; } /* Other */
+code span.pp { color: #bc7a00; } /* Preprocessor */
+code span.sc { color: #4070a0; } /* SpecialChar */
+code span.ss { color: #bb6688; } /* SpecialString */
+code span.st { color: #4070a0; } /* String */
+code span.va { color: #19177c; } /* Variable */
+code span.vs { color: #4070a0; } /* VerbatimString */
+code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warning */
+</style>
+
+<link rel="stylesheet" href="style.css" type="text/css" />
+</head>
+
+<body>
+
+
+
+  <div class="book without-animation with-summary font-size-2 font-family-1" data-basepath=".">
+
+    <div class="book-summary">
+      <nav role="navigation">
+
+<ul class="summary">
+<li><a href="./">Superpower</a></li>
+
+<li class="divider"></li>
+<li class="chapter" data-level="" data-path="index.html"><a href="index.html"><i class="fa fa-check"></i>Preface</a></li>
+<li class="chapter" data-level="1" data-path="the-experimental-design.html"><a href="the-experimental-design.html"><i class="fa fa-check"></i><b>1</b> The Experimental Design</a><ul>
+<li class="chapter" data-level="1.1" data-path="the-experimental-design.html"><a href="the-experimental-design.html#anova_design-function"><i class="fa fa-check"></i><b>1.1</b> ANOVA_design function</a><ul>
+<li class="chapter" data-level="1.1.1" data-path="the-experimental-design.html"><a href="the-experimental-design.html#specifying-the-design-using-design"><i class="fa fa-check"></i><b>1.1.1</b> Specifying the design using ‘design’</a></li>
+<li class="chapter" data-level="1.1.2" data-path="the-experimental-design.html"><a href="the-experimental-design.html#specifying-the-means-using-mu"><i class="fa fa-check"></i><b>1.1.2</b> Specifying the means using ‘mu’</a></li>
+<li class="chapter" data-level="1.1.3" data-path="the-experimental-design.html"><a href="the-experimental-design.html#specifying-label-names"><i class="fa fa-check"></i><b>1.1.3</b> Specifying label names</a></li>
+<li class="chapter" data-level="1.1.4" data-path="the-experimental-design.html"><a href="the-experimental-design.html#specifying-the-correlation"><i class="fa fa-check"></i><b>1.1.4</b> Specifying the correlation</a></li>
+<li class="chapter" data-level="1.1.5" data-path="the-experimental-design.html"><a href="the-experimental-design.html#specifying-the-sample-size"><i class="fa fa-check"></i><b>1.1.5</b> Specifying the sample size</a></li>
+<li class="chapter" data-level="1.1.6" data-path="the-experimental-design.html"><a href="the-experimental-design.html#specifying-the-standard-deviation"><i class="fa fa-check"></i><b>1.1.6</b> Specifying the standard deviation</a></li>
+</ul></li>
+</ul></li>
+<li class="chapter" data-level="2" data-path="one-way-anova.html"><a href="one-way-anova.html"><i class="fa fa-check"></i><b>2</b> One-Way ANOVA</a><ul>
+<li class="chapter" data-level="2.1" data-path="one-way-anova.html"><a href="one-way-anova.html#part-1"><i class="fa fa-check"></i><b>2.1</b> Part 1</a><ul>
+<li class="chapter" data-level="2.1.1" data-path="one-way-anova.html"><a href="one-way-anova.html#two-conditions"><i class="fa fa-check"></i><b>2.1.1</b> Two conditions</a></li>
+</ul></li>
+<li class="chapter" data-level="2.2" data-path="one-way-anova.html"><a href="one-way-anova.html#part-2"><i class="fa fa-check"></i><b>2.2</b> Part 2</a><ul>
+<li class="chapter" data-level="2.2.1" data-path="one-way-anova.html"><a href="one-way-anova.html#three-conditions"><i class="fa fa-check"></i><b>2.2.1</b> Three conditions</a></li>
+<li class="chapter" data-level="2.2.2" data-path="one-way-anova.html"><a href="one-way-anova.html#power-for-simple-effects"><i class="fa fa-check"></i><b>2.2.2</b> Power for simple effects</a></li>
+</ul></li>
+<li class="chapter" data-level="2.3" data-path="one-way-anova.html"><a href="one-way-anova.html#part-3"><i class="fa fa-check"></i><b>2.3</b> Part 3</a><ul>
+<li class="chapter" data-level="2.3.1" data-path="one-way-anova.html"><a href="one-way-anova.html#three-conditions-replication"><i class="fa fa-check"></i><b>2.3.1</b> Three conditions replication</a></li>
+<li class="chapter" data-level="2.3.2" data-path="one-way-anova.html"><a href="one-way-anova.html#variation-1"><i class="fa fa-check"></i><b>2.3.2</b> Variation 1</a></li>
+<li class="chapter" data-level="2.3.3" data-path="one-way-anova.html"><a href="one-way-anova.html#three-conditions-replication-1"><i class="fa fa-check"></i><b>2.3.3</b> Three conditions replication</a></li>
+<li class="chapter" data-level="2.3.4" data-path="one-way-anova.html"><a href="one-way-anova.html#variation-2"><i class="fa fa-check"></i><b>2.3.4</b> Variation 2</a></li>
+<li class="chapter" data-level="2.3.5" data-path="one-way-anova.html"><a href="one-way-anova.html#three-conditions-replication-2"><i class="fa fa-check"></i><b>2.3.5</b> Three conditions replication</a></li>
+</ul></li>
+<li class="chapter" data-level="2.4" data-path="one-way-anova.html"><a href="one-way-anova.html#effect-size-estimates-for-one-way-anova"><i class="fa fa-check"></i><b>2.4</b> Effect Size Estimates for One-Way ANOVA</a><ul>
+<li class="chapter" data-level="2.4.1" data-path="one-way-anova.html"><a href="one-way-anova.html#three-conditions-small-effect-size"><i class="fa fa-check"></i><b>2.4.1</b> Three conditions, small effect size</a></li>
+<li class="chapter" data-level="2.4.2" data-path="one-way-anova.html"><a href="one-way-anova.html#four-conditions-medium-effect-size"><i class="fa fa-check"></i><b>2.4.2</b> Four conditions, medium effect size</a></li>
+<li class="chapter" data-level="2.4.3" data-path="one-way-anova.html"><a href="one-way-anova.html#two-conditions-large-effect-size"><i class="fa fa-check"></i><b>2.4.3</b> Two conditions, large effect size</a></li>
+</ul></li>
+</ul></li>
+<li class="chapter" data-level="3" data-path="repeated-measures-anova.html"><a href="repeated-measures-anova.html"><i class="fa fa-check"></i><b>3</b> Repeated Measures ANOVA</a><ul>
+<li class="chapter" data-level="3.1" data-path="repeated-measures-anova.html"><a href="repeated-measures-anova.html#part-1-1"><i class="fa fa-check"></i><b>3.1</b> Part 1</a><ul>
+<li class="chapter" data-level="3.1.1" data-path="repeated-measures-anova.html"><a href="repeated-measures-anova.html#two-conditions-medium-effect-size"><i class="fa fa-check"></i><b>3.1.1</b> Two conditions, medium effect size</a></li>
+</ul></li>
+<li class="chapter" data-level="3.2" data-path="repeated-measures-anova.html"><a href="repeated-measures-anova.html#part-2-1"><i class="fa fa-check"></i><b>3.2</b> Part 2</a><ul>
+<li class="chapter" data-level="3.2.1" data-path="repeated-measures-anova.html"><a href="repeated-measures-anova.html#the-relation-between-cohens-f-and-cohens-d"><i class="fa fa-check"></i><b>3.2.1</b> The relation between Cohen’s *f and Cohen’s d</a></li>
+<li class="chapter" data-level="3.2.2" data-path="repeated-measures-anova.html"><a href="repeated-measures-anova.html#three-within-conditions-medium-effect-size"><i class="fa fa-check"></i><b>3.2.2</b> Three within conditions, medium effect size</a></li>
+</ul></li>
+<li class="chapter" data-level="3.3" data-path="repeated-measures-anova.html"><a href="repeated-measures-anova.html#part-3-1"><i class="fa fa-check"></i><b>3.3</b> Part 3</a><ul>
+<li class="chapter" data-level="3.3.1" data-path="repeated-measures-anova.html"><a href="repeated-measures-anova.html#reproducing-brysbaerts-examples"><i class="fa fa-check"></i><b>3.3.1</b> Reproducing Brysbaert’s Examples</a></li>
+<li class="chapter" data-level="3.3.2" data-path="repeated-measures-anova.html"><a href="repeated-measures-anova.html#reproducing-brysbaert-variation-1-changing-correlation"><i class="fa fa-check"></i><b>3.3.2</b> Reproducing Brysbaert Variation 1: Changing Correlation</a></li>
+</ul></li>
+<li class="chapter" data-level="3.4" data-path="repeated-measures-anova.html"><a href="repeated-measures-anova.html#part-4"><i class="fa fa-check"></i><b>3.4</b> Part 4</a><ul>
+<li class="chapter" data-level="3.4.1" data-path="repeated-measures-anova.html"><a href="repeated-measures-anova.html#two-by-two-anova-within-within-design"><i class="fa fa-check"></i><b>3.4.1</b> Two by two ANOVA, within-within design</a></li>
+<li class="chapter" data-level="3.4.2" data-path="repeated-measures-anova.html"><a href="repeated-measures-anova.html#examine-variation-of-means-and-correlation"><i class="fa fa-check"></i><b>3.4.2</b> Examine variation of means and correlation</a></li>
+</ul></li>
+</ul></li>
+<li class="chapter" data-level="4" data-path="mixed-anova.html"><a href="mixed-anova.html"><i class="fa fa-check"></i><b>4</b> Mixed ANOVA</a><ul>
+<li class="chapter" data-level="4.1" data-path="mixed-anova.html"><a href="mixed-anova.html#two-by-two-anova-within-between-design"><i class="fa fa-check"></i><b>4.1</b> Two by two ANOVA, within-between design</a><ul>
+<li class="chapter" data-level="4.1.1" data-path="mixed-anova.html"><a href="mixed-anova.html#two-by-two-anova-within-between-design-variation-1"><i class="fa fa-check"></i><b>4.1.1</b> Two by two ANOVA, within-between design Variation 1</a></li>
+</ul></li>
+</ul></li>
+<li class="chapter" data-level="5" data-path="power-for-three-way-interactions.html"><a href="power-for-three-way-interactions.html"><i class="fa fa-check"></i><b>5</b> Power for Three-way Interactions</a></li>
+<li class="chapter" data-level="6" data-path="the-no-way-interactions.html"><a href="the-no-way-interactions.html"><i class="fa fa-check"></i><b>6</b> The ‘No-Way’ Interactions</a></li>
+<li class="chapter" data-level="7" data-path="effect-of-varying-designs-on-power.html"><a href="effect-of-varying-designs-on-power.html"><i class="fa fa-check"></i><b>7</b> Effect of Varying Designs on Power</a><ul>
+<li class="chapter" data-level="7.1" data-path="effect-of-varying-designs-on-power.html"><a href="effect-of-varying-designs-on-power.html#within-designs"><i class="fa fa-check"></i><b>7.1</b> Within Designs</a></li>
+</ul></li>
+<li class="chapter" data-level="8" data-path="error-control-in-exploratory-anova.html"><a href="error-control-in-exploratory-anova.html"><i class="fa fa-check"></i><b>8</b> Error Control in Exploratory ANOVA</a></li>
+<li class="chapter" data-level="9" data-path="analytic-power-functions.html"><a href="analytic-power-functions.html"><i class="fa fa-check"></i><b>9</b> Analytic Power Functions</a><ul>
+<li class="chapter" data-level="9.1" data-path="analytic-power-functions.html"><a href="analytic-power-functions.html#one-way-between-subjects-anova"><i class="fa fa-check"></i><b>9.1</b> One-Way Between Subjects ANOVA</a></li>
+<li class="chapter" data-level="9.2" data-path="analytic-power-functions.html"><a href="analytic-power-functions.html#two-way-between-subject-interaction"><i class="fa fa-check"></i><b>9.2</b> Two-way Between Subject Interaction</a></li>
+<li class="chapter" data-level="9.3" data-path="analytic-power-functions.html"><a href="analytic-power-functions.html#x3-between-subject-anova"><i class="fa fa-check"></i><b>9.3</b> 3x3 Between Subject ANOVA</a></li>
+<li class="chapter" data-level="9.4" data-path="analytic-power-functions.html"><a href="analytic-power-functions.html#two-by-two-anova-within-design"><i class="fa fa-check"></i><b>9.4</b> Two by two ANOVA, within design</a></li>
+</ul></li>
+<li class="chapter" data-level="10" data-path="power-curve.html"><a href="power-curve.html"><i class="fa fa-check"></i><b>10</b> Power Curve</a><ul>
+<li class="chapter" data-level="10.1" data-path="power-curve.html"><a href="power-curve.html#explore-increase-in-effect-size-for-moderated-interactions."><i class="fa fa-check"></i><b>10.1</b> Explore increase in effect size for moderated interactions.</a></li>
+<li class="chapter" data-level="10.2" data-path="power-curve.html"><a href="power-curve.html#explore-increase-in-effect-size-for-cross-over-interactions."><i class="fa fa-check"></i><b>10.2</b> Explore increase in effect size for cross-over interactions.</a></li>
+<li class="chapter" data-level="10.3" data-path="power-curve.html"><a href="power-curve.html#explore-increase-in-correlation-in-moderated-interactions."><i class="fa fa-check"></i><b>10.3</b> Explore increase in correlation in moderated interactions.</a></li>
+<li class="chapter" data-level="10.4" data-path="power-curve.html"><a href="power-curve.html#increasing-correlation-in-on-factor-decreases-power-in-second-factor"><i class="fa fa-check"></i><b>10.4</b> Increasing correlation in on factor decreases power in second factor</a></li>
+</ul></li>
+<li class="chapter" data-level="11" data-path="appendix-1-direct-comparison-to-pwr2ppl.html"><a href="appendix-1-direct-comparison-to-pwr2ppl.html"><i class="fa fa-check"></i><b>11</b> Appendix 1: Direct Comparison to pwr2ppl</a><ul>
+<li class="chapter" data-level="11.1" data-path="appendix-1-direct-comparison-to-pwr2ppl.html"><a href="appendix-1-direct-comparison-to-pwr2ppl.html#examples-from-chapter-5"><i class="fa fa-check"></i><b>11.1</b> Examples from Chapter 5</a><ul>
+<li class="chapter" data-level="11.1.1" data-path="appendix-1-direct-comparison-to-pwr2ppl.html"><a href="appendix-1-direct-comparison-to-pwr2ppl.html#example-5.15.2"><i class="fa fa-check"></i><b>11.1.1</b> Example 5.1/5.2</a></li>
+<li class="chapter" data-level="11.1.2" data-path="appendix-1-direct-comparison-to-pwr2ppl.html"><a href="appendix-1-direct-comparison-to-pwr2ppl.html#example-5.3"><i class="fa fa-check"></i><b>11.1.2</b> Example 5.3</a></li>
+</ul></li>
+<li class="chapter" data-level="11.2" data-path="appendix-1-direct-comparison-to-pwr2ppl.html"><a href="appendix-1-direct-comparison-to-pwr2ppl.html#examples-from-chapter-6"><i class="fa fa-check"></i><b>11.2</b> Examples from Chapter 6</a><ul>
+<li class="chapter" data-level="11.2.1" data-path="appendix-1-direct-comparison-to-pwr2ppl.html"><a href="appendix-1-direct-comparison-to-pwr2ppl.html#example-from-table-6.2"><i class="fa fa-check"></i><b>11.2.1</b> Example from Table 6.2</a></li>
+<li class="chapter" data-level="11.2.2" data-path="appendix-1-direct-comparison-to-pwr2ppl.html"><a href="appendix-1-direct-comparison-to-pwr2ppl.html#example-from-table-6.6"><i class="fa fa-check"></i><b>11.2.2</b> Example from Table 6.6</a></li>
+<li class="chapter" data-level="11.2.3" data-path="appendix-1-direct-comparison-to-pwr2ppl.html"><a href="appendix-1-direct-comparison-to-pwr2ppl.html#example-from-table-6.8"><i class="fa fa-check"></i><b>11.2.3</b> Example from Table 6.8</a></li>
+</ul></li>
+<li class="chapter" data-level="11.3" data-path="appendix-1-direct-comparison-to-pwr2ppl.html"><a href="appendix-1-direct-comparison-to-pwr2ppl.html#example-from-chapter-7"><i class="fa fa-check"></i><b>11.3</b> Example from Chapter 7</a><ul>
+<li class="chapter" data-level="11.3.1" data-path="appendix-1-direct-comparison-to-pwr2ppl.html"><a href="appendix-1-direct-comparison-to-pwr2ppl.html#from-table-7.2"><i class="fa fa-check"></i><b>11.3.1</b> From Table 7.2</a></li>
+</ul></li>
+</ul></li>
+<li class="chapter" data-level="12" data-path="appendix-2-direct-comparison-to-morepower.html"><a href="appendix-2-direct-comparison-to-morepower.html"><i class="fa fa-check"></i><b>12</b> Appendix 2: Direct Comparison to MOREpower</a></li>
+<li class="divider"></li>
+<li><a href="https://github.com/rstudio/bookdown" target="blank">Published with bookdown</a></li>
+
+</ul>
+
+      </nav>
+    </div>
+
+    <div class="book-body">
+      <div class="body-inner">
+        <div class="book-header" role="navigation">
+          <h1>
+            <i class="fa fa-circle-o-notch fa-spin"></i><a href="./">The Superpower R Package: Capabilities and Validation</a>
+          </h1>
+        </div>
+
+        <div class="page-wrapper" tabindex="-1" role="main">
+          <div class="page-inner">
+
+            <section class="normal" id="section-">
+<div id="the-no-way-interactions" class="section level1">
+<h1><span class="header-section-number">Chapter 6</span> The ‘No-Way’ Interactions</h1>
+<p>In the 17th Data Colada blog post titled <a href="http://datacolada.org/17">No-way Interactions</a> Uri Simonsohn discusses how a moderated interaction (the effect is there in one condition, but disappears in another condition) requires at least twice as many subjects per cell as a study that simply aims to show the simple effect. For example, see the plot below. Assume the score on the vertical axis is desire for fruit, as a function of the fruit that is available (an apple or a banana) and how hungry people are (not, or very). We see there is a difference between the participants desire for a banana compared to an apple, but only for participants who are very hungry. The point that is made is that you need twice as many participants in each cell to have power for the interaction, as you need for the simple effect.</p>
+<pre class="sourceCode r"><code class="sourceCode r">string &lt;-<span class="st"> &quot;2b*2b&quot;</span>
+n &lt;-<span class="st"> </span><span class="dv">20</span>
+<span class="co"># All means are equal - so there is no real difference.</span>
+<span class="co"># Enter means in the order that matches the labels below.</span>
+mu &lt;-<span class="st"> </span><span class="kw">c</span>(<span class="dv">20</span>, <span class="dv">20</span>, <span class="dv">20</span>, <span class="dv">25</span>) 
+sd &lt;-<span class="st"> </span><span class="fl">0.5</span>
+labelnames &lt;-<span class="st"> </span><span class="kw">c</span>(<span class="st">&quot;fruit&quot;</span>, <span class="st">&quot;apple&quot;</span>, <span class="st">&quot;banana&quot;</span>, 
+                <span class="st">&quot;hunger&quot;</span>, <span class="st">&quot;no hunger&quot;</span>, <span class="st">&quot;very hungry&quot;</span>) <span class="co">#</span>
+<span class="co"># the label names should be in the order of the means specified above.</span>
+design_result &lt;-<span class="st"> </span><span class="kw">ANOVA_design</span>(<span class="dt">design =</span> string,
+                   <span class="dt">n =</span> n, 
+                   <span class="dt">mu =</span> mu, 
+                   <span class="dt">sd =</span> sd, 
+                   <span class="dt">labelnames =</span> labelnames,
+                   <span class="dt">plot =</span> <span class="ot">TRUE</span>)</code></pre>
+<p><img src="SuperpowerValidation_files/figure-html/unnamed-chunk-201-1.png" width="672" /></p>
+<p>We can reproduce the simulations in the Data Colada blog post, using the original code.</p>
+<pre class="sourceCode r"><code class="sourceCode r"><span class="co">#R-Code</span>
+<span class="co">#</span>
+<span class="co">#Written by Uri Simonsohn, March 2014</span>
+<span class="co">#</span>
+<span class="co">#</span>
+<span class="co">#In DataColada[17] </span>
+<span class="co"># I propose that 2x2 interaction studies need 2x the sample size</span>
+<span class="co">#http://datacolada.org/2014/03/10/17-no-way-interactions</span>
+<span class="co">#In a companion ,pdf I show the simple math behind it</span>
+<span class="co">#</span>
+<span class="co">#</span>
+<span class="co">#Simulations are often more persuasive than math, so here it goes.</span>
+<span class="co">#I run simulations that compute power for 2 and 4 cell design, </span>
+<span class="co"># the latter testing the interaction</span>
+<span class="co">###############################################################################</span>
+<span class="co">#Create function that computes power of Studies 1 and 2, </span>
+<span class="co"># where Study 1  has 2 cells and tests a simple effect</span>
+<span class="co">#and Study 2 has 4 cells and tests the interaction</span>
+colada17 =<span class="st"> </span><span class="cf">function</span>(d1,d2,n1,n2,simtot)
+  {
+  <span class="co">#n1: sample size, per cell, study 1</span>
+  <span class="co">#n2: sample size, per cell, study 2</span>
+  <span class="co">#d1: simple effect M1-M2</span>
+  <span class="co">#d2: moderated effect M3-M4, </span>
+  <span class="co"># full elimination of effect implies d2=0</span>
+  <span class="co">#simtot: how many simulations to run</span>
+  <span class="co">#Here we will store results</span>
+      p1 =<span class="st"> </span><span class="kw">c</span>()    <span class="co">#p-values for Study 1</span>
+      p2 =<span class="st"> </span><span class="kw">c</span>()    <span class="co">#p-values for Study 2</span>
+  <span class="cf">for</span> (i <span class="cf">in</span> <span class="dv">1</span><span class="op">:</span>simtot) {
+    <span class="co">#draw data 4 samples</span>
+    y1 =<span class="st"> </span><span class="kw">rnorm</span>(<span class="dt">n =</span> <span class="kw">max</span>(n1, n2), <span class="dt">mean =</span> d1)
+    y2 =<span class="st"> </span><span class="kw">rnorm</span>(<span class="dt">n =</span> <span class="kw">max</span>(n1, n2))
+    y3 =<span class="st"> </span><span class="kw">rnorm</span>(<span class="dt">n =</span> <span class="kw">max</span>(n1, n2), <span class="dt">mean =</span> d2)
+    y4 =<span class="st"> </span><span class="kw">rnorm</span>(<span class="dt">n =</span> <span class="kw">max</span>(n1, n2))
+    
+    <span class="co">#GET DATA READY FOR ANOVA  </span>
+    y =<span class="st"> </span><span class="kw">c</span>(y1, y2, y3, y4)          <span class="co">#the d.v.</span>
+    nrep =<span class="st"> </span><span class="kw">rep</span>(n2, <span class="dv">4</span>)
+    A =<span class="st"> </span><span class="kw">rep</span>(<span class="kw">c</span>(<span class="dv">1</span>, <span class="dv">1</span>, <span class="dv">0</span>, <span class="dv">0</span>), <span class="dt">times =</span> nrep)
+    B =<span class="st"> </span><span class="kw">rep</span>(<span class="kw">c</span>(<span class="dv">1</span>, <span class="dv">0</span>, <span class="dv">1</span>, <span class="dv">0</span>), <span class="dt">times =</span> nrep)
+    
+    <span class="co">#STUDY 1</span>
+      <span class="co">#Do a t-test on the first n1 observations</span>
+      p1.k =<span class="st"> </span><span class="kw">t.test</span>(y1[<span class="dv">1</span><span class="op">:</span>n1], y2[<span class="dv">1</span><span class="op">:</span>n1], <span class="dt">var.equal =</span> <span class="ot">TRUE</span>)<span class="op">$</span>p.value  
+    
+    <span class="co">#STUDY 2</span>
+      <span class="co">#Do anova, keep p-value of the interaction</span>
+      p2.k =<span class="st"> </span><span class="kw">anova</span>(<span class="kw">lm</span>(y <span class="op">~</span><span class="st"> </span>A <span class="op">*</span><span class="st"> </span>B))[<span class="st">&quot;A:B&quot;</span>, <span class="st">&quot;Pr(&gt;F)&quot;</span>]             
+        
+      <span class="co">#Store the results</span>
+      p1 =<span class="st"> </span><span class="kw">c</span>(p1, p1.k)
+      p2 =<span class="st"> </span><span class="kw">c</span>(p2, p2.k)
+    
+      }
+  
+  <span class="co">#What share off comparisons are significant</span>
+      <span class="co">#Simple test using estimate of variance from 2 cells only</span>
+      power1 =<span class="st"> </span><span class="kw">sum</span>(p1 <span class="op">&lt;=</span><span class="st"> </span><span class="fl">.05</span>) <span class="op">/</span><span class="st"> </span>simtot  
+      <span class="co">#Interaction</span>
+      power2 =<span class="st"> </span><span class="kw">sum</span>(p2 <span class="op">&lt;=</span><span class="st"> </span><span class="fl">.05</span>) <span class="op">/</span><span class="st"> </span>simtot  
+  
+    <span class="kw">cat</span>(<span class="st">&quot;</span><span class="ch">\n</span><span class="st">Study 1 is powered to:&quot;</span>,<span class="kw">round</span>(power1,<span class="dv">2</span>))
+    <span class="kw">cat</span>(<span class="st">&quot;</span><span class="ch">\n</span><span class="st">Study 2 is powered to:&quot;</span>,<span class="kw">round</span>(power2,<span class="dv">2</span>))
+  
+    }
+    
+    
+<span class="co">#Same power for 2n regardless of n and d</span></code></pre>
+<pre class="sourceCode r"><code class="sourceCode r">  <span class="kw">colada17</span>(<span class="dt">simtot =</span> <span class="dv">2000</span>, <span class="dt">n1 =</span> <span class="dv">20</span>, <span class="dt">n2 =</span> <span class="dv">40</span>, <span class="dt">d1 =</span> <span class="dv">1</span>, <span class="dt">d2 =</span> <span class="dv">0</span>)  </code></pre>
+<pre class="sourceCode r"><code class="sourceCode r">  <span class="kw">colada17</span>(<span class="dt">simtot =</span> <span class="dv">2000</span>, <span class="dt">n1 =</span> <span class="dv">50</span>, <span class="dt">n2 =</span> <span class="dv">100</span>, <span class="dt">d1 =</span> <span class="fl">.3</span>, <span class="dt">d2 =</span> <span class="dv">0</span>)</code></pre>
+<pre class="sourceCode r"><code class="sourceCode r">  <span class="kw">colada17</span>(<span class="dt">simtot =</span> <span class="dv">2000</span>, <span class="dt">n1 =</span> <span class="dv">150</span>, <span class="dt">n2 =</span> <span class="dv">300</span>, <span class="dt">d1 =</span> <span class="fl">.25</span>, <span class="dt">d2 =</span> <span class="dv">0</span>)</code></pre>
+<pre class="sourceCode r"><code class="sourceCode r"><span class="co">#Need 4n if effect is 70% attenuated</span>
+  <span class="kw">colada17</span>(<span class="dt">simtot =</span> <span class="dv">2000</span>, <span class="dt">n1 =</span> <span class="dv">25</span>, <span class="dt">n2 =</span> <span class="dv">100</span>, <span class="dt">d1 =</span> <span class="fl">.5</span>, <span class="dt">d2 =</span> <span class="fl">.3</span> <span class="op">*</span><span class="st"> </span><span class="fl">.5</span>)</code></pre>
+<pre class="sourceCode r"><code class="sourceCode r">  <span class="kw">colada17</span>(<span class="dt">simtot =</span> <span class="dv">2000</span>, <span class="dt">n1 =</span> <span class="dv">50</span>, <span class="dt">n2 =</span> <span class="dv">200</span>, <span class="dt">d1 =</span> <span class="fl">.5</span>, <span class="dt">d2 =</span> <span class="fl">.3</span> <span class="op">*</span><span class="st"> </span><span class="fl">.5</span>)</code></pre>
+<pre class="sourceCode r"><code class="sourceCode r">  <span class="kw">colada17</span>(<span class="dt">simtot =</span> <span class="dv">2000</span>, <span class="dt">n1 =</span> <span class="dv">22</span>, <span class="dt">n2 =</span> <span class="dv">88</span>, <span class="dt">d1 =</span> <span class="fl">.41</span>, <span class="dt">d2 =</span> <span class="fl">.3</span> <span class="op">*</span><span class="st"> </span><span class="fl">.41</span>)</code></pre>
+<pre class="sourceCode r"><code class="sourceCode r"><span class="co">#underpowered if run with the same n</span>
+<span class="kw">colada17</span>(<span class="dt">simtot =</span> nsims, <span class="dt">n1 =</span> <span class="dv">20</span>, <span class="dt">n2 =</span> <span class="dv">20</span>, <span class="dt">d1 =</span> <span class="dv">1</span>, <span class="dt">d2 =</span> <span class="dv">0</span>)  </code></pre>
+<p>And we can reproduce the results using the ANOVA_exact function.</p>
+<pre class="sourceCode r"><code class="sourceCode r"><span class="co">#Study 1</span>
+string &lt;-<span class="st"> &quot;2b*2b&quot;</span>
+n &lt;-<span class="st"> </span><span class="dv">10</span>
+<span class="co"># All means are equal - so there is no real difference.</span>
+<span class="co"># Enter means in the order that matches the labels below.</span>
+mu &lt;-<span class="st"> </span><span class="kw">c</span>(<span class="dv">1</span>, <span class="dv">2</span>, <span class="dv">1</span>, <span class="dv">2</span>) 
+sd &lt;-<span class="st"> </span><span class="dv">1</span>
+
+<span class="co"># the label names should be in the order of the means specified above.</span>
+design_result &lt;-<span class="st"> </span><span class="kw">ANOVA_design</span>(<span class="dt">design =</span> string,
+                   <span class="dt">n =</span> n, 
+                   <span class="dt">mu =</span> mu, 
+                   <span class="dt">sd =</span> sd, 
+                   <span class="dt">plot =</span> <span class="ot">TRUE</span>)</code></pre>
+<p><img src="SuperpowerValidation_files/figure-html/unnamed-chunk-217-1.png" width="672" /></p>
+<pre class="sourceCode r"><code class="sourceCode r">alpha_level &lt;-<span class="st"> </span><span class="fl">0.05</span> <span class="co">#We set the alpha level at 0.05. </span>
+
+exact_result &lt;-<span class="st"> </span><span class="kw">ANOVA_exact</span>(design_result, 
+                            <span class="dt">alpha_level =</span> alpha_level,
+                            <span class="dt">verbose =</span> <span class="ot">FALSE</span>)
+
+knitr<span class="op">::</span><span class="kw">kable</span>(exact_result<span class="op">$</span>main_results[<span class="dv">2</span>,], 
+             <span class="dt">caption =</span> <span class="st">&quot;ANOVA Results&quot;</span>)<span class="op">%&gt;%</span>
+<span class="st">  </span><span class="kw">kable_styling</span>(<span class="dt">latex_options =</span> <span class="st">&quot;hold_position&quot;</span>)</code></pre>
+<table class="table" style="margin-left: auto; margin-right: auto;">
+<caption>
+<span id="tab:unnamed-chunk-217">Table 6.1: </span>ANOVA Results
+</caption>
+<thead>
+<tr>
+<th style="text-align:left;">
+</th>
+<th style="text-align:right;">
+power
+</th>
+<th style="text-align:right;">
+partial_eta_squared
+</th>
+<th style="text-align:right;">
+cohen_f
+</th>
+<th style="text-align:right;">
+non_centrality
+</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td style="text-align:left;">
+b
+</td>
+<td style="text-align:right;">
+86.8
+</td>
+<td style="text-align:right;">
+0.2174
+</td>
+<td style="text-align:right;">
+0.527
+</td>
+<td style="text-align:right;">
+10
+</td>
+</tr>
+</tbody>
+</table>
+<pre class="sourceCode r"><code class="sourceCode r"><span class="co">#Study 2</span>
+string &lt;-<span class="st"> &quot;2b*2b&quot;</span>
+n &lt;-<span class="st"> </span><span class="dv">20</span>
+<span class="co"># All means are equal - so there is no real difference.</span>
+<span class="co"># Enter means in the order that matches the labels below.</span>
+mu &lt;-<span class="st"> </span><span class="kw">c</span>(<span class="dv">1</span>, <span class="dv">2</span>, <span class="dv">1</span>, <span class="dv">3</span>) 
+sd &lt;-<span class="st"> </span><span class="dv">1</span>
+
+<span class="co"># the label names should be in the order of the means specified above.</span>
+design_result &lt;-<span class="st"> </span><span class="kw">ANOVA_design</span>(<span class="dt">design =</span> string,
+                   <span class="dt">n =</span> n, 
+                   <span class="dt">mu =</span> mu, 
+                   <span class="dt">sd =</span> sd, 
+                   <span class="dt">plot =</span> <span class="ot">TRUE</span>)</code></pre>
+<p><img src="SuperpowerValidation_files/figure-html/unnamed-chunk-217-2.png" width="672" /></p>
+<pre class="sourceCode r"><code class="sourceCode r">alpha_level &lt;-<span class="st"> </span><span class="fl">0.05</span> <span class="co">#We set the alpha level at 0.05. </span>
+
+exact_result &lt;-<span class="st"> </span><span class="kw">ANOVA_exact</span>(design_result, 
+                            <span class="dt">alpha_level =</span> alpha_level,
+                            <span class="dt">verbose =</span> <span class="ot">FALSE</span>)
+
+knitr<span class="op">::</span><span class="kw">kable</span>(exact_result<span class="op">$</span>main_results[<span class="dv">3</span>,], 
+             <span class="dt">caption =</span> <span class="st">&quot;ANOVA Results&quot;</span>)<span class="op">%&gt;%</span>
+<span class="st">  </span><span class="kw">kable_styling</span>(<span class="dt">latex_options =</span> <span class="st">&quot;hold_position&quot;</span>)</code></pre>
+<table class="table" style="margin-left: auto; margin-right: auto;">
+<caption>
+<span id="tab:unnamed-chunk-217">Table 6.1: </span>ANOVA Results
+</caption>
+<thead>
+<tr>
+<th style="text-align:left;">
+</th>
+<th style="text-align:right;">
+power
+</th>
+<th style="text-align:right;">
+partial_eta_squared
+</th>
+<th style="text-align:right;">
+cohen_f
+</th>
+<th style="text-align:right;">
+non_centrality
+</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td style="text-align:left;">
+a:b
+</td>
+<td style="text-align:right;">
+59.79
+</td>
+<td style="text-align:right;">
+0.0617
+</td>
+<td style="text-align:right;">
+0.2565
+</td>
+<td style="text-align:right;">
+5
+</td>
+</tr>
+</tbody>
+</table>
+<p>We see we get the same power for the anova_fruit:hunger interaction and for the simple effect p_fruit_apple_hunger_very hungry_fruit_banana_hunger_very hungry as the simulations by Uri Simonsohn in his blog post.</p>
+<pre class="sourceCode r"><code class="sourceCode r"><span class="co">#Same power for 2n regardless of n and d</span>
+<span class="kw">colada17</span>(<span class="dt">simtot =</span> <span class="dv">10000</span>, <span class="dt">n1 =</span> <span class="dv">20</span>, <span class="dt">n2 =</span> <span class="dv">40</span>, <span class="dt">d1 =</span> <span class="dv">1</span>, <span class="dt">d2 =</span> <span class="dv">0</span>)  
+
+<span class="kw">colada17</span>(<span class="dt">simtot =</span> <span class="dv">10000</span>, <span class="dt">n1 =</span> <span class="dv">20</span>, <span class="dt">n2 =</span> <span class="dv">40</span>, <span class="dt">d1 =</span> <span class="dv">1</span>, <span class="dt">d2 =</span> <span class="dv">0</span>) </code></pre>
+<pre class="sourceCode r"><code class="sourceCode r"><span class="kw">colada17</span>(<span class="dt">simtot =</span> <span class="dv">10000</span>, <span class="dt">n1 =</span> <span class="dv">50</span>, <span class="dt">n2 =</span> <span class="dv">100</span>, <span class="dt">d1 =</span> <span class="fl">.3</span>, <span class="dt">d2 =</span> <span class="dv">0</span>)</code></pre>
+<pre class="sourceCode r"><code class="sourceCode r"><span class="kw">colada17</span>(<span class="dt">simtot =</span> <span class="dv">10000</span>, <span class="dt">n1 =</span> <span class="dv">150</span>, <span class="dt">n2 =</span> <span class="dv">300</span>, <span class="dt">d1 =</span> <span class="fl">.25</span>, <span class="dt">d2 =</span> <span class="dv">0</span>)</code></pre>
+<p>We can also reproduce the last example by adjusting the means and standard deviation. With 150 people, and a Cohen’s d of 0.25 (the difference is 5, the sd 20, so 5/20 = 0.25) we should reproduce the power for the simple effect.</p>
+<pre class="sourceCode r"><code class="sourceCode r">string &lt;-<span class="st"> &quot;2b*2b&quot;</span>
+n &lt;-<span class="st"> </span><span class="dv">150</span>
+mu &lt;-<span class="st"> </span><span class="kw">c</span>(<span class="dv">20</span>, <span class="dv">20</span>, <span class="dv">20</span>, <span class="dv">25</span>) <span class="co">#All means are equal - so there is no real difference.</span>
+<span class="co"># Enter means in the order that matches the labels below.</span>
+sd &lt;-<span class="st"> </span><span class="dv">20</span>
+labelnames &lt;-<span class="st"> </span><span class="kw">c</span>(<span class="st">&quot;fruit&quot;</span>, <span class="st">&quot;apple&quot;</span>, <span class="st">&quot;banana&quot;</span>, 
+                <span class="st">&quot;hunger&quot;</span>, <span class="st">&quot;no hunger&quot;</span>, <span class="st">&quot;very hungry&quot;</span>) <span class="co">#</span>
+<span class="co"># the label names should be in the order of the means specified above.</span>
+design_result &lt;-<span class="st"> </span><span class="kw">ANOVA_design</span>(<span class="dt">design =</span> string,
+                   <span class="dt">n =</span> n, 
+                   <span class="dt">mu =</span> mu, 
+                   <span class="dt">sd =</span> sd, 
+                   <span class="dt">labelnames =</span> labelnames)
+alpha_level &lt;-<span class="st"> </span><span class="fl">0.05</span> <span class="co">#We set the alpha level at 0.05. </span>
+
+exact_result &lt;-<span class="st"> </span><span class="kw">ANOVA_exact</span>(design_result, 
+                            <span class="dt">alpha_level =</span> alpha_level,
+                            <span class="dt">verbose =</span> <span class="ot">FALSE</span>)
+
+knitr<span class="op">::</span><span class="kw">kable</span>(exact_result<span class="op">$</span>main_results[<span class="dv">2</span>,], 
+             <span class="dt">caption =</span> <span class="st">&quot;ANOVA Results&quot;</span>)<span class="op">%&gt;%</span>
+<span class="st">  </span><span class="kw">kable_styling</span>(<span class="dt">latex_options =</span> <span class="st">&quot;hold_position&quot;</span>)</code></pre>
+<table class="table" style="margin-left: auto; margin-right: auto;">
+<caption>
+<span id="tab:unnamed-chunk-224">Table 6.2: </span>ANOVA Results
+</caption>
+<thead>
+<tr>
+<th style="text-align:left;">
+</th>
+<th style="text-align:right;">
+power
+</th>
+<th style="text-align:right;">
+partial_eta_squared
+</th>
+<th style="text-align:right;">
+cohen_f
+</th>
+<th style="text-align:right;">
+non_centrality
+</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td style="text-align:left;">
+hunger
+</td>
+<td style="text-align:right;">
+33.33
+</td>
+<td style="text-align:right;">
+0.0039
+</td>
+<td style="text-align:right;">
+0.0627
+</td>
+<td style="text-align:right;">
+2.3437
+</td>
+</tr>
+</tbody>
+</table>
+<p>And changing the sample size to 300 should reproduce the power for the interaction in the ANOVA.</p>
+<pre class="sourceCode r"><code class="sourceCode r">string &lt;-<span class="st"> &quot;2b*2b&quot;</span>
+n &lt;-<span class="st"> </span><span class="dv">300</span>
+mu &lt;-<span class="st"> </span><span class="kw">c</span>(<span class="dv">20</span>, <span class="dv">20</span>, <span class="dv">20</span>, <span class="dv">25</span>) <span class="co">#All means are equal - so there is no real difference.</span>
+<span class="co"># Enter means in the order that matches the labels below.</span>
+sd &lt;-<span class="st"> </span><span class="dv">20</span>
+labelnames &lt;-<span class="st"> </span><span class="kw">c</span>(<span class="st">&quot;fruit&quot;</span>, <span class="st">&quot;apple&quot;</span>, <span class="st">&quot;banana&quot;</span>, 
+                <span class="st">&quot;hunger&quot;</span>, <span class="st">&quot;no hunger&quot;</span>, <span class="st">&quot;very hungry&quot;</span>) <span class="co">#</span>
+<span class="co"># the label names should be in the order of the means specified above.</span>
+design_result &lt;-<span class="st"> </span><span class="kw">ANOVA_design</span>(<span class="dt">design =</span> string,
+                   <span class="dt">n =</span> n, 
+                   <span class="dt">mu =</span> mu, 
+                   <span class="dt">sd =</span> sd, 
+                   <span class="dt">labelnames =</span> labelnames)
+alpha_level &lt;-<span class="st"> </span><span class="fl">0.05</span> <span class="co">#We set the alpha level at 0.05. </span>
+
+exact_result &lt;-<span class="st"> </span><span class="kw">ANOVA_exact</span>(design_result, <span class="dt">alpha_level =</span> alpha_level)</code></pre>
+<pre><code>## Power and Effect sizes for ANOVA tests
+##              power partial_eta_squared cohen_f non_centrality
+## fruit        58.06              0.0039  0.0626         4.6875
+## hunger       58.06              0.0039  0.0626         4.6875
+## fruit:hunger 58.06              0.0039  0.0626         4.6875
+## 
+## Power and Effect sizes for contrasts
+##                                                                  power
+## p_fruit_apple_hunger_no hunger_fruit_apple_hunger_very hungry     5.00
+## p_fruit_apple_hunger_no hunger_fruit_banana_hunger_no hunger      5.00
+## p_fruit_apple_hunger_no hunger_fruit_banana_hunger_very hungry   86.37
+## p_fruit_apple_hunger_very hungry_fruit_banana_hunger_no hunger    5.00
+## p_fruit_apple_hunger_very hungry_fruit_banana_hunger_very hungry 86.37
+## p_fruit_banana_hunger_no hunger_fruit_banana_hunger_very hungry  86.37
+##                                                                  effect_size
+## p_fruit_apple_hunger_no hunger_fruit_apple_hunger_very hungry           0.00
+## p_fruit_apple_hunger_no hunger_fruit_banana_hunger_no hunger            0.00
+## p_fruit_apple_hunger_no hunger_fruit_banana_hunger_very hungry          0.25
+## p_fruit_apple_hunger_very hungry_fruit_banana_hunger_no hunger          0.00
+## p_fruit_apple_hunger_very hungry_fruit_banana_hunger_very hungry        0.25
+## p_fruit_banana_hunger_no hunger_fruit_banana_hunger_very hungry         0.25</code></pre>
+<pre class="sourceCode r"><code class="sourceCode r">knitr<span class="op">::</span><span class="kw">kable</span>(exact_result<span class="op">$</span>main_results[<span class="dv">3</span>,], 
+             <span class="dt">caption =</span> <span class="st">&quot;ANOVA Results&quot;</span>)<span class="op">%&gt;%</span>
+<span class="st">  </span><span class="kw">kable_styling</span>(<span class="dt">latex_options =</span> <span class="st">&quot;hold_position&quot;</span>)</code></pre>
+<table class="table" style="margin-left: auto; margin-right: auto;">
+<caption>
+<span id="tab:unnamed-chunk-225">Table 6.3: </span>ANOVA Results
+</caption>
+<thead>
+<tr>
+<th style="text-align:left;">
+</th>
+<th style="text-align:right;">
+power
+</th>
+<th style="text-align:right;">
+partial_eta_squared
+</th>
+<th style="text-align:right;">
+cohen_f
+</th>
+<th style="text-align:right;">
+non_centrality
+</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td style="text-align:left;">
+fruit:hunger
+</td>
+<td style="text-align:right;">
+58.06
+</td>
+<td style="text-align:right;">
+0.0039
+</td>
+<td style="text-align:right;">
+0.0626
+</td>
+<td style="text-align:right;">
+4.6875
+</td>
+</tr>
+</tbody>
+</table>
+<p>Now if we look at the power analysis table for the last simulation, we see that the power for the ANOVA is the same for the main effect of fruit, the main effect of hunger, and the main effect of the interaction. All the effect sizes are equal as well. We can understand why if we look at the means in a 2x2 table:</p>
+<pre class="sourceCode r"><code class="sourceCode r">mean_mat &lt;-<span class="st"> </span><span class="kw">t</span>(<span class="kw">matrix</span>(mu, 
+                     <span class="dt">nrow =</span> <span class="dv">2</span>,
+                     <span class="dt">ncol =</span> <span class="dv">2</span>)) <span class="co">#Create a mean matrix</span>
+<span class="kw">rownames</span>(mean_mat) &lt;-<span class="st"> </span><span class="kw">c</span>(<span class="st">&quot;apple&quot;</span>, <span class="st">&quot;banana&quot;</span>)
+<span class="kw">colnames</span>(mean_mat) &lt;-<span class="st"> </span><span class="kw">c</span>(<span class="st">&quot;no hunger&quot;</span>, <span class="st">&quot;very hungry&quot;</span>)
+mean_mat</code></pre>
+<pre><code>##        no hunger very hungry
+## apple         20          20
+## banana        20          25</code></pre>
+<p>The first main effect tests the marginal means if we sum over rows, 22.5 vs 20.</p>
+<pre class="sourceCode r"><code class="sourceCode r"><span class="kw">rowMeans</span>(mean_mat)</code></pre>
+<pre><code>##  apple banana 
+##   20.0   22.5</code></pre>
+<p>The second main effect tests the marginal means over the rows, which is also 22.5 vs 20.</p>
+<pre class="sourceCode r"><code class="sourceCode r"><span class="kw">colMeans</span>(mean_mat)</code></pre>
+<pre><code>##   no hunger very hungry 
+##        20.0        22.5</code></pre>
+<p>The interaction tests whether the average effect of hunger on liking fruit differs in the presence of bananas. In the presence of bananas the effect of hunger on the desireability of fruit is 5 scalepoints. The average effect (that we get from the marginal means) of hunger on fruit desireability is 2.5 (22.5-20). In other words, the interaction tests whether the difference effect between hunger and no hunger is different in the presence of an apple versus in the presence of a banana.</p>
+<p>Mathematically the interaction effect is computed as the difference between a cell mean and the grand mean, the marginal mean in row i and the grand mean, and the marginal mean in column j and grand mean. For example, for the very hungry-banana condition this is 25 (the value in the cell) - (21.25 [the grand mean] + 1.25 [the marginal mean in row 2, 22.5, minus the grand mean of 21.25] + 1.25 [the marginal mean in column 2, 22.5, minus the grand mean of 21.25]). 25 - (21.25 + (22.5-21.25) + (22.5-21.25)) = 1.25.</p>
+<p>We can repeat this for every cell, and get for no hunger-apple: 20 - (21.25 + (20-21.25) + (20-21.25)) = 1.25, for very hungry apple: 20 - (21.25 + (22.5-21.25) + (20-21.25)) = 1.25, and no hunger-banana: 20 - (21.25 + (20-21.25) + (22.5-21.25)) = 1.25. These values are used to calculate the sum of squares.</p>
+<pre class="sourceCode r"><code class="sourceCode r">a1 &lt;-<span class="st"> </span>mean_mat[<span class="dv">1</span>,<span class="dv">1</span>] <span class="op">-</span><span class="st"> </span>(<span class="kw">mean</span>(mean_mat) <span class="op">+</span><span class="st"> </span>
+<span class="st">                         </span>(<span class="kw">mean</span>(mean_mat[<span class="dv">1</span>,]) <span class="op">-</span><span class="st"> </span><span class="kw">mean</span>(mean_mat)) <span class="op">+</span><span class="st"> </span>
+<span class="st">                         </span>(<span class="kw">mean</span>(mean_mat[,<span class="dv">1</span>]) <span class="op">-</span><span class="st"> </span><span class="kw">mean</span>(mean_mat)))
+a2 &lt;-<span class="st"> </span>mean_mat[<span class="dv">1</span>,<span class="dv">2</span>] <span class="op">-</span><span class="st"> </span>(<span class="kw">mean</span>(mean_mat) <span class="op">+</span><span class="st"> </span>
+<span class="st">                         </span>(<span class="kw">mean</span>(mean_mat[<span class="dv">1</span>,]) <span class="op">-</span><span class="st"> </span><span class="kw">mean</span>(mean_mat)) <span class="op">+</span><span class="st"> </span>
+<span class="st">                         </span>(<span class="kw">mean</span>(mean_mat[,<span class="dv">2</span>]) <span class="op">-</span><span class="st"> </span><span class="kw">mean</span>(mean_mat)))
+b1 &lt;-<span class="st"> </span>mean_mat[<span class="dv">2</span>,<span class="dv">1</span>] <span class="op">-</span><span class="st"> </span>(<span class="kw">mean</span>(mean_mat) <span class="op">+</span><span class="st"> </span>
+<span class="st">                         </span>(<span class="kw">mean</span>(mean_mat[<span class="dv">2</span>,]) <span class="op">-</span><span class="st"> </span><span class="kw">mean</span>(mean_mat)) <span class="op">+</span><span class="st"> </span>
+<span class="st">                         </span>(<span class="kw">mean</span>(mean_mat[,<span class="dv">1</span>]) <span class="op">-</span><span class="st"> </span><span class="kw">mean</span>(mean_mat)))
+b2 &lt;-<span class="st"> </span>mean_mat[<span class="dv">2</span>,<span class="dv">2</span>] <span class="op">-</span><span class="st"> </span>(<span class="kw">mean</span>(mean_mat) <span class="op">+</span><span class="st"> </span>
+<span class="st">                         </span>(<span class="kw">mean</span>(mean_mat[<span class="dv">2</span>,]) <span class="op">-</span><span class="st"> </span><span class="kw">mean</span>(mean_mat)) <span class="op">+</span><span class="st"> </span>
+<span class="st">                         </span>(<span class="kw">mean</span>(mean_mat[,<span class="dv">2</span>]) <span class="op">-</span><span class="st"> </span><span class="kw">mean</span>(mean_mat)))
+
+SS_ab &lt;-<span class="st"> </span>n <span class="op">*</span><span class="st"> </span><span class="kw">sum</span>(<span class="kw">c</span>(a1, a2, b1, b2)<span class="op">^</span><span class="dv">2</span>)</code></pre>
+<p>The sum of squares is dependent on the sample size, as can be seen in the code above. The larger the sample size, the larger the sum of squares, and therefore (all else equal) the larger the <em>F</em>-statistic, and the smaller the <em>p</em>-value. We see from the simulations that all three tests have the same effect size, and therefore the same power.</p>
+<p>Interactions can have more power than main effects if the effect size of the interaction is larger than the effect size of the main effects. An example of this is a cross-over interaction. For example, let’s take a 2x2 matrix of means with a crossover interaction:</p>
+<pre class="sourceCode r"><code class="sourceCode r">mu &lt;-<span class="st"> </span><span class="kw">c</span>(<span class="dv">25</span>, <span class="dv">20</span>, <span class="dv">20</span>, <span class="dv">25</span>)
+mean_mat &lt;-<span class="st"> </span><span class="kw">t</span>(<span class="kw">matrix</span>(mu, 
+                     <span class="dt">nrow =</span> <span class="dv">2</span>,
+                     <span class="dt">ncol =</span> <span class="dv">2</span>)) <span class="co">#Create a mean matrix</span>
+<span class="kw">rownames</span>(mean_mat) &lt;-<span class="st"> </span><span class="kw">c</span>(<span class="st">&quot;apple&quot;</span>, <span class="st">&quot;banana&quot;</span>)
+<span class="kw">colnames</span>(mean_mat) &lt;-<span class="st"> </span><span class="kw">c</span>(<span class="st">&quot;no hunger&quot;</span>, <span class="st">&quot;very hungry&quot;</span>)
+mean_mat</code></pre>
+<pre><code>##        no hunger very hungry
+## apple         25          20
+## banana        20          25</code></pre>
+<p>Neither of the main effects is now significant, as the marginal means are 22.5 vs 22.5 for both main effects. The interaction is much stronger, however. We are testing whether the average effect of hunger on the desireability of fruit is different in the presence of bananas. Since the average effect is 0, and the effect of hunger on the desireability of bananas is 5, so the effect size is now twice as large.</p>
+<pre class="sourceCode r"><code class="sourceCode r">string &lt;-<span class="st"> &quot;2b*2b&quot;</span>
+n &lt;-<span class="st"> </span><span class="dv">300</span>
+mu &lt;-<span class="st"> </span><span class="kw">c</span>(<span class="dv">25</span>, <span class="dv">20</span>, <span class="dv">20</span>, <span class="dv">25</span>) <span class="co">#All means are equal - so there is no real difference.</span>
+<span class="co"># Enter means in the order that matches the labels below.</span>
+sd &lt;-<span class="st"> </span><span class="dv">20</span>
+labelnames &lt;-<span class="st"> </span><span class="kw">c</span>(<span class="st">&quot;fruit&quot;</span>, <span class="st">&quot;apple&quot;</span>, <span class="st">&quot;banana&quot;</span>, 
+                <span class="st">&quot;hunger&quot;</span>, <span class="st">&quot;no hunger&quot;</span>, <span class="st">&quot;very hungry&quot;</span>) <span class="co">#</span>
+<span class="co"># the label names should be in the order of the means specified above.</span>
+design_result &lt;-<span class="st"> </span><span class="kw">ANOVA_design</span>(<span class="dt">design =</span> string,
+                   <span class="dt">n =</span> n, 
+                   <span class="dt">mu =</span> mu, 
+                   <span class="dt">sd =</span> sd, 
+                   <span class="dt">labelnames =</span> labelnames)
+alpha_level &lt;-<span class="st"> </span><span class="fl">0.05</span> <span class="co">#We set the alpha level at 0.05. </span>
+
+exact_result &lt;-<span class="st"> </span><span class="kw">ANOVA_exact</span>(design_result, 
+                            <span class="dt">alpha_level =</span> alpha_level,
+                            <span class="dt">verbose =</span> <span class="ot">FALSE</span>)
+
+knitr<span class="op">::</span><span class="kw">kable</span>(exact_result<span class="op">$</span>main_results, 
+             <span class="dt">caption =</span> <span class="st">&quot;ANOVA Results&quot;</span>)<span class="op">%&gt;%</span>
+<span class="st">  </span><span class="kw">kable_styling</span>(<span class="dt">latex_options =</span> <span class="st">&quot;hold_position&quot;</span>)</code></pre>
+<table class="table" style="margin-left: auto; margin-right: auto;">
+<caption>
+<span id="tab:unnamed-chunk-231">Table 6.4: </span>ANOVA Results
+</caption>
+<thead>
+<tr>
+<th style="text-align:left;">
+</th>
+<th style="text-align:right;">
+power
+</th>
+<th style="text-align:right;">
+partial_eta_squared
+</th>
+<th style="text-align:right;">
+cohen_f
+</th>
+<th style="text-align:right;">
+non_centrality
+</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td style="text-align:left;">
+fruit
+</td>
+<td style="text-align:right;">
+5.0
+</td>
+<td style="text-align:right;">
+0.0000
+</td>
+<td style="text-align:right;">
+0.0000
+</td>
+<td style="text-align:right;">
+0.00
+</td>
+</tr>
+<tr>
+<td style="text-align:left;">
+hunger
+</td>
+<td style="text-align:right;">
+5.0
+</td>
+<td style="text-align:right;">
+0.0000
+</td>
+<td style="text-align:right;">
+0.0000
+</td>
+<td style="text-align:right;">
+0.00
+</td>
+</tr>
+<tr>
+<td style="text-align:left;">
+fruit:hunger
+</td>
+<td style="text-align:right;">
+99.1
+</td>
+<td style="text-align:right;">
+0.0154
+</td>
+<td style="text-align:right;">
+0.1252
+</td>
+<td style="text-align:right;">
+18.75
+</td>
+</tr>
+</tbody>
+</table>
+<p>We can also reproduce the power analysis using the analytic function:</p>
+<pre class="sourceCode r"><code class="sourceCode r">power_analytic &lt;-<span class="st"> </span><span class="kw">power_twoway_between</span>(design_result)
+power_analytic<span class="op">$</span>power_A</code></pre>
+<pre><code>## [1] 5</code></pre>
+<pre class="sourceCode r"><code class="sourceCode r">power_analytic<span class="op">$</span>power_B</code></pre>
+<pre><code>## [1] 5</code></pre>
+<pre class="sourceCode r"><code class="sourceCode r">power_analytic<span class="op">$</span>power_AB</code></pre>
+<pre><code>## [1] 99.10259</code></pre>
+
+</div>
+            </section>
+
+          </div>
+        </div>
+      </div>
+<a href="power-for-three-way-interactions.html" class="navigation navigation-prev " aria-label="Previous page"><i class="fa fa-angle-left"></i></a>
+<a href="effect-of-varying-designs-on-power.html" class="navigation navigation-next " aria-label="Next page"><i class="fa fa-angle-right"></i></a>
+    </div>
+  </div>
+<script src="libs/gitbook-2.6.7/js/app.min.js"></script>
+<script src="libs/gitbook-2.6.7/js/lunr.js"></script>
+<script src="libs/gitbook-2.6.7/js/plugin-search.js"></script>
+<script src="libs/gitbook-2.6.7/js/plugin-sharing.js"></script>
+<script src="libs/gitbook-2.6.7/js/plugin-fontsettings.js"></script>
+<script src="libs/gitbook-2.6.7/js/plugin-bookdown.js"></script>
+<script src="libs/gitbook-2.6.7/js/jquery.highlight.js"></script>
+<script>
+gitbook.require(["gitbook"], function(gitbook) {
+gitbook.start({
+"sharing": {
+"github": false,
+"facebook": true,
+"twitter": true,
+"google": false,
+"linkedin": false,
+"weibo": false,
+"instapaper": false,
+"vk": false,
+"all": ["facebook", "google", "twitter", "linkedin", "weibo", "instapaper"]
+},
+"fontsettings": {
+"theme": "white",
+"family": "sans",
+"size": 2
+},
+"edit": {
+"link": null,
+"text": null
+},
+"history": {
+"link": null,
+"text": null
+},
+"download": ["SuperpowerValidation.pdf", "SuperpowerValidation.epub"],
+"toc": {
+"collapse": "subsection"
+}
+});
+});
+</script>
+
+<!-- dynamically load mathjax for compatibility with self-contained -->
+<script>
+  (function () {
+    var script = document.createElement("script");
+    script.type = "text/javascript";
+    var src = "true";
+    if (src === "" || src === "true") src = "https://mathjax.rstudio.com/latest/MathJax.js?config=TeX-MML-AM_CHTML";
+    if (location.protocol !== "file:" && /^https?:/.test(src))
+      src = src.replace(/^https?:/, '');
+    script.src = src;
+    document.getElementsByTagName("head")[0].appendChild(script);
+  })();
+</script>
+</body>
+
+</html>

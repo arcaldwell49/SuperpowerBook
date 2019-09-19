@@ -154,6 +154,7 @@ knitr::kable(exact_result$main_results,
 The simulation confirms that for the *F*-test for the ANOVA we have 90% power. This is also what g*power tells us what would happen based on a post-hoc power analysis with an f of 0.2303587, 2 groups, 200 participants in total (100 in each between subject condition), and an alpha of 5%. 
 
 ![](screenshots/gpower_8.png)
+
 If we return to our expected means, how many participants do we need for sufficient power? Given the expected difference and standard deviation, d = 0.34375, and f = 0.171875. We can perform an a-priori power analysis for this simple case, which tells us we need 179 participants in each group (we can't split people in parts, and thus always round a power analysis upward), or 358 in total.
 
 ```{r}
@@ -212,8 +213,6 @@ knitr::kable(exact_result$main_results,
              caption = "Exact ANOVA Result")%>%
   kable_styling(latex_options = "hold_position")
 ```
-
-
 
 We stored the result from the power analysis in an object. This allows us to request plots (which are not printed automatically) showing the *p*-value distribution. If we request `simulation_result$plot1` we get the p-value distribution for the ANOVA:
 
