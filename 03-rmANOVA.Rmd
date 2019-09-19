@@ -202,14 +202,17 @@ The relation between Cohen's d or dz and Cohen's *f* becomes more difficult when
 I have created a custom function that will calculate f from d, based on a specification of one of the three patterns of means. Our pattern is most similar (but not identical) to a maximum variability pattern (two means are high, one is lower). So we could attempt to calculate f from d (0.5555556), by calculating d from the largest and smallest mean:
 
 ```{r}
-#This function allows you to calculate f, d and eta squared following Cohen, 1988, p 277
+#This function allows you to calculate f, d and eta squared 
+#following Cohen, 1988, p 277
 # From Cohen, 1988, p 277
 # The patterns are:
-# I. Minimum variability: one mean at each end of d, the remaining k- 2 means all at the midpoint.
+# I. Minimum variability: one mean at each end of d, 
+#the remaining k- 2 means all at the midpoint.
 # 2. Intermediate variability: the k means equally spaced over d.
 # 3. Maximum variability: the means all at the end points of d.
 
-# For each of these patterns, there is a fixed relationship between f and d for any given number of means, k.
+# For each of these patterns, 
+# there is a fixed relationship between f and d for any given number of means, k.
 
 # Pattern 1. For any given range of means, d, the minimum standard
 # deviation, f1, results when the remaining k - 2 means are concentrated at
@@ -229,26 +232,26 @@ I have created a custom function that will calculate f from d, based on a specif
 # the other, use formula (8.2.13).
 
 calc_f_d_eta <- function(mu, sd, variability){
-  if(variability == "minimum"){
+  if (variability == "minimum") {
     k = length(mu)
-    d <- (max(mu)-min(mu))/sd
-    f <- d*sqrt(1/(2*k))
-    f2 <- f^2
-    ES <- f2/(f2+1)
+    d <- (max(mu) - min(mu)) / sd
+    f <- d * sqrt(1 / (2 * k))
+    f2 <- f ^ 2
+    ES <- f2 / (f2 + 1)
   }
-  if(variability == "medium"){
-    k = length(mu) 
-    d <- (max(mu)-min(mu))/sd
-    f <- (d/2)*sqrt((k+1)/(3*(k-1)))
-    f2 <- f^2
-    ES <- f2/(f2+1)
-  }
-  if(variability == "maximum"){
+  if (variability == "medium") {
     k = length(mu)
-    d <- (max(mu)-min(mu))/sd
-    f <- ifelse(k %% 2 == 0, .5*d, d*(sqrt(k^2-1)/(2*k)))
-    f2 <- f^2
-    ES <- f2/(f2+1)
+    d <- (max(mu) - min(mu)) / sd
+    f <- (d / 2) * sqrt((k + 1) / (3 * (k - 1)))
+    f2 <- f ^ 2
+    ES <- f2 / (f2 + 1)
+  }
+  if (variability == "maximum") {
+    k = length(mu)
+    d <- (max(mu) - min(mu)) / sd
+    f <- ifelse(k %% 2 == 0, .5 * d, d * (sqrt(k ^ 2 - 1) / (2 * k)))
+    f2 <- f ^ 2
+    ES <- f2 / (f2 + 1)
   }
   invisible(list(mu = mu,
                  sd = sd,
@@ -306,7 +309,7 @@ simulation_result <- ANOVA_power(design_result,
 
 ```{r echo = FALSE}
 knitr::kable(simulation_result_3.5$main_results,
-             caption = "Simulated ANOVA Result")%>%
+             caption = "Simulated ANOVA Result") %>%
   kable_styling(latex_options = "hold_position")
 ```
 
@@ -319,7 +322,7 @@ exact_result <- ANOVA_exact(design_result,
 
 ```{r echo = FALSE}
 knitr::kable(exact_result$main_results,
-             caption = "Exact ANOVA Result")%>%
+             caption = "Exact ANOVA Result") %>%
   kable_styling(latex_options = "hold_position")
 ```
 
@@ -605,7 +608,7 @@ simulation_result <- ANOVA_power(design_result,
 
 ```{r echo=FALSE}
 knitr::kable(simulation_result_3.9$main_results,
-             caption = "Simulated ANOVA Result")%>%
+             caption = "Simulated ANOVA Result") %>%
   kable_styling(latex_options = "hold_position")
 ```
 
@@ -619,7 +622,7 @@ exact_result <- ANOVA_exact(design_result,
 
 ```{r echo=FALSE}
 knitr::kable(exact_result$main_results,
-             caption = "Exact ANOVA Result")%>%
+             caption = "Exact ANOVA Result") %>%
   kable_styling(latex_options = "hold_position")
 ```
 
@@ -953,7 +956,7 @@ simulation_result <- ANOVA_power(design_result,
 
 ```{r echo=FALSE}
 knitr::kable(simulation_result_4.7$main_results,
-             caption = "Simulated ANOVA Result")%>%
+             caption = "Simulated ANOVA Result") %>%
   kable_styling(latex_options = "hold_position")
 ```
 
@@ -964,9 +967,421 @@ exact_result <- ANOVA_exact(design_result, alpha_level = alpha_level)
 
 ```{r echo=FALSE}
 knitr::kable(exact_result$main_results,
-             caption = "Exact ANOVA Result")%>%
+             caption = "Exact ANOVA Result") %>%
   kable_styling(latex_options = "hold_position")
 ```
 
+## Part 5
+**Credit for the non-centrality parameter for the interaction goes to Andrew Vigotsky**
+
+### 2x2 ANOVA, within design
+
+Potvin & Schutz (2000) simulate a wide range of repeated measure designs. They give an example of a 3x3 design, with the following correlation matrix:
+
+![](screenshots/PS2000.png)
+
+Variances were set to 1 (so all covariance matrices in their simulations were identical). In this specific example, the white fields are related to the correlation for the A main effect (these cells have the same level for B, but different levels of A). The grey cells are related to the main effect of B (the cells have the same level of A, but different levels of B). Finally, the black cells are related to the AxB interaction (they have different levels of A and B). The diagonal (all 1) relate to cells with the same levels of A and B. 
+
+Potvin & Schulz (2000) examine power for 2x2 within ANOVA designs and develop approximations of the error variance. For a design with 2 within factors (A and B) these are: 
+
+For the main effect of A:
+$\sigma _ { e } ^ { 2 } = \sigma ^ { 2 } ( 1 - \overline { \rho } _ { A } ) + \sigma ^ { 2 } ( q - 1 ) ( \overline { \rho } _ { B } - \overline { \rho } _ { AB } )$
+
+For the main effectof B:
+$\sigma _ { e } ^ { 2 } = \sigma ^ { 2 } ( 1 - \overline { \rho } _ { B } ) + \sigma ^ { 2 } ( p - 1 ) ( \overline { \rho } _ { A } - \overline { \rho } _ { A B } )$
+
+For the interaction between A and B:
+$\sigma _ { e } ^ { 2 } = \sigma ^ { 2 } ( 1 - \rho _ { \max } ) - \sigma ^ { 2 } ( \overline { \rho } _ { \min } - \overline { \rho } _ { AB } )$
+
+Let's now compare the formulas in Potvin and Schutz (2000) with `Superpower` with a simple scenario.  
+
+```{r}
+mu = c(2,1,4,2) 
+n <- 20
+sd <- 5
+r <- .77
+string = "2w*2w"
+alpha_level <- 0.05
+
+
+design_result <- ANOVA_design(design = string,
+                              n = n, 
+                              mu = mu, 
+                              sd = sd, 
+                              r = r, 
+                              labelnames = labelnames,
+                              plot = TRUE)
+
+design_result$cor_mat
+```
+```{r}
+exact_result <- ANOVA_exact(design_result,
+                            alpha_level = alpha_level,
+                            verbose = FALSE)
+```
+
+```{r echo=FALSE}
+knitr::kable(exact_result$main_results,
+             caption = "Exact ANOVA Result") %>%
+  kable_styling(latex_options = "hold_position")
+```
+
+Further, as we use the analytical solution below, the variance components should be equal to the corresponding MSE from the `ANOVA_exact` produced `anova_table` object.
+
+```{r}
+exact_result$aov_result$anova_table
+```
+
+
+We can try to use the formula in Potvin & Schutz (2000).
+
+```{r}
+k <- 1 #one group (because all factors are within)
+
+rho_A <- .77 #mean r for factor A
+
+rho_B <- .77 #mean r for factor B
+
+rho_AB <- .77 #mean r for factor AB
+
+alpha <- 0.05
+
+sigma <- sd
+
+m_A <- 2 #levels factor A
+
+variance_e_A <- (sigma^2 * (1 - rho_A) + 
+  sigma^2 * (m_A - 1) * (rho_B - rho_AB) )
+#Variance A
+variance_e_A
+
+m_B <- 2 #levels factor B
+
+variance_e_B <- sigma^2 * (1 - rho_B) + 
+  sigma^2 * (m_B - 1) * (rho_A - rho_AB)
+#Variance B
+variance_e_B
+
+variance_e_AB <-
+  (sigma ^ 2 * (1 - max(rho_A, rho_B)) - 
+     sigma ^ 2 * (min(rho_A,rho_B) - rho_AB)) 
+#Variance AB
+variance_e_AB
+
+#Create a mean matrix
+mean_mat <- t(matrix(mu, nrow = m_B,ncol = m_A)) 
+mean_mat
+
+# Potvin & Schutz, 2000, formula 2, p. 348
+# For main effect A
+lambda_A <-
+  (n * m_A * sum((rowMeans(mean_mat) - 
+                   mean(rowMeans(mean_mat))) ^ 2) ) / variance_e_A
+  lambda_A
+
+#calculate degrees of freedom 1 - ignoring the sphericity correction
+df1 <- (m_A - 1) 
+
+df2 <- (n - k) * (m_A - 1) #calculate degrees of freedom 2
+
+F_critical <- qf(alpha, # critical F-vaue
+                 df1,
+                 df2, 
+                 lower.tail = FALSE) 
+
+pow_A <- pf(qf(alpha, #power 
+             df1, 
+             df2, 
+             lower.tail = FALSE), 
+          df1, 
+          df2, 
+          lambda_A, 
+          lower.tail = FALSE)
+pow_A*100
+
+lambda_B <-
+  n * m_B * sum((colMeans(mean_mat) - 
+                   mean(colMeans(mean_mat))) ^ 2) / variance_e_B 
+lambda_B
+
+df1 <- (m_B - 1) #calculate degrees of freedom 1
+
+df2 <- (n - k) * (m_B - 1) #calculate degrees of freedom 2
+
+F_critical <- qf(alpha, # critical F-vaue
+                 df1,
+                 df2,
+                 lower.tail = FALSE) 
+
+pow_B <- pf(qf(alpha, #power 
+             df1, 
+             df2, 
+             lower.tail = FALSE), 
+          df1, 
+          df2, 
+          lambda_B, 
+          lower.tail = FALSE)
+
+
+pow_B*100
+```
+
+
+```{r }
+#Peform double summation courtesy of Andrew Vigotsky
+term <- 0
+for (i in 1:nrow(mean_mat)) {
+  for (j in 1:ncol(mean_mat)) {
+    term <- (term + (mean_mat[i,j] - 
+                       mean(mean_mat[i,]) - 
+                       mean(mean_mat[,j]) + mean(mean_mat))^2)
+  }
+}
+term
+
+#Calculate lambda for interaction term
+lambda_AB <- n*term/variance_e_AB
+lambda_AB
+
+
+
+df1 <- (m_A - 1) * (m_B - 1)  #calculate degrees of freedom 1
+df2 <-
+(n - k) * (m_A - 1) * (m_B - 1) #calculate degrees of freedom 2
+F_critical <- qf(alpha, # critical F-vaue
+df1,
+df2,
+lower.tail = FALSE)
+
+pow_AB <- pf(qf(alpha, #power
+df1,
+df2,
+lower.tail = FALSE),
+df1,
+df2,
+lambda_AB,
+lower.tail = FALSE)
+
+pow_AB*100
+```
+
+We can now compile all the analytical results into a single table, and see that the results match those from `ANOVA_exact`.
+
+```{r echo = FALSE}
+power <- c(pow_A, pow_B, pow_AB)
+lambda <- c(lambda_A, lambda_B, lambda_AB)
+variance <- c(variance_e_A, variance_e_B, variance_e_AB)
+
+dat_analytical <- data.frame(variance, lambda, power)
+
+dat_analytical$power = dat_analytical$power*100
+
+knitr::kable(dat_analytical,
+             caption = "Analytical Result") %>%
+  kable_styling(latex_options = "hold_position")
+```
+
+And we can see in the simple scenario matches `ANOVA_exact` and `ANOVA_power` output.
+
+Let's now extend to one of the simlations presented by Potvin and Schultz with a 3x3 solution.
+
+```{r}
+mu = c(2,1,4,
+       2,.5,3,
+       2,0,6) 
+n <- 20
+sd <- 5
+r <- c(1.0,0.8,0.8,0.4,0.4,0.4,0.4,0.4,0.4,
+       0.8,1.0,0.8,0.4,0.4,0.4,0.4,0.4,0.4,
+       0.8,0.8,1.0,0.4,0.4,0.4,0.4,0.4,0.4,
+       0.4,0.4,0.4,1.0,0.8,0.8,0.4,0.4,0.4,
+       0.4,0.4,0.4,0.8,1.0,0.8,0.4,0.4,0.4,
+       0.4,0.4,0.4,0.8,0.8,1.0,0.4,0.4,0.4,
+       0.4,0.4,0.4,0.4,0.4,0.4,1.0,0.8,0.8,
+       0.4,0.4,0.4,0.4,0.4,0.4,0.8,1.0,0.8,
+       0.4,0.4,0.4,0.4,0.4,0.4,0.8,0.8,1.0)
+
+
+string = "3w*3w"
+alpha_level <- 0.05
+
+design_result <- ANOVA_design(design = string,
+                              n = n, 
+                              mu = mu, 
+                              sd = sd, 
+                              r = r, 
+                              plot = TRUE)
+
+design_result$cor_mat
+```
+
+The design now matches the correlation matrix in Figure 1 of Potvin and Schultz.
+
+And we can estimate power with `ANOVA_exact`.
+
+```{r}
+exact_result <- ANOVA_exact(design_result,
+                            alpha_level = alpha_level,
+                            verbose = FALSE)
+```
+
+```{r echo=FALSE}
+knitr::kable(exact_result$main_results,
+             caption = "Exact ANOVA Result") %>%
+  kable_styling(latex_options = "hold_position")
+```
+
+Further, as we use the analytical solution below, the variance components should be equal to the corresponding MSE from the `ANOVA_exact` produced `anova_table` object.
+
+```{r}
+exact_result$aov_result$anova_table
+```
+
+```{r}
+
+k <- 1 #one group (because all factors are within)
+
+rho_A <- .4 #mean r for factor A
+
+rho_B <- .8 #mean r for factor B
+
+rho_AB <- .4 #mean r for factor AB
+
+alpha <- 0.05
+
+sigma <- sd
+
+m_A <- 3 #levels factor A
+
+variance_e_A <- sigma^2 * (1 - rho_A) + 
+  sigma^2 * (m_A - 1) * (rho_B - rho_AB) 
+#Variance A
+variance_e_A
+
+m_B <- 3 #levels factor B
+
+variance_e_B <- sigma^2 * (1 - rho_B) + 
+  sigma^2 * (m_B - 1) * (rho_A - rho_AB)
+#Variance B
+variance_e_B
+
+variance_e_AB <-
+  (sigma ^ 2 * (1 - max(rho_A, rho_B)) - 
+     sigma ^ 2 * (min(rho_A,rho_B) - rho_AB)) 
+#Variance AB
+variance_e_AB
+
+#Create a mean matrix
+mean_mat <- t(matrix(mu, nrow = m_B,ncol = m_A)) 
+mean_mat
+
+# Potvin & Schutz, 2000, formula 2, p. 348
+# For main effect A
+lambda_A <-
+  (n * m_A * sum((rowMeans(mean_mat) - 
+                   mean(rowMeans(mean_mat))) ^ 2) ) / variance_e_A
+  lambda_A
+
+#calculate degrees of freedom 1 - ignoring the sphericity correction
+df1 <- (m_A - 1) 
+
+df2 <- (n - k) * (m_A - 1) #calculate degrees of freedom 2
+
+F_critical <- qf(alpha, # critical F-vaue
+                 df1,
+                 df2, 
+                 lower.tail = FALSE) 
+
+pow_A <- pf(qf(alpha, #power 
+             df1, 
+             df2, 
+             lower.tail = FALSE), 
+          df1, 
+          df2, 
+          lambda_A, 
+          lower.tail = FALSE)
+pow_A*100
+
+lambda_B <-
+  n * m_B * sum((colMeans(mean_mat) - 
+                   mean(colMeans(mean_mat))) ^ 2) / variance_e_B 
+lambda_B
+
+df1 <- (m_B - 1) #calculate degrees of freedom 1
+
+df2 <- (n - k) * (m_B - 1) #calculate degrees of freedom 2
+
+F_critical <- qf(alpha, # critical F-vaue
+                 df1,
+                 df2,
+                 lower.tail = FALSE) 
+
+pow_B <- pf(qf(alpha, #power 
+             df1, 
+             df2, 
+             lower.tail = FALSE), 
+          df1, 
+          df2, 
+          lambda_B, 
+          lower.tail = FALSE)
+
+
+pow_B*100
+```
+
+
+```{r }
+#Peform double summation courtesy of Andrew Vigotsky
+term <- 0
+for (i in 1:nrow(mean_mat)) {
+  for (j in 1:ncol(mean_mat)) {
+    term <- ((term + (mean_mat[i,j] -
+                        mean(mean_mat[i,]) - 
+                        mean(mean_mat[,j]) + mean(mean_mat))^2))
+  }
+}
+term
+
+#Calculate lambda for interaction term
+lambda_AB <- n*term/variance_e_AB
+lambda_AB
+
+
+
+df1 <- (m_A - 1) * (m_B - 1)  #calculate degrees of freedom 1
+df2 <-
+(n - k) * (m_A - 1) * (m_B - 1) #calculate degrees of freedom 2
+F_critical <- qf(alpha, # critical F-vaue
+df1,
+df2,
+lower.tail = FALSE)
+
+pow_AB <- pf(qf(alpha, #power
+df1,
+df2,
+lower.tail = FALSE),
+df1,
+df2,
+lambda_AB,
+lower.tail = FALSE)
+
+pow_AB*100
+```
+
+Again, when we compile all the analytical results into a single table we can see that the results match those from `ANOVA_exact`.
+
+```{r echo = FALSE}
+power <- c(pow_A, pow_B, pow_AB)
+lambda <- c(lambda_A, lambda_B, lambda_AB)
+variance <- c(variance_e_A, variance_e_B, variance_e_AB)
+
+dat_analytical <- data.frame(variance, lambda, power)
+
+dat_analytical$power = dat_analytical$power*100
+
+knitr::kable(dat_analytical,
+             caption = "Analytical Result") %>%
+  kable_styling(latex_options = "hold_position")
+```
 
  

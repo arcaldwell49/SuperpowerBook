@@ -125,7 +125,7 @@
   \postauthor{\par}
       \predate{\centering\large\emph}
   \postdate{\par}
-    \date{2019-09-18}
+    \date{2019-09-19}
 
 \usepackage{booktabs}
 \usepackage{booktabs}
@@ -150,7 +150,7 @@
 \setcounter{tocdepth}{1}
 \tableofcontents
 }
-This is a compilation of documents for \href{https://github.com/arcaldwell49/Superpower}{Superpower} R package written in \textbf{Markdown} and compiled by \textbf{Bookdown}.
+This is a compilation of documents for \href{https://github.com/arcaldwell49/Superpower}{Superpower} R package written in \textbf{Markdown} \citep{R-rmarkdown} and compiled by \textbf{Bookdown} \citep{R-bookdown}.
 
 \hypertarget{preface}{%
 \chapter*{Preface}\label{preface}}
@@ -159,9 +159,9 @@ This is a compilation of documents for \href{https://github.com/arcaldwell49/Sup
 The goal of \texttt{Superpower} is to easily simulate factorial designs and empirically calculate power using a simulation approach.
 The R package is intended to be utilized for prospective (a priori) power analysis. Please don't be silly and compute \href{https://discourse.datamethods.org/t/reference-collection-to-push-back-against-common-statistical-myths/1787}{post hoc power}.
 
-This package, and book, expect readers to have some familiarity with R. However, we have created \href{http://shiny.ieis.tue.nl/anova_power/}{two Shiny apps} (for the \texttt{ANOVA\_power} \& \texttt{ANOVA\_exact} functions respectively) to help use these functions if you are not familiar with R.
+This package, and book, expect readers to have some familiarity with R \citep{R-base}. However, we have created \href{http://shiny.ieis.tue.nl/anova_power/}{two Shiny apps} (for the \texttt{ANOVA\_power} \& \texttt{ANOVA\_exact} functions respectively) to help use these functions if you are not familiar with R.
 
-In this book we will display a variety of ways the \texttt{Superpower} package can be used for power analysis and sample size planning for factorial experimental designs. We also included various examples of the performance of \texttt{Superpower} against other R packages (e.g., \texttt{pwr2ppl} and \texttt{pwr}) and statistical programs (such as G*Power or MOREpower). All uses of the \texttt{ANOVA\_power} function have been run with 10000 iterations (\texttt{nsims\ =\ 10000}). If you have any issues using \texttt{Superpower} or want to expand its capabilities please raise the issue on our \href{https://github.com/arcaldwell49/Superpower/issues}{GitHub} repository.
+In this book we will display a variety of ways the \texttt{Superpower} package can be used for power analysis and sample size planning for factorial experimental designs. We also included various examples of the performance of \texttt{Superpower} against other R packages (e.g., \texttt{pwr2ppl} by \citet{R-pwr2ppl} and \texttt{pwr} by \citet{R-pwr}) and statistical programs (such as G*Power or MOREpower). All uses of the \texttt{ANOVA\_power} function have been run with 10000 iterations (\texttt{nsims\ =\ 10000}). If you have any issues using \texttt{Superpower} or want to expand its capabilities please raise the issue on our \href{https://github.com/arcaldwell49/Superpower/issues}{GitHub} repository.
 
 \hypertarget{the-experimental-design}{%
 \chapter{The Experimental Design}\label{the-experimental-design}}
@@ -172,7 +172,7 @@ Currently, this pacakge only provides power analysis for ANOVA and for repeated 
 \hypertarget{anova_design-function}{%
 \section{ANOVA\_design function}\label{anova_design-function}}
 
-Currently the ANOVA\_design function can create designs up three factors, for both within, between, and mixed designs. It requires the following input: design, n, mu, sd, r, and optionally allows you to set labelnames.
+Currently the \texttt{ANOVA\_design} function can create designs up three factors, for both within, between, and mixed designs. It requires the following input: design, n, mu, sd, r, and optionally allows you to set labelnames.
 
 \begin{enumerate}
 \def\labelenumi{\arabic{enumi}.}
@@ -194,7 +194,7 @@ Currently the ANOVA\_design function can create designs up three factors, for bo
 \end{enumerate}
 
 \hypertarget{specifying-the-design-using-design}{%
-\subsection{Specifying the design using `design'}\label{specifying-the-design-using-design}}
+\subsection{\texorpdfstring{Specifying the design using \texttt{design}}{Specifying the design using design}}\label{specifying-the-design-using-design}}
 
 \texttt{design} is used to specify the design.
 Every factor is specified with a number, indicating the numner of levels of the factor, and a letter, b or w, to indicate whether the factor is manipulated between or within participants.
@@ -205,7 +205,7 @@ A \texttt{2b*3w} is a design with two factors (a 2b factor and a 3w factor), the
 An example of a \texttt{2b*3w} design is a group of people in one condition who get a drug, and a group of people in another condition who get a placebo, and we measure their health before they take the pill, one day after they take the pill, and a week after they take the pill.
 
 \hypertarget{specifying-the-means-using-mu}{%
-\subsection{Specifying the means using `mu'}\label{specifying-the-means-using-mu}}
+\subsection{\texorpdfstring{Specifying the means using \texttt{mu}}{Specifying the means using mu}}\label{specifying-the-means-using-mu}}
 
 Note that for each cell in the design, a mean must be provided. Thus, for a \texttt{2b*3w} design, \textbf{6} (i.e., 2*3=6) means need to be entered.
 
@@ -2095,14 +2095,17 @@ I have created a custom function that will calculate f from d, based on a specif
 
 \begin{Shaded}
 \begin{Highlighting}[]
-\CommentTok{#This function allows you to calculate f, d and eta squared following Cohen, 1988, p 277}
+\CommentTok{#This function allows you to calculate f, d and eta squared }
+\CommentTok{#following Cohen, 1988, p 277}
 \CommentTok{# From Cohen, 1988, p 277}
 \CommentTok{# The patterns are:}
-\CommentTok{# I. Minimum variability: one mean at each end of d, the remaining k- 2 means all at the midpoint.}
+\CommentTok{# I. Minimum variability: one mean at each end of d, }
+\CommentTok{#the remaining k- 2 means all at the midpoint.}
 \CommentTok{# 2. Intermediate variability: the k means equally spaced over d.}
 \CommentTok{# 3. Maximum variability: the means all at the end points of d.}
 
-\CommentTok{# For each of these patterns, there is a fixed relationship between f and d for any given number of means, k.}
+\CommentTok{# For each of these patterns, }
+\CommentTok{# there is a fixed relationship between f and d for any given number of means, k.}
 
 \CommentTok{# Pattern 1. For any given range of means, d, the minimum standard}
 \CommentTok{# deviation, f1, results when the remaining k - 2 means are concentrated at}
@@ -2122,26 +2125,26 @@ I have created a custom function that will calculate f from d, based on a specif
 \CommentTok{# the other, use formula (8.2.13).}
 
 \NormalTok{calc_f_d_eta <-}\StringTok{ }\ControlFlowTok{function}\NormalTok{(mu, sd, variability)\{}
-  \ControlFlowTok{if}\NormalTok{(variability }\OperatorTok{==}\StringTok{ "minimum"}\NormalTok{)\{}
+  \ControlFlowTok{if}\NormalTok{ (variability }\OperatorTok{==}\StringTok{ "minimum"}\NormalTok{) \{}
 \NormalTok{    k =}\StringTok{ }\KeywordTok{length}\NormalTok{(mu)}
-\NormalTok{    d <-}\StringTok{ }\NormalTok{(}\KeywordTok{max}\NormalTok{(mu)}\OperatorTok{-}\KeywordTok{min}\NormalTok{(mu))}\OperatorTok{/}\NormalTok{sd}
-\NormalTok{    f <-}\StringTok{ }\NormalTok{d}\OperatorTok{*}\KeywordTok{sqrt}\NormalTok{(}\DecValTok{1}\OperatorTok{/}\NormalTok{(}\DecValTok{2}\OperatorTok{*}\NormalTok{k))}
-\NormalTok{    f2 <-}\StringTok{ }\NormalTok{f}\OperatorTok{^}\DecValTok{2}
-\NormalTok{    ES <-}\StringTok{ }\NormalTok{f2}\OperatorTok{/}\NormalTok{(f2}\OperatorTok{+}\DecValTok{1}\NormalTok{)}
+\NormalTok{    d <-}\StringTok{ }\NormalTok{(}\KeywordTok{max}\NormalTok{(mu) }\OperatorTok{-}\StringTok{ }\KeywordTok{min}\NormalTok{(mu)) }\OperatorTok{/}\StringTok{ }\NormalTok{sd}
+\NormalTok{    f <-}\StringTok{ }\NormalTok{d }\OperatorTok{*}\StringTok{ }\KeywordTok{sqrt}\NormalTok{(}\DecValTok{1} \OperatorTok{/}\StringTok{ }\NormalTok{(}\DecValTok{2} \OperatorTok{*}\StringTok{ }\NormalTok{k))}
+\NormalTok{    f2 <-}\StringTok{ }\NormalTok{f }\OperatorTok{^}\StringTok{ }\DecValTok{2}
+\NormalTok{    ES <-}\StringTok{ }\NormalTok{f2 }\OperatorTok{/}\StringTok{ }\NormalTok{(f2 }\OperatorTok{+}\StringTok{ }\DecValTok{1}\NormalTok{)}
 \NormalTok{  \}}
-  \ControlFlowTok{if}\NormalTok{(variability }\OperatorTok{==}\StringTok{ "medium"}\NormalTok{)\{}
-\NormalTok{    k =}\StringTok{ }\KeywordTok{length}\NormalTok{(mu) }
-\NormalTok{    d <-}\StringTok{ }\NormalTok{(}\KeywordTok{max}\NormalTok{(mu)}\OperatorTok{-}\KeywordTok{min}\NormalTok{(mu))}\OperatorTok{/}\NormalTok{sd}
-\NormalTok{    f <-}\StringTok{ }\NormalTok{(d}\OperatorTok{/}\DecValTok{2}\NormalTok{)}\OperatorTok{*}\KeywordTok{sqrt}\NormalTok{((k}\OperatorTok{+}\DecValTok{1}\NormalTok{)}\OperatorTok{/}\NormalTok{(}\DecValTok{3}\OperatorTok{*}\NormalTok{(k}\DecValTok{-1}\NormalTok{)))}
-\NormalTok{    f2 <-}\StringTok{ }\NormalTok{f}\OperatorTok{^}\DecValTok{2}
-\NormalTok{    ES <-}\StringTok{ }\NormalTok{f2}\OperatorTok{/}\NormalTok{(f2}\OperatorTok{+}\DecValTok{1}\NormalTok{)}
-\NormalTok{  \}}
-  \ControlFlowTok{if}\NormalTok{(variability }\OperatorTok{==}\StringTok{ "maximum"}\NormalTok{)\{}
+  \ControlFlowTok{if}\NormalTok{ (variability }\OperatorTok{==}\StringTok{ "medium"}\NormalTok{) \{}
 \NormalTok{    k =}\StringTok{ }\KeywordTok{length}\NormalTok{(mu)}
-\NormalTok{    d <-}\StringTok{ }\NormalTok{(}\KeywordTok{max}\NormalTok{(mu)}\OperatorTok{-}\KeywordTok{min}\NormalTok{(mu))}\OperatorTok{/}\NormalTok{sd}
-\NormalTok{    f <-}\StringTok{ }\KeywordTok{ifelse}\NormalTok{(k }\OperatorTok{%%}\StringTok{ }\DecValTok{2} \OperatorTok{==}\StringTok{ }\DecValTok{0}\NormalTok{, }\FloatTok{.5}\OperatorTok{*}\NormalTok{d, d}\OperatorTok{*}\NormalTok{(}\KeywordTok{sqrt}\NormalTok{(k}\OperatorTok{^}\DecValTok{2-1}\NormalTok{)}\OperatorTok{/}\NormalTok{(}\DecValTok{2}\OperatorTok{*}\NormalTok{k)))}
-\NormalTok{    f2 <-}\StringTok{ }\NormalTok{f}\OperatorTok{^}\DecValTok{2}
-\NormalTok{    ES <-}\StringTok{ }\NormalTok{f2}\OperatorTok{/}\NormalTok{(f2}\OperatorTok{+}\DecValTok{1}\NormalTok{)}
+\NormalTok{    d <-}\StringTok{ }\NormalTok{(}\KeywordTok{max}\NormalTok{(mu) }\OperatorTok{-}\StringTok{ }\KeywordTok{min}\NormalTok{(mu)) }\OperatorTok{/}\StringTok{ }\NormalTok{sd}
+\NormalTok{    f <-}\StringTok{ }\NormalTok{(d }\OperatorTok{/}\StringTok{ }\DecValTok{2}\NormalTok{) }\OperatorTok{*}\StringTok{ }\KeywordTok{sqrt}\NormalTok{((k }\OperatorTok{+}\StringTok{ }\DecValTok{1}\NormalTok{) }\OperatorTok{/}\StringTok{ }\NormalTok{(}\DecValTok{3} \OperatorTok{*}\StringTok{ }\NormalTok{(k }\OperatorTok{-}\StringTok{ }\DecValTok{1}\NormalTok{)))}
+\NormalTok{    f2 <-}\StringTok{ }\NormalTok{f }\OperatorTok{^}\StringTok{ }\DecValTok{2}
+\NormalTok{    ES <-}\StringTok{ }\NormalTok{f2 }\OperatorTok{/}\StringTok{ }\NormalTok{(f2 }\OperatorTok{+}\StringTok{ }\DecValTok{1}\NormalTok{)}
+\NormalTok{  \}}
+  \ControlFlowTok{if}\NormalTok{ (variability }\OperatorTok{==}\StringTok{ "maximum"}\NormalTok{) \{}
+\NormalTok{    k =}\StringTok{ }\KeywordTok{length}\NormalTok{(mu)}
+\NormalTok{    d <-}\StringTok{ }\NormalTok{(}\KeywordTok{max}\NormalTok{(mu) }\OperatorTok{-}\StringTok{ }\KeywordTok{min}\NormalTok{(mu)) }\OperatorTok{/}\StringTok{ }\NormalTok{sd}
+\NormalTok{    f <-}\StringTok{ }\KeywordTok{ifelse}\NormalTok{(k }\OperatorTok{%%}\StringTok{ }\DecValTok{2} \OperatorTok{==}\StringTok{ }\DecValTok{0}\NormalTok{, }\FloatTok{.5} \OperatorTok{*}\StringTok{ }\NormalTok{d, d }\OperatorTok{*}\StringTok{ }\NormalTok{(}\KeywordTok{sqrt}\NormalTok{(k }\OperatorTok{^}\StringTok{ }\DecValTok{2} \OperatorTok{-}\StringTok{ }\DecValTok{1}\NormalTok{) }\OperatorTok{/}\StringTok{ }\NormalTok{(}\DecValTok{2} \OperatorTok{*}\StringTok{ }\NormalTok{k)))}
+\NormalTok{    f2 <-}\StringTok{ }\NormalTok{f }\OperatorTok{^}\StringTok{ }\DecValTok{2}
+\NormalTok{    ES <-}\StringTok{ }\NormalTok{f2 }\OperatorTok{/}\StringTok{ }\NormalTok{(f2 }\OperatorTok{+}\StringTok{ }\DecValTok{1}\NormalTok{)}
 \NormalTok{  \}}
   \KeywordTok{invisible}\NormalTok{(}\KeywordTok{list}\NormalTok{(}\DataTypeTok{mu =}\NormalTok{ mu,}
                  \DataTypeTok{sd =}\NormalTok{ sd,}
@@ -3133,11 +3136,690 @@ AGE:COLOR & 45.98 & 0.1351 & 0.3953 & 3.7500\\
 \end{tabular}
 \end{table}
 
+\hypertarget{part-5}{%
+\section{Part 5}\label{part-5}}
+
+\textbf{Credit for the non-centrality parameter for the interaction goes to Andrew Vigotsky}
+
+\hypertarget{x2-anova-within-design}{%
+\subsection{2x2 ANOVA, within design}\label{x2-anova-within-design}}
+
+Potvin \& Schutz (2000) simulate a wide range of repeated measure designs. They give an example of a 3x3 design, with the following correlation matrix:
+
+\includegraphics{screenshots/PS2000.png}
+
+Variances were set to 1 (so all covariance matrices in their simulations were identical). In this specific example, the white fields are related to the correlation for the A main effect (these cells have the same level for B, but different levels of A). The grey cells are related to the main effect of B (the cells have the same level of A, but different levels of B). Finally, the black cells are related to the AxB interaction (they have different levels of A and B). The diagonal (all 1) relate to cells with the same levels of A and B.
+
+Potvin \& Schulz (2000) examine power for 2x2 within ANOVA designs and develop approximations of the error variance. For a design with 2 within factors (A and B) these are:
+
+For the main effect of A:
+\(\sigma _ { e } ^ { 2 } = \sigma ^ { 2 } ( 1 - \overline { \rho } _ { A } ) + \sigma ^ { 2 } ( q - 1 ) ( \overline { \rho } _ { B } - \overline { \rho } _ { AB } )\)
+
+For the main effectof B:
+\(\sigma _ { e } ^ { 2 } = \sigma ^ { 2 } ( 1 - \overline { \rho } _ { B } ) + \sigma ^ { 2 } ( p - 1 ) ( \overline { \rho } _ { A } - \overline { \rho } _ { A B } )\)
+
+For the interaction between A and B:
+\(\sigma _ { e } ^ { 2 } = \sigma ^ { 2 } ( 1 - \rho _ { \max } ) - \sigma ^ { 2 } ( \overline { \rho } _ { \min } - \overline { \rho } _ { AB } )\)
+
+Let's now compare the formulas in Potvin and Schutz (2000) with \texttt{Superpower} with a simple scenario.
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\NormalTok{mu =}\StringTok{ }\KeywordTok{c}\NormalTok{(}\DecValTok{2}\NormalTok{,}\DecValTok{1}\NormalTok{,}\DecValTok{4}\NormalTok{,}\DecValTok{2}\NormalTok{) }
+\NormalTok{n <-}\StringTok{ }\DecValTok{20}
+\NormalTok{sd <-}\StringTok{ }\DecValTok{5}
+\NormalTok{r <-}\StringTok{ }\FloatTok{.77}
+\NormalTok{string =}\StringTok{ "2w*2w"}
+\NormalTok{alpha_level <-}\StringTok{ }\FloatTok{0.05}
+
+
+\NormalTok{design_result <-}\StringTok{ }\KeywordTok{ANOVA_design}\NormalTok{(}\DataTypeTok{design =}\NormalTok{ string,}
+                              \DataTypeTok{n =}\NormalTok{ n, }
+                              \DataTypeTok{mu =}\NormalTok{ mu, }
+                              \DataTypeTok{sd =}\NormalTok{ sd, }
+                              \DataTypeTok{r =}\NormalTok{ r, }
+                              \DataTypeTok{labelnames =}\NormalTok{ labelnames,}
+                              \DataTypeTok{plot =} \OtherTok{TRUE}\NormalTok{)}
+\end{Highlighting}
+\end{Shaded}
+
+\includegraphics{SuperpowerValidation_files/figure-latex/unnamed-chunk-157-1.pdf}
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\NormalTok{design_result}\OperatorTok{$}\NormalTok{cor_mat}
+\end{Highlighting}
+\end{Shaded}
+
+\begin{verbatim}
+##            old_blue old_red young_blue young_red
+## old_blue       1.00    0.77       0.77      0.77
+## old_red        0.77    1.00       0.77      0.77
+## young_blue     0.77    0.77       1.00      0.77
+## young_red      0.77    0.77       0.77      1.00
+\end{verbatim}
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\NormalTok{exact_result <-}\StringTok{ }\KeywordTok{ANOVA_exact}\NormalTok{(design_result,}
+                            \DataTypeTok{alpha_level =}\NormalTok{ alpha_level,}
+                            \DataTypeTok{verbose =} \OtherTok{FALSE}\NormalTok{)}
+\end{Highlighting}
+\end{Shaded}
+
+\begin{table}[!h]
+
+\caption{\label{tab:unnamed-chunk-159}Exact ANOVA Result}
+\centering
+\begin{tabular}{l|r|r|r|r}
+\hline
+  & power & partial\_eta\_squared & cohen\_f & non\_centrality\\
+\hline
+AGE & 75.61 & 0.2917 & 0.6418 & 7.8261\\
+\hline
+COLOR & 75.61 & 0.2917 & 0.6418 & 7.8261\\
+\hline
+AGE:COLOR & 14.36 & 0.0438 & 0.2139 & 0.8696\\
+\hline
+\end{tabular}
+\end{table}
+
+Further, as we use the analytical solution below, the variance components should be equal to the corresponding MSE from the \texttt{ANOVA\_exact} produced \texttt{anova\_table} object.
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\NormalTok{exact_result}\OperatorTok{$}\NormalTok{aov_result}\OperatorTok{$}\NormalTok{anova_table}
+\end{Highlighting}
+\end{Shaded}
+
+\begin{verbatim}
+## Anova Table (Type 3 tests)
+## 
+## Response: y
+##           num Df den Df  MSE      F      pes  Pr(>F)  
+## AGE            1     19 5.75 7.8261 0.291734 0.01149 *
+## COLOR          1     19 5.75 7.8261 0.291734 0.01149 *
+## AGE:COLOR      1     19 5.75 0.8696 0.043764 0.36278  
+## ---
+## Signif. codes:  0 '***' 0.001 '**' 0.01 '*' 0.05 '.' 0.1 ' ' 1
+\end{verbatim}
+
+We can try to use the formula in Potvin \& Schutz (2000).
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\NormalTok{k <-}\StringTok{ }\DecValTok{1} \CommentTok{#one group (because all factors are within)}
+
+\NormalTok{rho_A <-}\StringTok{ }\FloatTok{.77} \CommentTok{#mean r for factor A}
+
+\NormalTok{rho_B <-}\StringTok{ }\FloatTok{.77} \CommentTok{#mean r for factor B}
+
+\NormalTok{rho_AB <-}\StringTok{ }\FloatTok{.77} \CommentTok{#mean r for factor AB}
+
+\NormalTok{alpha <-}\StringTok{ }\FloatTok{0.05}
+
+\NormalTok{sigma <-}\StringTok{ }\NormalTok{sd}
+
+\NormalTok{m_A <-}\StringTok{ }\DecValTok{2} \CommentTok{#levels factor A}
+
+\NormalTok{variance_e_A <-}\StringTok{ }\NormalTok{(sigma}\OperatorTok{^}\DecValTok{2} \OperatorTok{*}\StringTok{ }\NormalTok{(}\DecValTok{1} \OperatorTok{-}\StringTok{ }\NormalTok{rho_A) }\OperatorTok{+}\StringTok{ }
+\StringTok{  }\NormalTok{sigma}\OperatorTok{^}\DecValTok{2} \OperatorTok{*}\StringTok{ }\NormalTok{(m_A }\OperatorTok{-}\StringTok{ }\DecValTok{1}\NormalTok{) }\OperatorTok{*}\StringTok{ }\NormalTok{(rho_B }\OperatorTok{-}\StringTok{ }\NormalTok{rho_AB) )}
+\CommentTok{#Variance A}
+\NormalTok{variance_e_A}
+\end{Highlighting}
+\end{Shaded}
+
+\begin{verbatim}
+## [1] 5.75
+\end{verbatim}
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\NormalTok{m_B <-}\StringTok{ }\DecValTok{2} \CommentTok{#levels factor B}
+
+\NormalTok{variance_e_B <-}\StringTok{ }\NormalTok{sigma}\OperatorTok{^}\DecValTok{2} \OperatorTok{*}\StringTok{ }\NormalTok{(}\DecValTok{1} \OperatorTok{-}\StringTok{ }\NormalTok{rho_B) }\OperatorTok{+}\StringTok{ }
+\StringTok{  }\NormalTok{sigma}\OperatorTok{^}\DecValTok{2} \OperatorTok{*}\StringTok{ }\NormalTok{(m_B }\OperatorTok{-}\StringTok{ }\DecValTok{1}\NormalTok{) }\OperatorTok{*}\StringTok{ }\NormalTok{(rho_A }\OperatorTok{-}\StringTok{ }\NormalTok{rho_AB)}
+\CommentTok{#Variance B}
+\NormalTok{variance_e_B}
+\end{Highlighting}
+\end{Shaded}
+
+\begin{verbatim}
+## [1] 5.75
+\end{verbatim}
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\NormalTok{variance_e_AB <-}
+\StringTok{  }\NormalTok{(sigma }\OperatorTok{^}\StringTok{ }\DecValTok{2} \OperatorTok{*}\StringTok{ }\NormalTok{(}\DecValTok{1} \OperatorTok{-}\StringTok{ }\KeywordTok{max}\NormalTok{(rho_A, rho_B)) }\OperatorTok{-}\StringTok{ }
+\StringTok{     }\NormalTok{sigma }\OperatorTok{^}\StringTok{ }\DecValTok{2} \OperatorTok{*}\StringTok{ }\NormalTok{(}\KeywordTok{min}\NormalTok{(rho_A,rho_B) }\OperatorTok{-}\StringTok{ }\NormalTok{rho_AB)) }
+\CommentTok{#Variance AB}
+\NormalTok{variance_e_AB}
+\end{Highlighting}
+\end{Shaded}
+
+\begin{verbatim}
+## [1] 5.75
+\end{verbatim}
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\CommentTok{#Create a mean matrix}
+\NormalTok{mean_mat <-}\StringTok{ }\KeywordTok{t}\NormalTok{(}\KeywordTok{matrix}\NormalTok{(mu, }\DataTypeTok{nrow =}\NormalTok{ m_B,}\DataTypeTok{ncol =}\NormalTok{ m_A)) }
+\NormalTok{mean_mat}
+\end{Highlighting}
+\end{Shaded}
+
+\begin{verbatim}
+##      [,1] [,2]
+## [1,]    2    1
+## [2,]    4    2
+\end{verbatim}
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\CommentTok{# Potvin & Schutz, 2000, formula 2, p. 348}
+\CommentTok{# For main effect A}
+\NormalTok{lambda_A <-}
+\StringTok{  }\NormalTok{(n }\OperatorTok{*}\StringTok{ }\NormalTok{m_A }\OperatorTok{*}\StringTok{ }\KeywordTok{sum}\NormalTok{((}\KeywordTok{rowMeans}\NormalTok{(mean_mat) }\OperatorTok{-}\StringTok{ }
+\StringTok{                   }\KeywordTok{mean}\NormalTok{(}\KeywordTok{rowMeans}\NormalTok{(mean_mat))) }\OperatorTok{^}\StringTok{ }\DecValTok{2}\NormalTok{) ) }\OperatorTok{/}\StringTok{ }\NormalTok{variance_e_A}
+\NormalTok{  lambda_A}
+\end{Highlighting}
+\end{Shaded}
+
+\begin{verbatim}
+## [1] 7.826087
+\end{verbatim}
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\CommentTok{#calculate degrees of freedom 1 - ignoring the sphericity correction}
+\NormalTok{df1 <-}\StringTok{ }\NormalTok{(m_A }\OperatorTok{-}\StringTok{ }\DecValTok{1}\NormalTok{) }
+
+\NormalTok{df2 <-}\StringTok{ }\NormalTok{(n }\OperatorTok{-}\StringTok{ }\NormalTok{k) }\OperatorTok{*}\StringTok{ }\NormalTok{(m_A }\OperatorTok{-}\StringTok{ }\DecValTok{1}\NormalTok{) }\CommentTok{#calculate degrees of freedom 2}
+
+\NormalTok{F_critical <-}\StringTok{ }\KeywordTok{qf}\NormalTok{(alpha, }\CommentTok{# critical F-vaue}
+\NormalTok{                 df1,}
+\NormalTok{                 df2, }
+                 \DataTypeTok{lower.tail =} \OtherTok{FALSE}\NormalTok{) }
+
+\NormalTok{pow_A <-}\StringTok{ }\KeywordTok{pf}\NormalTok{(}\KeywordTok{qf}\NormalTok{(alpha, }\CommentTok{#power }
+\NormalTok{             df1, }
+\NormalTok{             df2, }
+             \DataTypeTok{lower.tail =} \OtherTok{FALSE}\NormalTok{), }
+\NormalTok{          df1, }
+\NormalTok{          df2, }
+\NormalTok{          lambda_A, }
+          \DataTypeTok{lower.tail =} \OtherTok{FALSE}\NormalTok{)}
+\NormalTok{pow_A}\OperatorTok{*}\DecValTok{100}
+\end{Highlighting}
+\end{Shaded}
+
+\begin{verbatim}
+## [1] 75.61412
+\end{verbatim}
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\NormalTok{lambda_B <-}
+\StringTok{  }\NormalTok{n }\OperatorTok{*}\StringTok{ }\NormalTok{m_B }\OperatorTok{*}\StringTok{ }\KeywordTok{sum}\NormalTok{((}\KeywordTok{colMeans}\NormalTok{(mean_mat) }\OperatorTok{-}\StringTok{ }
+\StringTok{                   }\KeywordTok{mean}\NormalTok{(}\KeywordTok{colMeans}\NormalTok{(mean_mat))) }\OperatorTok{^}\StringTok{ }\DecValTok{2}\NormalTok{) }\OperatorTok{/}\StringTok{ }\NormalTok{variance_e_B }
+\NormalTok{lambda_B}
+\end{Highlighting}
+\end{Shaded}
+
+\begin{verbatim}
+## [1] 7.826087
+\end{verbatim}
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\NormalTok{df1 <-}\StringTok{ }\NormalTok{(m_B }\OperatorTok{-}\StringTok{ }\DecValTok{1}\NormalTok{) }\CommentTok{#calculate degrees of freedom 1}
+
+\NormalTok{df2 <-}\StringTok{ }\NormalTok{(n }\OperatorTok{-}\StringTok{ }\NormalTok{k) }\OperatorTok{*}\StringTok{ }\NormalTok{(m_B }\OperatorTok{-}\StringTok{ }\DecValTok{1}\NormalTok{) }\CommentTok{#calculate degrees of freedom 2}
+
+\NormalTok{F_critical <-}\StringTok{ }\KeywordTok{qf}\NormalTok{(alpha, }\CommentTok{# critical F-vaue}
+\NormalTok{                 df1,}
+\NormalTok{                 df2,}
+                 \DataTypeTok{lower.tail =} \OtherTok{FALSE}\NormalTok{) }
+
+\NormalTok{pow_B <-}\StringTok{ }\KeywordTok{pf}\NormalTok{(}\KeywordTok{qf}\NormalTok{(alpha, }\CommentTok{#power }
+\NormalTok{             df1, }
+\NormalTok{             df2, }
+             \DataTypeTok{lower.tail =} \OtherTok{FALSE}\NormalTok{), }
+\NormalTok{          df1, }
+\NormalTok{          df2, }
+\NormalTok{          lambda_B, }
+          \DataTypeTok{lower.tail =} \OtherTok{FALSE}\NormalTok{)}
+
+
+\NormalTok{pow_B}\OperatorTok{*}\DecValTok{100}
+\end{Highlighting}
+\end{Shaded}
+
+\begin{verbatim}
+## [1] 75.61412
+\end{verbatim}
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\CommentTok{#Peform double summation courtesy of Andrew Vigotsky}
+\NormalTok{term <-}\StringTok{ }\DecValTok{0}
+\ControlFlowTok{for}\NormalTok{ (i }\ControlFlowTok{in} \DecValTok{1}\OperatorTok{:}\KeywordTok{nrow}\NormalTok{(mean_mat)) \{}
+  \ControlFlowTok{for}\NormalTok{ (j }\ControlFlowTok{in} \DecValTok{1}\OperatorTok{:}\KeywordTok{ncol}\NormalTok{(mean_mat)) \{}
+\NormalTok{    term <-}\StringTok{ }\NormalTok{(term }\OperatorTok{+}\StringTok{ }\NormalTok{(mean_mat[i,j] }\OperatorTok{-}\StringTok{ }
+\StringTok{                       }\KeywordTok{mean}\NormalTok{(mean_mat[i,]) }\OperatorTok{-}\StringTok{ }
+\StringTok{                       }\KeywordTok{mean}\NormalTok{(mean_mat[,j]) }\OperatorTok{+}\StringTok{ }\KeywordTok{mean}\NormalTok{(mean_mat))}\OperatorTok{^}\DecValTok{2}\NormalTok{)}
+\NormalTok{  \}}
+\NormalTok{\}}
+\NormalTok{term}
+\end{Highlighting}
+\end{Shaded}
+
+\begin{verbatim}
+## [1] 0.25
+\end{verbatim}
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\CommentTok{#Calculate lambda for interaction term}
+\NormalTok{lambda_AB <-}\StringTok{ }\NormalTok{n}\OperatorTok{*}\NormalTok{term}\OperatorTok{/}\NormalTok{variance_e_AB}
+\NormalTok{lambda_AB}
+\end{Highlighting}
+\end{Shaded}
+
+\begin{verbatim}
+## [1] 0.8695652
+\end{verbatim}
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\NormalTok{df1 <-}\StringTok{ }\NormalTok{(m_A }\OperatorTok{-}\StringTok{ }\DecValTok{1}\NormalTok{) }\OperatorTok{*}\StringTok{ }\NormalTok{(m_B }\OperatorTok{-}\StringTok{ }\DecValTok{1}\NormalTok{)  }\CommentTok{#calculate degrees of freedom 1}
+\NormalTok{df2 <-}
+\NormalTok{(n }\OperatorTok{-}\StringTok{ }\NormalTok{k) }\OperatorTok{*}\StringTok{ }\NormalTok{(m_A }\OperatorTok{-}\StringTok{ }\DecValTok{1}\NormalTok{) }\OperatorTok{*}\StringTok{ }\NormalTok{(m_B }\OperatorTok{-}\StringTok{ }\DecValTok{1}\NormalTok{) }\CommentTok{#calculate degrees of freedom 2}
+\NormalTok{F_critical <-}\StringTok{ }\KeywordTok{qf}\NormalTok{(alpha, }\CommentTok{# critical F-vaue}
+\NormalTok{df1,}
+\NormalTok{df2,}
+\DataTypeTok{lower.tail =} \OtherTok{FALSE}\NormalTok{)}
+
+\NormalTok{pow_AB <-}\StringTok{ }\KeywordTok{pf}\NormalTok{(}\KeywordTok{qf}\NormalTok{(alpha, }\CommentTok{#power}
+\NormalTok{df1,}
+\NormalTok{df2,}
+\DataTypeTok{lower.tail =} \OtherTok{FALSE}\NormalTok{),}
+\NormalTok{df1,}
+\NormalTok{df2,}
+\NormalTok{lambda_AB,}
+\DataTypeTok{lower.tail =} \OtherTok{FALSE}\NormalTok{)}
+
+\NormalTok{pow_AB}\OperatorTok{*}\DecValTok{100}
+\end{Highlighting}
+\end{Shaded}
+
+\begin{verbatim}
+## [1] 14.36376
+\end{verbatim}
+
+We can now compile all the analytical results into a single table, and see that the results match those from \texttt{ANOVA\_exact}.
+
+\begin{table}[!h]
+
+\caption{\label{tab:unnamed-chunk-163}Analytical Result}
+\centering
+\begin{tabular}{r|r|r}
+\hline
+variance & lambda & power\\
+\hline
+5.75 & 7.8260870 & 75.61412\\
+\hline
+5.75 & 7.8260870 & 75.61412\\
+\hline
+5.75 & 0.8695652 & 14.36376\\
+\hline
+\end{tabular}
+\end{table}
+
+And we can see in the simple scenario matches \texttt{ANOVA\_exact} and \texttt{ANOVA\_power} output.
+
+Let's now extend to one of the simlations presented by Potvin and Schultz with a 3x3 solution.
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\NormalTok{mu =}\StringTok{ }\KeywordTok{c}\NormalTok{(}\DecValTok{2}\NormalTok{,}\DecValTok{1}\NormalTok{,}\DecValTok{4}\NormalTok{,}
+       \DecValTok{2}\NormalTok{,.}\DecValTok{5}\NormalTok{,}\DecValTok{3}\NormalTok{,}
+       \DecValTok{2}\NormalTok{,}\DecValTok{0}\NormalTok{,}\DecValTok{6}\NormalTok{) }
+\NormalTok{n <-}\StringTok{ }\DecValTok{20}
+\NormalTok{sd <-}\StringTok{ }\DecValTok{5}
+\NormalTok{r <-}\StringTok{ }\KeywordTok{c}\NormalTok{(}\FloatTok{1.0}\NormalTok{,}\FloatTok{0.8}\NormalTok{,}\FloatTok{0.8}\NormalTok{,}\FloatTok{0.4}\NormalTok{,}\FloatTok{0.4}\NormalTok{,}\FloatTok{0.4}\NormalTok{,}\FloatTok{0.4}\NormalTok{,}\FloatTok{0.4}\NormalTok{,}\FloatTok{0.4}\NormalTok{,}
+       \FloatTok{0.8}\NormalTok{,}\FloatTok{1.0}\NormalTok{,}\FloatTok{0.8}\NormalTok{,}\FloatTok{0.4}\NormalTok{,}\FloatTok{0.4}\NormalTok{,}\FloatTok{0.4}\NormalTok{,}\FloatTok{0.4}\NormalTok{,}\FloatTok{0.4}\NormalTok{,}\FloatTok{0.4}\NormalTok{,}
+       \FloatTok{0.8}\NormalTok{,}\FloatTok{0.8}\NormalTok{,}\FloatTok{1.0}\NormalTok{,}\FloatTok{0.4}\NormalTok{,}\FloatTok{0.4}\NormalTok{,}\FloatTok{0.4}\NormalTok{,}\FloatTok{0.4}\NormalTok{,}\FloatTok{0.4}\NormalTok{,}\FloatTok{0.4}\NormalTok{,}
+       \FloatTok{0.4}\NormalTok{,}\FloatTok{0.4}\NormalTok{,}\FloatTok{0.4}\NormalTok{,}\FloatTok{1.0}\NormalTok{,}\FloatTok{0.8}\NormalTok{,}\FloatTok{0.8}\NormalTok{,}\FloatTok{0.4}\NormalTok{,}\FloatTok{0.4}\NormalTok{,}\FloatTok{0.4}\NormalTok{,}
+       \FloatTok{0.4}\NormalTok{,}\FloatTok{0.4}\NormalTok{,}\FloatTok{0.4}\NormalTok{,}\FloatTok{0.8}\NormalTok{,}\FloatTok{1.0}\NormalTok{,}\FloatTok{0.8}\NormalTok{,}\FloatTok{0.4}\NormalTok{,}\FloatTok{0.4}\NormalTok{,}\FloatTok{0.4}\NormalTok{,}
+       \FloatTok{0.4}\NormalTok{,}\FloatTok{0.4}\NormalTok{,}\FloatTok{0.4}\NormalTok{,}\FloatTok{0.8}\NormalTok{,}\FloatTok{0.8}\NormalTok{,}\FloatTok{1.0}\NormalTok{,}\FloatTok{0.4}\NormalTok{,}\FloatTok{0.4}\NormalTok{,}\FloatTok{0.4}\NormalTok{,}
+       \FloatTok{0.4}\NormalTok{,}\FloatTok{0.4}\NormalTok{,}\FloatTok{0.4}\NormalTok{,}\FloatTok{0.4}\NormalTok{,}\FloatTok{0.4}\NormalTok{,}\FloatTok{0.4}\NormalTok{,}\FloatTok{1.0}\NormalTok{,}\FloatTok{0.8}\NormalTok{,}\FloatTok{0.8}\NormalTok{,}
+       \FloatTok{0.4}\NormalTok{,}\FloatTok{0.4}\NormalTok{,}\FloatTok{0.4}\NormalTok{,}\FloatTok{0.4}\NormalTok{,}\FloatTok{0.4}\NormalTok{,}\FloatTok{0.4}\NormalTok{,}\FloatTok{0.8}\NormalTok{,}\FloatTok{1.0}\NormalTok{,}\FloatTok{0.8}\NormalTok{,}
+       \FloatTok{0.4}\NormalTok{,}\FloatTok{0.4}\NormalTok{,}\FloatTok{0.4}\NormalTok{,}\FloatTok{0.4}\NormalTok{,}\FloatTok{0.4}\NormalTok{,}\FloatTok{0.4}\NormalTok{,}\FloatTok{0.8}\NormalTok{,}\FloatTok{0.8}\NormalTok{,}\FloatTok{1.0}\NormalTok{)}
+
+
+\NormalTok{string =}\StringTok{ "3w*3w"}
+\NormalTok{alpha_level <-}\StringTok{ }\FloatTok{0.05}
+
+\NormalTok{design_result <-}\StringTok{ }\KeywordTok{ANOVA_design}\NormalTok{(}\DataTypeTok{design =}\NormalTok{ string,}
+                              \DataTypeTok{n =}\NormalTok{ n, }
+                              \DataTypeTok{mu =}\NormalTok{ mu, }
+                              \DataTypeTok{sd =}\NormalTok{ sd, }
+                              \DataTypeTok{r =}\NormalTok{ r, }
+                              \DataTypeTok{plot =} \OtherTok{TRUE}\NormalTok{)}
+\end{Highlighting}
+\end{Shaded}
+
+\includegraphics{SuperpowerValidation_files/figure-latex/unnamed-chunk-164-1.pdf}
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\NormalTok{design_result}\OperatorTok{$}\NormalTok{cor_mat}
+\end{Highlighting}
+\end{Shaded}
+
+\begin{verbatim}
+##       a1_b1 a1_b2 a1_b3 a2_b1 a2_b2 a2_b3 a3_b1 a3_b2 a3_b3
+## a1_b1   1.0   0.8   0.8   0.4   0.4   0.4   0.4   0.4   0.4
+## a1_b2   0.8   1.0   0.8   0.4   0.4   0.4   0.4   0.4   0.4
+## a1_b3   0.8   0.8   1.0   0.4   0.4   0.4   0.4   0.4   0.4
+## a2_b1   0.4   0.4   0.4   1.0   0.8   0.8   0.4   0.4   0.4
+## a2_b2   0.4   0.4   0.4   0.8   1.0   0.8   0.4   0.4   0.4
+## a2_b3   0.4   0.4   0.4   0.8   0.8   1.0   0.4   0.4   0.4
+## a3_b1   0.4   0.4   0.4   0.4   0.4   0.4   1.0   0.8   0.8
+## a3_b2   0.4   0.4   0.4   0.4   0.4   0.4   0.8   1.0   0.8
+## a3_b3   0.4   0.4   0.4   0.4   0.4   0.4   0.8   0.8   1.0
+\end{verbatim}
+
+The design now matches the correlation matrix in Figure 1 of Potvin and Schultz.
+
+And we can estimate power with \texttt{ANOVA\_exact}.
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\NormalTok{exact_result <-}\StringTok{ }\KeywordTok{ANOVA_exact}\NormalTok{(design_result,}
+                            \DataTypeTok{alpha_level =}\NormalTok{ alpha_level,}
+                            \DataTypeTok{verbose =} \OtherTok{FALSE}\NormalTok{)}
+\end{Highlighting}
+\end{Shaded}
+
+\begin{table}[!h]
+
+\caption{\label{tab:unnamed-chunk-166}Exact ANOVA Result}
+\centering
+\begin{tabular}{l|r|r|r|r}
+\hline
+  & power & partial\_eta\_squared & cohen\_f & non\_centrality\\
+\hline
+a & 9.44 & 0.0156 & 0.1260 & 0.6032\\
+\hline
+b & 100.00 & 0.7021 & 1.5352 & 89.5556\\
+\hline
+a:b & 90.09 & 0.1779 & 0.4652 & 16.4444\\
+\hline
+\end{tabular}
+\end{table}
+
+Further, as we use the analytical solution below, the variance components should be equal to the corresponding MSE from the \texttt{ANOVA\_exact} produced \texttt{anova\_table} object.
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\NormalTok{exact_result}\OperatorTok{$}\NormalTok{aov_result}\OperatorTok{$}\NormalTok{anova_table}
+\end{Highlighting}
+\end{Shaded}
+
+\begin{verbatim}
+## Anova Table (Type 3 tests)
+## 
+## Response: y
+##     num Df den Df MSE       F     pes          Pr(>F)    
+## a        2     38  35  0.3016 0.01563        0.741397    
+## b        2     38   5 44.7778 0.70209 0.0000000001018 ***
+## a:b      4     76   5  4.1111 0.17788        0.004542 ** 
+## ---
+## Signif. codes:  0 '***' 0.001 '**' 0.01 '*' 0.05 '.' 0.1 ' ' 1
+\end{verbatim}
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\NormalTok{k <-}\StringTok{ }\DecValTok{1} \CommentTok{#one group (because all factors are within)}
+
+\NormalTok{rho_A <-}\StringTok{ }\FloatTok{.4} \CommentTok{#mean r for factor A}
+
+\NormalTok{rho_B <-}\StringTok{ }\FloatTok{.8} \CommentTok{#mean r for factor B}
+
+\NormalTok{rho_AB <-}\StringTok{ }\FloatTok{.4} \CommentTok{#mean r for factor AB}
+
+\NormalTok{alpha <-}\StringTok{ }\FloatTok{0.05}
+
+\NormalTok{sigma <-}\StringTok{ }\NormalTok{sd}
+
+\NormalTok{m_A <-}\StringTok{ }\DecValTok{3} \CommentTok{#levels factor A}
+
+\NormalTok{variance_e_A <-}\StringTok{ }\NormalTok{sigma}\OperatorTok{^}\DecValTok{2} \OperatorTok{*}\StringTok{ }\NormalTok{(}\DecValTok{1} \OperatorTok{-}\StringTok{ }\NormalTok{rho_A) }\OperatorTok{+}\StringTok{ }
+\StringTok{  }\NormalTok{sigma}\OperatorTok{^}\DecValTok{2} \OperatorTok{*}\StringTok{ }\NormalTok{(m_A }\OperatorTok{-}\StringTok{ }\DecValTok{1}\NormalTok{) }\OperatorTok{*}\StringTok{ }\NormalTok{(rho_B }\OperatorTok{-}\StringTok{ }\NormalTok{rho_AB) }
+\CommentTok{#Variance A}
+\NormalTok{variance_e_A}
+\end{Highlighting}
+\end{Shaded}
+
+\begin{verbatim}
+## [1] 35
+\end{verbatim}
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\NormalTok{m_B <-}\StringTok{ }\DecValTok{3} \CommentTok{#levels factor B}
+
+\NormalTok{variance_e_B <-}\StringTok{ }\NormalTok{sigma}\OperatorTok{^}\DecValTok{2} \OperatorTok{*}\StringTok{ }\NormalTok{(}\DecValTok{1} \OperatorTok{-}\StringTok{ }\NormalTok{rho_B) }\OperatorTok{+}\StringTok{ }
+\StringTok{  }\NormalTok{sigma}\OperatorTok{^}\DecValTok{2} \OperatorTok{*}\StringTok{ }\NormalTok{(m_B }\OperatorTok{-}\StringTok{ }\DecValTok{1}\NormalTok{) }\OperatorTok{*}\StringTok{ }\NormalTok{(rho_A }\OperatorTok{-}\StringTok{ }\NormalTok{rho_AB)}
+\CommentTok{#Variance B}
+\NormalTok{variance_e_B}
+\end{Highlighting}
+\end{Shaded}
+
+\begin{verbatim}
+## [1] 5
+\end{verbatim}
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\NormalTok{variance_e_AB <-}
+\StringTok{  }\NormalTok{(sigma }\OperatorTok{^}\StringTok{ }\DecValTok{2} \OperatorTok{*}\StringTok{ }\NormalTok{(}\DecValTok{1} \OperatorTok{-}\StringTok{ }\KeywordTok{max}\NormalTok{(rho_A, rho_B)) }\OperatorTok{-}\StringTok{ }
+\StringTok{     }\NormalTok{sigma }\OperatorTok{^}\StringTok{ }\DecValTok{2} \OperatorTok{*}\StringTok{ }\NormalTok{(}\KeywordTok{min}\NormalTok{(rho_A,rho_B) }\OperatorTok{-}\StringTok{ }\NormalTok{rho_AB)) }
+\CommentTok{#Variance AB}
+\NormalTok{variance_e_AB}
+\end{Highlighting}
+\end{Shaded}
+
+\begin{verbatim}
+## [1] 5
+\end{verbatim}
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\CommentTok{#Create a mean matrix}
+\NormalTok{mean_mat <-}\StringTok{ }\KeywordTok{t}\NormalTok{(}\KeywordTok{matrix}\NormalTok{(mu, }\DataTypeTok{nrow =}\NormalTok{ m_B,}\DataTypeTok{ncol =}\NormalTok{ m_A)) }
+\NormalTok{mean_mat}
+\end{Highlighting}
+\end{Shaded}
+
+\begin{verbatim}
+##      [,1] [,2] [,3]
+## [1,]    2  1.0    4
+## [2,]    2  0.5    3
+## [3,]    2  0.0    6
+\end{verbatim}
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\CommentTok{# Potvin & Schutz, 2000, formula 2, p. 348}
+\CommentTok{# For main effect A}
+\NormalTok{lambda_A <-}
+\StringTok{  }\NormalTok{(n }\OperatorTok{*}\StringTok{ }\NormalTok{m_A }\OperatorTok{*}\StringTok{ }\KeywordTok{sum}\NormalTok{((}\KeywordTok{rowMeans}\NormalTok{(mean_mat) }\OperatorTok{-}\StringTok{ }
+\StringTok{                   }\KeywordTok{mean}\NormalTok{(}\KeywordTok{rowMeans}\NormalTok{(mean_mat))) }\OperatorTok{^}\StringTok{ }\DecValTok{2}\NormalTok{) ) }\OperatorTok{/}\StringTok{ }\NormalTok{variance_e_A}
+\NormalTok{  lambda_A}
+\end{Highlighting}
+\end{Shaded}
+
+\begin{verbatim}
+## [1] 0.6031746
+\end{verbatim}
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\CommentTok{#calculate degrees of freedom 1 - ignoring the sphericity correction}
+\NormalTok{df1 <-}\StringTok{ }\NormalTok{(m_A }\OperatorTok{-}\StringTok{ }\DecValTok{1}\NormalTok{) }
+
+\NormalTok{df2 <-}\StringTok{ }\NormalTok{(n }\OperatorTok{-}\StringTok{ }\NormalTok{k) }\OperatorTok{*}\StringTok{ }\NormalTok{(m_A }\OperatorTok{-}\StringTok{ }\DecValTok{1}\NormalTok{) }\CommentTok{#calculate degrees of freedom 2}
+
+\NormalTok{F_critical <-}\StringTok{ }\KeywordTok{qf}\NormalTok{(alpha, }\CommentTok{# critical F-vaue}
+\NormalTok{                 df1,}
+\NormalTok{                 df2, }
+                 \DataTypeTok{lower.tail =} \OtherTok{FALSE}\NormalTok{) }
+
+\NormalTok{pow_A <-}\StringTok{ }\KeywordTok{pf}\NormalTok{(}\KeywordTok{qf}\NormalTok{(alpha, }\CommentTok{#power }
+\NormalTok{             df1, }
+\NormalTok{             df2, }
+             \DataTypeTok{lower.tail =} \OtherTok{FALSE}\NormalTok{), }
+\NormalTok{          df1, }
+\NormalTok{          df2, }
+\NormalTok{          lambda_A, }
+          \DataTypeTok{lower.tail =} \OtherTok{FALSE}\NormalTok{)}
+\NormalTok{pow_A}\OperatorTok{*}\DecValTok{100}
+\end{Highlighting}
+\end{Shaded}
+
+\begin{verbatim}
+## [1] 9.441726
+\end{verbatim}
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\NormalTok{lambda_B <-}
+\StringTok{  }\NormalTok{n }\OperatorTok{*}\StringTok{ }\NormalTok{m_B }\OperatorTok{*}\StringTok{ }\KeywordTok{sum}\NormalTok{((}\KeywordTok{colMeans}\NormalTok{(mean_mat) }\OperatorTok{-}\StringTok{ }
+\StringTok{                   }\KeywordTok{mean}\NormalTok{(}\KeywordTok{colMeans}\NormalTok{(mean_mat))) }\OperatorTok{^}\StringTok{ }\DecValTok{2}\NormalTok{) }\OperatorTok{/}\StringTok{ }\NormalTok{variance_e_B }
+\NormalTok{lambda_B}
+\end{Highlighting}
+\end{Shaded}
+
+\begin{verbatim}
+## [1] 89.55556
+\end{verbatim}
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\NormalTok{df1 <-}\StringTok{ }\NormalTok{(m_B }\OperatorTok{-}\StringTok{ }\DecValTok{1}\NormalTok{) }\CommentTok{#calculate degrees of freedom 1}
+
+\NormalTok{df2 <-}\StringTok{ }\NormalTok{(n }\OperatorTok{-}\StringTok{ }\NormalTok{k) }\OperatorTok{*}\StringTok{ }\NormalTok{(m_B }\OperatorTok{-}\StringTok{ }\DecValTok{1}\NormalTok{) }\CommentTok{#calculate degrees of freedom 2}
+
+\NormalTok{F_critical <-}\StringTok{ }\KeywordTok{qf}\NormalTok{(alpha, }\CommentTok{# critical F-vaue}
+\NormalTok{                 df1,}
+\NormalTok{                 df2,}
+                 \DataTypeTok{lower.tail =} \OtherTok{FALSE}\NormalTok{) }
+
+\NormalTok{pow_B <-}\StringTok{ }\KeywordTok{pf}\NormalTok{(}\KeywordTok{qf}\NormalTok{(alpha, }\CommentTok{#power }
+\NormalTok{             df1, }
+\NormalTok{             df2, }
+             \DataTypeTok{lower.tail =} \OtherTok{FALSE}\NormalTok{), }
+\NormalTok{          df1, }
+\NormalTok{          df2, }
+\NormalTok{          lambda_B, }
+          \DataTypeTok{lower.tail =} \OtherTok{FALSE}\NormalTok{)}
+
+
+\NormalTok{pow_B}\OperatorTok{*}\DecValTok{100}
+\end{Highlighting}
+\end{Shaded}
+
+\begin{verbatim}
+## [1] 100
+\end{verbatim}
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\CommentTok{#Peform double summation courtesy of Andrew Vigotsky}
+\NormalTok{term <-}\StringTok{ }\DecValTok{0}
+\ControlFlowTok{for}\NormalTok{ (i }\ControlFlowTok{in} \DecValTok{1}\OperatorTok{:}\KeywordTok{nrow}\NormalTok{(mean_mat)) \{}
+  \ControlFlowTok{for}\NormalTok{ (j }\ControlFlowTok{in} \DecValTok{1}\OperatorTok{:}\KeywordTok{ncol}\NormalTok{(mean_mat)) \{}
+\NormalTok{    term <-}\StringTok{ }\NormalTok{((term }\OperatorTok{+}\StringTok{ }\NormalTok{(mean_mat[i,j] }\OperatorTok{-}
+\StringTok{                        }\KeywordTok{mean}\NormalTok{(mean_mat[i,]) }\OperatorTok{-}\StringTok{ }
+\StringTok{                        }\KeywordTok{mean}\NormalTok{(mean_mat[,j]) }\OperatorTok{+}\StringTok{ }\KeywordTok{mean}\NormalTok{(mean_mat))}\OperatorTok{^}\DecValTok{2}\NormalTok{))}
+\NormalTok{  \}}
+\NormalTok{\}}
+\NormalTok{term}
+\end{Highlighting}
+\end{Shaded}
+
+\begin{verbatim}
+## [1] 4.111111
+\end{verbatim}
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\CommentTok{#Calculate lambda for interaction term}
+\NormalTok{lambda_AB <-}\StringTok{ }\NormalTok{n}\OperatorTok{*}\NormalTok{term}\OperatorTok{/}\NormalTok{variance_e_AB}
+\NormalTok{lambda_AB}
+\end{Highlighting}
+\end{Shaded}
+
+\begin{verbatim}
+## [1] 16.44444
+\end{verbatim}
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\NormalTok{df1 <-}\StringTok{ }\NormalTok{(m_A }\OperatorTok{-}\StringTok{ }\DecValTok{1}\NormalTok{) }\OperatorTok{*}\StringTok{ }\NormalTok{(m_B }\OperatorTok{-}\StringTok{ }\DecValTok{1}\NormalTok{)  }\CommentTok{#calculate degrees of freedom 1}
+\NormalTok{df2 <-}
+\NormalTok{(n }\OperatorTok{-}\StringTok{ }\NormalTok{k) }\OperatorTok{*}\StringTok{ }\NormalTok{(m_A }\OperatorTok{-}\StringTok{ }\DecValTok{1}\NormalTok{) }\OperatorTok{*}\StringTok{ }\NormalTok{(m_B }\OperatorTok{-}\StringTok{ }\DecValTok{1}\NormalTok{) }\CommentTok{#calculate degrees of freedom 2}
+\NormalTok{F_critical <-}\StringTok{ }\KeywordTok{qf}\NormalTok{(alpha, }\CommentTok{# critical F-vaue}
+\NormalTok{df1,}
+\NormalTok{df2,}
+\DataTypeTok{lower.tail =} \OtherTok{FALSE}\NormalTok{)}
+
+\NormalTok{pow_AB <-}\StringTok{ }\KeywordTok{pf}\NormalTok{(}\KeywordTok{qf}\NormalTok{(alpha, }\CommentTok{#power}
+\NormalTok{df1,}
+\NormalTok{df2,}
+\DataTypeTok{lower.tail =} \OtherTok{FALSE}\NormalTok{),}
+\NormalTok{df1,}
+\NormalTok{df2,}
+\NormalTok{lambda_AB,}
+\DataTypeTok{lower.tail =} \OtherTok{FALSE}\NormalTok{)}
+
+\NormalTok{pow_AB}\OperatorTok{*}\DecValTok{100}
+\end{Highlighting}
+\end{Shaded}
+
+\begin{verbatim}
+## [1] 90.09263
+\end{verbatim}
+
+Again, when we compile all the analytical results into a single table we can see that the results match those from \texttt{ANOVA\_exact}.
+
+\begin{table}[!h]
+
+\caption{\label{tab:unnamed-chunk-170}Analytical Result}
+\centering
+\begin{tabular}{r|r|r}
+\hline
+variance & lambda & power\\
+\hline
+35 & 0.6031746 & 9.441726\\
+\hline
+5 & 89.5555556 & 100.000000\\
+\hline
+5 & 16.4444444 & 90.092634\\
+\hline
+\end{tabular}
+\end{table}
+
 \hypertarget{mixed-anova}{%
 \chapter{Mixed ANOVA}\label{mixed-anova}}
 
-\hypertarget{two-by-two-anova-within-between-design}{%
-\section{Two by two ANOVA, within-between design}\label{two-by-two-anova-within-between-design}}
+\hypertarget{x2-anova-within-between-design}{%
+\section{2x2 ANOVA, within-between design}\label{x2-anova-within-between-design}}
 
 We can simulate a Two-Way ANOVA with a specific alpha, sample size and effect size, to achieve a specified statistical power. We will try to reproduce the power analysis by G*Power for an F-test from an ANOVA with a repeated measures, within-between interaction effect.
 
@@ -3177,7 +3859,7 @@ For the 2-way interaction, the result should be a power of 91.25\% is we have a 
 
 \begin{table}[!h]
 
-\caption{\label{tab:unnamed-chunk-158}Simulated ANOVA Result}
+\caption{\label{tab:unnamed-chunk-172}Simulated ANOVA Result}
 \centering
 \begin{tabular}{l|r|r}
 \hline
@@ -3202,7 +3884,7 @@ anova\_color:age & 91.26 & 0.2155901\\
 
 \begin{table}[!h]
 
-\caption{\label{tab:unnamed-chunk-160}Exact ANOVA Result}
+\caption{\label{tab:unnamed-chunk-174}Exact ANOVA Result}
 \centering
 \begin{tabular}{l|r|r|r|r}
 \hline
@@ -3253,7 +3935,7 @@ We can simulate the same two-way ANOVA increasing the correlation to 0.7.
 
 \begin{table}[!h]
 
-\caption{\label{tab:unnamed-chunk-163}Simulated ANOVA Result}
+\caption{\label{tab:unnamed-chunk-177}Simulated ANOVA Result}
 \centering
 \begin{tabular}{l|r|r}
 \hline
@@ -3278,7 +3960,7 @@ anova\_color:age & 99.00 & 0.3081551\\
 
 \begin{table}[!h]
 
-\caption{\label{tab:unnamed-chunk-165}Exact ANOVA Result}
+\caption{\label{tab:unnamed-chunk-179}Exact ANOVA Result}
 \centering
 \begin{tabular}{l|r|r|r|r}
 \hline
@@ -3331,7 +4013,7 @@ Let's start with a 2x2x2 between subjects design. We collect 50 participants in 
 
 \begin{table}[!h]
 
-\caption{\label{tab:unnamed-chunk-168}Simulated ANOVA Result}
+\caption{\label{tab:unnamed-chunk-182}Simulated ANOVA Result}
 \centering
 \begin{tabular}{l|r|r}
 \hline
@@ -3364,7 +4046,7 @@ anova\_Size:Color:Load & 84.88 & 0.0248926\\
 
 \begin{table}[!h]
 
-\caption{\label{tab:unnamed-chunk-170}Exact ANOVA Result}
+\caption{\label{tab:unnamed-chunk-184}Exact ANOVA Result}
 \centering
 \begin{tabular}{l|r|r|r|r}
 \hline
@@ -3605,7 +4287,7 @@ A Three-Way ANOVA builds on the same principles as a One\_Way ANOVA. We look at 
 
 \begin{table}[!h]
 
-\caption{\label{tab:unnamed-chunk-175}Simulated ANOVA Result}
+\caption{\label{tab:unnamed-chunk-189}Simulated ANOVA Result}
 \centering
 \begin{tabular}{l|r|r}
 \hline
@@ -3626,7 +4308,7 @@ anova\_Size & 70.69 & 0.0180045\\
 
 \begin{table}[!h]
 
-\caption{\label{tab:unnamed-chunk-177}Exact ANOVA Result}
+\caption{\label{tab:unnamed-chunk-191}Exact ANOVA Result}
 \centering
 \begin{tabular}{l|r|r|r|r}
 \hline
@@ -3676,7 +4358,7 @@ Similarly, we can create a 2 factor design where we average over the third facto
 
 \begin{table}[!h]
 
-\caption{\label{tab:unnamed-chunk-181}Simulated ANOVA Result}
+\caption{\label{tab:unnamed-chunk-195}Simulated ANOVA Result}
 \centering
 \begin{tabular}{l|r|r}
 \hline
@@ -3701,7 +4383,7 @@ anova\_Size:Color & 69.72 & 0.0176374\\
 
 \begin{table}[!h]
 
-\caption{\label{tab:unnamed-chunk-183}Exact ANOVA Result}
+\caption{\label{tab:unnamed-chunk-197}Exact ANOVA Result}
 \centering
 \begin{tabular}{l|r|r|r|r}
 \hline
@@ -3777,7 +4459,7 @@ Size:Color & 70.33 & 0.0155 & 0.1256 & 6.25\\
 
 \begin{table}[!h]
 
-\caption{\label{tab:unnamed-chunk-187}Simulated ANOVA Result}
+\caption{\label{tab:unnamed-chunk-201}Simulated ANOVA Result}
 \centering
 \begin{tabular}{l|r|r}
 \hline
@@ -3810,7 +4492,7 @@ anova\_Size:Color:CognitiveLoad & 78.13 & 0.0213083\\
 
 \begin{table}[!h]
 
-\caption{\label{tab:unnamed-chunk-189}Exact ANOVA Result}
+\caption{\label{tab:unnamed-chunk-203}Exact ANOVA Result}
 \centering
 \begin{tabular}{l|r|r|r|r}
 \hline
@@ -4003,7 +4685,7 @@ The power for interactions depends on Cohen's \emph{f}, the alpha level, the sam
 
 \begin{table}[!h]
 
-\caption{\label{tab:unnamed-chunk-192}Exact ANOVA Result}
+\caption{\label{tab:unnamed-chunk-206}Exact ANOVA Result}
 \centering
 \begin{tabular}{l|r|r|r|r}
 \hline
@@ -4151,7 +4833,7 @@ We see that a pattern of means of 0, 0, 0, 0, 0, 0, 0, 20 for a 2x2x2 interactio
 
 \begin{table}[!h]
 
-\caption{\label{tab:unnamed-chunk-195}Exact ANOVA Result}
+\caption{\label{tab:unnamed-chunk-209}Exact ANOVA Result}
 \centering
 \begin{tabular}{l|r|r|r|r}
 \hline
@@ -4217,7 +4899,7 @@ Cohen's f is twice as large for a 2x2 design with the same mean value in one of 
 
 \begin{table}[!h]
 
-\caption{\label{tab:unnamed-chunk-198}Exact ANOVA Result}
+\caption{\label{tab:unnamed-chunk-212}Exact ANOVA Result}
 \centering
 \begin{tabular}{l|r|r|r|r}
 \hline
@@ -4285,7 +4967,7 @@ In the 17th Data Colada blog post titled \href{http://datacolada.org/17}{No-way 
 \end{Highlighting}
 \end{Shaded}
 
-\includegraphics{SuperpowerValidation_files/figure-latex/unnamed-chunk-201-1.pdf}
+\includegraphics{SuperpowerValidation_files/figure-latex/unnamed-chunk-215-1.pdf}
 
 We can reproduce the simulations in the Data Colada blog post, using the original code.
 
@@ -4428,7 +5110,7 @@ And we can reproduce the results using the ANOVA\_exact function.
 \end{Highlighting}
 \end{Shaded}
 
-\includegraphics{SuperpowerValidation_files/figure-latex/unnamed-chunk-217-1.pdf}
+\includegraphics{SuperpowerValidation_files/figure-latex/unnamed-chunk-231-1.pdf}
 
 \begin{Shaded}
 \begin{Highlighting}[]
@@ -4446,7 +5128,7 @@ And we can reproduce the results using the ANOVA\_exact function.
 
 \begin{table}[!h]
 
-\caption{\label{tab:unnamed-chunk-217}ANOVA Results}
+\caption{\label{tab:unnamed-chunk-231}ANOVA Results}
 \centering
 \begin{tabular}{l|r|r|r|r}
 \hline
@@ -4476,7 +5158,7 @@ b & 86.8 & 0.2174 & 0.527 & 10\\
 \end{Highlighting}
 \end{Shaded}
 
-\includegraphics{SuperpowerValidation_files/figure-latex/unnamed-chunk-217-2.pdf}
+\includegraphics{SuperpowerValidation_files/figure-latex/unnamed-chunk-231-2.pdf}
 
 \begin{Shaded}
 \begin{Highlighting}[]
@@ -4494,7 +5176,7 @@ b & 86.8 & 0.2174 & 0.527 & 10\\
 
 \begin{table}[!h]
 
-\caption{\label{tab:unnamed-chunk-217}ANOVA Results}
+\caption{\label{tab:unnamed-chunk-231}ANOVA Results}
 \centering
 \begin{tabular}{l|r|r|r|r}
 \hline
@@ -4559,7 +5241,7 @@ We can also reproduce the last example by adjusting the means and standard devia
 
 \begin{table}[!h]
 
-\caption{\label{tab:unnamed-chunk-224}ANOVA Results}
+\caption{\label{tab:unnamed-chunk-238}ANOVA Results}
 \centering
 \begin{tabular}{l|r|r|r|r}
 \hline
@@ -4627,7 +5309,7 @@ And changing the sample size to 300 should reproduce the power for the interacti
 
 \begin{table}[!h]
 
-\caption{\label{tab:unnamed-chunk-225}ANOVA Results}
+\caption{\label{tab:unnamed-chunk-239}ANOVA Results}
 \centering
 \begin{tabular}{l|r|r|r|r}
 \hline
@@ -4761,7 +5443,7 @@ Neither of the main effects is now significant, as the marginal means are 22.5 v
 
 \begin{table}[!h]
 
-\caption{\label{tab:unnamed-chunk-231}ANOVA Results}
+\caption{\label{tab:unnamed-chunk-245}ANOVA Results}
 \centering
 \begin{tabular}{l|r|r|r|r}
 \hline
@@ -4875,7 +5557,7 @@ In a one-way ANOVA adding a condition means, for example, going from a 1x2 to a 
 
 \begin{table}[!h]
 
-\caption{\label{tab:unnamed-chunk-235}Simulated ANOVA Result}
+\caption{\label{tab:unnamed-chunk-249}Simulated ANOVA Result}
 \centering
 \begin{tabular}{l|r|r}
 \hline
@@ -4896,7 +5578,7 @@ anova\_Condition & 84.15 & 0.0911796\\
 
 \begin{table}[!h]
 
-\caption{\label{tab:unnamed-chunk-237}Exact ANOVA Result}
+\caption{\label{tab:unnamed-chunk-251}Exact ANOVA Result}
 \centering
 \begin{tabular}{l|r|r|r|r}
 \hline
@@ -4976,7 +5658,7 @@ And we can see power across sample sizes
 
 \begin{table}[!h]
 
-\caption{\label{tab:unnamed-chunk-240}Exact ANOVA Result}
+\caption{\label{tab:unnamed-chunk-254}Exact ANOVA Result}
 \centering
 \begin{tabular}{l|r|r|r|r}
 \hline
@@ -5392,7 +6074,7 @@ Now imagine our design described above was a within design. The means and sd rem
 
 \begin{table}[!h]
 
-\caption{\label{tab:unnamed-chunk-248}Exact ANOVA Result}
+\caption{\label{tab:unnamed-chunk-262}Exact ANOVA Result}
 \centering
 \begin{tabular}{l|r|r|r|r}
 \hline
@@ -5444,7 +6126,7 @@ We see power is ever so slightly less than for the between subject design. This 
 
 \begin{table}[!h]
 
-\caption{\label{tab:unnamed-chunk-251}Exact ANOVA Result}
+\caption{\label{tab:unnamed-chunk-265}Exact ANOVA Result}
 \centering
 \begin{tabular}{l|r|r|r|r}
 \hline
@@ -5894,7 +6576,7 @@ In a 2 x 2 x 2 design, an ANOVA will give the test results for three main effect
 
 \begin{table}[!h]
 
-\caption{\label{tab:unnamed-chunk-255}Simulated ANOVA Result}
+\caption{\label{tab:unnamed-chunk-269}Simulated ANOVA Result}
 \centering
 \begin{tabular}{l|r|r}
 \hline
@@ -6015,7 +6697,7 @@ Let's re-run the simulation twith the Holm-Bonferroni correction, which is simpl
 
 \begin{table}[!h]
 
-\caption{\label{tab:unnamed-chunk-260}ANOVA Results}
+\caption{\label{tab:unnamed-chunk-274}ANOVA Results}
 \centering
 \begin{tabular}{l|r|r}
 \hline
@@ -6040,7 +6722,7 @@ anova\_condition1:condition2:condition3 & 1.1 & 0.0027855\\
 
 \begin{table}[!h]
 
-\caption{\label{tab:unnamed-chunk-261}Pairwise Results}
+\caption{\label{tab:unnamed-chunk-275}Pairwise Results}
 \centering
 \begin{tabular}{l|r|r}
 \hline
@@ -6152,7 +6834,7 @@ For some designs it is possible to calculate power analytically, using closed fu
 
 \begin{table}[!h]
 
-\caption{\label{tab:unnamed-chunk-264}Exact ANOVA Result}
+\caption{\label{tab:unnamed-chunk-278}Exact ANOVA Result}
 \centering
 \begin{tabular}{l|r|r|r|r}
 \hline
@@ -6248,7 +6930,7 @@ Finally, G*Power provides the option to calculate f from the means, sd and n for
 
 \begin{table}[!h]
 
-\caption{\label{tab:unnamed-chunk-269}Exact ANOVA Result}
+\caption{\label{tab:unnamed-chunk-283}Exact ANOVA Result}
 \centering
 \begin{tabular}{l|r|r|r|r}
 \hline
@@ -6357,7 +7039,7 @@ We can use the function by Aberson, 2019, as well.
 
 \begin{table}[!h]
 
-\caption{\label{tab:unnamed-chunk-273}Exact ANOVA Result}
+\caption{\label{tab:unnamed-chunk-287}Exact ANOVA Result}
 \centering
 \begin{tabular}{l|r|r|r|r}
 \hline
@@ -6453,7 +7135,7 @@ We first simulate a within subjects 2x2 ANOVA design.
 
 \begin{table}[!h]
 
-\caption{\label{tab:unnamed-chunk-276}Exact ANOVA Result}
+\caption{\label{tab:unnamed-chunk-290}Exact ANOVA Result}
 \centering
 \begin{tabular}{l|r|r|r|r}
 \hline
@@ -6582,7 +7264,7 @@ Power is calculated for a specific value of an effect size, alpha level, and sam
 
 \begin{table}[!h]
 
-\caption{\label{tab:unnamed-chunk-282}Exact ANOVA Result}
+\caption{\label{tab:unnamed-chunk-296}Exact ANOVA Result}
 \centering
 \begin{tabular}{l|r|r|r|r}
 \hline
@@ -6607,28 +7289,28 @@ We can make these calculations for a range of sample sizes, to get a power curve
 \end{Highlighting}
 \end{Shaded}
 
-\includegraphics{SuperpowerValidation_files/figure-latex/unnamed-chunk-283-1.pdf}
+\includegraphics{SuperpowerValidation_files/figure-latex/unnamed-chunk-297-1.pdf}
 
 \hypertarget{explore-increase-in-effect-size-for-moderated-interactions.}{%
 \section{Explore increase in effect size for moderated interactions.}\label{explore-increase-in-effect-size-for-moderated-interactions.}}
 
 The design has means 0, 0, 0, 0, with one cell increasing by 0.1, up to 0, 0, 0, 0.5. The standard deviation is set to 1. The correlation between all variables is 0.5.
 
-\includegraphics{SuperpowerValidation_files/figure-latex/unnamed-chunk-284-1.pdf}
+\includegraphics{SuperpowerValidation_files/figure-latex/unnamed-chunk-298-1.pdf}
 
 \hypertarget{explore-increase-in-effect-size-for-cross-over-interactions.}{%
 \section{Explore increase in effect size for cross-over interactions.}\label{explore-increase-in-effect-size-for-cross-over-interactions.}}
 
 The design has means 0, 0, 0, 0, with two cells increasing by 0.1, up to 0.5, 0, 0, 0.5. The standard deviation is set to 1. The correlation between all variables is 0.5.
 
-\includegraphics{SuperpowerValidation_files/figure-latex/unnamed-chunk-285-1.pdf}
+\includegraphics{SuperpowerValidation_files/figure-latex/unnamed-chunk-299-1.pdf}
 
 \hypertarget{explore-increase-in-correlation-in-moderated-interactions.}{%
 \section{Explore increase in correlation in moderated interactions.}\label{explore-increase-in-correlation-in-moderated-interactions.}}
 
 The design has means 0, 0, 0, 0.3. The standard deviation is set to 1. The correlation between all variables increases from 0 to 0.9.
 
-\includegraphics{SuperpowerValidation_files/figure-latex/unnamed-chunk-286-1.pdf}
+\includegraphics{SuperpowerValidation_files/figure-latex/unnamed-chunk-300-1.pdf}
 
 \hypertarget{increasing-correlation-in-on-factor-decreases-power-in-second-factor}{%
 \section{Increasing correlation in on factor decreases power in second factor}\label{increasing-correlation-in-on-factor-decreases-power-in-second-factor}}
@@ -6640,10 +7322,11 @@ The more important finding with respect to the effect of \emph{r} on power relat
 \end{quote}
 
 We see this in the plots below. As the correlation of the A factor increases from 0.4 to 0.9, we see the power for the main effect of factor B decreases.
-\includegraphics{SuperpowerValidation_files/figure-latex/unnamed-chunk-287-1.pdf}
+\includegraphics{SuperpowerValidation_files/figure-latex/unnamed-chunk-301-1.pdf}
 
 \hypertarget{appendix-1-direct-comparison-to-pwr2ppl}{%
-\chapter{Appendix 1: Direct Comparison to pwr2ppl}\label{appendix-1-direct-comparison-to-pwr2ppl}}
+\chapter*{Appendix 1: Direct Comparison to pwr2ppl}\label{appendix-1-direct-comparison-to-pwr2ppl}}
+\addcontentsline{toc}{chapter}{Appendix 1: Direct Comparison to pwr2ppl}
 
 In this appendix we have included the performance of \texttt{Superpower} to the \texttt{pwr2ppl} package using Chris Aberson's examples in \href{https://www.crcpress.com/Applied-Power-Analysis-for-the-Behavioral-Sciences-2nd-Edition/Aberson/p/book/9781138044593}{\emph{Applied Power Analysis for the Behavioral Sciences}} (2nd edition).
 
@@ -7431,7 +8114,8 @@ And the results from \texttt{pwr2ppl}.
 \end{verbatim}
 
 \hypertarget{appendix-2-direct-comparison-to-morepower}{%
-\chapter{Appendix 2: Direct Comparison to MOREpower}\label{appendix-2-direct-comparison-to-morepower}}
+\chapter*{Appendix 2: Direct Comparison to MOREpower}\label{appendix-2-direct-comparison-to-morepower}}
+\addcontentsline{toc}{chapter}{Appendix 2: Direct Comparison to MOREpower}
 
 MOREpower 6.0 by Jamie I. D. Campbell is standalone software for power analysis for ANOVA, t-tests, correlations, and tests of proportions. It outperforms G*power, in that it allows researchers to perform power analyses for a much wider range of designs. It allows a maximum of 9 levels per factor. Users can solve for N, power or effect size. An ANOVA effect size may be specified in terms of the effect-related variance explained (partial eta-squared) or in terms of a test statistic (F, mean square treatment {[}MST{]}, or t).
 

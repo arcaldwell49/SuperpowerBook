@@ -6,7 +6,7 @@
   <meta http-equiv="X-UA-Compatible" content="IE=edge" />
   <title>Chapter 4 Mixed ANOVA | The Superpower R Package: Capabilities and Validation</title>
   <meta name="description" content="This is a book describing the capabilities of the Superpower R package." />
-  <meta name="generator" content="bookdown 0.13 and GitBook 2.6.7" />
+  <meta name="generator" content="bookdown 0.10 and GitBook 2.6.7" />
 
   <meta property="og:title" content="Chapter 4 Mixed ANOVA | The Superpower R Package: Capabilities and Validation" />
   <meta property="og:type" content="book" />
@@ -31,8 +31,8 @@
   <meta name="apple-mobile-web-app-status-bar-style" content="black" />
   
   
-<link rel="prev" href="repeated-measures-anova.html"/>
-<link rel="next" href="power-for-three-way-interactions.html"/>
+<link rel="prev" href="repeated-measures-anova.html">
+<link rel="next" href="power-for-three-way-interactions.html">
 <script src="libs/jquery-2.2.3/jquery.min.js"></script>
 <link href="libs/gitbook-2.6.7/css/style.css" rel="stylesheet" />
 <link href="libs/gitbook-2.6.7/css/plugin-table.css" rel="stylesheet" />
@@ -47,6 +47,7 @@
 
 
 
+<script src="libs/kePrint-0.0.1/kePrint.js"></script>
 
 
 <style type="text/css">
@@ -55,6 +56,7 @@ a.sourceLine { pointer-events: none; color: inherit; text-decoration: inherit; }
 a.sourceLine:empty { height: 1.2em; }
 .sourceCode { overflow: visible; }
 code.sourceCode { white-space: pre; position: relative; }
+div.sourceCode { margin: 1em 0; }
 pre.sourceCode { margin: 0; }
 @media screen {
 div.sourceCode { overflow: auto; }
@@ -176,9 +178,12 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 <li class="chapter" data-level="3.4.1" data-path="repeated-measures-anova.html"><a href="repeated-measures-anova.html#two-by-two-anova-within-within-design"><i class="fa fa-check"></i><b>3.4.1</b> Two by two ANOVA, within-within design</a></li>
 <li class="chapter" data-level="3.4.2" data-path="repeated-measures-anova.html"><a href="repeated-measures-anova.html#examine-variation-of-means-and-correlation"><i class="fa fa-check"></i><b>3.4.2</b> Examine variation of means and correlation</a></li>
 </ul></li>
+<li class="chapter" data-level="3.5" data-path="repeated-measures-anova.html"><a href="repeated-measures-anova.html#part-5"><i class="fa fa-check"></i><b>3.5</b> Part 5</a><ul>
+<li class="chapter" data-level="3.5.1" data-path="repeated-measures-anova.html"><a href="repeated-measures-anova.html#x2-anova-within-design"><i class="fa fa-check"></i><b>3.5.1</b> 2x2 ANOVA, within design</a></li>
+</ul></li>
 </ul></li>
 <li class="chapter" data-level="4" data-path="mixed-anova.html"><a href="mixed-anova.html"><i class="fa fa-check"></i><b>4</b> Mixed ANOVA</a><ul>
-<li class="chapter" data-level="4.1" data-path="mixed-anova.html"><a href="mixed-anova.html#two-by-two-anova-within-between-design"><i class="fa fa-check"></i><b>4.1</b> Two by two ANOVA, within-between design</a><ul>
+<li class="chapter" data-level="4.1" data-path="mixed-anova.html"><a href="mixed-anova.html#x2-anova-within-between-design"><i class="fa fa-check"></i><b>4.1</b> 2x2 ANOVA, within-between design</a><ul>
 <li class="chapter" data-level="4.1.1" data-path="mixed-anova.html"><a href="mixed-anova.html#two-by-two-anova-within-between-design-variation-1"><i class="fa fa-check"></i><b>4.1.1</b> Two by two ANOVA, within-between design Variation 1</a></li>
 </ul></li>
 </ul></li>
@@ -238,62 +243,314 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
             <section class="normal" id="section-">
 <div id="mixed-anova" class="section level1">
 <h1><span class="header-section-number">Chapter 4</span> Mixed ANOVA</h1>
-<div id="two-by-two-anova-within-between-design" class="section level2">
-<h2><span class="header-section-number">4.1</span> Two by two ANOVA, within-between design</h2>
+<div id="x2-anova-within-between-design" class="section level2">
+<h2><span class="header-section-number">4.1</span> 2x2 ANOVA, within-between design</h2>
 <p>We can simulate a Two-Way ANOVA with a specific alpha, sample size and effect size, to achieve a specified statistical power. We will try to reproduce the power analysis by G*Power for an F-test from an ANOVA with a repeated measures, within-between interaction effect.</p>
 <p><img src="screenshots/gpower_5.png" /></p>
 <p>For the 2-way interaction, the result should be a power of 91.25% is we have a total samplesize of 46. Since we have 2 groups in the between factor that means the sample size per group is 2 (and both these groups collect 2 repeated measures).</p>
-<div class="sourceCode" id="cb191"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb191-1" title="1">mu &lt;-<span class="st"> </span><span class="kw">c</span>(<span class="op">-</span><span class="fl">0.25</span>, <span class="fl">0.25</span>, <span class="fl">0.25</span>,<span class="op">-</span><span class="fl">0.25</span>)</a>
-<a class="sourceLine" id="cb191-2" title="2">n &lt;-<span class="st"> </span><span class="dv">23</span></a>
-<a class="sourceLine" id="cb191-3" title="3">sd &lt;-<span class="st"> </span><span class="dv">1</span></a>
-<a class="sourceLine" id="cb191-4" title="4">r &lt;-<span class="st"> </span><span class="fl">0.5</span></a>
-<a class="sourceLine" id="cb191-5" title="5">string =<span class="st"> &quot;2w*2b&quot;</span></a>
-<a class="sourceLine" id="cb191-6" title="6">alpha_level &lt;-<span class="st"> </span><span class="fl">0.05</span></a>
-<a class="sourceLine" id="cb191-7" title="7">labelnames =<span class="st"> </span><span class="kw">c</span>(<span class="st">&quot;age&quot;</span>, <span class="st">&quot;old&quot;</span>, <span class="st">&quot;young&quot;</span>, <span class="st">&quot;color&quot;</span>, <span class="st">&quot;blue&quot;</span>, <span class="st">&quot;red&quot;</span>)</a>
-<a class="sourceLine" id="cb191-8" title="8"></a>
-<a class="sourceLine" id="cb191-9" title="9">design_result &lt;-<span class="st"> </span><span class="kw">ANOVA_design</span>(</a>
-<a class="sourceLine" id="cb191-10" title="10"><span class="dt">design =</span> string,</a>
-<a class="sourceLine" id="cb191-11" title="11"><span class="dt">n =</span> n,</a>
-<a class="sourceLine" id="cb191-12" title="12"><span class="dt">mu =</span> mu,</a>
-<a class="sourceLine" id="cb191-13" title="13"><span class="dt">sd =</span> sd,</a>
-<a class="sourceLine" id="cb191-14" title="14"><span class="dt">r =</span> r,</a>
-<a class="sourceLine" id="cb191-15" title="15"><span class="dt">labelnames =</span> labelnames</a>
-<a class="sourceLine" id="cb191-16" title="16">)</a></code></pre></div>
-<div class="sourceCode" id="cb192"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb192-1" title="1">simulation_result &lt;-<span class="st"> </span><span class="kw">ANOVA_power</span>(design_result, </a>
-<a class="sourceLine" id="cb192-2" title="2">                                 <span class="dt">alpha_level =</span> alpha_level, </a>
-<a class="sourceLine" id="cb192-3" title="3">                                 <span class="dt">nsims =</span> nsims,</a>
-<a class="sourceLine" id="cb192-4" title="4">                                 <span class="dt">verbose =</span> <span class="ot">FALSE</span>)</a></code></pre></div>
+<pre class="sourceCode r"><code class="sourceCode r">mu &lt;-<span class="st"> </span><span class="kw">c</span>(<span class="op">-</span><span class="fl">0.25</span>, <span class="fl">0.25</span>, <span class="fl">0.25</span>,<span class="op">-</span><span class="fl">0.25</span>)
+n &lt;-<span class="st"> </span><span class="dv">23</span>
+sd &lt;-<span class="st"> </span><span class="dv">1</span>
+r &lt;-<span class="st"> </span><span class="fl">0.5</span>
+string =<span class="st"> &quot;2w*2b&quot;</span>
+alpha_level &lt;-<span class="st"> </span><span class="fl">0.05</span>
+labelnames =<span class="st"> </span><span class="kw">c</span>(<span class="st">&quot;age&quot;</span>, <span class="st">&quot;old&quot;</span>, <span class="st">&quot;young&quot;</span>, <span class="st">&quot;color&quot;</span>, <span class="st">&quot;blue&quot;</span>, <span class="st">&quot;red&quot;</span>)
 
-<div class="sourceCode" id="cb193"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb193-1" title="1">exact_result &lt;-<span class="st"> </span><span class="kw">ANOVA_exact</span>(design_result,</a>
-<a class="sourceLine" id="cb193-2" title="2">                            <span class="dt">alpha_level =</span> alpha_level,</a>
-<a class="sourceLine" id="cb193-3" title="3">                            <span class="dt">verbose =</span> <span class="ot">FALSE</span>)</a></code></pre></div>
-
+design_result &lt;-<span class="st"> </span><span class="kw">ANOVA_design</span>(
+<span class="dt">design =</span> string,
+<span class="dt">n =</span> n,
+<span class="dt">mu =</span> mu,
+<span class="dt">sd =</span> sd,
+<span class="dt">r =</span> r,
+<span class="dt">labelnames =</span> labelnames
+)</code></pre>
+<pre class="sourceCode r"><code class="sourceCode r">simulation_result &lt;-<span class="st"> </span><span class="kw">ANOVA_power</span>(design_result, 
+                                 <span class="dt">alpha_level =</span> alpha_level, 
+                                 <span class="dt">nsims =</span> nsims,
+                                 <span class="dt">verbose =</span> <span class="ot">FALSE</span>)</code></pre>
+<table class="table" style="margin-left: auto; margin-right: auto;">
+<caption>
+<span id="tab:unnamed-chunk-172">Table 4.1: </span>Simulated ANOVA Result
+</caption>
+<thead>
+<tr>
+<th style="text-align:left;">
+</th>
+<th style="text-align:right;">
+power
+</th>
+<th style="text-align:right;">
+effect_size
+</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td style="text-align:left;">
+anova_color
+</td>
+<td style="text-align:right;">
+4.45
+</td>
+<td style="text-align:right;">
+0.0215448
+</td>
+</tr>
+<tr>
+<td style="text-align:left;">
+anova_age
+</td>
+<td style="text-align:right;">
+5.29
+</td>
+<td style="text-align:right;">
+0.0221193
+</td>
+</tr>
+<tr>
+<td style="text-align:left;">
+anova_color:age
+</td>
+<td style="text-align:right;">
+91.26
+</td>
+<td style="text-align:right;">
+0.2155901
+</td>
+</tr>
+</tbody>
+</table>
+<pre class="sourceCode r"><code class="sourceCode r">exact_result &lt;-<span class="st"> </span><span class="kw">ANOVA_exact</span>(design_result,
+                            <span class="dt">alpha_level =</span> alpha_level,
+                            <span class="dt">verbose =</span> <span class="ot">FALSE</span>)</code></pre>
+<table class="table" style="margin-left: auto; margin-right: auto;">
+<caption>
+<span id="tab:unnamed-chunk-174">Table 4.2: </span>Exact ANOVA Result
+</caption>
+<thead>
+<tr>
+<th style="text-align:left;">
+</th>
+<th style="text-align:right;">
+power
+</th>
+<th style="text-align:right;">
+partial_eta_squared
+</th>
+<th style="text-align:right;">
+cohen_f
+</th>
+<th style="text-align:right;">
+non_centrality
+</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td style="text-align:left;">
+color
+</td>
+<td style="text-align:right;">
+5.00
+</td>
+<td style="text-align:right;">
+0.0000
+</td>
+<td style="text-align:right;">
+0.0000
+</td>
+<td style="text-align:right;">
+0.0
+</td>
+</tr>
+<tr>
+<td style="text-align:left;">
+age
+</td>
+<td style="text-align:right;">
+5.00
+</td>
+<td style="text-align:right;">
+0.0000
+</td>
+<td style="text-align:right;">
+0.0000
+</td>
+<td style="text-align:right;">
+0.0
+</td>
+</tr>
+<tr>
+<td style="text-align:left;">
+color:age
+</td>
+<td style="text-align:right;">
+91.25
+</td>
+<td style="text-align:right;">
+0.2072
+</td>
+<td style="text-align:right;">
+0.5112
+</td>
+<td style="text-align:right;">
+11.5
+</td>
+</tr>
+</tbody>
+</table>
 <div id="two-by-two-anova-within-between-design-variation-1" class="section level3">
 <h3><span class="header-section-number">4.1.1</span> Two by two ANOVA, within-between design Variation 1</h3>
 <p>We can simulate the same two-way ANOVA increasing the correlation to 0.7.</p>
 <p><img src="screenshots/gpower_6.png" /></p>
-<div class="sourceCode" id="cb194"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb194-1" title="1">mu &lt;-<span class="st"> </span><span class="kw">c</span>(<span class="op">-</span><span class="fl">0.25</span>, <span class="fl">0.25</span>, <span class="fl">0.25</span>, <span class="fl">-0.25</span>)</a>
-<a class="sourceLine" id="cb194-2" title="2">n &lt;-<span class="st"> </span><span class="dv">23</span></a>
-<a class="sourceLine" id="cb194-3" title="3">sd &lt;-<span class="st"> </span><span class="dv">1</span></a>
-<a class="sourceLine" id="cb194-4" title="4">r &lt;-<span class="st"> </span><span class="fl">0.7</span></a>
-<a class="sourceLine" id="cb194-5" title="5">string =<span class="st"> &quot;2w*2b&quot;</span></a>
-<a class="sourceLine" id="cb194-6" title="6">alpha_level &lt;-<span class="st"> </span><span class="fl">0.05</span></a>
-<a class="sourceLine" id="cb194-7" title="7">labelnames =<span class="st"> </span><span class="kw">c</span>(<span class="st">&quot;age&quot;</span>, <span class="st">&quot;old&quot;</span>, <span class="st">&quot;young&quot;</span>, <span class="st">&quot;color&quot;</span>, <span class="st">&quot;blue&quot;</span>, <span class="st">&quot;red&quot;</span>)</a>
-<a class="sourceLine" id="cb194-8" title="8">design_result &lt;-<span class="st"> </span><span class="kw">ANOVA_design</span>(<span class="dt">design =</span> string,</a>
-<a class="sourceLine" id="cb194-9" title="9">                              <span class="dt">n =</span> n, </a>
-<a class="sourceLine" id="cb194-10" title="10">                              <span class="dt">mu =</span> mu, </a>
-<a class="sourceLine" id="cb194-11" title="11">                              <span class="dt">sd =</span> sd, </a>
-<a class="sourceLine" id="cb194-12" title="12">                              <span class="dt">r =</span> r, </a>
-<a class="sourceLine" id="cb194-13" title="13">                              <span class="dt">labelnames =</span> labelnames)</a></code></pre></div>
-<div class="sourceCode" id="cb195"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb195-1" title="1">simulation_result &lt;-<span class="st"> </span><span class="kw">ANOVA_power</span>(design_result, </a>
-<a class="sourceLine" id="cb195-2" title="2">                                 <span class="dt">alpha_level =</span> alpha_level, </a>
-<a class="sourceLine" id="cb195-3" title="3">                                 <span class="dt">nsims =</span> nsims,</a>
-<a class="sourceLine" id="cb195-4" title="4">                                 <span class="dt">verbose =</span> <span class="ot">FALSE</span>)</a></code></pre></div>
-
-<div class="sourceCode" id="cb196"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb196-1" title="1">exact_result &lt;-<span class="st"> </span><span class="kw">ANOVA_exact</span>(design_result,</a>
-<a class="sourceLine" id="cb196-2" title="2">                            <span class="dt">alpha_level =</span> alpha_level,</a>
-<a class="sourceLine" id="cb196-3" title="3">                            <span class="dt">verbose =</span> <span class="ot">FALSE</span>)</a></code></pre></div>
-
+<pre class="sourceCode r"><code class="sourceCode r">mu &lt;-<span class="st"> </span><span class="kw">c</span>(<span class="op">-</span><span class="fl">0.25</span>, <span class="fl">0.25</span>, <span class="fl">0.25</span>, <span class="fl">-0.25</span>)
+n &lt;-<span class="st"> </span><span class="dv">23</span>
+sd &lt;-<span class="st"> </span><span class="dv">1</span>
+r &lt;-<span class="st"> </span><span class="fl">0.7</span>
+string =<span class="st"> &quot;2w*2b&quot;</span>
+alpha_level &lt;-<span class="st"> </span><span class="fl">0.05</span>
+labelnames =<span class="st"> </span><span class="kw">c</span>(<span class="st">&quot;age&quot;</span>, <span class="st">&quot;old&quot;</span>, <span class="st">&quot;young&quot;</span>, <span class="st">&quot;color&quot;</span>, <span class="st">&quot;blue&quot;</span>, <span class="st">&quot;red&quot;</span>)
+design_result &lt;-<span class="st"> </span><span class="kw">ANOVA_design</span>(<span class="dt">design =</span> string,
+                              <span class="dt">n =</span> n, 
+                              <span class="dt">mu =</span> mu, 
+                              <span class="dt">sd =</span> sd, 
+                              <span class="dt">r =</span> r, 
+                              <span class="dt">labelnames =</span> labelnames)</code></pre>
+<pre class="sourceCode r"><code class="sourceCode r">simulation_result &lt;-<span class="st"> </span><span class="kw">ANOVA_power</span>(design_result, 
+                                 <span class="dt">alpha_level =</span> alpha_level, 
+                                 <span class="dt">nsims =</span> nsims,
+                                 <span class="dt">verbose =</span> <span class="ot">FALSE</span>)</code></pre>
+<table class="table" style="margin-left: auto; margin-right: auto;">
+<caption>
+<span id="tab:unnamed-chunk-177">Table 4.3: </span>Simulated ANOVA Result
+</caption>
+<thead>
+<tr>
+<th style="text-align:left;">
+</th>
+<th style="text-align:right;">
+power
+</th>
+<th style="text-align:right;">
+effect_size
+</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td style="text-align:left;">
+anova_color
+</td>
+<td style="text-align:right;">
+4.93
+</td>
+<td style="text-align:right;">
+0.0220656
+</td>
+</tr>
+<tr>
+<td style="text-align:left;">
+anova_age
+</td>
+<td style="text-align:right;">
+4.85
+</td>
+<td style="text-align:right;">
+0.0224569
+</td>
+</tr>
+<tr>
+<td style="text-align:left;">
+anova_color:age
+</td>
+<td style="text-align:right;">
+99.00
+</td>
+<td style="text-align:right;">
+0.3081551
+</td>
+</tr>
+</tbody>
+</table>
+<pre class="sourceCode r"><code class="sourceCode r">exact_result &lt;-<span class="st"> </span><span class="kw">ANOVA_exact</span>(design_result,
+                            <span class="dt">alpha_level =</span> alpha_level,
+                            <span class="dt">verbose =</span> <span class="ot">FALSE</span>)</code></pre>
+<table class="table" style="margin-left: auto; margin-right: auto;">
+<caption>
+<span id="tab:unnamed-chunk-179">Table 4.4: </span>Exact ANOVA Result
+</caption>
+<thead>
+<tr>
+<th style="text-align:left;">
+</th>
+<th style="text-align:right;">
+power
+</th>
+<th style="text-align:right;">
+partial_eta_squared
+</th>
+<th style="text-align:right;">
+cohen_f
+</th>
+<th style="text-align:right;">
+non_centrality
+</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td style="text-align:left;">
+color
+</td>
+<td style="text-align:right;">
+5.00
+</td>
+<td style="text-align:right;">
+0.0000
+</td>
+<td style="text-align:right;">
+0.00
+</td>
+<td style="text-align:right;">
+0.0000
+</td>
+</tr>
+<tr>
+<td style="text-align:left;">
+age
+</td>
+<td style="text-align:right;">
+5.00
+</td>
+<td style="text-align:right;">
+0.0000
+</td>
+<td style="text-align:right;">
+0.00
+</td>
+<td style="text-align:right;">
+0.0000
+</td>
+</tr>
+<tr>
+<td style="text-align:left;">
+color:age
+</td>
+<td style="text-align:right;">
+98.98
+</td>
+<td style="text-align:right;">
+0.3034
+</td>
+<td style="text-align:right;">
+0.66
+</td>
+<td style="text-align:right;">
+19.1667
+</td>
+</tr>
+</tbody>
+</table>
 
 </div>
 </div>
@@ -356,9 +613,8 @@ gitbook.start({
     script.type = "text/javascript";
     var src = "true";
     if (src === "" || src === "true") src = "https://mathjax.rstudio.com/latest/MathJax.js?config=TeX-MML-AM_CHTML";
-    if (location.protocol !== "file:")
-      if (/^https?:/.test(src))
-        src = src.replace(/^https?:/, '');
+    if (location.protocol !== "file:" && /^https?:/.test(src))
+      src = src.replace(/^https?:/, '');
     script.src = src;
     document.getElementsByTagName("head")[0].appendChild(script);
   })();

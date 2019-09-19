@@ -5,10 +5,10 @@ output: html_document
 ---
 
 ## Part 5
+**Credit for the non-centrality parameter for the interaction goes to Andrew Vigotsky**
+### 2x2 ANOVA, within design
 
-### Two by two ANOVA, within design
-
-Potvin & Schutz (2000) simulate a wide range of repeated measure designs. The give an example of a 3x3 design, with the following correlation matrix:
+Potvin & Schutz (2000) simulate a wide range of repeated measure designs. They give an example of a 3x3 design, with the following correlation matrix:
 
 ![](screenshots/PS2000.png)
 
@@ -61,7 +61,7 @@ exact_result <- ANOVA_exact(design_result,
 
 ```{r echo=FALSE}
 knitr::kable(exact_result$main_results,
-             caption = "Exact ANOVA Result")%>%
+             caption = "Exact ANOVA Result") %>%
   kable_styling(latex_options = "hold_position")
 ```
 
@@ -89,8 +89,8 @@ sigma <- sd
 
 m_A <- 2 #levels factor A
 
-variance_e_A <- sigma^2 * (1 - rho_A) + 
-  sigma^2 * (m_A - 1) * (rho_B - rho_AB) 
+variance_e_A <- (sigma^2 * (1 - rho_A) + 
+  sigma^2 * (m_A - 1) * (rho_B - rho_AB) )
 #Variance A
 variance_e_A
 
@@ -164,14 +164,16 @@ pow_B <- pf(qf(alpha, #power
 
 pow_B*100
 ```
-~~We see the 26.9 and 64.2 correspond to the results of the simulation quite closely~~
+
 
 ```{r }
 #Peform double summation courtesy of Andrew Vigotsky
 term <- 0
-for(i in nrow(mean_mat)) {
-  for(j in nrow(mean_mat)) {
-    term <- term + (mean_mat[i,j] - mean(mean_mat[i,]) - mean(mean_mat[,j]) + mean(mean_mat))^2
+for (i in 1:nrow(mean_mat)) {
+  for (j in 1:ncol(mean_mat)) {
+    term <- (term + (mean_mat[i,j] - 
+                       mean(mean_mat[i,]) - 
+                       mean(mean_mat[,j]) + mean(mean_mat))^2)
   }
 }
 term
@@ -200,6 +202,22 @@ lambda_AB,
 lower.tail = FALSE)
 
 pow_AB*100
+```
+
+We can now compile all the analytical results into a single table, and see that the results match those from `ANOVA_exact`.
+
+```{r echo = FALSE}
+power <- c(pow_A, pow_B, pow_AB)
+lambda <- c(lambda_A, lambda_B, lambda_AB)
+variance <- c(variance_e_A, variance_e_B, variance_e_AB)
+
+dat_analytical <- data.frame(variance, lambda, power)
+
+dat_analytical$power = dat_analytical$power*100
+
+knitr::kable(dat_analytical,
+             caption = "Analytical Result") %>%
+  kable_styling(latex_options = "hold_position")
 ```
 
 And we can see in the simple scenario matches `ANOVA_exact` and `ANOVA_power` output.
@@ -248,7 +266,7 @@ exact_result <- ANOVA_exact(design_result,
 
 ```{r echo=FALSE}
 knitr::kable(exact_result$main_results,
-             caption = "Exact ANOVA Result")%>%
+             caption = "Exact ANOVA Result") %>%
   kable_styling(latex_options = "hold_position")
 ```
 
@@ -354,9 +372,11 @@ pow_B*100
 ```{r }
 #Peform double summation courtesy of Andrew Vigotsky
 term <- 0
-for(i in nrow(mean_mat)) {
-  for(j in nrow(mean_mat)) {
-    term <- term + (mean_mat[i,j] - mean(mean_mat[i,]) - mean(mean_mat[,j]) + mean(mean_mat))^2
+for (i in 1:nrow(mean_mat)) {
+  for (j in 1:ncol(mean_mat)) {
+    term <- ((term + (mean_mat[i,j] -
+                        mean(mean_mat[i,]) - 
+                        mean(mean_mat[,j]) + mean(mean_mat))^2))
   }
 }
 term
@@ -385,4 +405,20 @@ lambda_AB,
 lower.tail = FALSE)
 
 pow_AB*100
+```
+
+Again, when we compile all the analytical results into a single table we can see that the results match those from `ANOVA_exact`.
+
+```{r echo = FALSE}
+power <- c(pow_A, pow_B, pow_AB)
+lambda <- c(lambda_A, lambda_B, lambda_AB)
+variance <- c(variance_e_A, variance_e_B, variance_e_AB)
+
+dat_analytical <- data.frame(variance, lambda, power)
+
+dat_analytical$power = dat_analytical$power*100
+
+knitr::kable(dat_analytical,
+             caption = "Analytical Result") %>%
+  kable_styling(latex_options = "hold_position")
 ```
