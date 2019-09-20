@@ -73,12 +73,19 @@ p_f$power_df$effect <- 0.5
 
 
 plot_data <- rbind(p_a$power_df, p_b$power_df, p_c$power_df, 
-                   p_d$power_df, p_e$power_df, p_f$power_df)
+                   p_d$power_df, p_e$power_df, p_f$power_df)%>%
+  mutate(AxB = `A:B`) %>% select(n,effect,A,B,AxB)
 
-plot1 <- ggplot(plot_data, aes(x = n, y = `A:B`,color = as.factor(effect))) +
+long_data = plot_data %>%
+  gather("A", "B", "AxB", key = factor, value = power)
+
+plot1 <- ggplot(long_data, aes(x = n, y = power,color = as.factor(effect))) +
   geom_line(size = 1.5) +
-  labs(color = "Effect Size") +
-  scale_color_viridis_d()
+  scale_y_continuous(breaks = seq(0,100,10)) +
+  labs(color = "Effect Size",
+       x = "Sample Size per Group",
+       y = "Power (%)") +
+  scale_color_viridis_d() + facet_wrap( ~ factor, ncol=2)
 
 ####
 
@@ -149,12 +156,19 @@ p_f <- plot_power(design_result,
 p_f$power_df$effect <- 0.5
 
 plot_data <- rbind(p_a$power_df, p_b$power_df, p_c$power_df,
-                   p_d$power_df, p_e$power_df, p_f$power_df)
+                   p_d$power_df, p_e$power_df, p_f$power_df)%>%
+  mutate(AxB = `A:B`) %>% select(n,effect,A,B,AxB)
 
-plot2 <- ggplot(plot_data, aes(x = n, y = `A:B`,color = as.factor(effect))) +
+long_data = plot_data %>%
+  gather("A", "B", "AxB", key = factor, value = power)
+
+plot2 <- ggplot(long_data, aes(x = n, y = power,color = as.factor(effect))) +
   geom_line(size = 1.5) +
-  labs(color = "Effect Size") +
-  scale_color_viridis_d()
+  scale_y_continuous(breaks = seq(0,100,10)) +
+  labs(color = "Effect Size",
+       x = "Sample Size per Group",
+       y = "Power (%)") +
+  scale_color_viridis_d() + facet_wrap( ~ factor, ncol=2)
 
 ##
 
@@ -166,6 +180,7 @@ design_result <- ANOVA_design(design = string,
                               sd = 1, 
                               r = 0.0, 
                               labelnames = labelnames)
+
 p_a <- plot_power(design_result,
                   max_n = 100)
 
@@ -232,12 +247,19 @@ p_f <- plot_power(design_result,
 p_f$power_df$correlation <- 0.9
 
 plot_data <- rbind(p_a$power_df, p_b$power_df, 
-                   p_c$power_df, p_d$power_df, p_e$power_df, p_f$power_df)
+                   p_c$power_df, p_d$power_df, p_e$power_df, p_f$power_df)%>%
+  mutate(AxB = `A:B`) %>% select(n,correlation,A,B,AxB)
 
-plot3 <- ggplot(plot_data, aes(x = n, y = `A:B`, color = as.factor(correlation))) +
+long_data = plot_data %>%
+  gather("A", "B", "AxB", key = factor, value = power)
+
+plot3 <- ggplot(long_data, aes(x = n, y = power,color = as.factor(correlation))) +
   geom_line(size = 1.5) +
-  labs(color = "Correlation") +
-  scale_color_viridis_d()
+  scale_y_continuous(breaks = seq(0,100,10)) +
+  labs(color = "Correlation",
+       x = "Sample Size per Group",
+       y = "Power (%)") +
+  scale_color_viridis_d() + facet_wrap( ~ factor, ncol=2)
 ##############
 
 string <- "2w*2w"
@@ -328,10 +350,18 @@ p_f <- plot_power(design_result,
 p_f$power_df$corr_diff <- 0.5
 
 plot_data <- rbind(p_a$power_df, p_b$power_df, p_c$power_df, 
-                   p_d$power_df, p_e$power_df, p_f$power_df)
+                   p_d$power_df, p_e$power_df, p_f$power_df)%>%
+  mutate(AxB = `A:B`) %>% select(n,corr_diff,A,B,AxB)
 
+long_data = plot_data %>%
+  gather("A", "B", "AxB", key = factor, value = power)
 
-plot4 <- ggplot(plot_data, aes(x = n, y = `A`, color = as.factor(corr_diff))) +
+plot4 <- ggplot(long_data, aes(x = n, y = power,color = as.factor(corr_diff))) +
   geom_line(size = 1.5) +
-  labs(color = "Difference in Correlation") +
-  scale_color_viridis_d()
+  scale_y_continuous(breaks = seq(0,100,10)) +
+  labs(color = "Difference in Correlation",
+       x = "Sample Size per Group",
+       y = "Power (%)") +
+  scale_color_viridis_d() + facet_wrap( ~ factor, ncol=2)
+
+

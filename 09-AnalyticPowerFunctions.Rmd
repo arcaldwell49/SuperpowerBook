@@ -40,7 +40,7 @@ power_oneway_between(design_result)$power
 
 ```
 
-This is a generalized function for One-Way ANOVA's for any number of groups. It is in part based on code from the `pwr2ppl` package (but Aberson's code allows for different n per condition, and different sd per condition).
+This is a generalized function for one-way ANOVA's for any number of groups. It is in part based on code from the `pwr2ppl` [@R-pwr2ppl] package (but Aberson's code allows for different n per condition, and different sd per condition).
 
 ```{r}
 anova1f_4(m1 = 80, m2 = 82, m3 = 82, m4 = 86,
@@ -49,7 +49,7 @@ anova1f_4(m1 = 80, m2 = 82, m3 = 82, m4 = 86,
           alpha = .05)
 ```
 
-We can also use the function in the pwr package. Note that we need to calculate f to use this function, which is based on the means and sd, as illustrated in the formulas above. 
+We can also use the function in the `pwr` package [@R-pwr]. Note that we need to calculate *f* to use this function, which is based on the means and sd, as illustrated in the formulas above. 
 
 ```{r}
 pwr.anova.test(n = 60,
@@ -58,7 +58,7 @@ pwr.anova.test(n = 60,
                sig.level = 0.05)
 ```
 
-Finally, G*Power provides the option to calculate f from the means, sd and n for the cells. It can then be used to calculate power.
+Finally, G*Power [@faul2007g] provides the option to calculate `f` from the means, sd and n for the cells. It can then be used to calculate power.
 
 ![](screenshots/gpower_13.png)
 
@@ -100,7 +100,7 @@ power_res$power_B
 power_res$power_AB
 ```
 
-We can use the function by Aberson, 2019, as well. 
+We can use the function by [@R-pwr2ppl], as well. 
 
 ```{r}
 anova2x2(m1.1 = 20,
@@ -158,83 +158,3 @@ power_res$power_B
 power_res$power_AB
 ```
 
-## Two by two ANOVA, within design
-
-Potvin & Schutz (2000) simulate a wide range of repeated measure designs. The give an example of a 3x3 design, with the following correlation matrix:
-
-![](screenshots/PS2000.png)
-
-Variances were set to 1 (so all covariance matrices in their simulations were identical). In this specific example, the white fields are related to the correlation for the A main effect (these cells have the same level for B, but different levels of A). The grey cells are related to the main effect of B (the cells have the same level of A, but different levels of B). Finally, the black cells are related to the AxB interaction (they have different levels of A and B). The diagonal (all 1) relate to cells with the same levels of A and B. 
-
-Potvin & Schulz (2000) examine power for 2x2 within ANOVA designs and develop approximations of the error variance. For a design with 2 within factors (A and B) these are: 
-
-For the main effect of A:
-$\sigma _ { e } ^ { 2 } = \sigma ^ { 2 } ( 1 - \overline { \rho } _ { A } ) + \sigma ^ { 2 } ( q - 1 ) ( \overline { \rho } _ { B } - \overline { \rho } _ { AB } )$
-
-For the main effectof B:
-$\sigma _ { e } ^ { 2 } = \sigma ^ { 2 } ( 1 - \overline { \rho } _ { B } ) + \sigma ^ { 2 } ( p - 1 ) ( \overline { \rho } _ { A } - \overline { \rho } _ { A B } )$
-
-For the interaction between A and B:
-$\sigma _ { e } ^ { 2 } = \sigma ^ { 2 } ( 1 - \rho _ { \max } ) - \sigma ^ { 2 } ( \overline { \rho } _ { \min } - \overline { \rho } _ { AB } )$
- 
-We first simulate a within subjects 2x2 ANOVA design.
-
-```{r}
-mu = c(2,1,4,2) 
-n <- 20
-sd <- 5
-r <- c(
-  0.8, 0.5, 0.4,
-       0.4, 0.5,
-            0.8
-  )
-string = "2w*2w"
-labelnames = c("A", "a1", "a2", "B", "b1", "b2")
-design_result <- ANOVA_design(design = string,
-                              n = n, 
-                              mu = mu, 
-                              sd = sd, 
-                              r = r, 
-                              labelnames = labelnames)
-
-exact_result <- ANOVA_exact(design_result,
-                            alpha_level = alpha_level,
-                            verbose = FALSE)
-```
-
-```{r echo = FALSE}
-knitr::kable(exact_result$main_results,
-             caption = "Exact ANOVA Result")%>%
-  kable_styling(latex_options = "hold_position")
-```
-
-We can use the `ANOVA_exact` function to evaluate this design since there is not a analytic solution in `Superpower`. 
-```{r}
-power_res <- ANOVA_exact(design_result = design_result)
-```
-
-```{r echo = FALSE}
-power_res$main_results
-```
-
-We can use `pwr2ppl` by Aberson (2019) to produce the same results.
-
-```{r}
-win2F(
-  m1.1 = 2,
-  m2.1 = 1,
-  m1.2 = 4,
-  m2.2 = 2,
-  s1.1 = 5,
-  s2.1 = 5,
-  s1.2 = 5,
-  s2.2 = 5,
-  r12 = 0.8,
-  r13 = 0.5,
-  r14 = 0.4,
-  r23 = 0.4,
-  r24 = 0.5,
-  r34 = 0.8,
-  n = 20
-)
-```

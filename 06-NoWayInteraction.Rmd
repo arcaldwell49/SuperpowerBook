@@ -3,7 +3,7 @@
 load("data/noway_data.RData")
 ```
 
-In the 17th Data Colada blog post titled [No-way Interactions](http://datacolada.org/17) Uri Simonsohn discusses how a moderated interaction (the effect is there in one condition, but disappears in another condition) requires at least twice as many subjects per cell as a study that simply aims to show the simple effect. For example, see the plot below. Assume the score on the vertical axis is desire for fruit, as a function of the fruit that is available (an apple or a banana) and how hungry people are (not, or very). We see there is a difference between the participants desire for a banana compared to an apple, but only for participants who are very hungry. The point that is made is that you need twice as many participants in each cell to have power for the interaction, as you need for the simple effect. 
+In the 17th Data Colada blog post titled [No-way Interactions](http://datacolada.org/17) @simonsohn_2014 discusses how a moderated interaction (the effect is there in one condition, but disappears in another condition) requires at least twice as many subjects per cell as a study that simply aims to show the simple effect. For example, see the plot below. Assume the score on the vertical axis is desire for fruit, as a function of the fruit that is available (an apple or a banana) and how hungry people are (not, or very). We see there is a difference between the participants desire for a banana compared to an apple, but only for participants who are very hungry. The point that is made is that you need twice as many participants in each cell to have power for the interaction, as you need for the simple effect. 
 
 ```{r}
 string <- "2b*2b"
@@ -152,8 +152,7 @@ colada17(simtot = nsims, n1 = 20, n2 = 20, d1 = 1, d2 = 0)
   cat("\nStudy 2 is powered to:",round(colada_7$power2,2))
 ```
 
-
-And we can reproduce the results using the ANOVA_exact function.
+And we can reproduce the results using the `ANOVA_exact` function.
 
 ```{r}
 #Study 1
@@ -311,9 +310,9 @@ colMeans(mean_mat)
 
 The interaction tests whether the average effect of hunger on liking fruit differs in the presence of bananas. In the presence of bananas the effect of hunger on the desireability of fruit is 5 scalepoints. The average effect (that we get from the marginal means) of hunger on fruit desireability is 2.5 (22.5-20). In other words, the interaction tests whether the difference effect between hunger and no hunger is different in the presence of an apple versus in the presence of a banana. 
 
-Mathematically the interaction effect is computed as the difference between a cell mean and the grand mean, the marginal mean in row i and the grand mean, and the marginal mean in column j and grand mean. For example, for the very hungry-banana condition this is 25 (the value in the cell) - (21.25 [the grand mean] + 1.25 [the marginal mean in row 2, 22.5, minus the grand mean of 21.25] + 1.25 [the marginal mean in column 2, 22.5, minus the grand mean of 21.25]). 25 - (21.25 + (22.5-21.25) + (22.5-21.25)) = 1.25. 
+Mathematically the interaction effect is computed as the difference between a cell mean and the grand mean, the marginal mean in row i and the grand mean, and the marginal mean in column j and grand mean. For example, for the very hungry-banana condition this is: 25 (the value in the cell) - (21.25 [the grand mean] + 1.25 [the marginal mean in row 2, 22.5, minus the grand mean of 21.25] + 1.25 [the marginal mean in column 2, 22.5, minus the grand mean of 21.25]). 25 - (21.25 + (22.5-21.25) + (22.5-21.25)) = 1.25. 
 
-We can repeat this for every cell, and get for no hunger-apple: 20 - (21.25 + (20-21.25) + (20-21.25)) = 1.25, for very hungry apple: 20 - (21.25 + (22.5-21.25) + (20-21.25)) = 1.25, and no hunger-banana: 20 - (21.25 + (20-21.25) + (22.5-21.25)) = 1.25. These values are used to calculate the sum of squares.
+We can repeat this for every cell, and get for no hunger-apple: $20 - (21.25 + (20-21.25) + (20-21.25)) = 1.25$, for very hungry apple: $20 - (21.25 + (22.5-21.25) + (20-21.25)) = 1.25$, and no hunger-banana: $20 - (21.25 + (20-21.25) + (22.5-21.25)) = 1.25$. These values are used to calculate the sum of squares.
 
 ```{r}
 a1 <- mean_mat[1,1] - (mean(mean_mat) + 
@@ -373,7 +372,7 @@ knitr::kable(exact_result$main_results,
   kable_styling(latex_options = "hold_position")
 ```
 
-We can also reproduce the power analysis using the analytic function:
+We can also reproduce the power analysis using the analytic functions in `Superpower`:
 
 ```{r}
 power_analytic <- power_twoway_between(design_result)

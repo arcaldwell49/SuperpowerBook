@@ -4,7 +4,7 @@ load("data/threeway_data.RData")
 ```
 There are almost no software solutions that allow researchers to perform power anaysis for more complex designs. Through simulation, it is relatively straightforward to examine the power for designs with multiple factors with many levels. 
 
-Let's start with a 2x2x2 between subjects design. We collect 50 participants in each between participant condition (so 400 participants in total - 50x2x2x2). 
+Let's start with a 2x2x2 between-subjects design. We collect 50 participants in each between participant condition (so 400 participants in total - $50(n)\times2(levels)\times2(levels)\times2(levels)= 400$). 
 
 ```{r start_threewayinteraction}
 # With 2x2x2 designs, 
@@ -71,7 +71,7 @@ power_analytic$eta_p_2_BC
 power_analytic$eta_p_2_ABC
 ```
 
-We can also confirm the power analysis in GPower. GPower allows you to compute the power for a three-way interaction - if you know the Cohen's f value to enter. Cohen's f is calculated based on the means for the interaction, the sum of squares of the effect, and the sum of squares of the errors. This is quite a challenge by hand, but we can simulate the results, or use the analytical solution we programmed to get Cohen's f for the pattern of means that we specified. 
+We can also confirm the power analysis in GPower [@faul2007g]. GPower allows you to compute the power for a three-way interaction - if you know the Cohen's *f* value to enter. Cohen's *f* is calculated based on the means for the interaction, the sum of squares of the effect, and the sum of squares of the errors. This is quite a challenge by hand, but we can simulate the results, or use the analytical solution we programmed to get Cohen's *f* for the pattern of means that we specified. 
 
 ```{r}
 # The power for the AC interaction (Size x Load) is 0.873535. 
@@ -86,7 +86,7 @@ power_analytic$F_critical_AC
 
 ![](screenshots/gpower_8.png)
 
-A Three-Way ANOVA builds on the same principles as a One_Way ANOVA. We look at whether the differences between groups are large, compared to the standard deviation. For the main effects we simply have 2 groups of 200 participants, and 2 means. If the population standard deviations are identical across groups, this is not in any way different from a One-Way ANOVA. Indeed, we can show this by simulating a One-Way ANOVA, where instead of 8 conditions, we have two conditions, and we average over the 4 groups of the other two factors. For example, for the main effect of size above can be computed analytically. There might be a small difference in the degrees of freedom of the two tests, or it is just random variation (And it will disappear when repeating the simulation 1000.000 times instead of 100.000. 
+A three-way ANOVA builds on the same principles as a one-way ANOVA. We look at whether the differences between groups are large, compared to the standard deviation. For the main effects we simply have 2 groups of 200 participants, and 2 means. If the population standard deviations are identical across groups, this is not in any way different from a one-way ANOVA. Indeed, we can show this by simulating a one-way ANOVA, where instead of 8 conditions, we have two conditions, and we average over the 4 groups of the other two factors. For example, for the main effect of size above can be computed analytically. There might be a small difference in the degrees of freedom of the two tests, or it is just random variation (And it will disappear when the number of iterations in the simulation, `nsim`, is increased). 
 
 ```{r}
 string <- "2b"
@@ -291,7 +291,7 @@ power_analytic$eta_p_2_A
 power_analytic$Cohen_f_A
 ```
 
-We see that a pattern of means of 0, 0, 0, 0, 0, 0, 0, 20 for a 2x2x2 interaction equals a Cohen's f of 0.25.  
+We see that a pattern of means of 0, 0, 0, 0, 0, 0, 0, 20 for a 2x2x2 interaction equals a Cohen's *f* of 0.25.  
 
 ```{r}
 labelnames <- c("Size", "b", "s", "Color", "g", "r")
@@ -320,7 +320,7 @@ power_analytic$eta_p_2_A
 power_analytic$Cohen_f_A
 ```
 
-Cohen's f is twice as large for a 2x2 design with the same mean value in one of four cells. In a 2 factor between design. 
+Cohen's *f* is twice as large for a 2x2 design with the same mean value in one of four cells. In a 2 factor between design. 
 
 ```{r}
 labelnames <- c("Size", "b", "s")

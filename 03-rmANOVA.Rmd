@@ -8,11 +8,11 @@ In a repeated measures design multiple observations are collected from the same 
 
 ### Two conditions, medium effect size
 
-To illustrate the effect of correated observations, we start by simulating data for a medium effect size for a dependent (or paired, or within-subject) *t*-test. Let's first look at G*power. If we want to perform an a-priori power analysis, we are asked to fill in the effect size dz. As Cohen (1988) writes, "The Z subscript is used to emphasize the fact that our raw score unit is no longer X or Y, but Z", where Z are the difference scores of X-Y. 
+To illustrate the effect of correated observations, we start by simulating data for a medium effect size for a dependent (or paired, or within-subject) *t*-test. Let's first look at @faul2007g. If we want to perform an a-priori power analysis, we are asked to fill in the effect size dz. As @cohen1988spa writes, "The Z subscript is used to emphasize the fact that our raw score unit is no longer X or Y, but Z", where Z are the difference scores of X-Y. 
 
 ![](screenshots/gpower_9.png)
 
-Within designs can have greater power to detect differences than between designs because the values are correlated, and a within design requires less participants because each participant provides multiple observations. One difference between an independent *t*-test and a dependent *t*-test is that an independent *t*-test has 2(n-1) degrees of freedom, while a dependent *t*-test has (n-1) degrees of freedom. The sample size needed in a two-group within-design (NW) relative to the sample needed in two-group between-designs (NB), assuming normal distributions, and ignoring the difference in degrees of freedom between the two types of tests, is (from Maxwell & Delaney, 2004, p. 561, formula 45): 
+Within designs can have greater power to detect differences than between designs because the values are correlated, and a within design requires less participants because each participant provides multiple observations. One difference between an independent *t*-test and a dependent *t*-test is that an independent *t*-test has 2(n-1) degrees of freedom, while a dependent *t*-test has (n-1) degrees of freedom. The sample size needed in a two-group within-design (NW) relative to the sample needed in two-group between-designs (NB), assuming normal distributions, and ignoring the difference in degrees of freedom between the two types of tests, is (from @maxwell_designing_2004, p. 561, formula 45): 
 
 $N_{W}=\frac{N_{B}(1-\rho)}{2}$
 
@@ -40,7 +40,7 @@ pwr.t.test(d = 0.05,
            alternative = "two.sided")
 ```
 
-There is no equivalent "fz" for Cohen's *f* for a within subject ANOVA. For two groups, we can directly compute Cohen's *f* from Cohen's d for two groups, as Cohen (1988) describes, because f = 1/2d. For a d = 0.5, f = 0.25. In Gpower we can run a 2 group within-subject power analysis for ANOVA. We plan for 80% power, and reproduce the anaysis above for the dependent *t*-test. This works because the correlation is set to 0.5, when d = dz, and thus the transformation of f=1/2d works.  
+There is no equivalent "fz" for Cohen's *f* for a within subject ANOVA. For two groups, we can directly compute Cohen's *f* from Cohen's d for two groups, as @cohen1988spa describes, because f = 1/2d. For a d = 0.5, f = 0.25. In Gpower we can run a 2 group within-subject power analysis for ANOVA. We plan for 80% power, and reproduce the anaysis above for the dependent *t*-test. This works because the correlation is set to 0.5, when d = dz, and thus the transformation of f=1/2d works.  
 
 ![](screenshots/gpower_1.png)
 
@@ -52,7 +52,7 @@ To reproduce this analysis in Gpower with a dependent *t*-test we need to change
 
 ![](screenshots/gpower_10.png)
 
-We can perform both these power analyses using simuations as well. We set groups to 2 for the simulation, n = 34 (which should give 80.777 power, according to the g*power program), a correlation among repeated measures of 0.5, and an alpha of 0.05. In this case, we simulate data with means -0.25  and 0.25, and set the sd to 1. This means we have a mean difference of 0.5, and a Cohen's d of 0.5/1 = 0.5. In the first example, we set the correlation to 0.5, and the result should be 80.77% power, and an effect size estimate of 0.5 for the simple effect. We also calculate partial eta-squared for the ANOVA, which equals $\frac{f^2}{f^2+1}$, or 0.05882353.
+We can perform both these power analyses using simuations as well. We set groups to 2 for the simulation, n = 34 (which should give 80.777 power, according to the @faul2007g program), a correlation among repeated measures of 0.5, and an alpha of 0.05. In this case, we simulate data with means -0.25  and 0.25, and set the sd to 1. This means we have a mean difference of 0.5, and a Cohen's d of 0.5/1 = 0.5. In the first example, we set the correlation to 0.5, and the result should be 80.77% power, and an effect size estimate of 0.5 for the simple effect. We also calculate partial eta-squared for the ANOVA, which equals $\frac{f^2}{f^2+1}$, or 0.05882353.
 
 ```{r}
 K <- 2
@@ -165,13 +165,13 @@ f <- 0.5*0.6454972
 #  
 ```
 
-Entering this f in G*power, with a correlation of 0.5, yields the same as entering `f = 0.25` and `correlation = 0.7`.
+Entering this f in Gpower, with a correlation of 0.5, yields the same as entering `f = 0.25` and `correlation = 0.7`.
 
 ## Part 2
 
 Here, we will examine a repeated measures experiment with 3 within-subject conditions, to illustrate how a repeated measures ANOVA extends a dependent *t*-test with 3 groups. 
 
-In the example for a two-group within design we provided a specific formula for the sample size benefit for two groups. The sample size needed in within-designs (NW) with more than 2 conditions, relative to the sample needed in between-designs (NB), assuming normal distributions and compound symmetry, and ignoring the difference in degrees of freedom between the two types of tests, is (from Maxwell & Delaney, 2004, p. 562, formula 47): 
+In the example for a two-group within design we provided a specific formula for the sample size benefit for two groups. The sample size needed in within-designs (NW) with more than 2 conditions, relative to the sample needed in between-designs (NB), assuming normal distributions and compound symmetry, and ignoring the difference in degrees of freedom between the two types of tests, is (from @maxwell_designing_2004, p. 562, formula 47): 
 
 $N_{W}=\frac{N_{B}(1-\rho)}{a}$
 
@@ -179,7 +179,7 @@ Where a is the number of within-subject levels.
 
 ### The relation between Cohen's f and Cohen's d
 
-Whereas in the case of a repeated measures ANOVA with 2 groups we could explain the principles of a power analysis by comparing our test against a *t*-test and Cohen's d, this becomes more difficult when we have more than 2 groups. It is more useful to explain how to directly calculate Cohen's *f*, the effect size used in power analyses for ANOVA. Cohen's *f* is calculated following Cohen, 1988, formula 8.2.1 and 8.2.2:
+Whereas in the case of a repeated measures ANOVA with 2 groups we could explain the principles of a power analysis by comparing our test against a *t*-test and Cohen's d, this becomes more difficult when we have more than 2 groups. It is more useful to explain how to directly calculate Cohen's *f*, the effect size used in power analyses for ANOVA. Cohen's *f* is calculated following @cohen1988spa, formula 8.2.1 and 8.2.2:
 
 $f = \sqrt{\frac{\frac{\sum(\mu-\overline{\mu})^2)}N}\sigma}$ 
 
@@ -197,7 +197,7 @@ f <- sqrt(sum((mu - mean(mu)) ^ 2) / length(mu)) / sd
   (4.3 - 4.2) / 0.9 / sqrt(2 * (1 - r))
 ```
 
-The relation between Cohen's d or dz and Cohen's *f* becomes more difficult when there are multiple groups, because the relationship depends on the pattern of the means. Cohen (1988) presents calculations for three patterns, minimal variability (for example, for 5 means: -0.25, 0, 0, 0, 0.25), medium variability (for example, for 5 means: -0.25, -0.25, 0.25, 0.25, 0.25 or -0.25, -0.25, -0.25, 0.25, 0.25). For these three patterns, formula's are available that compute Cohen's *f* from Cohen's d, where d is the effect size calculated for the difference between the largest and smallest mean (if the largest mean is 0.25 and the smallest mean is -0.25, 0.25 - -0.25 = 0.5, so d is 0.5 divided by the standard deviation of 0.9). In our example, d would be (4.3-3.8)/0.9 = 0.5555556. If we divide this value by `sqrt(2*(1-r))` we have dz = 0.5555556/0.7745967 = 0.7172191. 
+The relation between Cohen's d or dz and Cohen's *f* becomes more difficult when there are multiple groups, because the relationship depends on the pattern of the means. @cohen1988spa presents calculations for three patterns, minimal variability (for example, for 5 means: -0.25, 0, 0, 0, 0.25), medium variability (for example, for 5 means: -0.25, -0.25, 0.25, 0.25, 0.25 or -0.25, -0.25, -0.25, 0.25, 0.25). For these three patterns, formula's are available that compute Cohen's *f* from Cohen's d, where d is the effect size calculated for the difference between the largest and smallest mean (if the largest mean is 0.25 and the smallest mean is -0.25, 0.25 - -0.25 = 0.5, so d is 0.5 divided by the standard deviation of 0.9). In our example, d would be (4.3-3.8)/0.9 = 0.5555556. If we divide this value by `sqrt(2*(1-r))` we have dz = 0.5555556/0.7745967 = 0.7172191. 
 
 I have created a custom function that will calculate f from d, based on a specification of one of the three patterns of means. Our pattern is most similar (but not identical) to a maximum variability pattern (two means are high, one is lower). So we could attempt to calculate f from d (0.5555556), by calculating d from the largest and smallest mean:
 
@@ -487,11 +487,11 @@ knitr::kable(exact_result$main_results,
 
 **Results**
 
-The results of the simulation are very similar. Power for the ANOVA *F*-test is around 95.2%. For the three paired t-tests, power is around 92.7. This is in line with the a-priori power analysis when using g*power:
+The results of the simulation are very similar. Power for the ANOVA *F*-test is around 95.2%. For the three paired t-tests, power is around 92.7. This is in line with the a-priori power analysis when using Gpower:
 
 ![](screenshots/gpower_2.png)
 
-We can perform an post-hoc power analysis in G*power. We can calculate Cohen´s f based on the means and sd, using our own custom formula. 
+We can perform an post-hoc power analysis in Gpower. We can calculate Cohen´s f based on the means and sd, using our own custom formula. 
 
 ```{r}
 # Our simulation is based onthe following means and sd:
@@ -628,7 +628,7 @@ knitr::kable(exact_result$main_results,
 
 
 
-Again, this is similar to G*Power for the ANOVA:
+Again, this is similar to GPower for the ANOVA:
 
 [](screenshots/gpower_4.png)
 
@@ -639,11 +639,11 @@ load("data/mixed_data.RData")
 
 ## Part 4
 
-### Two by two ANOVA, within-within design
+### 2x2 ANOVA, within-within design
 
 We can simulate a 2x2 ANOVA, both factors manipulated within participants, with a specific sample size and effect size, to achieve a desired statistical power.
 
-As Potvin & Schutz (2000) explain, analytic procedures for a two-factor repeated measures ANOVA do not seem to exist. The main problem is quantifying the error variance (the denominator when calculating lambda or Cohen's *f*). Simulation based aproaches provide a solution. 
+As @potvin2000statistical explain, analytic procedures for a two-factor repeated measures ANOVA do not seem to exist. The main problem is quantifying the error variance (the denominator when calculating lambda or Cohen's *f*). Simulation based aproaches provide a solution. 
 
 We can reproduce the simulation coded by [Ben Amsel](https://cognitivedatascientist.com/2015/12/14/power-simulation-in-r-the-repeated-measures-anova-5/)
 
@@ -976,13 +976,13 @@ knitr::kable(exact_result$main_results,
 
 ### 2x2 ANOVA, within design
 
-Potvin & Schutz (2000) simulate a wide range of repeated measure designs. They give an example of a 3x3 design, with the following correlation matrix:
+@potvin2000statistical simulate a wide range of repeated measure designs. They give an example of a 3x3 design, with the following correlation matrix:
 
 ![](screenshots/PS2000.png)
 
 Variances were set to 1 (so all covariance matrices in their simulations were identical). In this specific example, the white fields are related to the correlation for the A main effect (these cells have the same level for B, but different levels of A). The grey cells are related to the main effect of B (the cells have the same level of A, but different levels of B). Finally, the black cells are related to the AxB interaction (they have different levels of A and B). The diagonal (all 1) relate to cells with the same levels of A and B. 
 
-Potvin & Schulz (2000) examine power for 2x2 within ANOVA designs and develop approximations of the error variance. For a design with 2 within factors (A and B) these are: 
+@potvin2000statistical examine power for 2x2 within ANOVA designs and develop approximations of the error variance. For a design with 2 within factors (A and B) these are: 
 
 For the main effect of A:
 $\sigma _ { e } ^ { 2 } = \sigma ^ { 2 } ( 1 - \overline { \rho } _ { A } ) + \sigma ^ { 2 } ( q - 1 ) ( \overline { \rho } _ { B } - \overline { \rho } _ { AB } )$
@@ -993,7 +993,7 @@ $\sigma _ { e } ^ { 2 } = \sigma ^ { 2 } ( 1 - \overline { \rho } _ { B } ) + \s
 For the interaction between A and B:
 $\sigma _ { e } ^ { 2 } = \sigma ^ { 2 } ( 1 - \rho _ { \max } ) - \sigma ^ { 2 } ( \overline { \rho } _ { \min } - \overline { \rho } _ { AB } )$
 
-Let's now compare the formulas in Potvin and Schutz (2000) with `Superpower` with a simple scenario.  
+Let's now compare the formulas in @potvin2000statistical with `Superpower` with a simple scenario.  
 
 ```{r}
 mu = c(2,1,4,2) 
@@ -1033,7 +1033,7 @@ exact_result$aov_result$anova_table
 ```
 
 
-We can try to use the formula in Potvin & Schutz (2000).
+We can try to use the formula in @potvin2000statistical.
 
 ```{r}
 k <- 1 #one group (because all factors are within)
@@ -1183,7 +1183,7 @@ knitr::kable(dat_analytical,
 
 And we can see in the simple scenario matches `ANOVA_exact` and `ANOVA_power` output.
 
-Let's now extend to one of the simlations presented by Potvin and Schultz with a 3x3 solution.
+Let's now extend to one of the simlations presented by @potvin2000statistical with a 3x3 solution.
 
 ```{r}
 mu = c(2,1,4,
@@ -1215,7 +1215,7 @@ design_result <- ANOVA_design(design = string,
 design_result$cor_mat
 ```
 
-The design now matches the correlation matrix in Figure 1 of Potvin and Schultz.
+The design now matches the correlation matrix in Figure 1 of @potvin2000statistical.
 
 And we can estimate power with `ANOVA_exact`.
 

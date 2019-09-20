@@ -4,7 +4,7 @@ author: "Aaron R. Caldwell & Dani&euml;l Lakens"
 date: "`r Sys.Date()`"
 site: bookdown::bookdown_site
 documentclass: book
-bibliography: [book.bib, packages.bib]
+bibliography: [book.bib, packages.bib, references.bib]
 biblio-style: apalike
 link-citations: yes
 description: "This is a book describing the capabilities of the Superpower R package."
@@ -17,7 +17,9 @@ This is a compilation of documents for [Superpower](https://github.com/arcaldwel
 ```{r include=FALSE}
 # automatically create a bib database for R packages
 knitr::write_bib(c(
-  .packages(), 'bookdown', 'knitr', 'rmarkdown', "pwr", "pwr2ppl"
+  .packages(), 'bookdown', 'knitr', 'rmarkdown', 
+  "pwr", "pwr2ppl",
+  "multcomp"
 ), 'packages.bib')
 ```
 
@@ -28,7 +30,7 @@ The R package is intended to be utilized for prospective (a priori) power analys
 
 This package, and book, expect readers to have some familiarity with R [@R-base]. However, we have created [two Shiny apps](http://shiny.ieis.tue.nl/anova_power/) (for the `ANOVA_power` & `ANOVA_exact` functions respectively) to help use these functions if you are not familiar with R.
 
-In this book we will display a variety of ways the `Superpower` package can be used for power analysis and sample size planning for factorial experimental designs. We also included various examples of the performance of `Superpower` against other R packages (e.g., `pwr2ppl` by @R-pwr2ppl  and `pwr` by @R-pwr) and statistical programs (such as G*Power or MOREpower). All uses of the `ANOVA_power` function have been run with 10000 iterations (`nsims = 10000`). If you have any issues using `Superpower` or want to expand its capabilities please raise the issue on our [GitHub](https://github.com/arcaldwell49/Superpower/issues) repository.
+In this book we will display a variety of ways the `Superpower` package can be used for power analysis and sample size planning for factorial experimental designs. We also included various examples of the performance of `Superpower` against other R packages (e.g., `pwr2ppl` by @R-pwr2ppl  and `pwr` by @R-pwr) and statistical programs (such as G*Power by @Campbell2012MorePower6F or MOREpower @faul2007g). All uses of the `ANOVA_power` function have been run with 10000 iterations (`nsims = 10000`). If you have any issues using `Superpower` or want to expand its capabilities please raise the issue on our [GitHub](https://github.com/arcaldwell49/Superpower/issues) repository.
 
 ```{r setup, include=FALSE}
 knitr::opts_chunk$set(echo = TRUE)
@@ -55,7 +57,7 @@ library(kableExtra)
 ```
 
 ```{r global_options, include=FALSE}
-#options(knitr.table.format = "latex")
+options(knitr.table.format = "latex")
 
 ```
 

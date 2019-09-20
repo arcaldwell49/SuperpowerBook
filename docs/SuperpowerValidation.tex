@@ -21,7 +21,6 @@
 \usepackage{microtype}
 \UseMicrotypeSet[protrusion]{basicmath} % disable protrusion for tt fonts
 }{}
-\usepackage[margin=1in]{geometry}
 \usepackage{hyperref}
 \hypersetup{unicode=true,
             pdftitle={The Superpower R Package: Capabilities and Validation},
@@ -125,7 +124,7 @@
   \postauthor{\par}
       \predate{\centering\large\emph}
   \postdate{\par}
-    \date{2019-09-19}
+    \date{2019-09-20}
 
 \usepackage{booktabs}
 \usepackage{booktabs}
@@ -161,7 +160,7 @@ The R package is intended to be utilized for prospective (a priori) power analys
 
 This package, and book, expect readers to have some familiarity with R \citep{R-base}. However, we have created \href{http://shiny.ieis.tue.nl/anova_power/}{two Shiny apps} (for the \texttt{ANOVA\_power} \& \texttt{ANOVA\_exact} functions respectively) to help use these functions if you are not familiar with R.
 
-In this book we will display a variety of ways the \texttt{Superpower} package can be used for power analysis and sample size planning for factorial experimental designs. We also included various examples of the performance of \texttt{Superpower} against other R packages (e.g., \texttt{pwr2ppl} by \citet{R-pwr2ppl} and \texttt{pwr} by \citet{R-pwr}) and statistical programs (such as G*Power or MOREpower). All uses of the \texttt{ANOVA\_power} function have been run with 10000 iterations (\texttt{nsims\ =\ 10000}). If you have any issues using \texttt{Superpower} or want to expand its capabilities please raise the issue on our \href{https://github.com/arcaldwell49/Superpower/issues}{GitHub} repository.
+In this book we will display a variety of ways the \texttt{Superpower} package can be used for power analysis and sample size planning for factorial experimental designs. We also included various examples of the performance of \texttt{Superpower} against other R packages (e.g., \texttt{pwr2ppl} by \citet{R-pwr2ppl} and \texttt{pwr} by \citet{R-pwr}) and statistical programs (such as G*Power by \citet{Campbell2012MorePower6F} or MOREpower \citet{faul2007g}). All uses of the \texttt{ANOVA\_power} function have been run with 10000 iterations (\texttt{nsims\ =\ 10000}). If you have any issues using \texttt{Superpower} or want to expand its capabilities please raise the issue on our \href{https://github.com/arcaldwell49/Superpower/issues}{GitHub} repository.
 
 \hypertarget{the-experimental-design}{%
 \chapter{The Experimental Design}\label{the-experimental-design}}
@@ -407,7 +406,7 @@ You can set the standard deviation(s) by setting a value of \texttt{sd}. Current
 \hypertarget{part-1}{%
 \section{Part 1}\label{part-1}}
 
-Using the formula also used in Albers \& Lakens (2018), we can determine the means that should yield a specified effect sizes (expressed in Cohen's \emph{f}). Eta-squared (identical to partial eta-squared for One-Way ANOVA's) has benchmarks of .0099, .0588, and .1379 for small, medium, and large effect sizes (Cohen, 1988). Athough these benchmarks are quite random, and researchers should only use such benchmarks for power analyses as a last resort, we will demonstrate an a-priori power analysis for these values.
+Using the formula also used in \citet{albers2018power}, we can determine the means that should yield a specified effect sizes (expressed in Cohen's \emph{f}). Eta-squared (identical to partial eta-squared for One-Way ANOVA's) has benchmarks of .0099, .0588, and .1379 for small, medium, and large effect sizes \citep{cohen1988spa}. Athough these benchmarks are quite random, and researchers should only use such benchmarks for power analyses as a last resort, we will demonstrate an a-priori power analysis for these values.
 
 \hypertarget{two-conditions}{%
 \subsection{Two conditions}\label{two-conditions}}
@@ -474,7 +473,7 @@ anova\_condition & 67.2 & 0.0331418\\
 \hline
   & power & partial\_eta\_squared & cohen\_f & non\_centrality\\
 \hline
-condition & 67.69 & 0.029 & 0.1727 & 5.9082\\
+condition & 67.68572 & 0.0289748 & 0.1727409 & 5.908203\\
 \hline
 \end{tabular}
 \end{table}
@@ -495,7 +494,7 @@ The result shows that we have exactly the same power for the ANOVA, as we have f
 ## [1] 0.6768572
 \end{verbatim}
 
-We can also directly compute Cohen's \emph{f} from Cohen's d for two groups, as Cohen (1988) describes, because f = 1/2d. So f = 0.5*0.34375 = 0.171875. And indeed, power analysis using the pwr package yields the same result using the \texttt{pwr.anova.test} as the \texttt{power.t.test}.
+We can also directly compute Cohen's \emph{f} from Cohen's d for two groups, as \citet{cohen1988spa} describes, because f = 1/2d. So f = 0.5*0.34375 = 0.171875. And indeed, power analysis using the pwr package yields the same result using the \texttt{pwr.anova.test} as the \texttt{power.t.test}.
 
 \begin{Shaded}
 \begin{Highlighting}[]
@@ -536,7 +535,7 @@ Let's mathematically explore which pattern of means we would need to expect to h
 ## [1] 0.2303587
 \end{verbatim}
 
-This sensitivity analysis shows we have 90\% power in our planned design to detect effects of Cohen's \emph{f} of 0.2303587. Benchmarks by Cohen (1988) for small, medium, and large Cohen's \emph{f} values are 0.1, 0.25, and 0.4, which correspond to eta-squared values of small (.0099), medium (.0588), and large (.1379), in line with d = .2, .5, or .8. So, at least based on these benchmarks, we have 90\% power to detect effects that are slightly below a medium effect benchmark.
+This sensitivity analysis shows we have 90\% power in our planned design to detect effects of Cohen's \emph{f} of 0.2303587. Benchmarks by \citet{cohen1988spa} for small, medium, and large Cohen's \emph{f} values are 0.1, 0.25, and 0.4, which correspond to eta-squared values of small (.0099), medium (.0588), and large (.1379), in line with d = .2, .5, or .8. So, at least based on these benchmarks, we have 90\% power to detect effects that are slightly below a medium effect benchmark.
 
 \begin{Shaded}
 \begin{Highlighting}[]
@@ -616,7 +615,7 @@ anova\_condition & 90.15 & 0.0544974\\
 \hline
   & power & partial\_eta\_squared & cohen\_f & non\_centrality\\
 \hline
-condition & 90.01 & 0.0509 & 0.2315 & 10.613\\
+condition & 90.00714 & 0.0508742 & 0.2315192 & 10.61302\\
 \hline
 \end{tabular}
 \end{table}
@@ -713,7 +712,7 @@ anova\_condition & 89.99 & 0.0315708\\
 \hline
   & power & partial\_eta\_squared & cohen\_f & non\_centrality\\
 \hline
-condition & 90.03 & 0.0288 & 0.1724 & 10.5757\\
+condition & 90.03028 & 0.0288499 & 0.1723571 & 10.57568\\
 \hline
 \end{tabular}
 \end{table}
@@ -796,7 +795,7 @@ anova\_condition & 47.26 & 0.0433997\\
 \hline
   & power & partial\_eta\_squared & cohen\_f & non\_centrality\\
 \hline
-condition & 47.69 & 0.0315 & 0.1804 & 4.7852\\
+condition & 47.69468 & 0.0315259 & 0.180422 & 4.785156\\
 \hline
 \end{tabular}
 \end{table}
@@ -883,7 +882,7 @@ Let's mathematically explore which pattern of means we would need to expect to h
 ## [1] 0.2934417
 \end{verbatim}
 
-This sensitivity analysis shows we have 90\% power in our planned design to detect effects of Cohen's \emph{f} of 0.2934417. Benchmarks by Cohen (1988) for small, medium, and large Cohen's \emph{f} values are 0.1, 0.25, and 0.4, which correspond to eta-squared values of small (.0099), medium (.0588), and large (.1379), in line with d = .2, .5, or .8. So, at least based on these benchmarks, we have 90\% power to detect effects that are somewhat sizeable.
+This sensitivity analysis shows we have 90\% power in our planned design to detect effects of Cohen's \emph{f} of 0.2934417. Benchmarks by \citet{cohen1988spa} for small, medium, and large Cohen's \emph{f} values are 0.1, 0.25, and 0.4, which correspond to eta-squared values of small (.0099), medium (.0588), and large (.1379), in line with d = .2, .5, or .8. So, at least based on these benchmarks, we have 90\% power to detect effects that are somewhat sizeable.
 
 \begin{Shaded}
 \begin{Highlighting}[]
@@ -963,7 +962,7 @@ anova\_condition & 90.3 & 0.090741\\
 \hline
   & power & partial\_eta\_squared & cohen\_f & non\_centrality\\
 \hline
-condition & 90 & 0.0808 & 0.2964 & 12.9162\\
+condition & 90.00112 & 0.0807686 & 0.2964209 & 12.9162\\
 \hline
 \end{tabular}
 \end{table}
@@ -1256,7 +1255,7 @@ anova\_factor1 & 78.81 & 0.0413822\\
 \hline
   & power & partial\_eta\_squared & cohen\_f & non\_centrality\\
 \hline
-factor1 & 79.37 & 0.0347 & 0.1896 & 9.6\\
+factor1 & 79.37239 & 0.0347072 & 0.1896182 & 9.6\\
 \hline
 \end{tabular}
 \end{table}
@@ -1396,7 +1395,7 @@ anova\_factor1 & 94.61 & 0.0386982\\
 \hline
   & power & partial\_eta\_squared & cohen\_f & non\_centrality\\
 \hline
-factor1 & 94.89 & 0.0346 & 0.1892 & 15.4667\\
+factor1 & 94.89169 & 0.034565 & 0.1892154 & 15.46667\\
 \hline
 \end{tabular}
 \end{table}
@@ -1530,7 +1529,7 @@ anova\_factor1 & 61.51 & 0.0335436\\
 \hline
   & power & partial\_eta\_squared & cohen\_f & non\_centrality\\
 \hline
-factor1 & 61.94 & 0.0263 & 0.1643 & 6.56\\
+factor1 & 61.94317 & 0.0262863 & 0.1643042 & 6.56\\
 \hline
 \end{tabular}
 \end{table}
@@ -1538,9 +1537,9 @@ factor1 & 61.94 & 0.0263 & 0.1643 & 6.56\\
 \hypertarget{effect-size-estimates-for-one-way-anova}{%
 \section{Effect Size Estimates for One-Way ANOVA}\label{effect-size-estimates-for-one-way-anova}}
 
-Using the formulas below, we can calculate the means for between designs with one factor (one-way ANOVA). Using the formula also used in Albers \& Lakens (2018), we can determine the means that should yield a specified effect sizes (expressed in Cohen's \emph{f}).
+Using the formulas below, we can calculate the means for between designs with one factor (one-way ANOVA). Using the formula also used in \citet{albers2018power}, we can determine the means that should yield a specified effect sizes (expressed in Cohen's \emph{f}).
 
-Eta-squared (idential to partial eta-squared for one-way ANOVA's) has benchmarks of .0099, .0588, and .1379 for small, medium, and large effect sizes (cohen, 1988).
+Eta-squared (idential to partial eta-squared for one-way ANOVA's) has benchmarks of .0099, .0588, and .1379 for small, medium, and large effect sizes cohen1988spa.
 
 \hypertarget{three-conditions-small-effect-size}{%
 \subsection{Three conditions, small effect size}\label{three-conditions-small-effect-size}}
@@ -1610,7 +1609,7 @@ anova\_factor1 & 100 & 0.0100165\\
 \hline
   & power & partial\_eta\_squared & cohen\_f & non\_centrality\\
 \hline
-factor1 & 100 & 0.0099 & 0.1 & 149.9849\\
+factor1 & 100 & 0.009902 & 0.100005 & 149.9848\\
 \hline
 \end{tabular}
 \end{table}
@@ -1685,7 +1684,7 @@ anova\_factor1 & 100 & 0.058913\\
 \hline
   & power & partial\_eta\_squared & cohen\_f & non\_centrality\\
 \hline
-factor1 & 100 & 0.0588 & 0.25 & 1249.469\\
+factor1 & 100 & 0.0588111 & 0.2499719 & 1249.469\\
 \hline
 \end{tabular}
 \end{table}
@@ -1758,7 +1757,7 @@ anova\_factor1 & 100 & 0.1380489\\
 \hline
   & power & partial\_eta\_squared & cohen\_f & non\_centrality\\
 \hline
-factor1 & 100 & 0.1379 & 0.4 & 1599.582\\
+factor1 & 100 & 0.1379238 & 0.3999878 & 1599.582\\
 \hline
 \end{tabular}
 \end{table}
@@ -1776,11 +1775,11 @@ In a repeated measures design multiple observations are collected from the same 
 \hypertarget{two-conditions-medium-effect-size}{%
 \subsection{Two conditions, medium effect size}\label{two-conditions-medium-effect-size}}
 
-To illustrate the effect of correated observations, we start by simulating data for a medium effect size for a dependent (or paired, or within-subject) \emph{t}-test. Let's first look at G*power. If we want to perform an a-priori power analysis, we are asked to fill in the effect size dz. As Cohen (1988) writes, ``The Z subscript is used to emphasize the fact that our raw score unit is no longer X or Y, but Z'', where Z are the difference scores of X-Y.
+To illustrate the effect of correated observations, we start by simulating data for a medium effect size for a dependent (or paired, or within-subject) \emph{t}-test. Let's first look at \citet{faul2007g}. If we want to perform an a-priori power analysis, we are asked to fill in the effect size dz. As \citet{cohen1988spa} writes, ``The Z subscript is used to emphasize the fact that our raw score unit is no longer X or Y, but Z'', where Z are the difference scores of X-Y.
 
 \includegraphics{screenshots/gpower_9.png}
 
-Within designs can have greater power to detect differences than between designs because the values are correlated, and a within design requires less participants because each participant provides multiple observations. One difference between an independent \emph{t}-test and a dependent \emph{t}-test is that an independent \emph{t}-test has 2(n-1) degrees of freedom, while a dependent \emph{t}-test has (n-1) degrees of freedom. The sample size needed in a two-group within-design (NW) relative to the sample needed in two-group between-designs (NB), assuming normal distributions, and ignoring the difference in degrees of freedom between the two types of tests, is (from Maxwell \& Delaney, 2004, p.~561, formula 45):
+Within designs can have greater power to detect differences than between designs because the values are correlated, and a within design requires less participants because each participant provides multiple observations. One difference between an independent \emph{t}-test and a dependent \emph{t}-test is that an independent \emph{t}-test has 2(n-1) degrees of freedom, while a dependent \emph{t}-test has (n-1) degrees of freedom. The sample size needed in a two-group within-design (NW) relative to the sample needed in two-group between-designs (NB), assuming normal distributions, and ignoring the difference in degrees of freedom between the two types of tests, is (from \citet{maxwell_designing_2004}, p.~561, formula 45):
 
 \(N_{W}=\frac{N_{B}(1-\rho)}{2}\)
 
@@ -1841,7 +1840,7 @@ Therefore, the relation between dz and d is \(\sqrt{2(1-\rho)}\). A given differ
 ## NOTE: n is number of *pairs*
 \end{verbatim}
 
-There is no equivalent ``fz'' for Cohen's \emph{f} for a within subject ANOVA. For two groups, we can directly compute Cohen's \emph{f} from Cohen's d for two groups, as Cohen (1988) describes, because f = 1/2d. For a d = 0.5, f = 0.25. In Gpower we can run a 2 group within-subject power analysis for ANOVA. We plan for 80\% power, and reproduce the anaysis above for the dependent \emph{t}-test. This works because the correlation is set to 0.5, when d = dz, and thus the transformation of f=1/2d works.
+There is no equivalent ``fz'' for Cohen's \emph{f} for a within subject ANOVA. For two groups, we can directly compute Cohen's \emph{f} from Cohen's d for two groups, as \citet{cohen1988spa} describes, because f = 1/2d. For a d = 0.5, f = 0.25. In Gpower we can run a 2 group within-subject power analysis for ANOVA. We plan for 80\% power, and reproduce the anaysis above for the dependent \emph{t}-test. This works because the correlation is set to 0.5, when d = dz, and thus the transformation of f=1/2d works.
 
 \includegraphics{screenshots/gpower_1.png}
 
@@ -1853,7 +1852,7 @@ To reproduce this analysis in Gpower with a dependent \emph{t}-test we need to c
 
 \includegraphics{screenshots/gpower_10.png}
 
-We can perform both these power analyses using simuations as well. We set groups to 2 for the simulation, n = 34 (which should give 80.777 power, according to the g*power program), a correlation among repeated measures of 0.5, and an alpha of 0.05. In this case, we simulate data with means -0.25 and 0.25, and set the sd to 1. This means we have a mean difference of 0.5, and a Cohen's d of 0.5/1 = 0.5. In the first example, we set the correlation to 0.5, and the result should be 80.77\% power, and an effect size estimate of 0.5 for the simple effect. We also calculate partial eta-squared for the ANOVA, which equals \(\frac{f^2}{f^2+1}\), or 0.05882353.
+We can perform both these power analyses using simuations as well. We set groups to 2 for the simulation, n = 34 (which should give 80.777 power, according to the \citet{faul2007g} program), a correlation among repeated measures of 0.5, and an alpha of 0.05. In this case, we simulate data with means -0.25 and 0.25, and set the sd to 1. This means we have a mean difference of 0.5, and a Cohen's d of 0.5/1 = 0.5. In the first example, we set the correlation to 0.5, and the result should be 80.77\% power, and an effect size estimate of 0.5 for the simple effect. We also calculate partial eta-squared for the ANOVA, which equals \(\frac{f^2}{f^2+1}\), or 0.05882353.
 
 \begin{Shaded}
 \begin{Highlighting}[]
@@ -1920,7 +1919,7 @@ anova\_speed & 80.74 & 0.2149221\\
 \hline
   & power & partial\_eta\_squared & cohen\_f & non\_centrality\\
 \hline
-speed & 80.78 & 0.2048 & 0.5075 & 8.5\\
+speed & 80.77775 & 0.2048193 & 0.5075192 & 8.5\\
 \hline
 \end{tabular}
 \end{table}
@@ -2009,7 +2008,7 @@ anova\_speed & 80.48 & 0.3153414\\
 \hline
   & power & partial\_eta\_squared & cohen\_f & non\_centrality\\
 \hline
-speed & 80.33 & 0.3043 & 0.6614 & 8.75\\
+speed & 80.33235 & 0.3043478 & 0.6614378 & 8.75\\
 \hline
 \end{tabular}
 \end{table}
@@ -2022,23 +2021,23 @@ speed & 80.33 & 0.3043 & 0.6614 & 8.75\\
 \end{Highlighting}
 \end{Shaded}
 
-Entering this f in G*power, with a correlation of 0.5, yields the same as entering \texttt{f\ =\ 0.25} and \texttt{correlation\ =\ 0.7}.
+Entering this f in Gpower, with a correlation of 0.5, yields the same as entering \texttt{f\ =\ 0.25} and \texttt{correlation\ =\ 0.7}.
 
 \hypertarget{part-2-1}{%
 \section{Part 2}\label{part-2-1}}
 
 Here, we will examine a repeated measures experiment with 3 within-subject conditions, to illustrate how a repeated measures ANOVA extends a dependent \emph{t}-test with 3 groups.
 
-In the example for a two-group within design we provided a specific formula for the sample size benefit for two groups. The sample size needed in within-designs (NW) with more than 2 conditions, relative to the sample needed in between-designs (NB), assuming normal distributions and compound symmetry, and ignoring the difference in degrees of freedom between the two types of tests, is (from Maxwell \& Delaney, 2004, p.~562, formula 47):
+In the example for a two-group within design we provided a specific formula for the sample size benefit for two groups. The sample size needed in within-designs (NW) with more than 2 conditions, relative to the sample needed in between-designs (NB), assuming normal distributions and compound symmetry, and ignoring the difference in degrees of freedom between the two types of tests, is (from \citet{maxwell_designing_2004}, p.~562, formula 47):
 
 \(N_{W}=\frac{N_{B}(1-\rho)}{a}\)
 
 Where a is the number of within-subject levels.
 
 \hypertarget{the-relation-between-cohens-f-and-cohens-d}{%
-\subsection{\texorpdfstring{The relation between Cohen's \emph{f} and Cohen's d}{The relation between Cohen's f and Cohen's d}}\label{the-relation-between-cohens-f-and-cohens-d}}
+\subsection{The relation between Cohen's f and Cohen's d}\label{the-relation-between-cohens-f-and-cohens-d}}
 
-Whereas in the case of a repeated measures ANOVA with 2 groups we could explain the principles of a power analysis by comparing our test against a \emph{t}-test and Cohen's d, this becomes more difficult when we have more than 2 groups. It is more useful to explain how to directly calculate Cohen's \emph{f}, the effect size used in power analyses for ANOVA. Cohen's \emph{f} is calculated following Cohen, 1988, formula 8.2.1 and 8.2.2:
+Whereas in the case of a repeated measures ANOVA with 2 groups we could explain the principles of a power analysis by comparing our test against a \emph{t}-test and Cohen's d, this becomes more difficult when we have more than 2 groups. It is more useful to explain how to directly calculate Cohen's \emph{f}, the effect size used in power analyses for ANOVA. Cohen's \emph{f} is calculated following \citet{cohen1988spa}, formula 8.2.1 and 8.2.2:
 
 \(f = \sqrt{\frac{\frac{\sum(\mu-\overline{\mu})^2)}N}\sigma}\)
 
@@ -2089,7 +2088,7 @@ Imagine we have a within-subject experiment with 3 conditions. We ask people wha
 ## [1] 0.1434438
 \end{verbatim}
 
-The relation between Cohen's d or dz and Cohen's \emph{f} becomes more difficult when there are multiple groups, because the relationship depends on the pattern of the means. Cohen (1988) presents calculations for three patterns, minimal variability (for example, for 5 means: -0.25, 0, 0, 0, 0.25), medium variability (for example, for 5 means: -0.25, -0.25, 0.25, 0.25, 0.25 or -0.25, -0.25, -0.25, 0.25, 0.25). For these three patterns, formula's are available that compute Cohen's \emph{f} from Cohen's d, where d is the effect size calculated for the difference between the largest and smallest mean (if the largest mean is 0.25 and the smallest mean is -0.25, 0.25 - -0.25 = 0.5, so d is 0.5 divided by the standard deviation of 0.9). In our example, d would be (4.3-3.8)/0.9 = 0.5555556. If we divide this value by \texttt{sqrt(2*(1-r))} we have dz = 0.5555556/0.7745967 = 0.7172191.
+The relation between Cohen's d or dz and Cohen's \emph{f} becomes more difficult when there are multiple groups, because the relationship depends on the pattern of the means. \citet{cohen1988spa} presents calculations for three patterns, minimal variability (for example, for 5 means: -0.25, 0, 0, 0, 0.25), medium variability (for example, for 5 means: -0.25, -0.25, 0.25, 0.25, 0.25 or -0.25, -0.25, -0.25, 0.25, 0.25). For these three patterns, formula's are available that compute Cohen's \emph{f} from Cohen's d, where d is the effect size calculated for the difference between the largest and smallest mean (if the largest mean is 0.25 and the smallest mean is -0.25, 0.25 - -0.25 = 0.5, so d is 0.5 divided by the standard deviation of 0.9). In our example, d would be (4.3-3.8)/0.9 = 0.5555556. If we divide this value by \texttt{sqrt(2*(1-r))} we have dz = 0.5555556/0.7745967 = 0.7172191.
 
 I have created a custom function that will calculate f from d, based on a specification of one of the three patterns of means. Our pattern is most similar (but not identical) to a maximum variability pattern (two means are high, one is lower). So we could attempt to calculate f from d (0.5555556), by calculating d from the largest and smallest mean:
 
@@ -2265,7 +2264,7 @@ anova\_speed & 97.04 & 0.345486\\
 \hline
   & power & partial\_eta\_squared & cohen\_f & non\_centrality\\
 \hline
-speed & 96.92 & 0.3304 & 0.7024 & 18.75\\
+speed & 96.91634 & 0.3303965 & 0.7024394 & 18.75\\
 \hline
 \end{tabular}
 \end{table}
@@ -2507,18 +2506,18 @@ anova\_speed & 95.25 & 0.1075912\\
 \hline
   & power & partial\_eta\_squared & cohen\_f & non\_centrality\\
 \hline
-speed & 95.29 & 0.0976 & 0.3288 & 16\\
+speed & 95.29217 & 0.097561 & 0.328798 & 16\\
 \hline
 \end{tabular}
 \end{table}
 
 \textbf{Results}
 
-The results of the simulation are very similar. Power for the ANOVA \emph{F}-test is around 95.2\%. For the three paired t-tests, power is around 92.7. This is in line with the a-priori power analysis when using g*power:
+The results of the simulation are very similar. Power for the ANOVA \emph{F}-test is around 95.2\%. For the three paired t-tests, power is around 92.7. This is in line with the a-priori power analysis when using Gpower:
 
 \includegraphics{screenshots/gpower_2.png}
 
-We can perform an post-hoc power analysis in G*power. We can calculate Cohen´s f based on the means and sd, using our own custom formula.
+We can perform an post-hoc power analysis in Gpower. We can calculate Cohen´s f based on the means and sd, using our own custom formula.
 
 \begin{Shaded}
 \begin{Highlighting}[]
@@ -2683,24 +2682,24 @@ anova\_SPEED & 98.37 & 0.1287432\\
 \hline
   & power & partial\_eta\_squared & cohen\_f & non\_centrality\\
 \hline
-SPEED & 98.35 & 0.119 & 0.3676 & 20\\
+SPEED & 98.34682 & 0.1190476 & 0.3676073 & 20\\
 \hline
 \end{tabular}
 \end{table}
 
-Again, this is similar to G*Power for the ANOVA:
+Again, this is similar to GPower for the ANOVA:
 
 \href{screenshots/gpower_4.png}{}
 
 \hypertarget{part-4}{%
 \section{Part 4}\label{part-4}}
 
-\hypertarget{two-by-two-anova-within-within-design}{%
-\subsection{Two by two ANOVA, within-within design}\label{two-by-two-anova-within-within-design}}
+\hypertarget{x2-anova-within-within-design}{%
+\subsection{2x2 ANOVA, within-within design}\label{x2-anova-within-within-design}}
 
 We can simulate a 2x2 ANOVA, both factors manipulated within participants, with a specific sample size and effect size, to achieve a desired statistical power.
 
-As Potvin \& Schutz (2000) explain, analytic procedures for a two-factor repeated measures ANOVA do not seem to exist. The main problem is quantifying the error variance (the denominator when calculating lambda or Cohen's \emph{f}). Simulation based aproaches provide a solution.
+As \citet{potvin2000statistical} explain, analytic procedures for a two-factor repeated measures ANOVA do not seem to exist. The main problem is quantifying the error variance (the denominator when calculating lambda or Cohen's \emph{f}). Simulation based aproaches provide a solution.
 
 We can reproduce the simulation coded by \href{https://cognitivedatascientist.com/2015/12/14/power-simulation-in-r-the-repeated-measures-anova-5/}{Ben Amsel}
 
@@ -2902,11 +2901,11 @@ anova\_age:color & 47.80 & 0.1641690\\
 \hline
   & power & partial\_eta\_squared & cohen\_f & non\_centrality\\
 \hline
-age & 5.0 & 0.0000 & 0.0000 & 0\\
+age & 5.00000 & 0.0000000 & 0.0000000 & 0\\
 \hline
-color & 5.0 & 0.0000 & 0.0000 & 0\\
+color & 5.00000 & 0.0000000 & 0.0000000 & 0\\
 \hline
-age:color & 48.4 & 0.1429 & 0.4082 & 4\\
+age:color & 48.40183 & 0.1428571 & 0.4082483 & 4\\
 \hline
 \end{tabular}
 \end{table}
@@ -2994,7 +2993,7 @@ Run the simulation
 \end{Highlighting}
 \end{Shaded}
 
-The empirical power is easy to compute, it's just the proportion of simulation runs where p \textless. 05.
+The empirical power is easy to compute, it's just the proportion of simulation runs where p \textless{}. 05.
 
 \begin{Shaded}
 \begin{Highlighting}[]
@@ -3104,10 +3103,10 @@ anova\_AGE:COLOR & 46.22 & 0.1595391\\
 
 \begin{verbatim}
 ## Power and Effect sizes for ANOVA tests
-##           power partial_eta_squared cohen_f non_centrality
-## AGE       30.40              0.0864  0.3074         2.2685
-## COLOR      9.51              0.0171  0.1318         0.4167
-## AGE:COLOR 45.98              0.1351  0.3953         3.7500
+##             power partial_eta_squared cohen_f non_centrality
+## AGE       30.4009              0.0864  0.3074         2.2685
+## COLOR      9.5071              0.0171  0.1318         0.4167
+## AGE:COLOR 45.9803              0.1351  0.3953         3.7500
 ## 
 ## Power and Effect sizes for contrasts
 ##                                            power effect_size
@@ -3127,11 +3126,11 @@ anova\_AGE:COLOR & 46.22 & 0.1595391\\
 \hline
   & power & partial\_eta\_squared & cohen\_f & non\_centrality\\
 \hline
-AGE & 30.40 & 0.0864 & 0.3074 & 2.2685\\
+AGE & 30.400885 & 0.0863588 & 0.3074437 & 2.2685185\\
 \hline
-COLOR & 9.51 & 0.0171 & 0.1318 & 0.4167\\
+COLOR & 9.507147 & 0.0170648 & 0.1317616 & 0.4166667\\
 \hline
-AGE:COLOR & 45.98 & 0.1351 & 0.3953 & 3.7500\\
+AGE:COLOR & 45.980305 & 0.1351351 & 0.3952847 & 3.7500000\\
 \hline
 \end{tabular}
 \end{table}
@@ -3144,13 +3143,13 @@ AGE:COLOR & 45.98 & 0.1351 & 0.3953 & 3.7500\\
 \hypertarget{x2-anova-within-design}{%
 \subsection{2x2 ANOVA, within design}\label{x2-anova-within-design}}
 
-Potvin \& Schutz (2000) simulate a wide range of repeated measure designs. They give an example of a 3x3 design, with the following correlation matrix:
+\citet{potvin2000statistical} simulate a wide range of repeated measure designs. They give an example of a 3x3 design, with the following correlation matrix:
 
 \includegraphics{screenshots/PS2000.png}
 
 Variances were set to 1 (so all covariance matrices in their simulations were identical). In this specific example, the white fields are related to the correlation for the A main effect (these cells have the same level for B, but different levels of A). The grey cells are related to the main effect of B (the cells have the same level of A, but different levels of B). Finally, the black cells are related to the AxB interaction (they have different levels of A and B). The diagonal (all 1) relate to cells with the same levels of A and B.
 
-Potvin \& Schulz (2000) examine power for 2x2 within ANOVA designs and develop approximations of the error variance. For a design with 2 within factors (A and B) these are:
+\citet{potvin2000statistical} examine power for 2x2 within ANOVA designs and develop approximations of the error variance. For a design with 2 within factors (A and B) these are:
 
 For the main effect of A:
 \(\sigma _ { e } ^ { 2 } = \sigma ^ { 2 } ( 1 - \overline { \rho } _ { A } ) + \sigma ^ { 2 } ( q - 1 ) ( \overline { \rho } _ { B } - \overline { \rho } _ { AB } )\)
@@ -3161,7 +3160,7 @@ For the main effectof B:
 For the interaction between A and B:
 \(\sigma _ { e } ^ { 2 } = \sigma ^ { 2 } ( 1 - \rho _ { \max } ) - \sigma ^ { 2 } ( \overline { \rho } _ { \min } - \overline { \rho } _ { AB } )\)
 
-Let's now compare the formulas in Potvin and Schutz (2000) with \texttt{Superpower} with a simple scenario.
+Let's now compare the formulas in \citet{potvin2000statistical} with \texttt{Superpower} with a simple scenario.
 
 \begin{Shaded}
 \begin{Highlighting}[]
@@ -3215,11 +3214,11 @@ Let's now compare the formulas in Potvin and Schutz (2000) with \texttt{Superpow
 \hline
   & power & partial\_eta\_squared & cohen\_f & non\_centrality\\
 \hline
-AGE & 75.61 & 0.2917 & 0.6418 & 7.8261\\
+AGE & 75.61412 & 0.2917342 & 0.6417938 & 7.8260870\\
 \hline
-COLOR & 75.61 & 0.2917 & 0.6418 & 7.8261\\
+COLOR & 75.61412 & 0.2917342 & 0.6417938 & 7.8260870\\
 \hline
-AGE:COLOR & 14.36 & 0.0438 & 0.2139 & 0.8696\\
+AGE:COLOR & 14.36376 & 0.0437637 & 0.2139313 & 0.8695652\\
 \hline
 \end{tabular}
 \end{table}
@@ -3244,7 +3243,7 @@ Further, as we use the analytical solution below, the variance components should
 ## Signif. codes:  0 '***' 0.001 '**' 0.01 '*' 0.05 '.' 0.1 ' ' 1
 \end{verbatim}
 
-We can try to use the formula in Potvin \& Schutz (2000).
+We can try to use the formula in \citet{potvin2000statistical}.
 
 \begin{Shaded}
 \begin{Highlighting}[]
@@ -3480,7 +3479,7 @@ variance & lambda & power\\
 
 And we can see in the simple scenario matches \texttt{ANOVA\_exact} and \texttt{ANOVA\_power} output.
 
-Let's now extend to one of the simlations presented by Potvin and Schultz with a 3x3 solution.
+Let's now extend to one of the simlations presented by \citet{potvin2000statistical} with a 3x3 solution.
 
 \begin{Shaded}
 \begin{Highlighting}[]
@@ -3533,7 +3532,7 @@ Let's now extend to one of the simlations presented by Potvin and Schultz with a
 ## a3_b3   0.4   0.4   0.4   0.4   0.4   0.4   0.8   0.8   1.0
 \end{verbatim}
 
-The design now matches the correlation matrix in Figure 1 of Potvin and Schultz.
+The design now matches the correlation matrix in Figure 1 of \citet{potvin2000statistical}.
 
 And we can estimate power with \texttt{ANOVA\_exact}.
 
@@ -3553,11 +3552,11 @@ And we can estimate power with \texttt{ANOVA\_exact}.
 \hline
   & power & partial\_eta\_squared & cohen\_f & non\_centrality\\
 \hline
-a & 9.44 & 0.0156 & 0.1260 & 0.6032\\
+a & 9.441726 & 0.0156250 & 0.1259882 & 0.6031746\\
 \hline
-b & 100.00 & 0.7021 & 1.5352 & 89.5556\\
+b & 100.000000 & 0.7020906 & 1.5351629 & 89.5555556\\
 \hline
-a:b & 90.09 & 0.1779 & 0.4652 & 16.4444\\
+a:b & 90.092634 & 0.1778846 & 0.4651605 & 16.4444444\\
 \hline
 \end{tabular}
 \end{table}
@@ -3821,7 +3820,7 @@ variance & lambda & power\\
 \hypertarget{x2-anova-within-between-design}{%
 \section{2x2 ANOVA, within-between design}\label{x2-anova-within-between-design}}
 
-We can simulate a Two-Way ANOVA with a specific alpha, sample size and effect size, to achieve a specified statistical power. We will try to reproduce the power analysis by G*Power for an F-test from an ANOVA with a repeated measures, within-between interaction effect.
+We can simulate a two-way ANOVA with a specific alpha, sample size and effect size, to achieve a specified statistical power. We will try to reproduce the power analysis by G*Power \citep{faul2007g} for an F-test from an ANOVA with a repeated measures, within-between interaction effect.
 
 \includegraphics{screenshots/gpower_5.png}
 
@@ -3890,11 +3889,11 @@ anova\_color:age & 91.26 & 0.2155901\\
 \hline
   & power & partial\_eta\_squared & cohen\_f & non\_centrality\\
 \hline
-color & 5.00 & 0.0000 & 0.0000 & 0.0\\
+color & 5.00000 & 0.0000000 & 0.0000000 & 0.0\\
 \hline
-age & 5.00 & 0.0000 & 0.0000 & 0.0\\
+age & 5.00000 & 0.0000000 & 0.0000000 & 0.0\\
 \hline
-color:age & 91.25 & 0.2072 & 0.5112 & 11.5\\
+color:age & 91.24984 & 0.2072072 & 0.5112374 & 11.5\\
 \hline
 \end{tabular}
 \end{table}
@@ -3966,11 +3965,11 @@ anova\_color:age & 99.00 & 0.3081551\\
 \hline
   & power & partial\_eta\_squared & cohen\_f & non\_centrality\\
 \hline
-color & 5.00 & 0.0000 & 0.00 & 0.0000\\
+color & 5.00000 & 0.0000000 & 0.0000000 & 0.00000\\
 \hline
-age & 5.00 & 0.0000 & 0.00 & 0.0000\\
+age & 5.00000 & 0.0000000 & 0.0000000 & 0.00000\\
 \hline
-color:age & 98.98 & 0.3034 & 0.66 & 19.1667\\
+color:age & 98.98467 & 0.3034301 & 0.6600046 & 19.16667\\
 \hline
 \end{tabular}
 \end{table}
@@ -3980,7 +3979,7 @@ color:age & 98.98 & 0.3034 & 0.66 & 19.1667\\
 
 There are almost no software solutions that allow researchers to perform power anaysis for more complex designs. Through simulation, it is relatively straightforward to examine the power for designs with multiple factors with many levels.
 
-Let's start with a 2x2x2 between subjects design. We collect 50 participants in each between participant condition (so 400 participants in total - 50x2x2x2).
+Let's start with a 2x2x2 between-subjects design. We collect 50 participants in each between participant condition (so 400 participants in total - \(50(n)\times2(levels)\times2(levels)\times2(levels)= 400\)).
 
 \begin{Shaded}
 \begin{Highlighting}[]
@@ -4052,19 +4051,19 @@ anova\_Size:Color:Load & 84.88 & 0.0248926\\
 \hline
   & power & partial\_eta\_squared & cohen\_f & non\_centrality\\
 \hline
-Size & 70.33 & 0.0157 & 0.1263 & 6.25\\
+Size & 70.330132 & 0.0156937 & 0.1262691 & 6.25\\
 \hline
-Color & 5.00 & 0.0000 & 0.0000 & 0.00\\
+Color & 5.000000 & 0.0000000 & 0.0000000 & 0.00\\
 \hline
-Load & 7.90 & 0.0006 & 0.0253 & 0.25\\
+Load & 7.895322 & 0.0006373 & 0.0252538 & 0.25\\
 \hline
-Size:Color & 32.17 & 0.0057 & 0.0758 & 2.25\\
+Size:Color & 32.172729 & 0.0057070 & 0.0757614 & 2.25\\
 \hline
-Size:Load & 84.91 & 0.0224 & 0.1515 & 9.00\\
+Size:Load & 84.912313 & 0.0224439 & 0.1515229 & 9.00\\
 \hline
-Color:Load & 7.90 & 0.0006 & 0.0253 & 0.25\\
+Color:Load & 7.895322 & 0.0006373 & 0.0252538 & 0.25\\
 \hline
-Size:Color:Load & 84.91 & 0.0224 & 0.1515 & 9.00\\
+Size:Color:Load & 84.912313 & 0.0224439 & 0.1515229 & 9.00\\
 \hline
 \end{tabular}
 \end{table}
@@ -4211,7 +4210,7 @@ Size:Color:Load & 84.91 & 0.0224 & 0.1515 & 9.00\\
 ## [1] 0.02200489
 \end{verbatim}
 
-We can also confirm the power analysis in GPower. GPower allows you to compute the power for a three-way interaction - if you know the Cohen's f value to enter. Cohen's f is calculated based on the means for the interaction, the sum of squares of the effect, and the sum of squares of the errors. This is quite a challenge by hand, but we can simulate the results, or use the analytical solution we programmed to get Cohen's f for the pattern of means that we specified.
+We can also confirm the power analysis in GPower \citep{faul2007g}. GPower allows you to compute the power for a three-way interaction - if you know the Cohen's \emph{f} value to enter. Cohen's \emph{f} is calculated based on the means for the interaction, the sum of squares of the effect, and the sum of squares of the errors. This is quite a challenge by hand, but we can simulate the results, or use the analytical solution we programmed to get Cohen's \emph{f} for the pattern of means that we specified.
 
 \begin{Shaded}
 \begin{Highlighting}[]
@@ -4259,7 +4258,7 @@ We can also confirm the power analysis in GPower. GPower allows you to compute t
 
 \includegraphics{screenshots/gpower_8.png}
 
-A Three-Way ANOVA builds on the same principles as a One\_Way ANOVA. We look at whether the differences between groups are large, compared to the standard deviation. For the main effects we simply have 2 groups of 200 participants, and 2 means. If the population standard deviations are identical across groups, this is not in any way different from a One-Way ANOVA. Indeed, we can show this by simulating a One-Way ANOVA, where instead of 8 conditions, we have two conditions, and we average over the 4 groups of the other two factors. For example, for the main effect of size above can be computed analytically. There might be a small difference in the degrees of freedom of the two tests, or it is just random variation (And it will disappear when repeating the simulation 1000.000 times instead of 100.000.
+A three-way ANOVA builds on the same principles as a one-way ANOVA. We look at whether the differences between groups are large, compared to the standard deviation. For the main effects we simply have 2 groups of 200 participants, and 2 means. If the population standard deviations are identical across groups, this is not in any way different from a one-way ANOVA. Indeed, we can show this by simulating a one-way ANOVA, where instead of 8 conditions, we have two conditions, and we average over the 4 groups of the other two factors. For example, for the main effect of size above can be computed analytically. There might be a small difference in the degrees of freedom of the two tests, or it is just random variation (And it will disappear when the number of iterations in the simulation, \texttt{nsim}, is increased).
 
 \begin{Shaded}
 \begin{Highlighting}[]
@@ -4314,7 +4313,7 @@ anova\_Size & 70.69 & 0.0180045\\
 \hline
   & power & partial\_eta\_squared & cohen\_f & non\_centrality\\
 \hline
-Size & 70.33 & 0.0155 & 0.1253 & 6.25\\
+Size & 70.33333 & 0.0154607 & 0.1253137 & 6.25\\
 \hline
 \end{tabular}
 \end{table}
@@ -4389,11 +4388,11 @@ anova\_Size:Color & 69.72 & 0.0176374\\
 \hline
   & power & partial\_eta\_squared & cohen\_f & non\_centrality\\
 \hline
-Size & 70.33 & 0.0155 & 0.1256 & 6.25\\
+Size & 70.33227 & 0.0155376 & 0.1256297 & 6.25\\
 \hline
-Color & 5.00 & 0.0000 & 0.0000 & 0.00\\
+Color & 5.00000 & 0.0000000 & 0.0000000 & 0.00\\
 \hline
-Size:Color & 70.33 & 0.0155 & 0.1256 & 6.25\\
+Size:Color & 70.33227 & 0.0155376 & 0.1256297 & 6.25\\
 \hline
 \end{tabular}
 \end{table}
@@ -4498,19 +4497,19 @@ anova\_Size:Color:CognitiveLoad & 78.13 & 0.0213083\\
 \hline
   & power & partial\_eta\_squared & cohen\_f & non\_centrality\\
 \hline
-Size & 41.53 & 0.0078 & 0.0884 & 3.0625\\
+Size & 41.52809 & 0.0077519 & 0.0883883 & 3.0625\\
 \hline
-Color & 5.72 & 0.0002 & 0.0126 & 0.0625\\
+Color & 5.71548 & 0.0001594 & 0.0126269 & 0.0625\\
 \hline
-CognitiveLoad & 11.62 & 0.0014 & 0.0379 & 0.5625\\
+CognitiveLoad & 11.61777 & 0.0014329 & 0.0378807 & 0.5625\\
 \hline
-Size:Color & 5.72 & 0.0002 & 0.0126 & 0.0625\\
+Size:Color & 5.71548 & 0.0001594 & 0.0126269 & 0.0625\\
 \hline
-Size:CognitiveLoad & 5.72 & 0.0002 & 0.0126 & 0.0625\\
+Size:CognitiveLoad & 5.71548 & 0.0001594 & 0.0126269 & 0.0625\\
 \hline
-Color:CognitiveLoad & 5.72 & 0.0002 & 0.0126 & 0.0625\\
+Color:CognitiveLoad & 5.71548 & 0.0001594 & 0.0126269 & 0.0625\\
 \hline
-Size:Color:CognitiveLoad & 78.33 & 0.0189 & 0.1389 & 7.5625\\
+Size:Color:CognitiveLoad & 78.32737 & 0.0189270 & 0.1388960 & 7.5625\\
 \hline
 \end{tabular}
 \end{table}
@@ -4691,19 +4690,19 @@ The power for interactions depends on Cohen's \emph{f}, the alpha level, the sam
 \hline
   & power & partial\_eta\_squared & cohen\_f & non\_centrality\\
 \hline
-Size & 26.93 & 0.0147 & 0.1220 & 2.5\\
+Size & 26.92604 & 0.0146628 & 0.1219875 & 2.5\\
 \hline
-Color & 5.00 & 0.0000 & 0.0000 & 0.0\\
+Color & 5.00000 & 0.0000000 & 0.0000000 & 0.0\\
 \hline
-Load & 5.00 & 0.0000 & 0.0000 & 0.0\\
+Load & 5.00000 & 0.0000000 & 0.0000000 & 0.0\\
 \hline
-Size:Color & 67.93 & 0.0427 & 0.2113 & 7.5\\
+Size:Color & 67.93217 & 0.0427350 & 0.2112886 & 7.5\\
 \hline
-Size:Load & 67.93 & 0.0427 & 0.2113 & 7.5\\
+Size:Load & 67.93217 & 0.0427350 & 0.2112886 & 7.5\\
 \hline
-Color:Load & 60.39 & 0.0289 & 0.1725 & 5.0\\
+Color:Load & 60.38579 & 0.0289017 & 0.1725164 & 5.0\\
 \hline
-Size:Color:Load & 26.93 & 0.0147 & 0.1220 & 2.5\\
+Size:Color:Load & 26.92604 & 0.0146628 & 0.1219875 & 2.5\\
 \hline
 \end{tabular}
 \end{table}
@@ -4814,7 +4813,7 @@ Size:Color:Load & 26.93 & 0.0147 & 0.1220 & 2.5\\
 ## [1] 0
 \end{verbatim}
 
-We see that a pattern of means of 0, 0, 0, 0, 0, 0, 0, 20 for a 2x2x2 interaction equals a Cohen's f of 0.25.
+We see that a pattern of means of 0, 0, 0, 0, 0, 0, 0, 20 for a 2x2x2 interaction equals a Cohen's \emph{f} of 0.25.
 
 \begin{Shaded}
 \begin{Highlighting}[]
@@ -4839,11 +4838,11 @@ We see that a pattern of means of 0, 0, 0, 0, 0, 0, 0, 20 for a 2x2x2 interactio
 \hline
   & power & partial\_eta\_squared & cohen\_f & non\_centrality\\
 \hline
-Size & 33.71 & 0.0649 & 0.2635 & 2.5\\
+Size & 33.71329 & 0.0649351 & 0.2635231 & 2.5\\
 \hline
-Color & 33.71 & 0.0649 & 0.2635 & 2.5\\
+Color & 33.71329 & 0.0649351 & 0.2635231 & 2.5\\
 \hline
-Size:Color & 33.71 & 0.0649 & 0.2635 & 2.5\\
+Size:Color & 33.71329 & 0.0649351 & 0.2635231 & 2.5\\
 \hline
 \end{tabular}
 \end{table}
@@ -4880,7 +4879,7 @@ Size:Color & 33.71 & 0.0649 & 0.2635 & 2.5\\
 ## [1] 0.25
 \end{verbatim}
 
-Cohen's f is twice as large for a 2x2 design with the same mean value in one of four cells. In a 2 factor between design.
+Cohen's \emph{f} is twice as large for a 2x2 design with the same mean value in one of four cells. In a 2 factor between design.
 
 \begin{Shaded}
 \begin{Highlighting}[]
@@ -4905,7 +4904,7 @@ Cohen's f is twice as large for a 2x2 design with the same mean value in one of 
 \hline
   & power & partial\_eta\_squared & cohen\_f & non\_centrality\\
 \hline
-Size & 18.51 & 0.0649 & 0.2635 & 1.25\\
+Size & 18.50957 & 0.0649351 & 0.2635231 & 1.25\\
 \hline
 \end{tabular}
 \end{table}
@@ -4945,7 +4944,7 @@ Size & 18.51 & 0.0649 & 0.2635 & 1.25\\
 \hypertarget{the-no-way-interactions}{%
 \chapter{The `No-Way' Interactions}\label{the-no-way-interactions}}
 
-In the 17th Data Colada blog post titled \href{http://datacolada.org/17}{No-way Interactions} Uri Simonsohn discusses how a moderated interaction (the effect is there in one condition, but disappears in another condition) requires at least twice as many subjects per cell as a study that simply aims to show the simple effect. For example, see the plot below. Assume the score on the vertical axis is desire for fruit, as a function of the fruit that is available (an apple or a banana) and how hungry people are (not, or very). We see there is a difference between the participants desire for a banana compared to an apple, but only for participants who are very hungry. The point that is made is that you need twice as many participants in each cell to have power for the interaction, as you need for the simple effect.
+In the 17th Data Colada blog post titled \href{http://datacolada.org/17}{No-way Interactions} \citet{simonsohn_2014} discusses how a moderated interaction (the effect is there in one condition, but disappears in another condition) requires at least twice as many subjects per cell as a study that simply aims to show the simple effect. For example, see the plot below. Assume the score on the vertical axis is desire for fruit, as a function of the fruit that is available (an apple or a banana) and how hungry people are (not, or very). We see there is a difference between the participants desire for a banana compared to an apple, but only for participants who are very hungry. The point that is made is that you need twice as many participants in each cell to have power for the interaction, as you need for the simple effect.
 
 \begin{Shaded}
 \begin{Highlighting}[]
@@ -5089,7 +5088,7 @@ We can reproduce the simulations in the Data Colada blog post, using the origina
 \end{Highlighting}
 \end{Shaded}
 
-And we can reproduce the results using the ANOVA\_exact function.
+And we can reproduce the results using the \texttt{ANOVA\_exact} function.
 
 \begin{Shaded}
 \begin{Highlighting}[]
@@ -5134,7 +5133,7 @@ And we can reproduce the results using the ANOVA\_exact function.
 \hline
   & power & partial\_eta\_squared & cohen\_f & non\_centrality\\
 \hline
-b & 86.8 & 0.2174 & 0.527 & 10\\
+b & 86.79843 & 0.2173913 & 0.5270463 & 10\\
 \hline
 \end{tabular}
 \end{table}
@@ -5182,7 +5181,7 @@ b & 86.8 & 0.2174 & 0.527 & 10\\
 \hline
   & power & partial\_eta\_squared & cohen\_f & non\_centrality\\
 \hline
-a:b & 59.79 & 0.0617 & 0.2565 & 5\\
+a:b & 59.78655 & 0.0617284 & 0.2564946 & 5\\
 \hline
 \end{tabular}
 \end{table}
@@ -5247,7 +5246,7 @@ We can also reproduce the last example by adjusting the means and standard devia
 \hline
   & power & partial\_eta\_squared & cohen\_f & non\_centrality\\
 \hline
-hunger & 33.33 & 0.0039 & 0.0627 & 2.3437\\
+hunger & 33.32955 & 0.0039171 & 0.0627094 & 2.34375\\
 \hline
 \end{tabular}
 \end{table}
@@ -5277,10 +5276,10 @@ And changing the sample size to 300 should reproduce the power for the interacti
 
 \begin{verbatim}
 ## Power and Effect sizes for ANOVA tests
-##              power partial_eta_squared cohen_f non_centrality
-## fruit        58.06              0.0039  0.0626         4.6875
-## hunger       58.06              0.0039  0.0626         4.6875
-## fruit:hunger 58.06              0.0039  0.0626         4.6875
+##                power partial_eta_squared cohen_f non_centrality
+## fruit        58.0592              0.0039  0.0626         4.6875
+## hunger       58.0592              0.0039  0.0626         4.6875
+## fruit:hunger 58.0592              0.0039  0.0626         4.6875
 ## 
 ## Power and Effect sizes for contrasts
 ##                                                                  power
@@ -5315,7 +5314,7 @@ And changing the sample size to 300 should reproduce the power for the interacti
 \hline
   & power & partial\_eta\_squared & cohen\_f & non\_centrality\\
 \hline
-fruit:hunger & 58.06 & 0.0039 & 0.0626 & 4.6875\\
+fruit:hunger & 58.05922 & 0.003904 & 0.0626044 & 4.6875\\
 \hline
 \end{tabular}
 \end{table}
@@ -5367,9 +5366,9 @@ The second main effect tests the marginal means over the rows, which is also 22.
 
 The interaction tests whether the average effect of hunger on liking fruit differs in the presence of bananas. In the presence of bananas the effect of hunger on the desireability of fruit is 5 scalepoints. The average effect (that we get from the marginal means) of hunger on fruit desireability is 2.5 (22.5-20). In other words, the interaction tests whether the difference effect between hunger and no hunger is different in the presence of an apple versus in the presence of a banana.
 
-Mathematically the interaction effect is computed as the difference between a cell mean and the grand mean, the marginal mean in row i and the grand mean, and the marginal mean in column j and grand mean. For example, for the very hungry-banana condition this is 25 (the value in the cell) - (21.25 {[}the grand mean{]} + 1.25 {[}the marginal mean in row 2, 22.5, minus the grand mean of 21.25{]} + 1.25 {[}the marginal mean in column 2, 22.5, minus the grand mean of 21.25{]}). 25 - (21.25 + (22.5-21.25) + (22.5-21.25)) = 1.25.
+Mathematically the interaction effect is computed as the difference between a cell mean and the grand mean, the marginal mean in row i and the grand mean, and the marginal mean in column j and grand mean. For example, for the very hungry-banana condition this is: 25 (the value in the cell) - (21.25 {[}the grand mean{]} + 1.25 {[}the marginal mean in row 2, 22.5, minus the grand mean of 21.25{]} + 1.25 {[}the marginal mean in column 2, 22.5, minus the grand mean of 21.25{]}). 25 - (21.25 + (22.5-21.25) + (22.5-21.25)) = 1.25.
 
-We can repeat this for every cell, and get for no hunger-apple: 20 - (21.25 + (20-21.25) + (20-21.25)) = 1.25, for very hungry apple: 20 - (21.25 + (22.5-21.25) + (20-21.25)) = 1.25, and no hunger-banana: 20 - (21.25 + (20-21.25) + (22.5-21.25)) = 1.25. These values are used to calculate the sum of squares.
+We can repeat this for every cell, and get for no hunger-apple: \(20 - (21.25 + (20-21.25) + (20-21.25)) = 1.25\), for very hungry apple: \(20 - (21.25 + (22.5-21.25) + (20-21.25)) = 1.25\), and no hunger-banana: \(20 - (21.25 + (20-21.25) + (22.5-21.25)) = 1.25\). These values are used to calculate the sum of squares.
 
 \begin{Shaded}
 \begin{Highlighting}[]
@@ -5449,16 +5448,16 @@ Neither of the main effects is now significant, as the marginal means are 22.5 v
 \hline
   & power & partial\_eta\_squared & cohen\_f & non\_centrality\\
 \hline
-fruit & 5.0 & 0.0000 & 0.0000 & 0.00\\
+fruit & 5.00000 & 0.0000000 & 0.0000000 & 0.00\\
 \hline
-hunger & 5.0 & 0.0000 & 0.0000 & 0.00\\
+hunger & 5.00000 & 0.0000000 & 0.0000000 & 0.00\\
 \hline
-fruit:hunger & 99.1 & 0.0154 & 0.1252 & 18.75\\
+fruit:hunger & 99.10259 & 0.0154353 & 0.1252089 & 18.75\\
 \hline
 \end{tabular}
 \end{table}
 
-We can also reproduce the power analysis using the analytic function:
+We can also reproduce the power analysis using the analytic functions in \texttt{Superpower}:
 
 \begin{Shaded}
 \begin{Highlighting}[]
@@ -5584,7 +5583,7 @@ anova\_Condition & 84.15 & 0.0911796\\
 \hline
   & power & partial\_eta\_squared & cohen\_f & non\_centrality\\
 \hline
-Condition & 84.39 & 0.0841 & 0.303 & 9\\
+Condition & 84.38754 & 0.0841121 & 0.3030458 & 9\\
 \hline
 \end{tabular}
 \end{table}
@@ -5664,7 +5663,7 @@ And we can see power across sample sizes
 \hline
   & power & partial\_eta\_squared & cohen\_f & non\_centrality\\
 \hline
-Condition & 76.17 & 0.0577 & 0.2474 & 9\\
+Condition & 76.16545 & 0.0576923 & 0.2474358 & 9\\
 \hline
 \end{tabular}
 \end{table}
@@ -5727,7 +5726,7 @@ We see that adding a condition that falls between the other two means reduces ou
 ## [1] 0.07407407
 \end{verbatim}
 
-Now power has increased. This is not always true. The power is a function of many factors in the design, incuding the effect size (Cohen's f) and the total sample size (and the degrees of freedom and number of groups). But as we will see below, as we keep adding conditions, the power will reduce, even if initially, the power might increase.
+Now power has increased. This is not always true. The power is a function of many factors in the design, incuding the effect size (Cohen's \emph{f}) and the total sample size (and the degrees of freedom and number of groups). But as we will see below, as we keep adding conditions, the power will reduce, even if initially, the power might increase.
 
 \begin{Shaded}
 \begin{Highlighting}[]
@@ -5736,7 +5735,7 @@ Now power has increased. This is not always true. The power is a function of man
 \end{Highlighting}
 \end{Shaded}
 
-It helps to think of these different designs in terms of either partial eta-squared, or Cohen's f (the one can easily be converted into the other).
+It helps to think of these different designs in terms of either partial eta-squared, or Cohen's \emph{f} (the one can easily be converted into the other).
 
 \begin{Shaded}
 \begin{Highlighting}[]
@@ -5932,7 +5931,7 @@ It helps to think of these different designs in terms of either partial eta-squa
 ## [1] 0.244949
 \end{verbatim}
 
-The SS\_A or the sum of squares for the main effect, is 900 for two groups, and the SS\_error for the error term is 10000. When we add a group, SS\_A is 900, and the SS\_error is 15000. Because the added condition falls exactly on the grand mean (83), the sum of squared for this extra group is 0. In other words, it does nothing to increase the signal that there is a difference between groups. However, the sum of squares for the error, which is a function of the total sample size, is increased, which reduces the effect size. So, adding a condition that falls on the grand mean reduces the power for the main effect of the ANOVA. Obviously, adding such a group has other benefits, such as being able to compare the two means to a new third condition.
+The \texttt{SS\_A} or the sum of squares for the main effect, is 900 for two groups, and the \texttt{SS\_error} for the error term is 10000. When we add a group, \texttt{SS\_A} is 900, and the \texttt{SS\_error} is 15000. Because the added condition falls exactly on the grand mean (83), the sum of squared for this extra group is 0. In other words, it does nothing to increase the signal that there is a difference between groups. However, the sum of squares for the error, which is a function of the total sample size, is increased, which reduces the effect size. So, adding a condition that falls on the grand mean reduces the power for the main effect of the ANOVA. Obviously, adding such a group has other benefits, such as being able to compare the two means to a new third condition.
 
 We already saw that adding a condition that has a mean as extreme as one of the existing groups also reduces the power. Let's again do the calculations step by step when the extra group has a mean as extreme as one of the two original conditions.
 
@@ -6033,7 +6032,7 @@ We already saw that adding a condition that has a mean as extreme as one of the 
 ## [1] 0.2828427
 \end{verbatim}
 
-We see the sum of squares of the error stays the same - 15000 - because it is only determined by the standard error and the sample size, but not by the differences in the means. This is an increase of 5000 compared to the 2 group design. The sum of squares (the second component that determines the size of partial eta-squared) increases, which increases Cohen's f.~
+We see the sum of squares of the error stays the same - 15000 - because it is only determined by the standard error and the sample size, but not by the differences in the means. This is an increase of 5000 compared to the 2 group design. The sum of squares (the second component that determines the size of partial eta-squared) increases, which increases Cohen's \emph{f}.
 
 \hypertarget{within-designs}{%
 \section{Within Designs}\label{within-designs}}
@@ -6080,12 +6079,12 @@ Now imagine our design described above was a within design. The means and sd rem
 \hline
   & power & partial\_eta\_squared & cohen\_f & non\_centrality\\
 \hline
-Condition & 83.66 & 0.1552 & 0.4286 & 9\\
+Condition & 83.66436 & 0.1551724 & 0.4285714 & 9\\
 \hline
 \end{tabular}
 \end{table}
 
-We see power is ever so slightly less than for the between subject design. This is due to the loss in degrees of freedom, which is 2(n-1) for between designs, and n-1 for within designs. But as the correlation increases, the power advantage of within designs becomes stronger.
+We see power is ever so slightly less than for the between subject design. This is due to the loss in degrees of freedom, which is \(2(n-1)\) for between designs, and \(n-1\) for within designs. But as the correlation increases, the power advantage of within designs becomes stronger.
 
 \begin{Shaded}
 \begin{Highlighting}[]
@@ -6132,7 +6131,7 @@ We see power is ever so slightly less than for the between subject design. This 
 \hline
   & power & partial\_eta\_squared & cohen\_f & non\_centrality\\
 \hline
-Condition & 75.71 & 0.0841 & 0.303 & 9\\
+Condition & 75.70841 & 0.0841121 & 0.3030458 & 9\\
 \hline
 \end{tabular}
 \end{table}
@@ -6527,20 +6526,14 @@ When we add a a condition in a within design where we expect the mean to be iden
 ## [1] 2.151016
 \end{verbatim}
 
-This set of designs where we increase the number of conditions demonstrates a common pattern where the power initially increases, but then starts to decrease. Again, the exact pattern (and when the power starts to decrease) depends on the effect size and sample size. Note also that the effect size (Cohen's f) decreases as we add conditions, but the increased sample size compensates for this when calculating power. When using power analysis software such as GPower, this is important to realize. You can't just power for a medium effect size, and then keep adding conditions under the assumption that the increased power you see in the program will become a reality. Increasing the number of conditions will reduce the effect size, and therefore, adding conditions will not automatically increase power (and might even decrease it).
+This set of designs where we increase the number of conditions demonstrates a common pattern where the power initially increases, but then starts to decrease. Again, the exact pattern (and when the power starts to decrease) depends on the effect size and sample size. Note also that the effect size (Cohen's f) decreases as we add conditions, but the increased sample size compensates for this when calculating power. When using power analysis software such as GPower \citep{faul2007g}, this is important to realize. You can't just power for a medium effect size, and then keep adding conditions under the assumption that the increased power you see in the program will become a reality. Increasing the number of conditions will reduce the effect size, and therefore, adding conditions will not automatically increase power (and might even decrease it).
 
 Overall, the effect of adding conditions with an effect close to the grand mean reduces power quite strongly, and adding conditions with means close to the extreme of the current conditions will either slightly increase of decrease power.
 
 \hypertarget{error-control-in-exploratory-anova}{%
 \chapter{Error Control in Exploratory ANOVA}\label{error-control-in-exploratory-anova}}
 
-\begin{Shaded}
-\begin{Highlighting}[]
-\KeywordTok{load}\NormalTok{(}\StringTok{"data/error_data.RData"}\NormalTok{)}
-\end{Highlighting}
-\end{Shaded}
-
-In a 2 x 2 x 2 design, an ANOVA will give the test results for three main effects, three two-way interactions, and one three-way interaction. That's 7 statistical tests. The probability of making at least one Type 1 error in a single 2 x 2 x 2 ANOVA is 1-(0.95)\^{}7 = 30\%.
+In a 2 x 2 x 2 design, an ANOVA will give the test results for three main effects, three two-way interactions, and one three-way interaction. That's 7 statistical tests. The probability of making at least one type I error in a single 2 x 2 x 2 ANOVA is \(1-(0.95)^7 = 30\)\%.
 
 \begin{Shaded}
 \begin{Highlighting}[]
@@ -6599,7 +6592,7 @@ anova\_condition1:condition2:condition3 & 4.5 & 0.0024848\\
 \end{tabular}
 \end{table}
 
-When there is no true effect, we formally do not have `power' (which is defined as the probability of finding p \textless{} \(\alpha\) if there is a true effect to be found) so the power column should be read as the `Type 1 error rate'. Because we have saved the power simulation in the `simulation\_result' object, we can perform calculations on the `sim\_data' dataframe that is stored. This dataframe contains the results for the nsims simulations (e.g., 10000 rows if you ran 10000 simulations) and stores the p-values and effect size estimates for each ANOVA. The first 7 columns are the p-values for the ANOVA, first the main effects of condition 1, 2, and 3, then three two-way interactions, and finally the threeway interaction.
+When there is no true effect, we formally do not have `power' (which is defined as the probability of finding p \textless{} \(\alpha\) if there is a true effect to be found) so the power column should be read as the `type I error rate'. Because we have saved the power simulation in the `simulation\_result' object, we can perform calculations on the `sim\_data' dataframe that is stored. This dataframe contains the results for the nsims simulations (e.g., 10000 rows if you ran 10000 simulations) and stores the p-values and effect size estimates for each ANOVA. The first 7 columns are the p-values for the ANOVA, first the main effects of condition 1, 2, and 3, then three two-way interactions, and finally the threeway interaction.
 
 We can calculate the number of significant results for each test (which should be 5\%) by counting the number of significant p-values in each of the 7 rows:
 
@@ -6627,9 +6620,9 @@ We can calculate the number of significant results for each test (which should b
 ##                                    4.5
 \end{verbatim}
 
-This is the Type 1 error rate for each test. When we talk about error rate inflation due to multiple comparisons, we are talking about the probability that you conclude there is an effect, when there is actually no effect, when there is a significant effect for the main effect of condition 1, or condition 2, or condition 3, or for the two-way interaction between condition 1 and 2, or condition 1 and 3, or condition 2 and 3, or in the threeway interaction.
+This is the type I error rate for each test. When we talk about error rate inflation due to multiple comparisons, we are talking about the probability that you conclude there is an effect, when there is actually no effect, when there is a significant effect for the main effect of condition 1, or condition 2, or condition 3, or for the two-way interaction between condition 1 and 2, or condition 1 and 3, or condition 2 and 3, or in the threeway interaction.
 
-To calculate this error rate we do not just add the 7 error rates (so 7 * 5\% - 35\%). Instead, we calculate the probability that there will be at least one significant result in an ANOVA we perform. Some ANOVA results will have multiple significant results, just due to the Type 1 error rate (e.g., a significant result for the three-way interaction, and for the main effect of condition 1) but such an ANOVA is counted only once. If we calculate this percentage from our simulations, we see the number is indeed very close to 1-(0.95)\^{}7 = 30\%.
+To calculate this error rate we do not just add the 7 error rates (so 7 * 5\% - 35\%). Instead, we calculate the probability that there will be at least one significant result in an ANOVA we perform. Some ANOVA results will have multiple significant results, just due to the type I error rate (e.g., a significant result for the three-way interaction, and for the main effect of condition 1) but such an ANOVA is counted only once. If we calculate this percentage from our simulations, we see the number is indeed very close to 1-(0.95)\^{}7 = 30\%.
 
 \begin{Shaded}
 \begin{Highlighting}[]
@@ -6643,11 +6636,11 @@ To calculate this error rate we do not just add the 7 error rates (so 7 * 5\% - 
 ## [1] 3.22
 \end{verbatim}
 
-The question is what we should do about this alpha inflation. It is undesirable if you perform exploratory ANOVA's and are fooled too often by Type 1 errors, which will not replicate if you try to build on them. Therefore, you need to control the Type 1 error rate.
+The question is what we should do about this alpha inflation. It is undesirable if you perform exploratory ANOVA's and are fooled too often by type I errors, which will not replicate if you try to build on them. Therefore, you need to control the type I error rate.
 
 In the simulation code, which relies on the afex package, there is the option to set p\_adjust. In the simulation above, p\_adjust was set to ``none''. This means no adjustment is mage to which p-values are considered to be significant, and the alpha level is used as it is set in the simulation (above this was 0.05).
 
-Afex relies on the \texttt{p.adjust} functon in the \texttt{stats} package in R (more information is available \href{https://www.rdocumentation.org/packages/stats/versions/3.1.1/topics/p.adjust}{here}). From the package details:
+Afex relies on the \texttt{p.adjust} functon in the \texttt{stats} package in base R (more information is available \href{https://www.rdocumentation.org/packages/stats/versions/3.1.1/topics/p.adjust}{here}). From the package details:
 
 \begin{quote}
 The adjustment methods include the Bonferroni correction (``bonferroni'') in which the p-values are multiplied by the number of comparisons. Less conservative corrections are also included by Holm (1979) (``holm''), Hochberg (1988) (``hochberg''), Hommel (1988) (``hommel''), Benjamini \& Hochberg (1995) (``BH'' or its alias ``fdr''), and Benjamini \& Yekutieli (2001) (``BY''), respectively. A pass-through option (``none'') is also included. The first four methods are designed to give strong control of the family-wise error rate. There seems no reason to use the unmodified Bonferroni correction because it is dominated by Holm's method, which is also valid under arbitrary assumptions.
@@ -6799,7 +6792,7 @@ p\_condition1\_b\_condition2\_d\_condition3\_e\_condition1\_b\_condition2\_d\_co
 ## [1] 0.66
 \end{verbatim}
 
-We see it is close to 5\%. Note that error rates have variation, and even in a few thousand simulations, the error rate in the sample of studies can easily be half a percentage point higher or lower. But \emph{in the long run} the error rate should equal the alpha level. Furthermore, note that the \href{https://en.wikipedia.org/wiki/Holm\%E2\%80\%93Bonferroni_method}{Holm-Bonferroni} method is slightly more powerful than the Bonferroni procedure (which is simply \(\alpha\) divided by the numner of tests). There are more powerful procedures to control the Type 1 error rate, which require more assumptions. For a small number of tests, they Holm-Bonferroni procedure works well. Alternative procedure to control error rates can be found in the \href{https://cran.r-project.org/web/packages/multcomp/index.html}{multcomp} R package.
+We see it is close to 5\%. Note that error rates have variation, and even in a few thousand simulations, the error rate in the sample of studies can easily be half a percentage point higher or lower. But \emph{in the long run} the error rate should equal the alpha level. Furthermore, note that the \href{https://en.wikipedia.org/wiki/Holm\%E2\%80\%93Bonferroni_method}{Holm-Bonferroni} method is slightly more powerful than the Bonferroni procedure (which is simply \(\alpha\) divided by the numner of tests). There are more powerful procedures to control the type I error rate, which require more assumptions. For a small number of tests, they Holm-Bonferroni procedure works well. Alternative procedure to control error rates can be found in the \href{https://cran.r-project.org/web/packages/multcomp/index.html}{multcomp} R package \citep{R-multcomp}.
 
 \hypertarget{analytic-power-functions}{%
 \chapter{Analytic Power Functions}\label{analytic-power-functions}}
@@ -6840,7 +6833,7 @@ For some designs it is possible to calculate power analytically, using closed fu
 \hline
   & power & partial\_eta\_squared & cohen\_f & non\_centrality\\
 \hline
-Factor\_A & 81.21 & 0.0461 & 0.2198 & 11.4\\
+Factor\_A & 81.21291 & 0.0460792 & 0.2197842 & 11.4\\
 \hline
 \end{tabular}
 \end{table}
@@ -6858,7 +6851,7 @@ We can also calculate power analytically with a \texttt{Superpower} function.
 ## [1] 81.21291
 \end{verbatim}
 
-This is a generalized function for One-Way ANOVA's for any number of groups. It is in part based on code from the \texttt{pwr2ppl} package (but Aberson's code allows for different n per condition, and different sd per condition).
+This is a generalized function for one-way ANOVA's for any number of groups. It is in part based on code from the \texttt{pwr2ppl} \citep{R-pwr2ppl} package (but Aberson's code allows for different n per condition, and different sd per condition).
 
 \begin{Shaded}
 \begin{Highlighting}[]
@@ -6873,7 +6866,7 @@ This is a generalized function for One-Way ANOVA's for any number of groups. It 
 ## Power  = 0.812 for eta-squared = 0.05
 \end{verbatim}
 
-We can also use the function in the pwr package. Note that we need to calculate f to use this function, which is based on the means and sd, as illustrated in the formulas above.
+We can also use the function in the \texttt{pwr} package \citep{R-pwr}. Note that we need to calculate \emph{f} to use this function, which is based on the means and sd, as illustrated in the formulas above.
 
 \begin{Shaded}
 \begin{Highlighting}[]
@@ -6897,7 +6890,7 @@ We can also use the function in the pwr package. Note that we need to calculate 
 ## NOTE: n is number in each group
 \end{verbatim}
 
-Finally, G*Power provides the option to calculate f from the means, sd and n for the cells. It can then be used to calculate power.
+Finally, G*Power \citep{faul2007g} provides the option to calculate \texttt{f} from the means, sd and n for the cells. It can then be used to calculate power.
 
 \includegraphics{screenshots/gpower_13.png}
 
@@ -6936,11 +6929,11 @@ Finally, G*Power provides the option to calculate f from the means, sd and n for
 \hline
   & power & partial\_eta\_squared & cohen\_f & non\_centrality\\
 \hline
-A & 59.79 & 0.0617 & 0.2565 & 5\\
+A & 59.78655 & 0.0617284 & 0.2564946 & 5\\
 \hline
-B & 59.79 & 0.0617 & 0.2565 & 5\\
+B & 59.78655 & 0.0617284 & 0.2564946 & 5\\
 \hline
-A:B & 59.79 & 0.0617 & 0.2565 & 5\\
+A:B & 59.78655 & 0.0617284 & 0.2564946 & 5\\
 \hline
 \end{tabular}
 \end{table}
@@ -6977,7 +6970,7 @@ A:B & 59.79 & 0.0617 & 0.2565 & 5\\
 ## [1] 59.78655
 \end{verbatim}
 
-We can use the function by Aberson, 2019, as well.
+We can use the function by \citep{R-pwr2ppl}, as well.
 
 \begin{Shaded}
 \begin{Highlighting}[]
@@ -7045,11 +7038,11 @@ We can use the function by Aberson, 2019, as well.
 \hline
   & power & partial\_eta\_squared & cohen\_f & non\_centrality\\
 \hline
-Factor\_A & 44.86 & 0.0253 & 0.1612 & 4.4444\\
+Factor\_A & 44.86306 & 0.0253325 & 0.1612169 & 4.444444\\
 \hline
-Factor\_B & 44.86 & 0.0253 & 0.1612 & 4.4444\\
+Factor\_B & 44.86306 & 0.0253325 & 0.1612169 & 4.444444\\
 \hline
-Factor\_A:Factor\_B & 64.34 & 0.0494 & 0.2280 & 8.8889\\
+Factor\_A:Factor\_B & 64.34127 & 0.0494132 & 0.2279952 & 8.888889\\
 \hline
 \end{tabular}
 \end{table}
@@ -7086,158 +7079,10 @@ Factor\_A:Factor\_B & 64.34 & 0.0494 & 0.2280 & 8.8889\\
 ## [1] 64.34127
 \end{verbatim}
 
-\hypertarget{two-by-two-anova-within-design}{%
-\section{Two by two ANOVA, within design}\label{two-by-two-anova-within-design}}
-
-Potvin \& Schutz (2000) simulate a wide range of repeated measure designs. The give an example of a 3x3 design, with the following correlation matrix:
-
-\includegraphics{screenshots/PS2000.png}
-
-Variances were set to 1 (so all covariance matrices in their simulations were identical). In this specific example, the white fields are related to the correlation for the A main effect (these cells have the same level for B, but different levels of A). The grey cells are related to the main effect of B (the cells have the same level of A, but different levels of B). Finally, the black cells are related to the AxB interaction (they have different levels of A and B). The diagonal (all 1) relate to cells with the same levels of A and B.
-
-Potvin \& Schulz (2000) examine power for 2x2 within ANOVA designs and develop approximations of the error variance. For a design with 2 within factors (A and B) these are:
-
-For the main effect of A:
-\(\sigma _ { e } ^ { 2 } = \sigma ^ { 2 } ( 1 - \overline { \rho } _ { A } ) + \sigma ^ { 2 } ( q - 1 ) ( \overline { \rho } _ { B } - \overline { \rho } _ { AB } )\)
-
-For the main effectof B:
-\(\sigma _ { e } ^ { 2 } = \sigma ^ { 2 } ( 1 - \overline { \rho } _ { B } ) + \sigma ^ { 2 } ( p - 1 ) ( \overline { \rho } _ { A } - \overline { \rho } _ { A B } )\)
-
-For the interaction between A and B:
-\(\sigma _ { e } ^ { 2 } = \sigma ^ { 2 } ( 1 - \rho _ { \max } ) - \sigma ^ { 2 } ( \overline { \rho } _ { \min } - \overline { \rho } _ { AB } )\)
-
-We first simulate a within subjects 2x2 ANOVA design.
-
-\begin{Shaded}
-\begin{Highlighting}[]
-\NormalTok{mu =}\StringTok{ }\KeywordTok{c}\NormalTok{(}\DecValTok{2}\NormalTok{,}\DecValTok{1}\NormalTok{,}\DecValTok{4}\NormalTok{,}\DecValTok{2}\NormalTok{) }
-\NormalTok{n <-}\StringTok{ }\DecValTok{20}
-\NormalTok{sd <-}\StringTok{ }\DecValTok{5}
-\NormalTok{r <-}\StringTok{ }\KeywordTok{c}\NormalTok{(}
-  \FloatTok{0.8}\NormalTok{, }\FloatTok{0.5}\NormalTok{, }\FloatTok{0.4}\NormalTok{,}
-       \FloatTok{0.4}\NormalTok{, }\FloatTok{0.5}\NormalTok{,}
-            \FloatTok{0.8}
-\NormalTok{  )}
-\NormalTok{string =}\StringTok{ "2w*2w"}
-\NormalTok{labelnames =}\StringTok{ }\KeywordTok{c}\NormalTok{(}\StringTok{"A"}\NormalTok{, }\StringTok{"a1"}\NormalTok{, }\StringTok{"a2"}\NormalTok{, }\StringTok{"B"}\NormalTok{, }\StringTok{"b1"}\NormalTok{, }\StringTok{"b2"}\NormalTok{)}
-\NormalTok{design_result <-}\StringTok{ }\KeywordTok{ANOVA_design}\NormalTok{(}\DataTypeTok{design =}\NormalTok{ string,}
-                              \DataTypeTok{n =}\NormalTok{ n, }
-                              \DataTypeTok{mu =}\NormalTok{ mu, }
-                              \DataTypeTok{sd =}\NormalTok{ sd, }
-                              \DataTypeTok{r =}\NormalTok{ r, }
-                              \DataTypeTok{labelnames =}\NormalTok{ labelnames)}
-
-\NormalTok{exact_result <-}\StringTok{ }\KeywordTok{ANOVA_exact}\NormalTok{(design_result,}
-                            \DataTypeTok{alpha_level =}\NormalTok{ alpha_level,}
-                            \DataTypeTok{verbose =} \OtherTok{FALSE}\NormalTok{)}
-\end{Highlighting}
-\end{Shaded}
-
-\begin{table}[!h]
-
-\caption{\label{tab:unnamed-chunk-290}Exact ANOVA Result}
-\centering
-\begin{tabular}{l|r|r|r|r}
-\hline
-  & power & partial\_eta\_squared & cohen\_f & non\_centrality\\
-\hline
-A & 26.92 & 0.0952 & 0.3244 & 2\\
-\hline
-B & 64.23 & 0.2400 & 0.5620 & 6\\
-\hline
-A:B & 26.92 & 0.0952 & 0.3244 & 2\\
-\hline
-\end{tabular}
-\end{table}
-
-We can use the \texttt{ANOVA\_exact} function to evaluate this design since there is not a analytic solution in \texttt{Superpower}.
-
-\begin{Shaded}
-\begin{Highlighting}[]
-\NormalTok{power_res <-}\StringTok{ }\KeywordTok{ANOVA_exact}\NormalTok{(}\DataTypeTok{design_result =}\NormalTok{ design_result)}
-\end{Highlighting}
-\end{Shaded}
-
-\begin{verbatim}
-## Power and Effect sizes for ANOVA tests
-##     power partial_eta_squared cohen_f non_centrality
-## A   26.92              0.0952  0.3244              2
-## B   64.23              0.2400  0.5620              6
-## A:B 26.92              0.0952  0.3244              2
-## 
-## Power and Effect sizes for contrasts
-##                       power effect_size
-## p_A_a1_B_b1_A_a1_B_b2 26.92     -0.3162
-## p_A_a1_B_b1_A_a2_B_b1 39.70      0.4000
-## p_A_a1_B_b1_A_a2_B_b2  5.00      0.0000
-## p_A_a1_B_b2_A_a2_B_b1 64.23      0.5477
-## p_A_a1_B_b2_A_a2_B_b2 13.60      0.2000
-## p_A_a2_B_b1_A_a2_B_b2 76.52     -0.6325
-\end{verbatim}
-
-\begin{verbatim}
-##     power partial_eta_squared cohen_f non_centrality
-## A   26.92              0.0952  0.3244              2
-## B   64.23              0.2400  0.5620              6
-## A:B 26.92              0.0952  0.3244              2
-\end{verbatim}
-
-We can use \texttt{pwr2ppl} by Aberson (2019) to produce the same results.
-
-\begin{Shaded}
-\begin{Highlighting}[]
-\KeywordTok{win2F}\NormalTok{(}
-  \DataTypeTok{m1.1 =} \DecValTok{2}\NormalTok{,}
-  \DataTypeTok{m2.1 =} \DecValTok{1}\NormalTok{,}
-  \DataTypeTok{m1.2 =} \DecValTok{4}\NormalTok{,}
-  \DataTypeTok{m2.2 =} \DecValTok{2}\NormalTok{,}
-  \DataTypeTok{s1.1 =} \DecValTok{5}\NormalTok{,}
-  \DataTypeTok{s2.1 =} \DecValTok{5}\NormalTok{,}
-  \DataTypeTok{s1.2 =} \DecValTok{5}\NormalTok{,}
-  \DataTypeTok{s2.2 =} \DecValTok{5}\NormalTok{,}
-  \DataTypeTok{r12 =} \FloatTok{0.8}\NormalTok{,}
-  \DataTypeTok{r13 =} \FloatTok{0.5}\NormalTok{,}
-  \DataTypeTok{r14 =} \FloatTok{0.4}\NormalTok{,}
-  \DataTypeTok{r23 =} \FloatTok{0.4}\NormalTok{,}
-  \DataTypeTok{r24 =} \FloatTok{0.5}\NormalTok{,}
-  \DataTypeTok{r34 =} \FloatTok{0.8}\NormalTok{,}
-  \DataTypeTok{n =} \DecValTok{20}
-\NormalTok{)}
-\end{Highlighting}
-\end{Shaded}
-
-\begin{verbatim}
-## Partial eta-squared Factor A = 0.24
-\end{verbatim}
-
-\begin{verbatim}
-## Power Factor A (Unadjusted) for n = 20 is 0.642
-\end{verbatim}
-
-\begin{verbatim}
-## Partial eta-squared Factor B = 0.095
-\end{verbatim}
-
-\begin{verbatim}
-## Power Factor B (Unadjusted) for n = 20 is 0.269
-\end{verbatim}
-
-\begin{verbatim}
-## Partial eta-squared AxB = 0.095
-\end{verbatim}
-
-\begin{verbatim}
-## Power AxB (Unadjusted) for n = 20 is 0.269
-\end{verbatim}
-
-\begin{verbatim}
-## Both Factors Have 2 levels - There is no adjustment when levels = 2
-\end{verbatim}
-
 \hypertarget{power-curve}{%
 \chapter{Power Curve}\label{power-curve}}
 
-Power is calculated for a specific value of an effect size, alpha level, and sample size. Because you often do not know the true effect size, it often makes more sense to think of the power curve as a function of the size of the effect. Although power curves can be calculated based on simulations for any design, we will use the analytic solution to calculate the power of ANOVA designs because these calculations are much faster. The basic approach is to calculate power for a specific pattern of means, a specific effect size, a given alpha level, and a specific pattern of correlations. This is one example:
+Power is calculated for a specific value of an effect size, alpha level, and sample size. Because you often do not know the true effect size, it often makes more sense to think of the power curve as a function of the size of the effect. Although power curves could be constructed from Monte Carlo simulations (\texttt{ANOVA\_power}) the \texttt{plot\_power} function utilizes the \texttt{ANOVA\_exact} function within its code because these ``exact'' simulations are much faster. The basic approach is to calculate power for a specific pattern of means, a specific effect size, a given alpha level, and a specific pattern of correlations. This is one example:
 
 \begin{Shaded}
 \begin{Highlighting}[]
@@ -7264,17 +7109,17 @@ Power is calculated for a specific value of an effect size, alpha level, and sam
 
 \begin{table}[!h]
 
-\caption{\label{tab:unnamed-chunk-296}Exact ANOVA Result}
+\caption{\label{tab:unnamed-chunk-291}Exact ANOVA Result}
 \centering
 \begin{tabular}{l|r|r|r|r}
 \hline
   & power & partial\_eta\_squared & cohen\_f & non\_centrality\\
 \hline
-A & 32.36 & 0.1163 & 0.3627 & 2.5\\
+A & 32.35926 & 0.1162791 & 0.3627381 & 2.5\\
 \hline
-B & 32.36 & 0.1163 & 0.3627 & 2.5\\
+B & 32.35926 & 0.1162791 & 0.3627381 & 2.5\\
 \hline
-A:B & 32.36 & 0.1163 & 0.3627 & 2.5\\
+A:B & 32.35926 & 0.1162791 & 0.3627381 & 2.5\\
 \hline
 \end{tabular}
 \end{table}
@@ -7289,40 +7134,42 @@ We can make these calculations for a range of sample sizes, to get a power curve
 \end{Highlighting}
 \end{Shaded}
 
-\includegraphics{SuperpowerValidation_files/figure-latex/unnamed-chunk-297-1.pdf}
+\includegraphics{SuperpowerValidation_files/figure-latex/unnamed-chunk-292-1.pdf}
+
+If we run many of these \texttt{plot\_power} functions across small changes in the ANOVA\_design we can compile a number of power curves that can be combined into a single plot. We do this below. The code to reprodcue these plots can be found on the \href{https://github.com/arcaldwell49/SuperpowerBook/tree/master/data}{GitHub repository for this book}.
 
 \hypertarget{explore-increase-in-effect-size-for-moderated-interactions.}{%
 \section{Explore increase in effect size for moderated interactions.}\label{explore-increase-in-effect-size-for-moderated-interactions.}}
 
 The design has means 0, 0, 0, 0, with one cell increasing by 0.1, up to 0, 0, 0, 0.5. The standard deviation is set to 1. The correlation between all variables is 0.5.
 
-\includegraphics{SuperpowerValidation_files/figure-latex/unnamed-chunk-298-1.pdf}
+\includegraphics{SuperpowerValidation_files/figure-latex/unnamed-chunk-293-1.pdf}
 
 \hypertarget{explore-increase-in-effect-size-for-cross-over-interactions.}{%
 \section{Explore increase in effect size for cross-over interactions.}\label{explore-increase-in-effect-size-for-cross-over-interactions.}}
 
 The design has means 0, 0, 0, 0, with two cells increasing by 0.1, up to 0.5, 0, 0, 0.5. The standard deviation is set to 1. The correlation between all variables is 0.5.
 
-\includegraphics{SuperpowerValidation_files/figure-latex/unnamed-chunk-299-1.pdf}
+\includegraphics{SuperpowerValidation_files/figure-latex/unnamed-chunk-294-1.pdf}
 
 \hypertarget{explore-increase-in-correlation-in-moderated-interactions.}{%
 \section{Explore increase in correlation in moderated interactions.}\label{explore-increase-in-correlation-in-moderated-interactions.}}
 
 The design has means 0, 0, 0, 0.3. The standard deviation is set to 1. The correlation between all variables increases from 0 to 0.9.
 
-\includegraphics{SuperpowerValidation_files/figure-latex/unnamed-chunk-300-1.pdf}
+\includegraphics{SuperpowerValidation_files/figure-latex/unnamed-chunk-295-1.pdf}
 
 \hypertarget{increasing-correlation-in-on-factor-decreases-power-in-second-factor}{%
 \section{Increasing correlation in on factor decreases power in second factor}\label{increasing-correlation-in-on-factor-decreases-power-in-second-factor}}
 
-As Potvin and Schutz (2000) write:
+As \citet{potvin2000statistical} write:
 
 \begin{quote}
-The more important finding with respect to the effect of \emph{r} on power relates to the effect of the correlations associated with one factor on the power of the test of the main effect of the other factor. Specifically, if the correlations among the levels of B are larger than those within the AB matrix (i.e., \emph{r}B - \emph{r}AB \textgreater{} 0.0), there is a reduction in the power for the test of the A effect (and the test on B is similarly affected by the A correlations).
+The more important finding with respect to the effect of \emph{r} on power relates to the effect of the correlations associated with one factor on the power of the test of the main effect of the other factor. Specifically, if the correlations among the levels of B are larger than those within the AB matrix (i.e., \emph{r}(B) - \emph{r}(AB) \textgreater{} 0.0), there is a reduction in the power for the test of the A effect (and the test on B is similarly affected by the A correlations).
 \end{quote}
 
-We see this in the plots below. As the correlation of the A factor increases from 0.4 to 0.9, we see the power for the main effect of factor B decreases.
-\includegraphics{SuperpowerValidation_files/figure-latex/unnamed-chunk-301-1.pdf}
+We see this in the plots below. As the correlation of the A factor increases from 0.4 to 0.9, we see the power for the main effect decreases.
+\includegraphics{SuperpowerValidation_files/figure-latex/unnamed-chunk-296-1.pdf}
 
 \hypertarget{appendix-1-direct-comparison-to-pwr2ppl}{%
 \chapter*{Appendix 1: Direct Comparison to pwr2ppl}\label{appendix-1-direct-comparison-to-pwr2ppl}}
@@ -7380,8 +7227,8 @@ The \texttt{ANOVA\_exact} result.
 \end{Shaded}
 
 \begin{verbatim}
-##      power partial_eta_squared cohen_f non_centrality
-## DORM 81.21              0.0461  0.2198           11.4
+##         power partial_eta_squared   cohen_f non_centrality
+## DORM 81.21291          0.04607922 0.2197842           11.4
 \end{verbatim}
 
 And these match \texttt{pwr2ppl}.
@@ -7461,10 +7308,10 @@ The \texttt{ANOVA\_exact} result.
 \end{Shaded}
 
 \begin{verbatim}
-##     power partial_eta_squared cohen_f non_centrality
-## a   89.75              0.0258  0.1626        10.4671
-## b   42.10              0.0078  0.0887         3.1142
-## a:b 42.10              0.0078  0.0887         3.1142
+##        power partial_eta_squared    cohen_f non_centrality
+## a   89.75072         0.025751475 0.16257965      10.467128
+## b   42.10204         0.007802747 0.08867981       3.114187
+## a:b 42.10204         0.007802747 0.08867981       3.114187
 \end{verbatim}
 
 And these match \texttt{pwr2ppl}. From Table 5.12.
@@ -7550,10 +7397,10 @@ The \texttt{ANOVA\_exact} result.
 \end{Shaded}
 
 \begin{verbatim}
-##     power partial_eta_squared cohen_f non_centrality
-## a   99.92              0.0256  0.1621        26.1678
-## b   79.61              0.0078  0.0884         7.7855
-## a:b 79.61              0.0078  0.0884         7.7855
+##        power partial_eta_squared   cohen_f non_centrality
+## a   99.91852         0.025600317 0.1620892      26.167820
+## b   79.60496         0.007756107 0.0884123       7.785467
+## a:b 79.60496         0.007756107 0.0884123       7.785467
 \end{verbatim}
 
 And these match \texttt{pwr2ppl}.
@@ -7632,8 +7479,8 @@ Now we prouce 3 \texttt{ANOVA\_exact} results representing no sphericity correct
 \end{Shaded}
 
 \begin{verbatim}
-##   power partial_eta_squared cohen_f non_centrality
-## a 80.95              0.1405  0.4043        11.7671
+##      power partial_eta_squared   cohen_f non_centrality
+## a 80.94999           0.1404744 0.4042678       11.76713
 \end{verbatim}
 
 \begin{Shaded}
@@ -7647,8 +7494,8 @@ Now we prouce 3 \texttt{ANOVA\_exact} results representing no sphericity correct
 \end{Shaded}
 
 \begin{verbatim}
-##   power partial_eta_squared cohen_f non_centrality
-## a 74.46              0.1405  0.4043         9.5852
+##      power partial_eta_squared   cohen_f non_centrality
+## a 74.45876           0.1404744 0.4042678       9.585214
 \end{verbatim}
 
 \begin{Shaded}
@@ -7662,8 +7509,8 @@ Now we prouce 3 \texttt{ANOVA\_exact} results representing no sphericity correct
 \end{Shaded}
 
 \begin{verbatim}
-##   power partial_eta_squared cohen_f non_centrality
-## a 78.14              0.1405  0.4043        10.7526
+##      power partial_eta_squared   cohen_f non_centrality
+## a 78.14498           0.1404744 0.4042678       10.75258
 \end{verbatim}
 
 And these match \texttt{pwr2ppl}.
@@ -7743,8 +7590,8 @@ Now we prouce 3 \texttt{ANOVA\_exact} results representing no sphericity correct
 \end{Shaded}
 
 \begin{verbatim}
-##   power partial_eta_squared cohen_f non_centrality
-## a 39.75               0.015  0.1235         4.5292
+##      power partial_eta_squared   cohen_f non_centrality
+## a 39.74802          0.01502077 0.1234902       4.529201
 \end{verbatim}
 
 \begin{Shaded}
@@ -7758,8 +7605,8 @@ Now we prouce 3 \texttt{ANOVA\_exact} results representing no sphericity correct
 \end{Shaded}
 
 \begin{verbatim}
-##   power partial_eta_squared cohen_f non_centrality
-## a 31.79               0.015  0.1235          2.998
+##      power partial_eta_squared   cohen_f non_centrality
+## a 31.78652          0.01502077 0.1234902       2.997994
 \end{verbatim}
 
 \begin{Shaded}
@@ -7773,8 +7620,8 @@ Now we prouce 3 \texttt{ANOVA\_exact} results representing no sphericity correct
 \end{Shaded}
 
 \begin{verbatim}
-##   power partial_eta_squared cohen_f non_centrality
-## a 32.12               0.015  0.1235         3.0591
+##      power partial_eta_squared   cohen_f non_centrality
+## a 32.12295          0.01502077 0.1234902       3.059139
 \end{verbatim}
 
 And these match \texttt{pwr2ppl}.
@@ -7860,10 +7707,10 @@ Now we prouce 3 \texttt{ANOVA\_exact} results representing no sphericity correct
 \end{Shaded}
 
 \begin{verbatim}
-##     power partial_eta_squared cohen_f non_centrality
-## a   27.24              0.0232  0.1541         1.8762
-## b   74.85              0.0401  0.2043         9.8948
-## a:b 10.23              0.0035  0.0590         0.8255
+##        power partial_eta_squared    cohen_f non_centrality
+## a   27.24340         0.023198088 0.15410717      1.8761726
+## b   74.84647         0.040077020 0.20432877      9.8948083
+## a:b 10.23225         0.003471099 0.05901855      0.8255159
 \end{verbatim}
 
 \begin{Shaded}
@@ -7877,10 +7724,10 @@ Now we prouce 3 \texttt{ANOVA\_exact} results representing no sphericity correct
 \end{Shaded}
 
 \begin{verbatim}
-##     power partial_eta_squared cohen_f non_centrality
-## a   27.24              0.0232  0.1541         1.8762
-## b   58.54              0.0401  0.2043         5.9072
-## a:b  9.13              0.0035  0.0590         0.5072
+##         power partial_eta_squared    cohen_f non_centrality
+## a   27.243403         0.023198088 0.15410717      1.8761726
+## b   58.540772         0.040077020 0.20432877      5.9072378
+## a:b  9.130272         0.003471099 0.05901855      0.5072161
 \end{verbatim}
 
 \begin{Shaded}
@@ -7894,10 +7741,10 @@ Now we prouce 3 \texttt{ANOVA\_exact} results representing no sphericity correct
 \end{Shaded}
 
 \begin{verbatim}
-##     power partial_eta_squared cohen_f non_centrality
-## a   27.24              0.0232  0.1541         1.8762
-## b   59.18              0.0401  0.2043         6.0353
-## a:b  9.17              0.0035  0.0590         0.5188
+##         power partial_eta_squared    cohen_f non_centrality
+## a   27.243403         0.023198088 0.15410717      1.8761726
+## b   59.182337         0.040077020 0.20432877      6.0353398
+## a:b  9.174188         0.003471099 0.05901855      0.5187745
 \end{verbatim}
 
 And these match \texttt{pwr2ppl}.
@@ -8017,10 +7864,10 @@ Now the results from \texttt{ANOVA\_exact}.
 \end{Shaded}
 
 \begin{verbatim}
-##     power partial_eta_squared cohen_f non_centrality
-## a   86.43              0.0888  0.3122         9.5493
-## b   82.68              0.0385  0.2001        11.7671
-## a:b 82.68              0.0385  0.2001        11.7671
+##        power partial_eta_squared   cohen_f non_centrality
+## a   86.42918          0.08878976 0.3121563       9.549274
+## b   82.68405          0.03848397 0.2000607      11.767135
+## a:b 82.68405          0.03848397 0.2000607      11.767135
 \end{verbatim}
 
 \begin{Shaded}
@@ -8034,10 +7881,10 @@ Now the results from \texttt{ANOVA\_exact}.
 \end{Shaded}
 
 \begin{verbatim}
-##     power partial_eta_squared cohen_f non_centrality
-## a   86.43              0.0888  0.3122         9.5493
-## b   76.47              0.0385  0.2001         9.5852
-## a:b 76.47              0.0385  0.2001         9.5852
+##        power partial_eta_squared   cohen_f non_centrality
+## a   86.42918          0.08878976 0.3121563       9.549274
+## b   76.47495          0.03848397 0.2000607       9.585214
+## a:b 76.47495          0.03848397 0.2000607       9.585214
 \end{verbatim}
 
 \begin{Shaded}
@@ -8051,10 +7898,10 @@ Now the results from \texttt{ANOVA\_exact}.
 \end{Shaded}
 
 \begin{verbatim}
-##     power partial_eta_squared cohen_f non_centrality
-## a   86.43              0.0888  0.3122         9.5493
-## b   77.32              0.0385  0.2001         9.8486
-## a:b 77.32              0.0385  0.2001         9.8486
+##        power partial_eta_squared   cohen_f non_centrality
+## a   86.42918          0.08878976 0.3121563       9.549274
+## b   77.31933          0.03848397 0.2000607       9.848557
+## a:b 77.31933          0.03848397 0.2000607       9.848557
 \end{verbatim}
 
 And the results from \texttt{pwr2ppl}.
@@ -8117,11 +7964,11 @@ And the results from \texttt{pwr2ppl}.
 \chapter*{Appendix 2: Direct Comparison to MOREpower}\label{appendix-2-direct-comparison-to-morepower}}
 \addcontentsline{toc}{chapter}{Appendix 2: Direct Comparison to MOREpower}
 
-MOREpower 6.0 by Jamie I. D. Campbell is standalone software for power analysis for ANOVA, t-tests, correlations, and tests of proportions. It outperforms G*power, in that it allows researchers to perform power analyses for a much wider range of designs. It allows a maximum of 9 levels per factor. Users can solve for N, power or effect size. An ANOVA effect size may be specified in terms of the effect-related variance explained (partial eta-squared) or in terms of a test statistic (F, mean square treatment {[}MST{]}, or t).
+MOREpower 6.0 by \citet{Campbell2012MorePower6F} is standalone software for power analysis for ANOVA, t-tests, correlations, and tests of proportions. It outperforms Gpower, in that it allows researchers to perform power analyses for a much wider range of designs. It allows a maximum of 9 levels per factor. Users can solve for N, power or effect size. An ANOVA effect size may be specified in terms of the effect-related variance explained (partial eta-squared) or in terms of a test statistic (\emph{F}, mean square treatment {[}MST{]}, or \emph{t}).
 
-Compared to Superpower, it does not provide all tests at once, it does not provide simple comparisons, it does not incorporate corrections for multiple comparisons, and it does not allow users to enter the means, sd's, and correlations.
+Compared to \texttt{Superpower}, it does not provide all tests at once, it does not provide simple comparisons, it does not incorporate corrections for multiple comparisons, and it does not allow users to enter the means, sd's, and correlations.
 
-We can replicate the independent t-test example in MOREpower:
+We can replicate the independent \emph{t}-test example in MOREpower:
 
 \begin{Shaded}
 \begin{Highlighting}[]
@@ -8146,8 +7993,8 @@ We can replicate the independent t-test example in MOREpower:
 
 \begin{verbatim}
 ## Power and Effect sizes for ANOVA tests
-##           power partial_eta_squared cohen_f non_centrality
-## condition 67.69               0.029  0.1727         5.9082
+##             power partial_eta_squared cohen_f non_centrality
+## condition 67.6857               0.029  0.1727         5.9082
 ## 
 ## Power and Effect sizes for contrasts
 ##                                   power effect_size
@@ -8161,7 +8008,7 @@ We can replicate the independent t-test example in MOREpower:
 \end{Shaded}
 
 \begin{verbatim}
-## [1] 0.029
+## [1] 0.02897482
 \end{verbatim}
 
 \begin{Shaded}
@@ -8171,14 +8018,14 @@ We can replicate the independent t-test example in MOREpower:
 \end{Shaded}
 
 \begin{verbatim}
-## [1] 67.69
+## [1] 67.68572
 \end{verbatim}
 
 \includegraphics{screenshots/morepower_1.png}
 
 We see the power estimates almost perfectly align with MOREpower if we enter partial eta-squared of 0.02897482, sample = 200 (MOREpower requires entering the total N, not N per condition).
 
-We can also replicate the dependent t-test example in MOREpower.
+We can also replicate the dependent \emph{t}-test example in MOREpower.
 
 \begin{Shaded}
 \begin{Highlighting}[]
@@ -8221,8 +8068,8 @@ We can also replicate the dependent t-test example in MOREpower.
 
 \begin{verbatim}
 ## Power and Effect sizes for ANOVA tests
-##       power partial_eta_squared cohen_f non_centrality
-## speed 80.78              0.2048  0.5075            8.5
+##         power partial_eta_squared cohen_f non_centrality
+## speed 80.7778              0.2048  0.5075            8.5
 ## 
 ## Power and Effect sizes for contrasts
 ##                         power effect_size
@@ -8236,7 +8083,7 @@ We can also replicate the dependent t-test example in MOREpower.
 \end{Shaded}
 
 \begin{verbatim}
-## [1] 0.2048
+## [1] 0.2048193
 \end{verbatim}
 
 \begin{Shaded}
@@ -8246,7 +8093,7 @@ We can also replicate the dependent t-test example in MOREpower.
 \end{Shaded}
 
 \begin{verbatim}
-## [1] 80.78
+## [1] 80.77775
 \end{verbatim}
 
 \includegraphics{screenshots/morepower_2.png}
@@ -8294,8 +8141,8 @@ We can also replicate the 3-group within ANOVA example in MOREpower.
 
 \begin{verbatim}
 ## Power and Effect sizes for ANOVA tests
-##       power partial_eta_squared cohen_f non_centrality
-## speed 96.92              0.3304  0.7024          18.75
+##         power partial_eta_squared cohen_f non_centrality
+## speed 96.9163              0.3304  0.7024          18.75
 ## 
 ## Power and Effect sizes for contrasts
 ##                           power effect_size
@@ -8329,7 +8176,7 @@ We can also replicate the 3-group within ANOVA example in MOREpower.
 \end{Shaded}
 
 \begin{verbatim}
-## [1] 96.92
+## [1] 96.91634
 \end{verbatim}
 
 \includegraphics{screenshots/morepower_3.png}
@@ -8361,10 +8208,10 @@ We can reproduce the 2x2 ANOVA example in MOREpower.
 
 \begin{verbatim}
 ## Power and Effect sizes for ANOVA tests
-##           power partial_eta_squared cohen_f non_centrality
-## age         5.0              0.0000  0.0000              0
-## color       5.0              0.0000  0.0000              0
-## age:color  48.4              0.1429  0.4082              4
+##             power partial_eta_squared cohen_f non_centrality
+## age        5.0000              0.0000  0.0000              0
+## color      5.0000              0.0000  0.0000              0
+## age:color 48.4018              0.1429  0.4082              4
 ## 
 ## Power and Effect sizes for contrasts
 ##                                            power effect_size
@@ -8383,7 +8230,7 @@ We can reproduce the 2x2 ANOVA example in MOREpower.
 \end{Shaded}
 
 \begin{verbatim}
-## [1] 0.1429
+## [1] 0.1428571
 \end{verbatim}
 
 This result reproduces the analysis in MOREpower, for a 2x2 within design, with a sample of 25, and eta-squared of 0.1428571.
@@ -8418,14 +8265,14 @@ Let's replicate the 2x2x2 full between analysis (total N = 400, effects sizes di
 
 \begin{verbatim}
 ## Power and Effect sizes for ANOVA tests
-##                 power partial_eta_squared cohen_f non_centrality
-## Size            70.33              0.0157  0.1263           6.25
-## Color            5.00              0.0000  0.0000           0.00
-## Load             7.90              0.0006  0.0253           0.25
-## Size:Color      32.17              0.0057  0.0758           2.25
-## Size:Load       84.91              0.0224  0.1515           9.00
-## Color:Load       7.90              0.0006  0.0253           0.25
-## Size:Color:Load 84.91              0.0224  0.1515           9.00
+##                   power partial_eta_squared cohen_f non_centrality
+## Size            70.3301              0.0157  0.1263           6.25
+## Color            5.0000              0.0000  0.0000           0.00
+## Load             7.8953              0.0006  0.0253           0.25
+## Size:Color      32.1727              0.0057  0.0758           2.25
+## Size:Load       84.9123              0.0224  0.1515           9.00
+## Color:Load       7.8953              0.0006  0.0253           0.25
+## Size:Color:Load 84.9123              0.0224  0.1515           9.00
 ## 
 ## Power and Effect sizes for contrasts
 ##                                                     power effect_size
@@ -8466,7 +8313,8 @@ Let's replicate the 2x2x2 full between analysis (total N = 400, effects sizes di
 \end{Shaded}
 
 \begin{verbatim}
-## [1] 0.0157 0.0000 0.0006 0.0057 0.0224 0.0006 0.0224
+## [1] 0.0156936598 0.0000000000 0.0006373486 0.0057070387 0.0224438903
+## [6] 0.0006373486 0.0224438903
 \end{verbatim}
 
 This result is nicely reproduced in MOREpower, both for the 2x2 effects, and the 2x2x2 between effects.
@@ -8501,10 +8349,10 @@ And finally, let's replicate the 2x2 full within analysis.
 
 \begin{verbatim}
 ## Power and Effect sizes for ANOVA tests
-##     power partial_eta_squared cohen_f non_centrality
-## A   26.92              0.0952  0.3244              2
-## B   64.23              0.2400  0.5620              6
-## A:B 26.92              0.0952  0.3244              2
+##       power partial_eta_squared cohen_f non_centrality
+## A   26.9175              0.0952  0.3244              2
+## B   64.2259              0.2400  0.5620              6
+## A:B 26.9175              0.0952  0.3244              2
 ## 
 ## Power and Effect sizes for contrasts
 ##                       power effect_size
@@ -8523,7 +8371,7 @@ And finally, let's replicate the 2x2 full within analysis.
 \end{Shaded}
 
 \begin{verbatim}
-## [1] 0.0952 0.2400 0.0952
+## [1] 0.0952381 0.2400000 0.0952381
 \end{verbatim}
 
 \begin{Shaded}
@@ -8533,14 +8381,14 @@ And finally, let's replicate the 2x2 full within analysis.
 \end{Shaded}
 
 \begin{verbatim}
-## [1] 26.92 64.23 26.92
+## [1] 26.91752 64.22587 26.91752
 \end{verbatim}
 
 This result is also reproduced in MOREpower, both for the main effect, and the 2x2 within interaction effect.
 
 \includegraphics{screenshots/morepower_6.png}
 
-\bibliography{book.bib,packages.bib}
+\bibliography{book.bib,packages.bib,references.bib}
 
 
 \end{document}
