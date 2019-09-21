@@ -6,7 +6,7 @@
   <meta http-equiv="X-UA-Compatible" content="IE=edge" />
   <title>The Superpower R Package: Capabilities and Validation</title>
   <meta name="description" content="This is a book describing the capabilities of the Superpower R package." />
-  <meta name="generator" content="bookdown 0.13 and GitBook 2.6.7" />
+  <meta name="generator" content="bookdown 0.10 and GitBook 2.6.7" />
 
   <meta property="og:title" content="The Superpower R Package: Capabilities and Validation" />
   <meta property="og:type" content="book" />
@@ -24,7 +24,7 @@
 <meta name="author" content="Aaron R. Caldwell &amp; Daniël Lakens" />
 
 
-<meta name="date" content="2019-09-20" />
+<meta name="date" content="2019-09-21" />
 
   <meta name="viewport" content="width=device-width, initial-scale=1" />
   <meta name="apple-mobile-web-app-capable" content="yes" />
@@ -32,7 +32,7 @@
   
   
 
-<link rel="next" href="the-experimental-design.html"/>
+<link rel="next" href="the-experimental-design.html">
 <script src="libs/jquery-2.2.3/jquery.min.js"></script>
 <link href="libs/gitbook-2.6.7/css/style.css" rel="stylesheet" />
 <link href="libs/gitbook-2.6.7/css/plugin-table.css" rel="stylesheet" />
@@ -47,7 +47,6 @@
 
 
 
-<script src="libs/kePrint-0.0.1/kePrint.js"></script>
 
 
 <style type="text/css">
@@ -56,6 +55,7 @@ a.sourceLine { pointer-events: none; color: inherit; text-decoration: inherit; }
 a.sourceLine:empty { height: 1.2em; }
 .sourceCode { overflow: visible; }
 code.sourceCode { white-space: pre; position: relative; }
+div.sourceCode { margin: 1em 0; }
 pre.sourceCode { margin: 0; }
 @media screen {
 div.sourceCode { overflow: auto; }
@@ -242,14 +242,14 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 <div id="header">
 <h1 class="title">The Superpower R Package: Capabilities and Validation</h1>
 <p class="author"><em>Aaron R. Caldwell &amp; Daniël Lakens</em></p>
-<p class="date"><em>2019-09-20</em></p>
+<p class="date"><em>2019-09-21</em></p>
 </div>
 <div id="preface" class="section level1 unnumbered">
 <h1>Preface</h1>
 <p>The goal of <code>Superpower</code> is to easily simulate factorial designs and empirically calculate power using a simulation approach.
 The R package is intended to be utilized for prospective (a priori) power analysis. Please don’t be silly and compute <a href="https://discourse.datamethods.org/t/reference-collection-to-push-back-against-common-statistical-myths/1787">post hoc power</a>.</p>
-<p>This package, and book, expect readers to have some familiarity with R <span class="citation">(R Core Team <a href="#ref-R-base">2019</a>)</span>. However, we have created <a href="http://shiny.ieis.tue.nl/anova_power/">two Shiny apps</a> (for the <code>ANOVA_power</code> &amp; <code>ANOVA_exact</code> functions respectively) to help use these functions if you are not familiar with R.</p>
-<p>In this book we will display a variety of ways the <code>Superpower</code> package can be used for power analysis and sample size planning for factorial experimental designs. We also included various examples of the performance of <code>Superpower</code> against other R packages (e.g., <code>pwr2ppl</code> by <span class="citation">Aberson (<a href="#ref-R-pwr2ppl">2019</a>)</span> and <code>pwr</code> by <span class="citation">Champely (<a href="#ref-R-pwr">2018</a>)</span>) and statistical programs (such as G*Power by <span class="citation">Campbell and Thompson (<a href="#ref-Campbell2012MorePower6F">2012</a>)</span> or MOREpower <span class="citation">Faul et al. (<a href="#ref-faul2007g">2007</a>)</span>). All uses of the <code>ANOVA_power</code> function have been run with 10000 iterations (<code>nsims = 10000</code>). If you have any issues using <code>Superpower</code> or want to expand its capabilities please raise the issue on our <a href="https://github.com/arcaldwell49/Superpower/issues">GitHub</a> repository.</p>
+<p>This package, and book, expect readers to have some familiarity with R <span class="citation">(R Core Team <a href="#ref-R-base" role="doc-biblioref">2018</a>)</span>. However, we have created two Shiny apps (for the <a href="http://shiny.ieis.tue.nl/anova_power/"><code>ANOVA_power</code></a> &amp; <a href="http://shiny.ieis.tue.nl/anova_exact/"><code>ANOVA_exact</code></a> functions respectively) to help use these functions if you are not familiar with R.</p>
+<p>In this book we will display a variety of ways the <code>Superpower</code> package can be used for power analysis and sample size planning for factorial experimental designs. We also included various examples of the performance of <code>Superpower</code> against other R packages (e.g., <code>pwr2ppl</code> by <span class="citation">Aberson (<a href="#ref-R-pwr2ppl" role="doc-biblioref">2019</a>)</span> and <code>pwr</code> by <span class="citation">Champely (<a href="#ref-R-pwr" role="doc-biblioref">2018</a>)</span>) and statistical programs (such as G*Power <span class="citation">Faul et al. (<a href="#ref-faul2007g" role="doc-biblioref">2007</a>)</span> by or MOREpower <span class="citation">Campbell and Thompson (<a href="#ref-Campbell2012MorePower6F" role="doc-biblioref">2012</a>)</span>). All uses of the <code>ANOVA_power</code> function have been run with 10000 iterations (<code>nsims = 10000</code>). If you have any issues using <code>Superpower</code> or want to expand its capabilities please raise the issue on our <a href="https://github.com/arcaldwell49/Superpower/issues">GitHub</a> repository.</p>
 
 </div>
 <h3>References</h3>
@@ -267,7 +267,7 @@ The R package is intended to be utilized for prospective (a priori) power analys
 <p>Faul, Franz, Edgar Erdfelder, Albert-Georg Lang, and Axel Buchner. 2007. “G*Power 3: A Flexible Statistical Power Analysis Program for the Social, Behavioral, and Biomedical Sciences.” <em>Behavior Research Methods</em> 39 (2): 175–91. <a href="http://www.psychologie.hhu.de/arbeitsgruppen/allgemeine-psychologie-und-arbeitspsychologie/gpower.html">http://www.psychologie.hhu.de/arbeitsgruppen/allgemeine-psychologie-und-arbeitspsychologie/gpower.html</a>.</p>
 </div>
 <div id="ref-R-base">
-<p>R Core Team. 2019. <em>R: A Language and Environment for Statistical Computing</em>. Vienna, Austria: R Foundation for Statistical Computing. <a href="https://www.R-project.org/">https://www.R-project.org/</a>.</p>
+<p>R Core Team. 2018. <em>R: A Language and Environment for Statistical Computing</em>. Vienna, Austria: R Foundation for Statistical Computing. <a href="https://www.R-project.org/">https://www.R-project.org/</a>.</p>
 </div>
 </div>
             </section>
@@ -328,9 +328,8 @@ gitbook.start({
     script.type = "text/javascript";
     var src = "true";
     if (src === "" || src === "true") src = "https://mathjax.rstudio.com/latest/MathJax.js?config=TeX-MML-AM_CHTML";
-    if (location.protocol !== "file:")
-      if (/^https?:/.test(src))
-        src = src.replace(/^https?:/, '');
+    if (location.protocol !== "file:" && /^https?:/.test(src))
+      src = src.replace(/^https?:/, '');
     script.src = src;
     document.getElementsByTagName("head")[0].appendChild(script);
   })();
