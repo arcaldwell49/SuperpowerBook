@@ -4,11 +4,11 @@
 
   <meta charset="utf-8" />
   <meta http-equiv="X-UA-Compatible" content="IE=edge" />
-  <title>Chapter 6 The ‘No-Way’ Interactions | The Superpower R Package: Capabilities and Validation</title>
+  <title>Chapter 6 The ‘No-Way’ Interactions | Power Analysis with Superpower</title>
   <meta name="description" content="This is a book describing the capabilities of the Superpower R package." />
   <meta name="generator" content="bookdown 0.10 and GitBook 2.6.7" />
 
-  <meta property="og:title" content="Chapter 6 The ‘No-Way’ Interactions | The Superpower R Package: Capabilities and Validation" />
+  <meta property="og:title" content="Chapter 6 The ‘No-Way’ Interactions | Power Analysis with Superpower" />
   <meta property="og:type" content="book" />
   
   
@@ -16,7 +16,7 @@
   
 
   <meta name="twitter:card" content="summary" />
-  <meta name="twitter:title" content="Chapter 6 The ‘No-Way’ Interactions | The Superpower R Package: Capabilities and Validation" />
+  <meta name="twitter:title" content="Chapter 6 The ‘No-Way’ Interactions | Power Analysis with Superpower" />
   
   <meta name="twitter:description" content="This is a book describing the capabilities of the Superpower R package." />
   
@@ -24,7 +24,7 @@
 <meta name="author" content="Aaron R. Caldwell &amp; Daniël Lakens" />
 
 
-<meta name="date" content="2019-09-21" />
+<meta name="date" content="2019-09-22" />
 
   <meta name="viewport" content="width=device-width, initial-scale=1" />
   <meta name="apple-mobile-web-app-capable" content="yes" />
@@ -47,6 +47,7 @@
 
 
 
+<script src="libs/kePrint-0.0.1/kePrint.js"></script>
 
 
 <style type="text/css">
@@ -231,7 +232,7 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
       <div class="body-inner">
         <div class="book-header" role="navigation">
           <h1>
-            <i class="fa fa-circle-o-notch fa-spin"></i><a href="./">The Superpower R Package: Capabilities and Validation</a>
+            <i class="fa fa-circle-o-notch fa-spin"></i><a href="./">Power Analysis with Superpower</a>
           </h1>
         </div>
 
@@ -362,7 +363,48 @@ exact_result &lt;-<span class="st"> </span><span class="kw">ANOVA_exact</span>(d
 knitr<span class="op">::</span><span class="kw">kable</span>(exact_result<span class="op">$</span>main_results[<span class="dv">2</span>,], 
              <span class="dt">caption =</span> <span class="st">&quot;ANOVA Results&quot;</span>)<span class="op">%&gt;%</span>
 <span class="st">  </span><span class="kw">kable_styling</span>(<span class="dt">latex_options =</span> <span class="st">&quot;hold_position&quot;</span>)</code></pre>
-
+<table class="table" style="margin-left: auto; margin-right: auto;">
+<caption>
+<span id="tab:unnamed-chunk-231">Table 6.1: </span>ANOVA Results
+</caption>
+<thead>
+<tr>
+<th style="text-align:left;">
+</th>
+<th style="text-align:right;">
+power
+</th>
+<th style="text-align:right;">
+partial_eta_squared
+</th>
+<th style="text-align:right;">
+cohen_f
+</th>
+<th style="text-align:right;">
+non_centrality
+</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td style="text-align:left;">
+b
+</td>
+<td style="text-align:right;">
+86.79843
+</td>
+<td style="text-align:right;">
+0.2173913
+</td>
+<td style="text-align:right;">
+0.5270463
+</td>
+<td style="text-align:right;">
+10
+</td>
+</tr>
+</tbody>
+</table>
 <pre class="sourceCode r"><code class="sourceCode r"><span class="co">#Study 2</span>
 string &lt;-<span class="st"> &quot;2b*2b&quot;</span>
 n &lt;-<span class="st"> </span><span class="dv">20</span>
@@ -387,7 +429,48 @@ exact_result &lt;-<span class="st"> </span><span class="kw">ANOVA_exact</span>(d
 knitr<span class="op">::</span><span class="kw">kable</span>(exact_result<span class="op">$</span>main_results[<span class="dv">3</span>,], 
              <span class="dt">caption =</span> <span class="st">&quot;ANOVA Results&quot;</span>)<span class="op">%&gt;%</span>
 <span class="st">  </span><span class="kw">kable_styling</span>(<span class="dt">latex_options =</span> <span class="st">&quot;hold_position&quot;</span>)</code></pre>
-
+<table class="table" style="margin-left: auto; margin-right: auto;">
+<caption>
+<span id="tab:unnamed-chunk-231">Table 6.1: </span>ANOVA Results
+</caption>
+<thead>
+<tr>
+<th style="text-align:left;">
+</th>
+<th style="text-align:right;">
+power
+</th>
+<th style="text-align:right;">
+partial_eta_squared
+</th>
+<th style="text-align:right;">
+cohen_f
+</th>
+<th style="text-align:right;">
+non_centrality
+</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td style="text-align:left;">
+a:b
+</td>
+<td style="text-align:right;">
+59.78655
+</td>
+<td style="text-align:right;">
+0.0617284
+</td>
+<td style="text-align:right;">
+0.2564946
+</td>
+<td style="text-align:right;">
+5
+</td>
+</tr>
+</tbody>
+</table>
 <p>We see we get the same power for the anova_fruit:hunger interaction and for the simple effect p_fruit_apple_hunger_very hungry_fruit_banana_hunger_very hungry as the simulations by Uri Simonsohn in his blog post.</p>
 <pre class="sourceCode r"><code class="sourceCode r"><span class="co">#Same power for 2n regardless of n and d</span>
 <span class="kw">colada17</span>(<span class="dt">simtot =</span> <span class="dv">10000</span>, <span class="dt">n1 =</span> <span class="dv">20</span>, <span class="dt">n2 =</span> <span class="dv">40</span>, <span class="dt">d1 =</span> <span class="dv">1</span>, <span class="dt">d2 =</span> <span class="dv">0</span>)  
@@ -418,7 +501,48 @@ exact_result &lt;-<span class="st"> </span><span class="kw">ANOVA_exact</span>(d
 knitr<span class="op">::</span><span class="kw">kable</span>(exact_result<span class="op">$</span>main_results[<span class="dv">2</span>,], 
              <span class="dt">caption =</span> <span class="st">&quot;ANOVA Results&quot;</span>)<span class="op">%&gt;%</span>
 <span class="st">  </span><span class="kw">kable_styling</span>(<span class="dt">latex_options =</span> <span class="st">&quot;hold_position&quot;</span>)</code></pre>
-
+<table class="table" style="margin-left: auto; margin-right: auto;">
+<caption>
+<span id="tab:unnamed-chunk-238">Table 6.2: </span>ANOVA Results
+</caption>
+<thead>
+<tr>
+<th style="text-align:left;">
+</th>
+<th style="text-align:right;">
+power
+</th>
+<th style="text-align:right;">
+partial_eta_squared
+</th>
+<th style="text-align:right;">
+cohen_f
+</th>
+<th style="text-align:right;">
+non_centrality
+</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td style="text-align:left;">
+hunger
+</td>
+<td style="text-align:right;">
+33.32955
+</td>
+<td style="text-align:right;">
+0.0039171
+</td>
+<td style="text-align:right;">
+0.0627094
+</td>
+<td style="text-align:right;">
+2.34375
+</td>
+</tr>
+</tbody>
+</table>
 <p>And changing the sample size to 300 should reproduce the power for the interaction in the ANOVA.</p>
 <pre class="sourceCode r"><code class="sourceCode r">string &lt;-<span class="st"> &quot;2b*2b&quot;</span>
 n &lt;-<span class="st"> </span><span class="dv">300</span>
@@ -460,7 +584,48 @@ exact_result &lt;-<span class="st"> </span><span class="kw">ANOVA_exact</span>(d
 <pre class="sourceCode r"><code class="sourceCode r">knitr<span class="op">::</span><span class="kw">kable</span>(exact_result<span class="op">$</span>main_results[<span class="dv">3</span>,], 
              <span class="dt">caption =</span> <span class="st">&quot;ANOVA Results&quot;</span>)<span class="op">%&gt;%</span>
 <span class="st">  </span><span class="kw">kable_styling</span>(<span class="dt">latex_options =</span> <span class="st">&quot;hold_position&quot;</span>)</code></pre>
-
+<table class="table" style="margin-left: auto; margin-right: auto;">
+<caption>
+<span id="tab:unnamed-chunk-239">Table 6.3: </span>ANOVA Results
+</caption>
+<thead>
+<tr>
+<th style="text-align:left;">
+</th>
+<th style="text-align:right;">
+power
+</th>
+<th style="text-align:right;">
+partial_eta_squared
+</th>
+<th style="text-align:right;">
+cohen_f
+</th>
+<th style="text-align:right;">
+non_centrality
+</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td style="text-align:left;">
+fruit:hunger
+</td>
+<td style="text-align:right;">
+58.05922
+</td>
+<td style="text-align:right;">
+0.003904
+</td>
+<td style="text-align:right;">
+0.0626044
+</td>
+<td style="text-align:right;">
+4.6875
+</td>
+</tr>
+</tbody>
+</table>
 <p>Now if we look at the power analysis table for the last simulation, we see that the power for the ANOVA is the same for the main effect of fruit, the main effect of hunger, and the main effect of the interaction. All the effect sizes are equal as well. We can understand why if we look at the means in a 2x2 table:</p>
 <pre class="sourceCode r"><code class="sourceCode r">mean_mat &lt;-<span class="st"> </span><span class="kw">t</span>(<span class="kw">matrix</span>(mu, 
                      <span class="dt">nrow =</span> <span class="dv">2</span>,
@@ -531,7 +696,82 @@ exact_result &lt;-<span class="st"> </span><span class="kw">ANOVA_exact</span>(d
 knitr<span class="op">::</span><span class="kw">kable</span>(exact_result<span class="op">$</span>main_results, 
              <span class="dt">caption =</span> <span class="st">&quot;ANOVA Results&quot;</span>)<span class="op">%&gt;%</span>
 <span class="st">  </span><span class="kw">kable_styling</span>(<span class="dt">latex_options =</span> <span class="st">&quot;hold_position&quot;</span>)</code></pre>
-
+<table class="table" style="margin-left: auto; margin-right: auto;">
+<caption>
+<span id="tab:unnamed-chunk-245">Table 6.4: </span>ANOVA Results
+</caption>
+<thead>
+<tr>
+<th style="text-align:left;">
+</th>
+<th style="text-align:right;">
+power
+</th>
+<th style="text-align:right;">
+partial_eta_squared
+</th>
+<th style="text-align:right;">
+cohen_f
+</th>
+<th style="text-align:right;">
+non_centrality
+</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td style="text-align:left;">
+fruit
+</td>
+<td style="text-align:right;">
+5.00000
+</td>
+<td style="text-align:right;">
+0.0000000
+</td>
+<td style="text-align:right;">
+0.0000000
+</td>
+<td style="text-align:right;">
+0.00
+</td>
+</tr>
+<tr>
+<td style="text-align:left;">
+hunger
+</td>
+<td style="text-align:right;">
+5.00000
+</td>
+<td style="text-align:right;">
+0.0000000
+</td>
+<td style="text-align:right;">
+0.0000000
+</td>
+<td style="text-align:right;">
+0.00
+</td>
+</tr>
+<tr>
+<td style="text-align:left;">
+fruit:hunger
+</td>
+<td style="text-align:right;">
+99.10259
+</td>
+<td style="text-align:right;">
+0.0154353
+</td>
+<td style="text-align:right;">
+0.1252089
+</td>
+<td style="text-align:right;">
+18.75
+</td>
+</tr>
+</tbody>
+</table>
 <p>We can also reproduce the power analysis using the analytic functions in <code>Superpower</code>:</p>
 <pre class="sourceCode r"><code class="sourceCode r">power_analytic &lt;-<span class="st"> </span><span class="kw">power_twoway_between</span>(design_result)
 power_analytic<span class="op">$</span>power_A</code></pre>

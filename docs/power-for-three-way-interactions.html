@@ -4,11 +4,11 @@
 
   <meta charset="utf-8" />
   <meta http-equiv="X-UA-Compatible" content="IE=edge" />
-  <title>Chapter 5 Power for Three-way Interactions | The Superpower R Package: Capabilities and Validation</title>
+  <title>Chapter 5 Power for Three-way Interactions | Power Analysis with Superpower</title>
   <meta name="description" content="This is a book describing the capabilities of the Superpower R package." />
   <meta name="generator" content="bookdown 0.10 and GitBook 2.6.7" />
 
-  <meta property="og:title" content="Chapter 5 Power for Three-way Interactions | The Superpower R Package: Capabilities and Validation" />
+  <meta property="og:title" content="Chapter 5 Power for Three-way Interactions | Power Analysis with Superpower" />
   <meta property="og:type" content="book" />
   
   
@@ -16,7 +16,7 @@
   
 
   <meta name="twitter:card" content="summary" />
-  <meta name="twitter:title" content="Chapter 5 Power for Three-way Interactions | The Superpower R Package: Capabilities and Validation" />
+  <meta name="twitter:title" content="Chapter 5 Power for Three-way Interactions | Power Analysis with Superpower" />
   
   <meta name="twitter:description" content="This is a book describing the capabilities of the Superpower R package." />
   
@@ -24,7 +24,7 @@
 <meta name="author" content="Aaron R. Caldwell &amp; Daniël Lakens" />
 
 
-<meta name="date" content="2019-09-21" />
+<meta name="date" content="2019-09-22" />
 
   <meta name="viewport" content="width=device-width, initial-scale=1" />
   <meta name="apple-mobile-web-app-capable" content="yes" />
@@ -47,6 +47,7 @@
 
 
 
+<script src="libs/kePrint-0.0.1/kePrint.js"></script>
 
 
 <style type="text/css">
@@ -231,7 +232,7 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
       <div class="body-inner">
         <div class="book-header" role="navigation">
           <h1>
-            <i class="fa fa-circle-o-notch fa-spin"></i><a href="./">The Superpower R Package: Capabilities and Validation</a>
+            <i class="fa fa-circle-o-notch fa-spin"></i><a href="./">Power Analysis with Superpower</a>
           </h1>
         </div>
 
@@ -262,11 +263,249 @@ design_result &lt;-<span class="st"> </span><span class="kw">ANOVA_design</span>
                                  <span class="dt">alpha_level =</span> alpha_level, 
                                  <span class="dt">nsims =</span> nsims,
                                  <span class="dt">verbose =</span> <span class="ot">FALSE</span>)</code></pre>
-
+<table class="table" style="margin-left: auto; margin-right: auto;">
+<caption>
+<span id="tab:unnamed-chunk-182">Table 5.1: </span>Simulated ANOVA Result
+</caption>
+<thead>
+<tr>
+<th style="text-align:left;">
+</th>
+<th style="text-align:right;">
+power
+</th>
+<th style="text-align:right;">
+effect_size
+</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td style="text-align:left;">
+anova_Size
+</td>
+<td style="text-align:right;">
+70.17
+</td>
+<td style="text-align:right;">
+0.0181513
+</td>
+</tr>
+<tr>
+<td style="text-align:left;">
+anova_Color
+</td>
+<td style="text-align:right;">
+5.37
+</td>
+<td style="text-align:right;">
+0.0026042
+</td>
+</tr>
+<tr>
+<td style="text-align:left;">
+anova_Load
+</td>
+<td style="text-align:right;">
+8.01
+</td>
+<td style="text-align:right;">
+0.0031862
+</td>
+</tr>
+<tr>
+<td style="text-align:left;">
+anova_Size:Color
+</td>
+<td style="text-align:right;">
+32.24
+</td>
+<td style="text-align:right;">
+0.0082572
+</td>
+</tr>
+<tr>
+<td style="text-align:left;">
+anova_Size:Load
+</td>
+<td style="text-align:right;">
+85.01
+</td>
+<td style="text-align:right;">
+0.0247630
+</td>
+</tr>
+<tr>
+<td style="text-align:left;">
+anova_Color:Load
+</td>
+<td style="text-align:right;">
+8.10
+</td>
+<td style="text-align:right;">
+0.0032246
+</td>
+</tr>
+<tr>
+<td style="text-align:left;">
+anova_Size:Color:Load
+</td>
+<td style="text-align:right;">
+84.88
+</td>
+<td style="text-align:right;">
+0.0248926
+</td>
+</tr>
+</tbody>
+</table>
 <pre class="sourceCode r"><code class="sourceCode r">exact_result &lt;-<span class="st"> </span><span class="kw">ANOVA_exact</span>(design_result,
                             <span class="dt">alpha_level =</span> alpha_level,
                             <span class="dt">verbose =</span> <span class="ot">FALSE</span>)</code></pre>
-
+<table class="table" style="margin-left: auto; margin-right: auto;">
+<caption>
+<span id="tab:unnamed-chunk-184">Table 5.2: </span>Exact ANOVA Result
+</caption>
+<thead>
+<tr>
+<th style="text-align:left;">
+</th>
+<th style="text-align:right;">
+power
+</th>
+<th style="text-align:right;">
+partial_eta_squared
+</th>
+<th style="text-align:right;">
+cohen_f
+</th>
+<th style="text-align:right;">
+non_centrality
+</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td style="text-align:left;">
+Size
+</td>
+<td style="text-align:right;">
+70.330132
+</td>
+<td style="text-align:right;">
+0.0156937
+</td>
+<td style="text-align:right;">
+0.1262691
+</td>
+<td style="text-align:right;">
+6.25
+</td>
+</tr>
+<tr>
+<td style="text-align:left;">
+Color
+</td>
+<td style="text-align:right;">
+5.000000
+</td>
+<td style="text-align:right;">
+0.0000000
+</td>
+<td style="text-align:right;">
+0.0000000
+</td>
+<td style="text-align:right;">
+0.00
+</td>
+</tr>
+<tr>
+<td style="text-align:left;">
+Load
+</td>
+<td style="text-align:right;">
+7.895322
+</td>
+<td style="text-align:right;">
+0.0006373
+</td>
+<td style="text-align:right;">
+0.0252538
+</td>
+<td style="text-align:right;">
+0.25
+</td>
+</tr>
+<tr>
+<td style="text-align:left;">
+Size:Color
+</td>
+<td style="text-align:right;">
+32.172729
+</td>
+<td style="text-align:right;">
+0.0057070
+</td>
+<td style="text-align:right;">
+0.0757614
+</td>
+<td style="text-align:right;">
+2.25
+</td>
+</tr>
+<tr>
+<td style="text-align:left;">
+Size:Load
+</td>
+<td style="text-align:right;">
+84.912313
+</td>
+<td style="text-align:right;">
+0.0224439
+</td>
+<td style="text-align:right;">
+0.1515229
+</td>
+<td style="text-align:right;">
+9.00
+</td>
+</tr>
+<tr>
+<td style="text-align:left;">
+Color:Load
+</td>
+<td style="text-align:right;">
+7.895322
+</td>
+<td style="text-align:right;">
+0.0006373
+</td>
+<td style="text-align:right;">
+0.0252538
+</td>
+<td style="text-align:right;">
+0.25
+</td>
+</tr>
+<tr>
+<td style="text-align:left;">
+Size:Color:Load
+</td>
+<td style="text-align:right;">
+84.912313
+</td>
+<td style="text-align:right;">
+0.0224439
+</td>
+<td style="text-align:right;">
+0.1515229
+</td>
+<td style="text-align:right;">
+9.00
+</td>
+</tr>
+</tbody>
+</table>
 <pre class="sourceCode r"><code class="sourceCode r"><span class="co">#Analytical power calculation</span>
 power_analytic &lt;-<span class="st"> </span><span class="kw">power_threeway_between</span>(design_result)
 power_analytic<span class="op">$</span>power_A</code></pre>
@@ -326,11 +565,81 @@ design_result &lt;-<span class="st"> </span><span class="kw">ANOVA_design</span>
                                  <span class="dt">alpha_level =</span> alpha_level, 
                                  <span class="dt">nsims =</span> nsims,
                                  <span class="dt">verbose =</span> <span class="ot">FALSE</span>)</code></pre>
-
+<table class="table" style="margin-left: auto; margin-right: auto;">
+<caption>
+<span id="tab:unnamed-chunk-189">Table 5.3: </span>Simulated ANOVA Result
+</caption>
+<thead>
+<tr>
+<th style="text-align:left;">
+</th>
+<th style="text-align:right;">
+power
+</th>
+<th style="text-align:right;">
+effect_size
+</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td style="text-align:left;">
+anova_Size
+</td>
+<td style="text-align:right;">
+70.69
+</td>
+<td style="text-align:right;">
+0.0180045
+</td>
+</tr>
+</tbody>
+</table>
 <pre class="sourceCode r"><code class="sourceCode r">exact_result &lt;-<span class="st"> </span><span class="kw">ANOVA_exact</span>(design_result,
                             <span class="dt">alpha_level =</span> alpha_level,
                             <span class="dt">verbose =</span> <span class="ot">FALSE</span>)</code></pre>
-
+<table class="table" style="margin-left: auto; margin-right: auto;">
+<caption>
+<span id="tab:unnamed-chunk-191">Table 5.4: </span>Exact ANOVA Result
+</caption>
+<thead>
+<tr>
+<th style="text-align:left;">
+</th>
+<th style="text-align:right;">
+power
+</th>
+<th style="text-align:right;">
+partial_eta_squared
+</th>
+<th style="text-align:right;">
+cohen_f
+</th>
+<th style="text-align:right;">
+non_centrality
+</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td style="text-align:left;">
+Size
+</td>
+<td style="text-align:right;">
+70.33333
+</td>
+<td style="text-align:right;">
+0.0154607
+</td>
+<td style="text-align:right;">
+0.1253137
+</td>
+<td style="text-align:right;">
+6.25
+</td>
+</tr>
+</tbody>
+</table>
 <pre class="sourceCode r"><code class="sourceCode r"><span class="co"># Power based on analytical solution</span>
 <span class="kw">power_oneway_between</span>(design_result)<span class="op">$</span>power </code></pre>
 <pre><code>## [1] 70.33333</code></pre>
@@ -349,11 +658,137 @@ design_result &lt;-<span class="st"> </span><span class="kw">ANOVA_design</span>
                                  <span class="dt">alpha_level =</span> alpha_level, 
                                  <span class="dt">nsims =</span> nsims,
                                  <span class="dt">verbose =</span> <span class="ot">FALSE</span>)</code></pre>
-
+<table class="table" style="margin-left: auto; margin-right: auto;">
+<caption>
+<span id="tab:unnamed-chunk-195">Table 5.5: </span>Simulated ANOVA Result
+</caption>
+<thead>
+<tr>
+<th style="text-align:left;">
+</th>
+<th style="text-align:right;">
+power
+</th>
+<th style="text-align:right;">
+effect_size
+</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td style="text-align:left;">
+anova_Size
+</td>
+<td style="text-align:right;">
+70.93
+</td>
+<td style="text-align:right;">
+0.0178407
+</td>
+</tr>
+<tr>
+<td style="text-align:left;">
+anova_Color
+</td>
+<td style="text-align:right;">
+5.20
+</td>
+<td style="text-align:right;">
+0.0025269
+</td>
+</tr>
+<tr>
+<td style="text-align:left;">
+anova_Size:Color
+</td>
+<td style="text-align:right;">
+69.72
+</td>
+<td style="text-align:right;">
+0.0176374
+</td>
+</tr>
+</tbody>
+</table>
 <pre class="sourceCode r"><code class="sourceCode r">exact_result &lt;-<span class="st"> </span><span class="kw">ANOVA_exact</span>(design_result,
                             <span class="dt">alpha_level =</span> alpha_level,
                             <span class="dt">verbose =</span> <span class="ot">FALSE</span>)</code></pre>
-
+<table class="table" style="margin-left: auto; margin-right: auto;">
+<caption>
+<span id="tab:unnamed-chunk-197">Table 5.6: </span>Exact ANOVA Result
+</caption>
+<thead>
+<tr>
+<th style="text-align:left;">
+</th>
+<th style="text-align:right;">
+power
+</th>
+<th style="text-align:right;">
+partial_eta_squared
+</th>
+<th style="text-align:right;">
+cohen_f
+</th>
+<th style="text-align:right;">
+non_centrality
+</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td style="text-align:left;">
+Size
+</td>
+<td style="text-align:right;">
+70.33227
+</td>
+<td style="text-align:right;">
+0.0155376
+</td>
+<td style="text-align:right;">
+0.1256297
+</td>
+<td style="text-align:right;">
+6.25
+</td>
+</tr>
+<tr>
+<td style="text-align:left;">
+Color
+</td>
+<td style="text-align:right;">
+5.00000
+</td>
+<td style="text-align:right;">
+0.0000000
+</td>
+<td style="text-align:right;">
+0.0000000
+</td>
+<td style="text-align:right;">
+0.00
+</td>
+</tr>
+<tr>
+<td style="text-align:left;">
+Size:Color
+</td>
+<td style="text-align:right;">
+70.33227
+</td>
+<td style="text-align:right;">
+0.0155376
+</td>
+<td style="text-align:right;">
+0.1256297
+</td>
+<td style="text-align:right;">
+6.25
+</td>
+</tr>
+</tbody>
+</table>
 <pre class="sourceCode r"><code class="sourceCode r"><span class="co"># Power based on analytical solution</span>
 power_res &lt;-<span class="st"> </span><span class="kw">power_twoway_between</span>(design_result) 
 power_res<span class="op">$</span>power_A</code></pre>
@@ -379,11 +814,249 @@ design_result &lt;-<span class="st"> </span><span class="kw">ANOVA_design</span>
                                  <span class="dt">alpha_level =</span> alpha_level, 
                                  <span class="dt">nsims =</span> nsims,
                                  <span class="dt">verbose =</span> <span class="ot">FALSE</span>)</code></pre>
-
+<table class="table" style="margin-left: auto; margin-right: auto;">
+<caption>
+<span id="tab:unnamed-chunk-201">Table 5.7: </span>Simulated ANOVA Result
+</caption>
+<thead>
+<tr>
+<th style="text-align:left;">
+</th>
+<th style="text-align:right;">
+power
+</th>
+<th style="text-align:right;">
+effect_size
+</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td style="text-align:left;">
+anova_Size
+</td>
+<td style="text-align:right;">
+42.71
+</td>
+<td style="text-align:right;">
+0.0103728
+</td>
+</tr>
+<tr>
+<td style="text-align:left;">
+anova_Color
+</td>
+<td style="text-align:right;">
+5.52
+</td>
+<td style="text-align:right;">
+0.0026837
+</td>
+</tr>
+<tr>
+<td style="text-align:left;">
+anova_CognitiveLoad
+</td>
+<td style="text-align:right;">
+11.10
+</td>
+<td style="text-align:right;">
+0.0038783
+</td>
+</tr>
+<tr>
+<td style="text-align:left;">
+anova_Size:Color
+</td>
+<td style="text-align:right;">
+5.74
+</td>
+<td style="text-align:right;">
+0.0026956
+</td>
+</tr>
+<tr>
+<td style="text-align:left;">
+anova_Size:CognitiveLoad
+</td>
+<td style="text-align:right;">
+6.05
+</td>
+<td style="text-align:right;">
+0.0027663
+</td>
+</tr>
+<tr>
+<td style="text-align:left;">
+anova_Color:CognitiveLoad
+</td>
+<td style="text-align:right;">
+5.69
+</td>
+<td style="text-align:right;">
+0.0027028
+</td>
+</tr>
+<tr>
+<td style="text-align:left;">
+anova_Size:Color:CognitiveLoad
+</td>
+<td style="text-align:right;">
+78.13
+</td>
+<td style="text-align:right;">
+0.0213083
+</td>
+</tr>
+</tbody>
+</table>
 <pre class="sourceCode r"><code class="sourceCode r">exact_result &lt;-<span class="st"> </span><span class="kw">ANOVA_exact</span>(design_result,
                             <span class="dt">alpha_level =</span> alpha_level,
                             <span class="dt">verbose =</span> <span class="ot">FALSE</span>)</code></pre>
-
+<table class="table" style="margin-left: auto; margin-right: auto;">
+<caption>
+<span id="tab:unnamed-chunk-203">Table 5.8: </span>Exact ANOVA Result
+</caption>
+<thead>
+<tr>
+<th style="text-align:left;">
+</th>
+<th style="text-align:right;">
+power
+</th>
+<th style="text-align:right;">
+partial_eta_squared
+</th>
+<th style="text-align:right;">
+cohen_f
+</th>
+<th style="text-align:right;">
+non_centrality
+</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td style="text-align:left;">
+Size
+</td>
+<td style="text-align:right;">
+41.52809
+</td>
+<td style="text-align:right;">
+0.0077519
+</td>
+<td style="text-align:right;">
+0.0883883
+</td>
+<td style="text-align:right;">
+3.0625
+</td>
+</tr>
+<tr>
+<td style="text-align:left;">
+Color
+</td>
+<td style="text-align:right;">
+5.71548
+</td>
+<td style="text-align:right;">
+0.0001594
+</td>
+<td style="text-align:right;">
+0.0126269
+</td>
+<td style="text-align:right;">
+0.0625
+</td>
+</tr>
+<tr>
+<td style="text-align:left;">
+CognitiveLoad
+</td>
+<td style="text-align:right;">
+11.61777
+</td>
+<td style="text-align:right;">
+0.0014329
+</td>
+<td style="text-align:right;">
+0.0378807
+</td>
+<td style="text-align:right;">
+0.5625
+</td>
+</tr>
+<tr>
+<td style="text-align:left;">
+Size:Color
+</td>
+<td style="text-align:right;">
+5.71548
+</td>
+<td style="text-align:right;">
+0.0001594
+</td>
+<td style="text-align:right;">
+0.0126269
+</td>
+<td style="text-align:right;">
+0.0625
+</td>
+</tr>
+<tr>
+<td style="text-align:left;">
+Size:CognitiveLoad
+</td>
+<td style="text-align:right;">
+5.71548
+</td>
+<td style="text-align:right;">
+0.0001594
+</td>
+<td style="text-align:right;">
+0.0126269
+</td>
+<td style="text-align:right;">
+0.0625
+</td>
+</tr>
+<tr>
+<td style="text-align:left;">
+Color:CognitiveLoad
+</td>
+<td style="text-align:right;">
+5.71548
+</td>
+<td style="text-align:right;">
+0.0001594
+</td>
+<td style="text-align:right;">
+0.0126269
+</td>
+<td style="text-align:right;">
+0.0625
+</td>
+</tr>
+<tr>
+<td style="text-align:left;">
+Size:Color:CognitiveLoad
+</td>
+<td style="text-align:right;">
+78.32737
+</td>
+<td style="text-align:right;">
+0.0189270
+</td>
+<td style="text-align:right;">
+0.1388960
+</td>
+<td style="text-align:right;">
+7.5625
+</td>
+</tr>
+</tbody>
+</table>
 <pre class="sourceCode r"><code class="sourceCode r"><span class="co">#Analytical power calculation</span>
 power_analytic &lt;-<span class="st"> </span><span class="kw">power_threeway_between</span>(design_result)
 power_analytic<span class="op">$</span>power_A</code></pre>
@@ -434,7 +1107,150 @@ design_result &lt;-<span class="st"> </span><span class="kw">ANOVA_design</span>
 <span class="co"># Power based on exact simulations</span>
 exact_result &lt;-<span class="st"> </span><span class="kw">ANOVA_exact</span>(design_result,
                             <span class="dt">verbose =</span> <span class="ot">FALSE</span>)</code></pre>
-
+<table class="table" style="margin-left: auto; margin-right: auto;">
+<caption>
+<span id="tab:unnamed-chunk-206">Table 5.9: </span>Exact ANOVA Result
+</caption>
+<thead>
+<tr>
+<th style="text-align:left;">
+</th>
+<th style="text-align:right;">
+power
+</th>
+<th style="text-align:right;">
+partial_eta_squared
+</th>
+<th style="text-align:right;">
+cohen_f
+</th>
+<th style="text-align:right;">
+non_centrality
+</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td style="text-align:left;">
+Size
+</td>
+<td style="text-align:right;">
+26.92604
+</td>
+<td style="text-align:right;">
+0.0146628
+</td>
+<td style="text-align:right;">
+0.1219875
+</td>
+<td style="text-align:right;">
+2.5
+</td>
+</tr>
+<tr>
+<td style="text-align:left;">
+Color
+</td>
+<td style="text-align:right;">
+5.00000
+</td>
+<td style="text-align:right;">
+0.0000000
+</td>
+<td style="text-align:right;">
+0.0000000
+</td>
+<td style="text-align:right;">
+0.0
+</td>
+</tr>
+<tr>
+<td style="text-align:left;">
+Load
+</td>
+<td style="text-align:right;">
+5.00000
+</td>
+<td style="text-align:right;">
+0.0000000
+</td>
+<td style="text-align:right;">
+0.0000000
+</td>
+<td style="text-align:right;">
+0.0
+</td>
+</tr>
+<tr>
+<td style="text-align:left;">
+Size:Color
+</td>
+<td style="text-align:right;">
+67.93217
+</td>
+<td style="text-align:right;">
+0.0427350
+</td>
+<td style="text-align:right;">
+0.2112886
+</td>
+<td style="text-align:right;">
+7.5
+</td>
+</tr>
+<tr>
+<td style="text-align:left;">
+Size:Load
+</td>
+<td style="text-align:right;">
+67.93217
+</td>
+<td style="text-align:right;">
+0.0427350
+</td>
+<td style="text-align:right;">
+0.2112886
+</td>
+<td style="text-align:right;">
+7.5
+</td>
+</tr>
+<tr>
+<td style="text-align:left;">
+Color:Load
+</td>
+<td style="text-align:right;">
+60.38579
+</td>
+<td style="text-align:right;">
+0.0289017
+</td>
+<td style="text-align:right;">
+0.1725164
+</td>
+<td style="text-align:right;">
+5.0
+</td>
+</tr>
+<tr>
+<td style="text-align:left;">
+Size:Color:Load
+</td>
+<td style="text-align:right;">
+26.92604
+</td>
+<td style="text-align:right;">
+0.0146628
+</td>
+<td style="text-align:right;">
+0.1219875
+</td>
+<td style="text-align:right;">
+2.5
+</td>
+</tr>
+</tbody>
+</table>
 <pre class="sourceCode r"><code class="sourceCode r"><span class="co">#Analytical power calculation</span>
 power_analytic &lt;-<span class="st"> </span><span class="kw">power_threeway_between</span>(design_result)</code></pre>
 <pre><code>## Warning in sqrt(f_2_ABC): NaNs produced</code></pre>
@@ -469,7 +1285,82 @@ design_result &lt;-<span class="st"> </span><span class="kw">ANOVA_design</span>
 <span class="co"># Power based on exact simulations</span>
 exact_result &lt;-<span class="st"> </span><span class="kw">ANOVA_exact</span>(design_result,
                             <span class="dt">verbose =</span> <span class="ot">FALSE</span>)</code></pre>
-
+<table class="table" style="margin-left: auto; margin-right: auto;">
+<caption>
+<span id="tab:unnamed-chunk-209">Table 5.10: </span>Exact ANOVA Result
+</caption>
+<thead>
+<tr>
+<th style="text-align:left;">
+</th>
+<th style="text-align:right;">
+power
+</th>
+<th style="text-align:right;">
+partial_eta_squared
+</th>
+<th style="text-align:right;">
+cohen_f
+</th>
+<th style="text-align:right;">
+non_centrality
+</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td style="text-align:left;">
+Size
+</td>
+<td style="text-align:right;">
+33.71329
+</td>
+<td style="text-align:right;">
+0.0649351
+</td>
+<td style="text-align:right;">
+0.2635231
+</td>
+<td style="text-align:right;">
+2.5
+</td>
+</tr>
+<tr>
+<td style="text-align:left;">
+Color
+</td>
+<td style="text-align:right;">
+33.71329
+</td>
+<td style="text-align:right;">
+0.0649351
+</td>
+<td style="text-align:right;">
+0.2635231
+</td>
+<td style="text-align:right;">
+2.5
+</td>
+</tr>
+<tr>
+<td style="text-align:left;">
+Size:Color
+</td>
+<td style="text-align:right;">
+33.71329
+</td>
+<td style="text-align:right;">
+0.0649351
+</td>
+<td style="text-align:right;">
+0.2635231
+</td>
+<td style="text-align:right;">
+2.5
+</td>
+</tr>
+</tbody>
+</table>
 <pre class="sourceCode r"><code class="sourceCode r"><span class="co">#Analytical power calculation</span>
 power_analytic &lt;-<span class="st"> </span><span class="kw">power_twoway_between</span>(design_result)
 power_analytic<span class="op">$</span>power_A</code></pre>
@@ -489,7 +1380,48 @@ design_result &lt;-<span class="st"> </span><span class="kw">ANOVA_design</span>
 <span class="co"># Power based on exact simulations</span>
 exact_result &lt;-<span class="st"> </span><span class="kw">ANOVA_exact</span>(design_result,
                             <span class="dt">verbose =</span> <span class="ot">FALSE</span>)</code></pre>
-
+<table class="table" style="margin-left: auto; margin-right: auto;">
+<caption>
+<span id="tab:unnamed-chunk-212">Table 5.11: </span>Exact ANOVA Result
+</caption>
+<thead>
+<tr>
+<th style="text-align:left;">
+</th>
+<th style="text-align:right;">
+power
+</th>
+<th style="text-align:right;">
+partial_eta_squared
+</th>
+<th style="text-align:right;">
+cohen_f
+</th>
+<th style="text-align:right;">
+non_centrality
+</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td style="text-align:left;">
+Size
+</td>
+<td style="text-align:right;">
+18.50957
+</td>
+<td style="text-align:right;">
+0.0649351
+</td>
+<td style="text-align:right;">
+0.2635231
+</td>
+<td style="text-align:right;">
+1.25
+</td>
+</tr>
+</tbody>
+</table>
 <pre class="sourceCode r"><code class="sourceCode r"><span class="co">#Analytical power calculation</span>
 power_analytic &lt;-<span class="st"> </span><span class="kw">power_oneway_between</span>(design_result)
 power_analytic<span class="op">$</span>power</code></pre>

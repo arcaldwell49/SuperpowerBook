@@ -21,9 +21,10 @@
 \usepackage{microtype}
 \UseMicrotypeSet[protrusion]{basicmath} % disable protrusion for tt fonts
 }{}
+\usepackage[margin=1in]{geometry}
 \usepackage{hyperref}
 \hypersetup{unicode=true,
-            pdftitle={The Superpower R Package: Capabilities and Validation},
+            pdftitle={Power Analysis with Superpower},
             pdfauthor={Aaron R. Caldwell \& Daniël Lakens},
             pdfborder={0 0 0},
             breaklinks=true}
@@ -116,7 +117,7 @@
 
 \setlength{\droptitle}{-2em}
 
-  \title{The Superpower R Package: Capabilities and Validation}
+  \title{Power Analysis with Superpower}
     \pretitle{\vspace{\droptitle}\centering\huge}
   \posttitle{\par}
     \author{Aaron R. Caldwell \& Daniël Lakens}
@@ -124,7 +125,7 @@
   \postauthor{\par}
       \predate{\centering\large\emph}
   \postdate{\par}
-    \date{2019-09-20}
+    \date{2019-09-22}
 
 \usepackage{booktabs}
 \usepackage{booktabs}
@@ -158,9 +159,9 @@ This is a compilation of documents for \href{https://github.com/arcaldwell49/Sup
 The goal of \texttt{Superpower} is to easily simulate factorial designs and empirically calculate power using a simulation approach.
 The R package is intended to be utilized for prospective (a priori) power analysis. Please don't be silly and compute \href{https://discourse.datamethods.org/t/reference-collection-to-push-back-against-common-statistical-myths/1787}{post hoc power}.
 
-This package, and book, expect readers to have some familiarity with R \citep{R-base}. However, we have created \href{http://shiny.ieis.tue.nl/anova_power/}{two Shiny apps} (for the \texttt{ANOVA\_power} \& \texttt{ANOVA\_exact} functions respectively) to help use these functions if you are not familiar with R.
+This package, and book, expect readers to have some familiarity with R \citep{R-base}. However, we have created two Shiny apps (for the \href{http://shiny.ieis.tue.nl/anova_power/}{\texttt{ANOVA\_power}} \& \href{http://shiny.ieis.tue.nl/anova_exact/}{\texttt{ANOVA\_exact}} functions respectively) to help use these functions if you are not familiar with R.
 
-In this book we will display a variety of ways the \texttt{Superpower} package can be used for power analysis and sample size planning for factorial experimental designs. We also included various examples of the performance of \texttt{Superpower} against other R packages (e.g., \texttt{pwr2ppl} by \citet{R-pwr2ppl} and \texttt{pwr} by \citet{R-pwr}) and statistical programs (such as G*Power by \citet{Campbell2012MorePower6F} or MOREpower \citet{faul2007g}). All uses of the \texttt{ANOVA\_power} function have been run with 10000 iterations (\texttt{nsims\ =\ 10000}). If you have any issues using \texttt{Superpower} or want to expand its capabilities please raise the issue on our \href{https://github.com/arcaldwell49/Superpower/issues}{GitHub} repository.
+In this book we will display a variety of ways the \texttt{Superpower} package can be used for power analysis and sample size planning for factorial experimental designs. We also included various examples of the performance of \texttt{Superpower} against other R packages (e.g., \texttt{pwr2ppl} by \citet{R-pwr2ppl} and \texttt{pwr} by \citet{R-pwr}) and statistical programs (such as G*Power \citet{faul2007g} by or MOREpower \citet{Campbell2012MorePower6F}). All uses of the \texttt{ANOVA\_power} function have been run with 10000 iterations (\texttt{nsims\ =\ 10000}). If you have any issues using \texttt{Superpower} or want to expand its capabilities please raise the issue on our \href{https://github.com/arcaldwell49/Superpower/issues}{GitHub} repository.
 
 \hypertarget{the-experimental-design}{%
 \chapter{The Experimental Design}\label{the-experimental-design}}
@@ -1539,7 +1540,7 @@ factor1 & 61.94317 & 0.0262863 & 0.1643042 & 6.56\\
 
 Using the formulas below, we can calculate the means for between designs with one factor (one-way ANOVA). Using the formula also used in \citet{albers2018power}, we can determine the means that should yield a specified effect sizes (expressed in Cohen's \emph{f}).
 
-Eta-squared (idential to partial eta-squared for one-way ANOVA's) has benchmarks of .0099, .0588, and .1379 for small, medium, and large effect sizes cohen1988spa.
+Eta-squared (idential to partial eta-squared for one-way ANOVA's) has benchmarks of .0099, .0588, and .1379 for small, medium, and large effect sizes \citep{cohen1988spa}.
 
 \hypertarget{three-conditions-small-effect-size}{%
 \subsection{Three conditions, small effect size}\label{three-conditions-small-effect-size}}
@@ -2993,7 +2994,7 @@ Run the simulation
 \end{Highlighting}
 \end{Shaded}
 
-The empirical power is easy to compute, it's just the proportion of simulation runs where p \textless{}. 05.
+The empirical power is easy to compute, it's just the proportion of simulation runs where p \textless. 05.
 
 \begin{Shaded}
 \begin{Highlighting}[]

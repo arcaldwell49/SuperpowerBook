@@ -4,11 +4,11 @@
 
   <meta charset="utf-8" />
   <meta http-equiv="X-UA-Compatible" content="IE=edge" />
-  <title>Chapter 7 Effect of Varying Designs on Power | The Superpower R Package: Capabilities and Validation</title>
+  <title>Chapter 7 Effect of Varying Designs on Power | Power Analysis with Superpower</title>
   <meta name="description" content="This is a book describing the capabilities of the Superpower R package." />
   <meta name="generator" content="bookdown 0.10 and GitBook 2.6.7" />
 
-  <meta property="og:title" content="Chapter 7 Effect of Varying Designs on Power | The Superpower R Package: Capabilities and Validation" />
+  <meta property="og:title" content="Chapter 7 Effect of Varying Designs on Power | Power Analysis with Superpower" />
   <meta property="og:type" content="book" />
   
   
@@ -16,7 +16,7 @@
   
 
   <meta name="twitter:card" content="summary" />
-  <meta name="twitter:title" content="Chapter 7 Effect of Varying Designs on Power | The Superpower R Package: Capabilities and Validation" />
+  <meta name="twitter:title" content="Chapter 7 Effect of Varying Designs on Power | Power Analysis with Superpower" />
   
   <meta name="twitter:description" content="This is a book describing the capabilities of the Superpower R package." />
   
@@ -24,7 +24,7 @@
 <meta name="author" content="Aaron R. Caldwell &amp; Daniël Lakens" />
 
 
-<meta name="date" content="2019-09-21" />
+<meta name="date" content="2019-09-22" />
 
   <meta name="viewport" content="width=device-width, initial-scale=1" />
   <meta name="apple-mobile-web-app-capable" content="yes" />
@@ -47,6 +47,7 @@
 
 
 
+<script src="libs/kePrint-0.0.1/kePrint.js"></script>
 
 
 <style type="text/css">
@@ -231,7 +232,7 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
       <div class="body-inner">
         <div class="book-header" role="navigation">
           <h1>
-            <i class="fa fa-circle-o-notch fa-spin"></i><a href="./">The Superpower R Package: Capabilities and Validation</a>
+            <i class="fa fa-circle-o-notch fa-spin"></i><a href="./">Power Analysis with Superpower</a>
           </h1>
         </div>
 
@@ -266,11 +267,81 @@ design_result &lt;-<span class="st"> </span><span class="kw">ANOVA_design</span>
                                  <span class="dt">alpha_level =</span> alpha_level, 
                                  <span class="dt">nsims =</span> nsims,
                                  <span class="dt">verbose =</span> <span class="ot">FALSE</span>)</code></pre>
-
+<table class="table" style="margin-left: auto; margin-right: auto;">
+<caption>
+<span id="tab:unnamed-chunk-249">Table 7.1: </span>Simulated ANOVA Result
+</caption>
+<thead>
+<tr>
+<th style="text-align:left;">
+</th>
+<th style="text-align:right;">
+power
+</th>
+<th style="text-align:right;">
+effect_size
+</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td style="text-align:left;">
+anova_Condition
+</td>
+<td style="text-align:right;">
+84.15
+</td>
+<td style="text-align:right;">
+0.0911796
+</td>
+</tr>
+</tbody>
+</table>
 <pre class="sourceCode r"><code class="sourceCode r">exact_result &lt;-<span class="st"> </span><span class="kw">ANOVA_exact</span>(design_result,
                             <span class="dt">alpha_level =</span> alpha_level,
                             <span class="dt">verbose =</span> <span class="ot">FALSE</span>)</code></pre>
-
+<table class="table" style="margin-left: auto; margin-right: auto;">
+<caption>
+<span id="tab:unnamed-chunk-251">Table 7.2: </span>Exact ANOVA Result
+</caption>
+<thead>
+<tr>
+<th style="text-align:left;">
+</th>
+<th style="text-align:right;">
+power
+</th>
+<th style="text-align:right;">
+partial_eta_squared
+</th>
+<th style="text-align:right;">
+cohen_f
+</th>
+<th style="text-align:right;">
+non_centrality
+</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td style="text-align:left;">
+Condition
+</td>
+<td style="text-align:right;">
+84.38754
+</td>
+<td style="text-align:right;">
+0.0841121
+</td>
+<td style="text-align:right;">
+0.3030458
+</td>
+<td style="text-align:right;">
+9
+</td>
+</tr>
+</tbody>
+</table>
 <p>We now addd a condition. Let’s assume the ‘light training’ condition falls in between the other two means.</p>
 <p>And we can see power across sample sizes</p>
 <pre class="sourceCode r"><code class="sourceCode r"><span class="co"># Plot power curve (from 5 to 100)</span>
@@ -302,7 +373,48 @@ design_result &lt;-<span class="st"> </span><span class="kw">ANOVA_design</span>
 <pre class="sourceCode r"><code class="sourceCode r">exact_result &lt;-<span class="st"> </span><span class="kw">ANOVA_exact</span>(design_result,
                             <span class="dt">alpha_level =</span> alpha_level,
                             <span class="dt">verbose =</span> <span class="ot">FALSE</span>)</code></pre>
-
+<table class="table" style="margin-left: auto; margin-right: auto;">
+<caption>
+<span id="tab:unnamed-chunk-254">Table 7.3: </span>Exact ANOVA Result
+</caption>
+<thead>
+<tr>
+<th style="text-align:left;">
+</th>
+<th style="text-align:right;">
+power
+</th>
+<th style="text-align:right;">
+partial_eta_squared
+</th>
+<th style="text-align:right;">
+cohen_f
+</th>
+<th style="text-align:right;">
+non_centrality
+</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td style="text-align:left;">
+Condition
+</td>
+<td style="text-align:right;">
+76.16545
+</td>
+<td style="text-align:right;">
+0.0576923
+</td>
+<td style="text-align:right;">
+0.2474358
+</td>
+<td style="text-align:right;">
+9
+</td>
+</tr>
+</tbody>
+</table>
 <p>We see that adding a condition that falls between the other two means reduces our power. Let’s instead assume that the ‘light training’ condition is not different from the control condition. In other words, the mean we add is as extreme as one of the existing means.</p>
 <pre class="sourceCode r"><code class="sourceCode r"><span class="co"># Plot power curve (from 5 to 100)</span>
 <span class="kw">plot_power</span>(design_result, <span class="dt">max_n =</span> <span class="dv">100</span>)</code></pre>
@@ -459,7 +571,48 @@ design_result &lt;-<span class="st"> </span><span class="kw">ANOVA_design</span>
 <pre class="sourceCode r"><code class="sourceCode r">exact_result &lt;-<span class="st"> </span><span class="kw">ANOVA_exact</span>(design_result,
                             <span class="dt">alpha_level =</span> alpha_level,
                             <span class="dt">verbose =</span> <span class="ot">FALSE</span>)</code></pre>
-
+<table class="table" style="margin-left: auto; margin-right: auto;">
+<caption>
+<span id="tab:unnamed-chunk-262">Table 7.4: </span>Exact ANOVA Result
+</caption>
+<thead>
+<tr>
+<th style="text-align:left;">
+</th>
+<th style="text-align:right;">
+power
+</th>
+<th style="text-align:right;">
+partial_eta_squared
+</th>
+<th style="text-align:right;">
+cohen_f
+</th>
+<th style="text-align:right;">
+non_centrality
+</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td style="text-align:left;">
+Condition
+</td>
+<td style="text-align:right;">
+83.66436
+</td>
+<td style="text-align:right;">
+0.1551724
+</td>
+<td style="text-align:right;">
+0.4285714
+</td>
+<td style="text-align:right;">
+9
+</td>
+</tr>
+</tbody>
+</table>
 <p>We see power is ever so slightly less than for the between subject design. This is due to the loss in degrees of freedom, which is <span class="math inline">\(2(n-1)\)</span> for between designs, and <span class="math inline">\(n-1\)</span> for within designs. But as the correlation increases, the power advantage of within designs becomes stronger.</p>
 <pre class="sourceCode r"><code class="sourceCode r">string &lt;-<span class="st"> &quot;3w&quot;</span>
 n &lt;-<span class="st"> </span><span class="dv">50</span>
@@ -485,7 +638,48 @@ design_result &lt;-<span class="st"> </span><span class="kw">ANOVA_design</span>
 <pre class="sourceCode r"><code class="sourceCode r">exact_result &lt;-<span class="st"> </span><span class="kw">ANOVA_exact</span>(design_result,
                             <span class="dt">alpha_level =</span> alpha_level,
                             <span class="dt">verbose =</span> <span class="ot">FALSE</span>)</code></pre>
-
+<table class="table" style="margin-left: auto; margin-right: auto;">
+<caption>
+<span id="tab:unnamed-chunk-265">Table 7.5: </span>Exact ANOVA Result
+</caption>
+<thead>
+<tr>
+<th style="text-align:left;">
+</th>
+<th style="text-align:right;">
+power
+</th>
+<th style="text-align:right;">
+partial_eta_squared
+</th>
+<th style="text-align:right;">
+cohen_f
+</th>
+<th style="text-align:right;">
+non_centrality
+</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td style="text-align:left;">
+Condition
+</td>
+<td style="text-align:right;">
+75.70841
+</td>
+<td style="text-align:right;">
+0.0841121
+</td>
+<td style="text-align:right;">
+0.3030458
+</td>
+<td style="text-align:right;">
+9
+</td>
+</tr>
+</tbody>
+</table>
 <p>When we add a a condition in a within design where we expect the mean to be identical to the grand mean, we again see that the power decreases. This similarly shows that adding a condition that equals the grand mean to a within subject design does not come for free, but has a power cost.</p>
 <pre class="sourceCode r"><code class="sourceCode r">n &lt;-<span class="st"> </span><span class="dv">30</span>
 sd &lt;-<span class="st"> </span><span class="dv">10</span>

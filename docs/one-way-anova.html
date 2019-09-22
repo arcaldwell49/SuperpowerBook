@@ -4,11 +4,11 @@
 
   <meta charset="utf-8" />
   <meta http-equiv="X-UA-Compatible" content="IE=edge" />
-  <title>Chapter 2 One-Way ANOVA | The Superpower R Package: Capabilities and Validation</title>
+  <title>Chapter 2 One-Way ANOVA | Power Analysis with Superpower</title>
   <meta name="description" content="This is a book describing the capabilities of the Superpower R package." />
   <meta name="generator" content="bookdown 0.10 and GitBook 2.6.7" />
 
-  <meta property="og:title" content="Chapter 2 One-Way ANOVA | The Superpower R Package: Capabilities and Validation" />
+  <meta property="og:title" content="Chapter 2 One-Way ANOVA | Power Analysis with Superpower" />
   <meta property="og:type" content="book" />
   
   
@@ -16,7 +16,7 @@
   
 
   <meta name="twitter:card" content="summary" />
-  <meta name="twitter:title" content="Chapter 2 One-Way ANOVA | The Superpower R Package: Capabilities and Validation" />
+  <meta name="twitter:title" content="Chapter 2 One-Way ANOVA | Power Analysis with Superpower" />
   
   <meta name="twitter:description" content="This is a book describing the capabilities of the Superpower R package." />
   
@@ -24,7 +24,7 @@
 <meta name="author" content="Aaron R. Caldwell &amp; Daniël Lakens" />
 
 
-<meta name="date" content="2019-09-21" />
+<meta name="date" content="2019-09-22" />
 
   <meta name="viewport" content="width=device-width, initial-scale=1" />
   <meta name="apple-mobile-web-app-capable" content="yes" />
@@ -47,6 +47,7 @@
 
 
 
+<script src="libs/kePrint-0.0.1/kePrint.js"></script>
 
 
 <style type="text/css">
@@ -231,7 +232,7 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
       <div class="body-inner">
         <div class="book-header" role="navigation">
           <h1>
-            <i class="fa fa-circle-o-notch fa-spin"></i><a href="./">The Superpower R Package: Capabilities and Validation</a>
+            <i class="fa fa-circle-o-notch fa-spin"></i><a href="./">Power Analysis with Superpower</a>
           </h1>
         </div>
 
@@ -268,11 +269,81 @@ alpha_level &lt;-<span class="st"> </span><span class="fl">0.05</span>
                                  <span class="dt">alpha_level =</span> alpha_level, 
                                  <span class="dt">nsims =</span> nsims,
                                  <span class="dt">verbose =</span> <span class="ot">FALSE</span>)</code></pre>
-
+<table class="table" style="margin-left: auto; margin-right: auto;">
+<caption>
+<span id="tab:unnamed-chunk-9">Table 2.1: </span>Simulated ANOVA Result
+</caption>
+<thead>
+<tr>
+<th style="text-align:left;">
+</th>
+<th style="text-align:right;">
+power
+</th>
+<th style="text-align:right;">
+effect_size
+</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td style="text-align:left;">
+anova_condition
+</td>
+<td style="text-align:right;">
+67.2
+</td>
+<td style="text-align:right;">
+0.0331418
+</td>
+</tr>
+</tbody>
+</table>
 <pre class="sourceCode r"><code class="sourceCode r">exact_result &lt;-<span class="st"> </span><span class="kw">ANOVA_exact</span>(design_result,
                             <span class="dt">alpha_level =</span> alpha_level,
                             <span class="dt">verbose =</span> <span class="ot">FALSE</span>)</code></pre>
-
+<table class="table" style="margin-left: auto; margin-right: auto;">
+<caption>
+<span id="tab:unnamed-chunk-11">Table 2.2: </span>Exact ANOVA Result
+</caption>
+<thead>
+<tr>
+<th style="text-align:left;">
+</th>
+<th style="text-align:right;">
+power
+</th>
+<th style="text-align:right;">
+partial_eta_squared
+</th>
+<th style="text-align:right;">
+cohen_f
+</th>
+<th style="text-align:right;">
+non_centrality
+</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td style="text-align:left;">
+condition
+</td>
+<td style="text-align:right;">
+67.68572
+</td>
+<td style="text-align:right;">
+0.0289748
+</td>
+<td style="text-align:right;">
+0.1727409
+</td>
+<td style="text-align:right;">
+5.908203
+</td>
+</tr>
+</tbody>
+</table>
 <p>The result shows that we have exactly the same power for the ANOVA, as we have for the <em>t</em>-test. This is because when there are only two groups, these tests are mathematically identical. In a study with 100 participants, we would have quite low power (around 67.7%). An ANOVA with 2 groups is identical to a <em>t</em>-test. For our example, Cohen’s d (the standardized mean difference) is 2.2/6.4, or d = 0.34375 for the difference between the control condition and pets, which we can use to easily compute the expected power for these simple comparisons using the pwr package.</p>
 <pre class="sourceCode r"><code class="sourceCode r"><span class="kw">pwr.t.test</span>(<span class="dt">d =</span> <span class="fl">2.2</span><span class="op">/</span><span class="fl">6.4</span>,
            <span class="dt">n =</span> <span class="dv">100</span>,
@@ -324,11 +395,81 @@ mu</code></pre>
                                  <span class="dt">alpha_level =</span> alpha_level, 
                                  <span class="dt">nsims =</span> nsims,
                                  <span class="dt">verbose =</span> <span class="ot">FALSE</span>)</code></pre>
-
+<table class="table" style="margin-left: auto; margin-right: auto;">
+<caption>
+<span id="tab:unnamed-chunk-19">Table 2.3: </span>Simulated ANOVA Result
+</caption>
+<thead>
+<tr>
+<th style="text-align:left;">
+</th>
+<th style="text-align:right;">
+power
+</th>
+<th style="text-align:right;">
+effect_size
+</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td style="text-align:left;">
+anova_condition
+</td>
+<td style="text-align:right;">
+90.15
+</td>
+<td style="text-align:right;">
+0.0544974
+</td>
+</tr>
+</tbody>
+</table>
 <pre class="sourceCode r"><code class="sourceCode r">exact_result &lt;-<span class="st"> </span><span class="kw">ANOVA_exact</span>(design_result,
                             <span class="dt">alpha_level =</span> alpha_level,
                             <span class="dt">verbose =</span> <span class="ot">FALSE</span>)</code></pre>
-
+<table class="table" style="margin-left: auto; margin-right: auto;">
+<caption>
+<span id="tab:unnamed-chunk-21">Table 2.4: </span>Exact ANOVA Result
+</caption>
+<thead>
+<tr>
+<th style="text-align:left;">
+</th>
+<th style="text-align:right;">
+power
+</th>
+<th style="text-align:right;">
+partial_eta_squared
+</th>
+<th style="text-align:right;">
+cohen_f
+</th>
+<th style="text-align:right;">
+non_centrality
+</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td style="text-align:left;">
+condition
+</td>
+<td style="text-align:right;">
+90.00714
+</td>
+<td style="text-align:right;">
+0.0508742
+</td>
+<td style="text-align:right;">
+0.2315192
+</td>
+<td style="text-align:right;">
+10.61302
+</td>
+</tr>
+</tbody>
+</table>
 <p>The simulation confirms that for the <em>F</em>-test for the ANOVA we have 90% power. This is also what g*power tells us what would happen based on a post-hoc power analysis with an f of 0.2303587, 2 groups, 200 participants in total (100 in each between subject condition), and an alpha of 5%.</p>
 <p><img src="screenshots/gpower_8.png" /></p>
 <p>If we return to our expected means, how many participants do we need for sufficient power? Given the expected difference and standard deviation, d = 0.34375, and f = 0.171875. We can perform an a-priori power analysis for this simple case, which tells us we need 179 participants in each group (we can’t split people in parts, and thus always round a power analysis upward), or 358 in total.</p>
@@ -370,11 +511,81 @@ alpha_level &lt;-<span class="st"> </span><span class="fl">0.05</span></code></p
                                  <span class="dt">alpha_level =</span> alpha_level, 
                                  <span class="dt">nsims =</span> nsims,
                                  <span class="dt">verbose =</span> <span class="ot">FALSE</span>)</code></pre>
-
+<table class="table" style="margin-left: auto; margin-right: auto;">
+<caption>
+<span id="tab:unnamed-chunk-25">Table 2.5: </span>Simulated ANOVA Result
+</caption>
+<thead>
+<tr>
+<th style="text-align:left;">
+</th>
+<th style="text-align:right;">
+power
+</th>
+<th style="text-align:right;">
+effect_size
+</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td style="text-align:left;">
+anova_condition
+</td>
+<td style="text-align:right;">
+89.99
+</td>
+<td style="text-align:right;">
+0.0315708
+</td>
+</tr>
+</tbody>
+</table>
 <pre class="sourceCode r"><code class="sourceCode r">exact_result &lt;-<span class="st"> </span><span class="kw">ANOVA_exact</span>(design_result,
                             <span class="dt">alpha_level =</span> alpha_level,
                             <span class="dt">verbose =</span> <span class="ot">FALSE</span>)</code></pre>
-
+<table class="table" style="margin-left: auto; margin-right: auto;">
+<caption>
+<span id="tab:unnamed-chunk-27">Table 2.6: </span>Exact ANOVA Result
+</caption>
+<thead>
+<tr>
+<th style="text-align:left;">
+</th>
+<th style="text-align:right;">
+power
+</th>
+<th style="text-align:right;">
+partial_eta_squared
+</th>
+<th style="text-align:right;">
+cohen_f
+</th>
+<th style="text-align:right;">
+non_centrality
+</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td style="text-align:left;">
+condition
+</td>
+<td style="text-align:right;">
+90.03028
+</td>
+<td style="text-align:right;">
+0.0288499
+</td>
+<td style="text-align:right;">
+0.1723571
+</td>
+<td style="text-align:right;">
+10.57568
+</td>
+</tr>
+</tbody>
+</table>
 <p>We stored the result from the power analysis in an object. This allows us to request plots (which are not printed automatically) showing the <em>p</em>-value distribution. If we request <code>simulation_result$plot1</code> we get the p-value distribution for the ANOVA:</p>
 <p><img src="SuperpowerValidation_files/figure-html/unnamed-chunk-28-1.png" width="672" /></p>
 <p>If we request <code>simulation_result$plot2</code> we get the p-value distribution for the paired comparisons (in this case only one):</p>
@@ -409,11 +620,81 @@ simulation_result &lt;-<span class="st"> </span><span class="kw">ANOVA_power</sp
                                  <span class="dt">alpha_level =</span> alpha_level, 
                                  <span class="dt">nsims =</span> nsims,
                                  <span class="dt">verbose =</span> <span class="ot">FALSE</span>)</code></pre>
-
+<table class="table" style="margin-left: auto; margin-right: auto;">
+<caption>
+<span id="tab:unnamed-chunk-32">Table 2.7: </span>Simulated ANOVA Result
+</caption>
+<thead>
+<tr>
+<th style="text-align:left;">
+</th>
+<th style="text-align:right;">
+power
+</th>
+<th style="text-align:right;">
+effect_size
+</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td style="text-align:left;">
+anova_condition
+</td>
+<td style="text-align:right;">
+47.26
+</td>
+<td style="text-align:right;">
+0.0433997
+</td>
+</tr>
+</tbody>
+</table>
 <pre class="sourceCode r"><code class="sourceCode r">exact_result &lt;-<span class="st"> </span><span class="kw">ANOVA_exact</span>(design_result,
                             <span class="dt">alpha_level =</span> alpha_level,
                             <span class="dt">verbose =</span> <span class="ot">FALSE</span>)</code></pre>
-
+<table class="table" style="margin-left: auto; margin-right: auto;">
+<caption>
+<span id="tab:unnamed-chunk-34">Table 2.8: </span>Exact ANOVA Result
+</caption>
+<thead>
+<tr>
+<th style="text-align:left;">
+</th>
+<th style="text-align:right;">
+power
+</th>
+<th style="text-align:right;">
+partial_eta_squared
+</th>
+<th style="text-align:right;">
+cohen_f
+</th>
+<th style="text-align:right;">
+non_centrality
+</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td style="text-align:left;">
+condition
+</td>
+<td style="text-align:right;">
+47.69468
+</td>
+<td style="text-align:right;">
+0.0315259
+</td>
+<td style="text-align:right;">
+0.180422
+</td>
+<td style="text-align:right;">
+4.785156
+</td>
+</tr>
+</tbody>
+</table>
 <p>The result shows that you would have quite low power with 50 participants, both for the overall ANOVA (just around 50% power), as for the follow up comparisons (approximately 40% power for the control vs cat condition, around 50% for the control vs dogs condition, and a really low power (around 6%, just above the Type 1 error rate of 5%) for the expected difference between cats and dogs.</p>
 </div>
 <div id="power-for-simple-effects" class="section level3">
@@ -480,11 +761,81 @@ mu</code></pre>
                                  <span class="dt">alpha_level =</span> alpha_level, 
                                  <span class="dt">nsims =</span> nsims,
                                  <span class="dt">verbose =</span> <span class="ot">FALSE</span>)</code></pre>
-
+<table class="table" style="margin-left: auto; margin-right: auto;">
+<caption>
+<span id="tab:unnamed-chunk-41">Table 2.9: </span>Simulated ANOVA Result
+</caption>
+<thead>
+<tr>
+<th style="text-align:left;">
+</th>
+<th style="text-align:right;">
+power
+</th>
+<th style="text-align:right;">
+effect_size
+</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td style="text-align:left;">
+anova_condition
+</td>
+<td style="text-align:right;">
+90.3
+</td>
+<td style="text-align:right;">
+0.090741
+</td>
+</tr>
+</tbody>
+</table>
 <pre class="sourceCode r"><code class="sourceCode r">exact_result &lt;-<span class="st"> </span><span class="kw">ANOVA_exact</span>(design_result,
                             <span class="dt">alpha_level =</span> alpha_level,
                             <span class="dt">verbose =</span> <span class="ot">FALSE</span>)</code></pre>
-
+<table class="table" style="margin-left: auto; margin-right: auto;">
+<caption>
+<span id="tab:unnamed-chunk-43">Table 2.10: </span>Exact ANOVA Result
+</caption>
+<thead>
+<tr>
+<th style="text-align:left;">
+</th>
+<th style="text-align:right;">
+power
+</th>
+<th style="text-align:right;">
+partial_eta_squared
+</th>
+<th style="text-align:right;">
+cohen_f
+</th>
+<th style="text-align:right;">
+non_centrality
+</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td style="text-align:left;">
+condition
+</td>
+<td style="text-align:right;">
+90.00112
+</td>
+<td style="text-align:right;">
+0.0807686
+</td>
+<td style="text-align:right;">
+0.2964209
+</td>
+<td style="text-align:right;">
+12.9162
+</td>
+</tr>
+</tbody>
+</table>
 <p>The simulation confirms that for the <em>F</em>-test for the ANOVA we have 90% power. This is also what g*power tells us what would happen based on a post-hoc power analysis with an f of 0.2934417, 3 groups, 150 participants in total (50 in each between subject condition), and an alpha of 5%.</p>
 <p><img src="screenshots/gpower_7.png" /></p>
 <p>We can also compute the power for the ANOVA and simple effects in R with the pwr package. The calculated effect sizes and power match those from the simulation.</p>
@@ -635,11 +986,81 @@ design =<span class="st"> </span><span class="kw">paste</span>(K, <span class="s
                                  <span class="dt">alpha_level =</span> alpha_level, 
                                  <span class="dt">nsims =</span> nsims,
                                  <span class="dt">verbose =</span> <span class="ot">FALSE</span>)</code></pre>
-
+<table class="table" style="margin-left: auto; margin-right: auto;">
+<caption>
+<span id="tab:unnamed-chunk-53">Table 2.11: </span>Simulated ANOVA Result
+</caption>
+<thead>
+<tr>
+<th style="text-align:left;">
+</th>
+<th style="text-align:right;">
+power
+</th>
+<th style="text-align:right;">
+effect_size
+</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td style="text-align:left;">
+anova_factor1
+</td>
+<td style="text-align:right;">
+78.81
+</td>
+<td style="text-align:right;">
+0.0413822
+</td>
+</tr>
+</tbody>
+</table>
 <pre class="sourceCode r"><code class="sourceCode r">exact_result &lt;-<span class="st"> </span><span class="kw">ANOVA_exact</span>(design_result,
                             <span class="dt">alpha_level =</span> alpha_level,
                             <span class="dt">verbose =</span> <span class="ot">FALSE</span>)</code></pre>
-
+<table class="table" style="margin-left: auto; margin-right: auto;">
+<caption>
+<span id="tab:unnamed-chunk-55">Table 2.12: </span>Exact ANOVA Result
+</caption>
+<thead>
+<tr>
+<th style="text-align:left;">
+</th>
+<th style="text-align:right;">
+power
+</th>
+<th style="text-align:right;">
+partial_eta_squared
+</th>
+<th style="text-align:right;">
+cohen_f
+</th>
+<th style="text-align:right;">
+non_centrality
+</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td style="text-align:left;">
+factor1
+</td>
+<td style="text-align:right;">
+79.37239
+</td>
+<td style="text-align:right;">
+0.0347072
+</td>
+<td style="text-align:right;">
+0.1896182
+</td>
+<td style="text-align:right;">
+9.6
+</td>
+</tr>
+</tbody>
+</table>
 </div>
 <div id="variation-1" class="section level3">
 <h3><span class="header-section-number">2.3.2</span> Variation 1</h3>
@@ -711,11 +1132,81 @@ design =<span class="st"> </span><span class="kw">paste</span>(K, <span class="s
                                  <span class="dt">alpha_level =</span> alpha_level, 
                                  <span class="dt">nsims =</span> nsims,
                                  <span class="dt">verbose =</span> <span class="ot">FALSE</span>)</code></pre>
-
+<table class="table" style="margin-left: auto; margin-right: auto;">
+<caption>
+<span id="tab:unnamed-chunk-64">Table 2.13: </span>Simulated ANOVA Result
+</caption>
+<thead>
+<tr>
+<th style="text-align:left;">
+</th>
+<th style="text-align:right;">
+power
+</th>
+<th style="text-align:right;">
+effect_size
+</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td style="text-align:left;">
+anova_factor1
+</td>
+<td style="text-align:right;">
+94.61
+</td>
+<td style="text-align:right;">
+0.0386982
+</td>
+</tr>
+</tbody>
+</table>
 <pre class="sourceCode r"><code class="sourceCode r">exact_result &lt;-<span class="st"> </span><span class="kw">ANOVA_exact</span>(design_result,
                             <span class="dt">alpha_level =</span> alpha_level,
                             <span class="dt">verbose =</span> <span class="ot">FALSE</span>)</code></pre>
-
+<table class="table" style="margin-left: auto; margin-right: auto;">
+<caption>
+<span id="tab:unnamed-chunk-66">Table 2.14: </span>Exact ANOVA Result
+</caption>
+<thead>
+<tr>
+<th style="text-align:left;">
+</th>
+<th style="text-align:right;">
+power
+</th>
+<th style="text-align:right;">
+partial_eta_squared
+</th>
+<th style="text-align:right;">
+cohen_f
+</th>
+<th style="text-align:right;">
+non_centrality
+</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td style="text-align:left;">
+factor1
+</td>
+<td style="text-align:right;">
+94.89169
+</td>
+<td style="text-align:right;">
+0.034565
+</td>
+<td style="text-align:right;">
+0.1892154
+</td>
+<td style="text-align:right;">
+15.46667
+</td>
+</tr>
+</tbody>
+</table>
 </div>
 <div id="variation-2" class="section level3">
 <h3><span class="header-section-number">2.3.4</span> Variation 2</h3>
@@ -781,11 +1272,81 @@ design =<span class="st"> </span><span class="kw">paste</span>(K, <span class="s
                                  <span class="dt">alpha_level =</span> alpha_level, 
                                  <span class="dt">nsims =</span> nsims,
                                  <span class="dt">verbose =</span> <span class="ot">FALSE</span>)</code></pre>
-
+<table class="table" style="margin-left: auto; margin-right: auto;">
+<caption>
+<span id="tab:unnamed-chunk-75">Table 2.15: </span>Simulated ANOVA Result
+</caption>
+<thead>
+<tr>
+<th style="text-align:left;">
+</th>
+<th style="text-align:right;">
+power
+</th>
+<th style="text-align:right;">
+effect_size
+</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td style="text-align:left;">
+anova_factor1
+</td>
+<td style="text-align:right;">
+61.51
+</td>
+<td style="text-align:right;">
+0.0335436
+</td>
+</tr>
+</tbody>
+</table>
 <pre class="sourceCode r"><code class="sourceCode r">exact_result &lt;-<span class="st"> </span><span class="kw">ANOVA_exact</span>(design_result,
                             <span class="dt">alpha_level =</span> alpha_level,
                             <span class="dt">verbose =</span> <span class="ot">FALSE</span>)</code></pre>
-
+<table class="table" style="margin-left: auto; margin-right: auto;">
+<caption>
+<span id="tab:unnamed-chunk-77">Table 2.16: </span>Exact ANOVA Result
+</caption>
+<thead>
+<tr>
+<th style="text-align:left;">
+</th>
+<th style="text-align:right;">
+power
+</th>
+<th style="text-align:right;">
+partial_eta_squared
+</th>
+<th style="text-align:right;">
+cohen_f
+</th>
+<th style="text-align:right;">
+non_centrality
+</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td style="text-align:left;">
+factor1
+</td>
+<td style="text-align:right;">
+61.94317
+</td>
+<td style="text-align:right;">
+0.0262863
+</td>
+<td style="text-align:right;">
+0.1643042
+</td>
+<td style="text-align:right;">
+6.56
+</td>
+</tr>
+</tbody>
+</table>
 </div>
 </div>
 <div id="effect-size-estimates-for-one-way-anova" class="section level2">
@@ -814,11 +1375,81 @@ string =<span class="st"> </span><span class="kw">paste</span>(K,<span class="st
                                  <span class="dt">alpha_level =</span> alpha_level, 
                                  <span class="dt">nsims =</span> nsims,
                                  <span class="dt">verbose =</span> <span class="ot">FALSE</span>)</code></pre>
-
+<table class="table" style="margin-left: auto; margin-right: auto;">
+<caption>
+<span id="tab:unnamed-chunk-80">Table 2.17: </span>Simulated ANOVA Result
+</caption>
+<thead>
+<tr>
+<th style="text-align:left;">
+</th>
+<th style="text-align:right;">
+power
+</th>
+<th style="text-align:right;">
+effect_size
+</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td style="text-align:left;">
+anova_factor1
+</td>
+<td style="text-align:right;">
+100
+</td>
+<td style="text-align:right;">
+0.0100165
+</td>
+</tr>
+</tbody>
+</table>
 <pre class="sourceCode r"><code class="sourceCode r">exact_result &lt;-<span class="st"> </span><span class="kw">ANOVA_exact</span>(design_result,
                             <span class="dt">alpha_level =</span> alpha_level,
                             <span class="dt">verbose =</span> <span class="ot">FALSE</span>)</code></pre>
-
+<table class="table" style="margin-left: auto; margin-right: auto;">
+<caption>
+<span id="tab:unnamed-chunk-82">Table 2.18: </span>Exact ANOVA Result
+</caption>
+<thead>
+<tr>
+<th style="text-align:left;">
+</th>
+<th style="text-align:right;">
+power
+</th>
+<th style="text-align:right;">
+partial_eta_squared
+</th>
+<th style="text-align:right;">
+cohen_f
+</th>
+<th style="text-align:right;">
+non_centrality
+</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td style="text-align:left;">
+factor1
+</td>
+<td style="text-align:right;">
+100
+</td>
+<td style="text-align:right;">
+0.009902
+</td>
+<td style="text-align:right;">
+0.100005
+</td>
+<td style="text-align:right;">
+149.9848
+</td>
+</tr>
+</tbody>
+</table>
 <p>The resulting effect size estimate from the simulation is very close to 0.0099</p>
 </div>
 <div id="four-conditions-medium-effect-size" class="section level3">
@@ -843,11 +1474,81 @@ string =<span class="st"> </span><span class="kw">paste</span>(K,<span class="st
                                  <span class="dt">alpha_level =</span> alpha_level, 
                                  <span class="dt">nsims =</span> nsims,
                                  <span class="dt">verbose =</span> <span class="ot">FALSE</span>)</code></pre>
-
+<table class="table" style="margin-left: auto; margin-right: auto;">
+<caption>
+<span id="tab:unnamed-chunk-86">Table 2.19: </span>Simulated ANOVA Result
+</caption>
+<thead>
+<tr>
+<th style="text-align:left;">
+</th>
+<th style="text-align:right;">
+power
+</th>
+<th style="text-align:right;">
+effect_size
+</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td style="text-align:left;">
+anova_factor1
+</td>
+<td style="text-align:right;">
+100
+</td>
+<td style="text-align:right;">
+0.058913
+</td>
+</tr>
+</tbody>
+</table>
 <pre class="sourceCode r"><code class="sourceCode r">exact_result &lt;-<span class="st"> </span><span class="kw">ANOVA_exact</span>(design_result,
                             <span class="dt">alpha_level =</span> alpha_level,
                             <span class="dt">verbose =</span> <span class="ot">FALSE</span>)</code></pre>
-
+<table class="table" style="margin-left: auto; margin-right: auto;">
+<caption>
+<span id="tab:unnamed-chunk-88">Table 2.20: </span>Exact ANOVA Result
+</caption>
+<thead>
+<tr>
+<th style="text-align:left;">
+</th>
+<th style="text-align:right;">
+power
+</th>
+<th style="text-align:right;">
+partial_eta_squared
+</th>
+<th style="text-align:right;">
+cohen_f
+</th>
+<th style="text-align:right;">
+non_centrality
+</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td style="text-align:left;">
+factor1
+</td>
+<td style="text-align:right;">
+100
+</td>
+<td style="text-align:right;">
+0.0588111
+</td>
+<td style="text-align:right;">
+0.2499719
+</td>
+<td style="text-align:right;">
+1249.469
+</td>
+</tr>
+</tbody>
+</table>
 <p>Results are very close to 0.588.</p>
 </div>
 <div id="two-conditions-large-effect-size" class="section level3">
@@ -870,11 +1571,81 @@ string =<span class="st"> </span><span class="kw">paste</span>(K,<span class="st
                                  <span class="dt">alpha_level =</span> alpha_level, 
                                  <span class="dt">nsims =</span> nsims,
                                  <span class="dt">verbose =</span> <span class="ot">FALSE</span>)</code></pre>
-
+<table class="table" style="margin-left: auto; margin-right: auto;">
+<caption>
+<span id="tab:unnamed-chunk-92">Table 2.21: </span>Simulated ANOVA Result
+</caption>
+<thead>
+<tr>
+<th style="text-align:left;">
+</th>
+<th style="text-align:right;">
+power
+</th>
+<th style="text-align:right;">
+effect_size
+</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td style="text-align:left;">
+anova_factor1
+</td>
+<td style="text-align:right;">
+100
+</td>
+<td style="text-align:right;">
+0.1380489
+</td>
+</tr>
+</tbody>
+</table>
 <pre class="sourceCode r"><code class="sourceCode r">exact_result &lt;-<span class="st"> </span><span class="kw">ANOVA_exact</span>(design_result,
                             <span class="dt">alpha_level =</span> alpha_level,
                             <span class="dt">verbose =</span> <span class="ot">FALSE</span>)</code></pre>
-
+<table class="table" style="margin-left: auto; margin-right: auto;">
+<caption>
+<span id="tab:unnamed-chunk-94">Table 2.22: </span>Exact ANOVA Result
+</caption>
+<thead>
+<tr>
+<th style="text-align:left;">
+</th>
+<th style="text-align:right;">
+power
+</th>
+<th style="text-align:right;">
+partial_eta_squared
+</th>
+<th style="text-align:right;">
+cohen_f
+</th>
+<th style="text-align:right;">
+non_centrality
+</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td style="text-align:left;">
+factor1
+</td>
+<td style="text-align:right;">
+100
+</td>
+<td style="text-align:right;">
+0.1379238
+</td>
+<td style="text-align:right;">
+0.3999878
+</td>
+<td style="text-align:right;">
+1599.582
+</td>
+</tr>
+</tbody>
+</table>
 <p>The results are very close to is simulation should yield a small effect size (0.1379).</p>
 
 </div>

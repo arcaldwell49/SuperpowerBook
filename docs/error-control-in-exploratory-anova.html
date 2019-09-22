@@ -4,11 +4,11 @@
 
   <meta charset="utf-8" />
   <meta http-equiv="X-UA-Compatible" content="IE=edge" />
-  <title>Chapter 8 Error Control in Exploratory ANOVA | The Superpower R Package: Capabilities and Validation</title>
+  <title>Chapter 8 Error Control in Exploratory ANOVA | Power Analysis with Superpower</title>
   <meta name="description" content="This is a book describing the capabilities of the Superpower R package." />
   <meta name="generator" content="bookdown 0.10 and GitBook 2.6.7" />
 
-  <meta property="og:title" content="Chapter 8 Error Control in Exploratory ANOVA | The Superpower R Package: Capabilities and Validation" />
+  <meta property="og:title" content="Chapter 8 Error Control in Exploratory ANOVA | Power Analysis with Superpower" />
   <meta property="og:type" content="book" />
   
   
@@ -16,7 +16,7 @@
   
 
   <meta name="twitter:card" content="summary" />
-  <meta name="twitter:title" content="Chapter 8 Error Control in Exploratory ANOVA | The Superpower R Package: Capabilities and Validation" />
+  <meta name="twitter:title" content="Chapter 8 Error Control in Exploratory ANOVA | Power Analysis with Superpower" />
   
   <meta name="twitter:description" content="This is a book describing the capabilities of the Superpower R package." />
   
@@ -24,7 +24,7 @@
 <meta name="author" content="Aaron R. Caldwell &amp; Daniël Lakens" />
 
 
-<meta name="date" content="2019-09-21" />
+<meta name="date" content="2019-09-22" />
 
   <meta name="viewport" content="width=device-width, initial-scale=1" />
   <meta name="apple-mobile-web-app-capable" content="yes" />
@@ -47,6 +47,7 @@
 
 
 
+<script src="libs/kePrint-0.0.1/kePrint.js"></script>
 
 
 <style type="text/css">
@@ -231,7 +232,7 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
       <div class="body-inner">
         <div class="book-header" role="navigation">
           <h1>
-            <i class="fa fa-circle-o-notch fa-spin"></i><a href="./">The Superpower R Package: Capabilities and Validation</a>
+            <i class="fa fa-circle-o-notch fa-spin"></i><a href="./">Power Analysis with Superpower</a>
           </h1>
         </div>
 
@@ -264,7 +265,102 @@ alpha_level &lt;-<span class="st"> </span><span class="fl">0.05</span>
 <pre class="sourceCode r"><code class="sourceCode r">simulation_result &lt;-<span class="st"> </span><span class="kw">ANOVA_power</span>(design_result,
                                  <span class="dt">alpha_level =</span> alpha_level,
                                  <span class="dt">verbose =</span> <span class="ot">FALSE</span>)</code></pre>
-
+<table class="table" style="margin-left: auto; margin-right: auto;">
+<caption>
+<span id="tab:unnamed-chunk-269">Table 8.1: </span>Simulated ANOVA Result
+</caption>
+<thead>
+<tr>
+<th style="text-align:left;">
+</th>
+<th style="text-align:right;">
+power
+</th>
+<th style="text-align:right;">
+effect_size
+</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td style="text-align:left;">
+anova_condition1
+</td>
+<td style="text-align:right;">
+4.5
+</td>
+<td style="text-align:right;">
+0.0023816
+</td>
+</tr>
+<tr>
+<td style="text-align:left;">
+anova_condition2
+</td>
+<td style="text-align:right;">
+5.3
+</td>
+<td style="text-align:right;">
+0.0025314
+</td>
+</tr>
+<tr>
+<td style="text-align:left;">
+anova_condition3
+</td>
+<td style="text-align:right;">
+5.6
+</td>
+<td style="text-align:right;">
+0.0026427
+</td>
+</tr>
+<tr>
+<td style="text-align:left;">
+anova_condition1:condition2
+</td>
+<td style="text-align:right;">
+5.2
+</td>
+<td style="text-align:right;">
+0.0025443
+</td>
+</tr>
+<tr>
+<td style="text-align:left;">
+anova_condition1:condition3
+</td>
+<td style="text-align:right;">
+5.2
+</td>
+<td style="text-align:right;">
+0.0025055
+</td>
+</tr>
+<tr>
+<td style="text-align:left;">
+anova_condition2:condition3
+</td>
+<td style="text-align:right;">
+6.6
+</td>
+<td style="text-align:right;">
+0.0027795
+</td>
+</tr>
+<tr>
+<td style="text-align:left;">
+anova_condition1:condition2:condition3
+</td>
+<td style="text-align:right;">
+4.5
+</td>
+<td style="text-align:right;">
+0.0024848
+</td>
+</tr>
+</tbody>
+</table>
 <p>When there is no true effect, we formally do not have ‘power’ (which is defined as the probability of finding p &lt; <span class="math inline">\(\alpha\)</span> if there is a true effect to be found) so the power column should be read as the ‘type I error rate’. Because we have saved the power simulation in the ‘simulation_result’ object, we can perform calculations on the ‘sim_data’ dataframe that is stored. This dataframe contains the results for the nsims simulations (e.g., 10000 rows if you ran 10000 simulations) and stores the p-values and effect size estimates for each ANOVA. The first 7 columns are the p-values for the ANOVA, first the main effects of condition 1, 2, and 3, then three two-way interactions, and finally the threeway interaction.</p>
 <p>We can calculate the number of significant results for each test (which should be 5%) by counting the number of significant p-values in each of the 7 rows:</p>
 <pre class="sourceCode r"><code class="sourceCode r"><span class="kw">apply</span>(<span class="kw">as.matrix</span>(simulation_result_<span class="fl">8.1</span><span class="op">$</span>sim_data[(<span class="dv">1</span><span class="op">:</span><span class="dv">7</span>)]), <span class="dv">2</span>, 
@@ -324,8 +420,429 @@ alpha_level &lt;-<span class="st"> </span><span class="fl">0.05</span></code></p
                                  <span class="dt">alpha_level =</span> alpha_level,
                                  <span class="dt">p_adjust =</span> p_adjust,
                                  <span class="dt">verbose =</span> <span class="ot">FALSE</span>)</code></pre>
-
-
+<table class="table" style="margin-left: auto; margin-right: auto;">
+<caption>
+<span id="tab:unnamed-chunk-274">Table 8.2: </span>ANOVA Results
+</caption>
+<thead>
+<tr>
+<th style="text-align:left;">
+</th>
+<th style="text-align:right;">
+power
+</th>
+<th style="text-align:right;">
+effect_size
+</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td style="text-align:left;">
+anova_condition1
+</td>
+<td style="text-align:right;">
+1.2
+</td>
+<td style="text-align:right;">
+0.0026148
+</td>
+</tr>
+<tr>
+<td style="text-align:left;">
+anova_condition2
+</td>
+<td style="text-align:right;">
+1.4
+</td>
+<td style="text-align:right;">
+0.0026294
+</td>
+</tr>
+<tr>
+<td style="text-align:left;">
+anova_condition3
+</td>
+<td style="text-align:right;">
+0.6
+</td>
+<td style="text-align:right;">
+0.0024602
+</td>
+</tr>
+<tr>
+<td style="text-align:left;">
+anova_condition1:condition2
+</td>
+<td style="text-align:right;">
+0.8
+</td>
+<td style="text-align:right;">
+0.0026337
+</td>
+</tr>
+<tr>
+<td style="text-align:left;">
+anova_condition1:condition3
+</td>
+<td style="text-align:right;">
+0.9
+</td>
+<td style="text-align:right;">
+0.0025830
+</td>
+</tr>
+<tr>
+<td style="text-align:left;">
+anova_condition2:condition3
+</td>
+<td style="text-align:right;">
+0.8
+</td>
+<td style="text-align:right;">
+0.0025079
+</td>
+</tr>
+<tr>
+<td style="text-align:left;">
+anova_condition1:condition2:condition3
+</td>
+<td style="text-align:right;">
+1.1
+</td>
+<td style="text-align:right;">
+0.0027855
+</td>
+</tr>
+</tbody>
+</table>
+<table class="table" style="margin-left: auto; margin-right: auto;">
+<caption>
+<span id="tab:unnamed-chunk-275">Table 8.3: </span>Pairwise Results
+</caption>
+<thead>
+<tr>
+<th style="text-align:left;">
+</th>
+<th style="text-align:right;">
+power
+</th>
+<th style="text-align:right;">
+effect_size
+</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td style="text-align:left;">
+p_condition1_a_condition2_c_condition3_e_condition1_a_condition2_c_condition3_f
+</td>
+<td style="text-align:right;">
+0.2
+</td>
+<td style="text-align:right;">
+0.0091931
+</td>
+</tr>
+<tr>
+<td style="text-align:left;">
+p_condition1_a_condition2_c_condition3_e_condition1_a_condition2_d_condition3_e
+</td>
+<td style="text-align:right;">
+0.3
+</td>
+<td style="text-align:right;">
+-0.0020647
+</td>
+</tr>
+<tr>
+<td style="text-align:left;">
+p_condition1_a_condition2_c_condition3_e_condition1_a_condition2_d_condition3_f
+</td>
+<td style="text-align:right;">
+0.1
+</td>
+<td style="text-align:right;">
+0.0045378
+</td>
+</tr>
+<tr>
+<td style="text-align:left;">
+p_condition1_a_condition2_c_condition3_e_condition1_b_condition2_c_condition3_e
+</td>
+<td style="text-align:right;">
+0.2
+</td>
+<td style="text-align:right;">
+0.0113580
+</td>
+</tr>
+<tr>
+<td style="text-align:left;">
+p_condition1_a_condition2_c_condition3_e_condition1_b_condition2_c_condition3_f
+</td>
+<td style="text-align:right;">
+0.2
+</td>
+<td style="text-align:right;">
+0.0065425
+</td>
+</tr>
+<tr>
+<td style="text-align:left;">
+p_condition1_a_condition2_c_condition3_e_condition1_b_condition2_d_condition3_e
+</td>
+<td style="text-align:right;">
+0.2
+</td>
+<td style="text-align:right;">
+-0.0060879
+</td>
+</tr>
+<tr>
+<td style="text-align:left;">
+p_condition1_a_condition2_c_condition3_e_condition1_b_condition2_d_condition3_f
+</td>
+<td style="text-align:right;">
+0.2
+</td>
+<td style="text-align:right;">
+0.0029079
+</td>
+</tr>
+<tr>
+<td style="text-align:left;">
+p_condition1_a_condition2_c_condition3_f_condition1_a_condition2_d_condition3_e
+</td>
+<td style="text-align:right;">
+0.4
+</td>
+<td style="text-align:right;">
+-0.0118354
+</td>
+</tr>
+<tr>
+<td style="text-align:left;">
+p_condition1_a_condition2_c_condition3_f_condition1_a_condition2_d_condition3_f
+</td>
+<td style="text-align:right;">
+0.1
+</td>
+<td style="text-align:right;">
+-0.0041912
+</td>
+</tr>
+<tr>
+<td style="text-align:left;">
+p_condition1_a_condition2_c_condition3_f_condition1_b_condition2_c_condition3_e
+</td>
+<td style="text-align:right;">
+0.2
+</td>
+<td style="text-align:right;">
+0.0022093
+</td>
+</tr>
+<tr>
+<td style="text-align:left;">
+p_condition1_a_condition2_c_condition3_f_condition1_b_condition2_c_condition3_f
+</td>
+<td style="text-align:right;">
+0.1
+</td>
+<td style="text-align:right;">
+-0.0029714
+</td>
+</tr>
+<tr>
+<td style="text-align:left;">
+p_condition1_a_condition2_c_condition3_f_condition1_b_condition2_d_condition3_e
+</td>
+<td style="text-align:right;">
+0.1
+</td>
+<td style="text-align:right;">
+-0.0155765
+</td>
+</tr>
+<tr>
+<td style="text-align:left;">
+p_condition1_a_condition2_c_condition3_f_condition1_b_condition2_d_condition3_f
+</td>
+<td style="text-align:right;">
+0.1
+</td>
+<td style="text-align:right;">
+-0.0072470
+</td>
+</tr>
+<tr>
+<td style="text-align:left;">
+p_condition1_a_condition2_d_condition3_e_condition1_a_condition2_d_condition3_f
+</td>
+<td style="text-align:right;">
+0.2
+</td>
+<td style="text-align:right;">
+0.0069110
+</td>
+</tr>
+<tr>
+<td style="text-align:left;">
+p_condition1_a_condition2_d_condition3_e_condition1_b_condition2_c_condition3_e
+</td>
+<td style="text-align:right;">
+0.3
+</td>
+<td style="text-align:right;">
+0.0139610
+</td>
+</tr>
+<tr>
+<td style="text-align:left;">
+p_condition1_a_condition2_d_condition3_e_condition1_b_condition2_c_condition3_f
+</td>
+<td style="text-align:right;">
+0.1
+</td>
+<td style="text-align:right;">
+0.0085668
+</td>
+</tr>
+<tr>
+<td style="text-align:left;">
+p_condition1_a_condition2_d_condition3_e_condition1_b_condition2_d_condition3_e
+</td>
+<td style="text-align:right;">
+0.1
+</td>
+<td style="text-align:right;">
+-0.0037733
+</td>
+</tr>
+<tr>
+<td style="text-align:left;">
+p_condition1_a_condition2_d_condition3_e_condition1_b_condition2_d_condition3_f
+</td>
+<td style="text-align:right;">
+0.2
+</td>
+<td style="text-align:right;">
+0.0054335
+</td>
+</tr>
+<tr>
+<td style="text-align:left;">
+p_condition1_a_condition2_d_condition3_f_condition1_b_condition2_c_condition3_e
+</td>
+<td style="text-align:right;">
+0.4
+</td>
+<td style="text-align:right;">
+0.0066358
+</td>
+</tr>
+<tr>
+<td style="text-align:left;">
+p_condition1_a_condition2_d_condition3_f_condition1_b_condition2_c_condition3_f
+</td>
+<td style="text-align:right;">
+0.1
+</td>
+<td style="text-align:right;">
+0.0012669
+</td>
+</tr>
+<tr>
+<td style="text-align:left;">
+p_condition1_a_condition2_d_condition3_f_condition1_b_condition2_d_condition3_e
+</td>
+<td style="text-align:right;">
+0.5
+</td>
+<td style="text-align:right;">
+-0.0114851
+</td>
+</tr>
+<tr>
+<td style="text-align:left;">
+p_condition1_a_condition2_d_condition3_f_condition1_b_condition2_d_condition3_f
+</td>
+<td style="text-align:right;">
+0.6
+</td>
+<td style="text-align:right;">
+-0.0020705
+</td>
+</tr>
+<tr>
+<td style="text-align:left;">
+p_condition1_b_condition2_c_condition3_e_condition1_b_condition2_c_condition3_f
+</td>
+<td style="text-align:right;">
+0.1
+</td>
+<td style="text-align:right;">
+-0.0053269
+</td>
+</tr>
+<tr>
+<td style="text-align:left;">
+p_condition1_b_condition2_c_condition3_e_condition1_b_condition2_d_condition3_e
+</td>
+<td style="text-align:right;">
+0.2
+</td>
+<td style="text-align:right;">
+-0.0179785
+</td>
+</tr>
+<tr>
+<td style="text-align:left;">
+p_condition1_b_condition2_c_condition3_e_condition1_b_condition2_d_condition3_f
+</td>
+<td style="text-align:right;">
+0.2
+</td>
+<td style="text-align:right;">
+-0.0086868
+</td>
+</tr>
+<tr>
+<td style="text-align:left;">
+p_condition1_b_condition2_c_condition3_f_condition1_b_condition2_d_condition3_e
+</td>
+<td style="text-align:right;">
+0.3
+</td>
+<td style="text-align:right;">
+-0.0129444
+</td>
+</tr>
+<tr>
+<td style="text-align:left;">
+p_condition1_b_condition2_c_condition3_f_condition1_b_condition2_d_condition3_f
+</td>
+<td style="text-align:right;">
+0.4
+</td>
+<td style="text-align:right;">
+-0.0035748
+</td>
+</tr>
+<tr>
+<td style="text-align:left;">
+p_condition1_b_condition2_d_condition3_e_condition1_b_condition2_d_condition3_f
+</td>
+<td style="text-align:right;">
+0.1
+</td>
+<td style="text-align:right;">
+0.0090723
+</td>
+</tr>
+</tbody>
+</table>
 <pre class="sourceCode r"><code class="sourceCode r"><span class="kw">sum</span>(<span class="kw">apply</span>(<span class="kw">as.matrix</span>(simulation_result_<span class="fl">8.2</span><span class="op">$</span>sim_data[(<span class="dv">1</span><span class="op">:</span><span class="dv">7</span>)]), <span class="dv">1</span>, 
     <span class="cf">function</span>(x) 
       <span class="kw">round</span>(<span class="kw">mean</span>(<span class="kw">ifelse</span>(x <span class="op">&lt;</span><span class="st"> </span>alpha_level, <span class="dv">1</span>, <span class="dv">0</span>) <span class="op">*</span><span class="st"> </span><span class="dv">100</span>),<span class="dv">4</span>)) <span class="op">&gt;</span><span class="st"> </span><span class="dv">0</span>)<span class="op">/</span>nsims<span class="op">*</span><span class="dv">100</span></code></pre>

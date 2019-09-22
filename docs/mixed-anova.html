@@ -4,11 +4,11 @@
 
   <meta charset="utf-8" />
   <meta http-equiv="X-UA-Compatible" content="IE=edge" />
-  <title>Chapter 4 Mixed ANOVA | The Superpower R Package: Capabilities and Validation</title>
+  <title>Chapter 4 Mixed ANOVA | Power Analysis with Superpower</title>
   <meta name="description" content="This is a book describing the capabilities of the Superpower R package." />
   <meta name="generator" content="bookdown 0.10 and GitBook 2.6.7" />
 
-  <meta property="og:title" content="Chapter 4 Mixed ANOVA | The Superpower R Package: Capabilities and Validation" />
+  <meta property="og:title" content="Chapter 4 Mixed ANOVA | Power Analysis with Superpower" />
   <meta property="og:type" content="book" />
   
   
@@ -16,7 +16,7 @@
   
 
   <meta name="twitter:card" content="summary" />
-  <meta name="twitter:title" content="Chapter 4 Mixed ANOVA | The Superpower R Package: Capabilities and Validation" />
+  <meta name="twitter:title" content="Chapter 4 Mixed ANOVA | Power Analysis with Superpower" />
   
   <meta name="twitter:description" content="This is a book describing the capabilities of the Superpower R package." />
   
@@ -24,7 +24,7 @@
 <meta name="author" content="Aaron R. Caldwell &amp; Daniël Lakens" />
 
 
-<meta name="date" content="2019-09-21" />
+<meta name="date" content="2019-09-22" />
 
   <meta name="viewport" content="width=device-width, initial-scale=1" />
   <meta name="apple-mobile-web-app-capable" content="yes" />
@@ -47,6 +47,7 @@
 
 
 
+<script src="libs/kePrint-0.0.1/kePrint.js"></script>
 
 
 <style type="text/css">
@@ -231,7 +232,7 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
       <div class="body-inner">
         <div class="book-header" role="navigation">
           <h1>
-            <i class="fa fa-circle-o-notch fa-spin"></i><a href="./">The Superpower R Package: Capabilities and Validation</a>
+            <i class="fa fa-circle-o-notch fa-spin"></i><a href="./">Power Analysis with Superpower</a>
           </h1>
         </div>
 
@@ -266,11 +267,137 @@ design_result &lt;-<span class="st"> </span><span class="kw">ANOVA_design</span>
                                  <span class="dt">alpha_level =</span> alpha_level, 
                                  <span class="dt">nsims =</span> nsims,
                                  <span class="dt">verbose =</span> <span class="ot">FALSE</span>)</code></pre>
-
+<table class="table" style="margin-left: auto; margin-right: auto;">
+<caption>
+<span id="tab:unnamed-chunk-172">Table 4.1: </span>Simulated ANOVA Result
+</caption>
+<thead>
+<tr>
+<th style="text-align:left;">
+</th>
+<th style="text-align:right;">
+power
+</th>
+<th style="text-align:right;">
+effect_size
+</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td style="text-align:left;">
+anova_color
+</td>
+<td style="text-align:right;">
+4.45
+</td>
+<td style="text-align:right;">
+0.0215448
+</td>
+</tr>
+<tr>
+<td style="text-align:left;">
+anova_age
+</td>
+<td style="text-align:right;">
+5.29
+</td>
+<td style="text-align:right;">
+0.0221193
+</td>
+</tr>
+<tr>
+<td style="text-align:left;">
+anova_color:age
+</td>
+<td style="text-align:right;">
+91.26
+</td>
+<td style="text-align:right;">
+0.2155901
+</td>
+</tr>
+</tbody>
+</table>
 <pre class="sourceCode r"><code class="sourceCode r">exact_result &lt;-<span class="st"> </span><span class="kw">ANOVA_exact</span>(design_result,
                             <span class="dt">alpha_level =</span> alpha_level,
                             <span class="dt">verbose =</span> <span class="ot">FALSE</span>)</code></pre>
-
+<table class="table" style="margin-left: auto; margin-right: auto;">
+<caption>
+<span id="tab:unnamed-chunk-174">Table 4.2: </span>Exact ANOVA Result
+</caption>
+<thead>
+<tr>
+<th style="text-align:left;">
+</th>
+<th style="text-align:right;">
+power
+</th>
+<th style="text-align:right;">
+partial_eta_squared
+</th>
+<th style="text-align:right;">
+cohen_f
+</th>
+<th style="text-align:right;">
+non_centrality
+</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td style="text-align:left;">
+color
+</td>
+<td style="text-align:right;">
+5.00000
+</td>
+<td style="text-align:right;">
+0.0000000
+</td>
+<td style="text-align:right;">
+0.0000000
+</td>
+<td style="text-align:right;">
+0.0
+</td>
+</tr>
+<tr>
+<td style="text-align:left;">
+age
+</td>
+<td style="text-align:right;">
+5.00000
+</td>
+<td style="text-align:right;">
+0.0000000
+</td>
+<td style="text-align:right;">
+0.0000000
+</td>
+<td style="text-align:right;">
+0.0
+</td>
+</tr>
+<tr>
+<td style="text-align:left;">
+color:age
+</td>
+<td style="text-align:right;">
+91.24984
+</td>
+<td style="text-align:right;">
+0.2072072
+</td>
+<td style="text-align:right;">
+0.5112374
+</td>
+<td style="text-align:right;">
+11.5
+</td>
+</tr>
+</tbody>
+</table>
 <div id="two-by-two-anova-within-between-design-variation-1" class="section level3">
 <h3><span class="header-section-number">4.1.1</span> Two by two ANOVA, within-between design Variation 1</h3>
 <p>We can simulate the same two-way ANOVA increasing the correlation to 0.7.</p>
@@ -292,11 +419,137 @@ design_result &lt;-<span class="st"> </span><span class="kw">ANOVA_design</span>
                                  <span class="dt">alpha_level =</span> alpha_level, 
                                  <span class="dt">nsims =</span> nsims,
                                  <span class="dt">verbose =</span> <span class="ot">FALSE</span>)</code></pre>
-
+<table class="table" style="margin-left: auto; margin-right: auto;">
+<caption>
+<span id="tab:unnamed-chunk-177">Table 4.3: </span>Simulated ANOVA Result
+</caption>
+<thead>
+<tr>
+<th style="text-align:left;">
+</th>
+<th style="text-align:right;">
+power
+</th>
+<th style="text-align:right;">
+effect_size
+</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td style="text-align:left;">
+anova_color
+</td>
+<td style="text-align:right;">
+4.93
+</td>
+<td style="text-align:right;">
+0.0220656
+</td>
+</tr>
+<tr>
+<td style="text-align:left;">
+anova_age
+</td>
+<td style="text-align:right;">
+4.85
+</td>
+<td style="text-align:right;">
+0.0224569
+</td>
+</tr>
+<tr>
+<td style="text-align:left;">
+anova_color:age
+</td>
+<td style="text-align:right;">
+99.00
+</td>
+<td style="text-align:right;">
+0.3081551
+</td>
+</tr>
+</tbody>
+</table>
 <pre class="sourceCode r"><code class="sourceCode r">exact_result &lt;-<span class="st"> </span><span class="kw">ANOVA_exact</span>(design_result,
                             <span class="dt">alpha_level =</span> alpha_level,
                             <span class="dt">verbose =</span> <span class="ot">FALSE</span>)</code></pre>
-
+<table class="table" style="margin-left: auto; margin-right: auto;">
+<caption>
+<span id="tab:unnamed-chunk-179">Table 4.4: </span>Exact ANOVA Result
+</caption>
+<thead>
+<tr>
+<th style="text-align:left;">
+</th>
+<th style="text-align:right;">
+power
+</th>
+<th style="text-align:right;">
+partial_eta_squared
+</th>
+<th style="text-align:right;">
+cohen_f
+</th>
+<th style="text-align:right;">
+non_centrality
+</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td style="text-align:left;">
+color
+</td>
+<td style="text-align:right;">
+5.00000
+</td>
+<td style="text-align:right;">
+0.0000000
+</td>
+<td style="text-align:right;">
+0.0000000
+</td>
+<td style="text-align:right;">
+0.00000
+</td>
+</tr>
+<tr>
+<td style="text-align:left;">
+age
+</td>
+<td style="text-align:right;">
+5.00000
+</td>
+<td style="text-align:right;">
+0.0000000
+</td>
+<td style="text-align:right;">
+0.0000000
+</td>
+<td style="text-align:right;">
+0.00000
+</td>
+</tr>
+<tr>
+<td style="text-align:left;">
+color:age
+</td>
+<td style="text-align:right;">
+98.98467
+</td>
+<td style="text-align:right;">
+0.3034301
+</td>
+<td style="text-align:right;">
+0.6600046
+</td>
+<td style="text-align:right;">
+19.16667
+</td>
+</tr>
+</tbody>
+</table>
 
 </div>
 </div>
