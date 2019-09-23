@@ -106,17 +106,19 @@ Each of these comparisons can have their own correlation if the factor is manipu
 The order in which the correlations are entered in the vector should match the covariance matrix.
 The order for a 2x2 design is given in the 6 item list above. The general pattern is that the matrix is filled from top to bottom, and left to right, illustrated by the increasing correlations in the table below.
 
-             a1_b1           a1_b2           a2_b1           a2_b2
-a1_b1        1.00            0.91            0.92            0.93
-a1_b2        0.91            1.00            0.94            0.95
-a2_b1        0.92            0.94            1.00            0.96
-a2_b2        0.93            0.95            0.9             1.00
+Matrix|a1_b1|a1_b2|a2_b1|a2_b2
+------|-----|-----|-----|-----             
+a1_b1 |1.00 |0.91 |0.92 |0.93
+a1_b2 |0.91 |1.00 |0.94 |0.95
+a2_b1 |0.92 |0.94 |1.00 |0.96
+a2_b2 |0.93 |0.95 |0.90 |1.00
 
 The diagonal is generated dynamically (based on the standard deviation).
+\pagebreak
 
-We would enter this correlation matrix as:
+We would enter this correlation matrix in the `ANOVA_design` function as:
 
-```{r}
+```{r include=TRUE, eval=TRUE}
 design_result <- ANOVA_design(design = "2w*2w",
                               n = 80,
                               mu = c(1.1, 1.2, 
@@ -154,5 +156,5 @@ This means for the `2w*2w` design above there is a total of 80 participants/subj
 
 ### Specifying the standard deviation
 
-You can set the standard deviation(s) by setting a value of `sd`. Currently, `Superpower` allows you to **violate the assumption of homogeneity of variance**. This will affect the type I error rate if the differences between conditions are extreme. Note that there is always some uncertainty in which values you can expect in the study you are planning. It is therefore useful to perform sensitivity analyses (e.g., running the simulation with the expected standard deviation, but also with more conservative or even worst-case-scenario values).
+You can set the standard deviation(s) by setting a value of `sd`. Currently, `Superpower` allows you to **violate the assumption of homogeneity of variance**. This will affect the type I error rate if the differences in `sd` between conditions are extreme. Note that there is always some uncertainty in which values you can expect in the study you are planning. It is therefore useful to perform sensitivity analyses (e.g., running the simulation with the expected standard deviation, but also with more conservative or even worst-case-scenario values).
 

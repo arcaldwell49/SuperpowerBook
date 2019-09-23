@@ -31,6 +31,7 @@ knitr::kable(exact_result$main_results,
              caption = "Exact ANOVA Result")%>%
   kable_styling(latex_options = "hold_position")
 ```
+\pagebreak
 
 We can make these calculations for a range of sample sizes, to get a power curve. We created a simple function that performs these calculations across a range of sample sizes (from n = 3 to max_, a variable you can specify in the function). 
 
@@ -41,6 +42,7 @@ p_a$plot_ANOVA
 ```
 
 If we run many of these `plot_power` functions across small changes in the ANOVA_design we can compile a number of power curves that can be combined into a single plot. We do this below. The code to reprodcue these plots can be found on the [GitHub repository for this book](https://github.com/arcaldwell49/SuperpowerBook/tree/master/data).
+\pagebreak
 
 ## Explore increase in effect size for moderated interactions.
 
@@ -49,6 +51,7 @@ The design has means 0, 0, 0, 0, with one cell increasing by 0.1, up to 0, 0, 0,
 ```{r, fig.height = 7, fig.width = 7, echo = FALSE}
 plot1
 ```
+\pagebreak
 
 ## Explore increase in effect size for cross-over interactions.
 
@@ -57,6 +60,7 @@ The design has means 0, 0, 0, 0, with two cells increasing by 0.1, up to 0.5, 0,
 ```{r, fig.height = 7, fig.width = 7, echo = FALSE}
 plot2
 ```
+\pagebreak
 
 ## Explore increase in correlation in moderated interactions.
 
@@ -65,6 +69,7 @@ The design has means 0, 0, 0, 0.3. The standard deviation is set to 1. The corre
 ```{r, fig.height = 7, fig.width = 7, echo = FALSE}
 plot3
 ```
+\pagebreak
 
 ## Increasing correlation in on factor decreases power in second factor
 As @potvin2000statistical write: 
@@ -72,6 +77,7 @@ As @potvin2000statistical write:
 >The more important finding with respect to the effect of *r* on power relates to the effect of the correlations associated with one factor on the power of the test of the main effect of the other factor. Specifically, if the correlations among the levels of B are larger than those within the AB matrix (i.e., *r*(B) - *r*(AB) > 0.0), there is a reduction in the power for the test of the A effect (and the test on B is similarly affected by the A correlations).
 
 We see this in the plots below. As the correlation of the A factor increases from 0.4 to 0.9, we see the power for the main effect decreases.
+
 ```{r, fig.height = 7, fig.width = 7, echo = FALSE}
 plot4
 ```
