@@ -78,7 +78,14 @@ power_result_s2$plot2 <- NULL
 power_result_gg$sim_data <- NULL
 power_result_gg$plot1 <- NULL
 power_result_gg$plot2 <- NULL
+power_result_gg$pc_results <- NULL
 
 power_result_hf$sim_data <- NULL
 power_result_hf$plot1 <- NULL
 power_result_hf$plot2 <- NULL
+power_result_hf$pc_results <- NULL
+
+rm(design_result_power)
+rm(design_result_power2)
+
+
