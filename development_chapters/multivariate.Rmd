@@ -27,16 +27,44 @@ This assumes that each level has a common standard deviation (i.e., there is onl
 In addition, the non-centrality parameter of the *F*-statistic can be estimated from Vonesh and Schork (1986) equations as the following:
 $$ \delta^2 = \frac{n \cdot d^2}{2(1-\rho_{min} )} $$
 
-Let us assume we have a `4w` design with `mu = c(0,.5,.5,1)`, a common standard deviation of 1 (`sd=1`), and correlation between `a1` and `a4` of .343 and a total sample size of 15 participants.
+Let us assume we have a `4w` design with `mu = c(0,0.5,0.5,1)`, a common standard deviation of 1 (`sd=1`), and correlation between `a1` and `a4` of `r = .343` and a total sample size of 15 participants.
 Power could then be calculated with the following `R` code.
 
 ```{r eval=FALSE}
-d = 1/1
+mu = c(0,0.5,0.5,1)
+rho = c(1, .7, .49, .343,
+      .7, 1, .7, .49,
+      .49, .7, 1, .49,
+      .343, .49, .7, 1)
+sd = 2
+n = 15
+
+d = (max(mu)-min(mu))/sd
   
-noncentrality = 
-  
+noncentrality = sqrt(((n*d^2) / (2*(1-min(rho)))))
+
+
 library(distributions3)
-Fdist <- FisherF(1,27, noncentrality)
+
+design_result <- ANOVA_design("4w",
+                              n = n,
+                              r = rho,
+                              sd = sd,
+                              mu = mu)
+
+exact_result <- ANOVA_exact(design_result, verbose = FALSE)
+exact_result$aov_result$Anova
+exact_result$manova_results
+
+Fdist2 <- FisherF(exact_result$aov_result$Anova$)
+Fdist <- FisherF(3,12, noncentrality)
+#Critical F
+Ft <- quantile(Fdist, .95)
+Ft
+#Power
+(1-pdf(Fdist, Ft))*100
+
+
 ```
 
 The problem with this formula for determining power in a simple one-way within subjects study is that it is inexact and makes a number of assumptions (Maxwell and Delaney, ppg. 752).
