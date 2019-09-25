@@ -41,7 +41,7 @@ n = 15
 
 d = (max(mu)-min(mu))/sd
   
-noncentrality = sqrt(((n*d^2) / (2*(1-min(rho)))))
+noncentrality = ((n*d^2) / (2*(1-min(rho))))
 
 
 library(distributions3)
@@ -56,13 +56,20 @@ exact_result <- ANOVA_exact(design_result, verbose = FALSE)
 exact_result$aov_result$Anova
 exact_result$manova_results
 
-Fdist2 <- FisherF(exact_result$aov_result$Anova$)
-Fdist <- FisherF(3,12, noncentrality)
+#Fdist2 <- FisherF(exact_result$aov_result$Anova$)
+#Fdist <- FisherF(3,12, noncentrality)
 #Critical F
-Ft <- quantile(Fdist, .95)
+#Ft <- quantile(Fdist, .95)
+
+Ft <- qf((1 - .05), 3, 12)
+power <- (1 - pf(Ft,
+                 3,
+                 12,
+                 noncentrality)) * 100
 Ft
 #Power
-(1-pdf(Fdist, Ft))*100
+#(1-pdf(Fdist, Ft))*100
+power
 
 
 ```
