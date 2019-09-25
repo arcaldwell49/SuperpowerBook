@@ -14,8 +14,9 @@ library(Superpower)
 library(tidyverse)
 library(knitr)
 library(kableExtra)
-nsims=10000
+
 ```
+
 ## Multivariate ANOVA (MANOVA)
 
 A large proportion of research with within-subjects manipulations, or repeated measures, rely upon the "univariate" approach (Maxwell & Delaney). While this approach is valid, when corrections for sphercity are applied, it may not be the most powerful or informative analysis plan. Instead, researchers should consider a multivariate analysis (MANOVA). While the MANOVA is not "assumption free" it does not assume sphercity which makes it a very attractive analytical tool and the preferred method of analysis for some (Maxwell and Delaney).
@@ -25,58 +26,53 @@ $$ d = \frac{\mu_{max}-\mu_{min}}{\sigma} $$
 This assumes that each level has a common standard deviation (i.e., there is only 1 `sd` input for the design).
 
 In addition, the non-centrality parameter of the *F*-statistic can be estimated from Vonesh and Schork (1986) equations as the following:
-$$ \delta^2 = \frac{n \cdot d^2}{2(1-\rho_{min} )} $$
+$$ \delta^2 = \frac{n \cdot d^2}{2\cdot(1-\rho_{min} )} $$
 
-Let us assume we have a `4w` design with `mu = c(0,0.5,0.5,1)`, a common standard deviation of 1 (`sd=1`), and correlation between `a1` and `a4` of `r = .343` and a total sample size of 15 participants.
+Let us assume we have a `2w` design with `mu = c(0,0.5)`, a common standard deviation of 1 (`sd=1`), and correlation between `a1` and `a4` of `r` `= .4` and a total sample size of 15 (`n = 15`) participants.
 Power could then be calculated with the following `R` code.
 
-```{r eval=FALSE}
-mu = c(0,0.5,0.5,1)
-rho = c(1, .7, .49, .343,
-      .7, 1, .7, .49,
-      .49, .7, 1, .49,
-      .343, .49, .7, 1)
+```{r }
+mu = c(0,0.5)
+rho = .4
 sd = 2
 n = 15
-
 d = (max(mu)-min(mu))/sd
-  
 noncentrality = ((n*d^2) / (2*(1-min(rho))))
+noncentrality
 
+#Critical F
+Ft <- qf((1 - .05), 1, 14)
+Ft
 
-library(distributions3)
-
-design_result <- ANOVA_design("4w",
+#Power
+power <- (1 - pf(Ft,
+                 1,
+                 14,
+                 noncentrality)) * 100
+power
+```
+\newpage
+```{r}
+design_result <- ANOVA_design("2w",
                               n = n,
                               r = rho,
                               sd = sd,
                               mu = mu)
 
 exact_result <- ANOVA_exact(design_result, verbose = FALSE)
-exact_result$aov_result$Anova
-exact_result$manova_results
-
-#Fdist2 <- FisherF(exact_result$aov_result$Anova$)
-#Fdist <- FisherF(3,12, noncentrality)
-#Critical F
-#Ft <- quantile(Fdist, .95)
-
-Ft <- qf((1 - .05), 3, 12)
-power <- (1 - pf(Ft,
-                 3,
-                 12,
-                 noncentrality)) * 100
-Ft
-#Power
-#(1-pdf(Fdist, Ft))*100
-power
 
 
 ```
 
-The problem with this formula for determining power in a simple one-way within subjects study is that it is inexact and makes a number of assumptions (Maxwell and Delaney, ppg. 752).
+```{r echo = FALSE}
+knitr::kable(exact_result$manova_results,
+             caption = "MANOVA Result")%>%
+  kable_styling(latex_options = "hold_position")
+```
 
-### Sphericity?
+The problem with this formula for determining power is that it is inexact and makes a number of assumptions (Maxwell and Delaney, ppg. 752). In reality, it can only give a lower bound estimate of power for a given design, and the actual power may be much higher. This is problematic because it could lead to inefficient study design (e.g., determining you need 20 participants when adequate power could be achieved with less participants). This will become increasingly important with designs with multiple levels and possible violations of the assumption of sphericity.
+
+### Sphericity Assumption
 
 In all the above examples, you will notice that the correlation is the sample between repeated measures. For most experiments in real life, this will not be the case. The correlations between levels may vary. This is problematic because the univariate (ANOVA) approach assumes sphericity, which means, for all intents and purposes, that the correlations between factor-levels are equal and the standard deviations at each level are equal as well. This assumption is tenuous at best and is typically "adjusted" for by applying a sphericity correction (e.g, Greenhouse-Geisser). How bad can it get? Well, let's simulate an example below.
 
@@ -92,7 +88,9 @@ design_result <- ANOVA_design("4w",
 power_result_s1 <- ANOVA_power(design_result, nsims = nsims, verbose = FALSE)
 ```
 ```{r echo=FALSE}
-power_result_s1$main_results
+knitr::kable(power_result_s1$main_results,
+             caption = "Simulated ANOVA Result")%>%
+  kable_styling(latex_options = "hold_position")
 ```
 **INSERT ANOVA Result ABOUT HERE**
 
@@ -113,7 +111,9 @@ power_result_s2 <- ANOVA_power(design_result, nsims = nsims, verbose = FALSE)
 
 ```
 ```{r echo=FALSE}
-power_result_none$main_results
+knitr::kable(power_result_none$main_results,
+             caption = "Simulated ANOVA Result")%>%
+  kable_styling(latex_options = "hold_position")
 ```
 
 **INSERT ANOVA Result ABOUT HERE**
@@ -147,21 +147,29 @@ design_result <- ANOVA_design("4w",
 power_result_none <- ANOVA_power(design_result, nsims = nsims, verbose = FALSE)
 ```
 ```{r echo =FALSE}
-power_result_none$manova_results
+
+knitr::kable(power_result_none$manova_results,
+             caption = "Simulated MANOVA Result")%>%
+  kable_styling(latex_options = "hold_position")
+
 ```
 ```{r eval=FALSE}
 power_result_gg <- ANOVA_power(design_result, correction = "GG",
                                nsims = nsims, verbose = FALSE)
 ```
 ```{r echo =FALSE}
-power_result_gg$main_results
+knitr::kable(power_result_gg$main_results,
+             caption = "Simulated ANOVA Result")%>%
+  kable_styling(latex_options = "hold_position")
 ```
 ```{r eval=FALSE}
 power_result_hf <- ANOVA_power(design_result, correction = "HF",
                                nsims = nsims, verbose = FALSE)
 ```
 ```{r echo =FALSE}
-power_result_hf$main_results
+knitr::kable(power_result_hf$main_results,
+             caption = "Simulated ANOVA Result")%>%
+  kable_styling(latex_options = "hold_position")
 ```
 
 Both the sphericity corrections, Greenhouse-Geisser (`GG`) and Huynh-Feldt (`HF`), as well as the MANOVA were able to adequately control type I error rate. Howevever, Greenhouse-Geisser seemed to be a tad conservative. We can now directly compare the power of the MANOVA or `HF`-adjusted approach. We can adjust the study design to the alternative, or hypothesized, model with the predicted means of `0, 0.75, 1.5, 3` instead of the null model.
@@ -179,10 +187,15 @@ power_result_hfeffect <- ANOVA_power(design_result_power, correction = "HF",
 
 ```
 ```{r echo=FALSE}
-power_result_hfeffect$main_results
+
+knitr::kable(power_result_hfeffect$main_results,
+             caption = "Simulated ANOVA Result")%>%
+  kable_styling(latex_options = "hold_position")
 ```
 ```{r echo=FALSE}
-power_result_hfeffect$manova_results
+knitr::kable(power_result_hfeffect$manova_results,
+             caption = "Simulated MANOVA Result")%>%
+  kable_styling(latex_options = "hold_position")
 ```
 
 Well, it appears the MANOVA based approach has roughly ~10% lower power compared the `HF`-adjusted ANOVA. However, the study still appears to be underpowered so we can increase the sample size. We will continue to evaluate the MANOVA results because, as Algina and Keselman (1997) note, the power disadvantage of MANOVA is diminished with increased sample size.
@@ -199,10 +212,14 @@ power_result_hfeffect <- ANOVA_power(design_result_power, correction = "HF",
 
 ```
 ```{r echo=FALSE}
-power_result_hfeffect2$main_results
+knitr::kable(power_result_hfeffect2$main_results,
+             caption = "Simulated ANOVA Result")%>%
+  kable_styling(latex_options = "hold_position")
 ```
 ```{r echo=FALSE}
-power_result_hfeffect2$manova_results
+knitr::kable(power_result_hfeffect2$manova_results,
+             caption = "Simulated MANOVA Result")%>%
+  kable_styling(latex_options = "hold_position")
 ```
 
 Again, the `HF`-adjusted analysis appears to be more powerful for *this very specific experimental design*. The difference in power between univariate and multivariate ouput is diminished when the sample size is increased.

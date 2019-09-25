@@ -6,7 +6,7 @@
   <meta http-equiv="X-UA-Compatible" content="IE=edge" />
   <title>Chapter 1 The Experimental Design | Power Analysis with Superpower</title>
   <meta name="description" content="This is a book describing the capabilities of the Superpower R package." />
-  <meta name="generator" content="bookdown 0.10 and GitBook 2.6.7" />
+  <meta name="generator" content="bookdown 0.13 and GitBook 2.6.7" />
 
   <meta property="og:title" content="Chapter 1 The Experimental Design | Power Analysis with Superpower" />
   <meta property="og:type" content="book" />
@@ -24,15 +24,15 @@
 <meta name="author" content="Aaron R. Caldwell &amp; Daniël Lakens" />
 
 
-<meta name="date" content="2019-09-22" />
+<meta name="date" content="2019-09-25" />
 
   <meta name="viewport" content="width=device-width, initial-scale=1" />
   <meta name="apple-mobile-web-app-capable" content="yes" />
   <meta name="apple-mobile-web-app-status-bar-style" content="black" />
   
   
-<link rel="prev" href="index.html">
-<link rel="next" href="one-way-anova.html">
+<link rel="prev" href="index.html"/>
+<link rel="next" href="one-way-anova.html"/>
 <script src="libs/jquery-2.2.3/jquery.min.js"></script>
 <link href="libs/gitbook-2.6.7/css/style.css" rel="stylesheet" />
 <link href="libs/gitbook-2.6.7/css/plugin-table.css" rel="stylesheet" />
@@ -56,7 +56,6 @@ a.sourceLine { pointer-events: none; color: inherit; text-decoration: inherit; }
 a.sourceLine:empty { height: 1.2em; }
 .sourceCode { overflow: visible; }
 code.sourceCode { white-space: pre; position: relative; }
-div.sourceCode { margin: 1em 0; }
 pre.sourceCode { margin: 0; }
 @media screen {
 div.sourceCode { overflow: auto; }
@@ -180,6 +179,10 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 </ul></li>
 <li class="chapter" data-level="3.5" data-path="repeated-measures-anova.html"><a href="repeated-measures-anova.html#part-5"><i class="fa fa-check"></i><b>3.5</b> Part 5</a><ul>
 <li class="chapter" data-level="3.5.1" data-path="repeated-measures-anova.html"><a href="repeated-measures-anova.html#x2-anova-within-design"><i class="fa fa-check"></i><b>3.5.1</b> 2x2 ANOVA, within design</a></li>
+</ul></li>
+<li class="chapter" data-level="3.6" data-path="repeated-measures-anova.html"><a href="repeated-measures-anova.html#multivariate-anova-manova"><i class="fa fa-check"></i><b>3.6</b> Multivariate ANOVA (MANOVA)</a></li>
+<li class="chapter" data-level="3.7" data-path="repeated-measures-anova.html"><a href="repeated-measures-anova.html#sphericity-assumption"><i class="fa fa-check"></i><b>3.7</b> Sphericity Assumption</a><ul>
+<li class="chapter" data-level="3.7.1" data-path="repeated-measures-anova.html"><a href="repeated-measures-anova.html#manova-or-sphericity-adjustment"><i class="fa fa-check"></i><b>3.7.1</b> MANOVA or Sphericity Adjustment?</a></li>
 </ul></li>
 </ul></li>
 <li class="chapter" data-level="4" data-path="mixed-anova.html"><a href="mixed-anova.html"><i class="fa fa-check"></i><b>4</b> Mixed ANOVA</a><ul>
@@ -315,37 +318,74 @@ An example of a <code>2b*3w</code> design is a group of people in one condition 
 <li>B1 vs. B2</li>
 </ol>
 <p>The number of possible comparisons is the product of the levels of all factors squared minus the product of all factors, divided by two. For a 2x2 design where each factor has two levels, this is:</p>
-<pre class="sourceCode r"><code class="sourceCode r">(((<span class="dv">2</span> <span class="op">*</span><span class="st"> </span><span class="dv">2</span>) <span class="op">^</span><span class="st"> </span><span class="dv">2</span>) <span class="op">-</span><span class="st"> </span>(<span class="dv">2</span> <span class="op">*</span><span class="st"> </span><span class="dv">2</span>))<span class="op">/</span><span class="dv">2</span></code></pre>
+<div class="sourceCode" id="cb1"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb1-1" title="1">(((<span class="dv">2</span> <span class="op">*</span><span class="st"> </span><span class="dv">2</span>) <span class="op">^</span><span class="st"> </span><span class="dv">2</span>) <span class="op">-</span><span class="st"> </span>(<span class="dv">2</span> <span class="op">*</span><span class="st"> </span><span class="dv">2</span>))<span class="op">/</span><span class="dv">2</span></a></code></pre></div>
 <pre><code>## [1] 6</code></pre>
 <p>The number of possible comparisons increases rapidly when adding factors and levels for each factor. For example, for a 2x2x4 design it is:</p>
-<pre class="sourceCode r"><code class="sourceCode r">(((<span class="dv">2</span> <span class="op">*</span><span class="st"> </span><span class="dv">2</span> <span class="op">*</span><span class="st"> </span><span class="dv">4</span>) <span class="op">^</span><span class="st"> </span><span class="dv">2</span>) <span class="op">-</span><span class="st"> </span>(<span class="dv">2</span> <span class="op">*</span><span class="st"> </span><span class="dv">2</span> <span class="op">*</span><span class="st"> </span><span class="dv">4</span>))<span class="op">/</span><span class="dv">2</span></code></pre>
+<div class="sourceCode" id="cb3"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb3-1" title="1">(((<span class="dv">2</span> <span class="op">*</span><span class="st"> </span><span class="dv">2</span> <span class="op">*</span><span class="st"> </span><span class="dv">4</span>) <span class="op">^</span><span class="st"> </span><span class="dv">2</span>) <span class="op">-</span><span class="st"> </span>(<span class="dv">2</span> <span class="op">*</span><span class="st"> </span><span class="dv">2</span> <span class="op">*</span><span class="st"> </span><span class="dv">4</span>))<span class="op">/</span><span class="dv">2</span></a></code></pre></div>
 <pre><code>## [1] 120</code></pre>
 <p>Each of these comparisons can have their own correlation if the factor is manipulated within subjects (if the factor is manipulated between subjects the correlation is 0). These correlations determine the covariance matrix. Potvin and Schutz (2000) surveyed statistical tools for power analysis and conclude that most software packages are limited to one factor repeated measure designs and do not provide power calculations for within designs with multiple factor (which is still true for software such as G*Power). Furthermore, software solutions which were available at the time (DATASIM by Bradley, Russel, &amp; Reeve, 1996) required researchers to assume correlations were of the same magnitude for all within factors, which is not always realistic. If you do not want to assume equal correlations for all paired comparisons, you can specify the correlation for each possible comparison.</p>
 <p>The order in which the correlations are entered in the vector should match the covariance matrix.
 The order for a 2x2 design is given in the 6 item list above. The general pattern is that the matrix is filled from top to bottom, and left to right, illustrated by the increasing correlations in the table below.</p>
-<pre><code>         a1_b1           a1_b2           a2_b1           a2_b2</code></pre>
-<p>a1_b1 1.00 0.91 0.92 0.93
-a1_b2 0.91 1.00 0.94 0.95
-a2_b1 0.92 0.94 1.00 0.96
-a2_b2 0.93 0.95 0.9 1.00</p>
-<p>The diagonal is generated dynamically (based on the standard deviation).</p>
-<p>We would enter this correlation matrix as:</p>
-<pre class="sourceCode r"><code class="sourceCode r">design_result &lt;-<span class="st"> </span><span class="kw">ANOVA_design</span>(<span class="dt">design =</span> <span class="st">&quot;2w*2w&quot;</span>,
-                              <span class="dt">n =</span> <span class="dv">80</span>,
-                              <span class="dt">mu =</span> <span class="kw">c</span>(<span class="fl">1.1</span>, <span class="fl">1.2</span>, 
-                                     <span class="fl">1.3</span>, <span class="fl">1.4</span>),
-                              <span class="dt">sd =</span> <span class="dv">1</span>,
-                              r &lt;-<span class="st"> </span><span class="kw">c</span>(<span class="fl">0.91</span>, <span class="fl">0.92</span>, 
-                                     <span class="fl">0.93</span>, <span class="fl">0.94</span>, 
-                                     <span class="fl">0.95</span>, <span class="fl">0.96</span>),
-                              <span class="dt">labelnames =</span> <span class="kw">c</span>(<span class="st">&quot;COLOR&quot;</span>, 
-                                             <span class="st">&quot;red&quot;</span>, <span class="st">&quot;blue&quot;</span>, 
-                                             <span class="st">&quot;SPEED&quot;</span>, 
-                                             <span class="st">&quot;fast&quot;</span>, <span class="st">&quot;slow&quot;</span>),
-                              <span class="dt">plot =</span> <span class="ot">TRUE</span>)</code></pre>
+<table>
+<thead>
+<tr class="header">
+<th>Matrix</th>
+<th>a1_b1</th>
+<th>a1_b2</th>
+<th>a2_b1</th>
+<th>a2_b2</th>
+</tr>
+</thead>
+<tbody>
+<tr class="odd">
+<td>a1_b1</td>
+<td>1.00</td>
+<td>0.91</td>
+<td>0.92</td>
+<td>0.93</td>
+</tr>
+<tr class="even">
+<td>a1_b2</td>
+<td>0.91</td>
+<td>1.00</td>
+<td>0.94</td>
+<td>0.95</td>
+</tr>
+<tr class="odd">
+<td>a2_b1</td>
+<td>0.92</td>
+<td>0.94</td>
+<td>1.00</td>
+<td>0.96</td>
+</tr>
+<tr class="even">
+<td>a2_b2</td>
+<td>0.93</td>
+<td>0.95</td>
+<td>0.90</td>
+<td>1.00</td>
+</tr>
+</tbody>
+</table>
+<p>The diagonal is generated dynamically (based on the standard deviation).
+</p>
+<p>We would enter this correlation matrix in the <code>ANOVA_design</code> function as:</p>
+<div class="sourceCode" id="cb5"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb5-1" title="1">design_result &lt;-<span class="st"> </span><span class="kw">ANOVA_design</span>(<span class="dt">design =</span> <span class="st">&quot;2w*2w&quot;</span>,</a>
+<a class="sourceLine" id="cb5-2" title="2">                              <span class="dt">n =</span> <span class="dv">80</span>,</a>
+<a class="sourceLine" id="cb5-3" title="3">                              <span class="dt">mu =</span> <span class="kw">c</span>(<span class="fl">1.1</span>, <span class="fl">1.2</span>, </a>
+<a class="sourceLine" id="cb5-4" title="4">                                     <span class="fl">1.3</span>, <span class="fl">1.4</span>),</a>
+<a class="sourceLine" id="cb5-5" title="5">                              <span class="dt">sd =</span> <span class="dv">1</span>,</a>
+<a class="sourceLine" id="cb5-6" title="6">                              r &lt;-<span class="st"> </span><span class="kw">c</span>(<span class="fl">0.91</span>, <span class="fl">0.92</span>, </a>
+<a class="sourceLine" id="cb5-7" title="7">                                     <span class="fl">0.93</span>, <span class="fl">0.94</span>, </a>
+<a class="sourceLine" id="cb5-8" title="8">                                     <span class="fl">0.95</span>, <span class="fl">0.96</span>),</a>
+<a class="sourceLine" id="cb5-9" title="9">                              <span class="dt">labelnames =</span> <span class="kw">c</span>(<span class="st">&quot;COLOR&quot;</span>, </a>
+<a class="sourceLine" id="cb5-10" title="10">                                             <span class="st">&quot;red&quot;</span>, <span class="st">&quot;blue&quot;</span>, </a>
+<a class="sourceLine" id="cb5-11" title="11">                                             <span class="st">&quot;SPEED&quot;</span>, </a>
+<a class="sourceLine" id="cb5-12" title="12">                                             <span class="st">&quot;fast&quot;</span>, <span class="st">&quot;slow&quot;</span>),</a>
+<a class="sourceLine" id="cb5-13" title="13">                              <span class="dt">plot =</span> <span class="ot">TRUE</span>)</a></code></pre></div>
 <p><img src="SuperpowerValidation_files/figure-html/unnamed-chunk-4-1.png" width="672" /></p>
 <p>We can check the correlation matrix by asking for it from the design_result object to check if it was entered the way we wanted:</p>
-<pre class="sourceCode r"><code class="sourceCode r">design_result<span class="op">$</span>cor_mat</code></pre>
+<div class="sourceCode" id="cb6"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb6-1" title="1">design_result<span class="op">$</span>cor_mat</a></code></pre></div>
 <pre><code>##           red_fast red_slow blue_fast blue_slow
 ## red_fast      1.00     0.91      0.92      0.93
 ## red_slow      0.91     1.00      0.94      0.95
@@ -354,7 +394,7 @@ a2_b2 0.93 0.95 0.9 1.00</p>
 <p>We should also check the covariance-variance matrix to ensure the <code>ANOVA_design</code> function working properly.
 The variance should be the diagonal element while the off-diagonal elements should be equal to <code>covariance = correlation*variance</code> or <span class="math inline">\(cov_{x,y}=\frac{\sum_{i=1}^{N}(x_{i}-\bar{x})(y_{i}-\bar{y})}{N-1}\)</span>.
 In this case, it is identical to the correlation matrix because the variance is equal to 1.</p>
-<pre class="sourceCode r"><code class="sourceCode r">design_result<span class="op">$</span>sigmatrix</code></pre>
+<div class="sourceCode" id="cb8"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb8-1" title="1">design_result<span class="op">$</span>sigmatrix</a></code></pre></div>
 <pre><code>##           red_fast red_slow blue_fast blue_slow
 ## red_fast      1.00     0.91      0.92      0.93
 ## red_slow      0.91     1.00      0.94      0.95
@@ -368,7 +408,7 @@ In this case, it is identical to the correlation matrix because the variance is 
 </div>
 <div id="specifying-the-standard-deviation" class="section level3">
 <h3><span class="header-section-number">1.1.6</span> Specifying the standard deviation</h3>
-<p>You can set the standard deviation(s) by setting a value of <code>sd</code>. Currently, <code>Superpower</code> allows you to <strong>violate the assumption of homogeneity of variance</strong>. This will affect the type I error rate if the differences between conditions are extreme. Note that there is always some uncertainty in which values you can expect in the study you are planning. It is therefore useful to perform sensitivity analyses (e.g., running the simulation with the expected standard deviation, but also with more conservative or even worst-case-scenario values).</p>
+<p>You can set the standard deviation(s) by setting a value of <code>sd</code>. Currently, <code>Superpower</code> allows you to <strong>violate the assumption of homogeneity of variance</strong>. This will affect the type I error rate if the differences in <code>sd</code> between conditions are extreme. Note that there is always some uncertainty in which values you can expect in the study you are planning. It is therefore useful to perform sensitivity analyses (e.g., running the simulation with the expected standard deviation, but also with more conservative or even worst-case-scenario values).</p>
 
 </div>
 </div>
@@ -431,8 +471,9 @@ gitbook.start({
     script.type = "text/javascript";
     var src = "true";
     if (src === "" || src === "true") src = "https://mathjax.rstudio.com/latest/MathJax.js?config=TeX-MML-AM_CHTML";
-    if (location.protocol !== "file:" && /^https?:/.test(src))
-      src = src.replace(/^https?:/, '');
+    if (location.protocol !== "file:")
+      if (/^https?:/.test(src))
+        src = src.replace(/^https?:/, '');
     script.src = src;
     document.getElementsByTagName("head")[0].appendChild(script);
   })();
