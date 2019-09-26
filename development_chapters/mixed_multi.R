@@ -1,18 +1,33 @@
 # Mixed Multivariate
 library(Superpower)
+
+n1 = 50
+n2 = 50
+
+p = 3
 S_mat <- matrix(c(16,6.0,1.6,
                   6.0,9.0,0.9,
                   1.6,0.9,1.0), nrow = 3)
+W1 <- (S_mat * (n2 + n1 - 2)) / 2
+
 S_mat_inverse <- solve(S_mat)
 row_1 = matrix(c(2,1.5,.2), nrow = 1)
 row_2 = matrix(c(2,1.5,.2), nrow = 3)
 
 D_2 <- row_1 %*% S_mat_inverse %*% row_2
 
-n1 = 50
-n2 = 50
 
-p = 3
+
+T_2 <- (n1*n2)/(n1 + n2)*D_2
+
+F_val <- ((n1 + n2 - p - 1)/((n1 + n2 - 2)*p)) * T_2
+
+Ft <- qf((1 - .05), 1, 98)
+
+power <- (1 - pf(Ft,
+        1,
+        98,
+        F_val)) * 100
 
 pt(sqrt((n1*n2/(n1 + n2))*D_2) - 
      sqrt(((p*(n1 + n2 - 2))/(n1 + n2 - 1 - p)) *
@@ -37,7 +52,7 @@ design_result$sigmatrix
 exact_result <- ANOVA_exact(design_result,
                             verbose=FALSE)
 
-exact_result$manova_result
+exact_result$manova_results
 ##########################################################
 ##########################################################
 S_mat <- matrix(c(7.22,0.32,
