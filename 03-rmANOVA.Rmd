@@ -4,11 +4,11 @@ load("data/rmANOVA_data.RData")
 ```
 ## Part 1
 
-In a repeated measures design multiple observations are collected from the same participants. In the simplest case, where there are two repeated observations, a repeated measures ANOVA equals a dependent or paired *t*-test. The difference compared to a between subject design is that repeated measures can be correlated, and in psychology, they often are. Let's first explore the impact of this correlation on the power of a repeated measures ANOVA.
+In a repeated measures design multiple observations are collected from the same participants. In the simplest case, where there are two repeated observations, a repeated measures ANOVA equals a dependent or paired *t*-test. The advantage of repeated measures designs is that they capitalize on the correlations between the repeated measurements. Let's first explore the impact of this correlation on the power of a repeated measures ANOVA.
 
 ### Two conditions, medium effect size
 
-To illustrate the effect of correated observations, we start by simulating data for a medium effect size for a dependent (or paired, or within-subject) *t*-test. Let's first look at @faul2007g. If we want to perform an a-priori power analysis, we are asked to fill in the effect size dz. As @cohen1988spa writes, "The Z subscript is used to emphasize the fact that our raw score unit is no longer X or Y, but Z", where Z are the difference scores of X-Y. 
+To illustrate the effect of correated observations, we start by simulating data for a medium effect size for a dependent (or paired, or within-subject) *t*-test. Let's first look at Gpower @faul2007g. If we want to perform an a-priori power analysis, we are asked to fill in the effect size dz. As @cohen1988spa writes, "The Z subscript is used to emphasize the fact that our raw score unit is no longer X or Y, but Z", where Z are the difference scores of X-Y. 
 
 ![](screenshots/gpower_9.png)
 
@@ -24,6 +24,7 @@ $\sigma_{z}=\sigma\sqrt{2(1-\rho)}$
 
 Therefore, the relation between dz and d is $\sqrt{2(1-\rho)}$. A given difference between population means for matched (dependent) samples is standardized by a value which is $\sqrt{2(1-\rho)}$ as large as would be the case were they independent. If we enter a correlation of 0.5 in the formula, we get $\sqrt{2(0.5)}=1$. In other words, when the correlation is 0.5, d = dz. When there is a strong correlation between dependent variables, for example r = 0.9, we get $d=d_{z}\sqrt{2(1-0.9)}$, and a dz of 1 would be a d = 0.45. Reversely, $d_{z}=\frac{d}{\sqrt{2(1-r)}}$, so with a r = 0.9, a d of 1 would be a dz = 2.24. Some consider this increase in dz compared to d when observations are strongly correlated an 'inflation' when estimating effect sizes, but since the reduction in the standard deviation of the difference scores due to the correlation makes it easier to distinguish signal from noise in a hypothesis test, it leads to a clear power benefit. 
 
+\newpage
 ```{r start_rmANOVA}
 # Check sample size formula Maxwell
 # Power is pretty similar with n/2, same d (assuming r = 0.5). 
@@ -33,26 +34,34 @@ pwr.t.test(d = 0.05,
            sig.level = 0.05,
            type = "two.sample",
            alternative = "two.sided")
+
 pwr.t.test(d = 0.05,
            n = c(1000, 2000, 4000),
            sig.level = 0.05,
            type = "paired",
            alternative = "two.sided")
 ```
+\newpage
 
 There is no equivalent "fz" for Cohen's *f* for a within subject ANOVA. For two groups, we can directly compute Cohen's *f* from Cohen's d for two groups, as @cohen1988spa describes, because f = 1/2d. For a d = 0.5, f = 0.25. In Gpower we can run a 2 group within-subject power analysis for ANOVA. We plan for 80% power, and reproduce the anaysis above for the dependent *t*-test. This works because the correlation is set to 0.5, when d = dz, and thus the transformation of f=1/2d works.  
 
 ![](screenshots/gpower_1.png)
 
+\newpage
+
 If we change the correlation to 0.7 and keep all other settings the same, the repeated measure a-priori power analysis yields a sample of 21. The correlation increases the power for the test. 
 
 ![](screenshots/gpower_11.png)
+
+\newpage
 
 To reproduce this analysis in Gpower with a dependent *t*-test we need to change dz following the formula above, $d_{z}=\frac{0.5}{\sqrt{2(1-0.7)}}$, which yields dz = `r 0.5/sqrt(2*(1-0.7))`. If we enter this value in Gpower for an a-priori power analysis, we get the exact same results (as we should, since an repeated measures ANOVA with 2 groups equals a dependent *t*-test). This example illustrates that the correlation between dependent variables always factors into a power analysis, both for a dependent *t*-test, and for a repeated measures ANOVA. Because a dependent *t*-test uses dz the correlation might be less visible, but given the relation between d and dz, the correlation is always taken into account and can greatly improve power for within designs compared to between designs.
 
 ![](screenshots/gpower_10.png)
 
-We can perform both these power analyses using simuations as well. We set groups to 2 for the simulation, n = 34 (which should give 80.777 power, according to the @faul2007g program), a correlation among repeated measures of 0.5, and an alpha of 0.05. In this case, we simulate data with means -0.25  and 0.25, and set the sd to 1. This means we have a mean difference of 0.5, and a Cohen's d of 0.5/1 = 0.5. In the first example, we set the correlation to 0.5, and the result should be 80.77% power, and an effect size estimate of 0.5 for the simple effect. We also calculate partial eta-squared for the ANOVA, which equals $\frac{f^2}{f^2+1}$, or 0.05882353.
+\newpage
+
+We can perform both these power analyses using `Superpower` as well. We set groups to 2 for the simulation, n = 34 (which should give 80.777 power, according to the @faul2007g program), a correlation among repeated measures of 0.5, and an alpha of 0.05. In this case, we simulate data with means -0.25  and 0.25, and set the sd to 1. This means we have a mean difference of 0.5, and a Cohen's d of 0.5/1 = 0.5. In the first example, we set the correlation to 0.5, and the result should be 80.77% power, and an effect size estimate of 0.5 for the simple effect. We also calculate partial eta-squared for the ANOVA, which equals $\frac{f^2}{f^2+1}$, or 0.05882353.
 
 ```{r}
 K <- 2
@@ -67,22 +76,17 @@ ES
 mu <- mu_from_ES(K = K, ES = ES)
 design = paste(K,"w",sep = "")
 labelnames <- c("speed", "fast", "slow")
-
 design_result <- ANOVA_design(design = design,
-                   n = n, 
-                   mu = mu, 
-                   sd = sd, 
-                   r = r, 
+                   n = n, mu = mu, sd = sd, r = r, 
                    labelnames = labelnames)
-
 alpha_level <- 0.05
 ```
 ```{r eval = FALSE}
 simulation_result <- ANOVA_power(design_result, 
                                  alpha_level = alpha_level, 
-                                 nsims = nsims,
-                                 verbose = FALSE)
+                                 nsims = nsims, verbose = FALSE)
 ```
+\newpage
 
 ```{r echo = FALSE}
 knitr::kable(simulation_result_3.1$main_results,
@@ -104,6 +108,8 @@ knitr::kable(exact_result$main_results,
 
 The results of the simulation are indeed very close to 80.777%. Note that the simulation calculates Cohen's dz effect sizes for paired comparisons - which here given the correlation of 0.5 is also 0.5 for a medium effect size. 
 
+\newpage
+
 We should see a larger dz if we increase the correlation, keeping the sample size the same, following the example in Gpower above. We repeat the simulation, and the only difference is a correlation between dependent variables of 0.7. This should yield an effect size dz = `r 0.5/sqrt(2*(1-0.7))`.
 
 ```{r}
@@ -120,16 +126,16 @@ mu <- mu_from_ES(K = K, ES = ES)
 design = paste(K,"w",sep = "")
 labelnames <- c("speed", "fast", "slow")
 design_result <- ANOVA_design(design = design,
-                   n = n, 
-                   mu = mu, 
-                   sd = sd, 
-                   r = r, 
+                   n = n, mu = mu, sd = sd, r = r, 
                    labelnames = labelnames)
-
 alpha_level <- 0.05
-
-design_result$sigmatrix
 ```
+```{r echo = FALSE}
+knitr::kable(design_result$sigmatrix,
+             caption = "Covariance-Variance Matrix")%>%
+  kable_styling(latex_options = "hold_position")
+```
+\newpage
 ```{r eval=FALSE}
 simulation_result <- ANOVA_power(design_result, 
                                  alpha_level = alpha_level, 
@@ -162,10 +168,12 @@ knitr::kable(exact_result$main_results,
 ```{r}
 #relation dz and f for within designs 
 f <- 0.5*0.6454972
-#  
+f 
 ```
 
 Entering this f in Gpower, with a correlation of 0.5, yields the same as entering `f = 0.25` and `correlation = 0.7`.
+
+\newpage
 
 ## Part 2
 
@@ -175,7 +183,7 @@ In the example for a two-group within design we provided a specific formula for 
 
 $N_{W}=\frac{N_{B}(1-\rho)}{a}$
 
-Where a is the number of within-subject levels. 
+Where "a" is the number of within-subject levels. 
 
 ### The relation between Cohen's f and Cohen's d
 
@@ -199,38 +207,26 @@ f <- sqrt(sum((mu - mean(mu)) ^ 2) / length(mu)) / sd
 
 The relation between Cohen's d or dz and Cohen's *f* becomes more difficult when there are multiple groups, because the relationship depends on the pattern of the means. @cohen1988spa presents calculations for three patterns, minimal variability (for example, for 5 means: -0.25, 0, 0, 0, 0.25), medium variability (for example, for 5 means: -0.25, -0.25, 0.25, 0.25, 0.25 or -0.25, -0.25, -0.25, 0.25, 0.25). For these three patterns, formula's are available that compute Cohen's *f* from Cohen's d, where d is the effect size calculated for the difference between the largest and smallest mean (if the largest mean is 0.25 and the smallest mean is -0.25, 0.25 - -0.25 = 0.5, so d is 0.5 divided by the standard deviation of 0.9). In our example, d would be (4.3-3.8)/0.9 = 0.5555556. If we divide this value by `sqrt(2*(1-r))` we have dz = 0.5555556/0.7745967 = 0.7172191. 
 
-I have created a custom function that will calculate f from d, based on a specification of one of the three patterns of means. Our pattern is most similar (but not identical) to a maximum variability pattern (two means are high, one is lower). So we could attempt to calculate f from d (0.5555556), by calculating d from the largest and smallest mean:
+We have created a custom function that will calculate f from d, based on a specification of one of the three patterns of means. Our pattern is most similar (but not identical) to a maximum variability pattern (two means are high, one is lower). So we could attempt to calculate f from d (0.5555556), by calculating d from the largest and smallest mean.
+
+This function allows you to calculate f, d and eta squared 
+following @cohen1988spa, p 277. The patterns are:
+1. Minimum variability: one mean at each end of d, the remaining k- 2 means all at the midpoint.
+2. Intermediate variability: the k means equally spaced over d.
+3. Maximum variability: the means all at the end points of d.
+
+For each of these patterns, there is a fixed relationship between f and d for any given number of means, k.
+
+**Pattern 1**
+For any given range of means, d, the minimum standard deviation, f1, results when the remaining k - 2 means are concentrated at the mean of the means (0 when expressed in standard units),  i.e., half-way between the largest and smallest.
+
+**Pattern 2**
+A pattern of medium variability results when the k meansare equally spaced over the range, and therefore at intervals of d/(k- 1).
+
+**Pattern 3** 
+It is demonstrable and intuitively evident that for any given range the dispersion which yield~ the maximum standard deviation has the k means falling at both extremes of the range. When k is even, !k fall at - !d and the other !k fall at + !d; when k is odd, (k + I )/2 of the means fall at either end and the (k- 1)/2 remaining means at the other. With this pattern, for all even numbers of means, use formula (8.2.12). When k is odd, and there is thus one more mean at one extreme than at the other, use formula (8.2.13).
 
 ```{r}
-#This function allows you to calculate f, d and eta squared 
-#following Cohen, 1988, p 277
-# From Cohen, 1988, p 277
-# The patterns are:
-# I. Minimum variability: one mean at each end of d, 
-#the remaining k- 2 means all at the midpoint.
-# 2. Intermediate variability: the k means equally spaced over d.
-# 3. Maximum variability: the means all at the end points of d.
-
-# For each of these patterns, 
-# there is a fixed relationship between f and d for any given number of means, k.
-
-# Pattern 1. For any given range of means, d, the minimum standard
-# deviation, f1, results when the remaining k - 2 means are concentrated at
-# the mean of the means (0 when expressed in standard units), i.e., half-way
-# between the largest and smallest.
-# 
-# Pattern 2. A pattern of medium variability results when the k means
-# are equally spaced over the range, and therefore at intervals of d/(k- 1).
-# 
-# Pattern 3. It is demonstrable and intuitively evident that for any given
-# range the dispersion which yield~ the maximum standard deviation has the
-# k means falling at both extremes of the range. When k is even, !k fall at
-# - !d and the other !k fall at + !d; when k is odd, (k + I )/2 of the means
-# fall at either end and the (k- 1)/2 remaining means at the other. With this
-# pattern, for all even numbers of means, use formula (8.2.12).
-# When k is odd, and there is thus one more mean at one extreme than at
-# the other, use formula (8.2.13).
-
 calc_f_d_eta <- function(mu, sd, variability){
   if (variability == "minimum") {
     k = length(mu)
@@ -269,9 +265,7 @@ We see the Cohen's *f* value is 0.2618914 and d = 0.5555556. The Cohen's *f* is 
 
 ### Three within conditions, medium effect size
 
-We can perform power analyses for within designs using simuations. We set groups to 3 for the simulation, n = 20, and the correlation between dependent variables to 0.8. If the true effect size is f = 0.25, and the alpha level is 0.05, the power is 96.6%. 
-
-In this case, we simulate data with means -0.3061862, 0.0000000, and 0.3061862, and set the sd to 1. 
+We can perform power analyses for within designs using simuations. We set groups to 3 for the simulation, n = 20, and the correlation between dependent variables to 0.8. If the true effect size is f = 0.25, and the alpha level is 0.05, the power is 96.6%. In this case, we simulate data with means -0.3061862, 0.0000000, and 0.3061862, and set the sd to 1. 
 
 ```{r}
 K <- 3
@@ -326,9 +320,14 @@ knitr::kable(exact_result$main_results,
   kable_styling(latex_options = "hold_position")
 ```
 
-The results of the simulation are indeed very close to 96.9%. We can see this is in line with the power estimate from Gpower: 
+The results of the simulation are indeed very close to 96.9%. 
+\newpage
+
+We can see this is in line with the power estimate from Gpower: 
 
 ![](screenshots/gpower_12.png)
+
+\newpage
 
 We can also validate this by creating the code to do a power analysis in R from scratch: 
 
@@ -359,9 +358,13 @@ power_oneway_within(design_result)$Cohen_f
 power_oneway_within(design_result)$Cohen_f_SPSS
 ```
 
+\newpage
+
 We can even check the calculation of Cohen's *f* SPSS style in GPower. We take the GPower settings as illustrated above. We click the 'Options' button, and check the radiobutton next to 'As in SPSS'. Click ok, and you will notice that the 'Corr among rep measures' field has disappeared. The correlation does not need to be entered seperately, but is incorporated in Cohen's *f*. The value of Cohen's *f*, which was 0.25, has changed into 0.7024394. This is the SPSS equivalent. The value is much larger. This value, and it's corresponding partial eta-squared, incorporate the correlation between observations. 
 
 ![](screenshots/gpower_14.png)
+
+\newpage
 
 ## Part 3
 
@@ -553,7 +556,8 @@ for (i in 1:nSim) {
   conds = factor(rep(letters[24:26], each = N))
   partID = factor(rep(part, times = 3))
   output <- data.frame(partID, conds, datalong)
-  test <- aov(datalong ~ conds + Error(partID / conds), data = output)
+  test <- aov(datalong ~ conds + Error(partID / conds), 
+              data = output)
   tests <- (summary(test))
   p1[i] <- tests$'Error: partID:conds'[[1]]$'Pr(>F)'[[1]]
   p2[i] <- t.test(data[, 1], data[, 2], paired = TRUE)$p.value
@@ -630,9 +634,9 @@ knitr::kable(exact_result$main_results,
 
 Again, this is similar to GPower for the ANOVA:
 
-[](screenshots/gpower_4.png)
+![](screenshots/gpower_4.png)
 
-
+\newpage
 ```{r include=FALSE}
 load("data/mixed_data.RData")
 ```
@@ -1398,8 +1402,8 @@ This assumes that each level has a common standard deviation (i.e., there is onl
 
 In addition, the non-centrality parameter of the *F*-statistic can be estimated from @vonesh1986sample equations as the following:
 $$ \delta^2 = \frac{n \cdot d^2}{2\cdot(1-\rho_{min} )} $$
-
-Let us assume we have a `2w` design with `mu = c(0,0.5)`, a common standard deviation of 1 (`sd=1`), and correlation between `a1` and `a2` of `r` `= .4` and a total sample size of 15 (`n = 15`) participants.
+\newpage
+Let us assume we have a `2w` design with `mu = c(0,0.5)`, a common standard deviation of 1 (`sd=1`), and correlation between `a1` and `a2` of r = .4 and a total sample size of 15 (`n = 15`) participants.
 Power could then be calculated with the following `R` code.
 
 ```{r }
@@ -1423,6 +1427,8 @@ power <- (1 - pf(Ft,
 power
 ```
 \newpage
+
+Now we replicate in `Superpower`.
 ```{r}
 design_result <- ANOVA_design("2w",
                               n = n,
@@ -1442,7 +1448,7 @@ knitr::kable(exact_result$manova_results,
 ```
 
 The problem with this formula for determining power is that it is inexact and makes a number of assumptions (@maxwell_designing_2004, ppg. 752). In reality, it can only give a lower bound estimate of power for a given design, and the actual power may be much higher. This is problematic because it could lead to inefficient study design (e.g., determining you need 20 participants when adequate power could be achieved with less participants). This will become increasingly important with designs with multiple levels and possible violations of the assumption of sphericity.
-
+\newpage
 ## Sphericity Assumption
 
 In all the above examples, you will notice that the correlation is the sample between repeated measures. For most experiments in real life, this will not be the case. The correlations between levels may vary. This is problematic because the univariate (ANOVA) approach assumes sphericity, which means, for all intents and purposes, that the correlations between factor-levels are equal and the standard deviations at each level are equal as well. This assumption is tenuous at best and is typically "adjusted" for by applying a sphericity correction (e.g, Greenhouse-Geisser). How bad can it get? Well, let's simulate an example below.
@@ -1465,7 +1471,7 @@ knitr::kable(power_result_s1$main_results,
 ```
 
 As we can see, the actual type I error rate far exceeds the typical 5%!
-
+\newpage
 Now, let's pour gasoline on the fire and see what happens when we make the sphericity violation worse by varying the standard deviations.
 
 ```{r eval=FALSE}
@@ -1487,7 +1493,7 @@ knitr::kable(power_result_none$main_results,
 ```
 
 These inflated error rates are obviously a problem, which begs the question what do we do about them?
-
+\newpage
 In our experience, most researchers default to using a Greenhouse-Geisser adjustment for sphericity, but this may not be the most statistical efficient way of dealing with violations of sphercity. Further, as we can see from the simulation (`power_result_s2`) the MANOVA maintains the type I error rate at 5%.
 
 ```{r echo=FALSE}
@@ -1495,7 +1501,7 @@ knitr::kable(power_result_none$manova_results,
              caption = "Simulated MANOVA Result")%>%
   kable_styling(latex_options = "hold_position")
 ```
-
+\newpage
 ### MANOVA or Sphericity Adjustment?
 
 In addition to adjusting for sphericity, one could also simply use the multivariate approach to repeated measures.
@@ -1507,7 +1513,7 @@ However, `ANOVA_power` can make the solution easy. Simply simulate, like we have
 
 As we saw above, the unadjusted repeated measures ANOVA has an elevated type I error rate, but the MANOVA analysis of the same data above approximately preserves the type I error rate. However, how does this perform relative to the sphericity corrections? Let's simulate again, and compare the results of the different corrections.
 
-
+First we setup the design.
 ```{r eval=FALSE}
 design_result <- ANOVA_design("4w",
                               n = 29,
@@ -1515,7 +1521,9 @@ design_result <- ANOVA_design("4w",
                               ),
                               sd = c(1,3,5,7),
                               mu= c(0,0,0,0))
-
+```
+\newpage
+```{r eval=FALSE}
 power_result_none <- ANOVA_power(design_result, nsims = nsims, verbose = FALSE)
 ```
 ```{r echo =FALSE}
@@ -1544,6 +1552,7 @@ knitr::kable(power_result_hf$main_results,
   kable_styling(latex_options = "hold_position")
 ```
 
+\newpage
 Both the sphericity corrections, Greenhouse-Geisser (`GG`) and Huynh-Feldt (`HF`), as well as the MANOVA were able to adequately control type I error rate. Howevever, Greenhouse-Geisser seemed to be a tad conservative. We can now directly compare the power of the MANOVA or `HF`-adjusted approach. We can adjust the study design to the alternative, or hypothesized, model with the predicted means of `0, 0.75, 1.5, 3` instead of the null model.
 
 ```{r eval=FALSE}
@@ -1554,8 +1563,10 @@ design_result_power <- ANOVA_design("4w",
                               sd = c(1,3,5,7),
                               mu= c(0,0.75,1.5,3))
 
-power_result_hfeffect <- ANOVA_power(design_result_power, correction = "HF",
-                                     nsims = nsims, verbose = FALSE)
+power_result_hfeffect <- ANOVA_power(design_result_power, 
+                                     correction = "HF",
+                                     nsims = nsims, 
+                                     verbose = FALSE)
 
 ```
 ```{r echo=FALSE}
@@ -1570,6 +1581,7 @@ knitr::kable(power_result_hfeffect$manova_results,
   kable_styling(latex_options = "hold_position")
 ```
 
+\newpage
 Well, it appears the MANOVA based approach has roughly ~10% lower power compared the `HF`-adjusted ANOVA. However, the study still appears to be underpowered so we can increase the sample size. We will continue to evaluate the MANOVA results because, as @algina1997detecting note, the power disadvantage of MANOVA is diminished with increased sample size.
 
 ```{r eval=FALSE}
@@ -1579,8 +1591,10 @@ design_result_power <- ANOVA_design("4w",
                               sd = c(1,3,5,7),
                               mu= c(0,0.75,1.5,3))
 
-power_result_hfeffect <- ANOVA_power(design_result_power, correction = "HF",
-                                     nsims = nsims, verbose = FALSE)
+power_result_hfeffect <- ANOVA_power(design_result_power, 
+                                     correction = "HF",
+                                     nsims = nsims, 
+                                     verbose = FALSE)
 
 ```
 ```{r echo=FALSE}

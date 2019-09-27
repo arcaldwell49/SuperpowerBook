@@ -5,11 +5,14 @@ So far we have discussed the simple one-way ANOVA, various forms of the repeated
 ## Simple Mixed Designs
 
 We can simulate a two-way ANOVA with a specific alpha, sample size and effect size, to achieve a specified statistical power. We will try to reproduce the power analysis by GPower [@faul2007g] for an F-test from an ANOVA with a repeated measures, within-between interaction effect. While GPower is a great tool it has limited options for mixed factorial ANOVAs.
+\newpage 
+Let us setup a simple 2x2 design.
+For the 2-way interaction, the result should be a power of 91.25% with at total sample size of 46. Since we have 2 groups in the between -subjects factor that means the sample size per group is 23 with two measurements per subject (i.e., `2w`).
 
 ![](screenshots/gpower_5.png)
+\newpage
 
-For the 2-way interaction, the result should be a power of 91.25% is we have a total samplesize of 46. Since we have 2 groups in the between factor that means the sample size per group is 2 (and both these groups collect 2 repeated measures). 
-
+Now, we can repeat the process in `Superpower`.
 ```{r start_mixedANOVA}
 mu <- c(-0.25, 0.25, 0.25,-0.25)
 n <- 23
@@ -18,7 +21,6 @@ r <- 0.5
 string = "2w*2b"
 alpha_level <- 0.05
 labelnames = c("age", "old", "young", "color", "blue", "red")
-
 design_result <- ANOVA_design(
 design = string,
 n = n,
@@ -27,7 +29,6 @@ sd = sd,
 r = r,
 labelnames = labelnames
 )
-
 ```
 ```{r eval=FALSE}
 simulation_result <- ANOVA_power(design_result, 
@@ -57,12 +58,11 @@ knitr::kable(exact_result$main_results,
 
 ```
 
-### Two by two ANOVA, within-between design Variation 1
-
-Now, we can simulate the same two-way ANOVA but increasing the correlation to `r``=0.7`. 
+\newpage
+Now, we can simulate the same two-way ANOVA but increasing the correlation to r=0.7. 
 
 ![](screenshots/gpower_6.png)
-
+\newpage
 
 ```{r}
 mu <- c(-0.25, 0.25, 0.25, -0.25)
@@ -117,16 +117,19 @@ Here we will use a modified example from @SASglmpower pg. 3739. In this hypothet
 
 First we can set up the dataframe in SAS. This is similiar to the `mu` command in `ANOVA_design`.
 
->data Exemplary2;
+```{r eval=FALSE}
+data Exemplary2;
 input variety Height1 Height2 Height3;
 datalines;
 1 14 16 21
 2 10 15 16
 ;
+```
 
 We can now solve for power in `PROC GLMPOWER`. In this case, we set up a multivariate repeated measures model, with a total of 40 flowers (20 per variety). We also setup the within-factor correlations with the CORRS command.
 
->proc glmpower data=Exemplary2;
+```{r eval=FALSE}
+proc glmpower data=Exemplary2;
 class Variety Exposure;
 model Height1 Height2 Height3 = Variety;
 repeated Time contrast;
@@ -139,6 +142,7 @@ MATRIX("MyCorrs")= (.75,
 					0.5625,.75)
 CORRS= "MyCorrs";
 run;
+```
 
 The power analysis results then get printed to the SAS ouput page.
 
@@ -187,6 +191,7 @@ You will notice a small discrepancy between the two power estimates for the main
 Now we move onto the example from pg 3794 of @SASglmpower.
 
 As stated in the manual:
+
 >Logan, Baron, and Kohout (1995) and Guo et al. (2013) study the effect of a dental intervention on the
 memory of pain after root canal therapy. The intervention is a sensory focus strategy, in which patients are
 instructed to pay attention only to the physical sensations in their mouth during the root canal procedure.
@@ -200,17 +205,21 @@ immediately after the procedure and then again at 1 week, 6 months, and 12 month
 This makes it a `2b*4w` design with treatment as a between subjects factor, with two levels (sensory focus versus standard of care), and time as a within-subject factor is time, with four levels (0, 1, 26, and 52 weeks). In this case, we differ from @SASglmpower and we will solve for power with a sample size of 300 per group (600 total) with an alpha of `.01`. In addition, we want to see what the impact of chaning the common standard deviation will have on power.
 
 So in SAS we set up the data.
-
->data Pain;
+```{r eval=FALSE}
+data Pain;
 input Treatment $ PainMem0 PainMem1Wk PainMem6Mo PainMem12Mo;
 datalines;
 SensoryFocus 2.40 2.38 2.05 1.90
 StandardOfCare 2.40 2.39 2.36 2.30
 ;
+```
+
+
 
 Then we can run the analysis in SAS. Note that in the example @SASglmpower are assuming a linear exponential covariance matrix, which we can mimic in `R`.
 
->proc glmpower data=Pain;
+```{r eval=FALSE}
+proc glmpower data=Pain;
 class Treatment;
 model PainMem0 PainMem1Wk PainMem6Mo PainMem12Mo = Treatment;
 repeated Time contrast;
@@ -224,6 +233,7 @@ matrix ("PainCorr") = lear(0.6, 0.8, 4, 0 1 26 52)
 corrmat = "PainCorr";
 run;
 quit;
+```
 
 This produces a table with the result for a power analysis with 2 different common standard deviations.
 

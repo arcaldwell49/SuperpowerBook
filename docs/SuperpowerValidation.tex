@@ -320,6 +320,7 @@ Each of these comparisons can have their own correlation if the factor is manipu
 
 The order in which the correlations are entered in the vector should match the covariance matrix.
 The order for a 2x2 design is given in the 6 item list above. The general pattern is that the matrix is filled from top to bottom, and left to right, illustrated by the increasing correlations in the table below.
+The diagonal is generated dynamically (based on the standard deviation).
 
 \begin{longtable}[]{@{}lllll@{}}
 \toprule
@@ -333,8 +334,7 @@ a2\_b2 & 0.93 & 0.95 & 0.90 & 1.00\tabularnewline
 \bottomrule
 \end{longtable}
 
-The diagonal is generated dynamically (based on the standard deviation).
-\pagebreak
+\newpage
 
 We would enter this correlation matrix in the \texttt{ANOVA\_design} function as:
 
@@ -357,7 +357,7 @@ We would enter this correlation matrix in the \texttt{ANOVA\_design} function as
 \end{Shaded}
 
 \includegraphics{SuperpowerValidation_files/figure-latex/unnamed-chunk-4-1.pdf}
-
+\newpage
 We can check the correlation matrix by asking for it from the design\_result object to check if it was entered the way we wanted:
 
 \begin{Shaded}
@@ -366,13 +366,24 @@ We can check the correlation matrix by asking for it from the design\_result obj
 \end{Highlighting}
 \end{Shaded}
 
-\begin{verbatim}
-##           red_fast red_slow blue_fast blue_slow
-## red_fast      1.00     0.91      0.92      0.93
-## red_slow      0.91     1.00      0.94      0.95
-## blue_fast     0.92     0.94      1.00      0.96
-## blue_slow     0.93     0.95      0.96      1.00
-\end{verbatim}
+\begin{table}[!h]
+
+\caption{\label{tab:unnamed-chunk-6}Correlation Matrix}
+\centering
+\begin{tabular}{l|r|r|r|r}
+\hline
+  & red\_fast & red\_slow & blue\_fast & blue\_slow\\
+\hline
+red\_fast & 1.00 & 0.91 & 0.92 & 0.93\\
+\hline
+red\_slow & 0.91 & 1.00 & 0.94 & 0.95\\
+\hline
+blue\_fast & 0.92 & 0.94 & 1.00 & 0.96\\
+\hline
+blue\_slow & 0.93 & 0.95 & 0.96 & 1.00\\
+\hline
+\end{tabular}
+\end{table}
 
 We should also check the covariance-variance matrix to ensure the \texttt{ANOVA\_design} function working properly.
 The variance should be the diagonal element while the off-diagonal elements should be equal to \texttt{covariance\ =\ correlation*variance} or \(cov_{x,y}=\frac{\sum_{i=1}^{N}(x_{i}-\bar{x})(y_{i}-\bar{y})}{N-1}\).
@@ -384,13 +395,24 @@ In this case, it is identical to the correlation matrix because the variance is 
 \end{Highlighting}
 \end{Shaded}
 
-\begin{verbatim}
-##           red_fast red_slow blue_fast blue_slow
-## red_fast      1.00     0.91      0.92      0.93
-## red_slow      0.91     1.00      0.94      0.95
-## blue_fast     0.92     0.94      1.00      0.96
-## blue_slow     0.93     0.95      0.96      1.00
-\end{verbatim}
+\begin{table}[!h]
+
+\caption{\label{tab:unnamed-chunk-8}Covariance-Variance Matrix}
+\centering
+\begin{tabular}{l|r|r|r|r}
+\hline
+  & red\_fast & red\_slow & blue\_fast & blue\_slow\\
+\hline
+red\_fast & 1.00 & 0.91 & 0.92 & 0.93\\
+\hline
+red\_slow & 0.91 & 1.00 & 0.94 & 0.95\\
+\hline
+blue\_fast & 0.92 & 0.94 & 1.00 & 0.96\\
+\hline
+blue\_slow & 0.93 & 0.95 & 0.96 & 1.00\\
+\hline
+\end{tabular}
+\end{table}
 
 \hypertarget{specifying-the-sample-size}{%
 \subsection{Specifying the sample size}\label{specifying-the-sample-size}}
@@ -450,7 +472,7 @@ Imagine we aim to design a study to test the hypothesis that giving people a pet
 
 \begin{table}[!h]
 
-\caption{\label{tab:unnamed-chunk-9}Simulated ANOVA Result}
+\caption{\label{tab:unnamed-chunk-11}Simulated ANOVA Result}
 \centering
 \begin{tabular}{l|r|r}
 \hline
@@ -471,7 +493,7 @@ anova\_condition & 67.2 & 0.0331418\\
 
 \begin{table}[!h]
 
-\caption{\label{tab:unnamed-chunk-11}Exact ANOVA Result}
+\caption{\label{tab:unnamed-chunk-13}Exact ANOVA Result}
 \centering
 \begin{tabular}{l|r|r|r|r}
 \hline
@@ -592,7 +614,7 @@ We can compute a pattern of means, given a standard deviation of 6.4, that would
 
 \begin{table}[!h]
 
-\caption{\label{tab:unnamed-chunk-19}Simulated ANOVA Result}
+\caption{\label{tab:unnamed-chunk-21}Simulated ANOVA Result}
 \centering
 \begin{tabular}{l|r|r}
 \hline
@@ -613,7 +635,7 @@ anova\_condition & 90.15 & 0.0544974\\
 
 \begin{table}[!h]
 
-\caption{\label{tab:unnamed-chunk-21}Exact ANOVA Result}
+\caption{\label{tab:unnamed-chunk-23}Exact ANOVA Result}
 \centering
 \begin{tabular}{l|r|r|r|r}
 \hline
@@ -689,7 +711,7 @@ If we re-run the simulation with this sample size, we indeed have 90\% power.
 
 \begin{table}[!h]
 
-\caption{\label{tab:unnamed-chunk-25}Simulated ANOVA Result}
+\caption{\label{tab:unnamed-chunk-27}Simulated ANOVA Result}
 \centering
 \begin{tabular}{l|r|r}
 \hline
@@ -710,7 +732,7 @@ anova\_condition & 89.99 & 0.0315708\\
 
 \begin{table}[!h]
 
-\caption{\label{tab:unnamed-chunk-27}Exact ANOVA Result}
+\caption{\label{tab:unnamed-chunk-29}Exact ANOVA Result}
 \centering
 \begin{tabular}{l|r|r|r|r}
 \hline
@@ -723,15 +745,13 @@ condition & 90.03028 & 0.0288499 & 0.1723571 & 10.57568\\
 
 We stored the result from the power analysis in an object. This allows us to request plots (which are not printed automatically) showing the \emph{p}-value distribution. If we request \texttt{simulation\_result\$plot1} we get the p-value distribution for the ANOVA:
 
-\includegraphics{SuperpowerValidation_files/figure-latex/unnamed-chunk-28-1.pdf}
+\includegraphics{SuperpowerValidation_files/figure-latex/unnamed-chunk-30-1.pdf}
 
 If we request \texttt{simulation\_result\$plot2} we get the p-value distribution for the paired comparisons (in this case only one):
 
-\includegraphics{SuperpowerValidation_files/figure-latex/unnamed-chunk-29-1.pdf}
+\includegraphics{SuperpowerValidation_files/figure-latex/unnamed-chunk-31-1.pdf}
 \newpage
-
-\hypertarget{part-2}{%
-\section{Part 2}\label{part-2}}
+\#\# Part 2
 
 \hypertarget{three-conditions}{%
 \subsection{Three conditions}\label{three-conditions}}
@@ -773,7 +793,7 @@ Imagine we aim to design a study to test the hypothesis that giving people a pet
 
 \begin{table}[!h]
 
-\caption{\label{tab:unnamed-chunk-32}Simulated ANOVA Result}
+\caption{\label{tab:unnamed-chunk-34}Simulated ANOVA Result}
 \centering
 \begin{tabular}{l|r|r}
 \hline
@@ -794,7 +814,7 @@ anova\_condition & 47.26 & 0.0433997\\
 
 \begin{table}[!h]
 
-\caption{\label{tab:unnamed-chunk-34}Exact ANOVA Result}
+\caption{\label{tab:unnamed-chunk-36}Exact ANOVA Result}
 \centering
 \begin{tabular}{l|r|r|r|r}
 \hline
@@ -940,7 +960,7 @@ We can compute a pattern of means, given a standard deviation of 6.4, that would
 
 \begin{table}[!h]
 
-\caption{\label{tab:unnamed-chunk-41}Simulated ANOVA Result}
+\caption{\label{tab:unnamed-chunk-43}Simulated ANOVA Result}
 \centering
 \begin{tabular}{l|r|r}
 \hline
@@ -961,7 +981,7 @@ anova\_condition & 90.3 & 0.090741\\
 
 \begin{table}[!h]
 
-\caption{\label{tab:unnamed-chunk-43}Exact ANOVA Result}
+\caption{\label{tab:unnamed-chunk-45}Exact ANOVA Result}
 \centering
 \begin{tabular}{l|r|r|r|r}
 \hline
@@ -1118,10 +1138,12 @@ Then we use the function to calculate power.
 \end{Highlighting}
 \end{Shaded}
 
+\newpage
+
 \hypertarget{part-3}{%
 \section{Part 3}\label{part-3}}
 
-Now we will simply replicate the simulations of \citet{brysbaert2019many}, and compare those results to \texttt{Superpower}.
+Now we will simply replicate the simulations of \citet{brysbaert2019many}, and compare those results to \texttt{Superpower}. Simulations to estimate the power of an ANOVA with three unrelated groups the effect between the two extreme groups is set to d = .4, the effect for the third group is d = .4 (see below for other situations) we use the built-in aov-test command give sample sizes (all samples sizes are equal).
 
 \begin{Shaded}
 \begin{Highlighting}[]
@@ -1233,7 +1255,7 @@ Now we will simply replicate the simulations of \citet{brysbaert2019many}, and c
 
 \begin{table}[!h]
 
-\caption{\label{tab:unnamed-chunk-53}Simulated ANOVA Result}
+\caption{\label{tab:unnamed-chunk-55}Simulated ANOVA Result}
 \centering
 \begin{tabular}{l|r|r}
 \hline
@@ -1254,7 +1276,7 @@ anova\_factor1 & 78.81 & 0.0413822\\
 
 \begin{table}[!h]
 
-\caption{\label{tab:unnamed-chunk-55}Exact ANOVA Result}
+\caption{\label{tab:unnamed-chunk-57}Exact ANOVA Result}
 \centering
 \begin{tabular}{l|r|r|r|r}
 \hline
@@ -1373,7 +1395,7 @@ factor1 & 79.37239 & 0.0347072 & 0.1896182 & 9.6\\
 
 \begin{table}[!h]
 
-\caption{\label{tab:unnamed-chunk-64}Simulated ANOVA Result}
+\caption{\label{tab:unnamed-chunk-66}Simulated ANOVA Result}
 \centering
 \begin{tabular}{l|r|r}
 \hline
@@ -1394,7 +1416,7 @@ anova\_factor1 & 94.61 & 0.0386982\\
 
 \begin{table}[!h]
 
-\caption{\label{tab:unnamed-chunk-66}Exact ANOVA Result}
+\caption{\label{tab:unnamed-chunk-68}Exact ANOVA Result}
 \centering
 \begin{tabular}{l|r|r|r|r}
 \hline
@@ -1507,7 +1529,7 @@ factor1 & 94.89169 & 0.034565 & 0.1892154 & 15.46667\\
 
 \begin{table}[!h]
 
-\caption{\label{tab:unnamed-chunk-75}Simulated ANOVA Result}
+\caption{\label{tab:unnamed-chunk-77}Simulated ANOVA Result}
 \centering
 \begin{tabular}{l|r|r}
 \hline
@@ -1528,7 +1550,7 @@ anova\_factor1 & 61.51 & 0.0335436\\
 
 \begin{table}[!h]
 
-\caption{\label{tab:unnamed-chunk-77}Exact ANOVA Result}
+\caption{\label{tab:unnamed-chunk-79}Exact ANOVA Result}
 \centering
 \begin{tabular}{l|r|r|r|r}
 \hline
@@ -1587,7 +1609,7 @@ We can simulate a one-factor anova setting means to achieve a certain effect siz
 
 \begin{table}[!h]
 
-\caption{\label{tab:unnamed-chunk-80}Simulated ANOVA Result}
+\caption{\label{tab:unnamed-chunk-82}Simulated ANOVA Result}
 \centering
 \begin{tabular}{l|r|r}
 \hline
@@ -1608,7 +1630,7 @@ anova\_factor1 & 100 & 0.0100165\\
 
 \begin{table}[!h]
 
-\caption{\label{tab:unnamed-chunk-82}Exact ANOVA Result}
+\caption{\label{tab:unnamed-chunk-84}Exact ANOVA Result}
 \centering
 \begin{tabular}{l|r|r|r|r}
 \hline
@@ -1662,7 +1684,7 @@ This simulation should yield a medium effect size (0.588) across four independen
 
 \begin{table}[!h]
 
-\caption{\label{tab:unnamed-chunk-86}Simulated ANOVA Result}
+\caption{\label{tab:unnamed-chunk-88}Simulated ANOVA Result}
 \centering
 \begin{tabular}{l|r|r}
 \hline
@@ -1683,7 +1705,7 @@ anova\_factor1 & 100 & 0.058913\\
 
 \begin{table}[!h]
 
-\caption{\label{tab:unnamed-chunk-88}Exact ANOVA Result}
+\caption{\label{tab:unnamed-chunk-90}Exact ANOVA Result}
 \centering
 \begin{tabular}{l|r|r|r|r}
 \hline
@@ -1735,7 +1757,7 @@ We can simulate a one-way ANOVA that should yield a large effect size (0.1379) a
 
 \begin{table}[!h]
 
-\caption{\label{tab:unnamed-chunk-92}Simulated ANOVA Result}
+\caption{\label{tab:unnamed-chunk-94}Simulated ANOVA Result}
 \centering
 \begin{tabular}{l|r|r}
 \hline
@@ -1756,7 +1778,7 @@ anova\_factor1 & 100 & 0.1380489\\
 
 \begin{table}[!h]
 
-\caption{\label{tab:unnamed-chunk-94}Exact ANOVA Result}
+\caption{\label{tab:unnamed-chunk-96}Exact ANOVA Result}
 \centering
 \begin{tabular}{l|r|r|r|r}
 \hline
@@ -1775,12 +1797,12 @@ The results are very close to is simulation should yield a small effect size (0.
 \hypertarget{part-1-1}{%
 \section{Part 1}\label{part-1-1}}
 
-In a repeated measures design multiple observations are collected from the same participants. In the simplest case, where there are two repeated observations, a repeated measures ANOVA equals a dependent or paired \emph{t}-test. The difference compared to a between subject design is that repeated measures can be correlated, and in psychology, they often are. Let's first explore the impact of this correlation on the power of a repeated measures ANOVA.
+In a repeated measures design multiple observations are collected from the same participants. In the simplest case, where there are two repeated observations, a repeated measures ANOVA equals a dependent or paired \emph{t}-test. The advantage of repeated measures designs is that they capitalize on the correlations between the repeated measurements. Let's first explore the impact of this correlation on the power of a repeated measures ANOVA.
 
 \hypertarget{two-conditions-medium-effect-size}{%
 \subsection{Two conditions, medium effect size}\label{two-conditions-medium-effect-size}}
 
-To illustrate the effect of correated observations, we start by simulating data for a medium effect size for a dependent (or paired, or within-subject) \emph{t}-test. Let's first look at \citet{faul2007g}. If we want to perform an a-priori power analysis, we are asked to fill in the effect size dz. As \citet{cohen1988spa} writes, ``The Z subscript is used to emphasize the fact that our raw score unit is no longer X or Y, but Z'', where Z are the difference scores of X-Y.
+To illustrate the effect of correated observations, we start by simulating data for a medium effect size for a dependent (or paired, or within-subject) \emph{t}-test. Let's first look at Gpower \citet{faul2007g}. If we want to perform an a-priori power analysis, we are asked to fill in the effect size dz. As \citet{cohen1988spa} writes, ``The Z subscript is used to emphasize the fact that our raw score unit is no longer X or Y, but Z'', where Z are the difference scores of X-Y.
 
 \includegraphics{screenshots/gpower_9.png}
 
@@ -1795,6 +1817,8 @@ Whereas in an independent \emph{t}-test the two observations are uncorrelated, i
 \(\sigma_{z}=\sigma\sqrt{2(1-\rho)}\)
 
 Therefore, the relation between dz and d is \(\sqrt{2(1-\rho)}\). A given difference between population means for matched (dependent) samples is standardized by a value which is \(\sqrt{2(1-\rho)}\) as large as would be the case were they independent. If we enter a correlation of 0.5 in the formula, we get \(\sqrt{2(0.5)}=1\). In other words, when the correlation is 0.5, d = dz. When there is a strong correlation between dependent variables, for example r = 0.9, we get \(d=d_{z}\sqrt{2(1-0.9)}\), and a dz of 1 would be a d = 0.45. Reversely, \(d_{z}=\frac{d}{\sqrt{2(1-r)}}\), so with a r = 0.9, a d of 1 would be a dz = 2.24. Some consider this increase in dz compared to d when observations are strongly correlated an `inflation' when estimating effect sizes, but since the reduction in the standard deviation of the difference scores due to the correlation makes it easier to distinguish signal from noise in a hypothesis test, it leads to a clear power benefit.
+
+\newpage
 
 \begin{Shaded}
 \begin{Highlighting}[]
@@ -1845,19 +1869,27 @@ Therefore, the relation between dz and d is \(\sqrt{2(1-\rho)}\). A given differ
 ## NOTE: n is number of *pairs*
 \end{verbatim}
 
+\newpage
+
 There is no equivalent ``fz'' for Cohen's \emph{f} for a within subject ANOVA. For two groups, we can directly compute Cohen's \emph{f} from Cohen's d for two groups, as \citet{cohen1988spa} describes, because f = 1/2d. For a d = 0.5, f = 0.25. In Gpower we can run a 2 group within-subject power analysis for ANOVA. We plan for 80\% power, and reproduce the anaysis above for the dependent \emph{t}-test. This works because the correlation is set to 0.5, when d = dz, and thus the transformation of f=1/2d works.
 
 \includegraphics{screenshots/gpower_1.png}
+
+\newpage
 
 If we change the correlation to 0.7 and keep all other settings the same, the repeated measure a-priori power analysis yields a sample of 21. The correlation increases the power for the test.
 
 \includegraphics{screenshots/gpower_11.png}
 
+\newpage
+
 To reproduce this analysis in Gpower with a dependent \emph{t}-test we need to change dz following the formula above, \(d_{z}=\frac{0.5}{\sqrt{2(1-0.7)}}\), which yields dz = 0.6454972. If we enter this value in Gpower for an a-priori power analysis, we get the exact same results (as we should, since an repeated measures ANOVA with 2 groups equals a dependent \emph{t}-test). This example illustrates that the correlation between dependent variables always factors into a power analysis, both for a dependent \emph{t}-test, and for a repeated measures ANOVA. Because a dependent \emph{t}-test uses dz the correlation might be less visible, but given the relation between d and dz, the correlation is always taken into account and can greatly improve power for within designs compared to between designs.
 
 \includegraphics{screenshots/gpower_10.png}
 
-We can perform both these power analyses using simuations as well. We set groups to 2 for the simulation, n = 34 (which should give 80.777 power, according to the \citet{faul2007g} program), a correlation among repeated measures of 0.5, and an alpha of 0.05. In this case, we simulate data with means -0.25 and 0.25, and set the sd to 1. This means we have a mean difference of 0.5, and a Cohen's d of 0.5/1 = 0.5. In the first example, we set the correlation to 0.5, and the result should be 80.77\% power, and an effect size estimate of 0.5 for the simple effect. We also calculate partial eta-squared for the ANOVA, which equals \(\frac{f^2}{f^2+1}\), or 0.05882353.
+\newpage
+
+We can perform both these power analyses using \texttt{Superpower} as well. We set groups to 2 for the simulation, n = 34 (which should give 80.777 power, according to the \citet{faul2007g} program), a correlation among repeated measures of 0.5, and an alpha of 0.05. In this case, we simulate data with means -0.25 and 0.25, and set the sd to 1. This means we have a mean difference of 0.5, and a Cohen's d of 0.5/1 = 0.5. In the first example, we set the correlation to 0.5, and the result should be 80.77\% power, and an effect size estimate of 0.5 for the simple effect. We also calculate partial eta-squared for the ANOVA, which equals \(\frac{f^2}{f^2+1}\), or 0.05882353.
 
 \begin{Shaded}
 \begin{Highlighting}[]
@@ -1882,14 +1914,9 @@ We can perform both these power analyses using simuations as well. We set groups
 \NormalTok{mu <-}\StringTok{ }\KeywordTok{mu_from_ES}\NormalTok{(}\DataTypeTok{K =}\NormalTok{ K, }\DataTypeTok{ES =}\NormalTok{ ES)}
 \NormalTok{design =}\StringTok{ }\KeywordTok{paste}\NormalTok{(K,}\StringTok{"w"}\NormalTok{,}\DataTypeTok{sep =} \StringTok{""}\NormalTok{)}
 \NormalTok{labelnames <-}\StringTok{ }\KeywordTok{c}\NormalTok{(}\StringTok{"speed"}\NormalTok{, }\StringTok{"fast"}\NormalTok{, }\StringTok{"slow"}\NormalTok{)}
-
 \NormalTok{design_result <-}\StringTok{ }\KeywordTok{ANOVA_design}\NormalTok{(}\DataTypeTok{design =}\NormalTok{ design,}
-                   \DataTypeTok{n =}\NormalTok{ n, }
-                   \DataTypeTok{mu =}\NormalTok{ mu, }
-                   \DataTypeTok{sd =}\NormalTok{ sd, }
-                   \DataTypeTok{r =}\NormalTok{ r, }
+                   \DataTypeTok{n =}\NormalTok{ n, }\DataTypeTok{mu =}\NormalTok{ mu, }\DataTypeTok{sd =}\NormalTok{ sd, }\DataTypeTok{r =}\NormalTok{ r, }
                    \DataTypeTok{labelnames =}\NormalTok{ labelnames)}
-
 \NormalTok{alpha_level <-}\StringTok{ }\FloatTok{0.05}
 \end{Highlighting}
 \end{Shaded}
@@ -1898,14 +1925,15 @@ We can perform both these power analyses using simuations as well. We set groups
 \begin{Highlighting}[]
 \NormalTok{simulation_result <-}\StringTok{ }\KeywordTok{ANOVA_power}\NormalTok{(design_result, }
                                  \DataTypeTok{alpha_level =}\NormalTok{ alpha_level, }
-                                 \DataTypeTok{nsims =}\NormalTok{ nsims,}
-                                 \DataTypeTok{verbose =} \OtherTok{FALSE}\NormalTok{)}
+                                 \DataTypeTok{nsims =}\NormalTok{ nsims, }\DataTypeTok{verbose =} \OtherTok{FALSE}\NormalTok{)}
 \end{Highlighting}
 \end{Shaded}
 
+\newpage
+
 \begin{table}[!h]
 
-\caption{\label{tab:unnamed-chunk-98}Simulated ANOVA Result}
+\caption{\label{tab:unnamed-chunk-100}Simulated ANOVA Result}
 \centering
 \begin{tabular}{l|r|r}
 \hline
@@ -1918,7 +1946,7 @@ anova\_speed & 80.74 & 0.2149221\\
 
 \begin{table}[!h]
 
-\caption{\label{tab:unnamed-chunk-100}Exact ANOVA Result}
+\caption{\label{tab:unnamed-chunk-102}Exact ANOVA Result}
 \centering
 \begin{tabular}{l|r|r|r|r}
 \hline
@@ -1930,6 +1958,8 @@ speed & 80.77775 & 0.2048193 & 0.5075192 & 8.5\\
 \end{table}
 
 The results of the simulation are indeed very close to 80.777\%. Note that the simulation calculates Cohen's dz effect sizes for paired comparisons - which here given the correlation of 0.5 is also 0.5 for a medium effect size.
+
+\newpage
 
 We should see a larger dz if we increase the correlation, keeping the sample size the same, following the example in Gpower above. We repeat the simulation, and the only difference is a correlation between dependent variables of 0.7. This should yield an effect size dz = 0.6454972.
 
@@ -1957,23 +1987,27 @@ We should see a larger dz if we increase the correlation, keeping the sample siz
 \NormalTok{design =}\StringTok{ }\KeywordTok{paste}\NormalTok{(K,}\StringTok{"w"}\NormalTok{,}\DataTypeTok{sep =} \StringTok{""}\NormalTok{)}
 \NormalTok{labelnames <-}\StringTok{ }\KeywordTok{c}\NormalTok{(}\StringTok{"speed"}\NormalTok{, }\StringTok{"fast"}\NormalTok{, }\StringTok{"slow"}\NormalTok{)}
 \NormalTok{design_result <-}\StringTok{ }\KeywordTok{ANOVA_design}\NormalTok{(}\DataTypeTok{design =}\NormalTok{ design,}
-                   \DataTypeTok{n =}\NormalTok{ n, }
-                   \DataTypeTok{mu =}\NormalTok{ mu, }
-                   \DataTypeTok{sd =}\NormalTok{ sd, }
-                   \DataTypeTok{r =}\NormalTok{ r, }
+                   \DataTypeTok{n =}\NormalTok{ n, }\DataTypeTok{mu =}\NormalTok{ mu, }\DataTypeTok{sd =}\NormalTok{ sd, }\DataTypeTok{r =}\NormalTok{ r, }
                    \DataTypeTok{labelnames =}\NormalTok{ labelnames)}
-
 \NormalTok{alpha_level <-}\StringTok{ }\FloatTok{0.05}
-
-\NormalTok{design_result}\OperatorTok{$}\NormalTok{sigmatrix}
 \end{Highlighting}
 \end{Shaded}
 
-\begin{verbatim}
-##      fast slow
-## fast  1.0  0.7
-## slow  0.7  1.0
-\end{verbatim}
+\begin{table}[!h]
+
+\caption{\label{tab:unnamed-chunk-104}Covariance-Variance Matrix}
+\centering
+\begin{tabular}{l|r|r}
+\hline
+  & fast & slow\\
+\hline
+fast & 1.0 & 0.7\\
+\hline
+slow & 0.7 & 1.0\\
+\hline
+\end{tabular}
+\end{table}
+\newpage
 
 \begin{Shaded}
 \begin{Highlighting}[]
@@ -1986,7 +2020,7 @@ We should see a larger dz if we increase the correlation, keeping the sample siz
 
 \begin{table}[!h]
 
-\caption{\label{tab:unnamed-chunk-103}Simulated ANOVA Result}
+\caption{\label{tab:unnamed-chunk-106}Simulated ANOVA Result}
 \centering
 \begin{tabular}{l|r|r}
 \hline
@@ -2007,7 +2041,7 @@ anova\_speed & 80.48 & 0.3153414\\
 
 \begin{table}[!h]
 
-\caption{\label{tab:unnamed-chunk-105}Exact ANOVA Result}
+\caption{\label{tab:unnamed-chunk-108}Exact ANOVA Result}
 \centering
 \begin{tabular}{l|r|r|r|r}
 \hline
@@ -2022,14 +2056,20 @@ speed & 80.33235 & 0.3043478 & 0.6614378 & 8.75\\
 \begin{Highlighting}[]
 \CommentTok{#relation dz and f for within designs }
 \NormalTok{f <-}\StringTok{ }\FloatTok{0.5}\OperatorTok{*}\FloatTok{0.6454972}
-\CommentTok{#  }
+\NormalTok{f }
 \end{Highlighting}
 \end{Shaded}
 
+\begin{verbatim}
+## [1] 0.3227486
+\end{verbatim}
+
 Entering this f in Gpower, with a correlation of 0.5, yields the same as entering \texttt{f\ =\ 0.25} and \texttt{correlation\ =\ 0.7}.
 
-\hypertarget{part-2-1}{%
-\section{Part 2}\label{part-2-1}}
+\newpage
+
+\hypertarget{part-2}{%
+\section{Part 2}\label{part-2}}
 
 Here, we will examine a repeated measures experiment with 3 within-subject conditions, to illustrate how a repeated measures ANOVA extends a dependent \emph{t}-test with 3 groups.
 
@@ -2037,7 +2077,7 @@ In the example for a two-group within design we provided a specific formula for 
 
 \(N_{W}=\frac{N_{B}(1-\rho)}{a}\)
 
-Where a is the number of within-subject levels.
+Where ``a'' is the number of within-subject levels.
 
 \hypertarget{the-relation-between-cohens-f-and-cohens-d}{%
 \subsection{The relation between Cohen's f and Cohen's d}\label{the-relation-between-cohens-f-and-cohens-d}}
@@ -2095,39 +2135,27 @@ Imagine we have a within-subject experiment with 3 conditions. We ask people wha
 
 The relation between Cohen's d or dz and Cohen's \emph{f} becomes more difficult when there are multiple groups, because the relationship depends on the pattern of the means. \citet{cohen1988spa} presents calculations for three patterns, minimal variability (for example, for 5 means: -0.25, 0, 0, 0, 0.25), medium variability (for example, for 5 means: -0.25, -0.25, 0.25, 0.25, 0.25 or -0.25, -0.25, -0.25, 0.25, 0.25). For these three patterns, formula's are available that compute Cohen's \emph{f} from Cohen's d, where d is the effect size calculated for the difference between the largest and smallest mean (if the largest mean is 0.25 and the smallest mean is -0.25, 0.25 - -0.25 = 0.5, so d is 0.5 divided by the standard deviation of 0.9). In our example, d would be (4.3-3.8)/0.9 = 0.5555556. If we divide this value by \texttt{sqrt(2*(1-r))} we have dz = 0.5555556/0.7745967 = 0.7172191.
 
-I have created a custom function that will calculate f from d, based on a specification of one of the three patterns of means. Our pattern is most similar (but not identical) to a maximum variability pattern (two means are high, one is lower). So we could attempt to calculate f from d (0.5555556), by calculating d from the largest and smallest mean:
+We have created a custom function that will calculate f from d, based on a specification of one of the three patterns of means. Our pattern is most similar (but not identical) to a maximum variability pattern (two means are high, one is lower). So we could attempt to calculate f from d (0.5555556), by calculating d from the largest and smallest mean.
+
+This function allows you to calculate f, d and eta squared
+following \citet{cohen1988spa}, p 277. The patterns are:
+1. Minimum variability: one mean at each end of d, the remaining k- 2 means all at the midpoint.
+2. Intermediate variability: the k means equally spaced over d.
+3. Maximum variability: the means all at the end points of d.
+
+For each of these patterns, there is a fixed relationship between f and d for any given number of means, k.
+
+\textbf{Pattern 1}
+For any given range of means, d, the minimum standard deviation, f1, results when the remaining k - 2 means are concentrated at the mean of the means (0 when expressed in standard units), i.e., half-way between the largest and smallest.
+
+\textbf{Pattern 2}
+A pattern of medium variability results when the k meansare equally spaced over the range, and therefore at intervals of d/(k- 1).
+
+\textbf{Pattern 3}
+It is demonstrable and intuitively evident that for any given range the dispersion which yield\textasciitilde{} the maximum standard deviation has the k means falling at both extremes of the range. When k is even, !k fall at - !d and the other !k fall at + !d; when k is odd, (k + I )/2 of the means fall at either end and the (k- 1)/2 remaining means at the other. With this pattern, for all even numbers of means, use formula (8.2.12). When k is odd, and there is thus one more mean at one extreme than at the other, use formula (8.2.13).
 
 \begin{Shaded}
 \begin{Highlighting}[]
-\CommentTok{#This function allows you to calculate f, d and eta squared }
-\CommentTok{#following Cohen, 1988, p 277}
-\CommentTok{# From Cohen, 1988, p 277}
-\CommentTok{# The patterns are:}
-\CommentTok{# I. Minimum variability: one mean at each end of d, }
-\CommentTok{#the remaining k- 2 means all at the midpoint.}
-\CommentTok{# 2. Intermediate variability: the k means equally spaced over d.}
-\CommentTok{# 3. Maximum variability: the means all at the end points of d.}
-
-\CommentTok{# For each of these patterns, }
-\CommentTok{# there is a fixed relationship between f and d for any given number of means, k.}
-
-\CommentTok{# Pattern 1. For any given range of means, d, the minimum standard}
-\CommentTok{# deviation, f1, results when the remaining k - 2 means are concentrated at}
-\CommentTok{# the mean of the means (0 when expressed in standard units), i.e., half-way}
-\CommentTok{# between the largest and smallest.}
-\CommentTok{# }
-\CommentTok{# Pattern 2. A pattern of medium variability results when the k means}
-\CommentTok{# are equally spaced over the range, and therefore at intervals of d/(k- 1).}
-\CommentTok{# }
-\CommentTok{# Pattern 3. It is demonstrable and intuitively evident that for any given}
-\CommentTok{# range the dispersion which yield~ the maximum standard deviation has the}
-\CommentTok{# k means falling at both extremes of the range. When k is even, !k fall at}
-\CommentTok{# - !d and the other !k fall at + !d; when k is odd, (k + I )/2 of the means}
-\CommentTok{# fall at either end and the (k- 1)/2 remaining means at the other. With this}
-\CommentTok{# pattern, for all even numbers of means, use formula (8.2.12).}
-\CommentTok{# When k is odd, and there is thus one more mean at one extreme than at}
-\CommentTok{# the other, use formula (8.2.13).}
-
 \NormalTok{calc_f_d_eta <-}\StringTok{ }\ControlFlowTok{function}\NormalTok{(mu, sd, variability)\{}
   \ControlFlowTok{if}\NormalTok{ (variability }\OperatorTok{==}\StringTok{ "minimum"}\NormalTok{) \{}
 \NormalTok{    k =}\StringTok{ }\KeywordTok{length}\NormalTok{(mu)}
@@ -2181,9 +2209,7 @@ We see the Cohen's \emph{f} value is 0.2618914 and d = 0.5555556. The Cohen's \e
 \hypertarget{three-within-conditions-medium-effect-size}{%
 \subsection{Three within conditions, medium effect size}\label{three-within-conditions-medium-effect-size}}
 
-We can perform power analyses for within designs using simuations. We set groups to 3 for the simulation, n = 20, and the correlation between dependent variables to 0.8. If the true effect size is f = 0.25, and the alpha level is 0.05, the power is 96.6\%.
-
-In this case, we simulate data with means -0.3061862, 0.0000000, and 0.3061862, and set the sd to 1.
+We can perform power analyses for within designs using simuations. We set groups to 3 for the simulation, n = 20, and the correlation between dependent variables to 0.8. If the true effect size is f = 0.25, and the alpha level is 0.05, the power is 96.6\%. In this case, we simulate data with means -0.3061862, 0.0000000, and 0.3061862, and set the sd to 1.
 
 \begin{Shaded}
 \begin{Highlighting}[]
@@ -2242,7 +2268,7 @@ In this case, we simulate data with means -0.3061862, 0.0000000, and 0.3061862, 
 
 \begin{table}[!h]
 
-\caption{\label{tab:unnamed-chunk-111}Simulated ANOVA Result}
+\caption{\label{tab:unnamed-chunk-114}Simulated ANOVA Result}
 \centering
 \begin{tabular}{l|r|r}
 \hline
@@ -2263,7 +2289,7 @@ anova\_speed & 97.04 & 0.345486\\
 
 \begin{table}[!h]
 
-\caption{\label{tab:unnamed-chunk-113}Exact ANOVA Result}
+\caption{\label{tab:unnamed-chunk-116}Exact ANOVA Result}
 \centering
 \begin{tabular}{l|r|r|r|r}
 \hline
@@ -2274,9 +2300,14 @@ speed & 96.91634 & 0.3303965 & 0.7024394 & 18.75\\
 \end{tabular}
 \end{table}
 
-The results of the simulation are indeed very close to 96.9\%. We can see this is in line with the power estimate from Gpower:
+The results of the simulation are indeed very close to 96.9\%.
+\newpage
+
+We can see this is in line with the power estimate from Gpower:
 
 \includegraphics{screenshots/gpower_12.png}
+
+\newpage
 
 We can also validate this by creating the code to do a power analysis in R from scratch:
 
@@ -2358,9 +2389,13 @@ We can also validate this by creating the code to do a power analysis in R from 
 ## [1] 0.7024394
 \end{verbatim}
 
+\newpage
+
 We can even check the calculation of Cohen's \emph{f} SPSS style in GPower. We take the GPower settings as illustrated above. We click the `Options' button, and check the radiobutton next to `As in SPSS'. Click ok, and you will notice that the `Corr among rep measures' field has disappeared. The correlation does not need to be entered seperately, but is incorporated in Cohen's \emph{f}. The value of Cohen's \emph{f}, which was 0.25, has changed into 0.7024394. This is the SPSS equivalent. The value is much larger. This value, and it's corresponding partial eta-squared, incorporate the correlation between observations.
 
 \includegraphics{screenshots/gpower_14.png}
+
+\newpage
 
 \hypertarget{part-3-1}{%
 \section{Part 3}\label{part-3-1}}
@@ -2484,7 +2519,7 @@ We create the within design, and run the simulation
 
 \begin{table}[!h]
 
-\caption{\label{tab:unnamed-chunk-122}Simulated ANOVA Result}
+\caption{\label{tab:unnamed-chunk-125}Simulated ANOVA Result}
 \centering
 \begin{tabular}{l|r|r}
 \hline
@@ -2505,7 +2540,7 @@ anova\_speed & 95.25 & 0.1075912\\
 
 \begin{table}[!h]
 
-\caption{\label{tab:unnamed-chunk-124}Exact ANOVA Result}
+\caption{\label{tab:unnamed-chunk-127}Exact ANOVA Result}
 \centering
 \begin{tabular}{l|r|r|r|r}
 \hline
@@ -2589,7 +2624,8 @@ The Cohen´s \emph{f} is 0.1885618. We can enter the \emph{f} (using the default
 \NormalTok{  conds =}\StringTok{ }\KeywordTok{factor}\NormalTok{(}\KeywordTok{rep}\NormalTok{(letters[}\DecValTok{24}\OperatorTok{:}\DecValTok{26}\NormalTok{], }\DataTypeTok{each =}\NormalTok{ N))}
 \NormalTok{  partID =}\StringTok{ }\KeywordTok{factor}\NormalTok{(}\KeywordTok{rep}\NormalTok{(part, }\DataTypeTok{times =} \DecValTok{3}\NormalTok{))}
 \NormalTok{  output <-}\StringTok{ }\KeywordTok{data.frame}\NormalTok{(partID, conds, datalong)}
-\NormalTok{  test <-}\StringTok{ }\KeywordTok{aov}\NormalTok{(datalong }\OperatorTok{~}\StringTok{ }\NormalTok{conds }\OperatorTok{+}\StringTok{ }\KeywordTok{Error}\NormalTok{(partID }\OperatorTok{/}\StringTok{ }\NormalTok{conds), }\DataTypeTok{data =}\NormalTok{ output)}
+\NormalTok{  test <-}\StringTok{ }\KeywordTok{aov}\NormalTok{(datalong }\OperatorTok{~}\StringTok{ }\NormalTok{conds }\OperatorTok{+}\StringTok{ }\KeywordTok{Error}\NormalTok{(partID }\OperatorTok{/}\StringTok{ }\NormalTok{conds), }
+              \DataTypeTok{data =}\NormalTok{ output)}
 \NormalTok{  tests <-}\StringTok{ }\NormalTok{(}\KeywordTok{summary}\NormalTok{(test))}
 \NormalTok{  p1[i] <-}\StringTok{ }\NormalTok{tests}\OperatorTok{$}\StringTok{'Error: partID:conds'}\NormalTok{[[}\DecValTok{1}\NormalTok{]]}\OperatorTok{$}\StringTok{'Pr(>F)'}\NormalTok{[[}\DecValTok{1}\NormalTok{]]}
 \NormalTok{  p2[i] <-}\StringTok{ }\KeywordTok{t.test}\NormalTok{(data[, }\DecValTok{1}\NormalTok{], data[, }\DecValTok{2}\NormalTok{], }\DataTypeTok{paired =} \OtherTok{TRUE}\NormalTok{)}\OperatorTok{$}\NormalTok{p.value}
@@ -2660,7 +2696,7 @@ We create the 3-level repeated measures design, and run the simulation.
 
 \begin{table}[!h]
 
-\caption{\label{tab:unnamed-chunk-133}Simulated ANOVA Result}
+\caption{\label{tab:unnamed-chunk-136}Simulated ANOVA Result}
 \centering
 \begin{tabular}{l|r|r}
 \hline
@@ -2681,7 +2717,7 @@ anova\_SPEED & 98.37 & 0.1287432\\
 
 \begin{table}[!h]
 
-\caption{\label{tab:unnamed-chunk-135}Exact ANOVA Result}
+\caption{\label{tab:unnamed-chunk-138}Exact ANOVA Result}
 \centering
 \begin{tabular}{l|r|r|r|r}
 \hline
@@ -2694,7 +2730,9 @@ SPEED & 98.34682 & 0.1190476 & 0.3676073 & 20\\
 
 Again, this is similar to GPower for the ANOVA:
 
-\href{screenshots/gpower_4.png}{}
+\includegraphics{screenshots/gpower_4.png}
+
+\newpage
 
 \hypertarget{part-4}{%
 \section{Part 4}\label{part-4}}
@@ -2840,7 +2878,7 @@ Visualize the distributions of \emph{p}-values
 \end{Highlighting}
 \end{Shaded}
 
-\includegraphics{SuperpowerValidation_files/figure-latex/unnamed-chunk-141-1.pdf}
+\includegraphics{SuperpowerValidation_files/figure-latex/unnamed-chunk-144-1.pdf}
 
 We can reproduce this simulation:
 
@@ -2875,7 +2913,7 @@ We can reproduce this simulation:
 
 \begin{table}[!h]
 
-\caption{\label{tab:unnamed-chunk-144}Simulated ANOVA Result}
+\caption{\label{tab:unnamed-chunk-147}Simulated ANOVA Result}
 \centering
 \begin{tabular}{l|r|r}
 \hline
@@ -2900,7 +2938,7 @@ anova\_age:color & 47.80 & 0.1641690\\
 
 \begin{table}[!h]
 
-\caption{\label{tab:unnamed-chunk-146}Exact ANOVA Result}
+\caption{\label{tab:unnamed-chunk-149}Exact ANOVA Result}
 \centering
 \begin{tabular}{l|r|r|r|r}
 \hline
@@ -3049,7 +3087,7 @@ Visualize the distributions of \emph{p}-values
 \end{Highlighting}
 \end{Shaded}
 
-\includegraphics{SuperpowerValidation_files/figure-latex/unnamed-chunk-151-1.pdf}
+\includegraphics{SuperpowerValidation_files/figure-latex/unnamed-chunk-154-1.pdf}
 
 We can reproduce this simulation:
 
@@ -3085,7 +3123,7 @@ We can reproduce this simulation:
 
 \begin{table}[!h]
 
-\caption{\label{tab:unnamed-chunk-154}Simulated ANOVA Result}
+\caption{\label{tab:unnamed-chunk-157}Simulated ANOVA Result}
 \centering
 \begin{tabular}{l|r|r}
 \hline
@@ -3125,7 +3163,7 @@ anova\_AGE:COLOR & 46.22 & 0.1595391\\
 
 \begin{table}[!h]
 
-\caption{\label{tab:unnamed-chunk-156}Exact ANOVA Result}
+\caption{\label{tab:unnamed-chunk-159}Exact ANOVA Result}
 \centering
 \begin{tabular}{l|r|r|r|r}
 \hline
@@ -3187,7 +3225,7 @@ Let's now compare the formulas in \citet{potvin2000statistical} with \texttt{Sup
 \end{Highlighting}
 \end{Shaded}
 
-\includegraphics{SuperpowerValidation_files/figure-latex/unnamed-chunk-157-1.pdf}
+\includegraphics{SuperpowerValidation_files/figure-latex/unnamed-chunk-160-1.pdf}
 
 \begin{Shaded}
 \begin{Highlighting}[]
@@ -3213,7 +3251,7 @@ Let's now compare the formulas in \citet{potvin2000statistical} with \texttt{Sup
 
 \begin{table}[!h]
 
-\caption{\label{tab:unnamed-chunk-159}Exact ANOVA Result}
+\caption{\label{tab:unnamed-chunk-162}Exact ANOVA Result}
 \centering
 \begin{tabular}{l|r|r|r|r}
 \hline
@@ -3467,7 +3505,7 @@ We can now compile all the analytical results into a single table, and see that 
 
 \begin{table}[!h]
 
-\caption{\label{tab:unnamed-chunk-163}Analytical Result}
+\caption{\label{tab:unnamed-chunk-166}Analytical Result}
 \centering
 \begin{tabular}{r|r|r}
 \hline
@@ -3516,7 +3554,7 @@ Let's now extend to one of the simlations presented by \citet{potvin2000statisti
 \end{Highlighting}
 \end{Shaded}
 
-\includegraphics{SuperpowerValidation_files/figure-latex/unnamed-chunk-164-1.pdf}
+\includegraphics{SuperpowerValidation_files/figure-latex/unnamed-chunk-167-1.pdf}
 
 \begin{Shaded}
 \begin{Highlighting}[]
@@ -3551,7 +3589,7 @@ And we can estimate power with \texttt{ANOVA\_exact}.
 
 \begin{table}[!h]
 
-\caption{\label{tab:unnamed-chunk-166}Exact ANOVA Result}
+\caption{\label{tab:unnamed-chunk-169}Exact ANOVA Result}
 \centering
 \begin{tabular}{l|r|r|r|r}
 \hline
@@ -3804,7 +3842,7 @@ Again, when we compile all the analytical results into a single table we can see
 
 \begin{table}[!h]
 
-\caption{\label{tab:unnamed-chunk-170}Analytical Result}
+\caption{\label{tab:unnamed-chunk-173}Analytical Result}
 \centering
 \begin{tabular}{r|r|r}
 \hline
@@ -3830,8 +3868,8 @@ This assumes that each level has a common standard deviation (i.e., there is onl
 
 In addition, the non-centrality parameter of the \emph{F}-statistic can be estimated from \citet{vonesh1986sample} equations as the following:
 \[ \delta^2 = \frac{n \cdot d^2}{2\cdot(1-\rho_{min} )} \]
-
-Let us assume we have a \texttt{2w} design with \texttt{mu\ =\ c(0,0.5)}, a common standard deviation of 1 (\texttt{sd=1}), and correlation between \texttt{a1} and \texttt{a2} of \texttt{r} \texttt{=\ .4} and a total sample size of 15 (\texttt{n\ =\ 15}) participants.
+\newpage
+Let us assume we have a \texttt{2w} design with \texttt{mu\ =\ c(0,0.5)}, a common standard deviation of 1 (\texttt{sd=1}), and correlation between \texttt{a1} and \texttt{a2} of r = .4 and a total sample size of 15 (\texttt{n\ =\ 15}) participants.
 Power could then be calculated with the following \texttt{R} code.
 
 \begin{Shaded}
@@ -3879,6 +3917,8 @@ Power could then be calculated with the following \texttt{R} code.
 
 \newpage
 
+Now we replicate in \texttt{Superpower}.
+
 \begin{Shaded}
 \begin{Highlighting}[]
 \NormalTok{design_result <-}\StringTok{ }\KeywordTok{ANOVA_design}\NormalTok{(}\StringTok{"2w"}\NormalTok{,}
@@ -3893,7 +3933,7 @@ Power could then be calculated with the following \texttt{R} code.
 
 \begin{table}[!h]
 
-\caption{\label{tab:unnamed-chunk-174}MANOVA Result}
+\caption{\label{tab:unnamed-chunk-177}MANOVA Result}
 \centering
 \begin{tabular}{l|r|r|r|r}
 \hline
@@ -3907,9 +3947,8 @@ a & 13.076818 & 0.0528541 & 0.2362278 & 0.7812500\\
 \end{table}
 
 The problem with this formula for determining power is that it is inexact and makes a number of assumptions (\citet{maxwell_designing_2004}, ppg. 752). In reality, it can only give a lower bound estimate of power for a given design, and the actual power may be much higher. This is problematic because it could lead to inefficient study design (e.g., determining you need 20 participants when adequate power could be achieved with less participants). This will become increasingly important with designs with multiple levels and possible violations of the assumption of sphericity.
-
-\hypertarget{sphericity-assumption}{%
-\section{Sphericity Assumption}\label{sphericity-assumption}}
+\newpage
+\#\# Sphericity Assumption
 
 In all the above examples, you will notice that the correlation is the sample between repeated measures. For most experiments in real life, this will not be the case. The correlations between levels may vary. This is problematic because the univariate (ANOVA) approach assumes sphericity, which means, for all intents and purposes, that the correlations between factor-levels are equal and the standard deviations at each level are equal as well. This assumption is tenuous at best and is typically ``adjusted'' for by applying a sphericity correction (e.g, Greenhouse-Geisser). How bad can it get? Well, let's simulate an example below.
 
@@ -3929,7 +3968,7 @@ In all the above examples, you will notice that the correlation is the sample be
 
 \begin{table}[!h]
 
-\caption{\label{tab:unnamed-chunk-175}Simulated ANOVA Result}
+\caption{\label{tab:unnamed-chunk-178}Simulated ANOVA Result}
 \centering
 \begin{tabular}{l|r|r}
 \hline
@@ -3941,7 +3980,7 @@ anova\_a & 7.16 & 0.0344525\\
 \end{table}
 
 As we can see, the actual type I error rate far exceeds the typical 5\%!
-
+\newpage
 Now, let's pour gasoline on the fire and see what happens when we make the sphericity violation worse by varying the standard deviations.
 
 \begin{Shaded}
@@ -3960,7 +3999,7 @@ Now, let's pour gasoline on the fire and see what happens when we make the spher
 
 \begin{table}[!h]
 
-\caption{\label{tab:unnamed-chunk-177}Simulated ANOVA Result}
+\caption{\label{tab:unnamed-chunk-180}Simulated ANOVA Result}
 \centering
 \begin{tabular}{l|r|r}
 \hline
@@ -3972,12 +4011,12 @@ anova\_a & 8.37 & 0.0346856\\
 \end{table}
 
 These inflated error rates are obviously a problem, which begs the question what do we do about them?
-
+\newpage
 In our experience, most researchers default to using a Greenhouse-Geisser adjustment for sphericity, but this may not be the most statistical efficient way of dealing with violations of sphercity. Further, as we can see from the simulation (\texttt{power\_result\_s2}) the MANOVA maintains the type I error rate at 5\%.
 
 \begin{table}[!h]
 
-\caption{\label{tab:unnamed-chunk-178}Simulated MANOVA Result}
+\caption{\label{tab:unnamed-chunk-181}Simulated MANOVA Result}
 \centering
 \begin{tabular}{l|r}
 \hline
@@ -3989,6 +4028,7 @@ manova\_a & 5.16\\
 \hline
 \end{tabular}
 \end{table}
+\newpage
 
 \hypertarget{manova-or-sphericity-adjustment}{%
 \subsection{MANOVA or Sphericity Adjustment?}\label{manova-or-sphericity-adjustment}}
@@ -4002,6 +4042,8 @@ However, \texttt{ANOVA\_power} can make the solution easy. Simply simulate, like
 
 As we saw above, the unadjusted repeated measures ANOVA has an elevated type I error rate, but the MANOVA analysis of the same data above approximately preserves the type I error rate. However, how does this perform relative to the sphericity corrections? Let's simulate again, and compare the results of the different corrections.
 
+First we setup the design.
+
 \begin{Shaded}
 \begin{Highlighting}[]
 \NormalTok{design_result <-}\StringTok{ }\KeywordTok{ANOVA_design}\NormalTok{(}\StringTok{"4w"}\NormalTok{,}
@@ -4010,14 +4052,20 @@ As we saw above, the unadjusted repeated measures ANOVA has an elevated type I e
 \NormalTok{                              ),}
                               \DataTypeTok{sd =} \KeywordTok{c}\NormalTok{(}\DecValTok{1}\NormalTok{,}\DecValTok{3}\NormalTok{,}\DecValTok{5}\NormalTok{,}\DecValTok{7}\NormalTok{),}
                               \DataTypeTok{mu=} \KeywordTok{c}\NormalTok{(}\DecValTok{0}\NormalTok{,}\DecValTok{0}\NormalTok{,}\DecValTok{0}\NormalTok{,}\DecValTok{0}\NormalTok{))}
+\end{Highlighting}
+\end{Shaded}
 
+\newpage
+
+\begin{Shaded}
+\begin{Highlighting}[]
 \NormalTok{power_result_none <-}\StringTok{ }\KeywordTok{ANOVA_power}\NormalTok{(design_result, }\DataTypeTok{nsims =}\NormalTok{ nsims, }\DataTypeTok{verbose =} \OtherTok{FALSE}\NormalTok{)}
 \end{Highlighting}
 \end{Shaded}
 
 \begin{table}[!h]
 
-\caption{\label{tab:unnamed-chunk-180}Simulated MANOVA Result}
+\caption{\label{tab:unnamed-chunk-184}Simulated MANOVA Result}
 \centering
 \begin{tabular}{l|r}
 \hline
@@ -4039,7 +4087,7 @@ manova\_a & 5.16\\
 
 \begin{table}[!h]
 
-\caption{\label{tab:unnamed-chunk-182}Simulated ANOVA Result}
+\caption{\label{tab:unnamed-chunk-186}Simulated ANOVA Result}
 \centering
 \begin{tabular}{l|r|r}
 \hline
@@ -4059,7 +4107,7 @@ anova\_a & 4.59 & 0.0339026\\
 
 \begin{table}[!h]
 
-\caption{\label{tab:unnamed-chunk-184}Simulated ANOVA Result}
+\caption{\label{tab:unnamed-chunk-188}Simulated ANOVA Result}
 \centering
 \begin{tabular}{l|r|r}
 \hline
@@ -4069,6 +4117,8 @@ anova\_a & 5.12 & 0.0346905\\
 \hline
 \end{tabular}
 \end{table}
+
+\newpage
 
 Both the sphericity corrections, Greenhouse-Geisser (\texttt{GG}) and Huynh-Feldt (\texttt{HF}), as well as the MANOVA were able to adequately control type I error rate. Howevever, Greenhouse-Geisser seemed to be a tad conservative. We can now directly compare the power of the MANOVA or \texttt{HF}-adjusted approach. We can adjust the study design to the alternative, or hypothesized, model with the predicted means of \texttt{0,\ 0.75,\ 1.5,\ 3} instead of the null model.
 
@@ -4081,14 +4131,16 @@ Both the sphericity corrections, Greenhouse-Geisser (\texttt{GG}) and Huynh-Feld
                               \DataTypeTok{sd =} \KeywordTok{c}\NormalTok{(}\DecValTok{1}\NormalTok{,}\DecValTok{3}\NormalTok{,}\DecValTok{5}\NormalTok{,}\DecValTok{7}\NormalTok{),}
                               \DataTypeTok{mu=} \KeywordTok{c}\NormalTok{(}\DecValTok{0}\NormalTok{,}\FloatTok{0.75}\NormalTok{,}\FloatTok{1.5}\NormalTok{,}\DecValTok{3}\NormalTok{))}
 
-\NormalTok{power_result_hfeffect <-}\StringTok{ }\KeywordTok{ANOVA_power}\NormalTok{(design_result_power, }\DataTypeTok{correction =} \StringTok{"HF"}\NormalTok{,}
-                                     \DataTypeTok{nsims =}\NormalTok{ nsims, }\DataTypeTok{verbose =} \OtherTok{FALSE}\NormalTok{)}
+\NormalTok{power_result_hfeffect <-}\StringTok{ }\KeywordTok{ANOVA_power}\NormalTok{(design_result_power, }
+                                     \DataTypeTok{correction =} \StringTok{"HF"}\NormalTok{,}
+                                     \DataTypeTok{nsims =}\NormalTok{ nsims, }
+                                     \DataTypeTok{verbose =} \OtherTok{FALSE}\NormalTok{)}
 \end{Highlighting}
 \end{Shaded}
 
 \begin{table}[!h]
 
-\caption{\label{tab:unnamed-chunk-186}Simulated ANOVA Result}
+\caption{\label{tab:unnamed-chunk-190}Simulated ANOVA Result}
 \centering
 \begin{tabular}{l|r|r}
 \hline
@@ -4100,7 +4152,7 @@ anova\_a & 60.48 & 0.1479382\\
 \end{table}
 \begin{table}[!h]
 
-\caption{\label{tab:unnamed-chunk-187}Simulated MANOVA Result}
+\caption{\label{tab:unnamed-chunk-191}Simulated MANOVA Result}
 \centering
 \begin{tabular}{l|r}
 \hline
@@ -4113,6 +4165,8 @@ manova\_a & 49.64\\
 \end{tabular}
 \end{table}
 
+\newpage
+
 Well, it appears the MANOVA based approach has roughly \textasciitilde{}10\% lower power compared the \texttt{HF}-adjusted ANOVA. However, the study still appears to be underpowered so we can increase the sample size. We will continue to evaluate the MANOVA results because, as \citet{algina1997detecting} note, the power disadvantage of MANOVA is diminished with increased sample size.
 
 \begin{Shaded}
@@ -4123,14 +4177,16 @@ Well, it appears the MANOVA based approach has roughly \textasciitilde{}10\% low
                               \DataTypeTok{sd =} \KeywordTok{c}\NormalTok{(}\DecValTok{1}\NormalTok{,}\DecValTok{3}\NormalTok{,}\DecValTok{5}\NormalTok{,}\DecValTok{7}\NormalTok{),}
                               \DataTypeTok{mu=} \KeywordTok{c}\NormalTok{(}\DecValTok{0}\NormalTok{,}\FloatTok{0.75}\NormalTok{,}\FloatTok{1.5}\NormalTok{,}\DecValTok{3}\NormalTok{))}
 
-\NormalTok{power_result_hfeffect <-}\StringTok{ }\KeywordTok{ANOVA_power}\NormalTok{(design_result_power, }\DataTypeTok{correction =} \StringTok{"HF"}\NormalTok{,}
-                                     \DataTypeTok{nsims =}\NormalTok{ nsims, }\DataTypeTok{verbose =} \OtherTok{FALSE}\NormalTok{)}
+\NormalTok{power_result_hfeffect <-}\StringTok{ }\KeywordTok{ANOVA_power}\NormalTok{(design_result_power, }
+                                     \DataTypeTok{correction =} \StringTok{"HF"}\NormalTok{,}
+                                     \DataTypeTok{nsims =}\NormalTok{ nsims, }
+                                     \DataTypeTok{verbose =} \OtherTok{FALSE}\NormalTok{)}
 \end{Highlighting}
 \end{Shaded}
 
 \begin{table}[!h]
 
-\caption{\label{tab:unnamed-chunk-189}Simulated ANOVA Result}
+\caption{\label{tab:unnamed-chunk-193}Simulated ANOVA Result}
 \centering
 \begin{tabular}{l|r|r}
 \hline
@@ -4142,7 +4198,7 @@ anova\_a & 84.69 & 0.1385088\\
 \end{table}
 \begin{table}[!h]
 
-\caption{\label{tab:unnamed-chunk-190}Simulated MANOVA Result}
+\caption{\label{tab:unnamed-chunk-194}Simulated MANOVA Result}
 \centering
 \begin{tabular}{l|r}
 \hline
@@ -4166,10 +4222,14 @@ So far we have discussed the simple one-way ANOVA, various forms of the repeated
 \section{Simple Mixed Designs}\label{simple-mixed-designs}}
 
 We can simulate a two-way ANOVA with a specific alpha, sample size and effect size, to achieve a specified statistical power. We will try to reproduce the power analysis by GPower \citep{faul2007g} for an F-test from an ANOVA with a repeated measures, within-between interaction effect. While GPower is a great tool it has limited options for mixed factorial ANOVAs.
+\newpage 
+Let us setup a simple 2x2 design.
+For the 2-way interaction, the result should be a power of 91.25\% with at total sample size of 46. Since we have 2 groups in the between -subjects factor that means the sample size per group is 23 with two measurements per subject (i.e., \texttt{2w}).
 
 \includegraphics{screenshots/gpower_5.png}
+\newpage
 
-For the 2-way interaction, the result should be a power of 91.25\% is we have a total samplesize of 46. Since we have 2 groups in the between factor that means the sample size per group is 2 (and both these groups collect 2 repeated measures).
+Now, we can repeat the process in \texttt{Superpower}.
 
 \begin{Shaded}
 \begin{Highlighting}[]
@@ -4180,7 +4240,6 @@ For the 2-way interaction, the result should be a power of 91.25\% is we have a 
 \NormalTok{string =}\StringTok{ "2w*2b"}
 \NormalTok{alpha_level <-}\StringTok{ }\FloatTok{0.05}
 \NormalTok{labelnames =}\StringTok{ }\KeywordTok{c}\NormalTok{(}\StringTok{"age"}\NormalTok{, }\StringTok{"old"}\NormalTok{, }\StringTok{"young"}\NormalTok{, }\StringTok{"color"}\NormalTok{, }\StringTok{"blue"}\NormalTok{, }\StringTok{"red"}\NormalTok{)}
-
 \NormalTok{design_result <-}\StringTok{ }\KeywordTok{ANOVA_design}\NormalTok{(}
 \DataTypeTok{design =}\NormalTok{ string,}
 \DataTypeTok{n =}\NormalTok{ n,}
@@ -4203,7 +4262,7 @@ For the 2-way interaction, the result should be a power of 91.25\% is we have a 
 
 \begin{table}[!h]
 
-\caption{\label{tab:unnamed-chunk-192}Simulated ANOVA Result}
+\caption{\label{tab:unnamed-chunk-196}Simulated ANOVA Result}
 \centering
 \begin{tabular}{l|r|r}
 \hline
@@ -4228,7 +4287,7 @@ anova\_color:age & 91.26 & 0.2155901\\
 
 \begin{table}[!h]
 
-\caption{\label{tab:unnamed-chunk-194}Exact ANOVA Result}
+\caption{\label{tab:unnamed-chunk-198}Exact ANOVA Result}
 \centering
 \begin{tabular}{l|r|r|r|r}
 \hline
@@ -4243,12 +4302,12 @@ color:age & 91.24984 & 0.2072072 & 0.5112374 & 11.5\\
 \end{tabular}
 \end{table}
 
-\hypertarget{two-by-two-anova-within-between-design-variation-1}{%
-\subsection{Two by two ANOVA, within-between design Variation 1}\label{two-by-two-anova-within-between-design-variation-1}}
+\newpage
 
-Now, we can simulate the same two-way ANOVA but increasing the correlation to \texttt{r\textasciigrave{}\textasciigrave{}=0.7}.
+Now, we can simulate the same two-way ANOVA but increasing the correlation to r=0.7.
 
 \includegraphics{screenshots/gpower_6.png}
+\newpage
 
 \begin{Shaded}
 \begin{Highlighting}[]
@@ -4279,7 +4338,7 @@ Now, we can simulate the same two-way ANOVA but increasing the correlation to \t
 
 \begin{table}[!h]
 
-\caption{\label{tab:unnamed-chunk-197}Simulated ANOVA Result}
+\caption{\label{tab:unnamed-chunk-201}Simulated ANOVA Result}
 \centering
 \begin{tabular}{l|r|r}
 \hline
@@ -4304,7 +4363,7 @@ anova\_color:age & 99.00 & 0.3081551\\
 
 \begin{table}[!h]
 
-\caption{\label{tab:unnamed-chunk-199}Exact ANOVA Result}
+\caption{\label{tab:unnamed-chunk-203}Exact ANOVA Result}
 \centering
 \begin{tabular}{l|r|r|r|r}
 \hline
@@ -4333,32 +4392,36 @@ Here we will use a modified example from \citet{SASglmpower} pg. 3739. In this h
 
 First we can set up the dataframe in SAS. This is similiar to the \texttt{mu} command in \texttt{ANOVA\_design}.
 
-\begin{quote}
-data Exemplary2;
-input variety Height1 Height2 Height3;
-datalines;
-1 14 16 21
-2 10 15 16
-;
-\end{quote}
+\begin{Shaded}
+\begin{Highlighting}[]
+\NormalTok{data Exemplary2;}
+\NormalTok{input variety Height1 Height2 Height3;}
+\NormalTok{datalines;}
+\DecValTok{1} \DecValTok{14} \DecValTok{16} \DecValTok{21}
+\DecValTok{2} \DecValTok{10} \DecValTok{15} \DecValTok{16}
+\NormalTok{;}
+\end{Highlighting}
+\end{Shaded}
 
 We can now solve for power in \texttt{PROC\ GLMPOWER}. In this case, we set up a multivariate repeated measures model, with a total of 40 flowers (20 per variety). We also setup the within-factor correlations with the CORRS command.
 
-\begin{quote}
-proc glmpower data=Exemplary2;
-class Variety Exposure;
-model Height1 Height2 Height3 = Variety;
-repeated Time contrast;
-power
-mtest = pt
-stddev = 5
-ntotal = 40
-power = .
-MATRIX(``MyCorrs'')= (.75,
-0.5625,.75)
-CORRS= ``MyCorrs'';
-run;
-\end{quote}
+\begin{Shaded}
+\begin{Highlighting}[]
+\NormalTok{proc glmpower data=Exemplary2;}
+\NormalTok{class Variety Exposure;}
+\NormalTok{model Height1 Height2 Height3 =}\StringTok{ }\NormalTok{Variety;}
+\NormalTok{repeated Time contrast;}
+\NormalTok{power}
+\NormalTok{mtest =}\StringTok{ }\NormalTok{pt}
+\NormalTok{stddev =}\StringTok{ }\DecValTok{5}
+\NormalTok{ntotal =}\StringTok{ }\DecValTok{40}
+\NormalTok{power =}\StringTok{ }\NormalTok{.}
+\KeywordTok{MATRIX}\NormalTok{(}\StringTok{"MyCorrs"}\NormalTok{)=}\StringTok{ }\NormalTok{(.}\DecValTok{75}\NormalTok{,}
+                    \FloatTok{0.5625}\NormalTok{,.}\DecValTok{75}\NormalTok{)}
+\NormalTok{CORRS=}\StringTok{ "MyCorrs"}\NormalTok{;}
+\NormalTok{run;}
+\end{Highlighting}
+\end{Shaded}
 
 The power analysis results then get printed to the SAS ouput page.
 
@@ -4392,7 +4455,7 @@ Now let's replicate this in \texttt{R} with \texttt{Superpower}. First, we setup
 \end{Highlighting}
 \end{Shaded}
 
-\includegraphics{SuperpowerValidation_files/figure-latex/unnamed-chunk-200-1.pdf}
+\includegraphics{SuperpowerValidation_files/figure-latex/unnamed-chunk-206-1.pdf}
 
 \begin{Shaded}
 \begin{Highlighting}[]
@@ -4404,7 +4467,7 @@ Now let's replicate this in \texttt{R} with \texttt{Superpower}. First, we setup
 
 \begin{table}[!h]
 
-\caption{\label{tab:unnamed-chunk-202}MANOVA Result}
+\caption{\label{tab:unnamed-chunk-208}MANOVA Result}
 \centering
 \begin{tabular}{l|r|r|r|r}
 \hline
@@ -4427,7 +4490,9 @@ You will notice a small discrepancy between the two power estimates for the main
 Now we move onto the example from pg 3794 of \citet{SASglmpower}.
 
 As stated in the manual:
-\textgreater{}Logan, Baron, and Kohout (1995) and Guo et al.~(2013) study the effect of a dental intervention on the
+
+\begin{quote}
+Logan, Baron, and Kohout (1995) and Guo et al.~(2013) study the effect of a dental intervention on the
 memory of pain after root canal therapy. The intervention is a sensory focus strategy, in which patients are
 instructed to pay attention only to the physical sensations in their mouth during the root canal procedure.
 Suppose you are interested in the long-term effects of this sensory focus intervention, because avoidance
@@ -4435,38 +4500,43 @@ behavior has been shown to build along with memory of pain. You are planning a s
 sensory focus to standard of care over a period of a year, asking patients to self-report their memory of pain
 immediately after the procedure and then again at 1 week, 6 months, and 12 months. You use a scale from 0
 (no pain remembered) to 5 (maximum pain remembered).
+\end{quote}
 
 This makes it a \texttt{2b*4w} design with treatment as a between subjects factor, with two levels (sensory focus versus standard of care), and time as a within-subject factor is time, with four levels (0, 1, 26, and 52 weeks). In this case, we differ from \citet{SASglmpower} and we will solve for power with a sample size of 300 per group (600 total) with an alpha of \texttt{.01}. In addition, we want to see what the impact of chaning the common standard deviation will have on power.
 
 So in SAS we set up the data.
 
-\begin{quote}
-data Pain;
-input Treatment \$ PainMem0 PainMem1Wk PainMem6Mo PainMem12Mo;
-datalines;
-SensoryFocus 2.40 2.38 2.05 1.90
-StandardOfCare 2.40 2.39 2.36 2.30
-;
-\end{quote}
+\begin{Shaded}
+\begin{Highlighting}[]
+\NormalTok{data Pain;}
+\NormalTok{input Treatment }\OperatorTok{$}\StringTok{ }\NormalTok{PainMem0 PainMem1Wk PainMem6Mo PainMem12Mo;}
+\NormalTok{datalines;}
+\NormalTok{SensoryFocus }\FloatTok{2.40} \FloatTok{2.38} \FloatTok{2.05} \FloatTok{1.90}
+\NormalTok{StandardOfCare }\FloatTok{2.40} \FloatTok{2.39} \FloatTok{2.36} \FloatTok{2.30}
+\NormalTok{;}
+\end{Highlighting}
+\end{Shaded}
 
 Then we can run the analysis in SAS. Note that in the example \citet{SASglmpower} are assuming a linear exponential covariance matrix, which we can mimic in \texttt{R}.
 
-\begin{quote}
-proc glmpower data=Pain;
-class Treatment;
-model PainMem0 PainMem1Wk PainMem6Mo PainMem12Mo = Treatment;
-repeated Time contrast;
-power
-mtest = pt
-alpha = 0.01
-power = .
-ntotal = 600
-stddev = 0.92 1.04
-matrix (``PainCorr'') = lear(0.6, 0.8, 4, 0 1 26 52)
-corrmat = ``PainCorr'';
-run;
-quit;
-\end{quote}
+\begin{Shaded}
+\begin{Highlighting}[]
+\NormalTok{proc glmpower data=Pain;}
+\NormalTok{class Treatment;}
+\NormalTok{model PainMem0 PainMem1Wk PainMem6Mo PainMem12Mo =}\StringTok{ }\NormalTok{Treatment;}
+\NormalTok{repeated Time contrast;}
+\NormalTok{power}
+\NormalTok{mtest =}\StringTok{ }\NormalTok{pt }
+\NormalTok{alpha =}\StringTok{ }\FloatTok{0.01}
+\NormalTok{power =}\StringTok{ }\NormalTok{.}
+\NormalTok{ntotal =}\StringTok{ }\DecValTok{600}
+\NormalTok{stddev =}\StringTok{ }\FloatTok{0.92} \FloatTok{1.04}
+\KeywordTok{matrix}\NormalTok{ (}\StringTok{"PainCorr"}\NormalTok{) =}\StringTok{ }\KeywordTok{lear}\NormalTok{(}\FloatTok{0.6}\NormalTok{, }\FloatTok{0.8}\NormalTok{, }\DecValTok{4}\NormalTok{, }\DecValTok{0} \DecValTok{1} \DecValTok{26} \DecValTok{52}\NormalTok{)}
+\NormalTok{corrmat =}\StringTok{ "PainCorr"}\NormalTok{;}
+\NormalTok{run;}
+\NormalTok{quit;}
+\end{Highlighting}
+\end{Shaded}
 
 This produces a table with the result for a power analysis with 2 different common standard deviations.
 
@@ -4509,7 +4579,7 @@ We then replicate in \texttt{R}, first by setting up the ``lear'' correlation ma
 
 \begin{table}[!h]
 
-\caption{\label{tab:unnamed-chunk-203}Simulated MANOVA Result}
+\caption{\label{tab:unnamed-chunk-211}Simulated MANOVA Result}
 \centering
 \begin{tabular}{l|r|r|r|r}
 \hline
@@ -4540,7 +4610,7 @@ Treatment:TIME & 99.55718 & 0.0531965 & 0.2370344 & 33.486447\\
 \end{Highlighting}
 \end{Shaded}
 
-\includegraphics{SuperpowerValidation_files/figure-latex/unnamed-chunk-204-1.pdf}
+\includegraphics{SuperpowerValidation_files/figure-latex/unnamed-chunk-212-1.pdf}
 
 \begin{Shaded}
 \begin{Highlighting}[]
@@ -4551,7 +4621,7 @@ Treatment:TIME & 99.55718 & 0.0531965 & 0.2370344 & 33.486447\\
 
 \begin{table}[!h]
 
-\caption{\label{tab:unnamed-chunk-205}Simulated MANOVA Result}
+\caption{\label{tab:unnamed-chunk-213}Simulated MANOVA Result}
 \centering
 \begin{tabular}{l|r|r|r|r}
 \hline
@@ -4608,7 +4678,7 @@ Let's start with a 2x2x2 between-subjects design. We collect 50 participants in 
 
 \begin{table}[!h]
 
-\caption{\label{tab:unnamed-chunk-208}Simulated ANOVA Result}
+\caption{\label{tab:unnamed-chunk-216}Simulated ANOVA Result}
 \centering
 \begin{tabular}{l|r|r}
 \hline
@@ -4641,7 +4711,7 @@ anova\_Size:Color:Load & 84.88 & 0.0248926\\
 
 \begin{table}[!h]
 
-\caption{\label{tab:unnamed-chunk-210}Exact ANOVA Result}
+\caption{\label{tab:unnamed-chunk-218}Exact ANOVA Result}
 \centering
 \begin{tabular}{l|r|r|r|r}
 \hline
@@ -4882,7 +4952,7 @@ A three-way ANOVA builds on the same principles as a one-way ANOVA. We look at w
 
 \begin{table}[!h]
 
-\caption{\label{tab:unnamed-chunk-215}Simulated ANOVA Result}
+\caption{\label{tab:unnamed-chunk-223}Simulated ANOVA Result}
 \centering
 \begin{tabular}{l|r|r}
 \hline
@@ -4903,7 +4973,7 @@ anova\_Size & 70.69 & 0.0180045\\
 
 \begin{table}[!h]
 
-\caption{\label{tab:unnamed-chunk-217}Exact ANOVA Result}
+\caption{\label{tab:unnamed-chunk-225}Exact ANOVA Result}
 \centering
 \begin{tabular}{l|r|r|r|r}
 \hline
@@ -4953,7 +5023,7 @@ Similarly, we can create a 2 factor design where we average over the third facto
 
 \begin{table}[!h]
 
-\caption{\label{tab:unnamed-chunk-221}Simulated ANOVA Result}
+\caption{\label{tab:unnamed-chunk-229}Simulated ANOVA Result}
 \centering
 \begin{tabular}{l|r|r}
 \hline
@@ -4978,7 +5048,7 @@ anova\_Size:Color & 69.72 & 0.0176374\\
 
 \begin{table}[!h]
 
-\caption{\label{tab:unnamed-chunk-223}Exact ANOVA Result}
+\caption{\label{tab:unnamed-chunk-231}Exact ANOVA Result}
 \centering
 \begin{tabular}{l|r|r|r|r}
 \hline
@@ -5054,7 +5124,7 @@ Size:Color & 70.33227 & 0.0155376 & 0.1256297 & 6.25\\
 
 \begin{table}[!h]
 
-\caption{\label{tab:unnamed-chunk-227}Simulated ANOVA Result}
+\caption{\label{tab:unnamed-chunk-235}Simulated ANOVA Result}
 \centering
 \begin{tabular}{l|r|r}
 \hline
@@ -5087,7 +5157,7 @@ anova\_Size:Color:CognitiveLoad & 78.13 & 0.0213083\\
 
 \begin{table}[!h]
 
-\caption{\label{tab:unnamed-chunk-229}Exact ANOVA Result}
+\caption{\label{tab:unnamed-chunk-237}Exact ANOVA Result}
 \centering
 \begin{tabular}{l|r|r|r|r}
 \hline
@@ -5280,7 +5350,7 @@ The power for interactions depends on Cohen's \emph{f}, the alpha level, the sam
 
 \begin{table}[!h]
 
-\caption{\label{tab:unnamed-chunk-232}Exact ANOVA Result}
+\caption{\label{tab:unnamed-chunk-240}Exact ANOVA Result}
 \centering
 \begin{tabular}{l|r|r|r|r}
 \hline
@@ -5428,7 +5498,7 @@ We see that a pattern of means of 0, 0, 0, 0, 0, 0, 0, 20 for a 2x2x2 interactio
 
 \begin{table}[!h]
 
-\caption{\label{tab:unnamed-chunk-235}Exact ANOVA Result}
+\caption{\label{tab:unnamed-chunk-243}Exact ANOVA Result}
 \centering
 \begin{tabular}{l|r|r|r|r}
 \hline
@@ -5494,7 +5564,7 @@ Cohen's \emph{f} is twice as large for a 2x2 design with the same mean value in 
 
 \begin{table}[!h]
 
-\caption{\label{tab:unnamed-chunk-238}Exact ANOVA Result}
+\caption{\label{tab:unnamed-chunk-246}Exact ANOVA Result}
 \centering
 \begin{tabular}{l|r|r|r|r}
 \hline
@@ -5562,7 +5632,7 @@ In the 17th Data Colada blog post titled \href{http://datacolada.org/17}{No-way 
 \end{Highlighting}
 \end{Shaded}
 
-\includegraphics{SuperpowerValidation_files/figure-latex/unnamed-chunk-241-1.pdf}
+\includegraphics{SuperpowerValidation_files/figure-latex/unnamed-chunk-249-1.pdf}
 
 We can reproduce the simulations in the Data Colada blog post, using the original code.
 
@@ -5775,7 +5845,7 @@ And we can reproduce the results using the \texttt{ANOVA\_exact} function.
 \end{Highlighting}
 \end{Shaded}
 
-\includegraphics{SuperpowerValidation_files/figure-latex/unnamed-chunk-257-1.pdf}
+\includegraphics{SuperpowerValidation_files/figure-latex/unnamed-chunk-265-1.pdf}
 
 \begin{Shaded}
 \begin{Highlighting}[]
@@ -5793,7 +5863,7 @@ And we can reproduce the results using the \texttt{ANOVA\_exact} function.
 
 \begin{table}[!h]
 
-\caption{\label{tab:unnamed-chunk-257}ANOVA Results}
+\caption{\label{tab:unnamed-chunk-265}ANOVA Results}
 \centering
 \begin{tabular}{l|r|r|r|r}
 \hline
@@ -5823,7 +5893,7 @@ b & 86.79843 & 0.2173913 & 0.5270463 & 10\\
 \end{Highlighting}
 \end{Shaded}
 
-\includegraphics{SuperpowerValidation_files/figure-latex/unnamed-chunk-257-2.pdf}
+\includegraphics{SuperpowerValidation_files/figure-latex/unnamed-chunk-265-2.pdf}
 
 \begin{Shaded}
 \begin{Highlighting}[]
@@ -5841,7 +5911,7 @@ b & 86.79843 & 0.2173913 & 0.5270463 & 10\\
 
 \begin{table}[!h]
 
-\caption{\label{tab:unnamed-chunk-257}ANOVA Results}
+\caption{\label{tab:unnamed-chunk-265}ANOVA Results}
 \centering
 \begin{tabular}{l|r|r|r|r}
 \hline
@@ -5936,7 +6006,7 @@ We can also reproduce the last example by adjusting the means and standard devia
 
 \begin{table}[!h]
 
-\caption{\label{tab:unnamed-chunk-264}ANOVA Results}
+\caption{\label{tab:unnamed-chunk-272}ANOVA Results}
 \centering
 \begin{tabular}{l|r|r|r|r}
 \hline
@@ -6004,7 +6074,7 @@ And changing the sample size to 300 should reproduce the power for the interacti
 
 \begin{table}[!h]
 
-\caption{\label{tab:unnamed-chunk-265}ANOVA Results}
+\caption{\label{tab:unnamed-chunk-273}ANOVA Results}
 \centering
 \begin{tabular}{l|r|r|r|r}
 \hline
@@ -6138,7 +6208,7 @@ Neither of the main effects is now significant, as the marginal means are 22.5 v
 
 \begin{table}[!h]
 
-\caption{\label{tab:unnamed-chunk-271}ANOVA Results}
+\caption{\label{tab:unnamed-chunk-279}ANOVA Results}
 \centering
 \begin{tabular}{l|r|r|r|r}
 \hline
@@ -6252,7 +6322,7 @@ In a one-way ANOVA adding a condition means, for example, going from a 1x2 to a 
 
 \begin{table}[!h]
 
-\caption{\label{tab:unnamed-chunk-275}Simulated ANOVA Result}
+\caption{\label{tab:unnamed-chunk-283}Simulated ANOVA Result}
 \centering
 \begin{tabular}{l|r|r}
 \hline
@@ -6273,7 +6343,7 @@ anova\_Condition & 84.15 & 0.0911796\\
 
 \begin{table}[!h]
 
-\caption{\label{tab:unnamed-chunk-277}Exact ANOVA Result}
+\caption{\label{tab:unnamed-chunk-285}Exact ANOVA Result}
 \centering
 \begin{tabular}{l|r|r|r|r}
 \hline
@@ -6353,7 +6423,7 @@ And we can see power across sample sizes
 
 \begin{table}[!h]
 
-\caption{\label{tab:unnamed-chunk-280}Exact ANOVA Result}
+\caption{\label{tab:unnamed-chunk-288}Exact ANOVA Result}
 \centering
 \begin{tabular}{l|r|r|r|r}
 \hline
@@ -6769,7 +6839,7 @@ Now imagine our design described above was a within design. The means and sd rem
 
 \begin{table}[!h]
 
-\caption{\label{tab:unnamed-chunk-288}Exact ANOVA Result}
+\caption{\label{tab:unnamed-chunk-296}Exact ANOVA Result}
 \centering
 \begin{tabular}{l|r|r|r|r}
 \hline
@@ -6821,7 +6891,7 @@ We see power is ever so slightly less than for the between subject design. This 
 
 \begin{table}[!h]
 
-\caption{\label{tab:unnamed-chunk-291}Exact ANOVA Result}
+\caption{\label{tab:unnamed-chunk-299}Exact ANOVA Result}
 \centering
 \begin{tabular}{l|r|r|r|r}
 \hline
@@ -7265,7 +7335,7 @@ In a 2 x 2 x 2 design, an ANOVA will give the test results for three main effect
 
 \begin{table}[!h]
 
-\caption{\label{tab:unnamed-chunk-295}Simulated ANOVA Result}
+\caption{\label{tab:unnamed-chunk-303}Simulated ANOVA Result}
 \centering
 \begin{tabular}{l|r|r}
 \hline
@@ -7386,7 +7456,7 @@ Let's re-run the simulation twith the Holm-Bonferroni correction, which is simpl
 
 \begin{table}[!h]
 
-\caption{\label{tab:unnamed-chunk-300}ANOVA Results}
+\caption{\label{tab:unnamed-chunk-308}ANOVA Results}
 \centering
 \begin{tabular}{l|r|r}
 \hline
@@ -7411,7 +7481,7 @@ anova\_condition1:condition2:condition3 & 1.1 & 0.0027855\\
 
 \begin{table}[!h]
 
-\caption{\label{tab:unnamed-chunk-301}Pairwise Results}
+\caption{\label{tab:unnamed-chunk-309}Pairwise Results}
 \centering
 \begin{tabular}{l|r|r}
 \hline
@@ -7523,7 +7593,7 @@ For some designs it is possible to calculate power analytically, using closed fu
 
 \begin{table}[!h]
 
-\caption{\label{tab:unnamed-chunk-304}Exact ANOVA Result}
+\caption{\label{tab:unnamed-chunk-312}Exact ANOVA Result}
 \centering
 \begin{tabular}{l|r|r|r|r}
 \hline
@@ -7619,7 +7689,7 @@ Finally, G*Power \citep{faul2007g} provides the option to calculate \texttt{f} f
 
 \begin{table}[!h]
 
-\caption{\label{tab:unnamed-chunk-309}Exact ANOVA Result}
+\caption{\label{tab:unnamed-chunk-317}Exact ANOVA Result}
 \centering
 \begin{tabular}{l|r|r|r|r}
 \hline
@@ -7728,7 +7798,7 @@ We can use the function by \citep{R-pwr2ppl}, as well.
 
 \begin{table}[!h]
 
-\caption{\label{tab:unnamed-chunk-313}Exact ANOVA Result}
+\caption{\label{tab:unnamed-chunk-321}Exact ANOVA Result}
 \centering
 \begin{tabular}{l|r|r|r|r}
 \hline
@@ -7805,7 +7875,7 @@ Power is calculated for a specific value of an effect size, alpha level, and sam
 
 \begin{table}[!h]
 
-\caption{\label{tab:unnamed-chunk-317}Exact ANOVA Result}
+\caption{\label{tab:unnamed-chunk-325}Exact ANOVA Result}
 \centering
 \begin{tabular}{l|r|r|r|r}
 \hline
@@ -7831,7 +7901,7 @@ We can make these calculations for a range of sample sizes, to get a power curve
 \end{Highlighting}
 \end{Shaded}
 
-\includegraphics{SuperpowerValidation_files/figure-latex/unnamed-chunk-318-1.pdf}
+\includegraphics{SuperpowerValidation_files/figure-latex/unnamed-chunk-326-1.pdf}
 
 If we run many of these \texttt{plot\_power} functions across small changes in the ANOVA\_design we can compile a number of power curves that can be combined into a single plot. We do this below. The code to reprodcue these plots can be found on the \href{https://github.com/arcaldwell49/SuperpowerBook/tree/master/data}{GitHub repository for this book}.
 \pagebreak
@@ -7841,7 +7911,7 @@ If we run many of these \texttt{plot\_power} functions across small changes in t
 
 The design has means 0, 0, 0, 0, with one cell increasing by 0.1, up to 0, 0, 0, 0.5. The standard deviation is set to 1. The correlation between all variables is 0.5.
 
-\includegraphics{SuperpowerValidation_files/figure-latex/unnamed-chunk-319-1.pdf}
+\includegraphics{SuperpowerValidation_files/figure-latex/unnamed-chunk-327-1.pdf}
 \pagebreak
 
 \hypertarget{explore-increase-in-effect-size-for-cross-over-interactions.}{%
@@ -7849,7 +7919,7 @@ The design has means 0, 0, 0, 0, with one cell increasing by 0.1, up to 0, 0, 0,
 
 The design has means 0, 0, 0, 0, with two cells increasing by 0.1, up to 0.5, 0, 0, 0.5. The standard deviation is set to 1. The correlation between all variables is 0.5.
 
-\includegraphics{SuperpowerValidation_files/figure-latex/unnamed-chunk-320-1.pdf}
+\includegraphics{SuperpowerValidation_files/figure-latex/unnamed-chunk-328-1.pdf}
 \pagebreak
 
 \hypertarget{explore-increase-in-correlation-in-moderated-interactions.}{%
@@ -7857,7 +7927,7 @@ The design has means 0, 0, 0, 0, with two cells increasing by 0.1, up to 0.5, 0,
 
 The design has means 0, 0, 0, 0.3. The standard deviation is set to 1. The correlation between all variables increases from 0 to 0.9.
 
-\includegraphics{SuperpowerValidation_files/figure-latex/unnamed-chunk-321-1.pdf}
+\includegraphics{SuperpowerValidation_files/figure-latex/unnamed-chunk-329-1.pdf}
 \pagebreak
 
 \hypertarget{increasing-correlation-in-on-factor-decreases-power-in-second-factor}{%
@@ -7871,7 +7941,7 @@ The more important finding with respect to the effect of \emph{r} on power relat
 
 We see this in the plots below. As the correlation of the A factor increases from 0.4 to 0.9, we see the power for the main effect decreases.
 
-\includegraphics{SuperpowerValidation_files/figure-latex/unnamed-chunk-322-1.pdf}
+\includegraphics{SuperpowerValidation_files/figure-latex/unnamed-chunk-330-1.pdf}
 
 \hypertarget{appendix-1-direct-comparison-to-pwr2ppl}{%
 \chapter*{Appendix 1: Direct Comparison to pwr2ppl}\label{appendix-1-direct-comparison-to-pwr2ppl}}

@@ -105,6 +105,7 @@ Each of these comparisons can have their own correlation if the factor is manipu
 
 The order in which the correlations are entered in the vector should match the covariance matrix.
 The order for a 2x2 design is given in the 6 item list above. The general pattern is that the matrix is filled from top to bottom, and left to right, illustrated by the increasing correlations in the table below.
+The diagonal is generated dynamically (based on the standard deviation).
 
 Matrix|a1_b1|a1_b2|a2_b1|a2_b2
 ------|-----|-----|-----|-----             
@@ -113,8 +114,7 @@ a1_b2 |0.91 |1.00 |0.94 |0.95
 a2_b1 |0.92 |0.94 |1.00 |0.96
 a2_b2 |0.93 |0.95 |0.90 |1.00
 
-The diagonal is generated dynamically (based on the standard deviation).
-\pagebreak
+\newpage
 
 We would enter this correlation matrix in the `ANOVA_design` function as:
 
@@ -133,19 +133,29 @@ design_result <- ANOVA_design(design = "2w*2w",
                                              "fast", "slow"),
                               plot = TRUE)
 ```
-
+\newpage
 We can check the correlation matrix by asking for it from the design_result object to check if it was entered the way we wanted:
 
-```{r}
+```{r eval = FALSE}
 design_result$cor_mat
+```
+```{r echo = FALSE}
+knitr::kable(design_result$cor_mat,
+             caption = "Correlation Matrix")%>%
+  kable_styling(latex_options = "hold_position")
 ```
 
 We should also check the covariance-variance matrix to ensure the `ANOVA_design` function working properly. 
 The variance should be the diagonal element while the off-diagonal elements should be equal to `covariance = correlation*variance` or $cov_{x,y}=\frac{\sum_{i=1}^{N}(x_{i}-\bar{x})(y_{i}-\bar{y})}{N-1}$. 
 In this case, it is identical to the correlation matrix because the variance is equal to 1.
 
-```{r}
+```{r eval=FALSE}
 design_result$sigmatrix
+```
+```{r echo = FALSE}
+knitr::kable(design_result$sigmatrix,
+             caption = "Covariance-Variance Matrix")%>%
+  kable_styling(latex_options = "hold_position")
 ```
 
 ### Specifying the sample size
