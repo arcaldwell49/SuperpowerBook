@@ -1463,7 +1463,6 @@ knitr::kable(power_result_s1$main_results,
              caption = "Simulated ANOVA Result")%>%
   kable_styling(latex_options = "hold_position")
 ```
-**INSERT ANOVA Result ABOUT HERE**
 
 As we can see, the actual type I error rate far exceeds the typical 5%!
 
@@ -1487,13 +1486,15 @@ knitr::kable(power_result_none$main_results,
   kable_styling(latex_options = "hold_position")
 ```
 
-**INSERT ANOVA Result ABOUT HERE**
-
 These inflated error rates are obviously a problem, which begs the question what do we do about them?
 
 In our experience, most researchers default to using a Greenhouse-Geisser adjustment for sphericity, but this may not be the most statistical efficient way of dealing with violations of sphercity. Further, as we can see from the simulation (`power_result_s2`) the MANOVA maintains the type I error rate at 5%.
 
-**Insert MANOVA Result About HERE**
+```{r echo=FALSE}
+knitr::kable(power_result_none$manova_results,
+             caption = "Simulated MANOVA Result")%>%
+  kable_styling(latex_options = "hold_position")
+```
 
 ### MANOVA or Sphericity Adjustment?
 

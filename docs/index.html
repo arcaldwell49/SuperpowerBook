@@ -24,7 +24,7 @@
 <meta name="author" content="Aaron R. Caldwell &amp; Daniël Lakens" />
 
 
-<meta name="date" content="2019-09-25" />
+<meta name="date" content="2019-09-27" />
 
   <meta name="viewport" content="width=device-width, initial-scale=1" />
   <meta name="apple-mobile-web-app-capable" content="yes" />
@@ -186,8 +186,12 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 </ul></li>
 </ul></li>
 <li class="chapter" data-level="4" data-path="mixed-anova.html"><a href="mixed-anova.html"><i class="fa fa-check"></i><b>4</b> Mixed ANOVA</a><ul>
-<li class="chapter" data-level="4.1" data-path="mixed-anova.html"><a href="mixed-anova.html#x2-anova-within-between-design"><i class="fa fa-check"></i><b>4.1</b> 2x2 ANOVA, within-between design</a><ul>
+<li class="chapter" data-level="4.1" data-path="mixed-anova.html"><a href="mixed-anova.html#simple-mixed-designs"><i class="fa fa-check"></i><b>4.1</b> Simple Mixed Designs</a><ul>
 <li class="chapter" data-level="4.1.1" data-path="mixed-anova.html"><a href="mixed-anova.html#two-by-two-anova-within-between-design-variation-1"><i class="fa fa-check"></i><b>4.1.1</b> Two by two ANOVA, within-between design Variation 1</a></li>
+</ul></li>
+<li class="chapter" data-level="4.2" data-path="mixed-anova.html"><a href="mixed-anova.html#complex-mixed-designs"><i class="fa fa-check"></i><b>4.2</b> Complex Mixed Designs</a><ul>
+<li class="chapter" data-level="4.2.1" data-path="mixed-anova.html"><a href="mixed-anova.html#b3w-design"><i class="fa fa-check"></i><b>4.2.1</b> 2b*3w Design</a></li>
+<li class="chapter" data-level="4.2.2" data-path="mixed-anova.html"><a href="mixed-anova.html#b4w-design"><i class="fa fa-check"></i><b>4.2.2</b> 2b*4w Design</a></li>
 </ul></li>
 </ul></li>
 <li class="chapter" data-level="5" data-path="power-for-three-way-interactions.html"><a href="power-for-three-way-interactions.html"><i class="fa fa-check"></i><b>5</b> Power for Three-way Interactions</a></li>
@@ -246,14 +250,14 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 <div id="header">
 <h1 class="title">Power Analysis with Superpower</h1>
 <p class="author"><em>Aaron R. Caldwell &amp; Daniël Lakens</em></p>
-<p class="date"><em>2019-09-25</em></p>
+<p class="date"><em>2019-09-27</em></p>
 </div>
 <div id="preface" class="section level1 unnumbered">
 <h1>Preface</h1>
 <p>The goal of <code>Superpower</code> is to easily simulate factorial designs and empirically calculate power using a simulation approach.
 The R package is intended to be utilized for prospective (a priori) power analysis. Please don’t be silly and compute <a href="https://discourse.datamethods.org/t/reference-collection-to-push-back-against-common-statistical-myths/1787">post hoc power</a>.</p>
-<p>This package, and book, expect readers to have some familiarity with R <span class="citation">(R Core Team <a href="#ref-R-base">2019</a>)</span>. However, we have created two Shiny apps (for the <a href="http://shiny.ieis.tue.nl/anova_power/"><code>ANOVA_power</code></a> &amp; <a href="http://shiny.ieis.tue.nl/anova_exact/"><code>ANOVA_exact</code></a> functions respectively) to help use these functions if you are not familiar with R.</p>
-<p>In this book we will display a variety of ways the <code>Superpower</code> package can be used for power analysis and sample size planning for factorial experimental designs. We also included various examples of the performance of <code>Superpower</code> against other R packages (e.g., <code>pwr2ppl</code> by <span class="citation">Aberson (<a href="#ref-R-pwr2ppl">2019</a>)</span> and <code>pwr</code> by <span class="citation">Champely (<a href="#ref-R-pwr">2018</a>)</span>) and statistical programs (such as G*Power <span class="citation">Faul et al. (<a href="#ref-faul2007g">2007</a>)</span> by or MOREpower <span class="citation">Campbell and Thompson (<a href="#ref-Campbell2012MorePower6F">2012</a>)</span>). All uses of the <code>ANOVA_power</code> function have been run with 10000 iterations (<code>nsims = 10000</code>). If you have any issues using <code>Superpower</code> or want to expand its capabilities please raise the issue on our <a href="https://github.com/arcaldwell49/Superpower/issues">GitHub</a> repository.</p>
+<p>This package, and book, expect readers to have some familiarity with R <span class="citation">(<a href="#ref-R-base">2019</a>)</span>. However, we have created two Shiny apps (for the <a href="http://shiny.ieis.tue.nl/anova_power/"><code>ANOVA_power</code></a> &amp; <a href="http://shiny.ieis.tue.nl/anova_exact/"><code>ANOVA_exact</code></a> functions respectively) to help use these functions if you are not familiar with R.</p>
+<p>In this book we will display a variety of ways the <code>Superpower</code> package can be used for power analysis and sample size planning for factorial experimental designs. We also included various examples of the performance of <code>Superpower</code> against other R packages (e.g., <code>pwr2ppl</code> by <span class="citation">Aberson (<a href="#ref-R-pwr2ppl">2019</a>)</span> and <code>pwr</code> by <span class="citation">Champely (<a href="#ref-R-pwr">2018</a>)</span>) and statistical programs (such as G*Power <span class="citation">Faul et al. (<a href="#ref-faul2007g">2007</a>)</span>, MOREpower <span class="citation">Campbell and Thompson (<a href="#ref-Campbell2012MorePower6F">2012</a>)</span>, and SAS’s <code>PROC GLMPOWER</code> <span class="citation">(<a href="#ref-SASglmpower">2015</a>)</span>). All uses of the <code>ANOVA_power</code> function have been run with 10000 iterations (<code>nsims = 10000</code>). If you have any issues using <code>Superpower</code> or want to expand its capabilities please raise the issue on our <a href="https://github.com/arcaldwell49/Superpower/issues">GitHub</a> repository.</p>
 
 </div>
 <h3>References</h3>
@@ -272,6 +276,9 @@ The R package is intended to be utilized for prospective (a priori) power analys
 </div>
 <div id="ref-R-base">
 <p>R Core Team. 2019. <em>R: A Language and Environment for Statistical Computing</em>. Vienna, Austria: R Foundation for Statistical Computing. <a href="https://www.R-project.org/">https://www.R-project.org/</a>.</p>
+</div>
+<div id="ref-SASglmpower">
+<p>SAS. 2015. “The Glmpower Procedure.” In <em>SAS/Stat 14.1 User’s Guide</em>, 3738–98. Cary, NC: SAS Institute Inc. <a href="http://support.sas.com/documentation/cdl/en/statug/68162/HTML/default/viewer.htm#statug_glmpower_toc.htm">http://support.sas.com/documentation/cdl/en/statug/68162/HTML/default/viewer.htm#statug_glmpower_toc.htm</a>.</p>
 </div>
 </div>
             </section>

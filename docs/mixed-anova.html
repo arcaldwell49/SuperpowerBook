@@ -24,7 +24,7 @@
 <meta name="author" content="Aaron R. Caldwell &amp; Daniël Lakens" />
 
 
-<meta name="date" content="2019-09-25" />
+<meta name="date" content="2019-09-27" />
 
   <meta name="viewport" content="width=device-width, initial-scale=1" />
   <meta name="apple-mobile-web-app-capable" content="yes" />
@@ -186,8 +186,12 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 </ul></li>
 </ul></li>
 <li class="chapter" data-level="4" data-path="mixed-anova.html"><a href="mixed-anova.html"><i class="fa fa-check"></i><b>4</b> Mixed ANOVA</a><ul>
-<li class="chapter" data-level="4.1" data-path="mixed-anova.html"><a href="mixed-anova.html#x2-anova-within-between-design"><i class="fa fa-check"></i><b>4.1</b> 2x2 ANOVA, within-between design</a><ul>
+<li class="chapter" data-level="4.1" data-path="mixed-anova.html"><a href="mixed-anova.html#simple-mixed-designs"><i class="fa fa-check"></i><b>4.1</b> Simple Mixed Designs</a><ul>
 <li class="chapter" data-level="4.1.1" data-path="mixed-anova.html"><a href="mixed-anova.html#two-by-two-anova-within-between-design-variation-1"><i class="fa fa-check"></i><b>4.1.1</b> Two by two ANOVA, within-between design Variation 1</a></li>
+</ul></li>
+<li class="chapter" data-level="4.2" data-path="mixed-anova.html"><a href="mixed-anova.html#complex-mixed-designs"><i class="fa fa-check"></i><b>4.2</b> Complex Mixed Designs</a><ul>
+<li class="chapter" data-level="4.2.1" data-path="mixed-anova.html"><a href="mixed-anova.html#b3w-design"><i class="fa fa-check"></i><b>4.2.1</b> 2b*3w Design</a></li>
+<li class="chapter" data-level="4.2.2" data-path="mixed-anova.html"><a href="mixed-anova.html#b4w-design"><i class="fa fa-check"></i><b>4.2.2</b> 2b*4w Design</a></li>
 </ul></li>
 </ul></li>
 <li class="chapter" data-level="5" data-path="power-for-three-way-interactions.html"><a href="power-for-three-way-interactions.html"><i class="fa fa-check"></i><b>5</b> Power for Three-way Interactions</a></li>
@@ -245,9 +249,10 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
             <section class="normal" id="section-">
 <div id="mixed-anova" class="section level1">
 <h1><span class="header-section-number">Chapter 4</span> Mixed ANOVA</h1>
-<div id="x2-anova-within-between-design" class="section level2">
-<h2><span class="header-section-number">4.1</span> 2x2 ANOVA, within-between design</h2>
-<p>We can simulate a two-way ANOVA with a specific alpha, sample size and effect size, to achieve a specified statistical power. We will try to reproduce the power analysis by G*Power <span class="citation">(Faul et al. <a href="#ref-faul2007g">2007</a>)</span> for an F-test from an ANOVA with a repeated measures, within-between interaction effect.</p>
+<p>So far we have discussed the simple one-way ANOVA, various forms of the repeated measures ANOVA (and multivariate alternatives), but we have not yet looked at “mixed ANOVA” wherein there are between and within subjects factors. Therefore, in this chapter we will show how a power analysis for these designs is performed in <code>Superpower</code>. Further, we will introduce comparisons to SAS’s <code>PROC GLMPOWER</code> which is a very powerful tool when designing mixed factorial experiments.</p>
+<div id="simple-mixed-designs" class="section level2">
+<h2><span class="header-section-number">4.1</span> Simple Mixed Designs</h2>
+<p>We can simulate a two-way ANOVA with a specific alpha, sample size and effect size, to achieve a specified statistical power. We will try to reproduce the power analysis by GPower <span class="citation">(Faul et al. <a href="#ref-faul2007g">2007</a>)</span> for an F-test from an ANOVA with a repeated measures, within-between interaction effect. While GPower is a great tool it has limited options for mixed factorial ANOVAs.</p>
 <p><img src="screenshots/gpower_5.png" /></p>
 <p>For the 2-way interaction, the result should be a power of 91.25% is we have a total samplesize of 46. Since we have 2 groups in the between factor that means the sample size per group is 2 (and both these groups collect 2 repeated measures).</p>
 <div class="sourceCode" id="cb260"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb260-1" title="1">mu &lt;-<span class="st"> </span><span class="kw">c</span>(<span class="op">-</span><span class="fl">0.25</span>, <span class="fl">0.25</span>, <span class="fl">0.25</span>,<span class="op">-</span><span class="fl">0.25</span>)</a>
@@ -272,7 +277,7 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 <a class="sourceLine" id="cb261-4" title="4">                                 <span class="dt">verbose =</span> <span class="ot">FALSE</span>)</a></code></pre></div>
 <table class="table" style="margin-left: auto; margin-right: auto;">
 <caption>
-<span id="tab:unnamed-chunk-191">Table 4.1: </span>Simulated ANOVA Result
+<span id="tab:unnamed-chunk-192">Table 4.1: </span>Simulated ANOVA Result
 </caption>
 <thead>
 <tr>
@@ -327,7 +332,7 @@ anova_color:age
 <a class="sourceLine" id="cb262-3" title="3">                            <span class="dt">verbose =</span> <span class="ot">FALSE</span>)</a></code></pre></div>
 <table class="table" style="margin-left: auto; margin-right: auto;">
 <caption>
-<span id="tab:unnamed-chunk-193">Table 4.2: </span>Exact ANOVA Result
+<span id="tab:unnamed-chunk-194">Table 4.2: </span>Exact ANOVA Result
 </caption>
 <thead>
 <tr>
@@ -403,7 +408,7 @@ color:age
 </table>
 <div id="two-by-two-anova-within-between-design-variation-1" class="section level3">
 <h3><span class="header-section-number">4.1.1</span> Two by two ANOVA, within-between design Variation 1</h3>
-<p>We can simulate the same two-way ANOVA increasing the correlation to 0.7.</p>
+<p>Now, we can simulate the same two-way ANOVA but increasing the correlation to <code>r``=0.7</code>.</p>
 <p><img src="screenshots/gpower_6.png" /></p>
 <div class="sourceCode" id="cb263"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb263-1" title="1">mu &lt;-<span class="st"> </span><span class="kw">c</span>(<span class="op">-</span><span class="fl">0.25</span>, <span class="fl">0.25</span>, <span class="fl">0.25</span>, <span class="fl">-0.25</span>)</a>
 <a class="sourceLine" id="cb263-2" title="2">n &lt;-<span class="st"> </span><span class="dv">23</span></a>
@@ -424,7 +429,7 @@ color:age
 <a class="sourceLine" id="cb264-4" title="4">                                 <span class="dt">verbose =</span> <span class="ot">FALSE</span>)</a></code></pre></div>
 <table class="table" style="margin-left: auto; margin-right: auto;">
 <caption>
-<span id="tab:unnamed-chunk-196">Table 4.3: </span>Simulated ANOVA Result
+<span id="tab:unnamed-chunk-197">Table 4.3: </span>Simulated ANOVA Result
 </caption>
 <thead>
 <tr>
@@ -479,7 +484,7 @@ anova_color:age
 <a class="sourceLine" id="cb265-3" title="3">                            <span class="dt">verbose =</span> <span class="ot">FALSE</span>)</a></code></pre></div>
 <table class="table" style="margin-left: auto; margin-right: auto;">
 <caption>
-<span id="tab:unnamed-chunk-198">Table 4.4: </span>Exact ANOVA Result
+<span id="tab:unnamed-chunk-199">Table 4.4: </span>Exact ANOVA Result
 </caption>
 <thead>
 <tr>
@@ -556,11 +561,426 @@ color:age
 
 </div>
 </div>
+<div id="complex-mixed-designs" class="section level2">
+<h2><span class="header-section-number">4.2</span> Complex Mixed Designs</h2>
+<p>Now, we are to the most complicated calculations. Similiar to the simple one-way repeated measures ANOVA, a mixed ANOVA assumes sphercity. Therefore, in most situations a multivariate approach, MANOVA, is recommended <span class="citation">(Maxwell, Delaney, and Kelley <a href="#ref-maxwell_designing_2004">2004</a>)</span>. To our knowledge, the only program that can accurately calculate power for mixed designs with greater than 2 levels is SAS’s <code>PROC GLMPOWER</code> <span class="citation">(SAS <a href="#ref-SASglmpower">2015</a>)</span>. The procedure utilizes approximate analytical solutions derived by <span class="citation">Muller and Peterson (<a href="#ref-muller1984practical">1984</a>)</span> and <span class="citation">O’Brien and Shieh (<a href="#ref-o1999pragmatic">1999</a>)</span>. According to the documentation, these analytical solutions are very accurate for all but small N situations (sorry exercise scientists!). Eventually, this chapter will document the analytical solution in a step-by-step fashion, but for the time being we will just directly compare <code>Superpower</code> to <code>GLMPOWER</code> from a few examples provided by SAS.</p>
+<div id="b3w-design" class="section level3">
+<h3><span class="header-section-number">4.2.1</span> 2b*3w Design</h3>
+<p>Here we will use a modified example from <span class="citation">SAS (<a href="#ref-SASglmpower">2015</a>)</span> pg. 3739. In this hypothetical experiment Suppose you are planning an experiment to study the growth of two varieties of flowers over the course of 3 weeks. The planned data analysis is a two-way ANOVA with flower height as the outcome and a model consisting of the effects of time, flower variety, and their interaction.</p>
+<p>First we can set up the dataframe in SAS. This is similiar to the <code>mu</code> command in <code>ANOVA_design</code>.</p>
+<blockquote>
+<p>data Exemplary2;
+input variety Height1 Height2 Height3;
+datalines;
+1 14 16 21
+2 10 15 16
+;</p>
+</blockquote>
+<p>We can now solve for power in <code>PROC GLMPOWER</code>. In this case, we set up a multivariate repeated measures model, with a total of 40 flowers (20 per variety). We also setup the within-factor correlations with the CORRS command.</p>
+<blockquote>
+<p>proc glmpower data=Exemplary2;
+class Variety Exposure;
+model Height1 Height2 Height3 = Variety;
+repeated Time contrast;
+power
+mtest = pt
+stddev = 5
+ntotal = 40
+power = .
+MATRIX(“MyCorrs”)= (.75,
+0.5625,.75)
+CORRS= “MyCorrs”;
+run;</p>
+</blockquote>
+<p>The power analysis results then get printed to the SAS ouput page.</p>
+<p><img src="screenshots/sas_2x3repeated.png" /></p>
+<p>Now let’s replicate this in <code>R</code> with <code>Superpower</code>. First, we setup the same design with <code>ANOVA_design</code>.</p>
+<div class="sourceCode" id="cb266"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb266-1" title="1">cor_<span class="dv">1</span> &lt;-<span class="st"> </span><span class="kw">matrix</span>(<span class="kw">c</span>(<span class="dv">1</span>, <span class="fl">.75</span>, <span class="fl">.5625</span>,</a>
+<a class="sourceLine" id="cb266-2" title="2">                  <span class="fl">.75</span>, <span class="dv">1</span>, <span class="fl">.75</span>,</a>
+<a class="sourceLine" id="cb266-3" title="3">                  <span class="fl">.5625</span>, <span class="fl">.75</span>, <span class="dv">1</span>), <span class="dt">nrow=</span><span class="dv">3</span>)</a>
+<a class="sourceLine" id="cb266-4" title="4"></a>
+<a class="sourceLine" id="cb266-5" title="5">cor_<span class="dv">2</span> &lt;-<span class="st"> </span>cor_<span class="dv">1</span><span class="op">*</span><span class="dv">0</span></a>
+<a class="sourceLine" id="cb266-6" title="6"></a>
+<a class="sourceLine" id="cb266-7" title="7">rho_mat &lt;-<span class="st"> </span><span class="kw">cbind</span>(<span class="kw">rbind</span>(cor_<span class="dv">1</span>,cor_<span class="dv">2</span>),</a>
+<a class="sourceLine" id="cb266-8" title="8">                      <span class="kw">rbind</span>(cor_<span class="dv">2</span>,cor_<span class="dv">1</span>))</a>
+<a class="sourceLine" id="cb266-9" title="9"></a>
+<a class="sourceLine" id="cb266-10" title="10">design_result &lt;-<span class="st"> </span><span class="kw">ANOVA_design</span>(<span class="st">&quot;2b*3w&quot;</span>,</a>
+<a class="sourceLine" id="cb266-11" title="11">                              <span class="dt">n =</span> <span class="dv">20</span>,</a>
+<a class="sourceLine" id="cb266-12" title="12">                              <span class="dt">sd =</span> <span class="dv">5</span>,</a>
+<a class="sourceLine" id="cb266-13" title="13">                              <span class="dt">mu =</span> <span class="kw">c</span>(<span class="dv">14</span>, <span class="dv">16</span>, <span class="dv">21</span>,</a>
+<a class="sourceLine" id="cb266-14" title="14">                                     <span class="dv">10</span>, <span class="dv">15</span>, <span class="dv">16</span>),</a>
+<a class="sourceLine" id="cb266-15" title="15">                              <span class="dt">r =</span> rho_mat,</a>
+<a class="sourceLine" id="cb266-16" title="16">                              <span class="dt">labelnames =</span> <span class="kw">c</span>(<span class="st">&quot;VARIETY&quot;</span>, </a>
+<a class="sourceLine" id="cb266-17" title="17">                                             <span class="st">&quot;type1&quot;</span>, <span class="st">&quot;type2&quot;</span>,</a>
+<a class="sourceLine" id="cb266-18" title="18">                                             <span class="st">&quot;TIME&quot;</span>, </a>
+<a class="sourceLine" id="cb266-19" title="19">                                             <span class="st">&quot;height1&quot;</span>, <span class="st">&quot;height2&quot;</span>, </a>
+<a class="sourceLine" id="cb266-20" title="20">                                             <span class="st">&quot;height3&quot;</span>),</a>
+<a class="sourceLine" id="cb266-21" title="21">                              <span class="dt">plot =</span> <span class="ot">TRUE</span>)</a></code></pre></div>
+<p><img src="SuperpowerValidation_files/figure-html/unnamed-chunk-200-1.png" width="672" /></p>
+<div class="sourceCode" id="cb267"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb267-1" title="1">exact_result &lt;-<span class="st"> </span><span class="kw">ANOVA_exact</span>(design_result, <span class="dt">verbose =</span> <span class="ot">FALSE</span>,</a>
+<a class="sourceLine" id="cb267-2" title="2">                            <span class="dt">correction =</span> <span class="st">&quot;none&quot;</span>,</a>
+<a class="sourceLine" id="cb267-3" title="3">                            <span class="dt">alpha_level =</span> <span class="fl">.05</span>)</a></code></pre></div>
+<table class="table" style="margin-left: auto; margin-right: auto;">
+<caption>
+<span id="tab:unnamed-chunk-202">Table 4.5: </span>MANOVA Result
+</caption>
+<thead>
+<tr>
+<th style="text-align:left;">
+</th>
+<th style="text-align:right;">
+power
+</th>
+<th style="text-align:right;">
+partial_eta_squared
+</th>
+<th style="text-align:right;">
+cohen_f
+</th>
+<th style="text-align:right;">
+non_centrality
+</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td style="text-align:left;">
+VARIETY
+</td>
+<td style="text-align:right;">
+63.65566
+</td>
+<td style="text-align:right;">
+0.1287208
+</td>
+<td style="text-align:right;">
+0.3843667
+</td>
+<td style="text-align:right;">
+5.614035
+</td>
+</tr>
+<tr>
+<td style="text-align:left;">
+TIME
+</td>
+<td style="text-align:right;">
+100.00000
+</td>
+<td style="text-align:right;">
+0.5877929
+</td>
+<td style="text-align:right;">
+1.1941377
+</td>
+<td style="text-align:right;">
+108.373333
+</td>
+</tr>
+<tr>
+<td style="text-align:left;">
+VARIETY:TIME
+</td>
+<td style="text-align:right;">
+84.08029
+</td>
+<td style="text-align:right;">
+0.1273729
+</td>
+<td style="text-align:right;">
+0.3820535
+</td>
+<td style="text-align:right;">
+11.093333
+</td>
+</tr>
+</tbody>
+</table>
+<p>You will notice a small discrepancy between the two power estimates for the main effect of variety. This difference is due to the analytical solutions problems with small sample sizes. You will see in the example below that the results match when the total sample size is much greater.</p>
+</div>
+<div id="b4w-design" class="section level3">
+<h3><span class="header-section-number">4.2.2</span> 2b*4w Design</h3>
+<p>Now we move onto the example from pg 3794 of <span class="citation">SAS (<a href="#ref-SASglmpower">2015</a>)</span>.</p>
+<p>As stated in the manual:
+&gt;Logan, Baron, and Kohout (1995) and Guo et al. (2013) study the effect of a dental intervention on the
+memory of pain after root canal therapy. The intervention is a sensory focus strategy, in which patients are
+instructed to pay attention only to the physical sensations in their mouth during the root canal procedure.
+Suppose you are interested in the long-term effects of this sensory focus intervention, because avoidance
+behavior has been shown to build along with memory of pain. You are planning a study to compare
+sensory focus to standard of care over a period of a year, asking patients to self-report their memory of pain
+immediately after the procedure and then again at 1 week, 6 months, and 12 months. You use a scale from 0
+(no pain remembered) to 5 (maximum pain remembered).</p>
+<p>This makes it a <code>2b*4w</code> design with treatment as a between subjects factor, with two levels (sensory focus versus standard of care), and time as a within-subject factor is time, with four levels (0, 1, 26, and 52 weeks). In this case, we differ from <span class="citation">SAS (<a href="#ref-SASglmpower">2015</a>)</span> and we will solve for power with a sample size of 300 per group (600 total) with an alpha of <code>.01</code>. In addition, we want to see what the impact of chaning the common standard deviation will have on power.</p>
+<p>So in SAS we set up the data.</p>
+<blockquote>
+<p>data Pain;
+input Treatment $ PainMem0 PainMem1Wk PainMem6Mo PainMem12Mo;
+datalines;
+SensoryFocus 2.40 2.38 2.05 1.90
+StandardOfCare 2.40 2.39 2.36 2.30
+;</p>
+</blockquote>
+<p>Then we can run the analysis in SAS. Note that in the example <span class="citation">SAS (<a href="#ref-SASglmpower">2015</a>)</span> are assuming a linear exponential covariance matrix, which we can mimic in <code>R</code>.</p>
+<blockquote>
+<p>proc glmpower data=Pain;
+class Treatment;
+model PainMem0 PainMem1Wk PainMem6Mo PainMem12Mo = Treatment;
+repeated Time contrast;
+power
+mtest = pt
+alpha = 0.01
+power = .
+ntotal = 600
+stddev = 0.92 1.04
+matrix (“PainCorr”) = lear(0.6, 0.8, 4, 0 1 26 52)
+corrmat = “PainCorr”;
+run;
+quit;</p>
+</blockquote>
+<p>This produces a table with the result for a power analysis with 2 different common standard deviations.</p>
+<p><img src="screenshots/sas_pain.PNG" /></p>
+<p>We then replicate in <code>R</code>, first by setting up the “lear” correlation matrix.</p>
+<div class="sourceCode" id="cb268"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb268-1" title="1">cor_<span class="dv">1</span> &lt;-<span class="st"> </span><span class="kw">matrix</span>(<span class="kw">c</span>(<span class="dv">1</span>,.<span class="dv">6</span>,.<span class="dv">491</span>,.<span class="dv">399</span>,</a>
+<a class="sourceLine" id="cb268-2" title="2">                  <span class="fl">.6</span>,<span class="dv">1</span>,.<span class="dv">495</span>,.<span class="dv">402</span>,</a>
+<a class="sourceLine" id="cb268-3" title="3">                  <span class="fl">.491</span>,.<span class="dv">495</span>,<span class="dv">1</span>,.<span class="dv">491</span>,</a>
+<a class="sourceLine" id="cb268-4" title="4">                  <span class="fl">.399</span>,.<span class="dv">402</span>,.<span class="dv">491</span>,<span class="dv">1</span>), <span class="dt">nrow=</span><span class="dv">4</span>)</a>
+<a class="sourceLine" id="cb268-5" title="5"></a>
+<a class="sourceLine" id="cb268-6" title="6">cor_<span class="dv">2</span> &lt;-<span class="st"> </span>cor_<span class="dv">1</span><span class="op">*</span><span class="dv">0</span></a>
+<a class="sourceLine" id="cb268-7" title="7"></a>
+<a class="sourceLine" id="cb268-8" title="8">pain_cor_mat &lt;-<span class="st"> </span><span class="kw">cbind</span>(<span class="kw">rbind</span>(cor_<span class="dv">1</span>,cor_<span class="dv">2</span>),</a>
+<a class="sourceLine" id="cb268-9" title="9">                      <span class="kw">rbind</span>(cor_<span class="dv">2</span>,cor_<span class="dv">1</span>))</a>
+<a class="sourceLine" id="cb268-10" title="10"></a>
+<a class="sourceLine" id="cb268-11" title="11">design_result &lt;-<span class="st"> </span><span class="kw">ANOVA_design</span>(<span class="st">&quot;2b*4w&quot;</span>,</a>
+<a class="sourceLine" id="cb268-12" title="12">                              <span class="dt">n =</span> <span class="dv">300</span>,</a>
+<a class="sourceLine" id="cb268-13" title="13">                              <span class="dt">mu =</span> <span class="kw">c</span>(<span class="fl">2.4</span>, <span class="fl">2.38</span>, <span class="fl">2.05</span>, <span class="fl">1.90</span>,</a>
+<a class="sourceLine" id="cb268-14" title="14">                                     <span class="fl">2.4</span>, <span class="fl">2.39</span>, <span class="fl">2.36</span>, <span class="fl">2.30</span>),</a>
+<a class="sourceLine" id="cb268-15" title="15">                              <span class="dt">sd =</span> <span class="fl">.92</span>,</a>
+<a class="sourceLine" id="cb268-16" title="16">                              <span class="dt">r =</span> pain_cor_mat,</a>
+<a class="sourceLine" id="cb268-17" title="17">                              <span class="dt">labelnames =</span> <span class="kw">c</span>(<span class="st">&quot;Treatment&quot;</span>, <span class="st">&quot;sensory&quot;</span>, <span class="st">&quot;standard&quot;</span>,</a>
+<a class="sourceLine" id="cb268-18" title="18">                                             <span class="st">&quot;TIME&quot;</span>, <span class="st">&quot;t1&quot;</span>, <span class="st">&quot;t2&quot;</span>, <span class="st">&quot;t3&quot;</span>, <span class="st">&quot;t4&quot;</span>),</a>
+<a class="sourceLine" id="cb268-19" title="19">                              <span class="dt">plot =</span> <span class="ot">TRUE</span>)</a></code></pre></div>
+<p><img src="SuperpowerValidation_files/figure-html/mixed_multivariate_1-1.png" width="672" /></p>
+<div class="sourceCode" id="cb269"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb269-1" title="1">exact_result &lt;-<span class="st"> </span><span class="kw">ANOVA_exact</span>(design_result, <span class="dt">verbose =</span> <span class="ot">FALSE</span>,</a>
+<a class="sourceLine" id="cb269-2" title="2">                            <span class="dt">alpha_level =</span> <span class="fl">.01</span>)</a></code></pre></div>
+<table class="table" style="margin-left: auto; margin-right: auto;">
+<caption>
+<span id="tab:unnamed-chunk-203">Table 4.6: </span>Simulated MANOVA Result
+</caption>
+<thead>
+<tr>
+<th style="text-align:left;">
+</th>
+<th style="text-align:right;">
+power
+</th>
+<th style="text-align:right;">
+pillai_trace
+</th>
+<th style="text-align:right;">
+cohen_f
+</th>
+<th style="text-align:right;">
+non_centrality
+</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td style="text-align:left;">
+(Intercept)
+</td>
+<td style="text-align:right;">
+100.00000
+</td>
+<td style="text-align:right;">
+0.9094197
+</td>
+<td style="text-align:right;">
+3.1685838
+</td>
+<td style="text-align:right;">
+6003.874016
+</td>
+</tr>
+<tr>
+<td style="text-align:left;">
+Treatment
+</td>
+<td style="text-align:right;">
+68.59334
+</td>
+<td style="text-align:right;">
+0.0155032
+</td>
+<td style="text-align:right;">
+0.1254885
+</td>
+<td style="text-align:right;">
+9.416918
+</td>
+</tr>
+<tr>
+<td style="text-align:left;">
+TIME
+</td>
+<td style="text-align:right;">
+99.99995
+</td>
+<td style="text-align:right;">
+0.0998664
+</td>
+<td style="text-align:right;">
+0.3330858
+</td>
+<td style="text-align:right;">
+66.123912
+</td>
+</tr>
+<tr>
+<td style="text-align:left;">
+Treatment:TIME
+</td>
+<td style="text-align:right;">
+99.55718
+</td>
+<td style="text-align:right;">
+0.0531965
+</td>
+<td style="text-align:right;">
+0.2370344
+</td>
+<td style="text-align:right;">
+33.486447
+</td>
+</tr>
+</tbody>
+</table>
+<div class="sourceCode" id="cb270"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb270-1" title="1">design_result &lt;-<span class="st"> </span><span class="kw">ANOVA_design</span>(<span class="st">&quot;2b*4w&quot;</span>,</a>
+<a class="sourceLine" id="cb270-2" title="2">                              <span class="dt">n =</span> <span class="dv">300</span>,</a>
+<a class="sourceLine" id="cb270-3" title="3">                              <span class="dt">mu =</span> <span class="kw">c</span>(<span class="fl">2.4</span>, <span class="fl">2.38</span>, <span class="fl">2.05</span>, <span class="fl">1.90</span>,</a>
+<a class="sourceLine" id="cb270-4" title="4">                                     <span class="fl">2.4</span>, <span class="fl">2.39</span>, <span class="fl">2.36</span>, <span class="fl">2.30</span>),</a>
+<a class="sourceLine" id="cb270-5" title="5">                              <span class="dt">sd =</span> <span class="fl">1.04</span>,</a>
+<a class="sourceLine" id="cb270-6" title="6">                              <span class="dt">r =</span> pain_cor_mat,</a>
+<a class="sourceLine" id="cb270-7" title="7">                              <span class="dt">labelnames =</span> <span class="kw">c</span>(<span class="st">&quot;Treatment&quot;</span>, <span class="st">&quot;sensory&quot;</span>, <span class="st">&quot;standard&quot;</span>,</a>
+<a class="sourceLine" id="cb270-8" title="8">                                             <span class="st">&quot;TIME&quot;</span>, <span class="st">&quot;t1&quot;</span>, <span class="st">&quot;t2&quot;</span>, <span class="st">&quot;t3&quot;</span>, <span class="st">&quot;t4&quot;</span>),</a>
+<a class="sourceLine" id="cb270-9" title="9">                              <span class="dt">plot =</span> <span class="ot">TRUE</span>)</a></code></pre></div>
+<p><img src="SuperpowerValidation_files/figure-html/unnamed-chunk-204-1.png" width="672" /></p>
+<div class="sourceCode" id="cb271"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb271-1" title="1">exact_result &lt;-<span class="st"> </span><span class="kw">ANOVA_exact</span>(design_result, <span class="dt">verbose =</span> <span class="ot">FALSE</span>,</a>
+<a class="sourceLine" id="cb271-2" title="2">                            <span class="dt">alpha_level =</span> <span class="fl">.01</span>)</a></code></pre></div>
+<table class="table" style="margin-left: auto; margin-right: auto;">
+<caption>
+<span id="tab:unnamed-chunk-205">Table 4.7: </span>Simulated MANOVA Result
+</caption>
+<thead>
+<tr>
+<th style="text-align:left;">
+</th>
+<th style="text-align:right;">
+power
+</th>
+<th style="text-align:right;">
+pillai_trace
+</th>
+<th style="text-align:right;">
+cohen_f
+</th>
+<th style="text-align:right;">
+non_centrality
+</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td style="text-align:left;">
+(Intercept)
+</td>
+<td style="text-align:right;">
+100.00000
+</td>
+<td style="text-align:right;">
+0.8870909
+</td>
+<td style="text-align:right;">
+2.8029779
+</td>
+<td style="text-align:right;">
+4698.297861
+</td>
+</tr>
+<tr>
+<td style="text-align:left;">
+Treatment
+</td>
+<td style="text-align:right;">
+55.22151
+</td>
+<td style="text-align:right;">
+0.0121730
+</td>
+<td style="text-align:right;">
+0.1110090
+</td>
+<td style="text-align:right;">
+7.369156
+</td>
+</tr>
+<tr>
+<td style="text-align:left;">
+TIME
+</td>
+<td style="text-align:right;">
+99.99672
+</td>
+<td style="text-align:right;">
+0.0798847
+</td>
+<td style="text-align:right;">
+0.2946528
+</td>
+<td style="text-align:right;">
+51.744895
+</td>
+</tr>
+<tr>
+<td style="text-align:left;">
+Treatment:TIME
+</td>
+<td style="text-align:right;">
+97.55110
+</td>
+<td style="text-align:right;">
+0.0421158
+</td>
+<td style="text-align:right;">
+0.2096843
+</td>
+<td style="text-align:right;">
+26.204631
+</td>
+</tr>
+</tbody>
+</table>
+<p>As we can see, the results for this analysis match SAS perfectly.</p>
+
+</div>
+</div>
 </div>
 <h3>References</h3>
 <div id="refs" class="references">
 <div id="ref-faul2007g">
 <p>Faul, Franz, Edgar Erdfelder, Albert-Georg Lang, and Axel Buchner. 2007. “G*Power 3: A Flexible Statistical Power Analysis Program for the Social, Behavioral, and Biomedical Sciences.” <em>Behavior Research Methods</em> 39 (2): 175–91. <a href="http://www.psychologie.hhu.de/arbeitsgruppen/allgemeine-psychologie-und-arbeitspsychologie/gpower.html">http://www.psychologie.hhu.de/arbeitsgruppen/allgemeine-psychologie-und-arbeitspsychologie/gpower.html</a>.</p>
+</div>
+<div id="ref-maxwell_designing_2004">
+<p>Maxwell, S.E., H.D. Delaney, and K. Kelley. 2004. <em>Designing Experiments and Analyzing Data: A Model Comparison Perspective</em>. Avec CD, v. 1. Lawrence Erlbaum Associates. <a href="https://designingexperiments.com/">https://designingexperiments.com/</a>.</p>
+</div>
+<div id="ref-muller1984practical">
+<p>Muller, Keith E, and Bercedis L Peterson. 1984. “Practical Methods for Computing Power in Testing the Multivariate General Linear Hypothesis.” <em>Computational Statistics &amp; Data Analysis</em> 2 (2): 143–58. <a href="https://doi.org/10.1016/0167-9473(84)90002-1">https://doi.org/10.1016/0167-9473(84)90002-1</a>.</p>
+</div>
+<div id="ref-o1999pragmatic">
+<p>O’Brien, Ralph G, and Gwowen Shieh. 1999. “Pragmatic, Unifying Algorithm Gives Power Probabilities for Common F Tests of the Multivariate General Linear Hypothesis.” Citeseer. <a href="https://pdfs.semanticscholar.org/deda/facfd686feea985e134babc524ceb46f0422.pdf">https://pdfs.semanticscholar.org/deda/facfd686feea985e134babc524ceb46f0422.pdf</a>.</p>
+</div>
+<div id="ref-SASglmpower">
+<p>SAS. 2015. “The Glmpower Procedure.” In <em>SAS/Stat 14.1 User’s Guide</em>, 3738–98. Cary, NC: SAS Institute Inc. <a href="http://support.sas.com/documentation/cdl/en/statug/68162/HTML/default/viewer.htm#statug_glmpower_toc.htm">http://support.sas.com/documentation/cdl/en/statug/68162/HTML/default/viewer.htm#statug_glmpower_toc.htm</a>.</p>
 </div>
 </div>
             </section>

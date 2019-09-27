@@ -24,7 +24,7 @@
 <meta name="author" content="Aaron R. Caldwell &amp; Daniël Lakens" />
 
 
-<meta name="date" content="2019-09-25" />
+<meta name="date" content="2019-09-27" />
 
   <meta name="viewport" content="width=device-width, initial-scale=1" />
   <meta name="apple-mobile-web-app-capable" content="yes" />
@@ -186,8 +186,12 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 </ul></li>
 </ul></li>
 <li class="chapter" data-level="4" data-path="mixed-anova.html"><a href="mixed-anova.html"><i class="fa fa-check"></i><b>4</b> Mixed ANOVA</a><ul>
-<li class="chapter" data-level="4.1" data-path="mixed-anova.html"><a href="mixed-anova.html#x2-anova-within-between-design"><i class="fa fa-check"></i><b>4.1</b> 2x2 ANOVA, within-between design</a><ul>
+<li class="chapter" data-level="4.1" data-path="mixed-anova.html"><a href="mixed-anova.html#simple-mixed-designs"><i class="fa fa-check"></i><b>4.1</b> Simple Mixed Designs</a><ul>
 <li class="chapter" data-level="4.1.1" data-path="mixed-anova.html"><a href="mixed-anova.html#two-by-two-anova-within-between-design-variation-1"><i class="fa fa-check"></i><b>4.1.1</b> Two by two ANOVA, within-between design Variation 1</a></li>
+</ul></li>
+<li class="chapter" data-level="4.2" data-path="mixed-anova.html"><a href="mixed-anova.html#complex-mixed-designs"><i class="fa fa-check"></i><b>4.2</b> Complex Mixed Designs</a><ul>
+<li class="chapter" data-level="4.2.1" data-path="mixed-anova.html"><a href="mixed-anova.html#b3w-design"><i class="fa fa-check"></i><b>4.2.1</b> 2b*3w Design</a></li>
+<li class="chapter" data-level="4.2.2" data-path="mixed-anova.html"><a href="mixed-anova.html#b4w-design"><i class="fa fa-check"></i><b>4.2.2</b> 2b*4w Design</a></li>
 </ul></li>
 </ul></li>
 <li class="chapter" data-level="5" data-path="power-for-three-way-interactions.html"><a href="power-for-three-way-interactions.html"><i class="fa fa-check"></i><b>5</b> Power for Three-way Interactions</a></li>
@@ -246,31 +250,31 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 <div id="error-control-in-exploratory-anova" class="section level1">
 <h1><span class="header-section-number">Chapter 8</span> Error Control in Exploratory ANOVA</h1>
 <p>In a 2 x 2 x 2 design, an ANOVA will give the test results for three main effects, three two-way interactions, and one three-way interaction. That’s 7 statistical tests. The probability of making at least one type I error in a single 2 x 2 x 2 ANOVA is <span class="math inline">\(1-(0.95)^7 = 30\)</span>%.</p>
-<div class="sourceCode" id="cb581"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb581-1" title="1">string &lt;-<span class="st"> &quot;2b*2b*2b&quot;</span></a>
-<a class="sourceLine" id="cb581-2" title="2">n &lt;-<span class="st"> </span><span class="dv">50</span></a>
-<a class="sourceLine" id="cb581-3" title="3">mu &lt;-<span class="st"> </span><span class="kw">c</span>(<span class="dv">20</span>, <span class="dv">20</span>, <span class="dv">20</span>, <span class="dv">20</span>, <span class="dv">20</span>, <span class="dv">20</span>, <span class="dv">20</span>, <span class="dv">20</span>) </a>
-<a class="sourceLine" id="cb581-4" title="4"><span class="co"># All means are equal - so there is no real difference.</span></a>
-<a class="sourceLine" id="cb581-5" title="5"><span class="co"># Enter means in the order that matches the labels below.</span></a>
-<a class="sourceLine" id="cb581-6" title="6">sd &lt;-<span class="st"> </span><span class="dv">5</span></a>
-<a class="sourceLine" id="cb581-7" title="7">p_adjust =<span class="st"> &quot;none&quot;</span></a>
-<a class="sourceLine" id="cb581-8" title="8"><span class="co"># &quot;none&quot; means we do not correct for multiple comparisons</span></a>
-<a class="sourceLine" id="cb581-9" title="9">labelnames &lt;-<span class="st"> </span><span class="kw">c</span>(<span class="st">&quot;condition1&quot;</span>, <span class="st">&quot;a&quot;</span>, <span class="st">&quot;b&quot;</span>, </a>
-<a class="sourceLine" id="cb581-10" title="10">                <span class="st">&quot;condition2&quot;</span>, <span class="st">&quot;c&quot;</span>, <span class="st">&quot;d&quot;</span>, </a>
-<a class="sourceLine" id="cb581-11" title="11">                <span class="st">&quot;condition3&quot;</span>, <span class="st">&quot;e&quot;</span>, <span class="st">&quot;f&quot;</span>) <span class="co">#</span></a>
-<a class="sourceLine" id="cb581-12" title="12"><span class="co"># The label names should be in the order of the means specified above.</span></a>
-<a class="sourceLine" id="cb581-13" title="13">design_result &lt;-<span class="st"> </span><span class="kw">ANOVA_design</span>(<span class="dt">design =</span> string,</a>
-<a class="sourceLine" id="cb581-14" title="14">                   <span class="dt">n =</span> n, </a>
-<a class="sourceLine" id="cb581-15" title="15">                   <span class="dt">mu =</span> mu, </a>
-<a class="sourceLine" id="cb581-16" title="16">                   <span class="dt">sd =</span> sd, </a>
-<a class="sourceLine" id="cb581-17" title="17">                   <span class="dt">labelnames =</span> labelnames)</a>
-<a class="sourceLine" id="cb581-18" title="18">alpha_level &lt;-<span class="st"> </span><span class="fl">0.05</span></a>
-<a class="sourceLine" id="cb581-19" title="19"><span class="co">#We set the alpha level at 0.05. </span></a></code></pre></div>
-<div class="sourceCode" id="cb582"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb582-1" title="1">simulation_result &lt;-<span class="st"> </span><span class="kw">ANOVA_power</span>(design_result,</a>
-<a class="sourceLine" id="cb582-2" title="2">                                 <span class="dt">alpha_level =</span> alpha_level,</a>
-<a class="sourceLine" id="cb582-3" title="3">                                 <span class="dt">verbose =</span> <span class="ot">FALSE</span>)</a></code></pre></div>
+<div class="sourceCode" id="cb587"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb587-1" title="1">string &lt;-<span class="st"> &quot;2b*2b*2b&quot;</span></a>
+<a class="sourceLine" id="cb587-2" title="2">n &lt;-<span class="st"> </span><span class="dv">50</span></a>
+<a class="sourceLine" id="cb587-3" title="3">mu &lt;-<span class="st"> </span><span class="kw">c</span>(<span class="dv">20</span>, <span class="dv">20</span>, <span class="dv">20</span>, <span class="dv">20</span>, <span class="dv">20</span>, <span class="dv">20</span>, <span class="dv">20</span>, <span class="dv">20</span>) </a>
+<a class="sourceLine" id="cb587-4" title="4"><span class="co"># All means are equal - so there is no real difference.</span></a>
+<a class="sourceLine" id="cb587-5" title="5"><span class="co"># Enter means in the order that matches the labels below.</span></a>
+<a class="sourceLine" id="cb587-6" title="6">sd &lt;-<span class="st"> </span><span class="dv">5</span></a>
+<a class="sourceLine" id="cb587-7" title="7">p_adjust =<span class="st"> &quot;none&quot;</span></a>
+<a class="sourceLine" id="cb587-8" title="8"><span class="co"># &quot;none&quot; means we do not correct for multiple comparisons</span></a>
+<a class="sourceLine" id="cb587-9" title="9">labelnames &lt;-<span class="st"> </span><span class="kw">c</span>(<span class="st">&quot;condition1&quot;</span>, <span class="st">&quot;a&quot;</span>, <span class="st">&quot;b&quot;</span>, </a>
+<a class="sourceLine" id="cb587-10" title="10">                <span class="st">&quot;condition2&quot;</span>, <span class="st">&quot;c&quot;</span>, <span class="st">&quot;d&quot;</span>, </a>
+<a class="sourceLine" id="cb587-11" title="11">                <span class="st">&quot;condition3&quot;</span>, <span class="st">&quot;e&quot;</span>, <span class="st">&quot;f&quot;</span>) <span class="co">#</span></a>
+<a class="sourceLine" id="cb587-12" title="12"><span class="co"># The label names should be in the order of the means specified above.</span></a>
+<a class="sourceLine" id="cb587-13" title="13">design_result &lt;-<span class="st"> </span><span class="kw">ANOVA_design</span>(<span class="dt">design =</span> string,</a>
+<a class="sourceLine" id="cb587-14" title="14">                   <span class="dt">n =</span> n, </a>
+<a class="sourceLine" id="cb587-15" title="15">                   <span class="dt">mu =</span> mu, </a>
+<a class="sourceLine" id="cb587-16" title="16">                   <span class="dt">sd =</span> sd, </a>
+<a class="sourceLine" id="cb587-17" title="17">                   <span class="dt">labelnames =</span> labelnames)</a>
+<a class="sourceLine" id="cb587-18" title="18">alpha_level &lt;-<span class="st"> </span><span class="fl">0.05</span></a>
+<a class="sourceLine" id="cb587-19" title="19"><span class="co">#We set the alpha level at 0.05. </span></a></code></pre></div>
+<div class="sourceCode" id="cb588"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb588-1" title="1">simulation_result &lt;-<span class="st"> </span><span class="kw">ANOVA_power</span>(design_result,</a>
+<a class="sourceLine" id="cb588-2" title="2">                                 <span class="dt">alpha_level =</span> alpha_level,</a>
+<a class="sourceLine" id="cb588-3" title="3">                                 <span class="dt">verbose =</span> <span class="ot">FALSE</span>)</a></code></pre></div>
 <table class="table" style="margin-left: auto; margin-right: auto;">
 <caption>
-<span id="tab:unnamed-chunk-288">Table 8.1: </span>Simulated ANOVA Result
+<span id="tab:unnamed-chunk-295">Table 8.1: </span>Simulated ANOVA Result
 </caption>
 <thead>
 <tr>
@@ -366,8 +370,8 @@ anova_condition1:condition2:condition3
 </table>
 <p>When there is no true effect, we formally do not have ‘power’ (which is defined as the probability of finding p &lt; <span class="math inline">\(\alpha\)</span> if there is a true effect to be found) so the power column should be read as the ‘type I error rate’. Because we have saved the power simulation in the ‘simulation_result’ object, we can perform calculations on the ‘sim_data’ dataframe that is stored. This dataframe contains the results for the nsims simulations (e.g., 10000 rows if you ran 10000 simulations) and stores the p-values and effect size estimates for each ANOVA. The first 7 columns are the p-values for the ANOVA, first the main effects of condition 1, 2, and 3, then three two-way interactions, and finally the threeway interaction.</p>
 <p>We can calculate the number of significant results for each test (which should be 5%) by counting the number of significant p-values in each of the 7 rows:</p>
-<div class="sourceCode" id="cb583"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb583-1" title="1"><span class="kw">apply</span>(<span class="kw">as.matrix</span>(simulation_result_<span class="fl">8.1</span><span class="op">$</span>sim_data[(<span class="dv">1</span><span class="op">:</span><span class="dv">7</span>)]), <span class="dv">2</span>, </a>
-<a class="sourceLine" id="cb583-2" title="2">    <span class="cf">function</span>(x) <span class="kw">round</span>(<span class="kw">mean</span>(<span class="kw">ifelse</span>(x <span class="op">&lt;</span><span class="st"> </span>alpha_level, <span class="dv">1</span>, <span class="dv">0</span>) <span class="op">*</span><span class="st"> </span><span class="dv">100</span>),<span class="dv">4</span>))</a></code></pre></div>
+<div class="sourceCode" id="cb589"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb589-1" title="1"><span class="kw">apply</span>(<span class="kw">as.matrix</span>(simulation_result_<span class="fl">8.1</span><span class="op">$</span>sim_data[(<span class="dv">1</span><span class="op">:</span><span class="dv">7</span>)]), <span class="dv">2</span>, </a>
+<a class="sourceLine" id="cb589-2" title="2">    <span class="cf">function</span>(x) <span class="kw">round</span>(<span class="kw">mean</span>(<span class="kw">ifelse</span>(x <span class="op">&lt;</span><span class="st"> </span>alpha_level, <span class="dv">1</span>, <span class="dv">0</span>) <span class="op">*</span><span class="st"> </span><span class="dv">100</span>),<span class="dv">4</span>))</a></code></pre></div>
 <pre><code>##                       anova_condition1 
 ##                                    4.5 
 ##                       anova_condition2 
@@ -384,9 +388,9 @@ anova_condition1:condition2:condition3
 ##                                    4.5</code></pre>
 <p>This is the type I error rate for each test. When we talk about error rate inflation due to multiple comparisons, we are talking about the probability that you conclude there is an effect, when there is actually no effect, when there is a significant effect for the main effect of condition 1, or condition 2, or condition 3, or for the two-way interaction between condition 1 and 2, or condition 1 and 3, or condition 2 and 3, or in the threeway interaction.</p>
 <p>To calculate this error rate we do not just add the 7 error rates (so 7 * 5% - 35%). Instead, we calculate the probability that there will be at least one significant result in an ANOVA we perform. Some ANOVA results will have multiple significant results, just due to the type I error rate (e.g., a significant result for the three-way interaction, and for the main effect of condition 1) but such an ANOVA is counted only once. If we calculate this percentage from our simulations, we see the number is indeed very close to 1-(0.95)^7 = 30%.</p>
-<div class="sourceCode" id="cb585"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb585-1" title="1"><span class="kw">sum</span>(<span class="kw">apply</span>(<span class="kw">as.matrix</span>(simulation_result_<span class="fl">8.1</span><span class="op">$</span>sim_data[(<span class="dv">1</span><span class="op">:</span><span class="dv">7</span>)]), <span class="dv">1</span>, </a>
-<a class="sourceLine" id="cb585-2" title="2">    <span class="cf">function</span>(x) </a>
-<a class="sourceLine" id="cb585-3" title="3">      <span class="kw">round</span>(<span class="kw">mean</span>(<span class="kw">ifelse</span>(x <span class="op">&lt;</span><span class="st"> </span>alpha_level, <span class="dv">1</span>, <span class="dv">0</span>) <span class="op">*</span><span class="st"> </span><span class="dv">100</span>),<span class="dv">4</span>)) <span class="op">&gt;</span><span class="st"> </span><span class="dv">0</span>)<span class="op">/</span>nsims<span class="op">*</span><span class="dv">100</span></a></code></pre></div>
+<div class="sourceCode" id="cb591"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb591-1" title="1"><span class="kw">sum</span>(<span class="kw">apply</span>(<span class="kw">as.matrix</span>(simulation_result_<span class="fl">8.1</span><span class="op">$</span>sim_data[(<span class="dv">1</span><span class="op">:</span><span class="dv">7</span>)]), <span class="dv">1</span>, </a>
+<a class="sourceLine" id="cb591-2" title="2">    <span class="cf">function</span>(x) </a>
+<a class="sourceLine" id="cb591-3" title="3">      <span class="kw">round</span>(<span class="kw">mean</span>(<span class="kw">ifelse</span>(x <span class="op">&lt;</span><span class="st"> </span>alpha_level, <span class="dv">1</span>, <span class="dv">0</span>) <span class="op">*</span><span class="st"> </span><span class="dv">100</span>),<span class="dv">4</span>)) <span class="op">&gt;</span><span class="st"> </span><span class="dv">0</span>)<span class="op">/</span>nsims<span class="op">*</span><span class="dv">100</span></a></code></pre></div>
 <pre><code>## [1] 3.22</code></pre>
 <p>The question is what we should do about this alpha inflation. It is undesirable if you perform exploratory ANOVA’s and are fooled too often by type I errors, which will not replicate if you try to build on them. Therefore, you need to control the type I error rate.</p>
 <p>In the simulation code, which relies on the afex package, there is the option to set p_adjust. In the simulation above, p_adjust was set to “none”. This means no adjustment is mage to which p-values are considered to be significant, and the alpha level is used as it is set in the simulation (above this was 0.05).</p>
@@ -401,31 +405,31 @@ anova_condition1:condition2:condition3
 <p>The “BH” (aka “fdr”) and “BY” method of Benjamini, Hochberg, and Yekutieli control the false discovery rate, the expected proportion of false discoveries amongst the rejected hypotheses. The false discovery rate is a less stringent condition than the family-wise error rate, so these methods are more powerful than the others.</p>
 </blockquote>
 <p>Let’s re-run the simulation twith the Holm-Bonferroni correction, which is simple and require no assumptions.</p>
-<div class="sourceCode" id="cb587"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb587-1" title="1">string &lt;-<span class="st"> &quot;2b*2b*2b&quot;</span></a>
-<a class="sourceLine" id="cb587-2" title="2">n &lt;-<span class="st"> </span><span class="dv">50</span></a>
-<a class="sourceLine" id="cb587-3" title="3">mu &lt;-<span class="st"> </span><span class="kw">c</span>(<span class="dv">20</span>, <span class="dv">20</span>, <span class="dv">20</span>, <span class="dv">20</span>, <span class="dv">20</span>, <span class="dv">20</span>, <span class="dv">20</span>, <span class="dv">20</span>) </a>
-<a class="sourceLine" id="cb587-4" title="4"><span class="co">#All means are equal - so there is no real difference.</span></a>
-<a class="sourceLine" id="cb587-5" title="5"><span class="co"># Enter means in the order that matches the labels below.</span></a>
-<a class="sourceLine" id="cb587-6" title="6">sd &lt;-<span class="st"> </span><span class="dv">5</span></a>
-<a class="sourceLine" id="cb587-7" title="7">p_adjust =<span class="st"> &quot;holm&quot;</span></a>
-<a class="sourceLine" id="cb587-8" title="8"><span class="co"># Changed to Holm-Bonferroni</span></a>
-<a class="sourceLine" id="cb587-9" title="9">labelnames &lt;-<span class="st"> </span><span class="kw">c</span>(<span class="st">&quot;condition1&quot;</span>, <span class="st">&quot;a&quot;</span>, <span class="st">&quot;b&quot;</span>, </a>
-<a class="sourceLine" id="cb587-10" title="10">                <span class="st">&quot;condition2&quot;</span>, <span class="st">&quot;c&quot;</span>, <span class="st">&quot;d&quot;</span>, </a>
-<a class="sourceLine" id="cb587-11" title="11">                <span class="st">&quot;condition3&quot;</span>, <span class="st">&quot;e&quot;</span>, <span class="st">&quot;f&quot;</span>) <span class="co">#</span></a>
-<a class="sourceLine" id="cb587-12" title="12"><span class="co"># the label names should be in the order of the means specified above.</span></a>
-<a class="sourceLine" id="cb587-13" title="13">design_result &lt;-<span class="st"> </span><span class="kw">ANOVA_design</span>(<span class="dt">design =</span> string,</a>
-<a class="sourceLine" id="cb587-14" title="14">                   <span class="dt">n =</span> n, </a>
-<a class="sourceLine" id="cb587-15" title="15">                   <span class="dt">mu =</span> mu, </a>
-<a class="sourceLine" id="cb587-16" title="16">                   <span class="dt">sd =</span> sd, </a>
-<a class="sourceLine" id="cb587-17" title="17">                   <span class="dt">labelnames =</span> labelnames)</a>
-<a class="sourceLine" id="cb587-18" title="18">alpha_level &lt;-<span class="st"> </span><span class="fl">0.05</span></a></code></pre></div>
-<div class="sourceCode" id="cb588"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb588-1" title="1">simulation_result &lt;-<span class="st"> </span><span class="kw">ANOVA_power</span>(design_result, </a>
-<a class="sourceLine" id="cb588-2" title="2">                                 <span class="dt">alpha_level =</span> alpha_level,</a>
-<a class="sourceLine" id="cb588-3" title="3">                                 <span class="dt">p_adjust =</span> p_adjust,</a>
-<a class="sourceLine" id="cb588-4" title="4">                                 <span class="dt">verbose =</span> <span class="ot">FALSE</span>)</a></code></pre></div>
+<div class="sourceCode" id="cb593"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb593-1" title="1">string &lt;-<span class="st"> &quot;2b*2b*2b&quot;</span></a>
+<a class="sourceLine" id="cb593-2" title="2">n &lt;-<span class="st"> </span><span class="dv">50</span></a>
+<a class="sourceLine" id="cb593-3" title="3">mu &lt;-<span class="st"> </span><span class="kw">c</span>(<span class="dv">20</span>, <span class="dv">20</span>, <span class="dv">20</span>, <span class="dv">20</span>, <span class="dv">20</span>, <span class="dv">20</span>, <span class="dv">20</span>, <span class="dv">20</span>) </a>
+<a class="sourceLine" id="cb593-4" title="4"><span class="co">#All means are equal - so there is no real difference.</span></a>
+<a class="sourceLine" id="cb593-5" title="5"><span class="co"># Enter means in the order that matches the labels below.</span></a>
+<a class="sourceLine" id="cb593-6" title="6">sd &lt;-<span class="st"> </span><span class="dv">5</span></a>
+<a class="sourceLine" id="cb593-7" title="7">p_adjust =<span class="st"> &quot;holm&quot;</span></a>
+<a class="sourceLine" id="cb593-8" title="8"><span class="co"># Changed to Holm-Bonferroni</span></a>
+<a class="sourceLine" id="cb593-9" title="9">labelnames &lt;-<span class="st"> </span><span class="kw">c</span>(<span class="st">&quot;condition1&quot;</span>, <span class="st">&quot;a&quot;</span>, <span class="st">&quot;b&quot;</span>, </a>
+<a class="sourceLine" id="cb593-10" title="10">                <span class="st">&quot;condition2&quot;</span>, <span class="st">&quot;c&quot;</span>, <span class="st">&quot;d&quot;</span>, </a>
+<a class="sourceLine" id="cb593-11" title="11">                <span class="st">&quot;condition3&quot;</span>, <span class="st">&quot;e&quot;</span>, <span class="st">&quot;f&quot;</span>) <span class="co">#</span></a>
+<a class="sourceLine" id="cb593-12" title="12"><span class="co"># the label names should be in the order of the means specified above.</span></a>
+<a class="sourceLine" id="cb593-13" title="13">design_result &lt;-<span class="st"> </span><span class="kw">ANOVA_design</span>(<span class="dt">design =</span> string,</a>
+<a class="sourceLine" id="cb593-14" title="14">                   <span class="dt">n =</span> n, </a>
+<a class="sourceLine" id="cb593-15" title="15">                   <span class="dt">mu =</span> mu, </a>
+<a class="sourceLine" id="cb593-16" title="16">                   <span class="dt">sd =</span> sd, </a>
+<a class="sourceLine" id="cb593-17" title="17">                   <span class="dt">labelnames =</span> labelnames)</a>
+<a class="sourceLine" id="cb593-18" title="18">alpha_level &lt;-<span class="st"> </span><span class="fl">0.05</span></a></code></pre></div>
+<div class="sourceCode" id="cb594"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb594-1" title="1">simulation_result &lt;-<span class="st"> </span><span class="kw">ANOVA_power</span>(design_result, </a>
+<a class="sourceLine" id="cb594-2" title="2">                                 <span class="dt">alpha_level =</span> alpha_level,</a>
+<a class="sourceLine" id="cb594-3" title="3">                                 <span class="dt">p_adjust =</span> p_adjust,</a>
+<a class="sourceLine" id="cb594-4" title="4">                                 <span class="dt">verbose =</span> <span class="ot">FALSE</span>)</a></code></pre></div>
 <table class="table" style="margin-left: auto; margin-right: auto;">
 <caption>
-<span id="tab:unnamed-chunk-293">Table 8.2: </span>ANOVA Results
+<span id="tab:unnamed-chunk-300">Table 8.2: </span>ANOVA Results
 </caption>
 <thead>
 <tr>
@@ -521,7 +525,7 @@ anova_condition1:condition2:condition3
 </table>
 <table class="table" style="margin-left: auto; margin-right: auto;">
 <caption>
-<span id="tab:unnamed-chunk-294">Table 8.3: </span>Pairwise Results
+<span id="tab:unnamed-chunk-301">Table 8.3: </span>Pairwise Results
 </caption>
 <thead>
 <tr>
@@ -846,9 +850,9 @@ p_condition1_b_condition2_d_condition3_e_condition1_b_condition2_d_condition3_f
 </tr>
 </tbody>
 </table>
-<div class="sourceCode" id="cb589"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb589-1" title="1"><span class="kw">sum</span>(<span class="kw">apply</span>(<span class="kw">as.matrix</span>(simulation_result_<span class="fl">8.2</span><span class="op">$</span>sim_data[(<span class="dv">1</span><span class="op">:</span><span class="dv">7</span>)]), <span class="dv">1</span>, </a>
-<a class="sourceLine" id="cb589-2" title="2">    <span class="cf">function</span>(x) </a>
-<a class="sourceLine" id="cb589-3" title="3">      <span class="kw">round</span>(<span class="kw">mean</span>(<span class="kw">ifelse</span>(x <span class="op">&lt;</span><span class="st"> </span>alpha_level, <span class="dv">1</span>, <span class="dv">0</span>) <span class="op">*</span><span class="st"> </span><span class="dv">100</span>),<span class="dv">4</span>)) <span class="op">&gt;</span><span class="st"> </span><span class="dv">0</span>)<span class="op">/</span>nsims<span class="op">*</span><span class="dv">100</span></a></code></pre></div>
+<div class="sourceCode" id="cb595"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb595-1" title="1"><span class="kw">sum</span>(<span class="kw">apply</span>(<span class="kw">as.matrix</span>(simulation_result_<span class="fl">8.2</span><span class="op">$</span>sim_data[(<span class="dv">1</span><span class="op">:</span><span class="dv">7</span>)]), <span class="dv">1</span>, </a>
+<a class="sourceLine" id="cb595-2" title="2">    <span class="cf">function</span>(x) </a>
+<a class="sourceLine" id="cb595-3" title="3">      <span class="kw">round</span>(<span class="kw">mean</span>(<span class="kw">ifelse</span>(x <span class="op">&lt;</span><span class="st"> </span>alpha_level, <span class="dv">1</span>, <span class="dv">0</span>) <span class="op">*</span><span class="st"> </span><span class="dv">100</span>),<span class="dv">4</span>)) <span class="op">&gt;</span><span class="st"> </span><span class="dv">0</span>)<span class="op">/</span>nsims<span class="op">*</span><span class="dv">100</span></a></code></pre></div>
 <pre><code>## [1] 0.66</code></pre>
 <p>We see it is close to 5%. Note that error rates have variation, and even in a few thousand simulations, the error rate in the sample of studies can easily be half a percentage point higher or lower. But <em>in the long run</em> the error rate should equal the alpha level. Furthermore, note that the <a href="https://en.wikipedia.org/wiki/Holm%E2%80%93Bonferroni_method">Holm-Bonferroni</a> method is slightly more powerful than the Bonferroni procedure (which is simply <span class="math inline">\(\alpha\)</span> divided by the numner of tests). There are more powerful procedures to control the type I error rate, which require more assumptions. For a small number of tests, they Holm-Bonferroni procedure works well. Alternative procedure to control error rates can be found in the <a href="https://cran.r-project.org/web/packages/multcomp/index.html">multcomp</a> R package <span class="citation">(Hothorn, Bretz, and Westfall <a href="#ref-R-multcomp">2019</a>)</span>.</p>
 

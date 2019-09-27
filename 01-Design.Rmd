@@ -1,11 +1,11 @@
 # The Experimental Design
 
 This section introduces how `Superpower` allows the user to specify their experimental design.
-Currently, this pacakge only provides power analysis for ANOVA and for repeated measures MANOVA so all designs are defined by the `ANOVA_design` function.
+Currently, this pacakge only provides power analysis for ANOVAs (and MANOVA for repeated measures) so all designs are currently defined by the `ANOVA_design` function.
 
 ## ANOVA_design function
 
-Currently the `ANOVA_design` function can create designs up three factors, for both within, between, and mixed designs. It requires the following input: design, n, mu, sd, r, and optionally allows you to set labelnames. 
+Currently the `ANOVA_design` function can create designs with up to three factors, for both within, between, and mixed designs. It requires the following input: design, n, mu, sd, r, and optionally allows you to set labelnames. 
 
 1. `design`: string that specifies the design (see below).
 2. `n`: the sample size for each between subject condition.
@@ -17,13 +17,13 @@ Currently the `ANOVA_design` function can create designs up three factors, for b
 
 ### Specifying the design using `design`
 
-`design` is used to specify the design. 
-Every factor is specified with a number, indicating the numner of levels of the factor, and a letter, b or w, to indicate whether the factor is manipulated between or within participants.
+The `design` option is used to specify the design. 
+Every factor is specified with a number, indicating the number of levels of the factor, and a letter, b or w, to indicate whether the factor is manipulated between or within participants.
 For example, a `2b` design has two between-participant groups. 
 A `12w` design has one factor with 12 levels, all manipulated within-participants.
 A `2b*3w` is a design with two factors (a 2b factor and a 3w factor), the first of which has 2 between participant levels (2b), and the second of which has 3 within participants levels (3w). 
 **If there are multiple factors (the functions take up to three different factors) separate factors with a \* (asterisk)**. 
-An example of a `2b*3w` design is a group of people in one condition who get a drug, and a group of people in another condition who get a placebo, and we measure their health before they take the pill, one day after they take the pill, and a week after they take the pill. 
+An example of a `2b*3w` design is a group of people in one condition who get a drug, and a group of people in another condition who get a placebo (hence `2b`), and we measure their health before they take the pill, one day after they take the pill, and a week after they take the pill (hence the `3w`). 
 
 ### Specifying the means using `mu`
 

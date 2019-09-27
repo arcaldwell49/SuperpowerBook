@@ -24,7 +24,7 @@
 <meta name="author" content="Aaron R. Caldwell &amp; Daniël Lakens" />
 
 
-<meta name="date" content="2019-09-25" />
+<meta name="date" content="2019-09-27" />
 
   <meta name="viewport" content="width=device-width, initial-scale=1" />
   <meta name="apple-mobile-web-app-capable" content="yes" />
@@ -186,8 +186,12 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 </ul></li>
 </ul></li>
 <li class="chapter" data-level="4" data-path="mixed-anova.html"><a href="mixed-anova.html"><i class="fa fa-check"></i><b>4</b> Mixed ANOVA</a><ul>
-<li class="chapter" data-level="4.1" data-path="mixed-anova.html"><a href="mixed-anova.html#x2-anova-within-between-design"><i class="fa fa-check"></i><b>4.1</b> 2x2 ANOVA, within-between design</a><ul>
+<li class="chapter" data-level="4.1" data-path="mixed-anova.html"><a href="mixed-anova.html#simple-mixed-designs"><i class="fa fa-check"></i><b>4.1</b> Simple Mixed Designs</a><ul>
 <li class="chapter" data-level="4.1.1" data-path="mixed-anova.html"><a href="mixed-anova.html#two-by-two-anova-within-between-design-variation-1"><i class="fa fa-check"></i><b>4.1.1</b> Two by two ANOVA, within-between design Variation 1</a></li>
+</ul></li>
+<li class="chapter" data-level="4.2" data-path="mixed-anova.html"><a href="mixed-anova.html#complex-mixed-designs"><i class="fa fa-check"></i><b>4.2</b> Complex Mixed Designs</a><ul>
+<li class="chapter" data-level="4.2.1" data-path="mixed-anova.html"><a href="mixed-anova.html#b3w-design"><i class="fa fa-check"></i><b>4.2.1</b> 2b*3w Design</a></li>
+<li class="chapter" data-level="4.2.2" data-path="mixed-anova.html"><a href="mixed-anova.html#b4w-design"><i class="fa fa-check"></i><b>4.2.2</b> 2b*4w Design</a></li>
 </ul></li>
 </ul></li>
 <li class="chapter" data-level="5" data-path="power-for-three-way-interactions.html"><a href="power-for-three-way-interactions.html"><i class="fa fa-check"></i><b>5</b> Power for Three-way Interactions</a></li>
@@ -246,10 +250,10 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 <div id="the-experimental-design" class="section level1">
 <h1><span class="header-section-number">Chapter 1</span> The Experimental Design</h1>
 <p>This section introduces how <code>Superpower</code> allows the user to specify their experimental design.
-Currently, this pacakge only provides power analysis for ANOVA and for repeated measures MANOVA so all designs are defined by the <code>ANOVA_design</code> function.</p>
+Currently, this pacakge only provides power analysis for ANOVAs (and MANOVA for repeated measures) so all designs are currently defined by the <code>ANOVA_design</code> function.</p>
 <div id="anova_design-function" class="section level2">
 <h2><span class="header-section-number">1.1</span> ANOVA_design function</h2>
-<p>Currently the <code>ANOVA_design</code> function can create designs up three factors, for both within, between, and mixed designs. It requires the following input: design, n, mu, sd, r, and optionally allows you to set labelnames.</p>
+<p>Currently the <code>ANOVA_design</code> function can create designs with up to three factors, for both within, between, and mixed designs. It requires the following input: design, n, mu, sd, r, and optionally allows you to set labelnames.</p>
 <ol style="list-style-type: decimal">
 <li><code>design</code>: string that specifies the design (see below).</li>
 <li><code>n</code>: the sample size for each between subject condition.</li>
@@ -261,13 +265,13 @@ Currently, this pacakge only provides power analysis for ANOVA and for repeated 
 </ol>
 <div id="specifying-the-design-using-design" class="section level3">
 <h3><span class="header-section-number">1.1.1</span> Specifying the design using <code>design</code></h3>
-<p><code>design</code> is used to specify the design.
-Every factor is specified with a number, indicating the numner of levels of the factor, and a letter, b or w, to indicate whether the factor is manipulated between or within participants.
+<p>The <code>design</code> option is used to specify the design.
+Every factor is specified with a number, indicating the number of levels of the factor, and a letter, b or w, to indicate whether the factor is manipulated between or within participants.
 For example, a <code>2b</code> design has two between-participant groups.
 A <code>12w</code> design has one factor with 12 levels, all manipulated within-participants.
 A <code>2b*3w</code> is a design with two factors (a 2b factor and a 3w factor), the first of which has 2 between participant levels (2b), and the second of which has 3 within participants levels (3w).
 <strong>If there are multiple factors (the functions take up to three different factors) separate factors with a * (asterisk)</strong>.
-An example of a <code>2b*3w</code> design is a group of people in one condition who get a drug, and a group of people in another condition who get a placebo, and we measure their health before they take the pill, one day after they take the pill, and a week after they take the pill.</p>
+An example of a <code>2b*3w</code> design is a group of people in one condition who get a drug, and a group of people in another condition who get a placebo (hence <code>2b</code>), and we measure their health before they take the pill, one day after they take the pill, and a week after they take the pill (hence the <code>3w</code>).</p>
 </div>
 <div id="specifying-the-means-using-mu" class="section level3">
 <h3><span class="header-section-number">1.1.2</span> Specifying the means using <code>mu</code></h3>

@@ -24,7 +24,7 @@
 <meta name="author" content="Aaron R. Caldwell &amp; Daniël Lakens" />
 
 
-<meta name="date" content="2019-09-25" />
+<meta name="date" content="2019-09-27" />
 
   <meta name="viewport" content="width=device-width, initial-scale=1" />
   <meta name="apple-mobile-web-app-capable" content="yes" />
@@ -186,8 +186,12 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 </ul></li>
 </ul></li>
 <li class="chapter" data-level="4" data-path="mixed-anova.html"><a href="mixed-anova.html"><i class="fa fa-check"></i><b>4</b> Mixed ANOVA</a><ul>
-<li class="chapter" data-level="4.1" data-path="mixed-anova.html"><a href="mixed-anova.html#x2-anova-within-between-design"><i class="fa fa-check"></i><b>4.1</b> 2x2 ANOVA, within-between design</a><ul>
+<li class="chapter" data-level="4.1" data-path="mixed-anova.html"><a href="mixed-anova.html#simple-mixed-designs"><i class="fa fa-check"></i><b>4.1</b> Simple Mixed Designs</a><ul>
 <li class="chapter" data-level="4.1.1" data-path="mixed-anova.html"><a href="mixed-anova.html#two-by-two-anova-within-between-design-variation-1"><i class="fa fa-check"></i><b>4.1.1</b> Two by two ANOVA, within-between design Variation 1</a></li>
+</ul></li>
+<li class="chapter" data-level="4.2" data-path="mixed-anova.html"><a href="mixed-anova.html#complex-mixed-designs"><i class="fa fa-check"></i><b>4.2</b> Complex Mixed Designs</a><ul>
+<li class="chapter" data-level="4.2.1" data-path="mixed-anova.html"><a href="mixed-anova.html#b3w-design"><i class="fa fa-check"></i><b>4.2.1</b> 2b*3w Design</a></li>
+<li class="chapter" data-level="4.2.2" data-path="mixed-anova.html"><a href="mixed-anova.html#b4w-design"><i class="fa fa-check"></i><b>4.2.2</b> 2b*4w Design</a></li>
 </ul></li>
 </ul></li>
 <li class="chapter" data-level="5" data-path="power-for-three-way-interactions.html"><a href="power-for-three-way-interactions.html"><i class="fa fa-check"></i><b>5</b> Power for Three-way Interactions</a></li>
@@ -247,10 +251,10 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 <h1><span class="header-section-number">Chapter 2</span> One-Way ANOVA</h1>
 <div id="part-1" class="section level2">
 <h2><span class="header-section-number">2.1</span> Part 1</h2>
-<p>Using the formula also used in <span class="citation">Albers and Lakens (<a href="#ref-albers2018power">2018</a>)</span>, we can determine the means that should yield a specified effect sizes (expressed in Cohen’s <em>f</em>). Eta-squared (identical to partial eta-squared for One-Way ANOVA’s) has benchmarks of .0099, .0588, and .1379 for small, medium, and large effect sizes <span class="citation">(Cohen <a href="#ref-cohen1988spa">1988</a>)</span>. Athough these benchmarks are quite random, and researchers should only use such benchmarks for power analyses as a last resort, we will demonstrate an a-priori power analysis for these values.</p>
+<p>Using the formula also used by <span class="citation">Albers and Lakens (<a href="#ref-albers2018power">2018</a>)</span>, we can determine the means that should yield a specified effect sizes (expressed in Cohen’s <em>f</em>). Eta-squared (identical to partial eta-squared for one-way ANOVA’s) has benchmarks of .0099, .0588, and .1379 for small, medium, and large effect sizes <span class="citation">(Cohen <a href="#ref-cohen1988spa">1988</a>)</span>. Athough these benchmarks are quite arbitrary, and researchers should only use such benchmarks for power analyses as a last resort, we will demonstrate an a priori power analysis for these values.</p>
 <div id="two-conditions" class="section level3">
 <h3><span class="header-section-number">2.1.1</span> Two conditions</h3>
-<p>Imagine we aim to design a study to test the hypothesis that giving people a pet to take care of will increase their life satisfaction. We have a control condition, and a condition where people get a pet, and randomly assign participants to either condition. We can simulate a one-way ANOVA with a specified alpha, sample size, and effect size, on see the statistical power we would have for the ANOVA and the follow-up comparisons. We expect pets to increase life-satisfaction compared to the control condition. Based on work by Pavot and Diener (1993) we believe that we can expect responses on the life-satifaction scale to have a mean of approximately 24 in our population, with a standard deviation of 6.4. We expect having a pet increases life satisfaction with approximately 2.2 scale points for participants who get a pet. 200 participants in total, with 100 participants in each condition. But before we proceed with the data collection, we examine the statistical power our design would have to detect the differences we predict.</p>
+<p>Imagine we aim to design a study to test the hypothesis that giving people a pet to take care of will increase their life satisfaction. We have a control condition, and a condition where people get a pet, and randomly assign participants to either condition. We can simulate a one-way ANOVA with a specified alpha, sample size, and effect size, on see the statistical power we would have for the ANOVA and the follow-up comparisons. We expect pets to increase life-satisfaction compared to the control condition. Based on work by <span class="citation">Pavot and Diener (<a href="#ref-pavot1993affective">1993</a>)</span> we believe that we can expect responses on the life-satifaction scale to have a mean of approximately 24 in our population, with a standard deviation of 6.4. We expect having a pet increases life satisfaction with approximately 2.2 scale points for participants who get a pet. 200 participants in total, with 100 participants in each condition. But before we proceed with the data collection, we examine the statistical power our design would have to detect the differences we predict.</p>
 <div class="sourceCode" id="cb10"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb10-1" title="1">string &lt;-<span class="st"> &quot;2b&quot;</span></a>
 <a class="sourceLine" id="cb10-2" title="2">n &lt;-<span class="st"> </span><span class="dv">100</span></a>
 <a class="sourceLine" id="cb10-3" title="3"><span class="co"># We are thinking of running 50 peope in each condition</span></a>
@@ -347,14 +351,14 @@ condition
 </tr>
 </tbody>
 </table>
-<p>The result shows that we have exactly the same power for the ANOVA, as we have for the <em>t</em>-test. This is because when there are only two groups, these tests are mathematically identical. In a study with 100 participants, we would have quite low power (around 67.7%). An ANOVA with 2 groups is identical to a <em>t</em>-test. For our example, Cohen’s d (the standardized mean difference) is 2.2/6.4, or d = 0.34375 for the difference between the control condition and pets, which we can use to easily compute the expected power for these simple comparisons using the pwr package.</p>
+<p>The result shows that we have exactly the same power for the ANOVA, as we have for the <em>t</em>-test. When there are only two groups, these tests are mathematically identical. In a study with 100 participants, we would have quite low power (around 67.7%). An ANOVA with 2 groups is identical to a <em>t</em>-test. For our example, Cohen’s d (the standardized mean difference) is 2.2/6.4, or d = 0.34375 for the difference between the control condition and pets, which we can use to easily compute the expected power for these simple comparisons using the <code>pwr</code> <span class="citation">(<a href="#ref-R-pwr">2018</a>)</span> package.</p>
 <div class="sourceCode" id="cb13"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb13-1" title="1"><span class="kw">pwr.t.test</span>(<span class="dt">d =</span> <span class="fl">2.2</span><span class="op">/</span><span class="fl">6.4</span>,</a>
 <a class="sourceLine" id="cb13-2" title="2">           <span class="dt">n =</span> <span class="dv">100</span>,</a>
 <a class="sourceLine" id="cb13-3" title="3">           <span class="dt">sig.level =</span> <span class="fl">0.05</span>,</a>
 <a class="sourceLine" id="cb13-4" title="4">           <span class="dt">type =</span> <span class="st">&quot;two.sample&quot;</span>,</a>
 <a class="sourceLine" id="cb13-5" title="5">           <span class="dt">alternative =</span> <span class="st">&quot;two.sided&quot;</span>)<span class="op">$</span>power</a></code></pre></div>
 <pre><code>## [1] 0.6768572</code></pre>
-<p>We can also directly compute Cohen’s <em>f</em> from Cohen’s d for two groups, as <span class="citation">Cohen (<a href="#ref-cohen1988spa">1988</a>)</span> describes, because f = 1/2d. So f = 0.5*0.34375 = 0.171875. And indeed, power analysis using the pwr package yields the same result using the <code>pwr.anova.test</code> as the <code>power.t.test</code>.</p>
+<p>We can also directly compute Cohen’s <em>f</em> from Cohen’s d for two groups, as <span class="citation">Cohen (<a href="#ref-cohen1988spa">1988</a>)</span> describes, because <em>f</em> = 1/2d. So <em>f</em> = 0.5*0.34375 = 0.171875. And indeed, power analysis using the pwr package yields the same result using the <code>pwr.anova.test</code> as the <code>power.t.test</code>.</p>
 <div class="sourceCode" id="cb15"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb15-1" title="1">K &lt;-<span class="st"> </span><span class="dv">2</span></a>
 <a class="sourceLine" id="cb15-2" title="2">n &lt;-<span class="st"> </span><span class="dv">100</span></a>
 <a class="sourceLine" id="cb15-3" title="3">f &lt;-<span class="st"> </span><span class="fl">0.171875</span></a>
@@ -386,7 +390,7 @@ condition
 <a class="sourceLine" id="cb21-2" title="2">mu &lt;-<span class="st"> </span>mu <span class="op">*</span><span class="st"> </span>sd</a>
 <a class="sourceLine" id="cb21-3" title="3">mu</a></code></pre></div>
 <pre><code>## [1] -1.474295  1.474295</code></pre>
-<p>We can compute a pattern of means, given a standard deviation of 6.4, that would give us an effect size of f = 0.23, or eta-squared of 0.05. We should be able to accomplish this is the means are -1.474295 and 1.474295. We can use these values to confirm the ANOVA has 90% power.</p>
+<p>We can compute a pattern of means, given a standard deviation of 6.4, that would give us an effect size of <em>f</em> = 0.23, or eta-squared of 0.05. We should be able to accomplish this is the means are -1.474295 and 1.474295. We can use these values to confirm the ANOVA has 90% power.</p>
 <div class="sourceCode" id="cb23"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb23-1" title="1">design_result &lt;-<span class="st"> </span><span class="kw">ANOVA_design</span>(</a>
 <a class="sourceLine" id="cb23-2" title="2">  <span class="dt">design =</span> string,</a>
 <a class="sourceLine" id="cb23-3" title="3">  <span class="dt">n =</span> n,</a>
@@ -473,9 +477,9 @@ condition
 </tr>
 </tbody>
 </table>
-<p>The simulation confirms that for the <em>F</em>-test for the ANOVA we have 90% power. This is also what g*power tells us what would happen based on a post-hoc power analysis with an f of 0.2303587, 2 groups, 200 participants in total (100 in each between subject condition), and an alpha of 5%.</p>
+<p>The simulation confirms that for the <em>F</em>-test for the ANOVA we have 90% power. This is also what Gpower tells us what would happen based on a post-hoc power analysis with an <em>f</em> of 0.2303587, 2 groups, 200 participants in total (100 in each between subject condition), and an alpha of 5%.</p>
 <p><img src="screenshots/gpower_8.png" /></p>
-<p>If we return to our expected means, how many participants do we need for sufficient power? Given the expected difference and standard deviation, d = 0.34375, and f = 0.171875. We can perform an a-priori power analysis for this simple case, which tells us we need 179 participants in each group (we can’t split people in parts, and thus always round a power analysis upward), or 358 in total.</p>
+<p>If we return to our expected means, how many participants do we need for sufficient power? Given the expected difference and standard deviation, d = 0.34375, and <em>f</em> = 0.171875. We can perform an a priori power analysis for this simple case, which tells us we need 179 participants in each group (we can’t split people in parts, and thus always round a power analysis upward), or 358 in total.</p>
 <div class="sourceCode" id="cb26"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb26-1" title="1">K &lt;-<span class="st"> </span><span class="dv">2</span></a>
 <a class="sourceLine" id="cb26-2" title="2">power &lt;-<span class="st"> </span><span class="fl">0.9</span></a>
 <a class="sourceLine" id="cb26-3" title="3">f &lt;-<span class="st"> </span><span class="fl">0.171875</span></a>
@@ -592,7 +596,8 @@ condition
 <p>We stored the result from the power analysis in an object. This allows us to request plots (which are not printed automatically) showing the <em>p</em>-value distribution. If we request <code>simulation_result$plot1</code> we get the p-value distribution for the ANOVA:</p>
 <p><img src="SuperpowerValidation_files/figure-html/unnamed-chunk-28-1.png" width="672" /></p>
 <p>If we request <code>simulation_result$plot2</code> we get the p-value distribution for the paired comparisons (in this case only one):</p>
-<p><img src="SuperpowerValidation_files/figure-html/unnamed-chunk-29-1.png" width="672" /></p>
+<p><img src="SuperpowerValidation_files/figure-html/unnamed-chunk-29-1.png" width="672" />
+</p>
 </div>
 </div>
 <div id="part-2" class="section level2">
@@ -841,7 +846,7 @@ condition
 </table>
 <p>The simulation confirms that for the <em>F</em>-test for the ANOVA we have 90% power. This is also what g*power tells us what would happen based on a post-hoc power analysis with an f of 0.2934417, 3 groups, 150 participants in total (50 in each between subject condition), and an alpha of 5%.</p>
 <p><img src="screenshots/gpower_7.png" /></p>
-<p>We can also compute the power for the ANOVA and simple effects in R with the pwr package. The calculated effect sizes and power match those from the simulation.</p>
+<p>We can also compute the power for the ANOVA and simple effects in <code>R</code> with the <code>pwr</code> package. The calculated effect sizes and power match those from the simulation.</p>
 <div class="sourceCode" id="cb49"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb49-1" title="1">K &lt;-<span class="st"> </span><span class="dv">3</span></a>
 <a class="sourceLine" id="cb49-2" title="2">n &lt;-<span class="st"> </span><span class="dv">50</span></a>
 <a class="sourceLine" id="cb49-3" title="3">sd &lt;-<span class="st"> </span><span class="fl">6.4</span></a>
@@ -916,7 +921,7 @@ condition
 </div>
 <div id="part-3" class="section level2">
 <h2><span class="header-section-number">2.3</span> Part 3</h2>
-<p>We first repeat the simulation by Brysbaert:</p>
+<p>Now we will simply replicate the simulations of <span class="citation">Brysbaert (<a href="#ref-brysbaert2019many">2019</a>)</span>, and compare those results to <code>Superpower</code>.</p>
 <div class="sourceCode" id="cb66"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb66-1" title="1"><span class="co"># Simulations to estimate the power of an ANOVA </span></a>
 <a class="sourceLine" id="cb66-2" title="2"><span class="co">#with three unrelated groups</span></a>
 <a class="sourceLine" id="cb66-3" title="3"><span class="co"># the effect between the two extreme groups is set to d = .4, </span></a>
@@ -979,7 +984,7 @@ condition
 <a class="sourceLine" id="cb70-5" title="5">r &lt;-<span class="st"> </span><span class="dv">0</span></a>
 <a class="sourceLine" id="cb70-6" title="6">design =<span class="st"> </span><span class="kw">paste</span>(K, <span class="st">&quot;b&quot;</span>, <span class="dt">sep =</span> <span class="st">&quot;&quot;</span>)</a></code></pre></div>
 <div class="sourceCode" id="cb71"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb71-1" title="1">design_result &lt;-<span class="st"> </span><span class="kw">ANOVA_design</span>(</a>
-<a class="sourceLine" id="cb71-2" title="2">  <span class="dt">design =</span> string,</a>
+<a class="sourceLine" id="cb71-2" title="2">  <span class="dt">design =</span> design,</a>
 <a class="sourceLine" id="cb71-3" title="3">  <span class="dt">n =</span> n,</a>
 <a class="sourceLine" id="cb71-4" title="4">  <span class="dt">mu =</span> mu,</a>
 <a class="sourceLine" id="cb71-5" title="5">  <span class="dt">sd =</span> sd,</a>
@@ -1125,7 +1130,7 @@ factor1
 <a class="sourceLine" id="cb78-5" title="5">r &lt;-<span class="st"> </span><span class="dv">0</span></a>
 <a class="sourceLine" id="cb78-6" title="6">design =<span class="st"> </span><span class="kw">paste</span>(K, <span class="st">&quot;b&quot;</span>, <span class="dt">sep =</span> <span class="st">&quot;&quot;</span>)</a></code></pre></div>
 <div class="sourceCode" id="cb79"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb79-1" title="1">design_result &lt;-<span class="st"> </span><span class="kw">ANOVA_design</span>(</a>
-<a class="sourceLine" id="cb79-2" title="2">  <span class="dt">design =</span> string,</a>
+<a class="sourceLine" id="cb79-2" title="2">  <span class="dt">design =</span> design,</a>
 <a class="sourceLine" id="cb79-3" title="3">  <span class="dt">n =</span> n,</a>
 <a class="sourceLine" id="cb79-4" title="4">  <span class="dt">mu =</span> mu,</a>
 <a class="sourceLine" id="cb79-5" title="5">  <span class="dt">sd =</span> sd,</a>
@@ -1265,7 +1270,7 @@ factor1
 <a class="sourceLine" id="cb86-4" title="4">sd &lt;-<span class="st"> </span><span class="dv">1</span></a>
 <a class="sourceLine" id="cb86-5" title="5">design =<span class="st"> </span><span class="kw">paste</span>(K, <span class="st">&quot;b&quot;</span>, <span class="dt">sep =</span> <span class="st">&quot;&quot;</span>)</a></code></pre></div>
 <div class="sourceCode" id="cb87"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb87-1" title="1">design_result &lt;-<span class="st"> </span><span class="kw">ANOVA_design</span>(</a>
-<a class="sourceLine" id="cb87-2" title="2">  <span class="dt">design =</span> string,</a>
+<a class="sourceLine" id="cb87-2" title="2">  <span class="dt">design =</span> design,</a>
 <a class="sourceLine" id="cb87-3" title="3">  <span class="dt">n =</span> n,</a>
 <a class="sourceLine" id="cb87-4" title="4">  <span class="dt">mu =</span> mu,</a>
 <a class="sourceLine" id="cb87-5" title="5">  <span class="dt">sd =</span> sd,</a>
@@ -1354,7 +1359,7 @@ factor1
 </div>
 <div id="effect-size-estimates-for-one-way-anova" class="section level2">
 <h2><span class="header-section-number">2.4</span> Effect Size Estimates for One-Way ANOVA</h2>
-<p>Using the formulas below, we can calculate the means for between designs with one factor (one-way ANOVA). Using the formula also used in <span class="citation">Albers and Lakens (<a href="#ref-albers2018power">2018</a>)</span>, we can determine the means that should yield a specified effect sizes (expressed in Cohen’s <em>f</em>).</p>
+<p>Using the formulas below, we can calculate the means for a one-way ANOVA. Using the formula from <span class="citation">Albers and Lakens (<a href="#ref-albers2018power">2018</a>)</span>, we can determine the means that should yield a specified effect sizes (expressed in Cohen’s <em>f</em>).</p>
 <p>Eta-squared (idential to partial eta-squared for one-way ANOVA’s) has benchmarks of .0099, .0588, and .1379 for small, medium, and large effect sizes <span class="citation">(Cohen <a href="#ref-cohen1988spa">1988</a>)</span>.</p>
 <div id="three-conditions-small-effect-size" class="section level3">
 <h3><span class="header-section-number">2.4.1</span> Three conditions, small effect size</h3>
@@ -1556,7 +1561,7 @@ factor1
 </div>
 <div id="two-conditions-large-effect-size" class="section level3">
 <h3><span class="header-section-number">2.4.3</span> Two conditions, large effect size</h3>
-<p>We can simulate a one-factor anova that should yield a large effect size (0.1379) across two conditions.</p>
+<p>We can simulate a one-way ANOVA that should yield a large effect size (0.1379) across two conditions.</p>
 <div class="sourceCode" id="cb98"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb98-1" title="1">K &lt;-<span class="st"> </span><span class="dv">2</span></a>
 <a class="sourceLine" id="cb98-2" title="2">ES &lt;-<span class="st"> </span><span class="fl">.1379</span></a>
 <a class="sourceLine" id="cb98-3" title="3">mu &lt;-<span class="st"> </span><span class="kw">mu_from_ES</span>(<span class="dt">K =</span> K, <span class="dt">ES =</span> ES)</a>
@@ -1659,8 +1664,17 @@ factor1
 <div id="ref-albers2018power">
 <p>Albers, Casper, and Daniël Lakens. 2018. “When Power Analyses Based on Pilot Data Are Biased: Inaccurate Effect Size Estimators and Follow-up Bias.” <em>Journal of Experimental Social Psychology</em> 74: 187–95. <a href="https://doi.org/10.1016/j.jesp.2017.09.004">https://doi.org/10.1016/j.jesp.2017.09.004</a>.</p>
 </div>
+<div id="ref-brysbaert2019many">
+<p>Brysbaert, Marc. 2019. “How Many Participants Do We Have to Include in Properly Powered Experiments? A Tutorial of Power Analysis with Reference Tables.” <em>Journal of Cognition</em> 2 (1). <a href="http://doi.org/10.5334/joc.72">http://doi.org/10.5334/joc.72</a>.</p>
+</div>
+<div id="ref-R-pwr">
+<p>Champely, Stephane. 2018. <em>Pwr: Basic Functions for Power Analysis</em>. <a href="https://CRAN.R-project.org/package=pwr">https://CRAN.R-project.org/package=pwr</a>.</p>
+</div>
 <div id="ref-cohen1988spa">
 <p>Cohen, J. 1988. <em>Statistical Power Analysis for the Behavioral Sciences</em>. Lawrence Erlbaum Associates.</p>
+</div>
+<div id="ref-pavot1993affective">
+<p>Pavot, William, and Ed Diener. 1993. “The Affective and Cognitive Context of Self-Reported Measures of Subjective Well-Being.” <em>Social Indicators Research</em> 28 (1): 1–20.</p>
 </div>
 </div>
             </section>

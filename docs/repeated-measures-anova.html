@@ -24,7 +24,7 @@
 <meta name="author" content="Aaron R. Caldwell &amp; Daniël Lakens" />
 
 
-<meta name="date" content="2019-09-25" />
+<meta name="date" content="2019-09-27" />
 
   <meta name="viewport" content="width=device-width, initial-scale=1" />
   <meta name="apple-mobile-web-app-capable" content="yes" />
@@ -186,8 +186,12 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 </ul></li>
 </ul></li>
 <li class="chapter" data-level="4" data-path="mixed-anova.html"><a href="mixed-anova.html"><i class="fa fa-check"></i><b>4</b> Mixed ANOVA</a><ul>
-<li class="chapter" data-level="4.1" data-path="mixed-anova.html"><a href="mixed-anova.html#x2-anova-within-between-design"><i class="fa fa-check"></i><b>4.1</b> 2x2 ANOVA, within-between design</a><ul>
+<li class="chapter" data-level="4.1" data-path="mixed-anova.html"><a href="mixed-anova.html#simple-mixed-designs"><i class="fa fa-check"></i><b>4.1</b> Simple Mixed Designs</a><ul>
 <li class="chapter" data-level="4.1.1" data-path="mixed-anova.html"><a href="mixed-anova.html#two-by-two-anova-within-between-design-variation-1"><i class="fa fa-check"></i><b>4.1.1</b> Two by two ANOVA, within-between design Variation 1</a></li>
+</ul></li>
+<li class="chapter" data-level="4.2" data-path="mixed-anova.html"><a href="mixed-anova.html#complex-mixed-designs"><i class="fa fa-check"></i><b>4.2</b> Complex Mixed Designs</a><ul>
+<li class="chapter" data-level="4.2.1" data-path="mixed-anova.html"><a href="mixed-anova.html#b3w-design"><i class="fa fa-check"></i><b>4.2.1</b> 2b*3w Design</a></li>
+<li class="chapter" data-level="4.2.2" data-path="mixed-anova.html"><a href="mixed-anova.html#b4w-design"><i class="fa fa-check"></i><b>4.2.2</b> 2b*4w Design</a></li>
 </ul></li>
 </ul></li>
 <li class="chapter" data-level="5" data-path="power-for-three-way-interactions.html"><a href="power-for-three-way-interactions.html"><i class="fa fa-check"></i><b>5</b> Power for Three-way Interactions</a></li>
@@ -252,7 +256,7 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 <h3><span class="header-section-number">3.1.1</span> Two conditions, medium effect size</h3>
 <p>To illustrate the effect of correated observations, we start by simulating data for a medium effect size for a dependent (or paired, or within-subject) <em>t</em>-test. Let’s first look at <span class="citation">Faul et al. (<a href="#ref-faul2007g">2007</a>)</span>. If we want to perform an a-priori power analysis, we are asked to fill in the effect size dz. As <span class="citation">Cohen (<a href="#ref-cohen1988spa">1988</a>)</span> writes, “The Z subscript is used to emphasize the fact that our raw score unit is no longer X or Y, but Z”, where Z are the difference scores of X-Y.</p>
 <p><img src="screenshots/gpower_9.png" /></p>
-<p>Within designs can have greater power to detect differences than between designs because the values are correlated, and a within design requires less participants because each participant provides multiple observations. One difference between an independent <em>t</em>-test and a dependent <em>t</em>-test is that an independent <em>t</em>-test has 2(n-1) degrees of freedom, while a dependent <em>t</em>-test has (n-1) degrees of freedom. The sample size needed in a two-group within-design (NW) relative to the sample needed in two-group between-designs (NB), assuming normal distributions, and ignoring the difference in degrees of freedom between the two types of tests, is (from <span class="citation">Maxwell et al. (<a href="#ref-maxwell_designing_2004">2004</a>)</span>, p. 561, formula 45):</p>
+<p>Within designs can have greater power to detect differences than between designs because the values are correlated, and a within design requires less participants because each participant provides multiple observations. One difference between an independent <em>t</em>-test and a dependent <em>t</em>-test is that an independent <em>t</em>-test has 2(n-1) degrees of freedom, while a dependent <em>t</em>-test has (n-1) degrees of freedom. The sample size needed in a two-group within-design (NW) relative to the sample needed in two-group between-designs (NB), assuming normal distributions, and ignoring the difference in degrees of freedom between the two types of tests, is (from <span class="citation">Maxwell, Delaney, and Kelley (<a href="#ref-maxwell_designing_2004">2004</a>)</span>, p. 561, formula 45):</p>
 <p><span class="math inline">\(N_{W}=\frac{N_{B}(1-\rho)}{2}\)</span></p>
 <p>The division by 2 in the equation is due to the fact that in a two-condition within design every participant provides two data-points. The extent to which this reduces the sample size compared to a between-subject design depends on the correlation (<em>r</em>) between the two dependent variables, as indicated by the <code>1-r</code> part of the equation. If the correlation is 0, a within-subject design needs half as many participants as a between-subject design (e.g., 64 instead 128 participants), simply because every participants provides 2 datapoints. The higher the correlation, the larger the relative benefit of within designs, and whenever the correlation is negative (up to -1) the relative benefit disappears.</p>
 <p>Whereas in an independent <em>t</em>-test the two observations are uncorrelated, in a within design the observations are correlated. This has an effect on the standard deviation of the difference scores. In turn, because the standardized effect size is the mean difference divided by the standard deviation of the difference scores, the correlation has an effect on the standardized mean difference in a within design, Cohen’s dz. The relation, as Cohen (1988, formula 2.3.7) explains, is:</p>
@@ -512,7 +516,7 @@ speed
 <div id="part-2-1" class="section level2">
 <h2><span class="header-section-number">3.2</span> Part 2</h2>
 <p>Here, we will examine a repeated measures experiment with 3 within-subject conditions, to illustrate how a repeated measures ANOVA extends a dependent <em>t</em>-test with 3 groups.</p>
-<p>In the example for a two-group within design we provided a specific formula for the sample size benefit for two groups. The sample size needed in within-designs (NW) with more than 2 conditions, relative to the sample needed in between-designs (NB), assuming normal distributions and compound symmetry, and ignoring the difference in degrees of freedom between the two types of tests, is (from <span class="citation">Maxwell et al. (<a href="#ref-maxwell_designing_2004">2004</a>)</span>, p. 562, formula 47):</p>
+<p>In the example for a two-group within design we provided a specific formula for the sample size benefit for two groups. The sample size needed in within-designs (NW) with more than 2 conditions, relative to the sample needed in between-designs (NB), assuming normal distributions and compound symmetry, and ignoring the difference in degrees of freedom between the two types of tests, is (from <span class="citation">Maxwell, Delaney, and Kelley (<a href="#ref-maxwell_designing_2004">2004</a>)</span>, p. 562, formula 47):</p>
 <p><span class="math inline">\(N_{W}=\frac{N_{B}(1-\rho)}{a}\)</span></p>
 <p>Where a is the number of within-subject levels.</p>
 <div id="the-relation-between-cohens-f-and-cohens-d" class="section level3">
@@ -2210,8 +2214,8 @@ power
 </div>
 <div id="multivariate-anova-manova" class="section level2">
 <h2><span class="header-section-number">3.6</span> Multivariate ANOVA (MANOVA)</h2>
-<p>A large proportion of research with within-subjects manipulations, or repeated measures, rely upon the “univariate” approach <span class="citation">(Maxwell et al. <a href="#ref-maxwell_designing_2004">2004</a>)</span>. While this approach is valid, when corrections for sphercity are applied, it may not be the most powerful or informative analysis plan. Instead, researchers should consider a multivariate analysis (MANOVA). While the MANOVA is not “assumption free” it does not assume sphercity which makes it a very attractive analytical tool and the preferred method of analysis for some [<span class="citation">Maxwell et al. (<a href="#ref-maxwell_designing_2004">2004</a>)</span>.</p>
-<p>For a simple one-way repeated measures design, there are some simple guidelines for power analysis set forth by <span class="citation">Maxwell et al. (<a href="#ref-maxwell_designing_2004">2004</a>)</span> (pg. 750). All that is needed in the effect size calculated as:
+<p>A large proportion of research with within-subjects manipulations, or repeated measures, rely upon the “univariate” approach <span class="citation">(Maxwell, Delaney, and Kelley <a href="#ref-maxwell_designing_2004">2004</a>)</span>. While this approach is valid, when corrections for sphercity are applied, it may not be the most powerful or informative analysis plan. Instead, researchers should consider a multivariate analysis (MANOVA). While the MANOVA is not “assumption free” it does not assume sphercity which makes it a very attractive analytical tool and the preferred method of analysis for some [<span class="citation">Maxwell, Delaney, and Kelley (<a href="#ref-maxwell_designing_2004">2004</a>)</span>.</p>
+<p>For a simple one-way repeated measures design, there are some simple guidelines for power analysis set forth by <span class="citation">Maxwell, Delaney, and Kelley (<a href="#ref-maxwell_designing_2004">2004</a>)</span> (pg. 750). All that is needed in the effect size calculated as:
 <span class="math display">\[ d = \frac{\mu_{max}-\mu_{min}}{\sigma} \]</span>
 This assumes that each level has a common standard deviation (i.e., there is only 1 <code>sd</code> input for the design).</p>
 <p>In addition, the non-centrality parameter of the <em>F</em>-statistic can be estimated from <span class="citation">Vonesh and Schork (<a href="#ref-vonesh1986sample">1986</a>)</span> equations as the following:
@@ -2304,7 +2308,7 @@ a
 </tr>
 </tbody>
 </table>
-<p>The problem with this formula for determining power is that it is inexact and makes a number of assumptions (<span class="citation">Maxwell et al. (<a href="#ref-maxwell_designing_2004">2004</a>)</span>, ppg. 752). In reality, it can only give a lower bound estimate of power for a given design, and the actual power may be much higher. This is problematic because it could lead to inefficient study design (e.g., determining you need 20 participants when adequate power could be achieved with less participants). This will become increasingly important with designs with multiple levels and possible violations of the assumption of sphericity.</p>
+<p>The problem with this formula for determining power is that it is inexact and makes a number of assumptions (<span class="citation">Maxwell, Delaney, and Kelley (<a href="#ref-maxwell_designing_2004">2004</a>)</span>, ppg. 752). In reality, it can only give a lower bound estimate of power for a given design, and the actual power may be much higher. This is problematic because it could lead to inefficient study design (e.g., determining you need 20 participants when adequate power could be achieved with less participants). This will become increasingly important with designs with multiple levels and possible violations of the assumption of sphericity.</p>
 </div>
 <div id="sphericity-assumption" class="section level2">
 <h2><span class="header-section-number">3.7</span> Sphericity Assumption</h2>
@@ -2348,7 +2352,6 @@ anova_a
 </tr>
 </tbody>
 </table>
-<p><strong>INSERT ANOVA Result ABOUT HERE</strong></p>
 <p>As we can see, the actual type I error rate far exceeds the typical 5%!</p>
 <p>Now, let’s pour gasoline on the fire and see what happens when we make the sphericity violation worse by varying the standard deviations.</p>
 <div class="sourceCode" id="cb254"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb254-1" title="1">design_result &lt;-<span class="st"> </span><span class="kw">ANOVA_design</span>(<span class="st">&quot;4w&quot;</span>,</a>
@@ -2390,14 +2393,44 @@ anova_a
 </tr>
 </tbody>
 </table>
-<p><strong>INSERT ANOVA Result ABOUT HERE</strong></p>
 <p>These inflated error rates are obviously a problem, which begs the question what do we do about them?</p>
 <p>In our experience, most researchers default to using a Greenhouse-Geisser adjustment for sphericity, but this may not be the most statistical efficient way of dealing with violations of sphercity. Further, as we can see from the simulation (<code>power_result_s2</code>) the MANOVA maintains the type I error rate at 5%.</p>
-<p><strong>Insert MANOVA Result About HERE</strong></p>
+<table class="table" style="margin-left: auto; margin-right: auto;">
+<caption>
+<span id="tab:unnamed-chunk-178">Table 3.22: </span>Simulated MANOVA Result
+</caption>
+<thead>
+<tr>
+<th style="text-align:left;">
+</th>
+<th style="text-align:right;">
+power
+</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td style="text-align:left;">
+manova_(Intercept)
+</td>
+<td style="text-align:right;">
+5.16
+</td>
+</tr>
+<tr>
+<td style="text-align:left;">
+manova_a
+</td>
+<td style="text-align:right;">
+5.16
+</td>
+</tr>
+</tbody>
+</table>
 <div id="manova-or-sphericity-adjustment" class="section level3">
 <h3><span class="header-section-number">3.7.1</span> MANOVA or Sphericity Adjustment?</h3>
 <p>In addition to adjusting for sphericity, one could also simply use the multivariate approach to repeated measures.
-While it is tempting to simply say one approach is superior to another, that is not case when the sample size is small (<span class="citation">Maxwell et al. (<a href="#ref-maxwell_designing_2004">2004</a>)</span>, ppg 775). Some general guidelines were proposed by Algina and Keselman (1997):</p>
+While it is tempting to simply say one approach is superior to another, that is not case when the sample size is small (<span class="citation">Maxwell, Delaney, and Kelley (<a href="#ref-maxwell_designing_2004">2004</a>)</span>, ppg 775). Some general guidelines were proposed by Algina and Keselman (1997):</p>
 <p>MANOVA when <code>levels &lt;= 4, epsilon &lt;= .9, n &gt; levels + 15</code> and <code>5 &lt;= levels &lt;= 8, epsilon &lt;= .85, n &gt; levels + 30</code>.</p>
 <p>However, <code>ANOVA_power</code> can make the solution easy. Simply simulate, like we have done above, for both the null situation (no differences) and with the hypothesized effect (to determine power), and see which approach best balances type I and II error rates.</p>
 <p>As we saw above, the unadjusted repeated measures ANOVA has an elevated type I error rate, but the MANOVA analysis of the same data above approximately preserves the type I error rate. However, how does this perform relative to the sphericity corrections? Let’s simulate again, and compare the results of the different corrections.</p>
@@ -2411,7 +2444,7 @@ While it is tempting to simply say one approach is superior to another, that is 
 <a class="sourceLine" id="cb255-8" title="8">power_result_none &lt;-<span class="st"> </span><span class="kw">ANOVA_power</span>(design_result, <span class="dt">nsims =</span> nsims, <span class="dt">verbose =</span> <span class="ot">FALSE</span>)</a></code></pre></div>
 <table class="table" style="margin-left: auto; margin-right: auto;">
 <caption>
-<span id="tab:unnamed-chunk-179">Table 3.22: </span>Simulated MANOVA Result
+<span id="tab:unnamed-chunk-180">Table 3.23: </span>Simulated MANOVA Result
 </caption>
 <thead>
 <tr>
@@ -2445,7 +2478,7 @@ manova_a
 <a class="sourceLine" id="cb256-2" title="2">                               <span class="dt">nsims =</span> nsims, <span class="dt">verbose =</span> <span class="ot">FALSE</span>)</a></code></pre></div>
 <table class="table" style="margin-left: auto; margin-right: auto;">
 <caption>
-<span id="tab:unnamed-chunk-181">Table 3.23: </span>Simulated ANOVA Result
+<span id="tab:unnamed-chunk-182">Table 3.24: </span>Simulated ANOVA Result
 </caption>
 <thead>
 <tr>
@@ -2477,7 +2510,7 @@ anova_a
 <a class="sourceLine" id="cb257-2" title="2">                               <span class="dt">nsims =</span> nsims, <span class="dt">verbose =</span> <span class="ot">FALSE</span>)</a></code></pre></div>
 <table class="table" style="margin-left: auto; margin-right: auto;">
 <caption>
-<span id="tab:unnamed-chunk-183">Table 3.24: </span>Simulated ANOVA Result
+<span id="tab:unnamed-chunk-184">Table 3.25: </span>Simulated ANOVA Result
 </caption>
 <thead>
 <tr>
@@ -2517,7 +2550,7 @@ anova_a
 <a class="sourceLine" id="cb258-9" title="9">                                     <span class="dt">nsims =</span> nsims, <span class="dt">verbose =</span> <span class="ot">FALSE</span>)</a></code></pre></div>
 <table class="table" style="margin-left: auto; margin-right: auto;">
 <caption>
-<span id="tab:unnamed-chunk-185">Table 3.25: </span>Simulated ANOVA Result
+<span id="tab:unnamed-chunk-186">Table 3.26: </span>Simulated ANOVA Result
 </caption>
 <thead>
 <tr>
@@ -2547,7 +2580,7 @@ anova_a
 </table>
 <table class="table" style="margin-left: auto; margin-right: auto;">
 <caption>
-<span id="tab:unnamed-chunk-186">Table 3.26: </span>Simulated MANOVA Result
+<span id="tab:unnamed-chunk-187">Table 3.27: </span>Simulated MANOVA Result
 </caption>
 <thead>
 <tr>
@@ -2588,7 +2621,7 @@ manova_a
 <a class="sourceLine" id="cb259-8" title="8">                                     <span class="dt">nsims =</span> nsims, <span class="dt">verbose =</span> <span class="ot">FALSE</span>)</a></code></pre></div>
 <table class="table" style="margin-left: auto; margin-right: auto;">
 <caption>
-<span id="tab:unnamed-chunk-188">Table 3.27: </span>Simulated ANOVA Result
+<span id="tab:unnamed-chunk-189">Table 3.28: </span>Simulated ANOVA Result
 </caption>
 <thead>
 <tr>
@@ -2618,7 +2651,7 @@ anova_a
 </table>
 <table class="table" style="margin-left: auto; margin-right: auto;">
 <caption>
-<span id="tab:unnamed-chunk-189">Table 3.28: </span>Simulated MANOVA Result
+<span id="tab:unnamed-chunk-190">Table 3.29: </span>Simulated MANOVA Result
 </caption>
 <thead>
 <tr>
@@ -2656,7 +2689,7 @@ manova_a
 <h3>References</h3>
 <div id="refs" class="references">
 <div id="ref-algina1997detecting">
-<p>Algina, James, and HJ Keselman. 1997. “Detecting Repeated Measures Effects with Univariate and Multivariate Statistics.” <em>Psychological Methods</em> 2 (2): 208.</p>
+<p>Algina, James, and HJ Keselman. 1997. “Detecting Repeated Measures Effects with Univariate and Multivariate Statistics.” <em>Psychological Methods</em> 2 (2): 208. <a href="http://dx.doi.org/10.1037/1082-989X.2.2.208">http://dx.doi.org/10.1037/1082-989X.2.2.208</a>.</p>
 </div>
 <div id="ref-cohen1988spa">
 <p>Cohen, J. 1988. <em>Statistical Power Analysis for the Behavioral Sciences</em>. Lawrence Erlbaum Associates.</p>
@@ -2665,13 +2698,13 @@ manova_a
 <p>Faul, Franz, Edgar Erdfelder, Albert-Georg Lang, and Axel Buchner. 2007. “G*Power 3: A Flexible Statistical Power Analysis Program for the Social, Behavioral, and Biomedical Sciences.” <em>Behavior Research Methods</em> 39 (2): 175–91. <a href="http://www.psychologie.hhu.de/arbeitsgruppen/allgemeine-psychologie-und-arbeitspsychologie/gpower.html">http://www.psychologie.hhu.de/arbeitsgruppen/allgemeine-psychologie-und-arbeitspsychologie/gpower.html</a>.</p>
 </div>
 <div id="ref-maxwell_designing_2004">
-<p>Maxwell, S.E., S.E. Maxwell, H.D. Delaney, and K. Kelley. 2004. <em>Designing Experiments and Analyzing Data: A Model Comparison Perspective</em>. Avec CD, v. 1. Lawrence Erlbaum Associates. <a href="https://designingexperiments.com/">https://designingexperiments.com/</a>.</p>
+<p>Maxwell, S.E., H.D. Delaney, and K. Kelley. 2004. <em>Designing Experiments and Analyzing Data: A Model Comparison Perspective</em>. Avec CD, v. 1. Lawrence Erlbaum Associates. <a href="https://designingexperiments.com/">https://designingexperiments.com/</a>.</p>
 </div>
 <div id="ref-potvin2000statistical">
 <p>Potvin, Patrick J, and Robert W Schutz. 2000. “Statistical Power for the Two-Factor Repeated Measures Anova.” <em>Behavior Research Methods, Instruments, &amp; Computers</em> 32 (2): 347–56. <a href="https://psycnet.apa.org/doi/10.3758/BF03207805">https://psycnet.apa.org/doi/10.3758/BF03207805</a>.</p>
 </div>
 <div id="ref-vonesh1986sample">
-<p>Vonesh, Edward F, and M Anthony Schork. 1986. “Sample Sizes in the Multivariate Analysis of Repeated Measurements.” <em>Biometrics</em>, 601–10.</p>
+<p>Vonesh, Edward F, and M Anthony Schork. 1986. “Sample Sizes in the Multivariate Analysis of Repeated Measurements.” <em>Biometrics</em>, 601–10. <a href="http://dx.doi.org/10.2307/2531210">http://dx.doi.org/10.2307/2531210</a>.</p>
 </div>
 </div>
             </section>
