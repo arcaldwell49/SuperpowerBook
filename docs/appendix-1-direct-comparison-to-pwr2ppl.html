@@ -6,7 +6,7 @@
   <meta http-equiv="X-UA-Compatible" content="IE=edge" />
   <title>Appendix 1: Direct Comparison to pwr2ppl | Power Analysis with Superpower</title>
   <meta name="description" content="This is a book describing the capabilities of the Superpower R package." />
-  <meta name="generator" content="bookdown 0.13 and GitBook 2.6.7" />
+  <meta name="generator" content="bookdown 0.10 and GitBook 2.6.7" />
 
   <meta property="og:title" content="Appendix 1: Direct Comparison to pwr2ppl | Power Analysis with Superpower" />
   <meta property="og:type" content="book" />
@@ -24,15 +24,15 @@
 <meta name="author" content="Aaron R. Caldwell &amp; Daniël Lakens" />
 
 
-<meta name="date" content="2019-10-01" />
+<meta name="date" content="2019-10-12" />
 
   <meta name="viewport" content="width=device-width, initial-scale=1" />
   <meta name="apple-mobile-web-app-capable" content="yes" />
   <meta name="apple-mobile-web-app-status-bar-style" content="black" />
   
   
-<link rel="prev" href="power-curve.html"/>
-<link rel="next" href="appendix-2-direct-comparison-to-morepower.html"/>
+<link rel="prev" href="power-curve.html">
+<link rel="next" href="appendix-2-direct-comparison-to-morepower.html">
 <script src="libs/jquery-2.2.3/jquery.min.js"></script>
 <link href="libs/gitbook-2.6.7/css/style.css" rel="stylesheet" />
 <link href="libs/gitbook-2.6.7/css/plugin-table.css" rel="stylesheet" />
@@ -56,6 +56,7 @@ a.sourceLine { pointer-events: none; color: inherit; text-decoration: inherit; }
 a.sourceLine:empty { height: 1.2em; }
 .sourceCode { overflow: visible; }
 code.sourceCode { white-space: pre; position: relative; }
+div.sourceCode { margin: 1em 0; }
 pre.sourceCode { margin: 0; }
 @media screen {
 div.sourceCode { overflow: auto; }
@@ -253,99 +254,99 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 <div id="example-5.15.2" class="section level3">
 <h3><span class="header-section-number">10.5.1</span> Example 5.1/5.2</h3>
 <p>In this example, Aberson proposes a study expecting an average “score” of 80, 82, 82, and 86 for the control and three treatment groups respectively. The common standard deviation is 10 and the sample size per cell is 60.</p>
-<div class="sourceCode" id="cb587"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb587-1" title="1">design_result &lt;-<span class="st"> </span><span class="kw">ANOVA_design</span>(<span class="dt">design =</span> <span class="st">&quot;4b&quot;</span>,</a>
-<a class="sourceLine" id="cb587-2" title="2">                              <span class="dt">n =</span> <span class="dv">60</span>,</a>
-<a class="sourceLine" id="cb587-3" title="3">                              <span class="dt">sd =</span> <span class="dv">10</span>,</a>
-<a class="sourceLine" id="cb587-4" title="4">                              <span class="dt">mu =</span> <span class="kw">c</span>(<span class="dv">80</span>, <span class="dv">82</span>, <span class="dv">82</span>, <span class="dv">86</span>),</a>
-<a class="sourceLine" id="cb587-5" title="5">                              <span class="dt">labelnames =</span> <span class="kw">c</span>(<span class="st">&quot;DORM&quot;</span>,</a>
-<a class="sourceLine" id="cb587-6" title="6">                              <span class="st">&quot;Control&quot;</span>,</a>
-<a class="sourceLine" id="cb587-7" title="7">                              <span class="st">&quot;T1&quot;</span>,</a>
-<a class="sourceLine" id="cb587-8" title="8">                              <span class="st">&quot;T2&quot;</span>,</a>
-<a class="sourceLine" id="cb587-9" title="9">                              <span class="st">&quot;T3&quot;</span>),</a>
-<a class="sourceLine" id="cb587-10" title="10">                              <span class="dt">plot =</span> <span class="ot">TRUE</span>)</a></code></pre></div>
+<pre class="sourceCode r"><code class="sourceCode r">design_result &lt;-<span class="st"> </span><span class="kw">ANOVA_design</span>(<span class="dt">design =</span> <span class="st">&quot;4b&quot;</span>,
+                              <span class="dt">n =</span> <span class="dv">60</span>,
+                              <span class="dt">sd =</span> <span class="dv">10</span>,
+                              <span class="dt">mu =</span> <span class="kw">c</span>(<span class="dv">80</span>, <span class="dv">82</span>, <span class="dv">82</span>, <span class="dv">86</span>),
+                              <span class="dt">labelnames =</span> <span class="kw">c</span>(<span class="st">&quot;DORM&quot;</span>,
+                              <span class="st">&quot;Control&quot;</span>,
+                              <span class="st">&quot;T1&quot;</span>,
+                              <span class="st">&quot;T2&quot;</span>,
+                              <span class="st">&quot;T3&quot;</span>),
+                              <span class="dt">plot =</span> <span class="ot">TRUE</span>)</code></pre>
 <p><img src="SuperpowerValidation_files/figure-html/aberson_appendix-1.png" width="672" /></p>
 <p>Now we calculate the analytical result from <code>Superpower</code>.</p>
-<div class="sourceCode" id="cb588"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb588-1" title="1">analytical_result &lt;-<span class="st"> </span><span class="kw">power_oneway_between</span>(design_result)</a>
-<a class="sourceLine" id="cb588-2" title="2"></a>
-<a class="sourceLine" id="cb588-3" title="3">analytical_result<span class="op">$</span>power</a></code></pre></div>
+<pre class="sourceCode r"><code class="sourceCode r">analytical_result &lt;-<span class="st"> </span><span class="kw">power_oneway_between</span>(design_result)
+
+analytical_result<span class="op">$</span>power</code></pre>
 <pre><code>## [1] 81.21291</code></pre>
 <p>The <code>ANOVA_exact</code> result.</p>
-<div class="sourceCode" id="cb590"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb590-1" title="1">exact_result &lt;-<span class="st"> </span><span class="kw">ANOVA_exact</span>(design_result, <span class="dt">verbose =</span> <span class="ot">FALSE</span>)</a>
-<a class="sourceLine" id="cb590-2" title="2"></a>
-<a class="sourceLine" id="cb590-3" title="3">exact_result<span class="op">$</span>main_results</a></code></pre></div>
+<pre class="sourceCode r"><code class="sourceCode r">exact_result &lt;-<span class="st"> </span><span class="kw">ANOVA_exact</span>(design_result, <span class="dt">verbose =</span> <span class="ot">FALSE</span>)
+
+exact_result<span class="op">$</span>main_results</code></pre>
 <pre><code>##         power partial_eta_squared   cohen_f non_centrality
 ## DORM 81.21291          0.04607922 0.2197842           11.4</code></pre>
 <p>And these match <code>pwr2ppl</code>.</p>
-<div class="sourceCode" id="cb592"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb592-1" title="1"><span class="kw">anova1f_4</span>(<span class="dt">m1 =</span> <span class="dv">80</span>, <span class="dt">m2 =</span> <span class="dv">82</span>, <span class="dt">m3 =</span> <span class="dv">82</span>, <span class="dt">m4 =</span> <span class="dv">86</span>,</a>
-<a class="sourceLine" id="cb592-2" title="2">          <span class="dt">s1 =</span> <span class="dv">10</span>, <span class="dt">s2 =</span> <span class="dv">10</span>, <span class="dt">s3 =</span> <span class="dv">10</span>, <span class="dt">s4 =</span> <span class="dv">10</span>,</a>
-<a class="sourceLine" id="cb592-3" title="3">          <span class="dt">n1 =</span> <span class="dv">60</span>, <span class="dt">n2 =</span> <span class="dv">60</span>, <span class="dt">n3 =</span> <span class="dv">60</span>, <span class="dt">n4 =</span> <span class="dv">60</span>)</a></code></pre></div>
+<pre class="sourceCode r"><code class="sourceCode r"><span class="kw">anova1f_4</span>(<span class="dt">m1 =</span> <span class="dv">80</span>, <span class="dt">m2 =</span> <span class="dv">82</span>, <span class="dt">m3 =</span> <span class="dv">82</span>, <span class="dt">m4 =</span> <span class="dv">86</span>,
+          <span class="dt">s1 =</span> <span class="dv">10</span>, <span class="dt">s2 =</span> <span class="dv">10</span>, <span class="dt">s3 =</span> <span class="dv">10</span>, <span class="dt">s4 =</span> <span class="dv">10</span>,
+          <span class="dt">n1 =</span> <span class="dv">60</span>, <span class="dt">n2 =</span> <span class="dv">60</span>, <span class="dt">n3 =</span> <span class="dv">60</span>, <span class="dt">n4 =</span> <span class="dv">60</span>)</code></pre>
 <pre><code>## Power  = 0.812 for eta-squared = 0.05</code></pre>
 </div>
 <div id="example-5.3" class="section level3">
 <h3><span class="header-section-number">10.5.2</span> Example 5.3</h3>
 <p>Now a 2 x 2 between-subject ANOVA.</p>
-<div class="sourceCode" id="cb594"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb594-1" title="1">design_result &lt;-<span class="st"> </span><span class="kw">ANOVA_design</span>(<span class="dt">design =</span> <span class="st">&quot;2b*2b&quot;</span>,</a>
-<a class="sourceLine" id="cb594-2" title="2">                              <span class="dt">n =</span> <span class="dv">100</span>,</a>
-<a class="sourceLine" id="cb594-3" title="3">                              <span class="dt">sd =</span> <span class="fl">1.7</span>,</a>
-<a class="sourceLine" id="cb594-4" title="4">                              <span class="dt">mu =</span> <span class="kw">c</span>(.<span class="dv">85</span>, <span class="fl">.85</span>, </a>
-<a class="sourceLine" id="cb594-5" title="5">                                     <span class="dv">0</span>, <span class="fl">.6</span>),</a>
-<a class="sourceLine" id="cb594-6" title="6">                              <span class="dt">plot =</span> <span class="ot">TRUE</span>)</a></code></pre></div>
+<pre class="sourceCode r"><code class="sourceCode r">design_result &lt;-<span class="st"> </span><span class="kw">ANOVA_design</span>(<span class="dt">design =</span> <span class="st">&quot;2b*2b&quot;</span>,
+                              <span class="dt">n =</span> <span class="dv">100</span>,
+                              <span class="dt">sd =</span> <span class="fl">1.7</span>,
+                              <span class="dt">mu =</span> <span class="kw">c</span>(.<span class="dv">85</span>, <span class="fl">.85</span>, 
+                                     <span class="dv">0</span>, <span class="fl">.6</span>),
+                              <span class="dt">plot =</span> <span class="ot">TRUE</span>)</code></pre>
 <p><img src="SuperpowerValidation_files/figure-html/aberson_5.3.2-1.png" width="672" /></p>
 <p>Now we calculate the analytical result from <code>Superpower</code>.</p>
-<div class="sourceCode" id="cb595"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb595-1" title="1">analytical_result &lt;-<span class="st"> </span><span class="kw">power_twoway_between</span>(design_result)</a>
-<a class="sourceLine" id="cb595-2" title="2"></a>
-<a class="sourceLine" id="cb595-3" title="3">analytical_result<span class="op">$</span>power_A</a></code></pre></div>
+<pre class="sourceCode r"><code class="sourceCode r">analytical_result &lt;-<span class="st"> </span><span class="kw">power_twoway_between</span>(design_result)
+
+analytical_result<span class="op">$</span>power_A</code></pre>
 <pre><code>## [1] 89.75072</code></pre>
-<div class="sourceCode" id="cb597"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb597-1" title="1">analytical_result<span class="op">$</span>power_B</a></code></pre></div>
+<pre class="sourceCode r"><code class="sourceCode r">analytical_result<span class="op">$</span>power_B</code></pre>
 <pre><code>## [1] 42.10204</code></pre>
-<div class="sourceCode" id="cb599"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb599-1" title="1">analytical_result<span class="op">$</span>power_AB</a></code></pre></div>
+<pre class="sourceCode r"><code class="sourceCode r">analytical_result<span class="op">$</span>power_AB</code></pre>
 <pre><code>## [1] 42.10204</code></pre>
 <p>The <code>ANOVA_exact</code> result.</p>
-<div class="sourceCode" id="cb601"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb601-1" title="1">exact_result &lt;-<span class="st"> </span><span class="kw">ANOVA_exact</span>(design_result, <span class="dt">verbose =</span> <span class="ot">FALSE</span>)</a>
-<a class="sourceLine" id="cb601-2" title="2"></a>
-<a class="sourceLine" id="cb601-3" title="3">exact_result<span class="op">$</span>main_results</a></code></pre></div>
+<pre class="sourceCode r"><code class="sourceCode r">exact_result &lt;-<span class="st"> </span><span class="kw">ANOVA_exact</span>(design_result, <span class="dt">verbose =</span> <span class="ot">FALSE</span>)
+
+exact_result<span class="op">$</span>main_results</code></pre>
 <pre><code>##        power partial_eta_squared    cohen_f non_centrality
 ## a   89.75072         0.025751475 0.16257965      10.467128
 ## b   42.10204         0.007802747 0.08867981       3.114187
 ## a:b 42.10204         0.007802747 0.08867981       3.114187</code></pre>
 <p>And these match <code>pwr2ppl</code>. From Table 5.12.</p>
-<div class="sourceCode" id="cb603"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb603-1" title="1"><span class="kw">anova2x2</span>(<span class="dt">m1.1 =</span> <span class="fl">0.85</span>, <span class="dt">m1.2 =</span> <span class="fl">0.85</span>, <span class="dt">m2.1 =</span> <span class="fl">0.00</span>, <span class="dt">m2.2 =</span> <span class="fl">0.60</span>,</a>
-<a class="sourceLine" id="cb603-2" title="2">         <span class="dt">s1.1 =</span> <span class="fl">1.7</span>, <span class="dt">s1.2 =</span> <span class="fl">1.7</span>, <span class="dt">s2.1 =</span> <span class="fl">1.7</span>, <span class="dt">s2.2 =</span> <span class="fl">1.7</span>,</a>
-<a class="sourceLine" id="cb603-3" title="3">         <span class="dt">n1.1 =</span> <span class="dv">100</span>, <span class="dt">n1.2 =</span> <span class="dv">100</span>, <span class="dt">n2.1 =</span> <span class="dv">100</span>, <span class="dt">n2.2 =</span> <span class="dv">100</span>,</a>
-<a class="sourceLine" id="cb603-4" title="4">         <span class="dt">alpha =</span> <span class="fl">.05</span>)</a></code></pre></div>
+<pre class="sourceCode r"><code class="sourceCode r"><span class="kw">anova2x2</span>(<span class="dt">m1.1 =</span> <span class="fl">0.85</span>, <span class="dt">m1.2 =</span> <span class="fl">0.85</span>, <span class="dt">m2.1 =</span> <span class="fl">0.00</span>, <span class="dt">m2.2 =</span> <span class="fl">0.60</span>,
+         <span class="dt">s1.1 =</span> <span class="fl">1.7</span>, <span class="dt">s1.2 =</span> <span class="fl">1.7</span>, <span class="dt">s2.1 =</span> <span class="fl">1.7</span>, <span class="dt">s2.2 =</span> <span class="fl">1.7</span>,
+         <span class="dt">n1.1 =</span> <span class="dv">100</span>, <span class="dt">n1.2 =</span> <span class="dv">100</span>, <span class="dt">n2.1 =</span> <span class="dv">100</span>, <span class="dt">n2.2 =</span> <span class="dv">100</span>,
+         <span class="dt">alpha =</span> <span class="fl">.05</span>)</code></pre>
 <pre><code>## Power for Main Effect Factor A = 0.898</code></pre>
 <pre><code>## Power for Main Effect Factor B = 0.421</code></pre>
 <pre><code>## Power for Interaction AxB = 0.421</code></pre>
 <p>Now we can increase the sample size to 250 per cell</p>
-<div class="sourceCode" id="cb607"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb607-1" title="1">design_result &lt;-<span class="st"> </span><span class="kw">ANOVA_design</span>(<span class="dt">design =</span> <span class="st">&quot;2b*2b&quot;</span>,</a>
-<a class="sourceLine" id="cb607-2" title="2">                              <span class="dt">n =</span> <span class="dv">250</span>,</a>
-<a class="sourceLine" id="cb607-3" title="3">                              <span class="dt">sd =</span> <span class="fl">1.7</span>,</a>
-<a class="sourceLine" id="cb607-4" title="4">                              <span class="dt">mu =</span> <span class="kw">c</span>(.<span class="dv">85</span>, <span class="fl">.85</span>, </a>
-<a class="sourceLine" id="cb607-5" title="5">                                     <span class="dv">0</span>, <span class="fl">.6</span>),</a>
-<a class="sourceLine" id="cb607-6" title="6">                              <span class="dt">plot =</span> <span class="ot">TRUE</span>)</a></code></pre></div>
+<pre class="sourceCode r"><code class="sourceCode r">design_result &lt;-<span class="st"> </span><span class="kw">ANOVA_design</span>(<span class="dt">design =</span> <span class="st">&quot;2b*2b&quot;</span>,
+                              <span class="dt">n =</span> <span class="dv">250</span>,
+                              <span class="dt">sd =</span> <span class="fl">1.7</span>,
+                              <span class="dt">mu =</span> <span class="kw">c</span>(.<span class="dv">85</span>, <span class="fl">.85</span>, 
+                                     <span class="dv">0</span>, <span class="fl">.6</span>),
+                              <span class="dt">plot =</span> <span class="ot">TRUE</span>)</code></pre>
 <p><img src="SuperpowerValidation_files/figure-html/aberson_5.3-1.png" width="672" /></p>
 <p>Now we calculate the analytical result from <code>Superpower</code>.</p>
-<div class="sourceCode" id="cb608"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb608-1" title="1">analytical_result &lt;-<span class="st"> </span><span class="kw">power_twoway_between</span>(design_result)</a>
-<a class="sourceLine" id="cb608-2" title="2"></a>
-<a class="sourceLine" id="cb608-3" title="3">analytical_result<span class="op">$</span>power_A</a></code></pre></div>
+<pre class="sourceCode r"><code class="sourceCode r">analytical_result &lt;-<span class="st"> </span><span class="kw">power_twoway_between</span>(design_result)
+
+analytical_result<span class="op">$</span>power_A</code></pre>
 <pre><code>## [1] 99.91852</code></pre>
-<div class="sourceCode" id="cb610"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb610-1" title="1">analytical_result<span class="op">$</span>power_B</a></code></pre></div>
+<pre class="sourceCode r"><code class="sourceCode r">analytical_result<span class="op">$</span>power_B</code></pre>
 <pre><code>## [1] 79.60496</code></pre>
-<div class="sourceCode" id="cb612"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb612-1" title="1">analytical_result<span class="op">$</span>power_AB</a></code></pre></div>
+<pre class="sourceCode r"><code class="sourceCode r">analytical_result<span class="op">$</span>power_AB</code></pre>
 <pre><code>## [1] 79.60496</code></pre>
 <p>The <code>ANOVA_exact</code> result.</p>
-<div class="sourceCode" id="cb614"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb614-1" title="1">exact_result &lt;-<span class="st"> </span><span class="kw">ANOVA_exact</span>(design_result, <span class="dt">verbose =</span> <span class="ot">FALSE</span>)</a>
-<a class="sourceLine" id="cb614-2" title="2"></a>
-<a class="sourceLine" id="cb614-3" title="3">exact_result<span class="op">$</span>main_results</a></code></pre></div>
+<pre class="sourceCode r"><code class="sourceCode r">exact_result &lt;-<span class="st"> </span><span class="kw">ANOVA_exact</span>(design_result, <span class="dt">verbose =</span> <span class="ot">FALSE</span>)
+
+exact_result<span class="op">$</span>main_results</code></pre>
 <pre><code>##        power partial_eta_squared   cohen_f non_centrality
 ## a   99.91852         0.025600317 0.1620892      26.167820
 ## b   79.60496         0.007756107 0.0884123       7.785467
 ## a:b 79.60496         0.007756107 0.0884123       7.785467</code></pre>
 <p>And these match <code>pwr2ppl</code>.</p>
-<div class="sourceCode" id="cb616"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb616-1" title="1"><span class="kw">anova2x2</span>(<span class="dt">m1.1 =</span> <span class="fl">0.85</span>, <span class="dt">m1.2 =</span> <span class="fl">0.85</span>, <span class="dt">m2.1 =</span> <span class="fl">0.00</span>, <span class="dt">m2.2 =</span> <span class="fl">0.60</span>,</a>
-<a class="sourceLine" id="cb616-2" title="2">         <span class="dt">s1.1 =</span> <span class="fl">1.7</span>, <span class="dt">s1.2 =</span> <span class="fl">1.7</span>, <span class="dt">s2.1 =</span> <span class="fl">1.7</span>, <span class="dt">s2.2 =</span> <span class="fl">1.7</span>,</a>
-<a class="sourceLine" id="cb616-3" title="3">         <span class="dt">n1.1 =</span> <span class="dv">250</span>, <span class="dt">n1.2 =</span> <span class="dv">250</span>, <span class="dt">n2.1 =</span> <span class="dv">250</span>, <span class="dt">n2.2 =</span> <span class="dv">250</span>,</a>
-<a class="sourceLine" id="cb616-4" title="4">         <span class="dt">alpha =</span> <span class="fl">.05</span>)</a></code></pre></div>
+<pre class="sourceCode r"><code class="sourceCode r"><span class="kw">anova2x2</span>(<span class="dt">m1.1 =</span> <span class="fl">0.85</span>, <span class="dt">m1.2 =</span> <span class="fl">0.85</span>, <span class="dt">m2.1 =</span> <span class="fl">0.00</span>, <span class="dt">m2.2 =</span> <span class="fl">0.60</span>,
+         <span class="dt">s1.1 =</span> <span class="fl">1.7</span>, <span class="dt">s1.2 =</span> <span class="fl">1.7</span>, <span class="dt">s2.1 =</span> <span class="fl">1.7</span>, <span class="dt">s2.2 =</span> <span class="fl">1.7</span>,
+         <span class="dt">n1.1 =</span> <span class="dv">250</span>, <span class="dt">n1.2 =</span> <span class="dv">250</span>, <span class="dt">n2.1 =</span> <span class="dv">250</span>, <span class="dt">n2.2 =</span> <span class="dv">250</span>,
+         <span class="dt">alpha =</span> <span class="fl">.05</span>)</code></pre>
 <pre><code>## Power for Main Effect Factor A = 0.999</code></pre>
 <pre><code>## Power for Main Effect Factor B = 0.796</code></pre>
 <pre><code>## Power for Interaction AxB = 0.796</code></pre>
@@ -356,19 +357,19 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 <p>Repeated measures ANOVAs</p>
 <div id="example-from-table-6.2" class="section level3">
 <h3><span class="header-section-number">10.6.1</span> Example from Table 6.2</h3>
-<div class="sourceCode" id="cb620"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb620-1" title="1">design_result &lt;-<span class="st"> </span><span class="kw">ANOVA_design</span>(<span class="dt">design =</span> <span class="st">&quot;4w&quot;</span>,</a>
-<a class="sourceLine" id="cb620-2" title="2">                              <span class="dt">n =</span> <span class="dv">25</span>,</a>
-<a class="sourceLine" id="cb620-3" title="3">                              <span class="dt">sd =</span> <span class="kw">c</span>(.<span class="dv">4</span>,.<span class="dv">5</span>,.<span class="dv">6</span>,.<span class="dv">7</span>),</a>
-<a class="sourceLine" id="cb620-4" title="4">                              <span class="dt">mu =</span> <span class="kw">c</span>(<span class="op">-</span>.<span class="dv">25</span>, <span class="fl">.00</span>, <span class="fl">.10</span>, <span class="fl">.15</span>),</a>
-<a class="sourceLine" id="cb620-5" title="5">                              <span class="dt">r =</span> <span class="kw">c</span>(.<span class="dv">50</span>, </a>
-<a class="sourceLine" id="cb620-6" title="6">                                    <span class="fl">.30</span>,</a>
-<a class="sourceLine" id="cb620-7" title="7">                                    <span class="fl">.15</span>, </a>
-<a class="sourceLine" id="cb620-8" title="8">                                    <span class="fl">.5</span>,</a>
-<a class="sourceLine" id="cb620-9" title="9">                                    <span class="fl">.30</span>, </a>
-<a class="sourceLine" id="cb620-10" title="10">                                    <span class="fl">.50</span>),</a>
-<a class="sourceLine" id="cb620-11" title="11">                              <span class="dt">plot =</span> <span class="ot">TRUE</span>)</a></code></pre></div>
+<pre class="sourceCode r"><code class="sourceCode r">design_result &lt;-<span class="st"> </span><span class="kw">ANOVA_design</span>(<span class="dt">design =</span> <span class="st">&quot;4w&quot;</span>,
+                              <span class="dt">n =</span> <span class="dv">25</span>,
+                              <span class="dt">sd =</span> <span class="kw">c</span>(.<span class="dv">4</span>,.<span class="dv">5</span>,.<span class="dv">6</span>,.<span class="dv">7</span>),
+                              <span class="dt">mu =</span> <span class="kw">c</span>(<span class="op">-</span>.<span class="dv">25</span>, <span class="fl">.00</span>, <span class="fl">.10</span>, <span class="fl">.15</span>),
+                              <span class="dt">r =</span> <span class="kw">c</span>(.<span class="dv">50</span>, 
+                                    <span class="fl">.30</span>,
+                                    <span class="fl">.15</span>, 
+                                    <span class="fl">.5</span>,
+                                    <span class="fl">.30</span>, 
+                                    <span class="fl">.50</span>),
+                              <span class="dt">plot =</span> <span class="ot">TRUE</span>)</code></pre>
 <p><img src="SuperpowerValidation_files/figure-html/aberson_6.2-1.png" width="672" /></p>
-<div class="sourceCode" id="cb621"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb621-1" title="1">design_result<span class="op">$</span>cor_mat</a></code></pre></div>
+<pre class="sourceCode r"><code class="sourceCode r">design_result<span class="op">$</span>cor_mat</code></pre>
 <pre><code>##      a1  a2  a3   a4
 ## a1 1.00 0.5 0.3 0.15
 ## a2 0.50 1.0 0.5 0.30
@@ -376,32 +377,32 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 ## a4 0.15 0.3 0.5 1.00</code></pre>
 <p>There is no analytical result from <code>Superpower</code> when the correlations vary.</p>
 <p>Now we prouce 3 <code>ANOVA_exact</code> results representing no sphericity correction, Greenhouse-Geisser, and Huynh-Feldt corrected results.</p>
-<div class="sourceCode" id="cb623"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb623-1" title="1">exact_result &lt;-<span class="st"> </span><span class="kw">ANOVA_exact</span>(design_result, <span class="dt">verbose =</span> <span class="ot">FALSE</span>)</a>
-<a class="sourceLine" id="cb623-2" title="2"></a>
-<a class="sourceLine" id="cb623-3" title="3">exact_result<span class="op">$</span>main_results</a></code></pre></div>
+<pre class="sourceCode r"><code class="sourceCode r">exact_result &lt;-<span class="st"> </span><span class="kw">ANOVA_exact</span>(design_result, <span class="dt">verbose =</span> <span class="ot">FALSE</span>)
+
+exact_result<span class="op">$</span>main_results</code></pre>
 <pre><code>##      power partial_eta_squared   cohen_f non_centrality
 ## a 80.94999           0.1404744 0.4042678       11.76713</code></pre>
-<div class="sourceCode" id="cb625"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb625-1" title="1">exact_result &lt;-<span class="st"> </span><span class="kw">ANOVA_exact</span>(design_result,</a>
-<a class="sourceLine" id="cb625-2" title="2">                            <span class="dt">correction =</span> <span class="st">&quot;GG&quot;</span>,</a>
-<a class="sourceLine" id="cb625-3" title="3">                            <span class="dt">verbose =</span> <span class="ot">FALSE</span>)</a>
-<a class="sourceLine" id="cb625-4" title="4"></a>
-<a class="sourceLine" id="cb625-5" title="5">exact_result<span class="op">$</span>main_results</a></code></pre></div>
+<pre class="sourceCode r"><code class="sourceCode r">exact_result &lt;-<span class="st"> </span><span class="kw">ANOVA_exact</span>(design_result,
+                            <span class="dt">correction =</span> <span class="st">&quot;GG&quot;</span>,
+                            <span class="dt">verbose =</span> <span class="ot">FALSE</span>)
+
+exact_result<span class="op">$</span>main_results</code></pre>
 <pre><code>##      power partial_eta_squared   cohen_f non_centrality
 ## a 74.45876           0.1404744 0.4042678       9.585214</code></pre>
-<div class="sourceCode" id="cb627"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb627-1" title="1">exact_result &lt;-<span class="st"> </span><span class="kw">ANOVA_exact</span>(design_result,</a>
-<a class="sourceLine" id="cb627-2" title="2">                            <span class="dt">correction =</span> <span class="st">&quot;HF&quot;</span>,</a>
-<a class="sourceLine" id="cb627-3" title="3">                            <span class="dt">verbose =</span> <span class="ot">FALSE</span>)</a>
-<a class="sourceLine" id="cb627-4" title="4"></a>
-<a class="sourceLine" id="cb627-5" title="5">exact_result<span class="op">$</span>main_results</a></code></pre></div>
+<pre class="sourceCode r"><code class="sourceCode r">exact_result &lt;-<span class="st"> </span><span class="kw">ANOVA_exact</span>(design_result,
+                            <span class="dt">correction =</span> <span class="st">&quot;HF&quot;</span>,
+                            <span class="dt">verbose =</span> <span class="ot">FALSE</span>)
+
+exact_result<span class="op">$</span>main_results</code></pre>
 <pre><code>##      power partial_eta_squared   cohen_f non_centrality
 ## a 78.14498           0.1404744 0.4042678       10.75258</code></pre>
 <p>And these match <code>pwr2ppl</code>.</p>
-<div class="sourceCode" id="cb629"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb629-1" title="1"><span class="kw">win1F</span>(<span class="dt">m1 =</span> <span class="fl">-.25</span>, <span class="dt">m2 =</span> <span class="fl">.00</span>, <span class="dt">m3 =</span> <span class="fl">.10</span>, <span class="dt">m4 =</span> <span class="fl">.15</span>,</a>
-<a class="sourceLine" id="cb629-2" title="2">      <span class="dt">s1 =</span> <span class="fl">.4</span>, <span class="dt">s2 =</span> <span class="fl">.5</span>, <span class="dt">s3 =</span> <span class="fl">.6</span>, <span class="dt">s4 =</span> <span class="fl">.7</span>,</a>
-<a class="sourceLine" id="cb629-3" title="3">      <span class="dt">r12 =</span> <span class="fl">.50</span>, <span class="dt">r13 =</span> <span class="fl">.30</span>,</a>
-<a class="sourceLine" id="cb629-4" title="4">      <span class="dt">r14 =</span> <span class="fl">.15</span>, <span class="dt">r23 =</span> <span class="fl">.5</span>,</a>
-<a class="sourceLine" id="cb629-5" title="5">      <span class="dt">r24 =</span> <span class="fl">.30</span>, <span class="dt">r34 =</span> <span class="fl">.50</span>,</a>
-<a class="sourceLine" id="cb629-6" title="6">      <span class="dt">n =</span> <span class="dv">25</span>)</a></code></pre></div>
+<pre class="sourceCode r"><code class="sourceCode r"><span class="kw">win1F</span>(<span class="dt">m1 =</span> <span class="fl">-.25</span>, <span class="dt">m2 =</span> <span class="fl">.00</span>, <span class="dt">m3 =</span> <span class="fl">.10</span>, <span class="dt">m4 =</span> <span class="fl">.15</span>,
+      <span class="dt">s1 =</span> <span class="fl">.4</span>, <span class="dt">s2 =</span> <span class="fl">.5</span>, <span class="dt">s3 =</span> <span class="fl">.6</span>, <span class="dt">s4 =</span> <span class="fl">.7</span>,
+      <span class="dt">r12 =</span> <span class="fl">.50</span>, <span class="dt">r13 =</span> <span class="fl">.30</span>,
+      <span class="dt">r14 =</span> <span class="fl">.15</span>, <span class="dt">r23 =</span> <span class="fl">.5</span>,
+      <span class="dt">r24 =</span> <span class="fl">.30</span>, <span class="dt">r34 =</span> <span class="fl">.50</span>,
+      <span class="dt">n =</span> <span class="dv">25</span>)</code></pre>
 <pre><code>## partial eta-squared = 0.14</code></pre>
 <pre><code>## Power (Unadjusted) for n = 25 is 0.809</code></pre>
 <pre><code>## Power H-F Adjusted (Epsilon = 0.914) for n = 25 is 0.782</code></pre>
@@ -409,19 +410,19 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 </div>
 <div id="example-from-table-6.6" class="section level3">
 <h3><span class="header-section-number">10.6.2</span> Example from Table 6.6</h3>
-<div class="sourceCode" id="cb634"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb634-1" title="1">design_result &lt;-<span class="st"> </span><span class="kw">ANOVA_design</span>(<span class="dt">design =</span> <span class="st">&quot;4w&quot;</span>,</a>
-<a class="sourceLine" id="cb634-2" title="2">                              <span class="dt">n =</span> <span class="dv">100</span>,</a>
-<a class="sourceLine" id="cb634-3" title="3">                              <span class="dt">sd =</span> <span class="kw">c</span>(.<span class="dv">4</span>,.<span class="dv">5</span>,<span class="fl">2.5</span>,<span class="dv">2</span>),</a>
-<a class="sourceLine" id="cb634-4" title="4">                              <span class="dt">mu =</span> <span class="kw">c</span>(<span class="op">-</span>.<span class="dv">25</span>, <span class="fl">.00</span>, <span class="fl">.10</span>, <span class="fl">.15</span>),</a>
-<a class="sourceLine" id="cb634-5" title="5">                              <span class="dt">r =</span> <span class="kw">c</span>(.<span class="dv">50</span>, </a>
-<a class="sourceLine" id="cb634-6" title="6">                                    <span class="fl">.30</span>,</a>
-<a class="sourceLine" id="cb634-7" title="7">                                    <span class="fl">.1</span>, </a>
-<a class="sourceLine" id="cb634-8" title="8">                                    <span class="fl">.5</span>,</a>
-<a class="sourceLine" id="cb634-9" title="9">                                    <span class="fl">.30</span>, </a>
-<a class="sourceLine" id="cb634-10" title="10">                                    <span class="fl">.40</span>),</a>
-<a class="sourceLine" id="cb634-11" title="11">                              <span class="dt">plot =</span> <span class="ot">TRUE</span>)</a></code></pre></div>
+<pre class="sourceCode r"><code class="sourceCode r">design_result &lt;-<span class="st"> </span><span class="kw">ANOVA_design</span>(<span class="dt">design =</span> <span class="st">&quot;4w&quot;</span>,
+                              <span class="dt">n =</span> <span class="dv">100</span>,
+                              <span class="dt">sd =</span> <span class="kw">c</span>(.<span class="dv">4</span>,.<span class="dv">5</span>,<span class="fl">2.5</span>,<span class="dv">2</span>),
+                              <span class="dt">mu =</span> <span class="kw">c</span>(<span class="op">-</span>.<span class="dv">25</span>, <span class="fl">.00</span>, <span class="fl">.10</span>, <span class="fl">.15</span>),
+                              <span class="dt">r =</span> <span class="kw">c</span>(.<span class="dv">50</span>, 
+                                    <span class="fl">.30</span>,
+                                    <span class="fl">.1</span>, 
+                                    <span class="fl">.5</span>,
+                                    <span class="fl">.30</span>, 
+                                    <span class="fl">.40</span>),
+                              <span class="dt">plot =</span> <span class="ot">TRUE</span>)</code></pre>
 <p><img src="SuperpowerValidation_files/figure-html/aberson_6.6-1.png" width="672" /></p>
-<div class="sourceCode" id="cb635"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb635-1" title="1">design_result<span class="op">$</span>cor_mat</a></code></pre></div>
+<pre class="sourceCode r"><code class="sourceCode r">design_result<span class="op">$</span>cor_mat</code></pre>
 <pre><code>##     a1  a2  a3  a4
 ## a1 1.0 0.5 0.3 0.1
 ## a2 0.5 1.0 0.5 0.3
@@ -429,31 +430,31 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 ## a4 0.1 0.3 0.4 1.0</code></pre>
 <p>There is no analytical result from <code>Superpower</code> when the correlations vary.</p>
 <p>Now we prouce 3 <code>ANOVA_exact</code> results representing no sphericity correction, Greenhouse-Geisser, and Huynh-Feldt corrected results.</p>
-<div class="sourceCode" id="cb637"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb637-1" title="1">exact_result &lt;-<span class="st"> </span><span class="kw">ANOVA_exact</span>(design_result, <span class="dt">verbose =</span> <span class="ot">FALSE</span>)</a>
-<a class="sourceLine" id="cb637-2" title="2"></a>
-<a class="sourceLine" id="cb637-3" title="3">exact_result<span class="op">$</span>main_results</a></code></pre></div>
+<pre class="sourceCode r"><code class="sourceCode r">exact_result &lt;-<span class="st"> </span><span class="kw">ANOVA_exact</span>(design_result, <span class="dt">verbose =</span> <span class="ot">FALSE</span>)
+
+exact_result<span class="op">$</span>main_results</code></pre>
 <pre><code>##      power partial_eta_squared   cohen_f non_centrality
 ## a 39.74802          0.01502077 0.1234902       4.529201</code></pre>
-<div class="sourceCode" id="cb639"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb639-1" title="1">exact_result &lt;-<span class="st"> </span><span class="kw">ANOVA_exact</span>(design_result,</a>
-<a class="sourceLine" id="cb639-2" title="2">                            <span class="dt">correction =</span> <span class="st">&quot;GG&quot;</span>,</a>
-<a class="sourceLine" id="cb639-3" title="3">                            <span class="dt">verbose =</span> <span class="ot">FALSE</span>)</a>
-<a class="sourceLine" id="cb639-4" title="4"></a>
-<a class="sourceLine" id="cb639-5" title="5">exact_result<span class="op">$</span>main_results</a></code></pre></div>
+<pre class="sourceCode r"><code class="sourceCode r">exact_result &lt;-<span class="st"> </span><span class="kw">ANOVA_exact</span>(design_result,
+                            <span class="dt">correction =</span> <span class="st">&quot;GG&quot;</span>,
+                            <span class="dt">verbose =</span> <span class="ot">FALSE</span>)
+
+exact_result<span class="op">$</span>main_results</code></pre>
 <pre><code>##      power partial_eta_squared   cohen_f non_centrality
 ## a 31.78652          0.01502077 0.1234902       2.997994</code></pre>
-<div class="sourceCode" id="cb641"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb641-1" title="1">exact_result &lt;-<span class="st"> </span><span class="kw">ANOVA_exact</span>(design_result,</a>
-<a class="sourceLine" id="cb641-2" title="2">                            <span class="dt">correction =</span> <span class="st">&quot;HF&quot;</span>,</a>
-<a class="sourceLine" id="cb641-3" title="3">                            <span class="dt">verbose =</span> <span class="ot">FALSE</span>)</a>
-<a class="sourceLine" id="cb641-4" title="4"></a>
-<a class="sourceLine" id="cb641-5" title="5">exact_result<span class="op">$</span>main_results</a></code></pre></div>
+<pre class="sourceCode r"><code class="sourceCode r">exact_result &lt;-<span class="st"> </span><span class="kw">ANOVA_exact</span>(design_result,
+                            <span class="dt">correction =</span> <span class="st">&quot;HF&quot;</span>,
+                            <span class="dt">verbose =</span> <span class="ot">FALSE</span>)
+
+exact_result<span class="op">$</span>main_results</code></pre>
 <pre><code>##      power partial_eta_squared   cohen_f non_centrality
 ## a 32.12295          0.01502077 0.1234902       3.059139</code></pre>
 <p>And these match <code>pwr2ppl</code>.</p>
-<div class="sourceCode" id="cb643"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb643-1" title="1"><span class="kw">win1F</span>(<span class="dt">m1 =</span> <span class="fl">-.25</span>, <span class="dt">m2 =</span> <span class="fl">.00</span>, <span class="dt">m3 =</span> <span class="fl">.10</span>, <span class="dt">m4 =</span> <span class="fl">.15</span>,</a>
-<a class="sourceLine" id="cb643-2" title="2">      <span class="dt">s1 =</span> <span class="fl">.4</span>, <span class="dt">s2 =</span> <span class="fl">.5</span>, <span class="dt">s3 =</span> <span class="fl">2.5</span>, <span class="dt">s4 =</span> <span class="fl">2.0</span>,</a>
-<a class="sourceLine" id="cb643-3" title="3">      <span class="dt">r12 =</span> <span class="fl">.50</span>, <span class="dt">r13 =</span> <span class="fl">.30</span>, <span class="dt">r14 =</span> <span class="fl">.10</span>,</a>
-<a class="sourceLine" id="cb643-4" title="4">      <span class="dt">r23 =</span> <span class="fl">.5</span>, <span class="dt">r24 =</span> <span class="fl">.30</span>, <span class="dt">r34 =</span> <span class="fl">.40</span>,</a>
-<a class="sourceLine" id="cb643-5" title="5">      <span class="dt">n =</span> <span class="dv">100</span>)</a></code></pre></div>
+<pre class="sourceCode r"><code class="sourceCode r"><span class="kw">win1F</span>(<span class="dt">m1 =</span> <span class="fl">-.25</span>, <span class="dt">m2 =</span> <span class="fl">.00</span>, <span class="dt">m3 =</span> <span class="fl">.10</span>, <span class="dt">m4 =</span> <span class="fl">.15</span>,
+      <span class="dt">s1 =</span> <span class="fl">.4</span>, <span class="dt">s2 =</span> <span class="fl">.5</span>, <span class="dt">s3 =</span> <span class="fl">2.5</span>, <span class="dt">s4 =</span> <span class="fl">2.0</span>,
+      <span class="dt">r12 =</span> <span class="fl">.50</span>, <span class="dt">r13 =</span> <span class="fl">.30</span>, <span class="dt">r14 =</span> <span class="fl">.10</span>,
+      <span class="dt">r23 =</span> <span class="fl">.5</span>, <span class="dt">r24 =</span> <span class="fl">.30</span>, <span class="dt">r34 =</span> <span class="fl">.40</span>,
+      <span class="dt">n =</span> <span class="dv">100</span>)</code></pre>
 <pre><code>## partial eta-squared = 0.015</code></pre>
 <pre><code>## Power (Unadjusted) for n = 100 is 0.397</code></pre>
 <pre><code>## Power H-F Adjusted (Epsilon = 0.675) for n = 100 is 0.321</code></pre>
@@ -461,20 +462,20 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 </div>
 <div id="example-from-table-6.8" class="section level3">
 <h3><span class="header-section-number">10.6.3</span> Example from Table 6.8</h3>
-<div class="sourceCode" id="cb648"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb648-1" title="1">design_result &lt;-<span class="st"> </span><span class="kw">ANOVA_design</span>(<span class="dt">design =</span> <span class="st">&quot;2w*4w&quot;</span>,</a>
-<a class="sourceLine" id="cb648-2" title="2">                              <span class="dt">n =</span> <span class="dv">80</span>,</a>
-<a class="sourceLine" id="cb648-3" title="3">                              <span class="dt">sd =</span> <span class="kw">c</span>(.<span class="dv">4</span>,<span class="fl">0.5</span>, </a>
-<a class="sourceLine" id="cb648-4" title="4">                                     <span class="fl">2.5</span>,<span class="fl">2.0</span>, </a>
-<a class="sourceLine" id="cb648-5" title="5">                                     <span class="fl">0.4</span>,<span class="fl">0.5</span>, </a>
-<a class="sourceLine" id="cb648-6" title="6">                                     <span class="fl">2.5</span>,<span class="fl">2.0</span>),</a>
-<a class="sourceLine" id="cb648-7" title="7">                              <span class="dt">mu =</span> <span class="kw">c</span>(<span class="op">-</span><span class="fl">0.25</span>,<span class="fl">0.0</span>, </a>
-<a class="sourceLine" id="cb648-8" title="8">                                     <span class="fl">0.10</span>,<span class="fl">0.15</span>, </a>
-<a class="sourceLine" id="cb648-9" title="9">                                     <span class="fl">-0.25</span>,<span class="fl">0.10</span>, </a>
-<a class="sourceLine" id="cb648-10" title="10">                                     <span class="fl">0.30</span>,<span class="fl">0.35</span>),</a>
-<a class="sourceLine" id="cb648-11" title="11">                              <span class="dt">r =</span> <span class="kw">c</span>(.<span class="dv">5</span>),</a>
-<a class="sourceLine" id="cb648-12" title="12">                              <span class="dt">plot =</span> <span class="ot">TRUE</span>)</a></code></pre></div>
+<pre class="sourceCode r"><code class="sourceCode r">design_result &lt;-<span class="st"> </span><span class="kw">ANOVA_design</span>(<span class="dt">design =</span> <span class="st">&quot;2w*4w&quot;</span>,
+                              <span class="dt">n =</span> <span class="dv">80</span>,
+                              <span class="dt">sd =</span> <span class="kw">c</span>(.<span class="dv">4</span>,<span class="fl">0.5</span>, 
+                                     <span class="fl">2.5</span>,<span class="fl">2.0</span>, 
+                                     <span class="fl">0.4</span>,<span class="fl">0.5</span>, 
+                                     <span class="fl">2.5</span>,<span class="fl">2.0</span>),
+                              <span class="dt">mu =</span> <span class="kw">c</span>(<span class="op">-</span><span class="fl">0.25</span>,<span class="fl">0.0</span>, 
+                                     <span class="fl">0.10</span>,<span class="fl">0.15</span>, 
+                                     <span class="fl">-0.25</span>,<span class="fl">0.10</span>, 
+                                     <span class="fl">0.30</span>,<span class="fl">0.35</span>),
+                              <span class="dt">r =</span> <span class="kw">c</span>(.<span class="dv">5</span>),
+                              <span class="dt">plot =</span> <span class="ot">TRUE</span>)</code></pre>
 <p><img src="SuperpowerValidation_files/figure-html/aberson_6.8-1.png" width="672" /></p>
-<div class="sourceCode" id="cb649"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb649-1" title="1">design_result<span class="op">$</span>cor_mat</a></code></pre></div>
+<pre class="sourceCode r"><code class="sourceCode r">design_result<span class="op">$</span>cor_mat</code></pre>
 <pre><code>##       a1_b1 a1_b2 a1_b3 a1_b4 a2_b1 a2_b2 a2_b3 a2_b4
 ## a1_b1   1.0   0.5   0.5   0.5   0.5   0.5   0.5   0.5
 ## a1_b2   0.5   1.0   0.5   0.5   0.5   0.5   0.5   0.5
@@ -486,43 +487,43 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 ## a2_b4   0.5   0.5   0.5   0.5   0.5   0.5   0.5   1.0</code></pre>
 <p>There is no analytical result from <code>Superpower</code> for two-way within subjects designs.</p>
 <p>Now we prouce 3 <code>ANOVA_exact</code> results representing no sphericity correction, Greenhouse-Geisser, and Huynh-Feldt corrected results.</p>
-<div class="sourceCode" id="cb651"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb651-1" title="1"><span class="co">#In comparision to pwr2ppl the main effects are &quot;flipped&quot;</span></a>
-<a class="sourceLine" id="cb651-2" title="2"><span class="co"># e.g. Superpower a = pwr2ppl &quot;B&quot;</span></a>
-<a class="sourceLine" id="cb651-3" title="3">exact_result &lt;-<span class="st"> </span><span class="kw">ANOVA_exact</span>(design_result, <span class="dt">verbose =</span> <span class="ot">FALSE</span>)</a>
-<a class="sourceLine" id="cb651-4" title="4"></a>
-<a class="sourceLine" id="cb651-5" title="5">exact_result<span class="op">$</span>main_results</a></code></pre></div>
+<pre class="sourceCode r"><code class="sourceCode r"><span class="co">#In comparision to pwr2ppl the main effects are &quot;flipped&quot;</span>
+<span class="co"># e.g. Superpower a = pwr2ppl &quot;B&quot;</span>
+exact_result &lt;-<span class="st"> </span><span class="kw">ANOVA_exact</span>(design_result, <span class="dt">verbose =</span> <span class="ot">FALSE</span>)
+
+exact_result<span class="op">$</span>main_results</code></pre>
 <pre><code>##        power partial_eta_squared    cohen_f non_centrality
 ## a   27.24340         0.023198088 0.15410717      1.8761726
 ## b   74.84647         0.040077020 0.20432877      9.8948083
 ## a:b 10.23225         0.003471099 0.05901855      0.8255159</code></pre>
-<div class="sourceCode" id="cb653"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb653-1" title="1">exact_result &lt;-<span class="st"> </span><span class="kw">ANOVA_exact</span>(design_result,</a>
-<a class="sourceLine" id="cb653-2" title="2">                            <span class="dt">correction =</span> <span class="st">&quot;GG&quot;</span>,</a>
-<a class="sourceLine" id="cb653-3" title="3">                            <span class="dt">verbose =</span> <span class="ot">FALSE</span>)</a>
-<a class="sourceLine" id="cb653-4" title="4"></a>
-<a class="sourceLine" id="cb653-5" title="5">exact_result<span class="op">$</span>main_results</a></code></pre></div>
+<pre class="sourceCode r"><code class="sourceCode r">exact_result &lt;-<span class="st"> </span><span class="kw">ANOVA_exact</span>(design_result,
+                            <span class="dt">correction =</span> <span class="st">&quot;GG&quot;</span>,
+                            <span class="dt">verbose =</span> <span class="ot">FALSE</span>)
+
+exact_result<span class="op">$</span>main_results</code></pre>
 <pre><code>##         power partial_eta_squared    cohen_f non_centrality
 ## a   27.243403         0.023198088 0.15410717      1.8761726
 ## b   58.540772         0.040077020 0.20432877      5.9072378
 ## a:b  9.130272         0.003471099 0.05901855      0.5072161</code></pre>
-<div class="sourceCode" id="cb655"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb655-1" title="1">exact_result &lt;-<span class="st"> </span><span class="kw">ANOVA_exact</span>(design_result,</a>
-<a class="sourceLine" id="cb655-2" title="2">                            <span class="dt">correction =</span> <span class="st">&quot;HF&quot;</span>,</a>
-<a class="sourceLine" id="cb655-3" title="3">                            <span class="dt">verbose =</span> <span class="ot">FALSE</span>)</a>
-<a class="sourceLine" id="cb655-4" title="4"></a>
-<a class="sourceLine" id="cb655-5" title="5">exact_result<span class="op">$</span>main_results</a></code></pre></div>
+<pre class="sourceCode r"><code class="sourceCode r">exact_result &lt;-<span class="st"> </span><span class="kw">ANOVA_exact</span>(design_result,
+                            <span class="dt">correction =</span> <span class="st">&quot;HF&quot;</span>,
+                            <span class="dt">verbose =</span> <span class="ot">FALSE</span>)
+
+exact_result<span class="op">$</span>main_results</code></pre>
 <pre><code>##         power partial_eta_squared    cohen_f non_centrality
 ## a   27.243403         0.023198088 0.15410717      1.8761726
 ## b   59.182337         0.040077020 0.20432877      6.0353398
 ## a:b  9.174188         0.003471099 0.05901855      0.5187745</code></pre>
 <p>And these match <code>pwr2ppl</code>.</p>
-<div class="sourceCode" id="cb657"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb657-1" title="1"><span class="kw">win2F</span>(<span class="dt">m1.1 =</span> <span class="fl">-.25</span>, <span class="dt">m2.1 =</span> <span class="dv">0</span>,</a>
-<a class="sourceLine" id="cb657-2" title="2">      <span class="dt">m3.1 =</span> <span class="fl">.10</span>, <span class="dt">m4.1 =</span> <span class="fl">.15</span>,</a>
-<a class="sourceLine" id="cb657-3" title="3">      <span class="dt">m1.2 =</span> <span class="fl">-.25</span>, <span class="dt">m2.2 =</span> <span class="fl">.10</span>,</a>
-<a class="sourceLine" id="cb657-4" title="4">      <span class="dt">m3.2 =</span> <span class="fl">.30</span>, <span class="dt">m4.2 =</span> <span class="fl">.35</span>,</a>
-<a class="sourceLine" id="cb657-5" title="5">      <span class="dt">s1.1 =</span> <span class="fl">.4</span>, <span class="dt">s2.1 =</span> <span class="fl">.5</span>,</a>
-<a class="sourceLine" id="cb657-6" title="6">      <span class="dt">s3.1 =</span> <span class="fl">2.5</span>, <span class="dt">s4.1 =</span> <span class="fl">2.0</span>,</a>
-<a class="sourceLine" id="cb657-7" title="7">      <span class="dt">s1.2 =</span> <span class="fl">.4</span>, <span class="dt">s2.2 =</span> <span class="fl">.5</span>,</a>
-<a class="sourceLine" id="cb657-8" title="8">      <span class="dt">s3.2 =</span> <span class="fl">2.5</span>, <span class="dt">s4.2 =</span> <span class="fl">2.0</span>,</a>
-<a class="sourceLine" id="cb657-9" title="9">      <span class="dt">r =</span> <span class="fl">.5</span>, <span class="dt">n =</span> <span class="dv">80</span>)</a></code></pre></div>
+<pre class="sourceCode r"><code class="sourceCode r"><span class="kw">win2F</span>(<span class="dt">m1.1 =</span> <span class="fl">-.25</span>, <span class="dt">m2.1 =</span> <span class="dv">0</span>,
+      <span class="dt">m3.1 =</span> <span class="fl">.10</span>, <span class="dt">m4.1 =</span> <span class="fl">.15</span>,
+      <span class="dt">m1.2 =</span> <span class="fl">-.25</span>, <span class="dt">m2.2 =</span> <span class="fl">.10</span>,
+      <span class="dt">m3.2 =</span> <span class="fl">.30</span>, <span class="dt">m4.2 =</span> <span class="fl">.35</span>,
+      <span class="dt">s1.1 =</span> <span class="fl">.4</span>, <span class="dt">s2.1 =</span> <span class="fl">.5</span>,
+      <span class="dt">s3.1 =</span> <span class="fl">2.5</span>, <span class="dt">s4.1 =</span> <span class="fl">2.0</span>,
+      <span class="dt">s1.2 =</span> <span class="fl">.4</span>, <span class="dt">s2.2 =</span> <span class="fl">.5</span>,
+      <span class="dt">s3.2 =</span> <span class="fl">2.5</span>, <span class="dt">s4.2 =</span> <span class="fl">2.0</span>,
+      <span class="dt">r =</span> <span class="fl">.5</span>, <span class="dt">n =</span> <span class="dv">80</span>)</code></pre>
 <pre><code>## Partial eta-squared Factor A = 0.04</code></pre>
 <pre><code>## Power Factor A (Unadjusted) for n = 80 is 0.748</code></pre>
 <pre><code>## Power Factor A H-F Adjusted (Epsilon = 0.61) for n = 80 is 0.592</code></pre>
@@ -543,22 +544,22 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 <h3><span class="header-section-number">10.7.1</span> From Table 7.2</h3>
 <p>In this case we must write out an entire correlation matrix.
 This means the diagonal element is equal to 1 and the off-diagonal elements corresponding to between-subjects factors are equal to zero.</p>
-<div class="sourceCode" id="cb669"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb669-1" title="1">design_result &lt;-<span class="st"> </span><span class="kw">ANOVA_design</span>(<span class="st">&quot;2b*4w&quot;</span>,</a>
-<a class="sourceLine" id="cb669-2" title="2">                              <span class="dt">n =</span> <span class="dv">50</span>,</a>
-<a class="sourceLine" id="cb669-3" title="3">                              <span class="dt">sd =</span> <span class="kw">c</span>(.<span class="dv">4</span>, <span class="fl">.5</span>, <span class="fl">0.6</span>, <span class="fl">.7</span>,</a>
-<a class="sourceLine" id="cb669-4" title="4">                                     <span class="fl">.4</span>, <span class="fl">.5</span>, <span class="fl">.6</span>, <span class="fl">.7</span>),</a>
-<a class="sourceLine" id="cb669-5" title="5">                              <span class="dt">r =</span> <span class="kw">c</span>(<span class="fl">1.0</span>,<span class="fl">0.5</span>,<span class="fl">0.3</span>,<span class="fl">0.15</span>,<span class="fl">0.0</span>,<span class="fl">0.0</span>,<span class="fl">0.0</span>,<span class="fl">0.0</span>,</a>
-<a class="sourceLine" id="cb669-6" title="6">                                    <span class="fl">0.5</span>,<span class="fl">1.0</span>,<span class="fl">0.5</span>,<span class="fl">0.3</span>,<span class="fl">0.0</span>,<span class="fl">0.0</span>,<span class="fl">0.0</span>,<span class="fl">0.0</span>,</a>
-<a class="sourceLine" id="cb669-7" title="7">                                    <span class="fl">0.3</span>,<span class="fl">0.5</span>,<span class="fl">1.0</span>,<span class="fl">0.5</span>,<span class="fl">0.0</span>,<span class="fl">0.0</span>,<span class="fl">0.0</span>,<span class="fl">0.0</span>,</a>
-<a class="sourceLine" id="cb669-8" title="8">                                    <span class="fl">0.15</span>,<span class="fl">0.3</span>,<span class="fl">0.5</span>,<span class="fl">1.0</span>,<span class="fl">0.0</span>,<span class="fl">0.0</span>,<span class="fl">0.0</span>,<span class="fl">0.0</span>,</a>
-<a class="sourceLine" id="cb669-9" title="9">                                    <span class="fl">0.0</span>,<span class="fl">0.0</span>,<span class="fl">0.0</span>,<span class="fl">0.0</span>,<span class="fl">1.0</span>,<span class="fl">0.5</span>,<span class="fl">0.3</span>,<span class="fl">0.15</span>,</a>
-<a class="sourceLine" id="cb669-10" title="10">                                    <span class="fl">0.0</span>,<span class="fl">0.0</span>,<span class="fl">0.0</span>,<span class="fl">0.0</span>,<span class="fl">0.5</span>,<span class="fl">1.0</span>,<span class="fl">0.5</span>,<span class="fl">0.3</span>,</a>
-<a class="sourceLine" id="cb669-11" title="11">                                    <span class="fl">0.0</span>,<span class="fl">0.0</span>,<span class="fl">0.0</span>,<span class="fl">0.0</span>,<span class="fl">0.3</span>,<span class="fl">0.5</span>,<span class="fl">1.0</span>,<span class="fl">0.5</span>,</a>
-<a class="sourceLine" id="cb669-12" title="12">                                    <span class="fl">0.0</span>,<span class="fl">0.0</span>,<span class="fl">0.0</span>,<span class="fl">0.0</span>,<span class="fl">0.15</span>,<span class="fl">0.3</span>,<span class="fl">0.5</span>,<span class="fl">1.0</span>),</a>
-<a class="sourceLine" id="cb669-13" title="13">                              <span class="dt">mu =</span> <span class="kw">c</span>(<span class="op">-</span>.<span class="dv">25</span>, <span class="fl">0.0</span>, <span class="fl">0.10</span>, <span class="fl">0.15</span>,</a>
-<a class="sourceLine" id="cb669-14" title="14">                                     <span class="fl">-.25</span>,<span class="op">-</span>.<span class="dv">25</span>,<span class="op">-</span>.<span class="dv">25</span>,<span class="op">-</span>.<span class="dv">25</span>))</a>
-<a class="sourceLine" id="cb669-15" title="15"></a>
-<a class="sourceLine" id="cb669-16" title="16">design_result<span class="op">$</span>cor_mat</a></code></pre></div>
+<pre class="sourceCode r"><code class="sourceCode r">design_result &lt;-<span class="st"> </span><span class="kw">ANOVA_design</span>(<span class="st">&quot;2b*4w&quot;</span>,
+                              <span class="dt">n =</span> <span class="dv">50</span>,
+                              <span class="dt">sd =</span> <span class="kw">c</span>(.<span class="dv">4</span>, <span class="fl">.5</span>, <span class="fl">0.6</span>, <span class="fl">.7</span>,
+                                     <span class="fl">.4</span>, <span class="fl">.5</span>, <span class="fl">.6</span>, <span class="fl">.7</span>),
+                              <span class="dt">r =</span> <span class="kw">c</span>(<span class="fl">1.0</span>,<span class="fl">0.5</span>,<span class="fl">0.3</span>,<span class="fl">0.15</span>,<span class="fl">0.0</span>,<span class="fl">0.0</span>,<span class="fl">0.0</span>,<span class="fl">0.0</span>,
+                                    <span class="fl">0.5</span>,<span class="fl">1.0</span>,<span class="fl">0.5</span>,<span class="fl">0.3</span>,<span class="fl">0.0</span>,<span class="fl">0.0</span>,<span class="fl">0.0</span>,<span class="fl">0.0</span>,
+                                    <span class="fl">0.3</span>,<span class="fl">0.5</span>,<span class="fl">1.0</span>,<span class="fl">0.5</span>,<span class="fl">0.0</span>,<span class="fl">0.0</span>,<span class="fl">0.0</span>,<span class="fl">0.0</span>,
+                                    <span class="fl">0.15</span>,<span class="fl">0.3</span>,<span class="fl">0.5</span>,<span class="fl">1.0</span>,<span class="fl">0.0</span>,<span class="fl">0.0</span>,<span class="fl">0.0</span>,<span class="fl">0.0</span>,
+                                    <span class="fl">0.0</span>,<span class="fl">0.0</span>,<span class="fl">0.0</span>,<span class="fl">0.0</span>,<span class="fl">1.0</span>,<span class="fl">0.5</span>,<span class="fl">0.3</span>,<span class="fl">0.15</span>,
+                                    <span class="fl">0.0</span>,<span class="fl">0.0</span>,<span class="fl">0.0</span>,<span class="fl">0.0</span>,<span class="fl">0.5</span>,<span class="fl">1.0</span>,<span class="fl">0.5</span>,<span class="fl">0.3</span>,
+                                    <span class="fl">0.0</span>,<span class="fl">0.0</span>,<span class="fl">0.0</span>,<span class="fl">0.0</span>,<span class="fl">0.3</span>,<span class="fl">0.5</span>,<span class="fl">1.0</span>,<span class="fl">0.5</span>,
+                                    <span class="fl">0.0</span>,<span class="fl">0.0</span>,<span class="fl">0.0</span>,<span class="fl">0.0</span>,<span class="fl">0.15</span>,<span class="fl">0.3</span>,<span class="fl">0.5</span>,<span class="fl">1.0</span>),
+                              <span class="dt">mu =</span> <span class="kw">c</span>(<span class="op">-</span>.<span class="dv">25</span>, <span class="fl">0.0</span>, <span class="fl">0.10</span>, <span class="fl">0.15</span>,
+                                     <span class="fl">-.25</span>,<span class="op">-</span>.<span class="dv">25</span>,<span class="op">-</span>.<span class="dv">25</span>,<span class="op">-</span>.<span class="dv">25</span>))
+
+design_result<span class="op">$</span>cor_mat</code></pre>
 <pre><code>##       a1_b1 a1_b2 a1_b3 a1_b4 a2_b1 a2_b2 a2_b3 a2_b4
 ## a1_b1  1.00   0.5   0.3  0.15  0.00   0.0   0.0  0.00
 ## a1_b2  0.50   1.0   0.5  0.30  0.00   0.0   0.0  0.00
@@ -569,43 +570,43 @@ This means the diagonal element is equal to 1 and the off-diagonal elements corr
 ## a2_b3  0.00   0.0   0.0  0.00  0.30   0.5   1.0  0.50
 ## a2_b4  0.00   0.0   0.0  0.00  0.15   0.3   0.5  1.00</code></pre>
 <p>Now the results from <code>ANOVA_exact</code>.</p>
-<div class="sourceCode" id="cb671"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb671-1" title="1">exact_result &lt;-<span class="st"> </span><span class="kw">ANOVA_exact</span>(design_result,</a>
-<a class="sourceLine" id="cb671-2" title="2">                            <span class="dt">correction =</span> <span class="st">&quot;none&quot;</span>,</a>
-<a class="sourceLine" id="cb671-3" title="3">                            <span class="dt">verbose =</span> <span class="ot">FALSE</span>)</a>
-<a class="sourceLine" id="cb671-4" title="4"></a>
-<a class="sourceLine" id="cb671-5" title="5">exact_result<span class="op">$</span>main_results</a></code></pre></div>
+<pre class="sourceCode r"><code class="sourceCode r">exact_result &lt;-<span class="st"> </span><span class="kw">ANOVA_exact</span>(design_result,
+                            <span class="dt">correction =</span> <span class="st">&quot;none&quot;</span>,
+                            <span class="dt">verbose =</span> <span class="ot">FALSE</span>)
+
+exact_result<span class="op">$</span>main_results</code></pre>
 <pre><code>##        power partial_eta_squared   cohen_f non_centrality
 ## a   86.42918          0.08878976 0.3121563       9.549274
 ## b   82.68405          0.03848397 0.2000607      11.767135
 ## a:b 82.68405          0.03848397 0.2000607      11.767135</code></pre>
-<div class="sourceCode" id="cb673"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb673-1" title="1">exact_result &lt;-<span class="st"> </span><span class="kw">ANOVA_exact</span>(design_result,</a>
-<a class="sourceLine" id="cb673-2" title="2">                            <span class="dt">correction =</span> <span class="st">&quot;GG&quot;</span>,</a>
-<a class="sourceLine" id="cb673-3" title="3">                            <span class="dt">verbose =</span> <span class="ot">FALSE</span>)</a>
-<a class="sourceLine" id="cb673-4" title="4"></a>
-<a class="sourceLine" id="cb673-5" title="5">exact_result<span class="op">$</span>main_results</a></code></pre></div>
+<pre class="sourceCode r"><code class="sourceCode r">exact_result &lt;-<span class="st"> </span><span class="kw">ANOVA_exact</span>(design_result,
+                            <span class="dt">correction =</span> <span class="st">&quot;GG&quot;</span>,
+                            <span class="dt">verbose =</span> <span class="ot">FALSE</span>)
+
+exact_result<span class="op">$</span>main_results</code></pre>
 <pre><code>##        power partial_eta_squared   cohen_f non_centrality
 ## a   86.42918          0.08878976 0.3121563       9.549274
 ## b   76.47495          0.03848397 0.2000607       9.585214
 ## a:b 76.47495          0.03848397 0.2000607       9.585214</code></pre>
-<div class="sourceCode" id="cb675"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb675-1" title="1">exact_result &lt;-<span class="st"> </span><span class="kw">ANOVA_exact</span>(design_result,</a>
-<a class="sourceLine" id="cb675-2" title="2">                            <span class="dt">correction =</span> <span class="st">&quot;HF&quot;</span>,</a>
-<a class="sourceLine" id="cb675-3" title="3">                            <span class="dt">verbose =</span> <span class="ot">FALSE</span>)</a>
-<a class="sourceLine" id="cb675-4" title="4"></a>
-<a class="sourceLine" id="cb675-5" title="5">exact_result<span class="op">$</span>main_results</a></code></pre></div>
+<pre class="sourceCode r"><code class="sourceCode r">exact_result &lt;-<span class="st"> </span><span class="kw">ANOVA_exact</span>(design_result,
+                            <span class="dt">correction =</span> <span class="st">&quot;HF&quot;</span>,
+                            <span class="dt">verbose =</span> <span class="ot">FALSE</span>)
+
+exact_result<span class="op">$</span>main_results</code></pre>
 <pre><code>##        power partial_eta_squared   cohen_f non_centrality
 ## a   86.42918          0.08878976 0.3121563       9.549274
 ## b   77.31933          0.03848397 0.2000607       9.848557
 ## a:b 77.31933          0.03848397 0.2000607       9.848557</code></pre>
 <p>And the results from <code>pwr2ppl</code>.</p>
-<div class="sourceCode" id="cb677"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb677-1" title="1"><span class="kw">win1bg1</span>(<span class="dt">m1.1 =</span> <span class="fl">-.25</span>, <span class="dt">m2.1 =</span> <span class="dv">0</span>, <span class="dt">m3.1 =</span> <span class="fl">0.10</span>, <span class="dt">m4.1 =</span> <span class="fl">.15</span>, </a>
-<a class="sourceLine" id="cb677-2" title="2">        <span class="dt">m1.2 =</span> <span class="fl">-.25</span>, <span class="dt">m2.2 =</span> <span class="fl">-.25</span>, <span class="dt">m3.2 =</span> <span class="fl">-.25</span>, <span class="dt">m4.2 =</span> <span class="fl">-.25</span>, </a>
-<a class="sourceLine" id="cb677-3" title="3">        <span class="dt">s1.1 =</span> <span class="fl">.4</span>, <span class="dt">s2.1 =</span> <span class="fl">.5</span>, <span class="dt">s3.1 =</span> <span class="fl">0.6</span>, <span class="dt">s4.1 =</span> <span class="fl">.7</span>, <span class="dt">s1.2 =</span> <span class="fl">.4</span>, </a>
-<a class="sourceLine" id="cb677-4" title="4">        <span class="dt">s2.2 =</span> <span class="fl">.5</span>, <span class="dt">s3.2 =</span> <span class="fl">.6</span>, <span class="dt">s4.2 =</span> <span class="fl">.7</span>,</a>
-<a class="sourceLine" id="cb677-5" title="5">        <span class="dt">n =</span> <span class="dv">50</span>, </a>
-<a class="sourceLine" id="cb677-6" title="6">        <span class="dt">r1.2_1 =</span> <span class="fl">.5</span>, <span class="dt">r1.3_1 =</span> <span class="fl">.3</span>, <span class="dt">r1.4_1 =</span> <span class="fl">.15</span>, </a>
-<a class="sourceLine" id="cb677-7" title="7">        <span class="dt">r2.3_1 =</span> <span class="fl">.5</span>, <span class="dt">r2.4_1 =</span> <span class="fl">.3</span>, <span class="dt">r3.4_1 =</span> <span class="fl">.5</span>, </a>
-<a class="sourceLine" id="cb677-8" title="8">        <span class="dt">r1.2_2 =</span> <span class="fl">.5</span>, <span class="dt">r1.3_2 =</span> <span class="fl">.3</span>, <span class="dt">r1.4_2 =</span> <span class="fl">.15</span>, </a>
-<a class="sourceLine" id="cb677-9" title="9">        <span class="dt">r2.3_2 =</span> <span class="fl">.5</span>, <span class="dt">r2.4_2 =</span> <span class="fl">.3</span>, <span class="dt">r3.4_2 =</span> <span class="fl">.5</span>)</a></code></pre></div>
+<pre class="sourceCode r"><code class="sourceCode r"><span class="kw">win1bg1</span>(<span class="dt">m1.1 =</span> <span class="fl">-.25</span>, <span class="dt">m2.1 =</span> <span class="dv">0</span>, <span class="dt">m3.1 =</span> <span class="fl">0.10</span>, <span class="dt">m4.1 =</span> <span class="fl">.15</span>, 
+        <span class="dt">m1.2 =</span> <span class="fl">-.25</span>, <span class="dt">m2.2 =</span> <span class="fl">-.25</span>, <span class="dt">m3.2 =</span> <span class="fl">-.25</span>, <span class="dt">m4.2 =</span> <span class="fl">-.25</span>, 
+        <span class="dt">s1.1 =</span> <span class="fl">.4</span>, <span class="dt">s2.1 =</span> <span class="fl">.5</span>, <span class="dt">s3.1 =</span> <span class="fl">0.6</span>, <span class="dt">s4.1 =</span> <span class="fl">.7</span>, <span class="dt">s1.2 =</span> <span class="fl">.4</span>, 
+        <span class="dt">s2.2 =</span> <span class="fl">.5</span>, <span class="dt">s3.2 =</span> <span class="fl">.6</span>, <span class="dt">s4.2 =</span> <span class="fl">.7</span>,
+        <span class="dt">n =</span> <span class="dv">50</span>, 
+        <span class="dt">r1.2_1 =</span> <span class="fl">.5</span>, <span class="dt">r1.3_1 =</span> <span class="fl">.3</span>, <span class="dt">r1.4_1 =</span> <span class="fl">.15</span>, 
+        <span class="dt">r2.3_1 =</span> <span class="fl">.5</span>, <span class="dt">r2.4_1 =</span> <span class="fl">.3</span>, <span class="dt">r3.4_1 =</span> <span class="fl">.5</span>, 
+        <span class="dt">r1.2_2 =</span> <span class="fl">.5</span>, <span class="dt">r1.3_2 =</span> <span class="fl">.3</span>, <span class="dt">r1.4_2 =</span> <span class="fl">.15</span>, 
+        <span class="dt">r2.3_2 =</span> <span class="fl">.5</span>, <span class="dt">r2.4_2 =</span> <span class="fl">.3</span>, <span class="dt">r3.4_2 =</span> <span class="fl">.5</span>)</code></pre>
 <pre><code>## Partial eta-squared Factor A = 0.089</code></pre>
 <pre><code>## Power Factor A (Between) for n = 50 is 0.864</code></pre>
 <pre><code>## Partial eta-squared Factor B = 0.038</code></pre>
@@ -678,9 +679,8 @@ gitbook.start({
     script.type = "text/javascript";
     var src = "true";
     if (src === "" || src === "true") src = "https://mathjax.rstudio.com/latest/MathJax.js?config=TeX-MML-AM_CHTML";
-    if (location.protocol !== "file:")
-      if (/^https?:/.test(src))
-        src = src.replace(/^https?:/, '');
+    if (location.protocol !== "file:" && /^https?:/.test(src))
+      src = src.replace(/^https?:/, '');
     script.src = src;
     document.getElementsByTagName("head")[0].appendChild(script);
   })();
