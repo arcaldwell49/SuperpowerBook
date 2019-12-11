@@ -6,7 +6,7 @@
   <meta http-equiv="X-UA-Compatible" content="IE=edge" />
   <title>Chapter 9 Analytic Power Functions | Power Analysis with Superpower</title>
   <meta name="description" content="This is a book describing the capabilities of the Superpower R package." />
-  <meta name="generator" content="bookdown 0.10 and GitBook 2.6.7" />
+  <meta name="generator" content="bookdown 0.16 and GitBook 2.6.7" />
 
   <meta property="og:title" content="Chapter 9 Analytic Power Functions | Power Analysis with Superpower" />
   <meta property="og:type" content="book" />
@@ -24,15 +24,15 @@
 <meta name="author" content="Aaron R. Caldwell &amp; Daniël Lakens" />
 
 
-<meta name="date" content="2019-10-12" />
+<meta name="date" content="2019-12-11" />
 
   <meta name="viewport" content="width=device-width, initial-scale=1" />
   <meta name="apple-mobile-web-app-capable" content="yes" />
   <meta name="apple-mobile-web-app-status-bar-style" content="black" />
   
   
-<link rel="prev" href="error-control-in-exploratory-anova.html">
-<link rel="next" href="power-curve.html">
+<link rel="prev" href="error-control-in-exploratory-anova.html"/>
+<link rel="next" href="power-curve.html"/>
 <script src="libs/jquery-2.2.3/jquery.min.js"></script>
 <link href="libs/gitbook-2.6.7/css/style.css" rel="stylesheet" />
 <link href="libs/gitbook-2.6.7/css/plugin-table.css" rel="stylesheet" />
@@ -40,6 +40,9 @@
 <link href="libs/gitbook-2.6.7/css/plugin-highlight.css" rel="stylesheet" />
 <link href="libs/gitbook-2.6.7/css/plugin-search.css" rel="stylesheet" />
 <link href="libs/gitbook-2.6.7/css/plugin-fontsettings.css" rel="stylesheet" />
+<link href="libs/gitbook-2.6.7/css/plugin-clipboard.css" rel="stylesheet" />
+
+
 
 
 
@@ -56,7 +59,6 @@ a.sourceLine { pointer-events: none; color: inherit; text-decoration: inherit; }
 a.sourceLine:empty { height: 1.2em; }
 .sourceCode { overflow: visible; }
 code.sourceCode { white-space: pre; position: relative; }
-div.sourceCode { margin: 1em 0; }
 pre.sourceCode { margin: 0; }
 @media screen {
 div.sourceCode { overflow: auto; }
@@ -248,27 +250,28 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
             <section class="normal" id="section-">
 <div id="analytic-power-functions" class="section level1">
 <h1><span class="header-section-number">Chapter 9</span> Analytic Power Functions</h1>
-<p>For some designs it is possible to calculate power analytically, using closed functions.</p>
+<p>For some designs it is possible to calculate power analytically, using closed functions. Within the <code>Superpower</code> package we have included a number of these closed functions. As you will see below, each analytic function only serves a very narrow scenario while the simulations functions are much more flexible. In addition, we will compare these functions to other packages/software. Please note, that the analytic power functions are designed to reject designs that are not appropriate for the functions (i.e., a <code>3w</code> design will be rejected by the <code>power_oneway_between</code> function).</p>
 <div id="one-way-between-subjects-anova" class="section level2">
 <h2><span class="header-section-number">9.1</span> One-Way Between Subjects ANOVA</h2>
-<pre class="sourceCode r"><code class="sourceCode r">string &lt;-<span class="st"> &quot;4b&quot;</span>
-n &lt;-<span class="st"> </span><span class="dv">60</span>
-mu &lt;-<span class="st"> </span><span class="kw">c</span>(<span class="dv">80</span>, <span class="dv">82</span>, <span class="dv">82</span>, <span class="dv">86</span>) 
-<span class="co">#All means are equal - so there is no real difference.</span>
-<span class="co"># Enter means in the order that matches the labels below.</span>
-sd &lt;-<span class="st"> </span><span class="dv">10</span>
-labelnames &lt;-<span class="st"> </span><span class="kw">c</span>(<span class="st">&quot;Factor_A&quot;</span>, <span class="st">&quot;a1&quot;</span>, <span class="st">&quot;a2&quot;</span>, <span class="st">&quot;a3&quot;</span>, <span class="st">&quot;a4&quot;</span>) 
-<span class="co"># the label names should be in the order of the means specified above.</span>
-design_result &lt;-<span class="st"> </span><span class="kw">ANOVA_design</span>(<span class="dt">design =</span> string,
-                   <span class="dt">n =</span> n, 
-                   <span class="dt">mu =</span> mu, 
-                   <span class="dt">sd =</span> sd, 
-                   <span class="dt">labelnames =</span> labelnames)
-
-
-exact_result &lt;-<span class="st"> </span><span class="kw">ANOVA_exact</span>(design_result,
-                            <span class="dt">alpha_level =</span> alpha_level,
-                            <span class="dt">verbose =</span> <span class="ot">FALSE</span>)</code></pre>
+<p>First, we can setup a one-way design with four levels, and perform a exact simulation power analysis with the <code>ANOVA_exact</code> function.</p>
+<div class="sourceCode" id="cb560"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb560-1" title="1">string &lt;-<span class="st"> &quot;4b&quot;</span></a>
+<a class="sourceLine" id="cb560-2" title="2">n &lt;-<span class="st"> </span><span class="dv">60</span></a>
+<a class="sourceLine" id="cb560-3" title="3">mu &lt;-<span class="st"> </span><span class="kw">c</span>(<span class="dv">80</span>, <span class="dv">82</span>, <span class="dv">82</span>, <span class="dv">86</span>) </a>
+<a class="sourceLine" id="cb560-4" title="4"><span class="co">#All means are equal - so there is no real difference.</span></a>
+<a class="sourceLine" id="cb560-5" title="5"><span class="co"># Enter means in the order that matches the labels below.</span></a>
+<a class="sourceLine" id="cb560-6" title="6">sd &lt;-<span class="st"> </span><span class="dv">10</span></a>
+<a class="sourceLine" id="cb560-7" title="7">labelnames &lt;-<span class="st"> </span><span class="kw">c</span>(<span class="st">&quot;Factor_A&quot;</span>, <span class="st">&quot;a1&quot;</span>, <span class="st">&quot;a2&quot;</span>, <span class="st">&quot;a3&quot;</span>, <span class="st">&quot;a4&quot;</span>) </a>
+<a class="sourceLine" id="cb560-8" title="8"><span class="co"># the label names should be in the order of the means specified above.</span></a>
+<a class="sourceLine" id="cb560-9" title="9">design_result &lt;-<span class="st"> </span><span class="kw">ANOVA_design</span>(<span class="dt">design =</span> string,</a>
+<a class="sourceLine" id="cb560-10" title="10">                   <span class="dt">n =</span> n, </a>
+<a class="sourceLine" id="cb560-11" title="11">                   <span class="dt">mu =</span> mu, </a>
+<a class="sourceLine" id="cb560-12" title="12">                   <span class="dt">sd =</span> sd, </a>
+<a class="sourceLine" id="cb560-13" title="13">                   <span class="dt">labelnames =</span> labelnames)</a>
+<a class="sourceLine" id="cb560-14" title="14"></a>
+<a class="sourceLine" id="cb560-15" title="15"></a>
+<a class="sourceLine" id="cb560-16" title="16">exact_result &lt;-<span class="st"> </span><span class="kw">ANOVA_exact</span>(design_result,</a>
+<a class="sourceLine" id="cb560-17" title="17">                            <span class="dt">alpha_level =</span> alpha_level,</a>
+<a class="sourceLine" id="cb560-18" title="18">                            <span class="dt">verbose =</span> <span class="ot">FALSE</span>)</a></code></pre></div>
 <table class="table" style="margin-left: auto; margin-right: auto;">
 <caption>
 <span id="tab:unnamed-chunk-263">Table 9.1: </span>Exact ANOVA Result
@@ -312,20 +315,20 @@ Factor_A
 </tbody>
 </table>
 <p>We can also calculate power analytically with a <code>Superpower</code> function.</p>
-<pre class="sourceCode r"><code class="sourceCode r"><span class="co">#using default alpha level of .05</span>
-<span class="kw">power_oneway_between</span>(design_result)<span class="op">$</span>power </code></pre>
+<div class="sourceCode" id="cb561"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb561-1" title="1"><span class="co">#using default alpha level of .05</span></a>
+<a class="sourceLine" id="cb561-2" title="2"><span class="kw">power_oneway_between</span>(design_result)<span class="op">$</span>power </a></code></pre></div>
 <pre><code>## [1] 81.21291</code></pre>
-<p>This is a generalized function for one-way ANOVA’s for any number of groups. It is in part based on code from the <code>pwr2ppl</code> <span class="citation">(Aberson <a href="#ref-R-pwr2ppl" role="doc-biblioref">2019</a>)</span> package (but Aberson’s code allows for different n per condition, and different sd per condition).</p>
-<pre class="sourceCode r"><code class="sourceCode r"><span class="kw">anova1f_4</span>(<span class="dt">m1 =</span> <span class="dv">80</span>, <span class="dt">m2 =</span> <span class="dv">82</span>, <span class="dt">m3 =</span> <span class="dv">82</span>, <span class="dt">m4 =</span> <span class="dv">86</span>,
-          <span class="dt">s1 =</span> <span class="dv">10</span>, <span class="dt">s2 =</span> <span class="dv">10</span>, <span class="dt">s3 =</span> <span class="dv">10</span>, <span class="dt">s4 =</span> <span class="dv">10</span>,
-          <span class="dt">n1 =</span> <span class="dv">60</span>, <span class="dt">n2 =</span> <span class="dv">60</span>, <span class="dt">n3 =</span> <span class="dv">60</span>, <span class="dt">n4 =</span> <span class="dv">60</span>,
-          <span class="dt">alpha =</span> <span class="fl">.05</span>)</code></pre>
+<p>This is a generalized function for one-way ANOVA’s for any number of groups. It is in part based on code from the <code>pwr2ppl</code> <span class="citation">(Aberson <a href="#ref-R-pwr2ppl">2019</a>)</span> package (but Aberson’s code allows for different n per condition, and different sd per condition).</p>
+<div class="sourceCode" id="cb563"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb563-1" title="1">pwr2ppl<span class="op">::</span><span class="kw">anova1f_4</span>(<span class="dt">m1 =</span> <span class="dv">80</span>, <span class="dt">m2 =</span> <span class="dv">82</span>, <span class="dt">m3 =</span> <span class="dv">82</span>, <span class="dt">m4 =</span> <span class="dv">86</span>,</a>
+<a class="sourceLine" id="cb563-2" title="2">          <span class="dt">s1 =</span> <span class="dv">10</span>, <span class="dt">s2 =</span> <span class="dv">10</span>, <span class="dt">s3 =</span> <span class="dv">10</span>, <span class="dt">s4 =</span> <span class="dv">10</span>,</a>
+<a class="sourceLine" id="cb563-3" title="3">          <span class="dt">n1 =</span> <span class="dv">60</span>, <span class="dt">n2 =</span> <span class="dv">60</span>, <span class="dt">n3 =</span> <span class="dv">60</span>, <span class="dt">n4 =</span> <span class="dv">60</span>,</a>
+<a class="sourceLine" id="cb563-4" title="4">          <span class="dt">alpha =</span> <span class="fl">.05</span>)</a></code></pre></div>
 <pre><code>## Power  = 0.812 for eta-squared = 0.05</code></pre>
-<p>We can also use the function in the <code>pwr</code> package <span class="citation">(Champely <a href="#ref-R-pwr" role="doc-biblioref">2018</a>)</span>. Note that we need to calculate <em>f</em> to use this function, which is based on the means and sd, as illustrated in the formulas above.</p>
-<pre class="sourceCode r"><code class="sourceCode r"><span class="kw">pwr.anova.test</span>(<span class="dt">n =</span> <span class="dv">60</span>,
-               <span class="dt">k =</span> <span class="dv">4</span>,
-               <span class="dt">f =</span> <span class="fl">0.2179449</span>,
-               <span class="dt">sig.level =</span> <span class="fl">0.05</span>)</code></pre>
+<p>We can also use the function in the <code>pwr</code> package <span class="citation">(Champely <a href="#ref-R-pwr">2018</a>)</span>. Note that we need to calculate <em>f</em> to use this function, which is based on the means and sd, as illustrated in the formulas above.</p>
+<div class="sourceCode" id="cb565"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb565-1" title="1">pwr<span class="op">::</span><span class="kw">pwr.anova.test</span>(<span class="dt">n =</span> <span class="dv">60</span>,</a>
+<a class="sourceLine" id="cb565-2" title="2">               <span class="dt">k =</span> <span class="dv">4</span>,</a>
+<a class="sourceLine" id="cb565-3" title="3">               <span class="dt">f =</span> <span class="fl">0.2179449</span>,</a>
+<a class="sourceLine" id="cb565-4" title="4">               <span class="dt">sig.level =</span> <span class="fl">0.05</span>)</a></code></pre></div>
 <pre><code>## 
 ##      Balanced one-way analysis of variance power calculation 
 ## 
@@ -336,30 +339,31 @@ Factor_A
 ##           power = 0.8121289
 ## 
 ## NOTE: n is number in each group</code></pre>
-<p>Finally, G*Power <span class="citation">(Faul et al. <a href="#ref-faul2007g" role="doc-biblioref">2007</a>)</span> provides the option to calculate <code>f</code> from the means, sd and n for the cells. It can then be used to calculate power.</p>
+<p>Finally, G*Power <span class="citation">(Faul et al. <a href="#ref-faul2007g">2007</a>)</span> provides the option to calculate <code>f</code> from the means, sd and n for the cells. It can then be used to calculate power.</p>
 <p><img src="screenshots/gpower_13.png" /></p>
 </div>
 <div id="two-way-between-subject-interaction" class="section level2">
 <h2><span class="header-section-number">9.2</span> Two-way Between Subject Interaction</h2>
-<pre class="sourceCode r"><code class="sourceCode r">string &lt;-<span class="st"> &quot;2b*2b&quot;</span>
-n &lt;-<span class="st"> </span><span class="dv">20</span>
-mu &lt;-<span class="st"> </span><span class="kw">c</span>(<span class="dv">20</span>, <span class="dv">20</span>, <span class="dv">20</span>, <span class="dv">25</span>) 
-<span class="co"># Enter means in the order that matches the labels below.</span>
-sd &lt;-<span class="st"> </span><span class="dv">5</span>
-labelnames &lt;-<span class="st"> </span><span class="kw">c</span>(<span class="st">&quot;A&quot;</span>, <span class="st">&quot;a1&quot;</span>, <span class="st">&quot;a2&quot;</span>, <span class="st">&quot;B&quot;</span>, <span class="st">&quot;b1&quot;</span>, <span class="st">&quot;b2&quot;</span>) 
-<span class="co"># the label names should be in the order of the means specified above.</span>
-
-design_result &lt;-<span class="st"> </span><span class="kw">ANOVA_design</span>(<span class="dt">design =</span> string,
-                   <span class="dt">n =</span> n, 
-                   <span class="dt">mu =</span> mu, 
-                   <span class="dt">sd =</span> sd, 
-                   <span class="dt">labelnames =</span> labelnames)
-
-
-
-exact_result &lt;-<span class="st"> </span><span class="kw">ANOVA_exact</span>(design_result,
-                            <span class="dt">alpha_level =</span> alpha_level,
-                            <span class="dt">verbose =</span> <span class="ot">FALSE</span>)</code></pre>
+<p>Now, we will setup a 2x2 between-subject ANOVA.</p>
+<div class="sourceCode" id="cb567"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb567-1" title="1">string &lt;-<span class="st"> &quot;2b*2b&quot;</span></a>
+<a class="sourceLine" id="cb567-2" title="2">n &lt;-<span class="st"> </span><span class="dv">20</span></a>
+<a class="sourceLine" id="cb567-3" title="3">mu &lt;-<span class="st"> </span><span class="kw">c</span>(<span class="dv">20</span>, <span class="dv">20</span>, <span class="dv">20</span>, <span class="dv">25</span>) </a>
+<a class="sourceLine" id="cb567-4" title="4"><span class="co"># Enter means in the order that matches the labels below.</span></a>
+<a class="sourceLine" id="cb567-5" title="5">sd &lt;-<span class="st"> </span><span class="dv">5</span></a>
+<a class="sourceLine" id="cb567-6" title="6">labelnames &lt;-<span class="st"> </span><span class="kw">c</span>(<span class="st">&quot;A&quot;</span>, <span class="st">&quot;a1&quot;</span>, <span class="st">&quot;a2&quot;</span>, <span class="st">&quot;B&quot;</span>, <span class="st">&quot;b1&quot;</span>, <span class="st">&quot;b2&quot;</span>) </a>
+<a class="sourceLine" id="cb567-7" title="7"><span class="co"># the label names should be in the order of the means specified above.</span></a>
+<a class="sourceLine" id="cb567-8" title="8"></a>
+<a class="sourceLine" id="cb567-9" title="9">design_result &lt;-<span class="st"> </span><span class="kw">ANOVA_design</span>(<span class="dt">design =</span> string,</a>
+<a class="sourceLine" id="cb567-10" title="10">                   <span class="dt">n =</span> n, </a>
+<a class="sourceLine" id="cb567-11" title="11">                   <span class="dt">mu =</span> mu, </a>
+<a class="sourceLine" id="cb567-12" title="12">                   <span class="dt">sd =</span> sd, </a>
+<a class="sourceLine" id="cb567-13" title="13">                   <span class="dt">labelnames =</span> labelnames)</a>
+<a class="sourceLine" id="cb567-14" title="14"></a>
+<a class="sourceLine" id="cb567-15" title="15"></a>
+<a class="sourceLine" id="cb567-16" title="16"></a>
+<a class="sourceLine" id="cb567-17" title="17">exact_result &lt;-<span class="st"> </span><span class="kw">ANOVA_exact</span>(design_result,</a>
+<a class="sourceLine" id="cb567-18" title="18">                            <span class="dt">alpha_level =</span> alpha_level,</a>
+<a class="sourceLine" id="cb567-19" title="19">                            <span class="dt">verbose =</span> <span class="ot">FALSE</span>)</a></code></pre></div>
 <table class="table" style="margin-left: auto; margin-right: auto;">
 <caption>
 <span id="tab:unnamed-chunk-268">Table 9.2: </span>Exact ANOVA Result
@@ -436,54 +440,56 @@ A:B
 </tr>
 </tbody>
 </table>
-<pre class="sourceCode r"><code class="sourceCode r"><span class="co">#using default alpha level of .05</span>
-power_res &lt;-<span class="st"> </span><span class="kw">power_twoway_between</span>(design_result) 
-power_res<span class="op">$</span>power_A</code></pre>
+<p>Now, let’s use the analytic function <code>power_twoway_between</code>.</p>
+<div class="sourceCode" id="cb568"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb568-1" title="1"><span class="co">#using default alpha level of .05</span></a>
+<a class="sourceLine" id="cb568-2" title="2">power_res &lt;-<span class="st"> </span><span class="kw">power_twoway_between</span>(design_result) </a>
+<a class="sourceLine" id="cb568-3" title="3">power_res<span class="op">$</span>power_A</a></code></pre></div>
 <pre><code>## [1] 59.78655</code></pre>
-<pre class="sourceCode r"><code class="sourceCode r">power_res<span class="op">$</span>power_B</code></pre>
+<div class="sourceCode" id="cb570"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb570-1" title="1">power_res<span class="op">$</span>power_B</a></code></pre></div>
 <pre><code>## [1] 59.78655</code></pre>
-<pre class="sourceCode r"><code class="sourceCode r">power_res<span class="op">$</span>power_AB</code></pre>
+<div class="sourceCode" id="cb572"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb572-1" title="1">power_res<span class="op">$</span>power_AB</a></code></pre></div>
 <pre><code>## [1] 59.78655</code></pre>
-<p>We can use the function by <span class="citation">(Aberson <a href="#ref-R-pwr2ppl" role="doc-biblioref">2019</a>)</span>, as well.</p>
-<pre class="sourceCode r"><code class="sourceCode r"><span class="kw">anova2x2</span>(<span class="dt">m1.1 =</span> <span class="dv">20</span>,
-         <span class="dt">m1.2 =</span> <span class="dv">20</span>,
-         <span class="dt">m2.1 =</span> <span class="dv">20</span>,
-         <span class="dt">m2.2 =</span> <span class="dv">25</span>,
-         <span class="dt">s1.1 =</span> <span class="dv">5</span>,
-         <span class="dt">s1.2 =</span> <span class="dv">5</span>,
-         <span class="dt">s2.1 =</span> <span class="dv">5</span>,
-         <span class="dt">s2.2 =</span> <span class="dv">5</span>,
-         <span class="dt">n1.1 =</span> <span class="dv">20</span>,
-         <span class="dt">n1.2 =</span> <span class="dv">20</span>,
-         <span class="dt">n2.1 =</span> <span class="dv">20</span>,
-         <span class="dt">n2.2 =</span> <span class="dv">20</span>,
-         <span class="dt">alpha =</span> <span class="fl">.05</span>,
-         <span class="dt">all =</span> <span class="st">&quot;OFF&quot;</span>)</code></pre>
+<p>We can compare these results to <span class="citation">(Aberson <a href="#ref-R-pwr2ppl">2019</a>)</span>, as well.</p>
+<div class="sourceCode" id="cb574"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb574-1" title="1">pwr2ppl<span class="op">::</span><span class="kw">anova2x2</span>(<span class="dt">m1.1 =</span> <span class="dv">20</span>,</a>
+<a class="sourceLine" id="cb574-2" title="2">         <span class="dt">m1.2 =</span> <span class="dv">20</span>,</a>
+<a class="sourceLine" id="cb574-3" title="3">         <span class="dt">m2.1 =</span> <span class="dv">20</span>,</a>
+<a class="sourceLine" id="cb574-4" title="4">         <span class="dt">m2.2 =</span> <span class="dv">25</span>,</a>
+<a class="sourceLine" id="cb574-5" title="5">         <span class="dt">s1.1 =</span> <span class="dv">5</span>,</a>
+<a class="sourceLine" id="cb574-6" title="6">         <span class="dt">s1.2 =</span> <span class="dv">5</span>,</a>
+<a class="sourceLine" id="cb574-7" title="7">         <span class="dt">s2.1 =</span> <span class="dv">5</span>,</a>
+<a class="sourceLine" id="cb574-8" title="8">         <span class="dt">s2.2 =</span> <span class="dv">5</span>,</a>
+<a class="sourceLine" id="cb574-9" title="9">         <span class="dt">n1.1 =</span> <span class="dv">20</span>,</a>
+<a class="sourceLine" id="cb574-10" title="10">         <span class="dt">n1.2 =</span> <span class="dv">20</span>,</a>
+<a class="sourceLine" id="cb574-11" title="11">         <span class="dt">n2.1 =</span> <span class="dv">20</span>,</a>
+<a class="sourceLine" id="cb574-12" title="12">         <span class="dt">n2.2 =</span> <span class="dv">20</span>,</a>
+<a class="sourceLine" id="cb574-13" title="13">         <span class="dt">alpha =</span> <span class="fl">.05</span>,</a>
+<a class="sourceLine" id="cb574-14" title="14">         <span class="dt">all =</span> <span class="st">&quot;OFF&quot;</span>)</a></code></pre></div>
 <pre><code>## Power for Main Effect Factor A = 0.598</code></pre>
 <pre><code>## Power for Main Effect Factor B = 0.598</code></pre>
 <pre><code>## Power for Interaction AxB = 0.598</code></pre>
 </div>
 <div id="x3-between-subject-anova" class="section level2">
 <h2><span class="header-section-number">9.3</span> 3x3 Between Subject ANOVA</h2>
-<pre class="sourceCode r"><code class="sourceCode r">string &lt;-<span class="st"> &quot;3b*3b&quot;</span>
-n &lt;-<span class="st"> </span><span class="dv">20</span>
-<span class="co">#All means are equal - so there is no real difference.</span>
-mu &lt;-<span class="st"> </span><span class="kw">c</span>(<span class="dv">20</span>, <span class="dv">20</span>, <span class="dv">20</span>, <span class="dv">20</span>, <span class="dv">20</span>, <span class="dv">20</span>, <span class="dv">20</span>, <span class="dv">20</span>, <span class="dv">25</span>) 
-<span class="co"># Enter means in the order that matches the labels below.</span>
-sd &lt;-<span class="st"> </span><span class="dv">5</span>
-labelnames &lt;-<span class="st"> </span><span class="kw">c</span>(<span class="st">&quot;Factor_A&quot;</span>, <span class="st">&quot;a1&quot;</span>, <span class="st">&quot;a2&quot;</span>, <span class="st">&quot;a3&quot;</span>, <span class="st">&quot;Factor_B&quot;</span>, <span class="st">&quot;b1&quot;</span>, <span class="st">&quot;b2&quot;</span>, <span class="st">&quot;b3&quot;</span>) 
-<span class="co"># the label names should be in the order of the means specified above.</span>
-design_result &lt;-<span class="st"> </span><span class="kw">ANOVA_design</span>(<span class="dt">design =</span> string,
-                   <span class="dt">n =</span> n, 
-                   <span class="dt">mu =</span> mu, 
-                   <span class="dt">sd =</span> sd, 
-                   <span class="dt">labelnames =</span> labelnames)
-
-
-
-exact_result &lt;-<span class="st"> </span><span class="kw">ANOVA_exact</span>(design_result,
-                            <span class="dt">alpha_level =</span> alpha_level,
-                            <span class="dt">verbose =</span> <span class="ot">FALSE</span>)</code></pre>
+<p>We can extend this function to a two-way design with 3 levels.</p>
+<div class="sourceCode" id="cb578"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb578-1" title="1">string &lt;-<span class="st"> &quot;3b*3b&quot;</span></a>
+<a class="sourceLine" id="cb578-2" title="2">n &lt;-<span class="st"> </span><span class="dv">20</span></a>
+<a class="sourceLine" id="cb578-3" title="3"><span class="co">#All means are equal - so there is no real difference.</span></a>
+<a class="sourceLine" id="cb578-4" title="4">mu &lt;-<span class="st"> </span><span class="kw">c</span>(<span class="dv">20</span>, <span class="dv">20</span>, <span class="dv">20</span>, <span class="dv">20</span>, <span class="dv">20</span>, <span class="dv">20</span>, <span class="dv">20</span>, <span class="dv">20</span>, <span class="dv">25</span>) </a>
+<a class="sourceLine" id="cb578-5" title="5"><span class="co"># Enter means in the order that matches the labels below.</span></a>
+<a class="sourceLine" id="cb578-6" title="6">sd &lt;-<span class="st"> </span><span class="dv">5</span></a>
+<a class="sourceLine" id="cb578-7" title="7">labelnames &lt;-<span class="st"> </span><span class="kw">c</span>(<span class="st">&quot;Factor_A&quot;</span>, <span class="st">&quot;a1&quot;</span>, <span class="st">&quot;a2&quot;</span>, <span class="st">&quot;a3&quot;</span>, <span class="st">&quot;Factor_B&quot;</span>, <span class="st">&quot;b1&quot;</span>, <span class="st">&quot;b2&quot;</span>, <span class="st">&quot;b3&quot;</span>) </a>
+<a class="sourceLine" id="cb578-8" title="8"><span class="co"># the label names should be in the order of the means specified above.</span></a>
+<a class="sourceLine" id="cb578-9" title="9">design_result &lt;-<span class="st"> </span><span class="kw">ANOVA_design</span>(<span class="dt">design =</span> string,</a>
+<a class="sourceLine" id="cb578-10" title="10">                   <span class="dt">n =</span> n, </a>
+<a class="sourceLine" id="cb578-11" title="11">                   <span class="dt">mu =</span> mu, </a>
+<a class="sourceLine" id="cb578-12" title="12">                   <span class="dt">sd =</span> sd, </a>
+<a class="sourceLine" id="cb578-13" title="13">                   <span class="dt">labelnames =</span> labelnames)</a>
+<a class="sourceLine" id="cb578-14" title="14"></a>
+<a class="sourceLine" id="cb578-15" title="15"></a>
+<a class="sourceLine" id="cb578-16" title="16"></a>
+<a class="sourceLine" id="cb578-17" title="17">exact_result &lt;-<span class="st"> </span><span class="kw">ANOVA_exact</span>(design_result,</a>
+<a class="sourceLine" id="cb578-18" title="18">                            <span class="dt">alpha_level =</span> alpha_level,</a>
+<a class="sourceLine" id="cb578-19" title="19">                            <span class="dt">verbose =</span> <span class="ot">FALSE</span>)</a></code></pre></div>
 <table class="table" style="margin-left: auto; margin-right: auto;">
 <caption>
 <span id="tab:unnamed-chunk-272">Table 9.3: </span>Exact ANOVA Result
@@ -560,13 +566,13 @@ Factor_A:Factor_B
 </tr>
 </tbody>
 </table>
-<pre class="sourceCode r"><code class="sourceCode r"><span class="co">#using default alpha level of .05</span>
-power_res &lt;-<span class="st"> </span><span class="kw">power_twoway_between</span>(design_result) 
-power_res<span class="op">$</span>power_A</code></pre>
+<div class="sourceCode" id="cb579"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb579-1" title="1"><span class="co">#using default alpha level of .05</span></a>
+<a class="sourceLine" id="cb579-2" title="2">power_res &lt;-<span class="st"> </span><span class="kw">power_twoway_between</span>(design_result) </a>
+<a class="sourceLine" id="cb579-3" title="3">power_res<span class="op">$</span>power_A</a></code></pre></div>
 <pre><code>## [1] 44.86306</code></pre>
-<pre class="sourceCode r"><code class="sourceCode r">power_res<span class="op">$</span>power_B</code></pre>
+<div class="sourceCode" id="cb581"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb581-1" title="1">power_res<span class="op">$</span>power_B</a></code></pre></div>
 <pre><code>## [1] 44.86306</code></pre>
-<pre class="sourceCode r"><code class="sourceCode r">power_res<span class="op">$</span>power_AB</code></pre>
+<div class="sourceCode" id="cb583"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb583-1" title="1">power_res<span class="op">$</span>power_AB</a></code></pre></div>
 <pre><code>## [1] 64.34127</code></pre>
 
 </div>
@@ -594,11 +600,13 @@ power_res<span class="op">$</span>power_A</code></pre>
   </div>
 <script src="libs/gitbook-2.6.7/js/app.min.js"></script>
 <script src="libs/gitbook-2.6.7/js/lunr.js"></script>
+<script src="libs/gitbook-2.6.7/js/clipboard.min.js"></script>
 <script src="libs/gitbook-2.6.7/js/plugin-search.js"></script>
 <script src="libs/gitbook-2.6.7/js/plugin-sharing.js"></script>
 <script src="libs/gitbook-2.6.7/js/plugin-fontsettings.js"></script>
 <script src="libs/gitbook-2.6.7/js/plugin-bookdown.js"></script>
 <script src="libs/gitbook-2.6.7/js/jquery.highlight.js"></script>
+<script src="libs/gitbook-2.6.7/js/plugin-clipboard.js"></script>
 <script>
 gitbook.require(["gitbook"], function(gitbook) {
 gitbook.start({
@@ -606,12 +614,11 @@ gitbook.start({
 "github": false,
 "facebook": true,
 "twitter": true,
-"google": false,
 "linkedin": false,
 "weibo": false,
 "instapaper": false,
 "vk": false,
-"all": ["facebook", "google", "twitter", "linkedin", "weibo", "instapaper"]
+"all": ["facebook", "twitter", "linkedin", "weibo", "instapaper"]
 },
 "fontsettings": {
 "theme": "white",
@@ -623,6 +630,10 @@ gitbook.start({
 "text": null
 },
 "history": {
+"link": null,
+"text": null
+},
+"view": {
 "link": null,
 "text": null
 },
@@ -641,8 +652,9 @@ gitbook.start({
     script.type = "text/javascript";
     var src = "true";
     if (src === "" || src === "true") src = "https://mathjax.rstudio.com/latest/MathJax.js?config=TeX-MML-AM_CHTML";
-    if (location.protocol !== "file:" && /^https?:/.test(src))
-      src = src.replace(/^https?:/, '');
+    if (location.protocol !== "file:")
+      if (/^https?:/.test(src))
+        src = src.replace(/^https?:/, '');
     script.src = src;
     document.getElementsByTagName("head")[0].appendChild(script);
   })();

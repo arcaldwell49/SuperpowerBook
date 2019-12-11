@@ -1,35 +1,45 @@
-\documentclass[]{book}
+\PassOptionsToPackage{unicode=true}{hyperref} % options for packages loaded elsewhere
+\PassOptionsToPackage{hyphens}{url}
+%
+\documentclass[
+]{book}
 \usepackage{lmodern}
 \usepackage{amssymb,amsmath}
 \usepackage{ifxetex,ifluatex}
-\usepackage{fixltx2e} % provides \textsubscript
 \ifnum 0\ifxetex 1\fi\ifluatex 1\fi=0 % if pdftex
   \usepackage[T1]{fontenc}
   \usepackage[utf8]{inputenc}
+  \usepackage{textcomp} % provides euro and other symbols
 \else % if luatex or xelatex
-  \ifxetex
-    \usepackage{mathspec}
-  \else
-    \usepackage{fontspec}
-  \fi
-  \defaultfontfeatures{Ligatures=TeX,Scale=MatchLowercase}
+  \usepackage{unicode-math}
+  \defaultfontfeatures{Scale=MatchLowercase}
+  \defaultfontfeatures[\rmfamily]{Ligatures=TeX,Scale=1}
 \fi
 % use upquote if available, for straight quotes in verbatim environments
 \IfFileExists{upquote.sty}{\usepackage{upquote}}{}
-% use microtype if available
-\IfFileExists{microtype.sty}{%
-\usepackage{microtype}
-\UseMicrotypeSet[protrusion]{basicmath} % disable protrusion for tt fonts
+\IfFileExists{microtype.sty}{% use microtype if available
+  \usepackage[]{microtype}
+  \UseMicrotypeSet[protrusion]{basicmath} % disable protrusion for tt fonts
 }{}
-\usepackage{hyperref}
-\hypersetup{unicode=true,
-            pdftitle={Power Analysis with Superpower},
-            pdfauthor={Aaron R. Caldwell \& Daniël Lakens},
-            pdfborder={0 0 0},
-            breaklinks=true}
+\makeatletter
+\@ifundefined{KOMAClassName}{% if non-KOMA class
+  \IfFileExists{parskip.sty}{%
+    \usepackage{parskip}
+  }{% else
+    \setlength{\parindent}{0pt}
+    \setlength{\parskip}{6pt plus 2pt minus 1pt}}
+}{% if KOMA class
+  \KOMAoptions{parskip=half}}
+\makeatother
+\usepackage{xcolor}
+\IfFileExists{xurl.sty}{\usepackage{xurl}}{} % add URL line breaks if available
+\IfFileExists{bookmark.sty}{\usepackage{bookmark}}{\usepackage{hyperref}}
+\hypersetup{
+  pdftitle={Power Analysis with Superpower},
+  pdfauthor={Aaron R. Caldwell \& Daniël Lakens},
+  pdfborder={0 0 0},
+  breaklinks=true}
 \urlstyle{same}  % don't use monospace font for urls
-\usepackage{natbib}
-\bibliographystyle{apalike}
 \usepackage{color}
 \usepackage{fancyvrb}
 \newcommand{\VerbBar}{|}
@@ -71,6 +81,9 @@
 \newcommand{\VerbatimStringTok}[1]{\textcolor[rgb]{0.31,0.60,0.02}{#1}}
 \newcommand{\WarningTok}[1]{\textcolor[rgb]{0.56,0.35,0.01}{\textbf{\textit{#1}}}}
 \usepackage{longtable,booktabs}
+% Allow footnotes in longtable head/foot
+\IfFileExists{footnotehyper.sty}{\usepackage{footnotehyper}}{\usepackage{footnote}}
+\makesavenoteenv{longtable}
 \usepackage{graphicx,grffile}
 \makeatletter
 \def\maxwidth{\ifdim\Gin@nat@width>\linewidth\linewidth\else\Gin@nat@width\fi}
@@ -80,53 +93,42 @@
 % margins by default, and it is still possible to overwrite the defaults
 % using explicit options in \includegraphics[width, height, ...]{}
 \setkeys{Gin}{width=\maxwidth,height=\maxheight,keepaspectratio}
-\IfFileExists{parskip.sty}{%
-\usepackage{parskip}
-}{% else
-\setlength{\parindent}{0pt}
-\setlength{\parskip}{6pt plus 2pt minus 1pt}
-}
 \setlength{\emergencystretch}{3em}  % prevent overfull lines
 \providecommand{\tightlist}{%
   \setlength{\itemsep}{0pt}\setlength{\parskip}{0pt}}
 \setcounter{secnumdepth}{5}
 % Redefines (sub)paragraphs to behave more like sections
 \ifx\paragraph\undefined\else
-\let\oldparagraph\paragraph
-\renewcommand{\paragraph}[1]{\oldparagraph{#1}\mbox{}}
+  \let\oldparagraph\paragraph
+  \renewcommand{\paragraph}[1]{\oldparagraph{#1}\mbox{}}
 \fi
 \ifx\subparagraph\undefined\else
-\let\oldsubparagraph\subparagraph
-\renewcommand{\subparagraph}[1]{\oldsubparagraph{#1}\mbox{}}
+  \let\oldsubparagraph\subparagraph
+  \renewcommand{\subparagraph}[1]{\oldsubparagraph{#1}\mbox{}}
 \fi
 
-%%% Use protect on footnotes to avoid problems with footnotes in titles
+% set default figure placement to htbp
+\makeatletter
+\def\fps@figure{htbp}
+\makeatother
+
+\usepackage{booktabs}
+% https://github.com/rstudio/rmarkdown/issues/337
 \let\rmarkdownfootnote\footnote%
 \def\footnote{\protect\rmarkdownfootnote}
 
-%%% Change title format to be more compact
+% https://github.com/rstudio/rmarkdown/pull/252
 \usepackage{titling}
-
-% Create subtitle command for use in maketitle
-\providecommand{\subtitle}[1]{
-  \posttitle{
-    \begin{center}\large#1\end{center}
-    }
-}
-
 \setlength{\droptitle}{-2em}
 
-  \title{Power Analysis with Superpower}
-    \pretitle{\vspace{\droptitle}\centering\huge}
-  \posttitle{\par}
-    \author{Aaron R. Caldwell \& Daniël Lakens}
-    \preauthor{\centering\large\emph}
-  \postauthor{\par}
-      \predate{\centering\large\emph}
-  \postdate{\par}
-    \date{2019-10-01}
+\pretitle{\vspace{\droptitle}\centering\huge}
+\posttitle{\par}
 
-\usepackage{booktabs}
+\preauthor{\centering\large\emph}
+\postauthor{\par}
+
+\predate{\centering\large\emph}
+\postdate{\par}
 \usepackage{booktabs}
 \usepackage{longtable}
 \usepackage{array}
@@ -141,6 +143,12 @@
 \usepackage[normalem]{ulem}
 \usepackage{makecell}
 \usepackage{xcolor}
+\usepackage[]{natbib}
+\bibliographystyle{apalike}
+
+\title{Power Analysis with Superpower}
+\author{Aaron R. Caldwell \& Daniël Lakens}
+\date{2019-12-11}
 
 \begin{document}
 \maketitle
@@ -155,10 +163,12 @@ This is a compilation of documents for \href{https://github.com/arcaldwell49/Sup
 \chapter*{Preface}\label{preface}}
 \addcontentsline{toc}{chapter}{Preface}
 
+\textbf{This book is still being developed. You may find typos in the book.}
+
 The goal of \texttt{Superpower} is to easily simulate factorial designs and empirically calculate power using a simulation approach.
 The R package is intended to be utilized for prospective (a priori) power analysis. Please don't be silly and compute \href{https://discourse.datamethods.org/t/reference-collection-to-push-back-against-common-statistical-myths/1787}{post hoc power}.
 
-This package, and book, expect readers to have some familiarity with R \citeyearpar{R-base}. However, we have created two Shiny apps (for the \href{http://shiny.ieis.tue.nl/anova_power/}{\texttt{ANOVA\_power}} \& \href{http://shiny.ieis.tue.nl/anova_exact/}{\texttt{ANOVA\_exact}} functions respectively) to help use \texttt{Superpower} if you are not familiar with R.
+This package, and book, expect readers to have some familiarity with R \citeyearpar{R-base}. However, we have created two Shiny apps (for the \href{https://aaroncaldwell.us/shiny/anova_power}{\texttt{ANOVA\_power}} \& \href{https://aaroncaldwell.us/shiny/anova_exact}{\texttt{ANOVA\_exact}} functions respectively) to help use \texttt{Superpower} if you are not familiar with R.
 
 In this book we will display a variety of ways the \texttt{Superpower} package can be used for power analysis and sample size planning for factorial experimental designs. We also included various examples of the performance of \texttt{Superpower} against other R packages (e.g., \texttt{pwr2ppl} by \citet{R-pwr2ppl} and \texttt{pwr} by \citet{R-pwr}) and statistical programs (such as G*Power \citet{faul2007g}, MOREpower \citet{Campbell2012MorePower6F}, and SAS's \texttt{PROC\ GLMPOWER} \citeyearpar{SASglmpower}). All uses of the \texttt{ANOVA\_power} function have been run with 10000 iterations (\texttt{nsims\ =\ 10000}). If you have any issues using \texttt{Superpower} or want to expand its capabilities please raise the issue on our \href{https://github.com/arcaldwell49/Superpower/issues}{GitHub} repository.
 
@@ -370,7 +380,7 @@ We can check the correlation matrix by asking for it from the design\_result obj
 
 \caption{\label{tab:unnamed-chunk-6}Correlation Matrix}
 \centering
-\begin{tabular}{l|r|r|r|r}
+\begin{tabular}[t]{l|r|r|r|r}
 \hline
   & red\_fast & red\_slow & blue\_fast & blue\_slow\\
 \hline
@@ -399,7 +409,7 @@ In this case, it is identical to the correlation matrix because the variance is 
 
 \caption{\label{tab:unnamed-chunk-8}Covariance-Variance Matrix}
 \centering
-\begin{tabular}{l|r|r|r|r}
+\begin{tabular}[t]{l|r|r|r|r}
 \hline
   & red\_fast & red\_slow & blue\_fast & blue\_slow\\
 \hline
@@ -474,7 +484,7 @@ Imagine we aim to design a study to test the hypothesis that giving people a pet
 
 \caption{\label{tab:unnamed-chunk-11}Simulated ANOVA Result}
 \centering
-\begin{tabular}{l|r|r}
+\begin{tabular}[t]{l|r|r}
 \hline
   & power & effect\_size\\
 \hline
@@ -495,7 +505,7 @@ anova\_condition & 67.2 & 0.0331418\\
 
 \caption{\label{tab:unnamed-chunk-13}Exact ANOVA Result}
 \centering
-\begin{tabular}{l|r|r|r|r}
+\begin{tabular}[t]{l|r|r|r|r}
 \hline
   & power & partial\_eta\_squared & cohen\_f & non\_centrality\\
 \hline
@@ -616,7 +626,7 @@ We can compute a pattern of means, given a standard deviation of 6.4, that would
 
 \caption{\label{tab:unnamed-chunk-21}Simulated ANOVA Result}
 \centering
-\begin{tabular}{l|r|r}
+\begin{tabular}[t]{l|r|r}
 \hline
   & power & effect\_size\\
 \hline
@@ -637,7 +647,7 @@ anova\_condition & 90.15 & 0.0544974\\
 
 \caption{\label{tab:unnamed-chunk-23}Exact ANOVA Result}
 \centering
-\begin{tabular}{l|r|r|r|r}
+\begin{tabular}[t]{l|r|r|r|r}
 \hline
   & power & partial\_eta\_squared & cohen\_f & non\_centrality\\
 \hline
@@ -713,7 +723,7 @@ If we re-run the simulation with this sample size, we indeed have 90\% power.
 
 \caption{\label{tab:unnamed-chunk-27}Simulated ANOVA Result}
 \centering
-\begin{tabular}{l|r|r}
+\begin{tabular}[t]{l|r|r}
 \hline
   & power & effect\_size\\
 \hline
@@ -734,7 +744,7 @@ anova\_condition & 89.99 & 0.0315708\\
 
 \caption{\label{tab:unnamed-chunk-29}Exact ANOVA Result}
 \centering
-\begin{tabular}{l|r|r|r|r}
+\begin{tabular}[t]{l|r|r|r|r}
 \hline
   & power & partial\_eta\_squared & cohen\_f & non\_centrality\\
 \hline
@@ -795,7 +805,7 @@ Imagine we aim to design a study to test the hypothesis that giving people a pet
 
 \caption{\label{tab:unnamed-chunk-34}Simulated ANOVA Result}
 \centering
-\begin{tabular}{l|r|r}
+\begin{tabular}[t]{l|r|r}
 \hline
   & power & effect\_size\\
 \hline
@@ -816,7 +826,7 @@ anova\_condition & 47.26 & 0.0433997\\
 
 \caption{\label{tab:unnamed-chunk-36}Exact ANOVA Result}
 \centering
-\begin{tabular}{l|r|r|r|r}
+\begin{tabular}[t]{l|r|r|r|r}
 \hline
   & power & partial\_eta\_squared & cohen\_f & non\_centrality\\
 \hline
@@ -962,7 +972,7 @@ We can compute a pattern of means, given a standard deviation of 6.4, that would
 
 \caption{\label{tab:unnamed-chunk-43}Simulated ANOVA Result}
 \centering
-\begin{tabular}{l|r|r}
+\begin{tabular}[t]{l|r|r}
 \hline
   & power & effect\_size\\
 \hline
@@ -983,7 +993,7 @@ anova\_condition & 90.3 & 0.090741\\
 
 \caption{\label{tab:unnamed-chunk-45}Exact ANOVA Result}
 \centering
-\begin{tabular}{l|r|r|r|r}
+\begin{tabular}[t]{l|r|r|r|r}
 \hline
   & power & partial\_eta\_squared & cohen\_f & non\_centrality\\
 \hline
@@ -1190,7 +1200,7 @@ We can simulate a one-factor anova setting means to achieve a certain effect siz
 
 \caption{\label{tab:unnamed-chunk-50}Simulated ANOVA Result}
 \centering
-\begin{tabular}{l|r|r}
+\begin{tabular}[t]{l|r|r}
 \hline
   & power & effect\_size\\
 \hline
@@ -1211,7 +1221,7 @@ anova\_factor1 & 100 & 0.0100165\\
 
 \caption{\label{tab:unnamed-chunk-52}Exact ANOVA Result}
 \centering
-\begin{tabular}{l|r|r|r|r}
+\begin{tabular}[t]{l|r|r|r|r}
 \hline
   & power & partial\_eta\_squared & cohen\_f & non\_centrality\\
 \hline
@@ -1265,7 +1275,7 @@ This simulation should yield a medium effect size (0.588) across four independen
 
 \caption{\label{tab:unnamed-chunk-56}Simulated ANOVA Result}
 \centering
-\begin{tabular}{l|r|r}
+\begin{tabular}[t]{l|r|r}
 \hline
   & power & effect\_size\\
 \hline
@@ -1286,7 +1296,7 @@ anova\_factor1 & 100 & 0.058913\\
 
 \caption{\label{tab:unnamed-chunk-58}Exact ANOVA Result}
 \centering
-\begin{tabular}{l|r|r|r|r}
+\begin{tabular}[t]{l|r|r|r|r}
 \hline
   & power & partial\_eta\_squared & cohen\_f & non\_centrality\\
 \hline
@@ -1338,7 +1348,7 @@ We can simulate a one-way ANOVA that should yield a large effect size (0.1379) a
 
 \caption{\label{tab:unnamed-chunk-62}Simulated ANOVA Result}
 \centering
-\begin{tabular}{l|r|r}
+\begin{tabular}[t]{l|r|r}
 \hline
   & power & effect\_size\\
 \hline
@@ -1359,7 +1369,7 @@ anova\_factor1 & 100 & 0.1380489\\
 
 \caption{\label{tab:unnamed-chunk-64}Exact ANOVA Result}
 \centering
-\begin{tabular}{l|r|r|r|r}
+\begin{tabular}[t]{l|r|r|r|r}
 \hline
   & power & partial\_eta\_squared & cohen\_f & non\_centrality\\
 \hline
@@ -1514,7 +1524,7 @@ We can perform both these power analyses using \texttt{Superpower} as well. We s
 
 \caption{\label{tab:unnamed-chunk-68}Simulated ANOVA Result}
 \centering
-\begin{tabular}{l|r|r}
+\begin{tabular}[t]{l|r|r}
 \hline
   & power & effect\_size\\
 \hline
@@ -1527,7 +1537,7 @@ anova\_speed & 80.74 & 0.2149221\\
 
 \caption{\label{tab:unnamed-chunk-70}Exact ANOVA Result}
 \centering
-\begin{tabular}{l|r|r|r|r}
+\begin{tabular}[t]{l|r|r|r|r}
 \hline
   & power & partial\_eta\_squared & cohen\_f & non\_centrality\\
 \hline
@@ -1576,7 +1586,7 @@ We should see a larger dz if we increase the correlation, keeping the sample siz
 
 \caption{\label{tab:unnamed-chunk-72}Covariance-Variance Matrix}
 \centering
-\begin{tabular}{l|r|r}
+\begin{tabular}[t]{l|r|r}
 \hline
   & fast & slow\\
 \hline
@@ -1601,7 +1611,7 @@ slow & 0.7 & 1.0\\
 
 \caption{\label{tab:unnamed-chunk-74}Simulated ANOVA Result}
 \centering
-\begin{tabular}{l|r|r}
+\begin{tabular}[t]{l|r|r}
 \hline
   & power & effect\_size\\
 \hline
@@ -1622,7 +1632,7 @@ anova\_speed & 80.48 & 0.3153414\\
 
 \caption{\label{tab:unnamed-chunk-76}Exact ANOVA Result}
 \centering
-\begin{tabular}{l|r|r|r|r}
+\begin{tabular}[t]{l|r|r|r|r}
 \hline
   & power & partial\_eta\_squared & cohen\_f & non\_centrality\\
 \hline
@@ -1849,7 +1859,7 @@ We can perform power analyses for within designs using simuations. We set groups
 
 \caption{\label{tab:unnamed-chunk-82}Simulated ANOVA Result}
 \centering
-\begin{tabular}{l|r|r}
+\begin{tabular}[t]{l|r|r}
 \hline
   & power & effect\_size\\
 \hline
@@ -1870,7 +1880,7 @@ anova\_speed & 97.04 & 0.345486\\
 
 \caption{\label{tab:unnamed-chunk-84}Exact ANOVA Result}
 \centering
-\begin{tabular}{l|r|r|r|r}
+\begin{tabular}[t]{l|r|r|r|r}
 \hline
   & power & partial\_eta\_squared & cohen\_f & non\_centrality\\
 \hline
@@ -2241,7 +2251,7 @@ We can reproduce this simulation:
 
 \caption{\label{tab:unnamed-chunk-98}Simulated ANOVA Result}
 \centering
-\begin{tabular}{l|r|r}
+\begin{tabular}[t]{l|r|r}
 \hline
   & power & effect\_size\\
 \hline
@@ -2266,7 +2276,7 @@ anova\_age:color & 47.80 & 0.1641690\\
 
 \caption{\label{tab:unnamed-chunk-100}Exact ANOVA Result}
 \centering
-\begin{tabular}{l|r|r|r|r}
+\begin{tabular}[t]{l|r|r|r|r}
 \hline
   & power & partial\_eta\_squared & cohen\_f & non\_centrality\\
 \hline
@@ -2451,7 +2461,7 @@ We can reproduce this simulation:
 
 \caption{\label{tab:unnamed-chunk-108}Simulated ANOVA Result}
 \centering
-\begin{tabular}{l|r|r}
+\begin{tabular}[t]{l|r|r}
 \hline
   & power & effect\_size\\
 \hline
@@ -2477,21 +2487,21 @@ anova\_AGE:COLOR & 46.22 & 0.1595391\\
 ## COLOR      9.5071              0.0171  0.1318         0.4167
 ## AGE:COLOR 45.9803              0.1351  0.3953         3.7500
 ## 
-## Power and Effect sizes for contrasts
+## Power and Effect sizes for pairwise comparisons (t-tests)
 ##                                            power effect_size
-## p_AGE_old_COLOR_blue_AGE_old_COLOR_red     14.16     -0.1826
-## p_AGE_old_COLOR_blue_AGE_young_COLOR_blue   5.98     -0.0609
-## p_AGE_old_COLOR_blue_AGE_young_COLOR_red   30.91      0.3043
-## p_AGE_old_COLOR_red_AGE_young_COLOR_blue    9.00      0.1217
-## p_AGE_old_COLOR_red_AGE_young_COLOR_red    64.66      0.4869
-## p_AGE_young_COLOR_blue_AGE_young_COLOR_red 41.80      0.3651
+## p_AGE_old_COLOR_blue_AGE_old_COLOR_red     14.16       -0.18
+## p_AGE_old_COLOR_blue_AGE_young_COLOR_blue   5.98       -0.06
+## p_AGE_old_COLOR_blue_AGE_young_COLOR_red   30.91        0.30
+## p_AGE_old_COLOR_red_AGE_young_COLOR_blue    9.00        0.12
+## p_AGE_old_COLOR_red_AGE_young_COLOR_red    64.66        0.49
+## p_AGE_young_COLOR_blue_AGE_young_COLOR_red 41.80        0.37
 \end{verbatim}
 
 \begin{table}[!h]
 
 \caption{\label{tab:unnamed-chunk-110}Exact ANOVA Result}
 \centering
-\begin{tabular}{l|r|r|r|r}
+\begin{tabular}[t]{l|r|r|r|r}
 \hline
   & power & partial\_eta\_squared & cohen\_f & non\_centrality\\
 \hline
@@ -2579,7 +2589,7 @@ Let's now compare the formulas in \citet{potvin2000statistical} with \texttt{Sup
 
 \caption{\label{tab:unnamed-chunk-113}Exact ANOVA Result}
 \centering
-\begin{tabular}{l|r|r|r|r}
+\begin{tabular}[t]{l|r|r|r|r}
 \hline
   & power & partial\_eta\_squared & cohen\_f & non\_centrality\\
 \hline
@@ -2833,7 +2843,7 @@ We can now compile all the analytical results into a single table, and see that 
 
 \caption{\label{tab:unnamed-chunk-117}Analytical Result}
 \centering
-\begin{tabular}{r|r|r}
+\begin{tabular}[t]{r|r|r}
 \hline
 variance & lambda & power\\
 \hline
@@ -2917,7 +2927,7 @@ And we can estimate power with \texttt{ANOVA\_exact}.
 
 \caption{\label{tab:unnamed-chunk-120}Exact ANOVA Result}
 \centering
-\begin{tabular}{l|r|r|r|r}
+\begin{tabular}[t]{l|r|r|r|r}
 \hline
   & power & partial\_eta\_squared & cohen\_f & non\_centrality\\
 \hline
@@ -3170,7 +3180,7 @@ Again, when we compile all the analytical results into a single table we can see
 
 \caption{\label{tab:unnamed-chunk-124}Analytical Result}
 \centering
-\begin{tabular}{r|r|r}
+\begin{tabular}[t]{r|r|r}
 \hline
 variance & lambda & power\\
 \hline
@@ -3261,7 +3271,7 @@ Now we replicate in \texttt{Superpower}.
 
 \caption{\label{tab:unnamed-chunk-128}MANOVA Result}
 \centering
-\begin{tabular}{l|r|r|r|r}
+\begin{tabular}[t]{l|r|r|r|r}
 \hline
   & power & pillai\_trace & cohen\_f & non\_centrality\\
 \hline
@@ -3299,7 +3309,7 @@ In all the above examples, you will notice that the correlation is the sample be
 
 \caption{\label{tab:unnamed-chunk-129}Simulated ANOVA Result}
 \centering
-\begin{tabular}{l|r|r}
+\begin{tabular}[t]{l|r|r}
 \hline
   & power & effect\_size\\
 \hline
@@ -3330,7 +3340,7 @@ Now, let's pour gasoline on the fire and see what happens when we make the spher
 
 \caption{\label{tab:unnamed-chunk-131}Simulated ANOVA Result}
 \centering
-\begin{tabular}{l|r|r}
+\begin{tabular}[t]{l|r|r}
 \hline
   & power & effect\_size\\
 \hline
@@ -3347,7 +3357,7 @@ In our experience, most researchers default to using a Greenhouse-Geisser adjust
 
 \caption{\label{tab:unnamed-chunk-132}Simulated MANOVA Result}
 \centering
-\begin{tabular}{l|r}
+\begin{tabular}[t]{l|r}
 \hline
   & power\\
 \hline
@@ -3396,7 +3406,7 @@ First we setup the design.
 
 \caption{\label{tab:unnamed-chunk-135}Simulated MANOVA Result}
 \centering
-\begin{tabular}{l|r}
+\begin{tabular}[t]{l|r}
 \hline
   & power\\
 \hline
@@ -3418,7 +3428,7 @@ manova\_a & 5.16\\
 
 \caption{\label{tab:unnamed-chunk-137}Simulated ANOVA Result}
 \centering
-\begin{tabular}{l|r|r}
+\begin{tabular}[t]{l|r|r}
 \hline
   & power & effect\_size\\
 \hline
@@ -3438,7 +3448,7 @@ anova\_a & 4.59 & 0.0339026\\
 
 \caption{\label{tab:unnamed-chunk-139}Simulated ANOVA Result}
 \centering
-\begin{tabular}{l|r|r}
+\begin{tabular}[t]{l|r|r}
 \hline
   & power & effect\_size\\
 \hline
@@ -3471,7 +3481,7 @@ Both the sphericity corrections, Greenhouse-Geisser (\texttt{GG}) and Huynh-Feld
 
 \caption{\label{tab:unnamed-chunk-141}Simulated ANOVA Result}
 \centering
-\begin{tabular}{l|r|r}
+\begin{tabular}[t]{l|r|r}
 \hline
   & power & effect\_size\\
 \hline
@@ -3483,7 +3493,7 @@ anova\_a & 60.48 & 0.1479382\\
 
 \caption{\label{tab:unnamed-chunk-142}Simulated MANOVA Result}
 \centering
-\begin{tabular}{l|r}
+\begin{tabular}[t]{l|r}
 \hline
   & power\\
 \hline
@@ -3517,7 +3527,7 @@ Well, it appears the MANOVA based approach has roughly \textasciitilde{}10\% low
 
 \caption{\label{tab:unnamed-chunk-144}Simulated ANOVA Result}
 \centering
-\begin{tabular}{l|r|r}
+\begin{tabular}[t]{l|r|r}
 \hline
   & power & effect\_size\\
 \hline
@@ -3529,7 +3539,7 @@ anova\_a & 84.69 & 0.1385088\\
 
 \caption{\label{tab:unnamed-chunk-145}Simulated MANOVA Result}
 \centering
-\begin{tabular}{l|r}
+\begin{tabular}[t]{l|r}
 \hline
   & power\\
 \hline
@@ -3593,7 +3603,7 @@ Now, we can repeat the process in \texttt{Superpower}.
 
 \caption{\label{tab:unnamed-chunk-147}Simulated ANOVA Result}
 \centering
-\begin{tabular}{l|r|r}
+\begin{tabular}[t]{l|r|r}
 \hline
   & power & effect\_size\\
 \hline
@@ -3618,7 +3628,7 @@ anova\_color:age & 91.26 & 0.2155901\\
 
 \caption{\label{tab:unnamed-chunk-149}Exact ANOVA Result}
 \centering
-\begin{tabular}{l|r|r|r|r}
+\begin{tabular}[t]{l|r|r|r|r}
 \hline
   & power & partial\_eta\_squared & cohen\_f & non\_centrality\\
 \hline
@@ -3669,7 +3679,7 @@ Now, we can simulate the same two-way ANOVA but increasing the correlation to r=
 
 \caption{\label{tab:unnamed-chunk-152}Simulated ANOVA Result}
 \centering
-\begin{tabular}{l|r|r}
+\begin{tabular}[t]{l|r|r}
 \hline
   & power & effect\_size\\
 \hline
@@ -3694,7 +3704,7 @@ anova\_color:age & 99.00 & 0.3081551\\
 
 \caption{\label{tab:unnamed-chunk-154}Exact ANOVA Result}
 \centering
-\begin{tabular}{l|r|r|r|r}
+\begin{tabular}[t]{l|r|r|r|r}
 \hline
   & power & partial\_eta\_squared & cohen\_f & non\_centrality\\
 \hline
@@ -3798,7 +3808,7 @@ Now let's replicate this in \texttt{R} with \texttt{Superpower}. First, we setup
 
 \caption{\label{tab:unnamed-chunk-159}MANOVA Result}
 \centering
-\begin{tabular}{l|r|r|r|r}
+\begin{tabular}[t]{l|r|r|r|r}
 \hline
   & power & partial\_eta\_squared & cohen\_f & non\_centrality\\
 \hline
@@ -3910,7 +3920,7 @@ We then replicate in \texttt{R}, first by setting up the ``lear'' correlation ma
 
 \caption{\label{tab:unnamed-chunk-162}Simulated MANOVA Result}
 \centering
-\begin{tabular}{l|r|r|r|r}
+\begin{tabular}[t]{l|r|r|r|r}
 \hline
   & power & pillai\_trace & cohen\_f & non\_centrality\\
 \hline
@@ -3952,7 +3962,7 @@ Treatment:TIME & 99.55718 & 0.0531965 & 0.2370344 & 33.486447\\
 
 \caption{\label{tab:unnamed-chunk-164}Simulated MANOVA Result}
 \centering
-\begin{tabular}{l|r|r|r|r}
+\begin{tabular}[t]{l|r|r|r|r}
 \hline
   & power & pillai\_trace & cohen\_f & non\_centrality\\
 \hline
@@ -4009,7 +4019,7 @@ Let's start with a 2x2x2 between-subjects design. We collect 50 participants in 
 
 \caption{\label{tab:unnamed-chunk-167}Simulated ANOVA Result}
 \centering
-\begin{tabular}{l|r|r}
+\begin{tabular}[t]{l|r|r}
 \hline
   & power & effect\_size\\
 \hline
@@ -4042,7 +4052,7 @@ anova\_Size:Color:Load & 84.88 & 0.0248926\\
 
 \caption{\label{tab:unnamed-chunk-169}Exact ANOVA Result}
 \centering
-\begin{tabular}{l|r|r|r|r}
+\begin{tabular}[t]{l|r|r|r|r}
 \hline
   & power & partial\_eta\_squared & cohen\_f & non\_centrality\\
 \hline
@@ -4283,7 +4293,7 @@ A three-way ANOVA builds on the same principles as a one-way ANOVA. We look at w
 
 \caption{\label{tab:unnamed-chunk-174}Simulated ANOVA Result}
 \centering
-\begin{tabular}{l|r|r}
+\begin{tabular}[t]{l|r|r}
 \hline
   & power & effect\_size\\
 \hline
@@ -4304,7 +4314,7 @@ anova\_Size & 70.69 & 0.0180045\\
 
 \caption{\label{tab:unnamed-chunk-176}Exact ANOVA Result}
 \centering
-\begin{tabular}{l|r|r|r|r}
+\begin{tabular}[t]{l|r|r|r|r}
 \hline
   & power & partial\_eta\_squared & cohen\_f & non\_centrality\\
 \hline
@@ -4354,7 +4364,7 @@ Similarly, we can create a 2 factor design where we average over the third facto
 
 \caption{\label{tab:unnamed-chunk-180}Simulated ANOVA Result}
 \centering
-\begin{tabular}{l|r|r}
+\begin{tabular}[t]{l|r|r}
 \hline
   & power & effect\_size\\
 \hline
@@ -4379,7 +4389,7 @@ anova\_Size:Color & 69.72 & 0.0176374\\
 
 \caption{\label{tab:unnamed-chunk-182}Exact ANOVA Result}
 \centering
-\begin{tabular}{l|r|r|r|r}
+\begin{tabular}[t]{l|r|r|r|r}
 \hline
   & power & partial\_eta\_squared & cohen\_f & non\_centrality\\
 \hline
@@ -4455,7 +4465,7 @@ Size:Color & 70.33227 & 0.0155376 & 0.1256297 & 6.25\\
 
 \caption{\label{tab:unnamed-chunk-186}Simulated ANOVA Result}
 \centering
-\begin{tabular}{l|r|r}
+\begin{tabular}[t]{l|r|r}
 \hline
   & power & effect\_size\\
 \hline
@@ -4488,7 +4498,7 @@ anova\_Size:Color:CognitiveLoad & 78.13 & 0.0213083\\
 
 \caption{\label{tab:unnamed-chunk-188}Exact ANOVA Result}
 \centering
-\begin{tabular}{l|r|r|r|r}
+\begin{tabular}[t]{l|r|r|r|r}
 \hline
   & power & partial\_eta\_squared & cohen\_f & non\_centrality\\
 \hline
@@ -4681,7 +4691,7 @@ The power for interactions depends on Cohen's \emph{f}, the alpha level, the sam
 
 \caption{\label{tab:unnamed-chunk-191}Exact ANOVA Result}
 \centering
-\begin{tabular}{l|r|r|r|r}
+\begin{tabular}[t]{l|r|r|r|r}
 \hline
   & power & partial\_eta\_squared & cohen\_f & non\_centrality\\
 \hline
@@ -4714,8 +4724,8 @@ Size:Color:Load & 26.92604 & 0.0146628 & 0.1219875 & 2.5\\
 \end{verbatim}
 
 \begin{verbatim}
-## Warning in pf(F_critical_ABC, df_ABC, df_error, lambda_ABC, lower.tail =
-## FALSE): NaNs produced
+## Warning in pf(F_critical_ABC, df_ABC, df_error, lambda_ABC, lower.tail = FALSE):
+## NaNs produced
 \end{verbatim}
 
 \begin{Shaded}
@@ -4829,7 +4839,7 @@ We see that a pattern of means of 0, 0, 0, 0, 0, 0, 0, 20 for a 2x2x2 interactio
 
 \caption{\label{tab:unnamed-chunk-194}Exact ANOVA Result}
 \centering
-\begin{tabular}{l|r|r|r|r}
+\begin{tabular}[t]{l|r|r|r|r}
 \hline
   & power & partial\_eta\_squared & cohen\_f & non\_centrality\\
 \hline
@@ -4895,7 +4905,7 @@ Cohen's \emph{f} is twice as large for a 2x2 design with the same mean value in 
 
 \caption{\label{tab:unnamed-chunk-197}Exact ANOVA Result}
 \centering
-\begin{tabular}{l|r|r|r|r}
+\begin{tabular}[t]{l|r|r|r|r}
 \hline
   & power & partial\_eta\_squared & cohen\_f & non\_centrality\\
 \hline
@@ -5194,7 +5204,7 @@ And we can reproduce the results using the \texttt{ANOVA\_exact} function.
 
 \caption{\label{tab:unnamed-chunk-216}ANOVA Results}
 \centering
-\begin{tabular}{l|r|r|r|r}
+\begin{tabular}[t]{l|r|r|r|r}
 \hline
   & power & partial\_eta\_squared & cohen\_f & non\_centrality\\
 \hline
@@ -5242,7 +5252,7 @@ b & 86.79843 & 0.2173913 & 0.5270463 & 10\\
 
 \caption{\label{tab:unnamed-chunk-216}ANOVA Results}
 \centering
-\begin{tabular}{l|r|r|r|r}
+\begin{tabular}[t]{l|r|r|r|r}
 \hline
   & power & partial\_eta\_squared & cohen\_f & non\_centrality\\
 \hline
@@ -5337,7 +5347,7 @@ We can also reproduce the last example by adjusting the means and standard devia
 
 \caption{\label{tab:unnamed-chunk-223}ANOVA Results}
 \centering
-\begin{tabular}{l|r|r|r|r}
+\begin{tabular}[t]{l|r|r|r|r}
 \hline
   & power & partial\_eta\_squared & cohen\_f & non\_centrality\\
 \hline
@@ -5376,7 +5386,7 @@ And changing the sample size to 300 should reproduce the power for the interacti
 ## hunger       58.0592              0.0039  0.0626         4.6875
 ## fruit:hunger 58.0592              0.0039  0.0626         4.6875
 ## 
-## Power and Effect sizes for contrasts
+## Power and Effect sizes for pairwise comparisons (t-tests)
 ##                                                                  power
 ## p_fruit_apple_hunger_no hunger_fruit_apple_hunger_very hungry     5.00
 ## p_fruit_apple_hunger_no hunger_fruit_banana_hunger_no hunger      5.00
@@ -5405,7 +5415,7 @@ And changing the sample size to 300 should reproduce the power for the interacti
 
 \caption{\label{tab:unnamed-chunk-224}ANOVA Results}
 \centering
-\begin{tabular}{l|r|r|r|r}
+\begin{tabular}[t]{l|r|r|r|r}
 \hline
   & power & partial\_eta\_squared & cohen\_f & non\_centrality\\
 \hline
@@ -5539,7 +5549,7 @@ Neither of the main effects is now significant, as the marginal means are 22.5 v
 
 \caption{\label{tab:unnamed-chunk-230}ANOVA Results}
 \centering
-\begin{tabular}{l|r|r|r|r}
+\begin{tabular}[t]{l|r|r|r|r}
 \hline
   & power & partial\_eta\_squared & cohen\_f & non\_centrality\\
 \hline
@@ -5653,7 +5663,7 @@ In a one-way ANOVA adding a condition means, for example, going from a 1x2 to a 
 
 \caption{\label{tab:unnamed-chunk-234}Simulated ANOVA Result}
 \centering
-\begin{tabular}{l|r|r}
+\begin{tabular}[t]{l|r|r}
 \hline
   & power & effect\_size\\
 \hline
@@ -5674,7 +5684,7 @@ anova\_Condition & 84.15 & 0.0911796\\
 
 \caption{\label{tab:unnamed-chunk-236}Exact ANOVA Result}
 \centering
-\begin{tabular}{l|r|r|r|r}
+\begin{tabular}[t]{l|r|r|r|r}
 \hline
   & power & partial\_eta\_squared & cohen\_f & non\_centrality\\
 \hline
@@ -5754,7 +5764,7 @@ And we can see power across sample sizes
 
 \caption{\label{tab:unnamed-chunk-239}Exact ANOVA Result}
 \centering
-\begin{tabular}{l|r|r|r|r}
+\begin{tabular}[t]{l|r|r|r|r}
 \hline
   & power & partial\_eta\_squared & cohen\_f & non\_centrality\\
 \hline
@@ -6170,7 +6180,7 @@ Now imagine our design described above was a within design. The means and sd rem
 
 \caption{\label{tab:unnamed-chunk-247}Exact ANOVA Result}
 \centering
-\begin{tabular}{l|r|r|r|r}
+\begin{tabular}[t]{l|r|r|r|r}
 \hline
   & power & partial\_eta\_squared & cohen\_f & non\_centrality\\
 \hline
@@ -6222,7 +6232,7 @@ We see power is ever so slightly less than for the between subject design. This 
 
 \caption{\label{tab:unnamed-chunk-250}Exact ANOVA Result}
 \centering
-\begin{tabular}{l|r|r|r|r}
+\begin{tabular}[t]{l|r|r|r|r}
 \hline
   & power & partial\_eta\_squared & cohen\_f & non\_centrality\\
 \hline
@@ -6666,7 +6676,7 @@ In a 2 x 2 x 2 design, an ANOVA will give the test results for three main effect
 
 \caption{\label{tab:unnamed-chunk-254}Simulated ANOVA Result}
 \centering
-\begin{tabular}{l|r|r}
+\begin{tabular}[t]{l|r|r}
 \hline
   & power & effect\_size\\
 \hline
@@ -6699,18 +6709,12 @@ We can calculate the number of significant results for each test (which should b
 \end{Shaded}
 
 \begin{verbatim}
-##                       anova_condition1 
-##                                    4.5 
-##                       anova_condition2 
-##                                    5.3 
-##                       anova_condition3 
-##                                    5.6 
-##            anova_condition1:condition2 
-##                                    5.2 
-##            anova_condition1:condition3 
-##                                    5.2 
-##            anova_condition2:condition3 
-##                                    6.6 
+##                       anova_condition1                       anova_condition2 
+##                                    4.5                                    5.3 
+##                       anova_condition3            anova_condition1:condition2 
+##                                    5.6                                    5.2 
+##            anova_condition1:condition3            anova_condition2:condition3 
+##                                    5.2                                    6.6 
 ## anova_condition1:condition2:condition3 
 ##                                    4.5
 \end{verbatim}
@@ -6787,7 +6791,7 @@ Let's re-run the simulation twith the Holm-Bonferroni correction, which is simpl
 
 \caption{\label{tab:unnamed-chunk-259}ANOVA Results}
 \centering
-\begin{tabular}{l|r|r}
+\begin{tabular}[t]{l|r|r}
 \hline
   & power & effect\_size\\
 \hline
@@ -6812,7 +6816,7 @@ anova\_condition1:condition2:condition3 & 1.1 & 0.0027855\\
 
 \caption{\label{tab:unnamed-chunk-260}Pairwise Results}
 \centering
-\begin{tabular}{l|r|r}
+\begin{tabular}[t]{l|r|r}
 \hline
   & power & effect\_size\\
 \hline
@@ -6892,10 +6896,12 @@ We see it is close to 5\%. Note that error rates have variation, and even in a f
 \hypertarget{analytic-power-functions}{%
 \chapter{Analytic Power Functions}\label{analytic-power-functions}}
 
-For some designs it is possible to calculate power analytically, using closed functions.
+For some designs it is possible to calculate power analytically, using closed functions. Within the \texttt{Superpower} package we have included a number of these closed functions. As you will see below, each analytic function only serves a very narrow scenario while the simulations functions are much more flexible. In addition, we will compare these functions to other packages/software. Please note, that the analytic power functions are designed to reject designs that are not appropriate for the functions (i.e., a \texttt{3w} design will be rejected by the \texttt{power\_oneway\_between} function).
 
 \hypertarget{one-way-between-subjects-anova}{%
 \section{One-Way Between Subjects ANOVA}\label{one-way-between-subjects-anova}}
+
+First, we can setup a one-way design with four levels, and perform a exact simulation power analysis with the \texttt{ANOVA\_exact} function.
 
 \begin{Shaded}
 \begin{Highlighting}[]
@@ -6924,7 +6930,7 @@ For some designs it is possible to calculate power analytically, using closed fu
 
 \caption{\label{tab:unnamed-chunk-263}Exact ANOVA Result}
 \centering
-\begin{tabular}{l|r|r|r|r}
+\begin{tabular}[t]{l|r|r|r|r}
 \hline
   & power & partial\_eta\_squared & cohen\_f & non\_centrality\\
 \hline
@@ -6950,7 +6956,7 @@ This is a generalized function for one-way ANOVA's for any number of groups. It 
 
 \begin{Shaded}
 \begin{Highlighting}[]
-\KeywordTok{anova1f_4}\NormalTok{(}\DataTypeTok{m1 =} \DecValTok{80}\NormalTok{, }\DataTypeTok{m2 =} \DecValTok{82}\NormalTok{, }\DataTypeTok{m3 =} \DecValTok{82}\NormalTok{, }\DataTypeTok{m4 =} \DecValTok{86}\NormalTok{,}
+\NormalTok{pwr2ppl}\OperatorTok{::}\KeywordTok{anova1f_4}\NormalTok{(}\DataTypeTok{m1 =} \DecValTok{80}\NormalTok{, }\DataTypeTok{m2 =} \DecValTok{82}\NormalTok{, }\DataTypeTok{m3 =} \DecValTok{82}\NormalTok{, }\DataTypeTok{m4 =} \DecValTok{86}\NormalTok{,}
           \DataTypeTok{s1 =} \DecValTok{10}\NormalTok{, }\DataTypeTok{s2 =} \DecValTok{10}\NormalTok{, }\DataTypeTok{s3 =} \DecValTok{10}\NormalTok{, }\DataTypeTok{s4 =} \DecValTok{10}\NormalTok{,}
           \DataTypeTok{n1 =} \DecValTok{60}\NormalTok{, }\DataTypeTok{n2 =} \DecValTok{60}\NormalTok{, }\DataTypeTok{n3 =} \DecValTok{60}\NormalTok{, }\DataTypeTok{n4 =} \DecValTok{60}\NormalTok{,}
           \DataTypeTok{alpha =} \FloatTok{.05}\NormalTok{)}
@@ -6965,7 +6971,7 @@ We can also use the function in the \texttt{pwr} package \citep{R-pwr}. Note tha
 
 \begin{Shaded}
 \begin{Highlighting}[]
-\KeywordTok{pwr.anova.test}\NormalTok{(}\DataTypeTok{n =} \DecValTok{60}\NormalTok{,}
+\NormalTok{pwr}\OperatorTok{::}\KeywordTok{pwr.anova.test}\NormalTok{(}\DataTypeTok{n =} \DecValTok{60}\NormalTok{,}
                \DataTypeTok{k =} \DecValTok{4}\NormalTok{,}
                \DataTypeTok{f =} \FloatTok{0.2179449}\NormalTok{,}
                \DataTypeTok{sig.level =} \FloatTok{0.05}\NormalTok{)}
@@ -6991,6 +6997,8 @@ Finally, G*Power \citep{faul2007g} provides the option to calculate \texttt{f} f
 
 \hypertarget{two-way-between-subject-interaction}{%
 \section{Two-way Between Subject Interaction}\label{two-way-between-subject-interaction}}
+
+Now, we will setup a 2x2 between-subject ANOVA.
 
 \begin{Shaded}
 \begin{Highlighting}[]
@@ -7020,7 +7028,7 @@ Finally, G*Power \citep{faul2007g} provides the option to calculate \texttt{f} f
 
 \caption{\label{tab:unnamed-chunk-268}Exact ANOVA Result}
 \centering
-\begin{tabular}{l|r|r|r|r}
+\begin{tabular}[t]{l|r|r|r|r}
 \hline
   & power & partial\_eta\_squared & cohen\_f & non\_centrality\\
 \hline
@@ -7032,6 +7040,8 @@ A:B & 59.78655 & 0.0617284 & 0.2564946 & 5\\
 \hline
 \end{tabular}
 \end{table}
+
+Now, let's use the analytic function \texttt{power\_twoway\_between}.
 
 \begin{Shaded}
 \begin{Highlighting}[]
@@ -7065,11 +7075,11 @@ A:B & 59.78655 & 0.0617284 & 0.2564946 & 5\\
 ## [1] 59.78655
 \end{verbatim}
 
-We can use the function by \citep{R-pwr2ppl}, as well.
+We can compare these results to \citep{R-pwr2ppl}, as well.
 
 \begin{Shaded}
 \begin{Highlighting}[]
-\KeywordTok{anova2x2}\NormalTok{(}\DataTypeTok{m1.1 =} \DecValTok{20}\NormalTok{,}
+\NormalTok{pwr2ppl}\OperatorTok{::}\KeywordTok{anova2x2}\NormalTok{(}\DataTypeTok{m1.1 =} \DecValTok{20}\NormalTok{,}
          \DataTypeTok{m1.2 =} \DecValTok{20}\NormalTok{,}
          \DataTypeTok{m2.1 =} \DecValTok{20}\NormalTok{,}
          \DataTypeTok{m2.2 =} \DecValTok{25}\NormalTok{,}
@@ -7101,6 +7111,8 @@ We can use the function by \citep{R-pwr2ppl}, as well.
 \hypertarget{x3-between-subject-anova}{%
 \section{3x3 Between Subject ANOVA}\label{x3-between-subject-anova}}
 
+We can extend this function to a two-way design with 3 levels.
+
 \begin{Shaded}
 \begin{Highlighting}[]
 \NormalTok{string <-}\StringTok{ "3b*3b"}
@@ -7129,7 +7141,7 @@ We can use the function by \citep{R-pwr2ppl}, as well.
 
 \caption{\label{tab:unnamed-chunk-272}Exact ANOVA Result}
 \centering
-\begin{tabular}{l|r|r|r|r}
+\begin{tabular}[t]{l|r|r|r|r}
 \hline
   & power & partial\_eta\_squared & cohen\_f & non\_centrality\\
 \hline
@@ -7206,7 +7218,7 @@ Power is calculated for a specific value of an effect size, alpha level, and sam
 
 \caption{\label{tab:unnamed-chunk-276}Exact ANOVA Result}
 \centering
-\begin{tabular}{l|r|r|r|r}
+\begin{tabular}[t]{l|r|r|r|r}
 \hline
   & power & partial\_eta\_squared & cohen\_f & non\_centrality\\
 \hline
@@ -8097,9 +8109,9 @@ We can replicate the independent \emph{t}-test example in MOREpower:
 ##             power partial_eta_squared cohen_f non_centrality
 ## condition 67.6857               0.029  0.1727         5.9082
 ## 
-## Power and Effect sizes for contrasts
+## Power and Effect sizes for pairwise comparisons (t-tests)
 ##                                   power effect_size
-## p_condition_control_condition_pet 67.69      0.3437
+## p_condition_control_condition_pet 67.69        0.34
 \end{verbatim}
 
 \begin{Shaded}
@@ -8172,7 +8184,7 @@ We can also replicate the dependent \emph{t}-test example in MOREpower.
 ##         power partial_eta_squared cohen_f non_centrality
 ## speed 80.7778              0.2048  0.5075            8.5
 ## 
-## Power and Effect sizes for contrasts
+## Power and Effect sizes for pairwise comparisons (t-tests)
 ##                         power effect_size
 ## p_speed_fast_speed_slow 80.78         0.5
 \end{verbatim}
@@ -8245,11 +8257,11 @@ We can also replicate the 3-group within ANOVA example in MOREpower.
 ##         power partial_eta_squared cohen_f non_centrality
 ## speed 96.9163              0.3304  0.7024          18.75
 ## 
-## Power and Effect sizes for contrasts
+## Power and Effect sizes for pairwise comparisons (t-tests)
 ##                           power effect_size
-## p_speed_fast_speed_medium 53.79      0.4841
-## p_speed_fast_speed_slow   98.39      0.9682
-## p_speed_medium_speed_slow 53.79      0.4841
+## p_speed_fast_speed_medium 53.79        0.48
+## p_speed_fast_speed_slow   98.39        0.97
+## p_speed_medium_speed_slow 53.79        0.48
 \end{verbatim}
 
 \begin{Shaded}
@@ -8314,14 +8326,14 @@ We can reproduce the 2x2 ANOVA example in MOREpower.
 ## color      5.0000              0.0000  0.0000              0
 ## age:color 48.4018              0.1429  0.4082              4
 ## 
-## Power and Effect sizes for contrasts
+## Power and Effect sizes for pairwise comparisons (t-tests)
 ##                                            power effect_size
-## p_age_old_color_blue_age_old_color_red      27.4     -0.2828
-## p_age_old_color_blue_age_young_color_blue   27.4     -0.2828
-## p_age_old_color_blue_age_young_color_red     5.0      0.0000
-## p_age_old_color_red_age_young_color_blue     5.0      0.0000
-## p_age_old_color_red_age_young_color_red     27.4      0.2828
-## p_age_young_color_blue_age_young_color_red  27.4      0.2828
+## p_age_old_color_blue_age_old_color_red      27.4       -0.28
+## p_age_old_color_blue_age_young_color_blue   27.4       -0.28
+## p_age_old_color_blue_age_young_color_red     5.0        0.00
+## p_age_old_color_red_age_young_color_blue     5.0        0.00
+## p_age_old_color_red_age_young_color_red     27.4        0.28
+## p_age_young_color_blue_age_young_color_red  27.4        0.28
 \end{verbatim}
 
 \begin{Shaded}
@@ -8375,7 +8387,7 @@ Let's replicate the 2x2x2 full between analysis (total N = 400, effects sizes di
 ## Color:Load       7.8953              0.0006  0.0253           0.25
 ## Size:Color:Load 84.9123              0.0224  0.1515           9.00
 ## 
-## Power and Effect sizes for contrasts
+## Power and Effect sizes for pairwise comparisons (t-tests)
 ##                                                     power effect_size
 ## p_Size_b_Color_g_Load_pres_Size_b_Color_g_Load_abs   5.00         0.0
 ## p_Size_b_Color_g_Load_pres_Size_b_Color_r_Load_pres 50.82         0.4
@@ -8455,14 +8467,14 @@ And finally, let's replicate the 2x2 full within analysis.
 ## B   64.2259              0.2400  0.5620              6
 ## A:B 26.9175              0.0952  0.3244              2
 ## 
-## Power and Effect sizes for contrasts
+## Power and Effect sizes for pairwise comparisons (t-tests)
 ##                       power effect_size
-## p_A_a1_B_b1_A_a1_B_b2 26.92     -0.3162
-## p_A_a1_B_b1_A_a2_B_b1 39.70      0.4000
-## p_A_a1_B_b1_A_a2_B_b2  5.00      0.0000
-## p_A_a1_B_b2_A_a2_B_b1 64.23      0.5477
-## p_A_a1_B_b2_A_a2_B_b2 13.60      0.2000
-## p_A_a2_B_b1_A_a2_B_b2 76.52     -0.6325
+## p_A_a1_B_b1_A_a1_B_b2 26.92       -0.32
+## p_A_a1_B_b1_A_a2_B_b1 39.70        0.40
+## p_A_a1_B_b1_A_a2_B_b2  5.00        0.00
+## p_A_a1_B_b2_A_a2_B_b1 64.23        0.55
+## p_A_a1_B_b2_A_a2_B_b2 13.60        0.20
+## p_A_a2_B_b1_A_a2_B_b2 76.52       -0.63
 \end{verbatim}
 
 \begin{Shaded}
@@ -8610,7 +8622,7 @@ Now we will simply replicate the simulations of \citet{brysbaert2019many}, and c
 
 \caption{\label{tab:unnamed-chunk-312}Simulated ANOVA Result}
 \centering
-\begin{tabular}{l|r|r}
+\begin{tabular}[t]{l|r|r}
 \hline
   & power & effect\_size\\
 \hline
@@ -8631,7 +8643,7 @@ anova\_factor1 & 78.81 & 0.0413822\\
 
 \caption{\label{tab:unnamed-chunk-314}Exact ANOVA Result}
 \centering
-\begin{tabular}{l|r|r|r|r}
+\begin{tabular}[t]{l|r|r|r|r}
 \hline
   & power & partial\_eta\_squared & cohen\_f & non\_centrality\\
 \hline
@@ -8750,7 +8762,7 @@ factor1 & 79.37239 & 0.0347072 & 0.1896182 & 9.6\\
 
 \caption{\label{tab:unnamed-chunk-323}Simulated ANOVA Result}
 \centering
-\begin{tabular}{l|r|r}
+\begin{tabular}[t]{l|r|r}
 \hline
   & power & effect\_size\\
 \hline
@@ -8771,7 +8783,7 @@ anova\_factor1 & 94.61 & 0.0386982\\
 
 \caption{\label{tab:unnamed-chunk-325}Exact ANOVA Result}
 \centering
-\begin{tabular}{l|r|r|r|r}
+\begin{tabular}[t]{l|r|r|r|r}
 \hline
   & power & partial\_eta\_squared & cohen\_f & non\_centrality\\
 \hline
@@ -8884,7 +8896,7 @@ factor1 & 94.89169 & 0.034565 & 0.1892154 & 15.46667\\
 
 \caption{\label{tab:unnamed-chunk-334}Simulated ANOVA Result}
 \centering
-\begin{tabular}{l|r|r}
+\begin{tabular}[t]{l|r|r}
 \hline
   & power & effect\_size\\
 \hline
@@ -8905,7 +8917,7 @@ anova\_factor1 & 61.51 & 0.0335436\\
 
 \caption{\label{tab:unnamed-chunk-336}Exact ANOVA Result}
 \centering
-\begin{tabular}{l|r|r|r|r}
+\begin{tabular}[t]{l|r|r|r|r}
 \hline
   & power & partial\_eta\_squared & cohen\_f & non\_centrality\\
 \hline
@@ -8956,7 +8968,7 @@ We create the within design, and run the simulation
 
 \caption{\label{tab:unnamed-chunk-340}Simulated ANOVA Result}
 \centering
-\begin{tabular}{l|r|r}
+\begin{tabular}[t]{l|r|r}
 \hline
   & power & effect\_size\\
 \hline
@@ -8977,7 +8989,7 @@ anova\_speed & 95.25 & 0.1075912\\
 
 \caption{\label{tab:unnamed-chunk-342}Exact ANOVA Result}
 \centering
-\begin{tabular}{l|r|r|r|r}
+\begin{tabular}[t]{l|r|r|r|r}
 \hline
   & power & partial\_eta\_squared & cohen\_f & non\_centrality\\
 \hline
@@ -9133,7 +9145,7 @@ We create the 3-level repeated measures design, and run the simulation.
 
 \caption{\label{tab:unnamed-chunk-351}Simulated ANOVA Result}
 \centering
-\begin{tabular}{l|r|r}
+\begin{tabular}[t]{l|r|r}
 \hline
   & power & effect\_size\\
 \hline
@@ -9154,7 +9166,7 @@ anova\_SPEED & 98.37 & 0.1287432\\
 
 \caption{\label{tab:unnamed-chunk-353}Exact ANOVA Result}
 \centering
-\begin{tabular}{l|r|r|r|r}
+\begin{tabular}[t]{l|r|r|r|r}
 \hline
   & power & partial\_eta\_squared & cohen\_f & non\_centrality\\
 \hline
@@ -9167,7 +9179,6 @@ Again, this is similar to GPower for the ANOVA:
 
 \includegraphics{screenshots/gpower_4.png}
 
-\bibliography{book.bib,packages.bib,references.bib}
-
+  \bibliography{book.bib,packages.bib,references.bib}
 
 \end{document}
