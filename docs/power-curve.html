@@ -6,7 +6,7 @@
   <meta http-equiv="X-UA-Compatible" content="IE=edge" />
   <title>Chapter 10 Power Curve | Power Analysis with Superpower</title>
   <meta name="description" content="This is a book describing the capabilities of the Superpower R package." />
-  <meta name="generator" content="bookdown 0.10 and GitBook 2.6.7" />
+  <meta name="generator" content="bookdown 0.16 and GitBook 2.6.7" />
 
   <meta property="og:title" content="Chapter 10 Power Curve | Power Analysis with Superpower" />
   <meta property="og:type" content="book" />
@@ -24,15 +24,15 @@
 <meta name="author" content="Aaron R. Caldwell &amp; Daniël Lakens" />
 
 
-<meta name="date" content="2019-12-18" />
+<meta name="date" content="2019-12-30" />
 
   <meta name="viewport" content="width=device-width, initial-scale=1" />
   <meta name="apple-mobile-web-app-capable" content="yes" />
   <meta name="apple-mobile-web-app-status-bar-style" content="black" />
   
   
-<link rel="prev" href="analytic-power-functions.html">
-<link rel="next" href="appendix-1-direct-comparison-to-pwr2ppl.html">
+<link rel="prev" href="analytic-power-functions.html"/>
+<link rel="next" href="appendix-1-direct-comparison-to-pwr2ppl.html"/>
 <script src="libs/jquery-2.2.3/jquery.min.js"></script>
 <link href="libs/gitbook-2.6.7/css/style.css" rel="stylesheet" />
 <link href="libs/gitbook-2.6.7/css/plugin-table.css" rel="stylesheet" />
@@ -40,6 +40,9 @@
 <link href="libs/gitbook-2.6.7/css/plugin-highlight.css" rel="stylesheet" />
 <link href="libs/gitbook-2.6.7/css/plugin-search.css" rel="stylesheet" />
 <link href="libs/gitbook-2.6.7/css/plugin-fontsettings.css" rel="stylesheet" />
+<link href="libs/gitbook-2.6.7/css/plugin-clipboard.css" rel="stylesheet" />
+
+
 
 
 
@@ -51,28 +54,25 @@
 
 
 <style type="text/css">
-code.sourceCode > span { display: inline-block; line-height: 1.25; }
-code.sourceCode > span { color: inherit; text-decoration: inherit; }
-code.sourceCode > span:empty { height: 1.2em; }
+a.sourceLine { display: inline-block; line-height: 1.25; }
+a.sourceLine { pointer-events: none; color: inherit; text-decoration: inherit; }
+a.sourceLine:empty { height: 1.2em; }
 .sourceCode { overflow: visible; }
 code.sourceCode { white-space: pre; position: relative; }
-div.sourceCode { margin: 1em 0; }
 pre.sourceCode { margin: 0; }
 @media screen {
 div.sourceCode { overflow: auto; }
 }
 @media print {
 code.sourceCode { white-space: pre-wrap; }
-code.sourceCode > span { text-indent: -5em; padding-left: 5em; }
+a.sourceLine { text-indent: -1em; padding-left: 1em; }
 }
-pre.numberSource code
-  { counter-reset: source-line 0; }
-pre.numberSource code > span
-  { position: relative; left: -4em; counter-increment: source-line; }
-pre.numberSource code > span > a:first-child::before
-  { content: counter(source-line);
+pre.numberSource a.sourceLine
+  { position: relative; left: -4em; }
+pre.numberSource a.sourceLine::before
+  { content: attr(title);
     position: relative; left: -1em; text-align: right; vertical-align: baseline;
-    border: none; display: inline-block;
+    border: none; pointer-events: all; display: inline-block;
     -webkit-touch-callout: none; -webkit-user-select: none;
     -khtml-user-select: none; -moz-user-select: none;
     -ms-user-select: none; user-select: none;
@@ -81,9 +81,9 @@ pre.numberSource code > span > a:first-child::before
   }
 pre.numberSource { margin-left: 3em; border-left: 1px solid #aaaaaa;  padding-left: 4px; }
 div.sourceCode
-  {   }
+  {  }
 @media screen {
-code.sourceCode > span > a:first-child::before { text-decoration: underline; }
+a.sourceLine::before { text-decoration: underline; }
 }
 code span.al { color: #ff0000; font-weight: bold; } /* Alert */
 code span.an { color: #60a0b0; font-weight: bold; font-style: italic; } /* Annotation */
@@ -251,24 +251,24 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 <div id="power-curve" class="section level1">
 <h1><span class="header-section-number">Chapter 10</span> Power Curve</h1>
 <p>Power is calculated for a specific value of an effect size, alpha level, and sample size. Because you often do not know the true effect size, it often makes more sense to think of the power curve as a function of the size of the effect. Although power curves could be constructed from Monte Carlo simulations (<code>ANOVA_power</code>) the <code>plot_power</code> function utilizes the <code>ANOVA_exact</code> function within its code because these “exact” simulations are much faster. The basic approach is to calculate power for a specific pattern of means, a specific effect size, a given alpha level, and a specific pattern of correlations. This is one example:</p>
-<pre class="sourceCode r"><code class="sourceCode r"><span id="cb585-1"><a href="power-curve.html#cb585-1"></a><span class="co">#2x2 design</span></span>
-<span id="cb585-2"><a href="power-curve.html#cb585-2"></a>string =<span class="st"> &quot;2w*2w&quot;</span></span>
-<span id="cb585-3"><a href="power-curve.html#cb585-3"></a>mu =<span class="st"> </span><span class="kw">c</span>(<span class="dv">0</span>,<span class="dv">0</span>,<span class="dv">0</span>,<span class="fl">0.5</span>)</span>
-<span id="cb585-4"><a href="power-curve.html#cb585-4"></a>n &lt;-<span class="st"> </span><span class="dv">20</span></span>
-<span id="cb585-5"><a href="power-curve.html#cb585-5"></a>sd &lt;-<span class="st"> </span><span class="dv">1</span></span>
-<span id="cb585-6"><a href="power-curve.html#cb585-6"></a>r &lt;-<span class="st"> </span><span class="fl">0.5</span></span>
-<span id="cb585-7"><a href="power-curve.html#cb585-7"></a>labelnames =<span class="st"> </span><span class="kw">c</span>(<span class="st">&quot;A&quot;</span>, <span class="st">&quot;a1&quot;</span>, <span class="st">&quot;a2&quot;</span>, <span class="st">&quot;B&quot;</span>, <span class="st">&quot;b1&quot;</span>, <span class="st">&quot;b2&quot;</span>)</span>
-<span id="cb585-8"><a href="power-curve.html#cb585-8"></a></span>
-<span id="cb585-9"><a href="power-curve.html#cb585-9"></a>design_result &lt;-<span class="st"> </span><span class="kw">ANOVA_design</span>(<span class="dt">design =</span> string,</span>
-<span id="cb585-10"><a href="power-curve.html#cb585-10"></a>                              <span class="dt">n =</span> n, </span>
-<span id="cb585-11"><a href="power-curve.html#cb585-11"></a>                              <span class="dt">mu =</span> mu, </span>
-<span id="cb585-12"><a href="power-curve.html#cb585-12"></a>                              <span class="dt">sd =</span> sd, </span>
-<span id="cb585-13"><a href="power-curve.html#cb585-13"></a>                              <span class="dt">r =</span> r, </span>
-<span id="cb585-14"><a href="power-curve.html#cb585-14"></a>                              <span class="dt">labelnames =</span> labelnames)</span>
-<span id="cb585-15"><a href="power-curve.html#cb585-15"></a></span>
-<span id="cb585-16"><a href="power-curve.html#cb585-16"></a>exact_result &lt;-<span class="st"> </span><span class="kw">ANOVA_exact</span>(design_result,</span>
-<span id="cb585-17"><a href="power-curve.html#cb585-17"></a>                            <span class="dt">alpha_level =</span> alpha_level,</span>
-<span id="cb585-18"><a href="power-curve.html#cb585-18"></a>                            <span class="dt">verbose =</span> <span class="ot">FALSE</span>)</span></code></pre></div>
+<div class="sourceCode" id="cb585"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb585-1" title="1"><span class="co">#2x2 design</span></a>
+<a class="sourceLine" id="cb585-2" title="2">string =<span class="st"> &quot;2w*2w&quot;</span></a>
+<a class="sourceLine" id="cb585-3" title="3">mu =<span class="st"> </span><span class="kw">c</span>(<span class="dv">0</span>,<span class="dv">0</span>,<span class="dv">0</span>,<span class="fl">0.5</span>)</a>
+<a class="sourceLine" id="cb585-4" title="4">n &lt;-<span class="st"> </span><span class="dv">20</span></a>
+<a class="sourceLine" id="cb585-5" title="5">sd &lt;-<span class="st"> </span><span class="dv">1</span></a>
+<a class="sourceLine" id="cb585-6" title="6">r &lt;-<span class="st"> </span><span class="fl">0.5</span></a>
+<a class="sourceLine" id="cb585-7" title="7">labelnames =<span class="st"> </span><span class="kw">c</span>(<span class="st">&quot;A&quot;</span>, <span class="st">&quot;a1&quot;</span>, <span class="st">&quot;a2&quot;</span>, <span class="st">&quot;B&quot;</span>, <span class="st">&quot;b1&quot;</span>, <span class="st">&quot;b2&quot;</span>)</a>
+<a class="sourceLine" id="cb585-8" title="8"></a>
+<a class="sourceLine" id="cb585-9" title="9">design_result &lt;-<span class="st"> </span><span class="kw">ANOVA_design</span>(<span class="dt">design =</span> string,</a>
+<a class="sourceLine" id="cb585-10" title="10">                              <span class="dt">n =</span> n, </a>
+<a class="sourceLine" id="cb585-11" title="11">                              <span class="dt">mu =</span> mu, </a>
+<a class="sourceLine" id="cb585-12" title="12">                              <span class="dt">sd =</span> sd, </a>
+<a class="sourceLine" id="cb585-13" title="13">                              <span class="dt">r =</span> r, </a>
+<a class="sourceLine" id="cb585-14" title="14">                              <span class="dt">labelnames =</span> labelnames)</a>
+<a class="sourceLine" id="cb585-15" title="15"></a>
+<a class="sourceLine" id="cb585-16" title="16">exact_result &lt;-<span class="st"> </span><span class="kw">ANOVA_exact</span>(design_result,</a>
+<a class="sourceLine" id="cb585-17" title="17">                            <span class="dt">alpha_level =</span> alpha_level,</a>
+<a class="sourceLine" id="cb585-18" title="18">                            <span class="dt">verbose =</span> <span class="ot">FALSE</span>)</a></code></pre></div>
 <table class="table" style="margin-left: auto; margin-right: auto;">
 <caption>
 <span id="tab:unnamed-chunk-276">Table 10.1: </span>Exact ANOVA Result
@@ -347,9 +347,9 @@ A:B
 </table>
 <div style="page-break-after: always;"></div>
 <p>We can make these calculations for a range of sample sizes, to get a power curve. We created a simple function that performs these calculations across a range of sample sizes (from n = 3 to max_, a variable you can specify in the function).</p>
-<pre class="sourceCode r"><code class="sourceCode r"><span id="cb586-1"><a href="power-curve.html#cb586-1"></a>p_a &lt;-<span class="st"> </span><span class="kw">plot_power</span>(design_result,</span>
-<span id="cb586-2"><a href="power-curve.html#cb586-2"></a>                      <span class="dt">max_n =</span> <span class="dv">50</span>)</span>
-<span id="cb586-3"><a href="power-curve.html#cb586-3"></a>p_a<span class="op">$</span>plot_ANOVA</span></code></pre></div>
+<div class="sourceCode" id="cb586"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb586-1" title="1">p_a &lt;-<span class="st"> </span><span class="kw">plot_power</span>(design_result,</a>
+<a class="sourceLine" id="cb586-2" title="2">                      <span class="dt">max_n =</span> <span class="dv">50</span>)</a>
+<a class="sourceLine" id="cb586-3" title="3">p_a<span class="op">$</span>plot_ANOVA</a></code></pre></div>
 <p><img src="SuperpowerValidation_files/figure-html/unnamed-chunk-277-1.png" width="672" /></p>
 <p>If we run many of these <code>plot_power</code> functions across small changes in the ANOVA_design we can compile a number of power curves that can be combined into a single plot. We do this below. The code to reprodcue these plots can be found on the <a href="https://github.com/arcaldwell49/SuperpowerBook/tree/master/data">GitHub repository for this book</a>.
 </p>
@@ -373,7 +373,7 @@ A:B
 </div>
 <div id="increasing-correlation-in-on-factor-decreases-power-in-second-factor" class="section level2">
 <h2><span class="header-section-number">10.4</span> Increasing correlation in on factor decreases power in second factor</h2>
-<p>As <span class="citation">Potvin and Schutz (<a href="#ref-potvin2000statistical" role="doc-biblioref">2000</a>)</span> write:</p>
+<p>As <span class="citation">Potvin and Schutz (<a href="#ref-potvin2000statistical">2000</a>)</span> write:</p>
 <blockquote>
 <p>The more important finding with respect to the effect of <em>r</em> on power relates to the effect of the correlations associated with one factor on the power of the test of the main effect of the other factor. Specifically, if the correlations among the levels of B are larger than those within the AB matrix (i.e., <em>r</em>(B) - <em>r</em>(AB) &gt; 0.0), there is a reduction in the power for the test of the A effect (and the test on B is similarly affected by the A correlations).</p>
 </blockquote>
@@ -399,11 +399,13 @@ A:B
   </div>
 <script src="libs/gitbook-2.6.7/js/app.min.js"></script>
 <script src="libs/gitbook-2.6.7/js/lunr.js"></script>
+<script src="libs/gitbook-2.6.7/js/clipboard.min.js"></script>
 <script src="libs/gitbook-2.6.7/js/plugin-search.js"></script>
 <script src="libs/gitbook-2.6.7/js/plugin-sharing.js"></script>
 <script src="libs/gitbook-2.6.7/js/plugin-fontsettings.js"></script>
 <script src="libs/gitbook-2.6.7/js/plugin-bookdown.js"></script>
 <script src="libs/gitbook-2.6.7/js/jquery.highlight.js"></script>
+<script src="libs/gitbook-2.6.7/js/plugin-clipboard.js"></script>
 <script>
 gitbook.require(["gitbook"], function(gitbook) {
 gitbook.start({
@@ -411,12 +413,11 @@ gitbook.start({
 "github": false,
 "facebook": true,
 "twitter": true,
-"google": false,
 "linkedin": false,
 "weibo": false,
 "instapaper": false,
 "vk": false,
-"all": ["facebook", "google", "twitter", "linkedin", "weibo", "instapaper"]
+"all": ["facebook", "twitter", "linkedin", "weibo", "instapaper"]
 },
 "fontsettings": {
 "theme": "white",
@@ -428,6 +429,10 @@ gitbook.start({
 "text": null
 },
 "history": {
+"link": null,
+"text": null
+},
+"view": {
 "link": null,
 "text": null
 },
@@ -446,8 +451,9 @@ gitbook.start({
     script.type = "text/javascript";
     var src = "true";
     if (src === "" || src === "true") src = "https://mathjax.rstudio.com/latest/MathJax.js?config=TeX-MML-AM_CHTML";
-    if (location.protocol !== "file:" && /^https?:/.test(src))
-      src = src.replace(/^https?:/, '');
+    if (location.protocol !== "file:")
+      if (/^https?:/.test(src))
+        src = src.replace(/^https?:/, '');
     script.src = src;
     document.getElementsByTagName("head")[0].appendChild(script);
   })();
