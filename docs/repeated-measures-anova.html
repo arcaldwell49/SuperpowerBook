@@ -24,7 +24,7 @@
 <meta name="author" content="Aaron R. Caldwell &amp; Daniël Lakens" />
 
 
-<meta name="date" content="2019-12-30" />
+<meta name="date" content="2020-01-08" />
 
   <meta name="viewport" content="width=device-width, initial-scale=1" />
   <meta name="apple-mobile-web-app-capable" content="yes" />
@@ -1978,7 +1978,7 @@ power
 </div>
 <div id="multivariate-anova-manova" class="section level2">
 <h2><span class="header-section-number">3.6</span> Multivariate ANOVA (MANOVA)</h2>
-<p>A large proportion of research with within-subjects manipulations, or repeated measures, rely upon the “univariate” approach <span class="citation">(Maxwell, Delaney, and Kelley <a href="#ref-maxwell_designing_2004">2004</a>)</span>. While this approach is valid, when corrections for sphercity are applied, it may not be the most powerful or informative analysis plan. Instead, researchers should consider a multivariate analysis (MANOVA). While the MANOVA is not “assumption free” it does not assume sphercity which makes it a very attractive analytical tool and the preferred method of analysis for some [<span class="citation">Maxwell, Delaney, and Kelley (<a href="#ref-maxwell_designing_2004">2004</a>)</span>.</p>
+<p>A large proportion of research with within-subjects manipulations, or repeated measures, rely upon the “univariate” approach <span class="citation">(Maxwell, Delaney, and Kelley <a href="#ref-maxwell_designing_2004">2004</a>)</span>. While this approach is valid, when corrections for sphercity are applied, it may not be the most powerful or informative analysis plan. Instead, researchers should consider a multivariate analysis (MANOVA). While the MANOVA is not “assumption free” it does not assume sphercity which makes it a very attractive analytical tool and the preferred method of analysis for some situations [<span class="citation">Maxwell, Delaney, and Kelley (<a href="#ref-maxwell_designing_2004">2004</a>)</span>.</p>
 <p>For a simple one-way repeated measures design, there are some simple guidelines for power analysis set forth by <span class="citation">Maxwell, Delaney, and Kelley (<a href="#ref-maxwell_designing_2004">2004</a>)</span> (pg. 750). All that is needed in the effect size calculated as:
 <span class="math display">\[ d = \frac{\mu_{max}-\mu_{min}}{\sigma} \]</span>
 This assumes that each level has a common standard deviation (i.e., there is only 1 <code>sd</code> input for the design).</p>
@@ -2079,7 +2079,7 @@ a
 </div>
 <div id="sphericity-assumption" class="section level2">
 <h2><span class="header-section-number">3.7</span> Sphericity Assumption</h2>
-<p>In all the above examples, you will notice that the correlation is the sample between repeated measures. For most experiments in real life, this will not be the case. The correlations between levels may vary. This is problematic because the univariate (ANOVA) approach assumes sphericity, which means, for all intents and purposes, that the correlations between factor-levels are equal and the standard deviations at each level are equal as well. This assumption is tenuous at best and is typically “adjusted” for by applying a sphericity correction (e.g, Greenhouse-Geisser). How bad can it get? Well, let’s simulate an example below.</p>
+<p>In all the above examples, you will notice that the correlation is the same for all repeated measures. For most experiments in real life, this will not be the case. The correlations between levels may vary. This is problematic because the univariate (ANOVA) approach assumes sphericity, which means, for all intents and purposes, that the correlations between factor-levels are equal and the standard deviations at each level are equal as well. This assumption is tenuous at best and is typically “adjusted” for by applying a sphericity correction (e.g, Greenhouse-Geisser). How bad can it get? Well, let’s simulate an example below.</p>
 <div class="sourceCode" id="cb211"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb211-1" title="1">design_result &lt;-<span class="st"> </span><span class="kw">ANOVA_design</span>(<span class="st">&quot;4w&quot;</span>,</a>
 <a class="sourceLine" id="cb211-2" title="2">                              <span class="dt">n =</span> <span class="dv">29</span>,</a>
 <a class="sourceLine" id="cb211-3" title="3">                              <span class="dt">r =</span> <span class="kw">c</span>(.<span class="dv">05</span>,.<span class="dv">15</span>,.<span class="dv">25</span>,.<span class="dv">55</span>, <span class="fl">.65</span>, <span class="fl">.9</span></a>
