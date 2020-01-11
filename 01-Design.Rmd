@@ -8,11 +8,11 @@ Currently, this pacakge only provides power analysis for ANOVAs (and MANOVA for 
 Currently the `ANOVA_design` function can create designs with up to three factors, for both within, between, and mixed designs. It requires the following input: design, n, mu, sd, r, and optionally allows you to set labelnames. 
 
 1. `design`: string that specifies the design (see below).
-2. `n`: the sample size for each between subject condition.
+2. `n`: the sample size for each between subject condition. Can be specified as a single value (when all conditions have the same sample size), or as a vector of values specifying the sample size for each condition.
 3. `mu`: a vector with the means for each condition.
-4. `sd`: the population standard deviation. Assumes homogeneity of variances (only one standard deviation can be provided).
-5. `r`: the correlation(s) for within designs (or 0 for between designs).
-6. `labelnames`: This is an optonal vector of words that indicates factor names and level names (see below).
+4. `sd`: the population standard deviation. Assumes homogeneity of variances (only one standard deviation can be provided). Can be specified as a single value (when all conditions have the same standard deviation), or as a vector of values specifying the standard deviation for each condition.
+5. `r`: the correlation(s) for within designs (or 0 for between designs). Can be specified as a single value (when all pairs of variables have the same correlation), or as a correlation matrix specifying the correlation between each pair.
+6. `labelnames`: This is an optional vector of words that indicates factor names and level names (see below).
 7. A final optional setting is to specify if you want to automatically print a plot or not (`plot` = TRUE or FALSE)
 
 ### Specifying the design using `design`
@@ -101,7 +101,11 @@ The number of possible comparisons increases rapidly when adding factors and lev
 (((2 * 2 * 4) ^ 2) - (2 * 2 * 4))/2
 ```
 
-Each of these comparisons can have their own correlation if the factor is manipulated within subjects (if the factor is manipulated between subjects the correlation is 0). These correlations determine the covariance matrix. Potvin and Schutz (2000) surveyed statistical tools for power analysis and conclude that most software packages are limited to one factor repeated measure designs and do not provide power calculations for within designs with multiple factor (which is still true for software such as G*Power). Furthermore, software solutions which were available at the time (DATASIM by Bradley, Russel, & Reeve, 1996) required researchers to assume correlations were of the same magnitude for all within factors, which is not always realistic. If you do not want to assume equal correlations for all paired comparisons, you can specify the correlation for each possible comparison.  
+Each of these comparisons can have their own correlation if the factor is manipulated within subjects (if the factor is manipulated between subjects the correlation is 0). 
+These correlations determine the covariance matrix. 
+Potvin and Schutz (2000) surveyed statistical tools for power analysis and conclude that most software packages are limited to one factor repeated measure designs and do not provide power calculations for within designs with multiple factor (which is still true for software such as G*Power). 
+Furthermore, software solutions which were available at the time (DATASIM by Bradley, Russel, & Reeve, 1996) required researchers to assume correlations were of the same magnitude for all within factors, which is not always realistic. 
+If you do not want to assume equal correlations for all paired comparisons, you can specify the correlation for each possible comparison.  
 
 The order in which the correlations are entered in the vector should match the covariance matrix.
 The order for a 2x2 design is given in the 6 item list above. The general pattern is that the matrix is filled from top to bottom, and left to right, illustrated by the increasing correlations in the table below.
@@ -134,7 +138,7 @@ design_result <- ANOVA_design(design = "2w*2w",
                               plot = TRUE)
 ```
 \newpage
-We can check the correlation matrix by asking for it from the design_result object to check if it was entered the way we wanted:
+We can check the correlation matrix by printing it from the design_result object to check if it was entered the way we wanted:
 
 ```{r eval = FALSE}
 design_result$cor_mat
@@ -145,7 +149,7 @@ knitr::kable(design_result$cor_mat,
   kable_styling(latex_options = "hold_position")
 ```
 
-We should also check the covariance-variance matrix to ensure the `ANOVA_design` function working properly. 
+We should also check the covariance-variance matrix to ensure the `ANOVA_design` function is working properly. 
 The variance should be the diagonal element while the off-diagonal elements should be equal to `covariance = correlation*variance` or $cov_{x,y}=\frac{\sum_{i=1}^{N}(x_{i}-\bar{x})(y_{i}-\bar{y})}{N-1}$. 
 In this case, it is identical to the correlation matrix because the variance is equal to 1.
 
@@ -160,11 +164,17 @@ knitr::kable(design_result$sigmatrix,
 
 ### Specifying the sample size
 
-You can set the sample size **per condition** by setting a value for `n`. The assumption is that you will collect equal sample sizes in all conditions [expanding Superpower to allow different sample sizes in each group is a planned future option].
+You can set the sample size **per condition** by setting a value for `n`. 
+It is beneficial to have a fully balanced design (the same sample size in each condition) in case of any violations of assumptions (such as homogeneity of variances), but this might not always be possible in real life, and it can be more efficient to collect a larger sample size in some conditions (e.g., if the population from which other participants are drawn is more difficult to collect).
+Superpower allows you to enter a single value (the same sample size in each condition) or a vector of values (different sample sizes in each condition).
 
 This means for the `2w*2w` design above there is a total of 80 participants/subjects with a total of 320 observations.
+Instead of 80 participants in each condition, for a `2b*2b` between subjects design, we could also specify the sample size as `n = c(60, 80, 80, 60)` if we plan to collect 60 participants in 2 conditions and 80 participants in 2 other conditions.
 
 ### Specifying the standard deviation
 
-You can set the standard deviation(s) by setting a value of `sd`. Currently, `Superpower` allows you to **violate the assumption of homogeneity of variance**. This will affect the type I error rate if the differences in `sd` between conditions are extreme. Note that there is always some uncertainty in which values you can expect in the study you are planning. It is therefore useful to perform sensitivity analyses (e.g., running the simulation with the expected standard deviation, but also with more conservative or even worst-case-scenario values).
-
+You can set the standard deviation(s) by setting a value of `sd`. 
+You can enter either a single standard deviation for all conditions, or you can **violate the assumption of homogeneity of variance** by entering a vector with different standard deviations for each conditions (e.g., `sd = c(0.8, 1.2, 0.92, 1.12)` for a `2b*2b` design.
+Violation the homogeneity of variances assumption will affect the type I error rate if the differences in `sd` between conditions are extreme. 
+Note that there is always some uncertainty in which values you can expect in the study you are planning. 
+It is therefore useful to perform sensitivity analyses (e.g., running the simulation with the expected standard deviation, but also with more conservative or even worst-case-scenario values).

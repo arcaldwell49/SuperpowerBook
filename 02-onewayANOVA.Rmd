@@ -4,7 +4,7 @@ load("data/oneway_data.RData")
 ```
 
 
-## Part 1
+## Introduction
 
 Using the formula also used by @albers2018power, we can determine the means that should yield a specified effect sizes (expressed in Cohen's *f*). Eta-squared (identical to partial eta-squared for one-way ANOVA's) has benchmarks of .0099, .0588, and .1379 for small, medium, and large effect sizes [@cohen1988spa]. Athough these benchmarks are quite arbitrary, and researchers should only use such benchmarks for power analyses as a last resort, we will demonstrate an a priori power analysis for these values. 
 
@@ -29,7 +29,7 @@ design_result <- ANOVA_design(design = string,
                    labelnames = labelnames)
 alpha_level <- 0.05
 # You should think carefully about how to justify your alpha level.
-# We will give some examples later, but for now, use 0.05.
+# We will use 0.05 in most examples, but do not support using a 0.05 alpha level for all analyses.
 ```
 ```{r eval=FALSE, echo=TRUE}
 simulation_result <- ANOVA_power(design_result, 
@@ -60,8 +60,7 @@ knitr::kable(exact_result$main_results,
 ```
 
 
-
-The result shows that we have exactly the same power for the ANOVA, as we have for the *t*-test. When there are only two groups, these tests are mathematically identical. In a study with 100 participants, we would have quite low power (around 67.7%). An ANOVA with 2 groups is identical to a *t*-test. For our example, Cohen's d (the standardized mean difference) is 2.2/6.4, or d = 0.34375 for the difference between the control condition and pets, which we can use to easily compute the expected power for these simple comparisons using the `pwr` -@R-pwr package.
+The result shows that we have exactly the same power for the ANOVA (note: in the simulation, vallues will differ slightly, but with a large number of simulations, power estimates wil be identical), as we have for the *t*-test. When there are only two groups, these tests are mathematically identical. In a study with 100 participants, we would have quite low power (around 67.7%). An ANOVA with 2 groups is identical to a *t*-test. For our example, Cohen's d (the standardized mean difference) is 2.2/6.4, or d = 0.34375 for the difference between the control condition and pets, which we can use to easily compute the expected power for these simple comparisons using the `pwr` -@R-pwr package.
 
 ```{r}
 pwr.t.test(d = 2.2/6.4,
