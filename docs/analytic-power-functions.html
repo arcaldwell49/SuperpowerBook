@@ -1,12 +1,12 @@
 <!DOCTYPE html>
-<html xmlns="http://www.w3.org/1999/xhtml" lang="" xml:lang="">
+<html lang="" xml:lang="">
 <head>
 
   <meta charset="utf-8" />
   <meta http-equiv="X-UA-Compatible" content="IE=edge" />
   <title>Chapter 9 Analytic Power Functions | Power Analysis with Superpower</title>
   <meta name="description" content="This is a book describing the capabilities of the Superpower R package." />
-  <meta name="generator" content="bookdown 0.16 and GitBook 2.6.7" />
+  <meta name="generator" content="bookdown 0.17 and GitBook 2.6.7" />
 
   <meta property="og:title" content="Chapter 9 Analytic Power Functions | Power Analysis with Superpower" />
   <meta property="og:type" content="book" />
@@ -24,7 +24,7 @@
 <meta name="author" content="Aaron R. Caldwell &amp; Daniël Lakens" />
 
 
-<meta name="date" content="2020-01-08" />
+<meta name="date" content="2020-01-11" />
 
   <meta name="viewport" content="width=device-width, initial-scale=1" />
   <meta name="apple-mobile-web-app-capable" content="yes" />
@@ -54,9 +54,9 @@
 
 
 <style type="text/css">
-a.sourceLine { display: inline-block; line-height: 1.25; }
-a.sourceLine { pointer-events: none; color: inherit; text-decoration: inherit; }
-a.sourceLine:empty { height: 1.2em; }
+code.sourceCode > span { display: inline-block; line-height: 1.25; }
+code.sourceCode > span { color: inherit; text-decoration: inherit; }
+code.sourceCode > span:empty { height: 1.2em; }
 .sourceCode { overflow: visible; }
 code.sourceCode { white-space: pre; position: relative; }
 pre.sourceCode { margin: 0; }
@@ -65,14 +65,16 @@ div.sourceCode { overflow: auto; }
 }
 @media print {
 code.sourceCode { white-space: pre-wrap; }
-a.sourceLine { text-indent: -1em; padding-left: 1em; }
+code.sourceCode > span { text-indent: -5em; padding-left: 5em; }
 }
-pre.numberSource a.sourceLine
-  { position: relative; left: -4em; }
-pre.numberSource a.sourceLine::before
-  { content: attr(title);
+pre.numberSource code
+  { counter-reset: source-line 0; }
+pre.numberSource code > span
+  { position: relative; left: -4em; counter-increment: source-line; }
+pre.numberSource code > span > a:first-child::before
+  { content: counter(source-line);
     position: relative; left: -1em; text-align: right; vertical-align: baseline;
-    border: none; pointer-events: all; display: inline-block;
+    border: none; display: inline-block;
     -webkit-touch-callout: none; -webkit-user-select: none;
     -khtml-user-select: none; -moz-user-select: none;
     -ms-user-select: none; user-select: none;
@@ -81,9 +83,9 @@ pre.numberSource a.sourceLine::before
   }
 pre.numberSource { margin-left: 3em; border-left: 1px solid #aaaaaa;  padding-left: 4px; }
 div.sourceCode
-  {  }
+  {   }
 @media screen {
-a.sourceLine::before { text-decoration: underline; }
+code.sourceCode > span > a:first-child::before { text-decoration: underline; }
 }
 code span.al { color: #ff0000; font-weight: bold; } /* Alert */
 code span.an { color: #60a0b0; font-weight: bold; font-style: italic; } /* Annotation */
@@ -132,7 +134,10 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 <li><a href="./">Superpower</a></li>
 
 <li class="divider"></li>
-<li class="chapter" data-level="" data-path="index.html"><a href="index.html"><i class="fa fa-check"></i>Preface</a></li>
+<li class="chapter" data-level="" data-path="index.html"><a href="index.html"><i class="fa fa-check"></i>Preface</a><ul>
+<li class="chapter" data-level="" data-path="index.html"><a href="index.html#contributors"><i class="fa fa-check"></i>Contributors</a></li>
+<li class="chapter" data-level="" data-path="index.html"><a href="index.html#funding"><i class="fa fa-check"></i>Funding</a></li>
+</ul></li>
 <li class="chapter" data-level="1" data-path="the-experimental-design.html"><a href="the-experimental-design.html"><i class="fa fa-check"></i><b>1</b> The Experimental Design</a><ul>
 <li class="chapter" data-level="1.1" data-path="the-experimental-design.html"><a href="the-experimental-design.html#anova_design-function"><i class="fa fa-check"></i><b>1.1</b> ANOVA_design function</a><ul>
 <li class="chapter" data-level="1.1.1" data-path="the-experimental-design.html"><a href="the-experimental-design.html#specifying-the-design-using-design"><i class="fa fa-check"></i><b>1.1.1</b> Specifying the design using <code>design</code></a></li>
@@ -144,7 +149,7 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 </ul></li>
 </ul></li>
 <li class="chapter" data-level="2" data-path="one-way-anova.html"><a href="one-way-anova.html"><i class="fa fa-check"></i><b>2</b> One-Way ANOVA</a><ul>
-<li class="chapter" data-level="2.1" data-path="one-way-anova.html"><a href="one-way-anova.html#part-1"><i class="fa fa-check"></i><b>2.1</b> Part 1</a><ul>
+<li class="chapter" data-level="2.1" data-path="one-way-anova.html"><a href="one-way-anova.html#introduction"><i class="fa fa-check"></i><b>2.1</b> Introduction</a><ul>
 <li class="chapter" data-level="2.1.1" data-path="one-way-anova.html"><a href="one-way-anova.html#two-conditions"><i class="fa fa-check"></i><b>2.1.1</b> Two conditions</a></li>
 <li class="chapter" data-level="2.1.2" data-path="one-way-anova.html"><a href="one-way-anova.html#three-conditions"><i class="fa fa-check"></i><b>2.1.2</b> Three conditions</a></li>
 <li class="chapter" data-level="2.1.3" data-path="one-way-anova.html"><a href="one-way-anova.html#power-for-simple-effects"><i class="fa fa-check"></i><b>2.1.3</b> Power for simple effects</a></li>
@@ -156,7 +161,7 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 </ul></li>
 </ul></li>
 <li class="chapter" data-level="3" data-path="repeated-measures-anova.html"><a href="repeated-measures-anova.html"><i class="fa fa-check"></i><b>3</b> Repeated Measures ANOVA</a><ul>
-<li class="chapter" data-level="3.1" data-path="repeated-measures-anova.html"><a href="repeated-measures-anova.html#part-1-1"><i class="fa fa-check"></i><b>3.1</b> Part 1</a><ul>
+<li class="chapter" data-level="3.1" data-path="repeated-measures-anova.html"><a href="repeated-measures-anova.html#part-1"><i class="fa fa-check"></i><b>3.1</b> Part 1</a><ul>
 <li class="chapter" data-level="3.1.1" data-path="repeated-measures-anova.html"><a href="repeated-measures-anova.html#two-conditions-medium-effect-size"><i class="fa fa-check"></i><b>3.1.1</b> Two conditions, medium effect size</a></li>
 </ul></li>
 <li class="chapter" data-level="3.2" data-path="repeated-measures-anova.html"><a href="repeated-measures-anova.html#part-2"><i class="fa fa-check"></i><b>3.2</b> Part 2</a><ul>
@@ -172,9 +177,6 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 <li class="chapter" data-level="3.5.1" data-path="repeated-measures-anova.html"><a href="repeated-measures-anova.html#x2-anova-within-design"><i class="fa fa-check"></i><b>3.5.1</b> 2x2 ANOVA, within design</a></li>
 </ul></li>
 <li class="chapter" data-level="3.6" data-path="repeated-measures-anova.html"><a href="repeated-measures-anova.html#multivariate-anova-manova"><i class="fa fa-check"></i><b>3.6</b> Multivariate ANOVA (MANOVA)</a></li>
-<li class="chapter" data-level="3.7" data-path="repeated-measures-anova.html"><a href="repeated-measures-anova.html#sphericity-assumption"><i class="fa fa-check"></i><b>3.7</b> Sphericity Assumption</a><ul>
-<li class="chapter" data-level="3.7.1" data-path="repeated-measures-anova.html"><a href="repeated-measures-anova.html#manova-or-sphericity-adjustment"><i class="fa fa-check"></i><b>3.7.1</b> MANOVA or Sphericity Adjustment?</a></li>
-</ul></li>
 </ul></li>
 <li class="chapter" data-level="4" data-path="mixed-anova.html"><a href="mixed-anova.html"><i class="fa fa-check"></i><b>4</b> Mixed ANOVA</a><ul>
 <li class="chapter" data-level="4.1" data-path="mixed-anova.html"><a href="mixed-anova.html#simple-mixed-designs"><i class="fa fa-check"></i><b>4.1</b> Simple Mixed Designs</a></li>
@@ -200,33 +202,39 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 <li class="chapter" data-level="10.3" data-path="power-curve.html"><a href="power-curve.html#explore-increase-in-correlation-in-moderated-interactions."><i class="fa fa-check"></i><b>10.3</b> Explore increase in correlation in moderated interactions.</a></li>
 <li class="chapter" data-level="10.4" data-path="power-curve.html"><a href="power-curve.html#increasing-correlation-in-on-factor-decreases-power-in-second-factor"><i class="fa fa-check"></i><b>10.4</b> Increasing correlation in on factor decreases power in second factor</a></li>
 </ul></li>
+<li class="chapter" data-level="11" data-path="violations-of-assumptions.html"><a href="violations-of-assumptions.html"><i class="fa fa-check"></i><b>11</b> Violations of Assumptions</a><ul>
+<li class="chapter" data-level="11.1" data-path="violations-of-assumptions.html"><a href="violations-of-assumptions.html#violation-of-heterogeneity-assumption"><i class="fa fa-check"></i><b>11.1</b> Violation of Heterogeneity Assumption</a></li>
+<li class="chapter" data-level="11.2" data-path="violations-of-assumptions.html"><a href="violations-of-assumptions.html#violation-of-the-sphericity-assumption"><i class="fa fa-check"></i><b>11.2</b> Violation of the sphericity assumption</a><ul>
+<li class="chapter" data-level="11.2.1" data-path="violations-of-assumptions.html"><a href="violations-of-assumptions.html#manova-or-sphericity-adjustment"><i class="fa fa-check"></i><b>11.2.1</b> MANOVA or Sphericity Adjustment?</a></li>
+</ul></li>
+</ul></li>
 <li class="chapter" data-level="" data-path="appendix-1-direct-comparison-to-pwr2ppl.html"><a href="appendix-1-direct-comparison-to-pwr2ppl.html"><i class="fa fa-check"></i>Appendix 1: Direct Comparison to pwr2ppl</a><ul>
-<li class="chapter" data-level="10.5" data-path="appendix-1-direct-comparison-to-pwr2ppl.html"><a href="appendix-1-direct-comparison-to-pwr2ppl.html#examples-from-chapter-5"><i class="fa fa-check"></i><b>10.5</b> Examples from Chapter 5</a><ul>
-<li class="chapter" data-level="10.5.1" data-path="appendix-1-direct-comparison-to-pwr2ppl.html"><a href="appendix-1-direct-comparison-to-pwr2ppl.html#example-5.15.2"><i class="fa fa-check"></i><b>10.5.1</b> Example 5.1/5.2</a></li>
-<li class="chapter" data-level="10.5.2" data-path="appendix-1-direct-comparison-to-pwr2ppl.html"><a href="appendix-1-direct-comparison-to-pwr2ppl.html#example-5.3"><i class="fa fa-check"></i><b>10.5.2</b> Example 5.3</a></li>
+<li class="chapter" data-level="11.3" data-path="appendix-1-direct-comparison-to-pwr2ppl.html"><a href="appendix-1-direct-comparison-to-pwr2ppl.html#examples-from-chapter-5"><i class="fa fa-check"></i><b>11.3</b> Examples from Chapter 5</a><ul>
+<li class="chapter" data-level="11.3.1" data-path="appendix-1-direct-comparison-to-pwr2ppl.html"><a href="appendix-1-direct-comparison-to-pwr2ppl.html#example-5.15.2"><i class="fa fa-check"></i><b>11.3.1</b> Example 5.1/5.2</a></li>
+<li class="chapter" data-level="11.3.2" data-path="appendix-1-direct-comparison-to-pwr2ppl.html"><a href="appendix-1-direct-comparison-to-pwr2ppl.html#example-5.3"><i class="fa fa-check"></i><b>11.3.2</b> Example 5.3</a></li>
 </ul></li>
-<li class="chapter" data-level="10.6" data-path="appendix-1-direct-comparison-to-pwr2ppl.html"><a href="appendix-1-direct-comparison-to-pwr2ppl.html#examples-from-chapter-6"><i class="fa fa-check"></i><b>10.6</b> Examples from Chapter 6</a><ul>
-<li class="chapter" data-level="10.6.1" data-path="appendix-1-direct-comparison-to-pwr2ppl.html"><a href="appendix-1-direct-comparison-to-pwr2ppl.html#example-from-table-6.2"><i class="fa fa-check"></i><b>10.6.1</b> Example from Table 6.2</a></li>
-<li class="chapter" data-level="10.6.2" data-path="appendix-1-direct-comparison-to-pwr2ppl.html"><a href="appendix-1-direct-comparison-to-pwr2ppl.html#example-from-table-6.6"><i class="fa fa-check"></i><b>10.6.2</b> Example from Table 6.6</a></li>
-<li class="chapter" data-level="10.6.3" data-path="appendix-1-direct-comparison-to-pwr2ppl.html"><a href="appendix-1-direct-comparison-to-pwr2ppl.html#example-from-table-6.8"><i class="fa fa-check"></i><b>10.6.3</b> Example from Table 6.8</a></li>
+<li class="chapter" data-level="11.4" data-path="appendix-1-direct-comparison-to-pwr2ppl.html"><a href="appendix-1-direct-comparison-to-pwr2ppl.html#examples-from-chapter-6"><i class="fa fa-check"></i><b>11.4</b> Examples from Chapter 6</a><ul>
+<li class="chapter" data-level="11.4.1" data-path="appendix-1-direct-comparison-to-pwr2ppl.html"><a href="appendix-1-direct-comparison-to-pwr2ppl.html#example-from-table-6.2"><i class="fa fa-check"></i><b>11.4.1</b> Example from Table 6.2</a></li>
+<li class="chapter" data-level="11.4.2" data-path="appendix-1-direct-comparison-to-pwr2ppl.html"><a href="appendix-1-direct-comparison-to-pwr2ppl.html#example-from-table-6.6"><i class="fa fa-check"></i><b>11.4.2</b> Example from Table 6.6</a></li>
+<li class="chapter" data-level="11.4.3" data-path="appendix-1-direct-comparison-to-pwr2ppl.html"><a href="appendix-1-direct-comparison-to-pwr2ppl.html#example-from-table-6.8"><i class="fa fa-check"></i><b>11.4.3</b> Example from Table 6.8</a></li>
 </ul></li>
-<li class="chapter" data-level="10.7" data-path="appendix-1-direct-comparison-to-pwr2ppl.html"><a href="appendix-1-direct-comparison-to-pwr2ppl.html#example-from-chapter-7"><i class="fa fa-check"></i><b>10.7</b> Example from Chapter 7</a><ul>
-<li class="chapter" data-level="10.7.1" data-path="appendix-1-direct-comparison-to-pwr2ppl.html"><a href="appendix-1-direct-comparison-to-pwr2ppl.html#from-table-7.2"><i class="fa fa-check"></i><b>10.7.1</b> From Table 7.2</a></li>
+<li class="chapter" data-level="11.5" data-path="appendix-1-direct-comparison-to-pwr2ppl.html"><a href="appendix-1-direct-comparison-to-pwr2ppl.html#example-from-chapter-7"><i class="fa fa-check"></i><b>11.5</b> Example from Chapter 7</a><ul>
+<li class="chapter" data-level="11.5.1" data-path="appendix-1-direct-comparison-to-pwr2ppl.html"><a href="appendix-1-direct-comparison-to-pwr2ppl.html#from-table-7.2"><i class="fa fa-check"></i><b>11.5.1</b> From Table 7.2</a></li>
+</ul></li>
+</ul></li>
+<li class="chapter" data-level="" data-path="appendix-3-comparison-to-brysbaert.html"><a href="appendix-3-comparison-to-brysbaert.html"><i class="fa fa-check"></i>Appendix 3: Comparison to Brysbaert</a><ul>
+<li class="chapter" data-level="11.6" data-path="appendix-3-comparison-to-brysbaert.html"><a href="appendix-3-comparison-to-brysbaert.html#one-way-anova-1"><i class="fa fa-check"></i><b>11.6</b> One-Way ANOVA</a><ul>
+<li class="chapter" data-level="11.6.1" data-path="appendix-3-comparison-to-brysbaert.html"><a href="appendix-3-comparison-to-brysbaert.html#three-conditions-replication"><i class="fa fa-check"></i><b>11.6.1</b> Three conditions replication</a></li>
+<li class="chapter" data-level="11.6.2" data-path="appendix-3-comparison-to-brysbaert.html"><a href="appendix-3-comparison-to-brysbaert.html#variation-1"><i class="fa fa-check"></i><b>11.6.2</b> Variation 1</a></li>
+<li class="chapter" data-level="11.6.3" data-path="appendix-3-comparison-to-brysbaert.html"><a href="appendix-3-comparison-to-brysbaert.html#three-conditions-replication-1"><i class="fa fa-check"></i><b>11.6.3</b> Three conditions replication</a></li>
+<li class="chapter" data-level="11.6.4" data-path="appendix-3-comparison-to-brysbaert.html"><a href="appendix-3-comparison-to-brysbaert.html#variation-2"><i class="fa fa-check"></i><b>11.6.4</b> Variation 2</a></li>
+<li class="chapter" data-level="11.6.5" data-path="appendix-3-comparison-to-brysbaert.html"><a href="appendix-3-comparison-to-brysbaert.html#three-conditions-replication-2"><i class="fa fa-check"></i><b>11.6.5</b> Three conditions replication</a></li>
+</ul></li>
+<li class="chapter" data-level="11.7" data-path="appendix-3-comparison-to-brysbaert.html"><a href="appendix-3-comparison-to-brysbaert.html#repeated-measures"><i class="fa fa-check"></i><b>11.7</b> Repeated Measures</a><ul>
+<li class="chapter" data-level="11.7.1" data-path="appendix-3-comparison-to-brysbaert.html"><a href="appendix-3-comparison-to-brysbaert.html#reproducing-brysbaert-variation-1-changing-correlation"><i class="fa fa-check"></i><b>11.7.1</b> Reproducing Brysbaert Variation 1: Changing Correlation</a></li>
 </ul></li>
 </ul></li>
 <li class="chapter" data-level="" data-path="appendix-2-direct-comparison-to-morepower.html"><a href="appendix-2-direct-comparison-to-morepower.html"><i class="fa fa-check"></i>Appendix 2: Direct Comparison to MOREpower</a></li>
-<li class="chapter" data-level="" data-path="appendix-3-comparison-to-brysbaert.html"><a href="appendix-3-comparison-to-brysbaert.html"><i class="fa fa-check"></i>Appendix 3: Comparison to Brysbaert</a><ul>
-<li class="chapter" data-level="10.8" data-path="appendix-3-comparison-to-brysbaert.html"><a href="appendix-3-comparison-to-brysbaert.html#one-way-anova-1"><i class="fa fa-check"></i><b>10.8</b> One-Way ANOVA</a><ul>
-<li class="chapter" data-level="10.8.1" data-path="appendix-3-comparison-to-brysbaert.html"><a href="appendix-3-comparison-to-brysbaert.html#three-conditions-replication"><i class="fa fa-check"></i><b>10.8.1</b> Three conditions replication</a></li>
-<li class="chapter" data-level="10.8.2" data-path="appendix-3-comparison-to-brysbaert.html"><a href="appendix-3-comparison-to-brysbaert.html#variation-1"><i class="fa fa-check"></i><b>10.8.2</b> Variation 1</a></li>
-<li class="chapter" data-level="10.8.3" data-path="appendix-3-comparison-to-brysbaert.html"><a href="appendix-3-comparison-to-brysbaert.html#three-conditions-replication-1"><i class="fa fa-check"></i><b>10.8.3</b> Three conditions replication</a></li>
-<li class="chapter" data-level="10.8.4" data-path="appendix-3-comparison-to-brysbaert.html"><a href="appendix-3-comparison-to-brysbaert.html#variation-2"><i class="fa fa-check"></i><b>10.8.4</b> Variation 2</a></li>
-<li class="chapter" data-level="10.8.5" data-path="appendix-3-comparison-to-brysbaert.html"><a href="appendix-3-comparison-to-brysbaert.html#three-conditions-replication-2"><i class="fa fa-check"></i><b>10.8.5</b> Three conditions replication</a></li>
-</ul></li>
-<li class="chapter" data-level="10.9" data-path="appendix-3-comparison-to-brysbaert.html"><a href="appendix-3-comparison-to-brysbaert.html#repeated-measures"><i class="fa fa-check"></i><b>10.9</b> Repeated Measures</a><ul>
-<li class="chapter" data-level="10.9.1" data-path="appendix-3-comparison-to-brysbaert.html"><a href="appendix-3-comparison-to-brysbaert.html#reproducing-brysbaert-variation-1-changing-correlation"><i class="fa fa-check"></i><b>10.9.1</b> Reproducing Brysbaert Variation 1: Changing Correlation</a></li>
-</ul></li>
-</ul></li>
 <li class="chapter" data-level="" data-path="references.html"><a href="references.html"><i class="fa fa-check"></i>References</a></li>
 <li class="divider"></li>
 <li><a href="https://github.com/rstudio/bookdown" target="blank">Published with bookdown</a></li>
@@ -254,27 +262,24 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 <div id="one-way-between-subjects-anova" class="section level2">
 <h2><span class="header-section-number">9.1</span> One-Way Between Subjects ANOVA</h2>
 <p>First, we can setup a one-way design with four levels, and perform a exact simulation power analysis with the <code>ANOVA_exact</code> function.</p>
-<div class="sourceCode" id="cb560"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb560-1" title="1">string &lt;-<span class="st"> &quot;4b&quot;</span></a>
-<a class="sourceLine" id="cb560-2" title="2">n &lt;-<span class="st"> </span><span class="dv">60</span></a>
-<a class="sourceLine" id="cb560-3" title="3">mu &lt;-<span class="st"> </span><span class="kw">c</span>(<span class="dv">80</span>, <span class="dv">82</span>, <span class="dv">82</span>, <span class="dv">86</span>) </a>
-<a class="sourceLine" id="cb560-4" title="4"><span class="co">#All means are equal - so there is no real difference.</span></a>
-<a class="sourceLine" id="cb560-5" title="5"><span class="co"># Enter means in the order that matches the labels below.</span></a>
-<a class="sourceLine" id="cb560-6" title="6">sd &lt;-<span class="st"> </span><span class="dv">10</span></a>
-<a class="sourceLine" id="cb560-7" title="7">labelnames &lt;-<span class="st"> </span><span class="kw">c</span>(<span class="st">&quot;Factor_A&quot;</span>, <span class="st">&quot;a1&quot;</span>, <span class="st">&quot;a2&quot;</span>, <span class="st">&quot;a3&quot;</span>, <span class="st">&quot;a4&quot;</span>) </a>
-<a class="sourceLine" id="cb560-8" title="8"><span class="co"># the label names should be in the order of the means specified above.</span></a>
-<a class="sourceLine" id="cb560-9" title="9">design_result &lt;-<span class="st"> </span><span class="kw">ANOVA_design</span>(<span class="dt">design =</span> string,</a>
-<a class="sourceLine" id="cb560-10" title="10">                   <span class="dt">n =</span> n, </a>
-<a class="sourceLine" id="cb560-11" title="11">                   <span class="dt">mu =</span> mu, </a>
-<a class="sourceLine" id="cb560-12" title="12">                   <span class="dt">sd =</span> sd, </a>
-<a class="sourceLine" id="cb560-13" title="13">                   <span class="dt">labelnames =</span> labelnames)</a>
-<a class="sourceLine" id="cb560-14" title="14"></a>
-<a class="sourceLine" id="cb560-15" title="15"></a>
-<a class="sourceLine" id="cb560-16" title="16">exact_result &lt;-<span class="st"> </span><span class="kw">ANOVA_exact</span>(design_result,</a>
-<a class="sourceLine" id="cb560-17" title="17">                            <span class="dt">alpha_level =</span> alpha_level,</a>
-<a class="sourceLine" id="cb560-18" title="18">                            <span class="dt">verbose =</span> <span class="ot">FALSE</span>)</a></code></pre></div>
+<div class="sourceCode" id="cb551"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb551-1"><a href="analytic-power-functions.html#cb551-1"></a>string &lt;-<span class="st"> &quot;4b&quot;</span></span>
+<span id="cb551-2"><a href="analytic-power-functions.html#cb551-2"></a>n &lt;-<span class="st"> </span><span class="dv">60</span></span>
+<span id="cb551-3"><a href="analytic-power-functions.html#cb551-3"></a>mu &lt;-<span class="st"> </span><span class="kw">c</span>(<span class="dv">80</span>, <span class="dv">82</span>, <span class="dv">82</span>, <span class="dv">86</span>) </span>
+<span id="cb551-4"><a href="analytic-power-functions.html#cb551-4"></a><span class="co">#All means are equal - so there is no real difference.</span></span>
+<span id="cb551-5"><a href="analytic-power-functions.html#cb551-5"></a><span class="co"># Enter means in the order that matches the labels below.</span></span>
+<span id="cb551-6"><a href="analytic-power-functions.html#cb551-6"></a>sd &lt;-<span class="st"> </span><span class="dv">10</span></span>
+<span id="cb551-7"><a href="analytic-power-functions.html#cb551-7"></a>design_result &lt;-<span class="st"> </span><span class="kw">ANOVA_design</span>(<span class="dt">design =</span> string,</span>
+<span id="cb551-8"><a href="analytic-power-functions.html#cb551-8"></a>                   <span class="dt">n =</span> n, </span>
+<span id="cb551-9"><a href="analytic-power-functions.html#cb551-9"></a>                   <span class="dt">mu =</span> mu, </span>
+<span id="cb551-10"><a href="analytic-power-functions.html#cb551-10"></a>                   <span class="dt">sd =</span> sd)</span>
+<span id="cb551-11"><a href="analytic-power-functions.html#cb551-11"></a></span>
+<span id="cb551-12"><a href="analytic-power-functions.html#cb551-12"></a></span>
+<span id="cb551-13"><a href="analytic-power-functions.html#cb551-13"></a>exact_result &lt;-<span class="st"> </span><span class="kw">ANOVA_exact</span>(design_result,</span>
+<span id="cb551-14"><a href="analytic-power-functions.html#cb551-14"></a>                            <span class="dt">alpha_level =</span> alpha_level,</span>
+<span id="cb551-15"><a href="analytic-power-functions.html#cb551-15"></a>                            <span class="dt">verbose =</span> <span class="ot">FALSE</span>)</span></code></pre></div>
 <table class="table" style="margin-left: auto; margin-right: auto;">
 <caption>
-<span id="tab:unnamed-chunk-263">Table 9.1: </span>Exact ANOVA Result
+<span id="tab:unnamed-chunk-246">Table 9.1: </span>Exact ANOVA Result
 </caption>
 <thead>
 <tr>
@@ -297,7 +302,7 @@ non_centrality
 <tbody>
 <tr>
 <td style="text-align:left;">
-Factor_A
+a
 </td>
 <td style="text-align:right;">
 81.21291
@@ -315,20 +320,20 @@ Factor_A
 </tbody>
 </table>
 <p>We can also calculate power analytically with a <code>Superpower</code> function.</p>
-<div class="sourceCode" id="cb561"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb561-1" title="1"><span class="co">#using default alpha level of .05</span></a>
-<a class="sourceLine" id="cb561-2" title="2"><span class="kw">power_oneway_between</span>(design_result)<span class="op">$</span>power </a></code></pre></div>
+<div class="sourceCode" id="cb552"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb552-1"><a href="analytic-power-functions.html#cb552-1"></a><span class="co">#using default alpha level of .05</span></span>
+<span id="cb552-2"><a href="analytic-power-functions.html#cb552-2"></a><span class="kw">power_oneway_between</span>(design_result)<span class="op">$</span>power </span></code></pre></div>
 <pre><code>## [1] 81.21291</code></pre>
-<p>This is a generalized function for one-way ANOVA’s for any number of groups. It is in part based on code from the <code>pwr2ppl</code> <span class="citation">(Aberson <a href="#ref-R-pwr2ppl">2019</a>)</span> package (but Aberson’s code allows for different n per condition, and different sd per condition).</p>
-<div class="sourceCode" id="cb563"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb563-1" title="1">pwr2ppl<span class="op">::</span><span class="kw">anova1f_4</span>(<span class="dt">m1 =</span> <span class="dv">80</span>, <span class="dt">m2 =</span> <span class="dv">82</span>, <span class="dt">m3 =</span> <span class="dv">82</span>, <span class="dt">m4 =</span> <span class="dv">86</span>,</a>
-<a class="sourceLine" id="cb563-2" title="2">          <span class="dt">s1 =</span> <span class="dv">10</span>, <span class="dt">s2 =</span> <span class="dv">10</span>, <span class="dt">s3 =</span> <span class="dv">10</span>, <span class="dt">s4 =</span> <span class="dv">10</span>,</a>
-<a class="sourceLine" id="cb563-3" title="3">          <span class="dt">n1 =</span> <span class="dv">60</span>, <span class="dt">n2 =</span> <span class="dv">60</span>, <span class="dt">n3 =</span> <span class="dv">60</span>, <span class="dt">n4 =</span> <span class="dv">60</span>,</a>
-<a class="sourceLine" id="cb563-4" title="4">          <span class="dt">alpha =</span> <span class="fl">.05</span>)</a></code></pre></div>
+<p>This is a generalized function for one-way ANOVA’s for any number of groups. It is in part based on code from the <code>pwr2ppl</code> <span class="citation">(Aberson <a href="#ref-R-pwr2ppl" role="doc-biblioref">2019</a>)</span> package (but Aberson’s code allows for different n per condition, and different sd per condition).</p>
+<div class="sourceCode" id="cb554"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb554-1"><a href="analytic-power-functions.html#cb554-1"></a>pwr2ppl<span class="op">::</span><span class="kw">anova1f_4</span>(<span class="dt">m1 =</span> <span class="dv">80</span>, <span class="dt">m2 =</span> <span class="dv">82</span>, <span class="dt">m3 =</span> <span class="dv">82</span>, <span class="dt">m4 =</span> <span class="dv">86</span>,</span>
+<span id="cb554-2"><a href="analytic-power-functions.html#cb554-2"></a>          <span class="dt">s1 =</span> <span class="dv">10</span>, <span class="dt">s2 =</span> <span class="dv">10</span>, <span class="dt">s3 =</span> <span class="dv">10</span>, <span class="dt">s4 =</span> <span class="dv">10</span>,</span>
+<span id="cb554-3"><a href="analytic-power-functions.html#cb554-3"></a>          <span class="dt">n1 =</span> <span class="dv">60</span>, <span class="dt">n2 =</span> <span class="dv">60</span>, <span class="dt">n3 =</span> <span class="dv">60</span>, <span class="dt">n4 =</span> <span class="dv">60</span>,</span>
+<span id="cb554-4"><a href="analytic-power-functions.html#cb554-4"></a>          <span class="dt">alpha =</span> <span class="fl">.05</span>)</span></code></pre></div>
 <pre><code>## Power  = 0.812 for eta-squared = 0.05</code></pre>
-<p>We can also use the function in the <code>pwr</code> package <span class="citation">(Champely <a href="#ref-R-pwr">2018</a>)</span>. Note that we need to calculate <em>f</em> to use this function, which is based on the means and sd, as illustrated in the formulas above.</p>
-<div class="sourceCode" id="cb565"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb565-1" title="1">pwr<span class="op">::</span><span class="kw">pwr.anova.test</span>(<span class="dt">n =</span> <span class="dv">60</span>,</a>
-<a class="sourceLine" id="cb565-2" title="2">               <span class="dt">k =</span> <span class="dv">4</span>,</a>
-<a class="sourceLine" id="cb565-3" title="3">               <span class="dt">f =</span> <span class="fl">0.2179449</span>,</a>
-<a class="sourceLine" id="cb565-4" title="4">               <span class="dt">sig.level =</span> <span class="fl">0.05</span>)</a></code></pre></div>
+<p>We can also use the function in the <code>pwr</code> package <span class="citation">(Champely <a href="#ref-R-pwr" role="doc-biblioref">2018</a>)</span>. Note that we need to calculate <em>f</em> to use this function, which is based on the means and sd, as illustrated in the formulas above.</p>
+<div class="sourceCode" id="cb556"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb556-1"><a href="analytic-power-functions.html#cb556-1"></a>pwr<span class="op">::</span><span class="kw">pwr.anova.test</span>(<span class="dt">n =</span> <span class="dv">60</span>,</span>
+<span id="cb556-2"><a href="analytic-power-functions.html#cb556-2"></a>               <span class="dt">k =</span> <span class="dv">4</span>,</span>
+<span id="cb556-3"><a href="analytic-power-functions.html#cb556-3"></a>               <span class="dt">f =</span> <span class="fl">0.2179449</span>,</span>
+<span id="cb556-4"><a href="analytic-power-functions.html#cb556-4"></a>               <span class="dt">sig.level =</span> <span class="fl">0.05</span>)</span></code></pre></div>
 <pre><code>## 
 ##      Balanced one-way analysis of variance power calculation 
 ## 
@@ -339,34 +344,29 @@ Factor_A
 ##           power = 0.8121289
 ## 
 ## NOTE: n is number in each group</code></pre>
-<p>Finally, G*Power <span class="citation">(Faul et al. <a href="#ref-faul2007g">2007</a>)</span> provides the option to calculate <code>f</code> from the means, sd and n for the cells. It can then be used to calculate power.</p>
+<p>Finally, G*Power <span class="citation">(Faul et al. <a href="#ref-faul2007g" role="doc-biblioref">2007</a>)</span> provides the option to calculate <code>f</code> from the means, sd and n for the cells. It can then be used to calculate power.</p>
 <p><img src="screenshots/gpower_13.png" /></p>
 </div>
 <div id="two-way-between-subject-interaction" class="section level2">
 <h2><span class="header-section-number">9.2</span> Two-way Between Subject Interaction</h2>
 <p>Now, we will setup a 2x2 between-subject ANOVA.</p>
-<div class="sourceCode" id="cb567"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb567-1" title="1">string &lt;-<span class="st"> &quot;2b*2b&quot;</span></a>
-<a class="sourceLine" id="cb567-2" title="2">n &lt;-<span class="st"> </span><span class="dv">20</span></a>
-<a class="sourceLine" id="cb567-3" title="3">mu &lt;-<span class="st"> </span><span class="kw">c</span>(<span class="dv">20</span>, <span class="dv">20</span>, <span class="dv">20</span>, <span class="dv">25</span>) </a>
-<a class="sourceLine" id="cb567-4" title="4"><span class="co"># Enter means in the order that matches the labels below.</span></a>
-<a class="sourceLine" id="cb567-5" title="5">sd &lt;-<span class="st"> </span><span class="dv">5</span></a>
-<a class="sourceLine" id="cb567-6" title="6">labelnames &lt;-<span class="st"> </span><span class="kw">c</span>(<span class="st">&quot;A&quot;</span>, <span class="st">&quot;a1&quot;</span>, <span class="st">&quot;a2&quot;</span>, <span class="st">&quot;B&quot;</span>, <span class="st">&quot;b1&quot;</span>, <span class="st">&quot;b2&quot;</span>) </a>
-<a class="sourceLine" id="cb567-7" title="7"><span class="co"># the label names should be in the order of the means specified above.</span></a>
-<a class="sourceLine" id="cb567-8" title="8"></a>
-<a class="sourceLine" id="cb567-9" title="9">design_result &lt;-<span class="st"> </span><span class="kw">ANOVA_design</span>(<span class="dt">design =</span> string,</a>
-<a class="sourceLine" id="cb567-10" title="10">                   <span class="dt">n =</span> n, </a>
-<a class="sourceLine" id="cb567-11" title="11">                   <span class="dt">mu =</span> mu, </a>
-<a class="sourceLine" id="cb567-12" title="12">                   <span class="dt">sd =</span> sd, </a>
-<a class="sourceLine" id="cb567-13" title="13">                   <span class="dt">labelnames =</span> labelnames)</a>
-<a class="sourceLine" id="cb567-14" title="14"></a>
-<a class="sourceLine" id="cb567-15" title="15"></a>
-<a class="sourceLine" id="cb567-16" title="16"></a>
-<a class="sourceLine" id="cb567-17" title="17">exact_result &lt;-<span class="st"> </span><span class="kw">ANOVA_exact</span>(design_result,</a>
-<a class="sourceLine" id="cb567-18" title="18">                            <span class="dt">alpha_level =</span> alpha_level,</a>
-<a class="sourceLine" id="cb567-19" title="19">                            <span class="dt">verbose =</span> <span class="ot">FALSE</span>)</a></code></pre></div>
+<div class="sourceCode" id="cb558"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb558-1"><a href="analytic-power-functions.html#cb558-1"></a>string &lt;-<span class="st"> &quot;2b*2b&quot;</span></span>
+<span id="cb558-2"><a href="analytic-power-functions.html#cb558-2"></a>n &lt;-<span class="st"> </span><span class="dv">20</span></span>
+<span id="cb558-3"><a href="analytic-power-functions.html#cb558-3"></a>mu &lt;-<span class="st"> </span><span class="kw">c</span>(<span class="dv">20</span>, <span class="dv">20</span>, <span class="dv">20</span>, <span class="dv">25</span>) </span>
+<span id="cb558-4"><a href="analytic-power-functions.html#cb558-4"></a><span class="co"># Enter means in the order that matches the labels below.</span></span>
+<span id="cb558-5"><a href="analytic-power-functions.html#cb558-5"></a>sd &lt;-<span class="st"> </span><span class="dv">5</span></span>
+<span id="cb558-6"><a href="analytic-power-functions.html#cb558-6"></a></span>
+<span id="cb558-7"><a href="analytic-power-functions.html#cb558-7"></a>design_result &lt;-<span class="st"> </span><span class="kw">ANOVA_design</span>(<span class="dt">design =</span> string,</span>
+<span id="cb558-8"><a href="analytic-power-functions.html#cb558-8"></a>                   <span class="dt">n =</span> n, </span>
+<span id="cb558-9"><a href="analytic-power-functions.html#cb558-9"></a>                   <span class="dt">mu =</span> mu, </span>
+<span id="cb558-10"><a href="analytic-power-functions.html#cb558-10"></a>                   <span class="dt">sd =</span> sd)</span>
+<span id="cb558-11"><a href="analytic-power-functions.html#cb558-11"></a></span>
+<span id="cb558-12"><a href="analytic-power-functions.html#cb558-12"></a>exact_result &lt;-<span class="st"> </span><span class="kw">ANOVA_exact</span>(design_result,</span>
+<span id="cb558-13"><a href="analytic-power-functions.html#cb558-13"></a>                            <span class="dt">alpha_level =</span> alpha_level,</span>
+<span id="cb558-14"><a href="analytic-power-functions.html#cb558-14"></a>                            <span class="dt">verbose =</span> <span class="ot">FALSE</span>)</span></code></pre></div>
 <table class="table" style="margin-left: auto; margin-right: auto;">
 <caption>
-<span id="tab:unnamed-chunk-268">Table 9.2: </span>Exact ANOVA Result
+<span id="tab:unnamed-chunk-251">Table 9.2: </span>Exact ANOVA Result
 </caption>
 <thead>
 <tr>
@@ -389,7 +389,7 @@ non_centrality
 <tbody>
 <tr>
 <td style="text-align:left;">
-A
+a
 </td>
 <td style="text-align:right;">
 59.78655
@@ -406,7 +406,7 @@ A
 </tr>
 <tr>
 <td style="text-align:left;">
-B
+b
 </td>
 <td style="text-align:right;">
 59.78655
@@ -423,7 +423,7 @@ B
 </tr>
 <tr>
 <td style="text-align:left;">
-A:B
+a:b
 </td>
 <td style="text-align:right;">
 59.78655
@@ -441,29 +441,29 @@ A:B
 </tbody>
 </table>
 <p>Now, let’s use the analytic function <code>power_twoway_between</code>.</p>
-<div class="sourceCode" id="cb568"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb568-1" title="1"><span class="co">#using default alpha level of .05</span></a>
-<a class="sourceLine" id="cb568-2" title="2">power_res &lt;-<span class="st"> </span><span class="kw">power_twoway_between</span>(design_result) </a>
-<a class="sourceLine" id="cb568-3" title="3">power_res<span class="op">$</span>power_A</a></code></pre></div>
+<div class="sourceCode" id="cb559"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb559-1"><a href="analytic-power-functions.html#cb559-1"></a><span class="co">#using default alpha level of .05</span></span>
+<span id="cb559-2"><a href="analytic-power-functions.html#cb559-2"></a>power_res &lt;-<span class="st"> </span><span class="kw">power_twoway_between</span>(design_result) </span>
+<span id="cb559-3"><a href="analytic-power-functions.html#cb559-3"></a>power_res<span class="op">$</span>power_A</span></code></pre></div>
 <pre><code>## [1] 59.78655</code></pre>
-<div class="sourceCode" id="cb570"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb570-1" title="1">power_res<span class="op">$</span>power_B</a></code></pre></div>
+<div class="sourceCode" id="cb561"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb561-1"><a href="analytic-power-functions.html#cb561-1"></a>power_res<span class="op">$</span>power_B</span></code></pre></div>
 <pre><code>## [1] 59.78655</code></pre>
-<div class="sourceCode" id="cb572"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb572-1" title="1">power_res<span class="op">$</span>power_AB</a></code></pre></div>
+<div class="sourceCode" id="cb563"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb563-1"><a href="analytic-power-functions.html#cb563-1"></a>power_res<span class="op">$</span>power_AB</span></code></pre></div>
 <pre><code>## [1] 59.78655</code></pre>
-<p>We can compare these results to <span class="citation">(Aberson <a href="#ref-R-pwr2ppl">2019</a>)</span>, as well.</p>
-<div class="sourceCode" id="cb574"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb574-1" title="1">pwr2ppl<span class="op">::</span><span class="kw">anova2x2</span>(<span class="dt">m1.1 =</span> <span class="dv">20</span>,</a>
-<a class="sourceLine" id="cb574-2" title="2">         <span class="dt">m1.2 =</span> <span class="dv">20</span>,</a>
-<a class="sourceLine" id="cb574-3" title="3">         <span class="dt">m2.1 =</span> <span class="dv">20</span>,</a>
-<a class="sourceLine" id="cb574-4" title="4">         <span class="dt">m2.2 =</span> <span class="dv">25</span>,</a>
-<a class="sourceLine" id="cb574-5" title="5">         <span class="dt">s1.1 =</span> <span class="dv">5</span>,</a>
-<a class="sourceLine" id="cb574-6" title="6">         <span class="dt">s1.2 =</span> <span class="dv">5</span>,</a>
-<a class="sourceLine" id="cb574-7" title="7">         <span class="dt">s2.1 =</span> <span class="dv">5</span>,</a>
-<a class="sourceLine" id="cb574-8" title="8">         <span class="dt">s2.2 =</span> <span class="dv">5</span>,</a>
-<a class="sourceLine" id="cb574-9" title="9">         <span class="dt">n1.1 =</span> <span class="dv">20</span>,</a>
-<a class="sourceLine" id="cb574-10" title="10">         <span class="dt">n1.2 =</span> <span class="dv">20</span>,</a>
-<a class="sourceLine" id="cb574-11" title="11">         <span class="dt">n2.1 =</span> <span class="dv">20</span>,</a>
-<a class="sourceLine" id="cb574-12" title="12">         <span class="dt">n2.2 =</span> <span class="dv">20</span>,</a>
-<a class="sourceLine" id="cb574-13" title="13">         <span class="dt">alpha =</span> <span class="fl">.05</span>,</a>
-<a class="sourceLine" id="cb574-14" title="14">         <span class="dt">all =</span> <span class="st">&quot;OFF&quot;</span>)</a></code></pre></div>
+<p>We can compare these results to <span class="citation">(Aberson <a href="#ref-R-pwr2ppl" role="doc-biblioref">2019</a>)</span>, as well.</p>
+<div class="sourceCode" id="cb565"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb565-1"><a href="analytic-power-functions.html#cb565-1"></a>pwr2ppl<span class="op">::</span><span class="kw">anova2x2</span>(<span class="dt">m1.1 =</span> <span class="dv">20</span>,</span>
+<span id="cb565-2"><a href="analytic-power-functions.html#cb565-2"></a>         <span class="dt">m1.2 =</span> <span class="dv">20</span>,</span>
+<span id="cb565-3"><a href="analytic-power-functions.html#cb565-3"></a>         <span class="dt">m2.1 =</span> <span class="dv">20</span>,</span>
+<span id="cb565-4"><a href="analytic-power-functions.html#cb565-4"></a>         <span class="dt">m2.2 =</span> <span class="dv">25</span>,</span>
+<span id="cb565-5"><a href="analytic-power-functions.html#cb565-5"></a>         <span class="dt">s1.1 =</span> <span class="dv">5</span>,</span>
+<span id="cb565-6"><a href="analytic-power-functions.html#cb565-6"></a>         <span class="dt">s1.2 =</span> <span class="dv">5</span>,</span>
+<span id="cb565-7"><a href="analytic-power-functions.html#cb565-7"></a>         <span class="dt">s2.1 =</span> <span class="dv">5</span>,</span>
+<span id="cb565-8"><a href="analytic-power-functions.html#cb565-8"></a>         <span class="dt">s2.2 =</span> <span class="dv">5</span>,</span>
+<span id="cb565-9"><a href="analytic-power-functions.html#cb565-9"></a>         <span class="dt">n1.1 =</span> <span class="dv">20</span>,</span>
+<span id="cb565-10"><a href="analytic-power-functions.html#cb565-10"></a>         <span class="dt">n1.2 =</span> <span class="dv">20</span>,</span>
+<span id="cb565-11"><a href="analytic-power-functions.html#cb565-11"></a>         <span class="dt">n2.1 =</span> <span class="dv">20</span>,</span>
+<span id="cb565-12"><a href="analytic-power-functions.html#cb565-12"></a>         <span class="dt">n2.2 =</span> <span class="dv">20</span>,</span>
+<span id="cb565-13"><a href="analytic-power-functions.html#cb565-13"></a>         <span class="dt">alpha =</span> <span class="fl">.05</span>,</span>
+<span id="cb565-14"><a href="analytic-power-functions.html#cb565-14"></a>         <span class="dt">all =</span> <span class="st">&quot;OFF&quot;</span>)</span></code></pre></div>
 <pre><code>## Power for Main Effect Factor A = 0.598</code></pre>
 <pre><code>## Power for Main Effect Factor B = 0.598</code></pre>
 <pre><code>## Power for Interaction AxB = 0.598</code></pre>
@@ -471,28 +471,24 @@ A:B
 <div id="x3-between-subject-anova" class="section level2">
 <h2><span class="header-section-number">9.3</span> 3x3 Between Subject ANOVA</h2>
 <p>We can extend this function to a two-way design with 3 levels.</p>
-<div class="sourceCode" id="cb578"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb578-1" title="1">string &lt;-<span class="st"> &quot;3b*3b&quot;</span></a>
-<a class="sourceLine" id="cb578-2" title="2">n &lt;-<span class="st"> </span><span class="dv">20</span></a>
-<a class="sourceLine" id="cb578-3" title="3"><span class="co">#All means are equal - so there is no real difference.</span></a>
-<a class="sourceLine" id="cb578-4" title="4">mu &lt;-<span class="st"> </span><span class="kw">c</span>(<span class="dv">20</span>, <span class="dv">20</span>, <span class="dv">20</span>, <span class="dv">20</span>, <span class="dv">20</span>, <span class="dv">20</span>, <span class="dv">20</span>, <span class="dv">20</span>, <span class="dv">25</span>) </a>
-<a class="sourceLine" id="cb578-5" title="5"><span class="co"># Enter means in the order that matches the labels below.</span></a>
-<a class="sourceLine" id="cb578-6" title="6">sd &lt;-<span class="st"> </span><span class="dv">5</span></a>
-<a class="sourceLine" id="cb578-7" title="7">labelnames &lt;-<span class="st"> </span><span class="kw">c</span>(<span class="st">&quot;Factor_A&quot;</span>, <span class="st">&quot;a1&quot;</span>, <span class="st">&quot;a2&quot;</span>, <span class="st">&quot;a3&quot;</span>, <span class="st">&quot;Factor_B&quot;</span>, <span class="st">&quot;b1&quot;</span>, <span class="st">&quot;b2&quot;</span>, <span class="st">&quot;b3&quot;</span>) </a>
-<a class="sourceLine" id="cb578-8" title="8"><span class="co"># the label names should be in the order of the means specified above.</span></a>
-<a class="sourceLine" id="cb578-9" title="9">design_result &lt;-<span class="st"> </span><span class="kw">ANOVA_design</span>(<span class="dt">design =</span> string,</a>
-<a class="sourceLine" id="cb578-10" title="10">                   <span class="dt">n =</span> n, </a>
-<a class="sourceLine" id="cb578-11" title="11">                   <span class="dt">mu =</span> mu, </a>
-<a class="sourceLine" id="cb578-12" title="12">                   <span class="dt">sd =</span> sd, </a>
-<a class="sourceLine" id="cb578-13" title="13">                   <span class="dt">labelnames =</span> labelnames)</a>
-<a class="sourceLine" id="cb578-14" title="14"></a>
-<a class="sourceLine" id="cb578-15" title="15"></a>
-<a class="sourceLine" id="cb578-16" title="16"></a>
-<a class="sourceLine" id="cb578-17" title="17">exact_result &lt;-<span class="st"> </span><span class="kw">ANOVA_exact</span>(design_result,</a>
-<a class="sourceLine" id="cb578-18" title="18">                            <span class="dt">alpha_level =</span> alpha_level,</a>
-<a class="sourceLine" id="cb578-19" title="19">                            <span class="dt">verbose =</span> <span class="ot">FALSE</span>)</a></code></pre></div>
+<div class="sourceCode" id="cb569"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb569-1"><a href="analytic-power-functions.html#cb569-1"></a>string &lt;-<span class="st"> &quot;3b*3b&quot;</span></span>
+<span id="cb569-2"><a href="analytic-power-functions.html#cb569-2"></a>n &lt;-<span class="st"> </span><span class="dv">20</span></span>
+<span id="cb569-3"><a href="analytic-power-functions.html#cb569-3"></a><span class="co">#All means are equal - so there is no real difference.</span></span>
+<span id="cb569-4"><a href="analytic-power-functions.html#cb569-4"></a>mu &lt;-<span class="st"> </span><span class="kw">c</span>(<span class="dv">20</span>, <span class="dv">20</span>, <span class="dv">20</span>, <span class="dv">20</span>, <span class="dv">20</span>, <span class="dv">20</span>, <span class="dv">20</span>, <span class="dv">20</span>, <span class="dv">25</span>) </span>
+<span id="cb569-5"><a href="analytic-power-functions.html#cb569-5"></a><span class="co"># Enter means in the order that matches the labels below.</span></span>
+<span id="cb569-6"><a href="analytic-power-functions.html#cb569-6"></a>sd &lt;-<span class="st"> </span><span class="dv">5</span></span>
+<span id="cb569-7"><a href="analytic-power-functions.html#cb569-7"></a></span>
+<span id="cb569-8"><a href="analytic-power-functions.html#cb569-8"></a>design_result &lt;-<span class="st"> </span><span class="kw">ANOVA_design</span>(<span class="dt">design =</span> string,</span>
+<span id="cb569-9"><a href="analytic-power-functions.html#cb569-9"></a>                   <span class="dt">n =</span> n, </span>
+<span id="cb569-10"><a href="analytic-power-functions.html#cb569-10"></a>                   <span class="dt">mu =</span> mu, </span>
+<span id="cb569-11"><a href="analytic-power-functions.html#cb569-11"></a>                   <span class="dt">sd =</span> sd)</span>
+<span id="cb569-12"><a href="analytic-power-functions.html#cb569-12"></a></span>
+<span id="cb569-13"><a href="analytic-power-functions.html#cb569-13"></a>exact_result &lt;-<span class="st"> </span><span class="kw">ANOVA_exact</span>(design_result,</span>
+<span id="cb569-14"><a href="analytic-power-functions.html#cb569-14"></a>                            <span class="dt">alpha_level =</span> alpha_level,</span>
+<span id="cb569-15"><a href="analytic-power-functions.html#cb569-15"></a>                            <span class="dt">verbose =</span> <span class="ot">FALSE</span>)</span></code></pre></div>
 <table class="table" style="margin-left: auto; margin-right: auto;">
 <caption>
-<span id="tab:unnamed-chunk-272">Table 9.3: </span>Exact ANOVA Result
+<span id="tab:unnamed-chunk-255">Table 9.3: </span>Exact ANOVA Result
 </caption>
 <thead>
 <tr>
@@ -515,7 +511,7 @@ non_centrality
 <tbody>
 <tr>
 <td style="text-align:left;">
-Factor_A
+a
 </td>
 <td style="text-align:right;">
 44.86306
@@ -532,7 +528,7 @@ Factor_A
 </tr>
 <tr>
 <td style="text-align:left;">
-Factor_B
+b
 </td>
 <td style="text-align:right;">
 44.86306
@@ -549,7 +545,7 @@ Factor_B
 </tr>
 <tr>
 <td style="text-align:left;">
-Factor_A:Factor_B
+a:b
 </td>
 <td style="text-align:right;">
 64.34127
@@ -566,13 +562,13 @@ Factor_A:Factor_B
 </tr>
 </tbody>
 </table>
-<div class="sourceCode" id="cb579"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb579-1" title="1"><span class="co">#using default alpha level of .05</span></a>
-<a class="sourceLine" id="cb579-2" title="2">power_res &lt;-<span class="st"> </span><span class="kw">power_twoway_between</span>(design_result) </a>
-<a class="sourceLine" id="cb579-3" title="3">power_res<span class="op">$</span>power_A</a></code></pre></div>
+<div class="sourceCode" id="cb570"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb570-1"><a href="analytic-power-functions.html#cb570-1"></a><span class="co">#using default alpha level of .05</span></span>
+<span id="cb570-2"><a href="analytic-power-functions.html#cb570-2"></a>power_res &lt;-<span class="st"> </span><span class="kw">power_twoway_between</span>(design_result) </span>
+<span id="cb570-3"><a href="analytic-power-functions.html#cb570-3"></a>power_res<span class="op">$</span>power_A</span></code></pre></div>
 <pre><code>## [1] 44.86306</code></pre>
-<div class="sourceCode" id="cb581"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb581-1" title="1">power_res<span class="op">$</span>power_B</a></code></pre></div>
+<div class="sourceCode" id="cb572"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb572-1"><a href="analytic-power-functions.html#cb572-1"></a>power_res<span class="op">$</span>power_B</span></code></pre></div>
 <pre><code>## [1] 44.86306</code></pre>
-<div class="sourceCode" id="cb583"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb583-1" title="1">power_res<span class="op">$</span>power_AB</a></code></pre></div>
+<div class="sourceCode" id="cb574"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb574-1"><a href="analytic-power-functions.html#cb574-1"></a>power_res<span class="op">$</span>power_AB</span></code></pre></div>
 <pre><code>## [1] 64.34127</code></pre>
 
 </div>
