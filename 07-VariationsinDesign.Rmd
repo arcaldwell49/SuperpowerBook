@@ -1,5 +1,5 @@
 # Effect of Varying Designs on Power
-```{r}
+```{r  echo=FALSE}
 load("data/variation_data.RData")
 ```
 Researchers might consider what the effects on the statistical power of their design is, when they add participants. Participants can be added to an additional condition, or to the existing design. 
@@ -9,7 +9,6 @@ In a one-way ANOVA adding a condition means, for example, going from a 1x2 to a 
 ```{r variations_in_design}
 string <- "2b"
 n <- 50
-#All means are equal - so there is no real difference.
 mu <- c(80, 86) 
 sd <- 10
 labelnames <- c("Condition", "control", "intensive_training") 
@@ -63,20 +62,15 @@ plot_power(design_result, max_n = 100)
 ```{r}
 string <- "3b"
 n <- 50
-mu <-
-c(80, 83, 86) #All means are equal - so there is no real difference.
+mu <- c(80, 83, 86)
 sd <- 10
-labelnames <-
-c("Condition",
-"control",
-"light_training",
-"intensive_training")
+labelnames <- c("Condition", "control", "light_training", "intensive_training")
 design_result <- ANOVA_design(
-design = string,
-n = n,
-mu = mu,
-sd = sd,
-labelnames = labelnames
+  design = string,
+  n = n,
+  mu = mu,
+  sd = sd,
+  labelnames = labelnames
 )
 # Power for the given N in the design_result
 power_oneway_between(design_result)$power
@@ -107,20 +101,15 @@ plot_power(design_result, max_n = 100)
 ```{r}
 string <- "3b"
 n <- 50
-mu <-
-c(80, 80, 86) #All means are equal - so there is no real difference.
+mu <- c(80, 80, 86)
 sd <- 10
-labelnames <-
-c("Condition",
-"control",
-"light_training",
-"intensive_training")
+labelnames <- c("Condition", "control", "light_training", "intensive_training")
 design_result <- ANOVA_design(
-design = string,
-n = n,
-mu = mu,
-sd = sd,
-labelnames = labelnames
+  design = string,
+  n = n,
+  mu = mu,
+  sd = sd,
+  labelnames = labelnames
 )
 
 # Power for the given N in the design_result
@@ -145,9 +134,7 @@ It helps to think of these different designs in terms of either partial eta-squa
 mu <- c(80, 86)
 sd = 10
 n <- 50 #sample size per condition
-mean_mat <- t(matrix(mu,
-nrow = 2,
-ncol = 1)) #Create a mean matrix
+mean_mat <- t(matrix(mu, nrow = 2, ncol = 1)) #Create a mean matrix
 # Using the sweep function to remove rowmeans from the matrix
 mean_mat_res <- sweep(mean_mat, 2, rowMeans(mean_mat))
 mean_mat_res
@@ -169,9 +156,7 @@ Cohen_f
 mu <- c(80, 83, 86)
 sd = 10
 n <- 50
-mean_mat <- t(matrix(mu,
-nrow = 3,
-ncol = 1)) #Create a mean matrix
+mean_mat <- t(matrix(mu, nrow = 3, ncol = 1)) #Create a mean matrix
 # Using the sweep function to remove rowmeans from the matrix
 mean_mat_res <- sweep(mean_mat, 2, rowMeans(mean_mat))
 mean_mat_res
@@ -200,9 +185,7 @@ We already saw that adding a condition that has a mean as extreme as one of the 
 mu <- c(80, 80, 86)
 sd = 10
 n <- 50
-mean_mat <- t(matrix(mu,
-nrow = 3,
-ncol = 1)) #Create a mean matrix
+mean_mat <- t(matrix(mu, nrow = 3, ncol = 1)) #Create a mean matrix
 # Using the sweep function to remove rowmeans from the matrix
 mean_mat_res <- sweep(mean_mat, 2, rowMeans(mean_mat))
 mean_mat_res
@@ -231,16 +214,15 @@ Now imagine our design described above was a within design. The means and sd rem
 ```{r}
 string <- "2w"
 n <- 50
-mu <-
-c(80, 86) #All means are equal - so there is no real difference.
+mu <- c(80, 86)
 sd <- 10
 labelnames <- c("Condition", "control", "intensive_training") #
 design_result <- ANOVA_design(
-design = string,
-n = n,
-mu = mu,
-sd = sd,
-labelnames = labelnames
+  design = string,
+  n = n,
+  mu = mu,
+  sd = sd,
+  labelnames = labelnames
 )
 
 power_oneway_within(design_result)$power
@@ -263,21 +245,15 @@ We see power is ever so slightly less than for the between subject design. This 
 ```{r}
 string <- "3w"
 n <- 50
-mu <-
-c(80, 83, 86) #All means are equal - so there is no real difference.
+mu <- c(80, 83, 86)
 sd <- 10
-labelnames <-
-c("Condition",
-"control",
-"light_training",
-"intensive_training") #
-
+labelnames <- c("Condition", "control", "light_training", "intensive_training")
 design_result <- ANOVA_design(
-design = string,
-n = n,
-mu = mu,
-sd = sd,
-labelnames = labelnames
+  design = string,
+  n = n,
+  mu = mu,
+  sd = sd,
+  labelnames = labelnames
 )
 
 power_oneway_within(design_result)$power
@@ -302,16 +278,13 @@ n <- 30
 sd <- 10
 r <- 0.5
 string <- "2w"
-mu <- c(0, 5) #All means are equal - so there is no real difference.
-labelnames <- c("Factor_A", "a1", "a2") #
-design_result <-
-ANOVA_design(
-design = string,
-n = n,
-mu = mu,
-sd = sd,
-r = r,
-labelnames = labelnames
+mu <- c(0, 5) 
+design_result <- ANOVA_design(
+  design = string,
+  n = n,
+  mu = mu,
+  sd = sd,
+  r = r
 )
 
 power_oneway_within(design_result)$power
@@ -321,18 +294,14 @@ power_oneway_within(design_result)$lambda
 power_oneway_within(design_result)$F_critical
 
 string <- "3w"
-mu <-
-c(0, 0, 5) #All means are equal - so there is no real difference.
-labelnames <- c("Factor_A", "a1", "a2", "a3") 
+mu <- c(0, 0, 5)
 
-design_result <-
-ANOVA_design(
-design = string,
-n = n,
-mu = mu,
-sd = sd,
-r = r,
-labelnames = labelnames
+design_result <- ANOVA_design(
+  design = string,
+  n = n,
+  mu = mu,
+  sd = sd,
+  r = r
 )
 
 power_oneway_within(design_result)$power
@@ -342,17 +311,13 @@ power_oneway_within(design_result)$lambda
 power_oneway_within(design_result)$F_critical
 
 string <- "4w"
-mu <-
-c(0, 0, 0, 5) #All means are equal - so there is no real difference.
-labelnames <- c("Factor_A", "a1", "a2", "a3", "a4") #
-design_result <-
-ANOVA_design(
-design = string,
-n = n,
-mu = mu,
-sd = sd,
-r = r,
-labelnames = labelnames
+mu <- c(0, 0, 0, 5)
+design_result <- ANOVA_design(
+  design = string,
+  n = n,
+  mu = mu,
+  sd = sd,
+  r = r
 )
 
 power_oneway_within(design_result)$power
@@ -362,19 +327,14 @@ power_oneway_within(design_result)$lambda
 power_oneway_within(design_result)$F_critical
 
 string <- "5w"
-mu <-
-c(0, 0, 0, 0, 5) 
-#All means are equal - so there is no real difference.
-labelnames <- c("Factor_A", "a1", "a2", "a3", "a4", "a5") 
+mu <- c(0, 0, 0, 0, 5) 
 
-design_result <-
-ANOVA_design(
-design = string,
-n = n,
-mu = mu,
-sd = sd,
-r = r,
-labelnames = labelnames
+design_result <- ANOVA_design(
+  design = string,
+  n = n,
+  mu = mu,
+  sd = sd,
+  r = r
 )
 power_oneway_within(design_result)$power
 power_oneway_within(design_result)$Cohen_f
@@ -384,16 +344,12 @@ power_oneway_within(design_result)$F_critical
 
 string <- "6w"
 mu <- c(0, 0, 0, 0, 0, 5) 
-#All means are equal - so there is no real difference.
-labelnames <- c("Factor_A", "a1", "a2", "a3", "a4", "a5", "a6") #
-design_result <-
-ANOVA_design(
-design = string,
-n = n,
-mu = mu,
-sd = sd,
-r = r,
-labelnames = labelnames
+design_result <- ANOVA_design(
+  design = string,
+  n = n,
+  mu = mu,
+  sd = sd,
+  r = r
 )
 power_oneway_within(design_result)$power
 power_oneway_within(design_result)$Cohen_f
@@ -403,17 +359,12 @@ power_oneway_within(design_result)$F_critical
 
 string <- "7w"
 mu <- c(0, 0, 0, 0, 0, 0, 5) 
-#All means are equal - so there is no real difference.
-labelnames <- c("Factor_A", "a1", "a2", "a3",
-                "a4", "a5", "a6", "a7") 
-design_result <-
-ANOVA_design(
-design = string,
-n = n,
-mu = mu,
-sd = sd,
-r = r,
-labelnames = labelnames
+design_result <- ANOVA_design(
+  design = string,
+  n = n,
+  mu = mu,
+  sd = sd,
+  r = r
 )
 
 power_oneway_within(design_result)$power
@@ -423,6 +374,11 @@ power_oneway_within(design_result)$lambda
 power_oneway_within(design_result)$F_critical
 ```
 
-This set of designs where we increase the number of conditions demonstrates a common pattern where the power initially increases, but then starts to decrease. Again, the exact pattern (and when the power starts to decrease) depends on the effect size and sample size. Note also that the effect size (Cohen's f) decreases as we add conditions, but the increased sample size compensates for this when calculating power. When using power analysis software such as GPower [@faul2007g], this is important to realize. You can't just power for a medium effect size, and then keep adding conditions under the assumption that the increased power you see in the program will become a reality. Increasing the number of conditions will reduce the effect size, and therefore, adding conditions will not automatically increase power (and might even decrease it). 
+This set of designs where we increase the number of conditions demonstrates a common pattern where the power initially increases, but then starts to decrease. 
+Again, the exact pattern (and when the power starts to decrease) depends on the effect size and sample size. 
+Note also that the effect size (Cohen's f) decreases as we add conditions, but the increased sample size compensates for this when calculating power. 
+When using power analysis software such as GPower [@faul2007g], this is important to realize. 
+You can't just power for a medium effect size, and then keep adding conditions under the assumption that the increased power you see in the program will become a reality.
+Increasing the number of conditions will reduce the effect size, and therefore, adding conditions will not automatically increase power (and might even decrease it). 
 
 Overall, the effect of adding conditions with an effect close to the grand mean reduces power quite strongly, and adding conditions with means close to the extreme of the current conditions will either slightly increase of decrease power.

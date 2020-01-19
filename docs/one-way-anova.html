@@ -1,12 +1,12 @@
 <!DOCTYPE html>
-<html xmlns="http://www.w3.org/1999/xhtml" lang="" xml:lang="">
+<html lang="" xml:lang="">
 <head>
 
   <meta charset="utf-8" />
   <meta http-equiv="X-UA-Compatible" content="IE=edge" />
   <title>Chapter 2 One-Way ANOVA | Power Analysis with Superpower</title>
   <meta name="description" content="This is a book describing the capabilities of the Superpower R package." />
-  <meta name="generator" content="bookdown 0.16 and GitBook 2.6.7" />
+  <meta name="generator" content="bookdown 0.17 and GitBook 2.6.7" />
 
   <meta property="og:title" content="Chapter 2 One-Way ANOVA | Power Analysis with Superpower" />
   <meta property="og:type" content="book" />
@@ -24,7 +24,7 @@
 <meta name="author" content="Aaron R. Caldwell &amp; Daniël Lakens" />
 
 
-<meta name="date" content="2020-01-08" />
+<meta name="date" content="2020-01-11" />
 
   <meta name="viewport" content="width=device-width, initial-scale=1" />
   <meta name="apple-mobile-web-app-capable" content="yes" />
@@ -54,9 +54,9 @@
 
 
 <style type="text/css">
-a.sourceLine { display: inline-block; line-height: 1.25; }
-a.sourceLine { pointer-events: none; color: inherit; text-decoration: inherit; }
-a.sourceLine:empty { height: 1.2em; }
+code.sourceCode > span { display: inline-block; line-height: 1.25; }
+code.sourceCode > span { color: inherit; text-decoration: inherit; }
+code.sourceCode > span:empty { height: 1.2em; }
 .sourceCode { overflow: visible; }
 code.sourceCode { white-space: pre; position: relative; }
 pre.sourceCode { margin: 0; }
@@ -65,14 +65,16 @@ div.sourceCode { overflow: auto; }
 }
 @media print {
 code.sourceCode { white-space: pre-wrap; }
-a.sourceLine { text-indent: -1em; padding-left: 1em; }
+code.sourceCode > span { text-indent: -5em; padding-left: 5em; }
 }
-pre.numberSource a.sourceLine
-  { position: relative; left: -4em; }
-pre.numberSource a.sourceLine::before
-  { content: attr(title);
+pre.numberSource code
+  { counter-reset: source-line 0; }
+pre.numberSource code > span
+  { position: relative; left: -4em; counter-increment: source-line; }
+pre.numberSource code > span > a:first-child::before
+  { content: counter(source-line);
     position: relative; left: -1em; text-align: right; vertical-align: baseline;
-    border: none; pointer-events: all; display: inline-block;
+    border: none; display: inline-block;
     -webkit-touch-callout: none; -webkit-user-select: none;
     -khtml-user-select: none; -moz-user-select: none;
     -ms-user-select: none; user-select: none;
@@ -81,9 +83,9 @@ pre.numberSource a.sourceLine::before
   }
 pre.numberSource { margin-left: 3em; border-left: 1px solid #aaaaaa;  padding-left: 4px; }
 div.sourceCode
-  {  }
+  {   }
 @media screen {
-a.sourceLine::before { text-decoration: underline; }
+code.sourceCode > span > a:first-child::before { text-decoration: underline; }
 }
 code span.al { color: #ff0000; font-weight: bold; } /* Alert */
 code span.an { color: #60a0b0; font-weight: bold; font-style: italic; } /* Annotation */
@@ -132,7 +134,10 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 <li><a href="./">Superpower</a></li>
 
 <li class="divider"></li>
-<li class="chapter" data-level="" data-path="index.html"><a href="index.html"><i class="fa fa-check"></i>Preface</a></li>
+<li class="chapter" data-level="" data-path="index.html"><a href="index.html"><i class="fa fa-check"></i>Preface</a><ul>
+<li class="chapter" data-level="" data-path="index.html"><a href="index.html#contributors"><i class="fa fa-check"></i>Contributors</a></li>
+<li class="chapter" data-level="" data-path="index.html"><a href="index.html#funding"><i class="fa fa-check"></i>Funding</a></li>
+</ul></li>
 <li class="chapter" data-level="1" data-path="the-experimental-design.html"><a href="the-experimental-design.html"><i class="fa fa-check"></i><b>1</b> The Experimental Design</a><ul>
 <li class="chapter" data-level="1.1" data-path="the-experimental-design.html"><a href="the-experimental-design.html#anova_design-function"><i class="fa fa-check"></i><b>1.1</b> ANOVA_design function</a><ul>
 <li class="chapter" data-level="1.1.1" data-path="the-experimental-design.html"><a href="the-experimental-design.html#specifying-the-design-using-design"><i class="fa fa-check"></i><b>1.1.1</b> Specifying the design using <code>design</code></a></li>
@@ -144,7 +149,7 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 </ul></li>
 </ul></li>
 <li class="chapter" data-level="2" data-path="one-way-anova.html"><a href="one-way-anova.html"><i class="fa fa-check"></i><b>2</b> One-Way ANOVA</a><ul>
-<li class="chapter" data-level="2.1" data-path="one-way-anova.html"><a href="one-way-anova.html#part-1"><i class="fa fa-check"></i><b>2.1</b> Part 1</a><ul>
+<li class="chapter" data-level="2.1" data-path="one-way-anova.html"><a href="one-way-anova.html#introduction"><i class="fa fa-check"></i><b>2.1</b> Introduction</a><ul>
 <li class="chapter" data-level="2.1.1" data-path="one-way-anova.html"><a href="one-way-anova.html#two-conditions"><i class="fa fa-check"></i><b>2.1.1</b> Two conditions</a></li>
 <li class="chapter" data-level="2.1.2" data-path="one-way-anova.html"><a href="one-way-anova.html#three-conditions"><i class="fa fa-check"></i><b>2.1.2</b> Three conditions</a></li>
 <li class="chapter" data-level="2.1.3" data-path="one-way-anova.html"><a href="one-way-anova.html#power-for-simple-effects"><i class="fa fa-check"></i><b>2.1.3</b> Power for simple effects</a></li>
@@ -156,7 +161,7 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 </ul></li>
 </ul></li>
 <li class="chapter" data-level="3" data-path="repeated-measures-anova.html"><a href="repeated-measures-anova.html"><i class="fa fa-check"></i><b>3</b> Repeated Measures ANOVA</a><ul>
-<li class="chapter" data-level="3.1" data-path="repeated-measures-anova.html"><a href="repeated-measures-anova.html#part-1-1"><i class="fa fa-check"></i><b>3.1</b> Part 1</a><ul>
+<li class="chapter" data-level="3.1" data-path="repeated-measures-anova.html"><a href="repeated-measures-anova.html#part-1"><i class="fa fa-check"></i><b>3.1</b> Part 1</a><ul>
 <li class="chapter" data-level="3.1.1" data-path="repeated-measures-anova.html"><a href="repeated-measures-anova.html#two-conditions-medium-effect-size"><i class="fa fa-check"></i><b>3.1.1</b> Two conditions, medium effect size</a></li>
 </ul></li>
 <li class="chapter" data-level="3.2" data-path="repeated-measures-anova.html"><a href="repeated-measures-anova.html#part-2"><i class="fa fa-check"></i><b>3.2</b> Part 2</a><ul>
@@ -172,9 +177,6 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 <li class="chapter" data-level="3.5.1" data-path="repeated-measures-anova.html"><a href="repeated-measures-anova.html#x2-anova-within-design"><i class="fa fa-check"></i><b>3.5.1</b> 2x2 ANOVA, within design</a></li>
 </ul></li>
 <li class="chapter" data-level="3.6" data-path="repeated-measures-anova.html"><a href="repeated-measures-anova.html#multivariate-anova-manova"><i class="fa fa-check"></i><b>3.6</b> Multivariate ANOVA (MANOVA)</a></li>
-<li class="chapter" data-level="3.7" data-path="repeated-measures-anova.html"><a href="repeated-measures-anova.html#sphericity-assumption"><i class="fa fa-check"></i><b>3.7</b> Sphericity Assumption</a><ul>
-<li class="chapter" data-level="3.7.1" data-path="repeated-measures-anova.html"><a href="repeated-measures-anova.html#manova-or-sphericity-adjustment"><i class="fa fa-check"></i><b>3.7.1</b> MANOVA or Sphericity Adjustment?</a></li>
-</ul></li>
 </ul></li>
 <li class="chapter" data-level="4" data-path="mixed-anova.html"><a href="mixed-anova.html"><i class="fa fa-check"></i><b>4</b> Mixed ANOVA</a><ul>
 <li class="chapter" data-level="4.1" data-path="mixed-anova.html"><a href="mixed-anova.html#simple-mixed-designs"><i class="fa fa-check"></i><b>4.1</b> Simple Mixed Designs</a></li>
@@ -200,33 +202,39 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 <li class="chapter" data-level="10.3" data-path="power-curve.html"><a href="power-curve.html#explore-increase-in-correlation-in-moderated-interactions."><i class="fa fa-check"></i><b>10.3</b> Explore increase in correlation in moderated interactions.</a></li>
 <li class="chapter" data-level="10.4" data-path="power-curve.html"><a href="power-curve.html#increasing-correlation-in-on-factor-decreases-power-in-second-factor"><i class="fa fa-check"></i><b>10.4</b> Increasing correlation in on factor decreases power in second factor</a></li>
 </ul></li>
+<li class="chapter" data-level="11" data-path="violations-of-assumptions.html"><a href="violations-of-assumptions.html"><i class="fa fa-check"></i><b>11</b> Violations of Assumptions</a><ul>
+<li class="chapter" data-level="11.1" data-path="violations-of-assumptions.html"><a href="violations-of-assumptions.html#violation-of-heterogeneity-assumption"><i class="fa fa-check"></i><b>11.1</b> Violation of Heterogeneity Assumption</a></li>
+<li class="chapter" data-level="11.2" data-path="violations-of-assumptions.html"><a href="violations-of-assumptions.html#violation-of-the-sphericity-assumption"><i class="fa fa-check"></i><b>11.2</b> Violation of the sphericity assumption</a><ul>
+<li class="chapter" data-level="11.2.1" data-path="violations-of-assumptions.html"><a href="violations-of-assumptions.html#manova-or-sphericity-adjustment"><i class="fa fa-check"></i><b>11.2.1</b> MANOVA or Sphericity Adjustment?</a></li>
+</ul></li>
+</ul></li>
 <li class="chapter" data-level="" data-path="appendix-1-direct-comparison-to-pwr2ppl.html"><a href="appendix-1-direct-comparison-to-pwr2ppl.html"><i class="fa fa-check"></i>Appendix 1: Direct Comparison to pwr2ppl</a><ul>
-<li class="chapter" data-level="10.5" data-path="appendix-1-direct-comparison-to-pwr2ppl.html"><a href="appendix-1-direct-comparison-to-pwr2ppl.html#examples-from-chapter-5"><i class="fa fa-check"></i><b>10.5</b> Examples from Chapter 5</a><ul>
-<li class="chapter" data-level="10.5.1" data-path="appendix-1-direct-comparison-to-pwr2ppl.html"><a href="appendix-1-direct-comparison-to-pwr2ppl.html#example-5.15.2"><i class="fa fa-check"></i><b>10.5.1</b> Example 5.1/5.2</a></li>
-<li class="chapter" data-level="10.5.2" data-path="appendix-1-direct-comparison-to-pwr2ppl.html"><a href="appendix-1-direct-comparison-to-pwr2ppl.html#example-5.3"><i class="fa fa-check"></i><b>10.5.2</b> Example 5.3</a></li>
+<li class="chapter" data-level="11.3" data-path="appendix-1-direct-comparison-to-pwr2ppl.html"><a href="appendix-1-direct-comparison-to-pwr2ppl.html#examples-from-chapter-5"><i class="fa fa-check"></i><b>11.3</b> Examples from Chapter 5</a><ul>
+<li class="chapter" data-level="11.3.1" data-path="appendix-1-direct-comparison-to-pwr2ppl.html"><a href="appendix-1-direct-comparison-to-pwr2ppl.html#example-5.15.2"><i class="fa fa-check"></i><b>11.3.1</b> Example 5.1/5.2</a></li>
+<li class="chapter" data-level="11.3.2" data-path="appendix-1-direct-comparison-to-pwr2ppl.html"><a href="appendix-1-direct-comparison-to-pwr2ppl.html#example-5.3"><i class="fa fa-check"></i><b>11.3.2</b> Example 5.3</a></li>
 </ul></li>
-<li class="chapter" data-level="10.6" data-path="appendix-1-direct-comparison-to-pwr2ppl.html"><a href="appendix-1-direct-comparison-to-pwr2ppl.html#examples-from-chapter-6"><i class="fa fa-check"></i><b>10.6</b> Examples from Chapter 6</a><ul>
-<li class="chapter" data-level="10.6.1" data-path="appendix-1-direct-comparison-to-pwr2ppl.html"><a href="appendix-1-direct-comparison-to-pwr2ppl.html#example-from-table-6.2"><i class="fa fa-check"></i><b>10.6.1</b> Example from Table 6.2</a></li>
-<li class="chapter" data-level="10.6.2" data-path="appendix-1-direct-comparison-to-pwr2ppl.html"><a href="appendix-1-direct-comparison-to-pwr2ppl.html#example-from-table-6.6"><i class="fa fa-check"></i><b>10.6.2</b> Example from Table 6.6</a></li>
-<li class="chapter" data-level="10.6.3" data-path="appendix-1-direct-comparison-to-pwr2ppl.html"><a href="appendix-1-direct-comparison-to-pwr2ppl.html#example-from-table-6.8"><i class="fa fa-check"></i><b>10.6.3</b> Example from Table 6.8</a></li>
+<li class="chapter" data-level="11.4" data-path="appendix-1-direct-comparison-to-pwr2ppl.html"><a href="appendix-1-direct-comparison-to-pwr2ppl.html#examples-from-chapter-6"><i class="fa fa-check"></i><b>11.4</b> Examples from Chapter 6</a><ul>
+<li class="chapter" data-level="11.4.1" data-path="appendix-1-direct-comparison-to-pwr2ppl.html"><a href="appendix-1-direct-comparison-to-pwr2ppl.html#example-from-table-6.2"><i class="fa fa-check"></i><b>11.4.1</b> Example from Table 6.2</a></li>
+<li class="chapter" data-level="11.4.2" data-path="appendix-1-direct-comparison-to-pwr2ppl.html"><a href="appendix-1-direct-comparison-to-pwr2ppl.html#example-from-table-6.6"><i class="fa fa-check"></i><b>11.4.2</b> Example from Table 6.6</a></li>
+<li class="chapter" data-level="11.4.3" data-path="appendix-1-direct-comparison-to-pwr2ppl.html"><a href="appendix-1-direct-comparison-to-pwr2ppl.html#example-from-table-6.8"><i class="fa fa-check"></i><b>11.4.3</b> Example from Table 6.8</a></li>
 </ul></li>
-<li class="chapter" data-level="10.7" data-path="appendix-1-direct-comparison-to-pwr2ppl.html"><a href="appendix-1-direct-comparison-to-pwr2ppl.html#example-from-chapter-7"><i class="fa fa-check"></i><b>10.7</b> Example from Chapter 7</a><ul>
-<li class="chapter" data-level="10.7.1" data-path="appendix-1-direct-comparison-to-pwr2ppl.html"><a href="appendix-1-direct-comparison-to-pwr2ppl.html#from-table-7.2"><i class="fa fa-check"></i><b>10.7.1</b> From Table 7.2</a></li>
+<li class="chapter" data-level="11.5" data-path="appendix-1-direct-comparison-to-pwr2ppl.html"><a href="appendix-1-direct-comparison-to-pwr2ppl.html#example-from-chapter-7"><i class="fa fa-check"></i><b>11.5</b> Example from Chapter 7</a><ul>
+<li class="chapter" data-level="11.5.1" data-path="appendix-1-direct-comparison-to-pwr2ppl.html"><a href="appendix-1-direct-comparison-to-pwr2ppl.html#from-table-7.2"><i class="fa fa-check"></i><b>11.5.1</b> From Table 7.2</a></li>
+</ul></li>
+</ul></li>
+<li class="chapter" data-level="" data-path="appendix-3-comparison-to-brysbaert.html"><a href="appendix-3-comparison-to-brysbaert.html"><i class="fa fa-check"></i>Appendix 3: Comparison to Brysbaert</a><ul>
+<li class="chapter" data-level="11.6" data-path="appendix-3-comparison-to-brysbaert.html"><a href="appendix-3-comparison-to-brysbaert.html#one-way-anova-1"><i class="fa fa-check"></i><b>11.6</b> One-Way ANOVA</a><ul>
+<li class="chapter" data-level="11.6.1" data-path="appendix-3-comparison-to-brysbaert.html"><a href="appendix-3-comparison-to-brysbaert.html#three-conditions-replication"><i class="fa fa-check"></i><b>11.6.1</b> Three conditions replication</a></li>
+<li class="chapter" data-level="11.6.2" data-path="appendix-3-comparison-to-brysbaert.html"><a href="appendix-3-comparison-to-brysbaert.html#variation-1"><i class="fa fa-check"></i><b>11.6.2</b> Variation 1</a></li>
+<li class="chapter" data-level="11.6.3" data-path="appendix-3-comparison-to-brysbaert.html"><a href="appendix-3-comparison-to-brysbaert.html#three-conditions-replication-1"><i class="fa fa-check"></i><b>11.6.3</b> Three conditions replication</a></li>
+<li class="chapter" data-level="11.6.4" data-path="appendix-3-comparison-to-brysbaert.html"><a href="appendix-3-comparison-to-brysbaert.html#variation-2"><i class="fa fa-check"></i><b>11.6.4</b> Variation 2</a></li>
+<li class="chapter" data-level="11.6.5" data-path="appendix-3-comparison-to-brysbaert.html"><a href="appendix-3-comparison-to-brysbaert.html#three-conditions-replication-2"><i class="fa fa-check"></i><b>11.6.5</b> Three conditions replication</a></li>
+</ul></li>
+<li class="chapter" data-level="11.7" data-path="appendix-3-comparison-to-brysbaert.html"><a href="appendix-3-comparison-to-brysbaert.html#repeated-measures"><i class="fa fa-check"></i><b>11.7</b> Repeated Measures</a><ul>
+<li class="chapter" data-level="11.7.1" data-path="appendix-3-comparison-to-brysbaert.html"><a href="appendix-3-comparison-to-brysbaert.html#reproducing-brysbaert-variation-1-changing-correlation"><i class="fa fa-check"></i><b>11.7.1</b> Reproducing Brysbaert Variation 1: Changing Correlation</a></li>
 </ul></li>
 </ul></li>
 <li class="chapter" data-level="" data-path="appendix-2-direct-comparison-to-morepower.html"><a href="appendix-2-direct-comparison-to-morepower.html"><i class="fa fa-check"></i>Appendix 2: Direct Comparison to MOREpower</a></li>
-<li class="chapter" data-level="" data-path="appendix-3-comparison-to-brysbaert.html"><a href="appendix-3-comparison-to-brysbaert.html"><i class="fa fa-check"></i>Appendix 3: Comparison to Brysbaert</a><ul>
-<li class="chapter" data-level="10.8" data-path="appendix-3-comparison-to-brysbaert.html"><a href="appendix-3-comparison-to-brysbaert.html#one-way-anova-1"><i class="fa fa-check"></i><b>10.8</b> One-Way ANOVA</a><ul>
-<li class="chapter" data-level="10.8.1" data-path="appendix-3-comparison-to-brysbaert.html"><a href="appendix-3-comparison-to-brysbaert.html#three-conditions-replication"><i class="fa fa-check"></i><b>10.8.1</b> Three conditions replication</a></li>
-<li class="chapter" data-level="10.8.2" data-path="appendix-3-comparison-to-brysbaert.html"><a href="appendix-3-comparison-to-brysbaert.html#variation-1"><i class="fa fa-check"></i><b>10.8.2</b> Variation 1</a></li>
-<li class="chapter" data-level="10.8.3" data-path="appendix-3-comparison-to-brysbaert.html"><a href="appendix-3-comparison-to-brysbaert.html#three-conditions-replication-1"><i class="fa fa-check"></i><b>10.8.3</b> Three conditions replication</a></li>
-<li class="chapter" data-level="10.8.4" data-path="appendix-3-comparison-to-brysbaert.html"><a href="appendix-3-comparison-to-brysbaert.html#variation-2"><i class="fa fa-check"></i><b>10.8.4</b> Variation 2</a></li>
-<li class="chapter" data-level="10.8.5" data-path="appendix-3-comparison-to-brysbaert.html"><a href="appendix-3-comparison-to-brysbaert.html#three-conditions-replication-2"><i class="fa fa-check"></i><b>10.8.5</b> Three conditions replication</a></li>
-</ul></li>
-<li class="chapter" data-level="10.9" data-path="appendix-3-comparison-to-brysbaert.html"><a href="appendix-3-comparison-to-brysbaert.html#repeated-measures"><i class="fa fa-check"></i><b>10.9</b> Repeated Measures</a><ul>
-<li class="chapter" data-level="10.9.1" data-path="appendix-3-comparison-to-brysbaert.html"><a href="appendix-3-comparison-to-brysbaert.html#reproducing-brysbaert-variation-1-changing-correlation"><i class="fa fa-check"></i><b>10.9.1</b> Reproducing Brysbaert Variation 1: Changing Correlation</a></li>
-</ul></li>
-</ul></li>
 <li class="chapter" data-level="" data-path="references.html"><a href="references.html"><i class="fa fa-check"></i>References</a></li>
 <li class="divider"></li>
 <li><a href="https://github.com/rstudio/bookdown" target="blank">Published with bookdown</a></li>
@@ -250,33 +258,33 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
             <section class="normal" id="section-">
 <div id="one-way-anova" class="section level1">
 <h1><span class="header-section-number">Chapter 2</span> One-Way ANOVA</h1>
-<div id="part-1" class="section level2">
-<h2><span class="header-section-number">2.1</span> Part 1</h2>
-<p>Using the formula also used by <span class="citation">Albers and Lakens (<a href="#ref-albers2018power">2018</a>)</span>, we can determine the means that should yield a specified effect sizes (expressed in Cohen’s <em>f</em>). Eta-squared (identical to partial eta-squared for one-way ANOVA’s) has benchmarks of .0099, .0588, and .1379 for small, medium, and large effect sizes <span class="citation">(Cohen <a href="#ref-cohen1988spa">1988</a>)</span>. Athough these benchmarks are quite arbitrary, and researchers should only use such benchmarks for power analyses as a last resort, we will demonstrate an a priori power analysis for these values.</p>
+<div id="introduction" class="section level2">
+<h2><span class="header-section-number">2.1</span> Introduction</h2>
+<p>Using the formula also used by <span class="citation">Albers and Lakens (<a href="#ref-albers2018power" role="doc-biblioref">2018</a>)</span>, we can determine the means that should yield a specified effect sizes (expressed in Cohen’s <em>f</em>). Eta-squared (identical to partial eta-squared for one-way ANOVA’s) has benchmarks of .0099, .0588, and .1379 for small, medium, and large effect sizes <span class="citation">(Cohen <a href="#ref-cohen1988spa" role="doc-biblioref">1988</a>)</span>. Athough these benchmarks are quite arbitrary, and researchers should only use such benchmarks for power analyses as a last resort, we will demonstrate an a priori power analysis for these values.</p>
 <div id="two-conditions" class="section level3">
 <h3><span class="header-section-number">2.1.1</span> Two conditions</h3>
-<p>Imagine we aim to design a study to test the hypothesis that giving people a pet to take care of will increase their life satisfaction. We have a control condition, and a condition where people get a pet, and randomly assign participants to either condition. We can simulate a one-way ANOVA with a specified alpha, sample size, and effect size, on see the statistical power we would have for the ANOVA and the follow-up comparisons. We expect pets to increase life-satisfaction compared to the control condition. Based on work by <span class="citation">Pavot and Diener (<a href="#ref-pavot1993affective">1993</a>)</span> we believe that we can expect responses on the life-satifaction scale to have a mean of approximately 24 in our population, with a standard deviation of 6.4. We expect having a pet increases life satisfaction with approximately 2.2 scale points for participants who get a pet. 200 participants in total, with 100 participants in each condition. But before we proceed with the data collection, we examine the statistical power our design would have to detect the differences we predict.</p>
-<div class="sourceCode" id="cb8"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb8-1" title="1">string &lt;-<span class="st"> &quot;2b&quot;</span></a>
-<a class="sourceLine" id="cb8-2" title="2">n &lt;-<span class="st"> </span><span class="dv">100</span></a>
-<a class="sourceLine" id="cb8-3" title="3"><span class="co"># We are thinking of running 50 peope in each condition</span></a>
-<a class="sourceLine" id="cb8-4" title="4">mu &lt;-<span class="st"> </span><span class="kw">c</span>(<span class="dv">24</span>, <span class="fl">26.2</span>)</a>
-<a class="sourceLine" id="cb8-5" title="5"><span class="co"># Enter means in the order that matches the labels below.</span></a>
-<a class="sourceLine" id="cb8-6" title="6"><span class="co"># In this case, control, cat, dog. </span></a>
-<a class="sourceLine" id="cb8-7" title="7">sd &lt;-<span class="st"> </span><span class="fl">6.4</span></a>
-<a class="sourceLine" id="cb8-8" title="8">labelnames &lt;-<span class="st"> </span><span class="kw">c</span>(<span class="st">&quot;condition&quot;</span>, <span class="st">&quot;control&quot;</span>, <span class="st">&quot;pet&quot;</span>) <span class="co">#</span></a>
-<a class="sourceLine" id="cb8-9" title="9"><span class="co"># the label names should be in the order of the means specified above.</span></a>
-<a class="sourceLine" id="cb8-10" title="10">design_result &lt;-<span class="st"> </span><span class="kw">ANOVA_design</span>(<span class="dt">design =</span> string,</a>
-<a class="sourceLine" id="cb8-11" title="11">                   <span class="dt">n =</span> n, </a>
-<a class="sourceLine" id="cb8-12" title="12">                   <span class="dt">mu =</span> mu, </a>
-<a class="sourceLine" id="cb8-13" title="13">                   <span class="dt">sd =</span> sd, </a>
-<a class="sourceLine" id="cb8-14" title="14">                   <span class="dt">labelnames =</span> labelnames)</a>
-<a class="sourceLine" id="cb8-15" title="15">alpha_level &lt;-<span class="st"> </span><span class="fl">0.05</span></a>
-<a class="sourceLine" id="cb8-16" title="16"><span class="co"># You should think carefully about how to justify your alpha level.</span></a>
-<a class="sourceLine" id="cb8-17" title="17"><span class="co"># We will give some examples later, but for now, use 0.05.</span></a></code></pre></div>
-<div class="sourceCode" id="cb9"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb9-1" title="1">simulation_result &lt;-<span class="st"> </span><span class="kw">ANOVA_power</span>(design_result, </a>
-<a class="sourceLine" id="cb9-2" title="2">                                 <span class="dt">alpha_level =</span> alpha_level, </a>
-<a class="sourceLine" id="cb9-3" title="3">                                 <span class="dt">nsims =</span> nsims,</a>
-<a class="sourceLine" id="cb9-4" title="4">                                 <span class="dt">verbose =</span> <span class="ot">FALSE</span>)</a></code></pre></div>
+<p>Imagine we aim to design a study to test the hypothesis that giving people a pet to take care of will increase their life satisfaction. We have a control condition, and a condition where people get a pet, and randomly assign participants to either condition. We can simulate a one-way ANOVA with a specified alpha, sample size, and effect size, on see the statistical power we would have for the ANOVA and the follow-up comparisons. We expect pets to increase life-satisfaction compared to the control condition. Based on work by <span class="citation">Pavot and Diener (<a href="#ref-pavot1993affective" role="doc-biblioref">1993</a>)</span> we believe that we can expect responses on the life-satifaction scale to have a mean of approximately 24 in our population, with a standard deviation of 6.4. We expect having a pet increases life satisfaction with approximately 2.2 scale points for participants who get a pet. 200 participants in total, with 100 participants in each condition. But before we proceed with the data collection, we examine the statistical power our design would have to detect the differences we predict.</p>
+<div class="sourceCode" id="cb8"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb8-1"><a href="one-way-anova.html#cb8-1"></a>string &lt;-<span class="st"> &quot;2b&quot;</span></span>
+<span id="cb8-2"><a href="one-way-anova.html#cb8-2"></a>n &lt;-<span class="st"> </span><span class="dv">100</span></span>
+<span id="cb8-3"><a href="one-way-anova.html#cb8-3"></a><span class="co"># We are thinking of running 50 peope in each condition</span></span>
+<span id="cb8-4"><a href="one-way-anova.html#cb8-4"></a>mu &lt;-<span class="st"> </span><span class="kw">c</span>(<span class="dv">24</span>, <span class="fl">26.2</span>)</span>
+<span id="cb8-5"><a href="one-way-anova.html#cb8-5"></a><span class="co"># Enter means in the order that matches the labels below.</span></span>
+<span id="cb8-6"><a href="one-way-anova.html#cb8-6"></a><span class="co"># In this case, control, cat, dog. </span></span>
+<span id="cb8-7"><a href="one-way-anova.html#cb8-7"></a>sd &lt;-<span class="st"> </span><span class="fl">6.4</span></span>
+<span id="cb8-8"><a href="one-way-anova.html#cb8-8"></a>labelnames &lt;-<span class="st"> </span><span class="kw">c</span>(<span class="st">&quot;condition&quot;</span>, <span class="st">&quot;control&quot;</span>, <span class="st">&quot;pet&quot;</span>) <span class="co">#</span></span>
+<span id="cb8-9"><a href="one-way-anova.html#cb8-9"></a><span class="co"># the label names should be in the order of the means specified above.</span></span>
+<span id="cb8-10"><a href="one-way-anova.html#cb8-10"></a>design_result &lt;-<span class="st"> </span><span class="kw">ANOVA_design</span>(<span class="dt">design =</span> string,</span>
+<span id="cb8-11"><a href="one-way-anova.html#cb8-11"></a>                   <span class="dt">n =</span> n, </span>
+<span id="cb8-12"><a href="one-way-anova.html#cb8-12"></a>                   <span class="dt">mu =</span> mu, </span>
+<span id="cb8-13"><a href="one-way-anova.html#cb8-13"></a>                   <span class="dt">sd =</span> sd, </span>
+<span id="cb8-14"><a href="one-way-anova.html#cb8-14"></a>                   <span class="dt">labelnames =</span> labelnames)</span>
+<span id="cb8-15"><a href="one-way-anova.html#cb8-15"></a>alpha_level &lt;-<span class="st"> </span><span class="fl">0.05</span></span>
+<span id="cb8-16"><a href="one-way-anova.html#cb8-16"></a><span class="co"># You should think carefully about how to justify your alpha level.</span></span>
+<span id="cb8-17"><a href="one-way-anova.html#cb8-17"></a><span class="co"># We will use 0.05 in most examples, but do not support using a 0.05 alpha level for all analyses.</span></span></code></pre></div>
+<div class="sourceCode" id="cb9"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb9-1"><a href="one-way-anova.html#cb9-1"></a>simulation_result &lt;-<span class="st"> </span><span class="kw">ANOVA_power</span>(design_result, </span>
+<span id="cb9-2"><a href="one-way-anova.html#cb9-2"></a>                                 <span class="dt">alpha_level =</span> alpha_level, </span>
+<span id="cb9-3"><a href="one-way-anova.html#cb9-3"></a>                                 <span class="dt">nsims =</span> nsims,</span>
+<span id="cb9-4"><a href="one-way-anova.html#cb9-4"></a>                                 <span class="dt">verbose =</span> <span class="ot">FALSE</span>)</span></code></pre></div>
 <table class="table" style="margin-left: auto; margin-right: auto;">
 <caption>
 <span id="tab:unnamed-chunk-11">Table 2.1: </span>Simulated ANOVA Result
@@ -307,9 +315,9 @@ anova_condition
 </tr>
 </tbody>
 </table>
-<div class="sourceCode" id="cb10"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb10-1" title="1">exact_result &lt;-<span class="st"> </span><span class="kw">ANOVA_exact</span>(design_result,</a>
-<a class="sourceLine" id="cb10-2" title="2">                            <span class="dt">alpha_level =</span> alpha_level,</a>
-<a class="sourceLine" id="cb10-3" title="3">                            <span class="dt">verbose =</span> <span class="ot">FALSE</span>)</a></code></pre></div>
+<div class="sourceCode" id="cb10"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb10-1"><a href="one-way-anova.html#cb10-1"></a>exact_result &lt;-<span class="st"> </span><span class="kw">ANOVA_exact</span>(design_result,</span>
+<span id="cb10-2"><a href="one-way-anova.html#cb10-2"></a>                            <span class="dt">alpha_level =</span> alpha_level,</span>
+<span id="cb10-3"><a href="one-way-anova.html#cb10-3"></a>                            <span class="dt">verbose =</span> <span class="ot">FALSE</span>)</span></code></pre></div>
 <table class="table" style="margin-left: auto; margin-right: auto;">
 <caption>
 <span id="tab:unnamed-chunk-13">Table 2.2: </span>Exact ANOVA Result
@@ -352,57 +360,57 @@ condition
 </tr>
 </tbody>
 </table>
-<p>The result shows that we have exactly the same power for the ANOVA, as we have for the <em>t</em>-test. When there are only two groups, these tests are mathematically identical. In a study with 100 participants, we would have quite low power (around 67.7%). An ANOVA with 2 groups is identical to a <em>t</em>-test. For our example, Cohen’s d (the standardized mean difference) is 2.2/6.4, or d = 0.34375 for the difference between the control condition and pets, which we can use to easily compute the expected power for these simple comparisons using the <code>pwr</code> <span class="citation">(<a href="#ref-R-pwr">2018</a>)</span> package.</p>
-<div class="sourceCode" id="cb11"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb11-1" title="1"><span class="kw">pwr.t.test</span>(<span class="dt">d =</span> <span class="fl">2.2</span><span class="op">/</span><span class="fl">6.4</span>,</a>
-<a class="sourceLine" id="cb11-2" title="2">           <span class="dt">n =</span> <span class="dv">100</span>,</a>
-<a class="sourceLine" id="cb11-3" title="3">           <span class="dt">sig.level =</span> <span class="fl">0.05</span>,</a>
-<a class="sourceLine" id="cb11-4" title="4">           <span class="dt">type =</span> <span class="st">&quot;two.sample&quot;</span>,</a>
-<a class="sourceLine" id="cb11-5" title="5">           <span class="dt">alternative =</span> <span class="st">&quot;two.sided&quot;</span>)<span class="op">$</span>power</a></code></pre></div>
+<p>The result shows that we have exactly the same power for the ANOVA (note: in the simulation, vallues will differ slightly, but with a large number of simulations, power estimates wil be identical), as we have for the <em>t</em>-test. When there are only two groups, these tests are mathematically identical. In a study with 100 participants, we would have quite low power (around 67.7%). An ANOVA with 2 groups is identical to a <em>t</em>-test. For our example, Cohen’s d (the standardized mean difference) is 2.2/6.4, or d = 0.34375 for the difference between the control condition and pets, which we can use to easily compute the expected power for these simple comparisons using the <code>pwr</code> <span class="citation">(<a href="#ref-R-pwr" role="doc-biblioref">2018</a>)</span> package.</p>
+<div class="sourceCode" id="cb11"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb11-1"><a href="one-way-anova.html#cb11-1"></a><span class="kw">pwr.t.test</span>(<span class="dt">d =</span> <span class="fl">2.2</span><span class="op">/</span><span class="fl">6.4</span>,</span>
+<span id="cb11-2"><a href="one-way-anova.html#cb11-2"></a>           <span class="dt">n =</span> <span class="dv">100</span>,</span>
+<span id="cb11-3"><a href="one-way-anova.html#cb11-3"></a>           <span class="dt">sig.level =</span> <span class="fl">0.05</span>,</span>
+<span id="cb11-4"><a href="one-way-anova.html#cb11-4"></a>           <span class="dt">type =</span> <span class="st">&quot;two.sample&quot;</span>,</span>
+<span id="cb11-5"><a href="one-way-anova.html#cb11-5"></a>           <span class="dt">alternative =</span> <span class="st">&quot;two.sided&quot;</span>)<span class="op">$</span>power</span></code></pre></div>
 <pre><code>## [1] 0.6768572</code></pre>
-<p>We can also directly compute Cohen’s <em>f</em> from Cohen’s d for two groups, as <span class="citation">Cohen (<a href="#ref-cohen1988spa">1988</a>)</span> describes, because <em>f</em> = 1/2d. So <em>f</em> = 0.5*0.34375 = 0.171875. And indeed, power analysis using the pwr package yields the same result using the <code>pwr.anova.test</code> as the <code>power.t.test</code>.</p>
-<div class="sourceCode" id="cb13"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb13-1" title="1">K &lt;-<span class="st"> </span><span class="dv">2</span></a>
-<a class="sourceLine" id="cb13-2" title="2">n &lt;-<span class="st"> </span><span class="dv">100</span></a>
-<a class="sourceLine" id="cb13-3" title="3">f &lt;-<span class="st"> </span><span class="fl">0.171875</span></a>
-<a class="sourceLine" id="cb13-4" title="4"><span class="kw">pwr.anova.test</span>(<span class="dt">n =</span> n,</a>
-<a class="sourceLine" id="cb13-5" title="5">               <span class="dt">k =</span> K,</a>
-<a class="sourceLine" id="cb13-6" title="6">               <span class="dt">f =</span> f,</a>
-<a class="sourceLine" id="cb13-7" title="7">               <span class="dt">sig.level =</span> alpha_level)<span class="op">$</span>power</a></code></pre></div>
+<p>We can also directly compute Cohen’s <em>f</em> from Cohen’s d for two groups, as <span class="citation">Cohen (<a href="#ref-cohen1988spa" role="doc-biblioref">1988</a>)</span> describes, because <em>f</em> = 1/2d. So <em>f</em> = 0.5*0.34375 = 0.171875. And indeed, power analysis using the pwr package yields the same result using the <code>pwr.anova.test</code> as the <code>power.t.test</code>.</p>
+<div class="sourceCode" id="cb13"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb13-1"><a href="one-way-anova.html#cb13-1"></a>K &lt;-<span class="st"> </span><span class="dv">2</span></span>
+<span id="cb13-2"><a href="one-way-anova.html#cb13-2"></a>n &lt;-<span class="st"> </span><span class="dv">100</span></span>
+<span id="cb13-3"><a href="one-way-anova.html#cb13-3"></a>f &lt;-<span class="st"> </span><span class="fl">0.171875</span></span>
+<span id="cb13-4"><a href="one-way-anova.html#cb13-4"></a><span class="kw">pwr.anova.test</span>(<span class="dt">n =</span> n,</span>
+<span id="cb13-5"><a href="one-way-anova.html#cb13-5"></a>               <span class="dt">k =</span> K,</span>
+<span id="cb13-6"><a href="one-way-anova.html#cb13-6"></a>               <span class="dt">f =</span> f,</span>
+<span id="cb13-7"><a href="one-way-anova.html#cb13-7"></a>               <span class="dt">sig.level =</span> alpha_level)<span class="op">$</span>power</span></code></pre></div>
 <pre><code>## [1] 0.6768572</code></pre>
 <p>This analysis tells us that running the study with 100 participants in each condition is too likely to <em>not</em> yield a significant test result, even if our expected pattern of differences is true. This is not optimal.</p>
 <p>Let’s mathematically explore which pattern of means we would need to expect to habe 90% power for the ANOVA with 50 participants in each group. We can use the pwr package in R to compute a sensitivity analysis that tells us the effect size, in Cohen’s <em>f</em>, that we are able to detect with 3 groups and 50 partiicpants in each group, in order to achive 90% power with an alpha level of 5%.</p>
-<div class="sourceCode" id="cb15"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb15-1" title="1">K &lt;-<span class="st"> </span><span class="dv">2</span></a>
-<a class="sourceLine" id="cb15-2" title="2">n &lt;-<span class="st"> </span><span class="dv">100</span></a>
-<a class="sourceLine" id="cb15-3" title="3">sd &lt;-<span class="st"> </span><span class="fl">6.4</span></a>
-<a class="sourceLine" id="cb15-4" title="4">r &lt;-<span class="st"> </span><span class="dv">0</span></a>
-<a class="sourceLine" id="cb15-5" title="5"><span class="co">#Calculate f when running simulation</span></a>
-<a class="sourceLine" id="cb15-6" title="6">f &lt;-<span class="st"> </span><span class="kw">pwr.anova.test</span>(<span class="dt">n =</span> n,</a>
-<a class="sourceLine" id="cb15-7" title="7">                    <span class="dt">k =</span> K,</a>
-<a class="sourceLine" id="cb15-8" title="8">                    <span class="dt">power =</span> <span class="fl">0.9</span>,</a>
-<a class="sourceLine" id="cb15-9" title="9">                    <span class="dt">sig.level =</span> alpha_level)<span class="op">$</span>f</a>
-<a class="sourceLine" id="cb15-10" title="10">f</a></code></pre></div>
+<div class="sourceCode" id="cb15"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb15-1"><a href="one-way-anova.html#cb15-1"></a>K &lt;-<span class="st"> </span><span class="dv">2</span></span>
+<span id="cb15-2"><a href="one-way-anova.html#cb15-2"></a>n &lt;-<span class="st"> </span><span class="dv">100</span></span>
+<span id="cb15-3"><a href="one-way-anova.html#cb15-3"></a>sd &lt;-<span class="st"> </span><span class="fl">6.4</span></span>
+<span id="cb15-4"><a href="one-way-anova.html#cb15-4"></a>r &lt;-<span class="st"> </span><span class="dv">0</span></span>
+<span id="cb15-5"><a href="one-way-anova.html#cb15-5"></a><span class="co">#Calculate f when running simulation</span></span>
+<span id="cb15-6"><a href="one-way-anova.html#cb15-6"></a>f &lt;-<span class="st"> </span><span class="kw">pwr.anova.test</span>(<span class="dt">n =</span> n,</span>
+<span id="cb15-7"><a href="one-way-anova.html#cb15-7"></a>                    <span class="dt">k =</span> K,</span>
+<span id="cb15-8"><a href="one-way-anova.html#cb15-8"></a>                    <span class="dt">power =</span> <span class="fl">0.9</span>,</span>
+<span id="cb15-9"><a href="one-way-anova.html#cb15-9"></a>                    <span class="dt">sig.level =</span> alpha_level)<span class="op">$</span>f</span>
+<span id="cb15-10"><a href="one-way-anova.html#cb15-10"></a>f</span></code></pre></div>
 <pre><code>## [1] 0.2303587</code></pre>
-<p>This sensitivity analysis shows we have 90% power in our planned design to detect effects of Cohen’s <em>f</em> of 0.2303587. Benchmarks by <span class="citation">Cohen (<a href="#ref-cohen1988spa">1988</a>)</span> for small, medium, and large Cohen’s <em>f</em> values are 0.1, 0.25, and 0.4, which correspond to eta-squared values of small (.0099), medium (.0588), and large (.1379), in line with d = .2, .5, or .8. So, at least based on these benchmarks, we have 90% power to detect effects that are slightly below a medium effect benchmark.</p>
-<div class="sourceCode" id="cb17"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb17-1" title="1">f2 &lt;-<span class="st"> </span>f<span class="op">^</span><span class="dv">2</span></a>
-<a class="sourceLine" id="cb17-2" title="2">ES &lt;-<span class="st"> </span>f2 <span class="op">/</span><span class="st"> </span>(f2 <span class="op">+</span><span class="st"> </span><span class="dv">1</span>)</a>
-<a class="sourceLine" id="cb17-3" title="3">ES</a></code></pre></div>
+<p>This sensitivity analysis shows we have 90% power in our planned design to detect effects of Cohen’s <em>f</em> of 0.2303587. Benchmarks by <span class="citation">Cohen (<a href="#ref-cohen1988spa" role="doc-biblioref">1988</a>)</span> for small, medium, and large Cohen’s <em>f</em> values are 0.1, 0.25, and 0.4, which correspond to eta-squared values of small (.0099), medium (.0588), and large (.1379), in line with d = .2, .5, or .8. So, at least based on these benchmarks, we have 90% power to detect effects that are slightly below a medium effect benchmark.</p>
+<div class="sourceCode" id="cb17"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb17-1"><a href="one-way-anova.html#cb17-1"></a>f2 &lt;-<span class="st"> </span>f<span class="op">^</span><span class="dv">2</span></span>
+<span id="cb17-2"><a href="one-way-anova.html#cb17-2"></a>ES &lt;-<span class="st"> </span>f2 <span class="op">/</span><span class="st"> </span>(f2 <span class="op">+</span><span class="st"> </span><span class="dv">1</span>)</span>
+<span id="cb17-3"><a href="one-way-anova.html#cb17-3"></a>ES</span></code></pre></div>
 <pre><code>## [1] 0.0503911</code></pre>
 <p>Expressed in eta-squared, we can detect values of eta-squared = 0.05 or larger.</p>
-<div class="sourceCode" id="cb19"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb19-1" title="1">mu &lt;-<span class="st"> </span><span class="kw">mu_from_ES</span>(<span class="dt">K =</span> K, <span class="dt">ES =</span> ES)</a>
-<a class="sourceLine" id="cb19-2" title="2">mu &lt;-<span class="st"> </span>mu <span class="op">*</span><span class="st"> </span>sd</a>
-<a class="sourceLine" id="cb19-3" title="3">mu</a></code></pre></div>
+<div class="sourceCode" id="cb19"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb19-1"><a href="one-way-anova.html#cb19-1"></a>mu &lt;-<span class="st"> </span><span class="kw">mu_from_ES</span>(<span class="dt">K =</span> K, <span class="dt">ES =</span> ES)</span>
+<span id="cb19-2"><a href="one-way-anova.html#cb19-2"></a>mu &lt;-<span class="st"> </span>mu <span class="op">*</span><span class="st"> </span>sd</span>
+<span id="cb19-3"><a href="one-way-anova.html#cb19-3"></a>mu</span></code></pre></div>
 <pre><code>## [1] -1.474295  1.474295</code></pre>
 <p>We can compute a pattern of means, given a standard deviation of 6.4, that would give us an effect size of <em>f</em> = 0.23, or eta-squared of 0.05. We should be able to accomplish this is the means are -1.474295 and 1.474295. We can use these values to confirm the ANOVA has 90% power.</p>
-<div class="sourceCode" id="cb21"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb21-1" title="1">design_result &lt;-<span class="st"> </span><span class="kw">ANOVA_design</span>(</a>
-<a class="sourceLine" id="cb21-2" title="2">  <span class="dt">design =</span> string,</a>
-<a class="sourceLine" id="cb21-3" title="3">  <span class="dt">n =</span> n,</a>
-<a class="sourceLine" id="cb21-4" title="4">  <span class="dt">mu =</span> mu,</a>
-<a class="sourceLine" id="cb21-5" title="5">  <span class="dt">sd =</span> sd,</a>
-<a class="sourceLine" id="cb21-6" title="6">  <span class="dt">labelnames =</span> labelnames</a>
-<a class="sourceLine" id="cb21-7" title="7">  )</a></code></pre></div>
-<div class="sourceCode" id="cb22"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb22-1" title="1">simulation_result &lt;-<span class="st"> </span><span class="kw">ANOVA_power</span>(design_result, </a>
-<a class="sourceLine" id="cb22-2" title="2">                                 <span class="dt">alpha_level =</span> alpha_level, </a>
-<a class="sourceLine" id="cb22-3" title="3">                                 <span class="dt">nsims =</span> nsims,</a>
-<a class="sourceLine" id="cb22-4" title="4">                                 <span class="dt">verbose =</span> <span class="ot">FALSE</span>)</a></code></pre></div>
+<div class="sourceCode" id="cb21"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb21-1"><a href="one-way-anova.html#cb21-1"></a>design_result &lt;-<span class="st"> </span><span class="kw">ANOVA_design</span>(</span>
+<span id="cb21-2"><a href="one-way-anova.html#cb21-2"></a>  <span class="dt">design =</span> string,</span>
+<span id="cb21-3"><a href="one-way-anova.html#cb21-3"></a>  <span class="dt">n =</span> n,</span>
+<span id="cb21-4"><a href="one-way-anova.html#cb21-4"></a>  <span class="dt">mu =</span> mu,</span>
+<span id="cb21-5"><a href="one-way-anova.html#cb21-5"></a>  <span class="dt">sd =</span> sd,</span>
+<span id="cb21-6"><a href="one-way-anova.html#cb21-6"></a>  <span class="dt">labelnames =</span> labelnames</span>
+<span id="cb21-7"><a href="one-way-anova.html#cb21-7"></a>  )</span></code></pre></div>
+<div class="sourceCode" id="cb22"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb22-1"><a href="one-way-anova.html#cb22-1"></a>simulation_result &lt;-<span class="st"> </span><span class="kw">ANOVA_power</span>(design_result, </span>
+<span id="cb22-2"><a href="one-way-anova.html#cb22-2"></a>                                 <span class="dt">alpha_level =</span> alpha_level, </span>
+<span id="cb22-3"><a href="one-way-anova.html#cb22-3"></a>                                 <span class="dt">nsims =</span> nsims,</span>
+<span id="cb22-4"><a href="one-way-anova.html#cb22-4"></a>                                 <span class="dt">verbose =</span> <span class="ot">FALSE</span>)</span></code></pre></div>
 <table class="table" style="margin-left: auto; margin-right: auto;">
 <caption>
 <span id="tab:unnamed-chunk-21">Table 2.3: </span>Simulated ANOVA Result
@@ -433,9 +441,9 @@ anova_condition
 </tr>
 </tbody>
 </table>
-<div class="sourceCode" id="cb23"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb23-1" title="1">exact_result &lt;-<span class="st"> </span><span class="kw">ANOVA_exact</span>(design_result,</a>
-<a class="sourceLine" id="cb23-2" title="2">                            <span class="dt">alpha_level =</span> alpha_level,</a>
-<a class="sourceLine" id="cb23-3" title="3">                            <span class="dt">verbose =</span> <span class="ot">FALSE</span>)</a></code></pre></div>
+<div class="sourceCode" id="cb23"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb23-1"><a href="one-way-anova.html#cb23-1"></a>exact_result &lt;-<span class="st"> </span><span class="kw">ANOVA_exact</span>(design_result,</span>
+<span id="cb23-2"><a href="one-way-anova.html#cb23-2"></a>                            <span class="dt">alpha_level =</span> alpha_level,</span>
+<span id="cb23-3"><a href="one-way-anova.html#cb23-3"></a>                            <span class="dt">verbose =</span> <span class="ot">FALSE</span>)</span></code></pre></div>
 <table class="table" style="margin-left: auto; margin-right: auto;">
 <caption>
 <span id="tab:unnamed-chunk-23">Table 2.4: </span>Exact ANOVA Result
@@ -481,13 +489,13 @@ condition
 <p>The simulation confirms that for the <em>F</em>-test for the ANOVA we have 90% power. This is also what Gpower tells us what would happen based on a post-hoc power analysis with an <em>f</em> of 0.2303587, 2 groups, 200 participants in total (100 in each between subject condition), and an alpha of 5%.</p>
 <p><img src="screenshots/gpower_8.png" /></p>
 <p>If we return to our expected means, how many participants do we need for sufficient power? Given the expected difference and standard deviation, d = 0.34375, and <em>f</em> = 0.171875. We can perform an a priori power analysis for this simple case, which tells us we need 179 participants in each group (we can’t split people in parts, and thus always round a power analysis upward), or 358 in total.</p>
-<div class="sourceCode" id="cb24"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb24-1" title="1">K &lt;-<span class="st"> </span><span class="dv">2</span></a>
-<a class="sourceLine" id="cb24-2" title="2">power &lt;-<span class="st"> </span><span class="fl">0.9</span></a>
-<a class="sourceLine" id="cb24-3" title="3">f &lt;-<span class="st"> </span><span class="fl">0.171875</span></a>
-<a class="sourceLine" id="cb24-4" title="4"><span class="kw">pwr.anova.test</span>(<span class="dt">power =</span> power,</a>
-<a class="sourceLine" id="cb24-5" title="5">               <span class="dt">k =</span> K,</a>
-<a class="sourceLine" id="cb24-6" title="6">               <span class="dt">f =</span> f,</a>
-<a class="sourceLine" id="cb24-7" title="7">               <span class="dt">sig.level =</span> alpha_level)</a></code></pre></div>
+<div class="sourceCode" id="cb24"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb24-1"><a href="one-way-anova.html#cb24-1"></a>K &lt;-<span class="st"> </span><span class="dv">2</span></span>
+<span id="cb24-2"><a href="one-way-anova.html#cb24-2"></a>power &lt;-<span class="st"> </span><span class="fl">0.9</span></span>
+<span id="cb24-3"><a href="one-way-anova.html#cb24-3"></a>f &lt;-<span class="st"> </span><span class="fl">0.171875</span></span>
+<span id="cb24-4"><a href="one-way-anova.html#cb24-4"></a><span class="kw">pwr.anova.test</span>(<span class="dt">power =</span> power,</span>
+<span id="cb24-5"><a href="one-way-anova.html#cb24-5"></a>               <span class="dt">k =</span> K,</span>
+<span id="cb24-6"><a href="one-way-anova.html#cb24-6"></a>               <span class="dt">f =</span> f,</span>
+<span id="cb24-7"><a href="one-way-anova.html#cb24-7"></a>               <span class="dt">sig.level =</span> alpha_level)</span></code></pre></div>
 <pre><code>## 
 ##      Balanced one-way analysis of variance power calculation 
 ## 
@@ -499,26 +507,26 @@ condition
 ## 
 ## NOTE: n is number in each group</code></pre>
 <p>If we re-run the simulation with this sample size, we indeed have 90% power.</p>
-<div class="sourceCode" id="cb26"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb26-1" title="1">string &lt;-<span class="st"> &quot;2b&quot;</span></a>
-<a class="sourceLine" id="cb26-2" title="2">n &lt;-<span class="st"> </span><span class="dv">179</span></a>
-<a class="sourceLine" id="cb26-3" title="3">mu &lt;-<span class="st"> </span><span class="kw">c</span>(<span class="dv">24</span>, <span class="fl">26.2</span>)</a>
-<a class="sourceLine" id="cb26-4" title="4"><span class="co"># Enter means in the order that matches the labels below.</span></a>
-<a class="sourceLine" id="cb26-5" title="5"><span class="co"># In this case, control, pet.</span></a>
-<a class="sourceLine" id="cb26-6" title="6">sd &lt;-<span class="st"> </span><span class="fl">6.4</span></a>
-<a class="sourceLine" id="cb26-7" title="7">labelnames &lt;-<span class="st"> </span><span class="kw">c</span>(<span class="st">&quot;condition&quot;</span>, <span class="st">&quot;control&quot;</span>, <span class="st">&quot;pet&quot;</span>) <span class="co">#</span></a>
-<a class="sourceLine" id="cb26-8" title="8"><span class="co"># the label names should be in the order of the means specified above.</span></a>
-<a class="sourceLine" id="cb26-9" title="9">design_result &lt;-<span class="st"> </span><span class="kw">ANOVA_design</span>(</a>
-<a class="sourceLine" id="cb26-10" title="10"><span class="dt">design =</span> string,</a>
-<a class="sourceLine" id="cb26-11" title="11"><span class="dt">n =</span> n,</a>
-<a class="sourceLine" id="cb26-12" title="12"><span class="dt">mu =</span> mu,</a>
-<a class="sourceLine" id="cb26-13" title="13"><span class="dt">sd =</span> sd,</a>
-<a class="sourceLine" id="cb26-14" title="14"><span class="dt">labelnames =</span> labelnames</a>
-<a class="sourceLine" id="cb26-15" title="15">)</a>
-<a class="sourceLine" id="cb26-16" title="16">alpha_level &lt;-<span class="st"> </span><span class="fl">0.05</span></a></code></pre></div>
-<div class="sourceCode" id="cb27"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb27-1" title="1">simulation_result &lt;-<span class="st"> </span><span class="kw">ANOVA_power</span>(design_result, </a>
-<a class="sourceLine" id="cb27-2" title="2">                                 <span class="dt">alpha_level =</span> alpha_level, </a>
-<a class="sourceLine" id="cb27-3" title="3">                                 <span class="dt">nsims =</span> nsims,</a>
-<a class="sourceLine" id="cb27-4" title="4">                                 <span class="dt">verbose =</span> <span class="ot">FALSE</span>)</a></code></pre></div>
+<div class="sourceCode" id="cb26"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb26-1"><a href="one-way-anova.html#cb26-1"></a>string &lt;-<span class="st"> &quot;2b&quot;</span></span>
+<span id="cb26-2"><a href="one-way-anova.html#cb26-2"></a>n &lt;-<span class="st"> </span><span class="dv">179</span></span>
+<span id="cb26-3"><a href="one-way-anova.html#cb26-3"></a>mu &lt;-<span class="st"> </span><span class="kw">c</span>(<span class="dv">24</span>, <span class="fl">26.2</span>)</span>
+<span id="cb26-4"><a href="one-way-anova.html#cb26-4"></a><span class="co"># Enter means in the order that matches the labels below.</span></span>
+<span id="cb26-5"><a href="one-way-anova.html#cb26-5"></a><span class="co"># In this case, control, pet.</span></span>
+<span id="cb26-6"><a href="one-way-anova.html#cb26-6"></a>sd &lt;-<span class="st"> </span><span class="fl">6.4</span></span>
+<span id="cb26-7"><a href="one-way-anova.html#cb26-7"></a>labelnames &lt;-<span class="st"> </span><span class="kw">c</span>(<span class="st">&quot;condition&quot;</span>, <span class="st">&quot;control&quot;</span>, <span class="st">&quot;pet&quot;</span>) <span class="co">#</span></span>
+<span id="cb26-8"><a href="one-way-anova.html#cb26-8"></a><span class="co"># the label names should be in the order of the means specified above.</span></span>
+<span id="cb26-9"><a href="one-way-anova.html#cb26-9"></a>design_result &lt;-<span class="st"> </span><span class="kw">ANOVA_design</span>(</span>
+<span id="cb26-10"><a href="one-way-anova.html#cb26-10"></a><span class="dt">design =</span> string,</span>
+<span id="cb26-11"><a href="one-way-anova.html#cb26-11"></a><span class="dt">n =</span> n,</span>
+<span id="cb26-12"><a href="one-way-anova.html#cb26-12"></a><span class="dt">mu =</span> mu,</span>
+<span id="cb26-13"><a href="one-way-anova.html#cb26-13"></a><span class="dt">sd =</span> sd,</span>
+<span id="cb26-14"><a href="one-way-anova.html#cb26-14"></a><span class="dt">labelnames =</span> labelnames</span>
+<span id="cb26-15"><a href="one-way-anova.html#cb26-15"></a>)</span>
+<span id="cb26-16"><a href="one-way-anova.html#cb26-16"></a>alpha_level &lt;-<span class="st"> </span><span class="fl">0.05</span></span></code></pre></div>
+<div class="sourceCode" id="cb27"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb27-1"><a href="one-way-anova.html#cb27-1"></a>simulation_result &lt;-<span class="st"> </span><span class="kw">ANOVA_power</span>(design_result, </span>
+<span id="cb27-2"><a href="one-way-anova.html#cb27-2"></a>                                 <span class="dt">alpha_level =</span> alpha_level, </span>
+<span id="cb27-3"><a href="one-way-anova.html#cb27-3"></a>                                 <span class="dt">nsims =</span> nsims,</span>
+<span id="cb27-4"><a href="one-way-anova.html#cb27-4"></a>                                 <span class="dt">verbose =</span> <span class="ot">FALSE</span>)</span></code></pre></div>
 <table class="table" style="margin-left: auto; margin-right: auto;">
 <caption>
 <span id="tab:unnamed-chunk-27">Table 2.5: </span>Simulated ANOVA Result
@@ -549,9 +557,9 @@ anova_condition
 </tr>
 </tbody>
 </table>
-<div class="sourceCode" id="cb28"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb28-1" title="1">exact_result &lt;-<span class="st"> </span><span class="kw">ANOVA_exact</span>(design_result,</a>
-<a class="sourceLine" id="cb28-2" title="2">                            <span class="dt">alpha_level =</span> alpha_level,</a>
-<a class="sourceLine" id="cb28-3" title="3">                            <span class="dt">verbose =</span> <span class="ot">FALSE</span>)</a></code></pre></div>
+<div class="sourceCode" id="cb28"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb28-1"><a href="one-way-anova.html#cb28-1"></a>exact_result &lt;-<span class="st"> </span><span class="kw">ANOVA_exact</span>(design_result,</span>
+<span id="cb28-2"><a href="one-way-anova.html#cb28-2"></a>                            <span class="dt">alpha_level =</span> alpha_level,</span>
+<span id="cb28-3"><a href="one-way-anova.html#cb28-3"></a>                            <span class="dt">verbose =</span> <span class="ot">FALSE</span>)</span></code></pre></div>
 <table class="table" style="margin-left: auto; margin-right: auto;">
 <caption>
 <span id="tab:unnamed-chunk-29">Table 2.6: </span>Exact ANOVA Result
@@ -604,29 +612,29 @@ condition
 <div id="three-conditions" class="section level3">
 <h3><span class="header-section-number">2.1.2</span> Three conditions</h3>
 <p>Imagine we aim to design a study to test the hypothesis that giving people a pet to take care of will increase their life satisfaction. We have a control condition, a ‘cat’ pet condition, and a ‘dog’ pet condition. We can simulate a One-Way ANOVA with a specified alpha, sample size, and effect size, on see the statistical power we would have for the ANOVA and the follow-up comparisons. We expect all pets to increase life-satisfaction compared to the control condition. Obviously, we also expect the people who are in the ‘dog’ pet condition to have even greater life-satisfaction than people in the ‘cat’ pet condition. Based on work by Pavot and Diener (1993) we believe that we can expect responses on the life-satifaction scale to have a mean of approximately 24 in our population, with a standard deviation of 6.4. We expect having a pet increases life satisfaction with approximately 2.2 scale points for participants who get a cat, and 2.6 scale points for participants who get a dog. We initially consider collecting data from 150 participants in total, with 50 participants in each condition. But before we proceed with the data collection, we examine the statistical power our design would have to detect the differences we predict.</p>
-<div class="sourceCode" id="cb29"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb29-1" title="1">string &lt;-<span class="st"> &quot;3b&quot;</span></a>
-<a class="sourceLine" id="cb29-2" title="2">n &lt;-<span class="st"> </span><span class="dv">50</span></a>
-<a class="sourceLine" id="cb29-3" title="3"><span class="co"># We are thinking of running 50 peope in each condition</span></a>
-<a class="sourceLine" id="cb29-4" title="4">mu &lt;-<span class="st"> </span><span class="kw">c</span>(<span class="dv">24</span>, <span class="fl">26.2</span>, <span class="fl">26.6</span>)</a>
-<a class="sourceLine" id="cb29-5" title="5"><span class="co"># Enter means in the order that matches the labels below.</span></a>
-<a class="sourceLine" id="cb29-6" title="6"><span class="co"># In this case, control, cat, dog.</span></a>
-<a class="sourceLine" id="cb29-7" title="7">sd &lt;-<span class="st"> </span><span class="fl">6.4</span></a>
-<a class="sourceLine" id="cb29-8" title="8">labelnames &lt;-<span class="st"> </span><span class="kw">c</span>(<span class="st">&quot;condition&quot;</span>, <span class="st">&quot;control&quot;</span>, <span class="st">&quot;cat&quot;</span>, <span class="st">&quot;dog&quot;</span>) <span class="co">#</span></a>
-<a class="sourceLine" id="cb29-9" title="9"><span class="co"># the label names should be in the order of the means specified above.</span></a>
-<a class="sourceLine" id="cb29-10" title="10">design_result &lt;-<span class="st"> </span><span class="kw">ANOVA_design</span>(</a>
-<a class="sourceLine" id="cb29-11" title="11"><span class="dt">design =</span> string,</a>
-<a class="sourceLine" id="cb29-12" title="12"><span class="dt">n =</span> n,</a>
-<a class="sourceLine" id="cb29-13" title="13"><span class="dt">mu =</span> mu,</a>
-<a class="sourceLine" id="cb29-14" title="14"><span class="dt">sd =</span> sd,</a>
-<a class="sourceLine" id="cb29-15" title="15"><span class="dt">labelnames =</span> labelnames</a>
-<a class="sourceLine" id="cb29-16" title="16">)</a>
-<a class="sourceLine" id="cb29-17" title="17">alpha_level &lt;-<span class="st"> </span><span class="fl">0.05</span></a></code></pre></div>
-<div class="sourceCode" id="cb30"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb30-1" title="1"><span class="co"># You should think carefully about how to justify your alpha level.</span></a>
-<a class="sourceLine" id="cb30-2" title="2"><span class="co"># We will give some examples later, but for now, use 0.05.</span></a>
-<a class="sourceLine" id="cb30-3" title="3">simulation_result &lt;-<span class="st"> </span><span class="kw">ANOVA_power</span>(design_result, </a>
-<a class="sourceLine" id="cb30-4" title="4">                                 <span class="dt">alpha_level =</span> alpha_level, </a>
-<a class="sourceLine" id="cb30-5" title="5">                                 <span class="dt">nsims =</span> nsims,</a>
-<a class="sourceLine" id="cb30-6" title="6">                                 <span class="dt">verbose =</span> <span class="ot">FALSE</span>)</a></code></pre></div>
+<div class="sourceCode" id="cb29"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb29-1"><a href="one-way-anova.html#cb29-1"></a>string &lt;-<span class="st"> &quot;3b&quot;</span></span>
+<span id="cb29-2"><a href="one-way-anova.html#cb29-2"></a>n &lt;-<span class="st"> </span><span class="dv">50</span></span>
+<span id="cb29-3"><a href="one-way-anova.html#cb29-3"></a><span class="co"># We are thinking of running 50 peope in each condition</span></span>
+<span id="cb29-4"><a href="one-way-anova.html#cb29-4"></a>mu &lt;-<span class="st"> </span><span class="kw">c</span>(<span class="dv">24</span>, <span class="fl">26.2</span>, <span class="fl">26.6</span>)</span>
+<span id="cb29-5"><a href="one-way-anova.html#cb29-5"></a><span class="co"># Enter means in the order that matches the labels below.</span></span>
+<span id="cb29-6"><a href="one-way-anova.html#cb29-6"></a><span class="co"># In this case, control, cat, dog.</span></span>
+<span id="cb29-7"><a href="one-way-anova.html#cb29-7"></a>sd &lt;-<span class="st"> </span><span class="fl">6.4</span></span>
+<span id="cb29-8"><a href="one-way-anova.html#cb29-8"></a>labelnames &lt;-<span class="st"> </span><span class="kw">c</span>(<span class="st">&quot;condition&quot;</span>, <span class="st">&quot;control&quot;</span>, <span class="st">&quot;cat&quot;</span>, <span class="st">&quot;dog&quot;</span>) <span class="co">#</span></span>
+<span id="cb29-9"><a href="one-way-anova.html#cb29-9"></a><span class="co"># the label names should be in the order of the means specified above.</span></span>
+<span id="cb29-10"><a href="one-way-anova.html#cb29-10"></a>design_result &lt;-<span class="st"> </span><span class="kw">ANOVA_design</span>(</span>
+<span id="cb29-11"><a href="one-way-anova.html#cb29-11"></a><span class="dt">design =</span> string,</span>
+<span id="cb29-12"><a href="one-way-anova.html#cb29-12"></a><span class="dt">n =</span> n,</span>
+<span id="cb29-13"><a href="one-way-anova.html#cb29-13"></a><span class="dt">mu =</span> mu,</span>
+<span id="cb29-14"><a href="one-way-anova.html#cb29-14"></a><span class="dt">sd =</span> sd,</span>
+<span id="cb29-15"><a href="one-way-anova.html#cb29-15"></a><span class="dt">labelnames =</span> labelnames</span>
+<span id="cb29-16"><a href="one-way-anova.html#cb29-16"></a>)</span>
+<span id="cb29-17"><a href="one-way-anova.html#cb29-17"></a>alpha_level &lt;-<span class="st"> </span><span class="fl">0.05</span></span></code></pre></div>
+<div class="sourceCode" id="cb30"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb30-1"><a href="one-way-anova.html#cb30-1"></a><span class="co"># You should think carefully about how to justify your alpha level.</span></span>
+<span id="cb30-2"><a href="one-way-anova.html#cb30-2"></a><span class="co"># We will give some examples later, but for now, use 0.05.</span></span>
+<span id="cb30-3"><a href="one-way-anova.html#cb30-3"></a>simulation_result &lt;-<span class="st"> </span><span class="kw">ANOVA_power</span>(design_result, </span>
+<span id="cb30-4"><a href="one-way-anova.html#cb30-4"></a>                                 <span class="dt">alpha_level =</span> alpha_level, </span>
+<span id="cb30-5"><a href="one-way-anova.html#cb30-5"></a>                                 <span class="dt">nsims =</span> nsims,</span>
+<span id="cb30-6"><a href="one-way-anova.html#cb30-6"></a>                                 <span class="dt">verbose =</span> <span class="ot">FALSE</span>)</span></code></pre></div>
 <table class="table" style="margin-left: auto; margin-right: auto;">
 <caption>
 <span id="tab:unnamed-chunk-34">Table 2.7: </span>Simulated ANOVA Result
@@ -657,9 +665,9 @@ anova_condition
 </tr>
 </tbody>
 </table>
-<div class="sourceCode" id="cb31"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb31-1" title="1">exact_result &lt;-<span class="st"> </span><span class="kw">ANOVA_exact</span>(design_result,</a>
-<a class="sourceLine" id="cb31-2" title="2">                            <span class="dt">alpha_level =</span> alpha_level,</a>
-<a class="sourceLine" id="cb31-3" title="3">                            <span class="dt">verbose =</span> <span class="ot">FALSE</span>)</a></code></pre></div>
+<div class="sourceCode" id="cb31"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb31-1"><a href="one-way-anova.html#cb31-1"></a>exact_result &lt;-<span class="st"> </span><span class="kw">ANOVA_exact</span>(design_result,</span>
+<span id="cb31-2"><a href="one-way-anova.html#cb31-2"></a>                            <span class="dt">alpha_level =</span> alpha_level,</span>
+<span id="cb31-3"><a href="one-way-anova.html#cb31-3"></a>                            <span class="dt">verbose =</span> <span class="ot">FALSE</span>)</span></code></pre></div>
 <table class="table" style="margin-left: auto; margin-right: auto;">
 <caption>
 <span id="tab:unnamed-chunk-36">Table 2.8: </span>Exact ANOVA Result
@@ -709,65 +717,65 @@ condition
 <p>We are typically not just interested in the ANOVA, but also in follow up comparisons. In this case, we would perform a <em>t</em>-test comparing the control condition against the cat and dog condition, and we would compare the cat and dog conditions against each other, in independent <em>t</em>-tests.</p>
 <p>For our example, Cohen’s d (the standardized mean difference) is 2.2/6.4, or d = 0.34375 for the difference between the control condition and cats, 2.6/6.4 of d = 0.40625 for the difference between the control condition and dogs, and 0.4/6.4 or d = 0.0625 for the difference between cats and dogs as pets.</p>
 <p>We can easily compute the expected power for these simple comparisons using the pwr package.</p>
-<div class="sourceCode" id="cb32"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb32-1" title="1"><span class="kw">pwr.t.test</span>(</a>
-<a class="sourceLine" id="cb32-2" title="2">  <span class="dt">d =</span> <span class="fl">2.2</span> <span class="op">/</span><span class="st"> </span><span class="fl">6.4</span>,</a>
-<a class="sourceLine" id="cb32-3" title="3">  <span class="dt">n =</span> <span class="dv">50</span>,</a>
-<a class="sourceLine" id="cb32-4" title="4">  <span class="dt">sig.level =</span> <span class="fl">0.05</span>,</a>
-<a class="sourceLine" id="cb32-5" title="5">  <span class="dt">type =</span> <span class="st">&quot;two.sample&quot;</span>,</a>
-<a class="sourceLine" id="cb32-6" title="6">  <span class="dt">alternative =</span> <span class="st">&quot;two.sided&quot;</span></a>
-<a class="sourceLine" id="cb32-7" title="7">  )<span class="op">$</span>power</a></code></pre></div>
+<div class="sourceCode" id="cb32"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb32-1"><a href="one-way-anova.html#cb32-1"></a><span class="kw">pwr.t.test</span>(</span>
+<span id="cb32-2"><a href="one-way-anova.html#cb32-2"></a>  <span class="dt">d =</span> <span class="fl">2.2</span> <span class="op">/</span><span class="st"> </span><span class="fl">6.4</span>,</span>
+<span id="cb32-3"><a href="one-way-anova.html#cb32-3"></a>  <span class="dt">n =</span> <span class="dv">50</span>,</span>
+<span id="cb32-4"><a href="one-way-anova.html#cb32-4"></a>  <span class="dt">sig.level =</span> <span class="fl">0.05</span>,</span>
+<span id="cb32-5"><a href="one-way-anova.html#cb32-5"></a>  <span class="dt">type =</span> <span class="st">&quot;two.sample&quot;</span>,</span>
+<span id="cb32-6"><a href="one-way-anova.html#cb32-6"></a>  <span class="dt">alternative =</span> <span class="st">&quot;two.sided&quot;</span></span>
+<span id="cb32-7"><a href="one-way-anova.html#cb32-7"></a>  )<span class="op">$</span>power</span></code></pre></div>
 <pre><code>## [1] 0.3983064</code></pre>
-<div class="sourceCode" id="cb34"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb34-1" title="1">  <span class="kw">pwr.t.test</span>(</a>
-<a class="sourceLine" id="cb34-2" title="2">  <span class="dt">d =</span> <span class="fl">2.6</span> <span class="op">/</span><span class="st"> </span><span class="fl">6.4</span>,</a>
-<a class="sourceLine" id="cb34-3" title="3">  <span class="dt">n =</span> <span class="dv">50</span>,</a>
-<a class="sourceLine" id="cb34-4" title="4">  <span class="dt">sig.level =</span> <span class="fl">0.05</span>,</a>
-<a class="sourceLine" id="cb34-5" title="5">  <span class="dt">type =</span> <span class="st">&quot;two.sample&quot;</span>,</a>
-<a class="sourceLine" id="cb34-6" title="6">  <span class="dt">alternative =</span> <span class="st">&quot;two.sided&quot;</span></a>
-<a class="sourceLine" id="cb34-7" title="7">  )<span class="op">$</span>power</a></code></pre></div>
+<div class="sourceCode" id="cb34"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb34-1"><a href="one-way-anova.html#cb34-1"></a>  <span class="kw">pwr.t.test</span>(</span>
+<span id="cb34-2"><a href="one-way-anova.html#cb34-2"></a>  <span class="dt">d =</span> <span class="fl">2.6</span> <span class="op">/</span><span class="st"> </span><span class="fl">6.4</span>,</span>
+<span id="cb34-3"><a href="one-way-anova.html#cb34-3"></a>  <span class="dt">n =</span> <span class="dv">50</span>,</span>
+<span id="cb34-4"><a href="one-way-anova.html#cb34-4"></a>  <span class="dt">sig.level =</span> <span class="fl">0.05</span>,</span>
+<span id="cb34-5"><a href="one-way-anova.html#cb34-5"></a>  <span class="dt">type =</span> <span class="st">&quot;two.sample&quot;</span>,</span>
+<span id="cb34-6"><a href="one-way-anova.html#cb34-6"></a>  <span class="dt">alternative =</span> <span class="st">&quot;two.sided&quot;</span></span>
+<span id="cb34-7"><a href="one-way-anova.html#cb34-7"></a>  )<span class="op">$</span>power</span></code></pre></div>
 <pre><code>## [1] 0.5205162</code></pre>
-<div class="sourceCode" id="cb36"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb36-1" title="1">  <span class="kw">pwr.t.test</span>(</a>
-<a class="sourceLine" id="cb36-2" title="2">  <span class="dt">d =</span> <span class="fl">0.4</span> <span class="op">/</span><span class="st"> </span><span class="fl">6.4</span>,</a>
-<a class="sourceLine" id="cb36-3" title="3">  <span class="dt">n =</span> <span class="dv">50</span>,</a>
-<a class="sourceLine" id="cb36-4" title="4">  <span class="dt">sig.level =</span> <span class="fl">0.05</span>,</a>
-<a class="sourceLine" id="cb36-5" title="5">  <span class="dt">type =</span> <span class="st">&quot;two.sample&quot;</span>,</a>
-<a class="sourceLine" id="cb36-6" title="6">  <span class="dt">alternative =</span> <span class="st">&quot;two.sided&quot;</span></a>
-<a class="sourceLine" id="cb36-7" title="7">  )<span class="op">$</span>power</a></code></pre></div>
+<div class="sourceCode" id="cb36"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb36-1"><a href="one-way-anova.html#cb36-1"></a>  <span class="kw">pwr.t.test</span>(</span>
+<span id="cb36-2"><a href="one-way-anova.html#cb36-2"></a>  <span class="dt">d =</span> <span class="fl">0.4</span> <span class="op">/</span><span class="st"> </span><span class="fl">6.4</span>,</span>
+<span id="cb36-3"><a href="one-way-anova.html#cb36-3"></a>  <span class="dt">n =</span> <span class="dv">50</span>,</span>
+<span id="cb36-4"><a href="one-way-anova.html#cb36-4"></a>  <span class="dt">sig.level =</span> <span class="fl">0.05</span>,</span>
+<span id="cb36-5"><a href="one-way-anova.html#cb36-5"></a>  <span class="dt">type =</span> <span class="st">&quot;two.sample&quot;</span>,</span>
+<span id="cb36-6"><a href="one-way-anova.html#cb36-6"></a>  <span class="dt">alternative =</span> <span class="st">&quot;two.sided&quot;</span></span>
+<span id="cb36-7"><a href="one-way-anova.html#cb36-7"></a>  )<span class="op">$</span>power</span></code></pre></div>
 <pre><code>## [1] 0.06104044</code></pre>
 <p>This analysis tells us that running the study with 50 participants in each condition is more likely to <em>not</em> yield a significant test result, even if our expected pattern of differences is true, than that we will observe a <em>p</em>-value smaller than our alpha level. This is not optimal.</p>
 <p>Let’s mathematically explore which pattern of means we would need to expect to habe 90% power for the ANOVA with 50 participants in each group. We can use the pwr package in R to compute a sensitivity analysis that tells us the effect size, in Cohen’s <em>f</em>, that we are able to detect with 3 groups and 50 partiicpants in each group, in order to achive 90% power with an alpha level of 5%.</p>
-<div class="sourceCode" id="cb38"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb38-1" title="1">K &lt;-<span class="st"> </span><span class="dv">3</span></a>
-<a class="sourceLine" id="cb38-2" title="2">n &lt;-<span class="st"> </span><span class="dv">50</span></a>
-<a class="sourceLine" id="cb38-3" title="3">sd &lt;-<span class="st"> </span><span class="fl">6.4</span></a>
-<a class="sourceLine" id="cb38-4" title="4">r &lt;-<span class="st"> </span><span class="dv">0</span></a>
-<a class="sourceLine" id="cb38-5" title="5"><span class="co">#Calculate f when running simulation</span></a>
-<a class="sourceLine" id="cb38-6" title="6">f &lt;-<span class="st"> </span><span class="kw">pwr.anova.test</span>(<span class="dt">n =</span> n,</a>
-<a class="sourceLine" id="cb38-7" title="7">                    <span class="dt">k =</span> K,</a>
-<a class="sourceLine" id="cb38-8" title="8">                    <span class="dt">power =</span> <span class="fl">0.9</span>,</a>
-<a class="sourceLine" id="cb38-9" title="9">                    <span class="dt">sig.level =</span> alpha_level)<span class="op">$</span>f</a>
-<a class="sourceLine" id="cb38-10" title="10">f</a></code></pre></div>
+<div class="sourceCode" id="cb38"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb38-1"><a href="one-way-anova.html#cb38-1"></a>K &lt;-<span class="st"> </span><span class="dv">3</span></span>
+<span id="cb38-2"><a href="one-way-anova.html#cb38-2"></a>n &lt;-<span class="st"> </span><span class="dv">50</span></span>
+<span id="cb38-3"><a href="one-way-anova.html#cb38-3"></a>sd &lt;-<span class="st"> </span><span class="fl">6.4</span></span>
+<span id="cb38-4"><a href="one-way-anova.html#cb38-4"></a>r &lt;-<span class="st"> </span><span class="dv">0</span></span>
+<span id="cb38-5"><a href="one-way-anova.html#cb38-5"></a><span class="co">#Calculate f when running simulation</span></span>
+<span id="cb38-6"><a href="one-way-anova.html#cb38-6"></a>f &lt;-<span class="st"> </span><span class="kw">pwr.anova.test</span>(<span class="dt">n =</span> n,</span>
+<span id="cb38-7"><a href="one-way-anova.html#cb38-7"></a>                    <span class="dt">k =</span> K,</span>
+<span id="cb38-8"><a href="one-way-anova.html#cb38-8"></a>                    <span class="dt">power =</span> <span class="fl">0.9</span>,</span>
+<span id="cb38-9"><a href="one-way-anova.html#cb38-9"></a>                    <span class="dt">sig.level =</span> alpha_level)<span class="op">$</span>f</span>
+<span id="cb38-10"><a href="one-way-anova.html#cb38-10"></a>f</span></code></pre></div>
 <pre><code>## [1] 0.2934417</code></pre>
-<p>This sensitivity analysis shows we have 90% power in our planned design to detect effects of Cohen’s <em>f</em> of 0.2934417. Benchmarks by <span class="citation">Cohen (<a href="#ref-cohen1988spa">1988</a>)</span> for small, medium, and large Cohen’s <em>f</em> values are 0.1, 0.25, and 0.4, which correspond to eta-squared values of small (.0099), medium (.0588), and large (.1379), in line with d = .2, .5, or .8. So, at least based on these benchmarks, we have 90% power to detect effects that are somewhat sizeable.</p>
-<div class="sourceCode" id="cb40"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb40-1" title="1">f2 &lt;-<span class="st"> </span>f<span class="op">^</span><span class="dv">2</span></a>
-<a class="sourceLine" id="cb40-2" title="2">ES &lt;-<span class="st"> </span>f2 <span class="op">/</span><span class="st"> </span>(f2 <span class="op">+</span><span class="st"> </span><span class="dv">1</span>)</a>
-<a class="sourceLine" id="cb40-3" title="3">ES</a></code></pre></div>
+<p>This sensitivity analysis shows we have 90% power in our planned design to detect effects of Cohen’s <em>f</em> of 0.2934417. Benchmarks by <span class="citation">Cohen (<a href="#ref-cohen1988spa" role="doc-biblioref">1988</a>)</span> for small, medium, and large Cohen’s <em>f</em> values are 0.1, 0.25, and 0.4, which correspond to eta-squared values of small (.0099), medium (.0588), and large (.1379), in line with d = .2, .5, or .8. So, at least based on these benchmarks, we have 90% power to detect effects that are somewhat sizeable.</p>
+<div class="sourceCode" id="cb40"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb40-1"><a href="one-way-anova.html#cb40-1"></a>f2 &lt;-<span class="st"> </span>f<span class="op">^</span><span class="dv">2</span></span>
+<span id="cb40-2"><a href="one-way-anova.html#cb40-2"></a>ES &lt;-<span class="st"> </span>f2 <span class="op">/</span><span class="st"> </span>(f2 <span class="op">+</span><span class="st"> </span><span class="dv">1</span>)</span>
+<span id="cb40-3"><a href="one-way-anova.html#cb40-3"></a>ES</span></code></pre></div>
 <pre><code>## [1] 0.07928127</code></pre>
 <p>Expressed in eta-squared, we can detect values of eta-squared = 0.0793 or larger.</p>
-<div class="sourceCode" id="cb42"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb42-1" title="1">mu &lt;-<span class="st"> </span><span class="kw">mu_from_ES</span>(<span class="dt">K =</span> K, <span class="dt">ES =</span> ES)</a>
-<a class="sourceLine" id="cb42-2" title="2">mu &lt;-<span class="st"> </span>mu <span class="op">*</span><span class="st"> </span>sd</a>
-<a class="sourceLine" id="cb42-3" title="3">mu</a></code></pre></div>
+<div class="sourceCode" id="cb42"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb42-1"><a href="one-way-anova.html#cb42-1"></a>mu &lt;-<span class="st"> </span><span class="kw">mu_from_ES</span>(<span class="dt">K =</span> K, <span class="dt">ES =</span> ES)</span>
+<span id="cb42-2"><a href="one-way-anova.html#cb42-2"></a>mu &lt;-<span class="st"> </span>mu <span class="op">*</span><span class="st"> </span>sd</span>
+<span id="cb42-3"><a href="one-way-anova.html#cb42-3"></a>mu</span></code></pre></div>
 <pre><code>## [1] -2.300104  0.000000  2.300104</code></pre>
 <p>We can compute a pattern of means, given a standard deviation of 6.4, that would give us an effect size of f = 0.2934, or eta-squared of 0.0793. We should be able to accomplish this is the means are -2.300104, 0.000000, and 2.300104. We can use these values to confirm the ANOVA has 90% power.</p>
-<div class="sourceCode" id="cb44"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb44-1" title="1">design_result &lt;-<span class="st"> </span><span class="kw">ANOVA_design</span>(</a>
-<a class="sourceLine" id="cb44-2" title="2">  <span class="dt">design =</span> string,</a>
-<a class="sourceLine" id="cb44-3" title="3">  <span class="dt">n =</span> n,</a>
-<a class="sourceLine" id="cb44-4" title="4">  <span class="dt">mu =</span> mu,</a>
-<a class="sourceLine" id="cb44-5" title="5">  <span class="dt">sd =</span> sd,</a>
-<a class="sourceLine" id="cb44-6" title="6">  <span class="dt">labelnames =</span> labelnames</a>
-<a class="sourceLine" id="cb44-7" title="7">  )</a></code></pre></div>
-<div class="sourceCode" id="cb45"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb45-1" title="1">simulation_result &lt;-<span class="st"> </span><span class="kw">ANOVA_power</span>(design_result, </a>
-<a class="sourceLine" id="cb45-2" title="2">                                 <span class="dt">alpha_level =</span> alpha_level, </a>
-<a class="sourceLine" id="cb45-3" title="3">                                 <span class="dt">nsims =</span> nsims,</a>
-<a class="sourceLine" id="cb45-4" title="4">                                 <span class="dt">verbose =</span> <span class="ot">FALSE</span>)</a></code></pre></div>
+<div class="sourceCode" id="cb44"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb44-1"><a href="one-way-anova.html#cb44-1"></a>design_result &lt;-<span class="st"> </span><span class="kw">ANOVA_design</span>(</span>
+<span id="cb44-2"><a href="one-way-anova.html#cb44-2"></a>  <span class="dt">design =</span> string,</span>
+<span id="cb44-3"><a href="one-way-anova.html#cb44-3"></a>  <span class="dt">n =</span> n,</span>
+<span id="cb44-4"><a href="one-way-anova.html#cb44-4"></a>  <span class="dt">mu =</span> mu,</span>
+<span id="cb44-5"><a href="one-way-anova.html#cb44-5"></a>  <span class="dt">sd =</span> sd,</span>
+<span id="cb44-6"><a href="one-way-anova.html#cb44-6"></a>  <span class="dt">labelnames =</span> labelnames</span>
+<span id="cb44-7"><a href="one-way-anova.html#cb44-7"></a>  )</span></code></pre></div>
+<div class="sourceCode" id="cb45"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb45-1"><a href="one-way-anova.html#cb45-1"></a>simulation_result &lt;-<span class="st"> </span><span class="kw">ANOVA_power</span>(design_result, </span>
+<span id="cb45-2"><a href="one-way-anova.html#cb45-2"></a>                                 <span class="dt">alpha_level =</span> alpha_level, </span>
+<span id="cb45-3"><a href="one-way-anova.html#cb45-3"></a>                                 <span class="dt">nsims =</span> nsims,</span>
+<span id="cb45-4"><a href="one-way-anova.html#cb45-4"></a>                                 <span class="dt">verbose =</span> <span class="ot">FALSE</span>)</span></code></pre></div>
 <table class="table" style="margin-left: auto; margin-right: auto;">
 <caption>
 <span id="tab:unnamed-chunk-43">Table 2.9: </span>Simulated ANOVA Result
@@ -798,9 +806,9 @@ anova_condition
 </tr>
 </tbody>
 </table>
-<div class="sourceCode" id="cb46"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb46-1" title="1">exact_result &lt;-<span class="st"> </span><span class="kw">ANOVA_exact</span>(design_result,</a>
-<a class="sourceLine" id="cb46-2" title="2">                            <span class="dt">alpha_level =</span> alpha_level,</a>
-<a class="sourceLine" id="cb46-3" title="3">                            <span class="dt">verbose =</span> <span class="ot">FALSE</span>)</a></code></pre></div>
+<div class="sourceCode" id="cb46"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb46-1"><a href="one-way-anova.html#cb46-1"></a>exact_result &lt;-<span class="st"> </span><span class="kw">ANOVA_exact</span>(design_result,</span>
+<span id="cb46-2"><a href="one-way-anova.html#cb46-2"></a>                            <span class="dt">alpha_level =</span> alpha_level,</span>
+<span id="cb46-3"><a href="one-way-anova.html#cb46-3"></a>                            <span class="dt">verbose =</span> <span class="ot">FALSE</span>)</span></code></pre></div>
 <table class="table" style="margin-left: auto; margin-right: auto;">
 <caption>
 <span id="tab:unnamed-chunk-45">Table 2.10: </span>Exact ANOVA Result
@@ -846,105 +854,105 @@ condition
 <p>The simulation confirms that for the <em>F</em>-test for the ANOVA we have 90% power. This is also what g*power tells us what would happen based on a post-hoc power analysis with an f of 0.2934417, 3 groups, 150 participants in total (50 in each between subject condition), and an alpha of 5%.</p>
 <p><img src="screenshots/gpower_7.png" /></p>
 <p>We can also compute the power for the ANOVA and simple effects in <code>R</code> with the <code>pwr</code> package. The calculated effect sizes and power match those from the simulation.</p>
-<div class="sourceCode" id="cb47"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb47-1" title="1">K &lt;-<span class="st"> </span><span class="dv">3</span></a>
-<a class="sourceLine" id="cb47-2" title="2">n &lt;-<span class="st"> </span><span class="dv">50</span></a>
-<a class="sourceLine" id="cb47-3" title="3">sd &lt;-<span class="st"> </span><span class="fl">6.4</span></a>
-<a class="sourceLine" id="cb47-4" title="4">f &lt;-<span class="st"> </span><span class="fl">0.2934417</span></a>
-<a class="sourceLine" id="cb47-5" title="5"><span class="kw">pwr.anova.test</span>(</a>
-<a class="sourceLine" id="cb47-6" title="6"><span class="dt">n =</span> n,</a>
-<a class="sourceLine" id="cb47-7" title="7"><span class="dt">k =</span> K,</a>
-<a class="sourceLine" id="cb47-8" title="8"><span class="dt">f =</span> f,</a>
-<a class="sourceLine" id="cb47-9" title="9"><span class="dt">sig.level =</span> alpha_level</a>
-<a class="sourceLine" id="cb47-10" title="10">)<span class="op">$</span>power</a></code></pre></div>
+<div class="sourceCode" id="cb47"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb47-1"><a href="one-way-anova.html#cb47-1"></a>K &lt;-<span class="st"> </span><span class="dv">3</span></span>
+<span id="cb47-2"><a href="one-way-anova.html#cb47-2"></a>n &lt;-<span class="st"> </span><span class="dv">50</span></span>
+<span id="cb47-3"><a href="one-way-anova.html#cb47-3"></a>sd &lt;-<span class="st"> </span><span class="fl">6.4</span></span>
+<span id="cb47-4"><a href="one-way-anova.html#cb47-4"></a>f &lt;-<span class="st"> </span><span class="fl">0.2934417</span></span>
+<span id="cb47-5"><a href="one-way-anova.html#cb47-5"></a><span class="kw">pwr.anova.test</span>(</span>
+<span id="cb47-6"><a href="one-way-anova.html#cb47-6"></a><span class="dt">n =</span> n,</span>
+<span id="cb47-7"><a href="one-way-anova.html#cb47-7"></a><span class="dt">k =</span> K,</span>
+<span id="cb47-8"><a href="one-way-anova.html#cb47-8"></a><span class="dt">f =</span> f,</span>
+<span id="cb47-9"><a href="one-way-anova.html#cb47-9"></a><span class="dt">sig.level =</span> alpha_level</span>
+<span id="cb47-10"><a href="one-way-anova.html#cb47-10"></a>)<span class="op">$</span>power</span></code></pre></div>
 <pre><code>## [1] 0.9000112</code></pre>
-<div class="sourceCode" id="cb49"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb49-1" title="1">d &lt;-<span class="st"> </span><span class="fl">2.300104</span> <span class="op">/</span><span class="st"> </span><span class="fl">6.4</span></a>
-<a class="sourceLine" id="cb49-2" title="2">d</a></code></pre></div>
+<div class="sourceCode" id="cb49"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb49-1"><a href="one-way-anova.html#cb49-1"></a>d &lt;-<span class="st"> </span><span class="fl">2.300104</span> <span class="op">/</span><span class="st"> </span><span class="fl">6.4</span></span>
+<span id="cb49-2"><a href="one-way-anova.html#cb49-2"></a>d</span></code></pre></div>
 <pre><code>## [1] 0.3593912</code></pre>
-<div class="sourceCode" id="cb51"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb51-1" title="1"><span class="kw">pwr.t.test</span>(</a>
-<a class="sourceLine" id="cb51-2" title="2"><span class="dt">d =</span> <span class="fl">2.300104</span> <span class="op">/</span><span class="st"> </span><span class="fl">6.4</span>,</a>
-<a class="sourceLine" id="cb51-3" title="3"><span class="dt">n =</span> <span class="dv">50</span>,</a>
-<a class="sourceLine" id="cb51-4" title="4"><span class="dt">sig.level =</span> <span class="fl">0.05</span>,</a>
-<a class="sourceLine" id="cb51-5" title="5"><span class="dt">type =</span> <span class="st">&quot;two.sample&quot;</span>,</a>
-<a class="sourceLine" id="cb51-6" title="6"><span class="dt">alternative =</span> <span class="st">&quot;two.sided&quot;</span></a>
-<a class="sourceLine" id="cb51-7" title="7">)<span class="op">$</span>power</a></code></pre></div>
+<div class="sourceCode" id="cb51"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb51-1"><a href="one-way-anova.html#cb51-1"></a><span class="kw">pwr.t.test</span>(</span>
+<span id="cb51-2"><a href="one-way-anova.html#cb51-2"></a><span class="dt">d =</span> <span class="fl">2.300104</span> <span class="op">/</span><span class="st"> </span><span class="fl">6.4</span>,</span>
+<span id="cb51-3"><a href="one-way-anova.html#cb51-3"></a><span class="dt">n =</span> <span class="dv">50</span>,</span>
+<span id="cb51-4"><a href="one-way-anova.html#cb51-4"></a><span class="dt">sig.level =</span> <span class="fl">0.05</span>,</span>
+<span id="cb51-5"><a href="one-way-anova.html#cb51-5"></a><span class="dt">type =</span> <span class="st">&quot;two.sample&quot;</span>,</span>
+<span id="cb51-6"><a href="one-way-anova.html#cb51-6"></a><span class="dt">alternative =</span> <span class="st">&quot;two.sided&quot;</span></span>
+<span id="cb51-7"><a href="one-way-anova.html#cb51-7"></a>)<span class="op">$</span>power</span></code></pre></div>
 <pre><code>## [1] 0.4284243</code></pre>
-<div class="sourceCode" id="cb53"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb53-1" title="1">d &lt;-<span class="st"> </span><span class="dv">2</span> <span class="op">*</span><span class="st"> </span><span class="fl">2.300104</span> <span class="op">/</span><span class="st"> </span><span class="fl">6.4</span></a>
-<a class="sourceLine" id="cb53-2" title="2">d</a></code></pre></div>
+<div class="sourceCode" id="cb53"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb53-1"><a href="one-way-anova.html#cb53-1"></a>d &lt;-<span class="st"> </span><span class="dv">2</span> <span class="op">*</span><span class="st"> </span><span class="fl">2.300104</span> <span class="op">/</span><span class="st"> </span><span class="fl">6.4</span></span>
+<span id="cb53-2"><a href="one-way-anova.html#cb53-2"></a>d</span></code></pre></div>
 <pre><code>## [1] 0.7187825</code></pre>
-<div class="sourceCode" id="cb55"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb55-1" title="1"><span class="kw">pwr.t.test</span>(</a>
-<a class="sourceLine" id="cb55-2" title="2"><span class="dt">d =</span> d,</a>
-<a class="sourceLine" id="cb55-3" title="3"><span class="dt">n =</span> <span class="dv">50</span>,</a>
-<a class="sourceLine" id="cb55-4" title="4"><span class="dt">sig.level =</span> <span class="fl">0.05</span>,</a>
-<a class="sourceLine" id="cb55-5" title="5"><span class="dt">type =</span> <span class="st">&quot;two.sample&quot;</span>,</a>
-<a class="sourceLine" id="cb55-6" title="6"><span class="dt">alternative =</span> <span class="st">&quot;two.sided&quot;</span></a>
-<a class="sourceLine" id="cb55-7" title="7">)<span class="op">$</span>power</a></code></pre></div>
+<div class="sourceCode" id="cb55"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb55-1"><a href="one-way-anova.html#cb55-1"></a><span class="kw">pwr.t.test</span>(</span>
+<span id="cb55-2"><a href="one-way-anova.html#cb55-2"></a><span class="dt">d =</span> d,</span>
+<span id="cb55-3"><a href="one-way-anova.html#cb55-3"></a><span class="dt">n =</span> <span class="dv">50</span>,</span>
+<span id="cb55-4"><a href="one-way-anova.html#cb55-4"></a><span class="dt">sig.level =</span> <span class="fl">0.05</span>,</span>
+<span id="cb55-5"><a href="one-way-anova.html#cb55-5"></a><span class="dt">type =</span> <span class="st">&quot;two.sample&quot;</span>,</span>
+<span id="cb55-6"><a href="one-way-anova.html#cb55-6"></a><span class="dt">alternative =</span> <span class="st">&quot;two.sided&quot;</span></span>
+<span id="cb55-7"><a href="one-way-anova.html#cb55-7"></a>)<span class="op">$</span>power</span></code></pre></div>
 <pre><code>## [1] 0.9450353</code></pre>
 <p>We can also compare the results against the analytic solution by Aberson (2019).</p>
 <p>First, load the function for a 3-way ANOVA from the <code>pwr2ppl</code> package.</p>
 <p>Then we use the function to calculate power.</p>
-<div class="sourceCode" id="cb57"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb57-1" title="1"><span class="co">#Initial example, low power</span></a>
-<a class="sourceLine" id="cb57-2" title="2"><span class="kw">anova1f_3</span>(</a>
-<a class="sourceLine" id="cb57-3" title="3"><span class="dt">m1 =</span> <span class="dv">24</span>,</a>
-<a class="sourceLine" id="cb57-4" title="4"><span class="dt">m2 =</span> <span class="fl">26.2</span>,</a>
-<a class="sourceLine" id="cb57-5" title="5"><span class="dt">m3 =</span> <span class="fl">26.6</span>,</a>
-<a class="sourceLine" id="cb57-6" title="6"><span class="dt">s1 =</span> <span class="fl">6.4</span>,</a>
-<a class="sourceLine" id="cb57-7" title="7"><span class="dt">s2 =</span> <span class="fl">6.4</span>,</a>
-<a class="sourceLine" id="cb57-8" title="8"><span class="dt">s3 =</span> <span class="fl">6.4</span>,</a>
-<a class="sourceLine" id="cb57-9" title="9"><span class="dt">n1 =</span> <span class="dv">50</span>,</a>
-<a class="sourceLine" id="cb57-10" title="10"><span class="dt">n2 =</span> <span class="dv">50</span>,</a>
-<a class="sourceLine" id="cb57-11" title="11"><span class="dt">n3 =</span> <span class="dv">50</span>,</a>
-<a class="sourceLine" id="cb57-12" title="12"><span class="dt">alpha =</span> <span class="fl">.05</span></a>
-<a class="sourceLine" id="cb57-13" title="13">)</a></code></pre></div>
+<div class="sourceCode" id="cb57"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb57-1"><a href="one-way-anova.html#cb57-1"></a><span class="co">#Initial example, low power</span></span>
+<span id="cb57-2"><a href="one-way-anova.html#cb57-2"></a><span class="kw">anova1f_3</span>(</span>
+<span id="cb57-3"><a href="one-way-anova.html#cb57-3"></a><span class="dt">m1 =</span> <span class="dv">24</span>,</span>
+<span id="cb57-4"><a href="one-way-anova.html#cb57-4"></a><span class="dt">m2 =</span> <span class="fl">26.2</span>,</span>
+<span id="cb57-5"><a href="one-way-anova.html#cb57-5"></a><span class="dt">m3 =</span> <span class="fl">26.6</span>,</span>
+<span id="cb57-6"><a href="one-way-anova.html#cb57-6"></a><span class="dt">s1 =</span> <span class="fl">6.4</span>,</span>
+<span id="cb57-7"><a href="one-way-anova.html#cb57-7"></a><span class="dt">s2 =</span> <span class="fl">6.4</span>,</span>
+<span id="cb57-8"><a href="one-way-anova.html#cb57-8"></a><span class="dt">s3 =</span> <span class="fl">6.4</span>,</span>
+<span id="cb57-9"><a href="one-way-anova.html#cb57-9"></a><span class="dt">n1 =</span> <span class="dv">50</span>,</span>
+<span id="cb57-10"><a href="one-way-anova.html#cb57-10"></a><span class="dt">n2 =</span> <span class="dv">50</span>,</span>
+<span id="cb57-11"><a href="one-way-anova.html#cb57-11"></a><span class="dt">n3 =</span> <span class="dv">50</span>,</span>
+<span id="cb57-12"><a href="one-way-anova.html#cb57-12"></a><span class="dt">alpha =</span> <span class="fl">.05</span></span>
+<span id="cb57-13"><a href="one-way-anova.html#cb57-13"></a>)</span></code></pre></div>
 <pre><code>## Sample size overall = 150</code></pre>
 <pre><code>## Power  = 0.4769 for eta-squared = 0.0315</code></pre>
-<div class="sourceCode" id="cb60"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb60-1" title="1"><span class="co">#From: Aberson, Christopher L. </span></a>
-<a class="sourceLine" id="cb60-2" title="2"><span class="co">#   Applied Power Analysis for the Behavioral Sciences, 2nd Edition.</span></a>
-<a class="sourceLine" id="cb60-3" title="3"><span class="co"># $Power [1] 0.4769468</span></a>
-<a class="sourceLine" id="cb60-4" title="4"><span class="co">#Later example, based on larger mean difference</span></a>
-<a class="sourceLine" id="cb60-5" title="5"><span class="kw">anova1f_3</span>(</a>
-<a class="sourceLine" id="cb60-6" title="6"><span class="dt">m1 =</span> <span class="fl">-2.300104</span>,</a>
-<a class="sourceLine" id="cb60-7" title="7"><span class="dt">m2 =</span> <span class="dv">0</span>,</a>
-<a class="sourceLine" id="cb60-8" title="8"><span class="dt">m3 =</span> <span class="fl">2.300104</span>,</a>
-<a class="sourceLine" id="cb60-9" title="9"><span class="dt">s1 =</span> <span class="fl">6.4</span>,</a>
-<a class="sourceLine" id="cb60-10" title="10"><span class="dt">s2 =</span> <span class="fl">6.4</span>,</a>
-<a class="sourceLine" id="cb60-11" title="11"><span class="dt">s3 =</span> <span class="fl">6.4</span>,</a>
-<a class="sourceLine" id="cb60-12" title="12"><span class="dt">n1 =</span> <span class="dv">50</span>,</a>
-<a class="sourceLine" id="cb60-13" title="13"><span class="dt">n2 =</span> <span class="dv">50</span>,</a>
-<a class="sourceLine" id="cb60-14" title="14"><span class="dt">n3 =</span> <span class="dv">50</span>,</a>
-<a class="sourceLine" id="cb60-15" title="15"><span class="dt">alpha =</span> <span class="fl">.05</span></a>
-<a class="sourceLine" id="cb60-16" title="16">)</a></code></pre></div>
+<div class="sourceCode" id="cb60"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb60-1"><a href="one-way-anova.html#cb60-1"></a><span class="co">#From: Aberson, Christopher L. </span></span>
+<span id="cb60-2"><a href="one-way-anova.html#cb60-2"></a><span class="co">#   Applied Power Analysis for the Behavioral Sciences, 2nd Edition.</span></span>
+<span id="cb60-3"><a href="one-way-anova.html#cb60-3"></a><span class="co"># $Power [1] 0.4769468</span></span>
+<span id="cb60-4"><a href="one-way-anova.html#cb60-4"></a><span class="co">#Later example, based on larger mean difference</span></span>
+<span id="cb60-5"><a href="one-way-anova.html#cb60-5"></a><span class="kw">anova1f_3</span>(</span>
+<span id="cb60-6"><a href="one-way-anova.html#cb60-6"></a><span class="dt">m1 =</span> <span class="fl">-2.300104</span>,</span>
+<span id="cb60-7"><a href="one-way-anova.html#cb60-7"></a><span class="dt">m2 =</span> <span class="dv">0</span>,</span>
+<span id="cb60-8"><a href="one-way-anova.html#cb60-8"></a><span class="dt">m3 =</span> <span class="fl">2.300104</span>,</span>
+<span id="cb60-9"><a href="one-way-anova.html#cb60-9"></a><span class="dt">s1 =</span> <span class="fl">6.4</span>,</span>
+<span id="cb60-10"><a href="one-way-anova.html#cb60-10"></a><span class="dt">s2 =</span> <span class="fl">6.4</span>,</span>
+<span id="cb60-11"><a href="one-way-anova.html#cb60-11"></a><span class="dt">s3 =</span> <span class="fl">6.4</span>,</span>
+<span id="cb60-12"><a href="one-way-anova.html#cb60-12"></a><span class="dt">n1 =</span> <span class="dv">50</span>,</span>
+<span id="cb60-13"><a href="one-way-anova.html#cb60-13"></a><span class="dt">n2 =</span> <span class="dv">50</span>,</span>
+<span id="cb60-14"><a href="one-way-anova.html#cb60-14"></a><span class="dt">n3 =</span> <span class="dv">50</span>,</span>
+<span id="cb60-15"><a href="one-way-anova.html#cb60-15"></a><span class="dt">alpha =</span> <span class="fl">.05</span></span>
+<span id="cb60-16"><a href="one-way-anova.html#cb60-16"></a>)</span></code></pre></div>
 <pre><code>## Sample size overall = 150</code></pre>
 <pre><code>## Power  = 0.9 for eta-squared = 0.0808</code></pre>
-<div class="sourceCode" id="cb63"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb63-1" title="1"><span class="co"># $Power [1] 0.9000112</span></a></code></pre></div>
+<div class="sourceCode" id="cb63"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb63-1"><a href="one-way-anova.html#cb63-1"></a><span class="co"># $Power [1] 0.9000112</span></span></code></pre></div>
 <div style="page-break-after: always;"></div>
 </div>
 </div>
 <div id="effect-size-estimates-for-one-way-anova" class="section level2">
 <h2><span class="header-section-number">2.2</span> Effect Size Estimates for One-Way ANOVA</h2>
-<p>Using the formulas below, we can calculate the means for a one-way ANOVA. Using the formula from <span class="citation">Albers and Lakens (<a href="#ref-albers2018power">2018</a>)</span>, we can determine the means that should yield a specified effect sizes (expressed in Cohen’s <em>f</em>).</p>
-<p>Eta-squared (idential to partial eta-squared for one-way ANOVA’s) has benchmarks of .0099, .0588, and .1379 for small, medium, and large effect sizes <span class="citation">(Cohen <a href="#ref-cohen1988spa">1988</a>)</span>.</p>
+<p>Using the formulas below, we can calculate the means for a one-way ANOVA. Using the formula from <span class="citation">Albers and Lakens (<a href="#ref-albers2018power" role="doc-biblioref">2018</a>)</span>, we can determine the means that should yield a specified effect sizes (expressed in Cohen’s <em>f</em>).</p>
+<p>Eta-squared (idential to partial eta-squared for one-way ANOVA’s) has benchmarks of .0099, .0588, and .1379 for small, medium, and large effect sizes <span class="citation">(Cohen <a href="#ref-cohen1988spa" role="doc-biblioref">1988</a>)</span>.</p>
 <div id="three-conditions-small-effect-size" class="section level3">
 <h3><span class="header-section-number">2.2.1</span> Three conditions, small effect size</h3>
 <p>We can simulate a one-factor anova setting means to achieve a certain effect size. Eta-squared is biased. Thus, the eta-squared we calculate based on the observed data overestimates the population effect size. This bias is largest for smaller sample sizes. Thus, to test whether the simulation yields the expected effect size, we use extremele large sample sizes in each between subject condition (n = 5000). This simulation should yield a small effect size (0.099)</p>
-<div class="sourceCode" id="cb64"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb64-1" title="1">K &lt;-<span class="st"> </span><span class="dv">3</span></a>
-<a class="sourceLine" id="cb64-2" title="2">ES &lt;-<span class="st"> </span><span class="fl">.0099</span></a>
-<a class="sourceLine" id="cb64-3" title="3">mu &lt;-<span class="st"> </span><span class="kw">mu_from_ES</span>(<span class="dt">K =</span> K, <span class="dt">ES =</span> ES)</a>
-<a class="sourceLine" id="cb64-4" title="4">n &lt;-<span class="st"> </span><span class="dv">5000</span></a>
-<a class="sourceLine" id="cb64-5" title="5">sd &lt;-<span class="st"> </span><span class="dv">1</span></a>
-<a class="sourceLine" id="cb64-6" title="6">r &lt;-<span class="st"> </span><span class="dv">0</span></a>
-<a class="sourceLine" id="cb64-7" title="7">string =<span class="st"> </span><span class="kw">paste</span>(K,<span class="st">&quot;b&quot;</span>,<span class="dt">sep =</span> <span class="st">&quot;&quot;</span>)</a></code></pre></div>
-<div class="sourceCode" id="cb65"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb65-1" title="1">design_result &lt;-<span class="st"> </span><span class="kw">ANOVA_design</span>(</a>
-<a class="sourceLine" id="cb65-2" title="2">  <span class="dt">design =</span> string,</a>
-<a class="sourceLine" id="cb65-3" title="3">  <span class="dt">n =</span> n,</a>
-<a class="sourceLine" id="cb65-4" title="4">  <span class="dt">mu =</span> mu,</a>
-<a class="sourceLine" id="cb65-5" title="5">  <span class="dt">sd =</span> sd,</a>
-<a class="sourceLine" id="cb65-6" title="6">  <span class="dt">r =</span> r,</a>
-<a class="sourceLine" id="cb65-7" title="7">  <span class="dt">labelnames =</span> <span class="kw">c</span>(<span class="st">&quot;factor1&quot;</span>, <span class="st">&quot;level1&quot;</span>, <span class="st">&quot;level2&quot;</span>, <span class="st">&quot;level3&quot;</span>)</a>
-<a class="sourceLine" id="cb65-8" title="8">  )</a></code></pre></div>
-<div class="sourceCode" id="cb66"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb66-1" title="1">simulation_result &lt;-<span class="st"> </span><span class="kw">ANOVA_power</span>(design_result, </a>
-<a class="sourceLine" id="cb66-2" title="2">                                 <span class="dt">alpha_level =</span> alpha_level, </a>
-<a class="sourceLine" id="cb66-3" title="3">                                 <span class="dt">nsims =</span> nsims,</a>
-<a class="sourceLine" id="cb66-4" title="4">                                 <span class="dt">verbose =</span> <span class="ot">FALSE</span>)</a></code></pre></div>
+<div class="sourceCode" id="cb64"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb64-1"><a href="one-way-anova.html#cb64-1"></a>K &lt;-<span class="st"> </span><span class="dv">3</span></span>
+<span id="cb64-2"><a href="one-way-anova.html#cb64-2"></a>ES &lt;-<span class="st"> </span><span class="fl">.0099</span></span>
+<span id="cb64-3"><a href="one-way-anova.html#cb64-3"></a>mu &lt;-<span class="st"> </span><span class="kw">mu_from_ES</span>(<span class="dt">K =</span> K, <span class="dt">ES =</span> ES)</span>
+<span id="cb64-4"><a href="one-way-anova.html#cb64-4"></a>n &lt;-<span class="st"> </span><span class="dv">5000</span></span>
+<span id="cb64-5"><a href="one-way-anova.html#cb64-5"></a>sd &lt;-<span class="st"> </span><span class="dv">1</span></span>
+<span id="cb64-6"><a href="one-way-anova.html#cb64-6"></a>r &lt;-<span class="st"> </span><span class="dv">0</span></span>
+<span id="cb64-7"><a href="one-way-anova.html#cb64-7"></a>string =<span class="st"> </span><span class="kw">paste</span>(K,<span class="st">&quot;b&quot;</span>,<span class="dt">sep =</span> <span class="st">&quot;&quot;</span>)</span></code></pre></div>
+<div class="sourceCode" id="cb65"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb65-1"><a href="one-way-anova.html#cb65-1"></a>design_result &lt;-<span class="st"> </span><span class="kw">ANOVA_design</span>(</span>
+<span id="cb65-2"><a href="one-way-anova.html#cb65-2"></a>  <span class="dt">design =</span> string,</span>
+<span id="cb65-3"><a href="one-way-anova.html#cb65-3"></a>  <span class="dt">n =</span> n,</span>
+<span id="cb65-4"><a href="one-way-anova.html#cb65-4"></a>  <span class="dt">mu =</span> mu,</span>
+<span id="cb65-5"><a href="one-way-anova.html#cb65-5"></a>  <span class="dt">sd =</span> sd,</span>
+<span id="cb65-6"><a href="one-way-anova.html#cb65-6"></a>  <span class="dt">r =</span> r,</span>
+<span id="cb65-7"><a href="one-way-anova.html#cb65-7"></a>  <span class="dt">labelnames =</span> <span class="kw">c</span>(<span class="st">&quot;factor1&quot;</span>, <span class="st">&quot;level1&quot;</span>, <span class="st">&quot;level2&quot;</span>, <span class="st">&quot;level3&quot;</span>)</span>
+<span id="cb65-8"><a href="one-way-anova.html#cb65-8"></a>  )</span></code></pre></div>
+<div class="sourceCode" id="cb66"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb66-1"><a href="one-way-anova.html#cb66-1"></a>simulation_result &lt;-<span class="st"> </span><span class="kw">ANOVA_power</span>(design_result, </span>
+<span id="cb66-2"><a href="one-way-anova.html#cb66-2"></a>                                 <span class="dt">alpha_level =</span> alpha_level, </span>
+<span id="cb66-3"><a href="one-way-anova.html#cb66-3"></a>                                 <span class="dt">nsims =</span> nsims,</span>
+<span id="cb66-4"><a href="one-way-anova.html#cb66-4"></a>                                 <span class="dt">verbose =</span> <span class="ot">FALSE</span>)</span></code></pre></div>
 <table class="table" style="margin-left: auto; margin-right: auto;">
 <caption>
 <span id="tab:unnamed-chunk-50">Table 2.11: </span>Simulated ANOVA Result
@@ -975,9 +983,9 @@ anova_factor1
 </tr>
 </tbody>
 </table>
-<div class="sourceCode" id="cb67"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb67-1" title="1">exact_result &lt;-<span class="st"> </span><span class="kw">ANOVA_exact</span>(design_result,</a>
-<a class="sourceLine" id="cb67-2" title="2">                            <span class="dt">alpha_level =</span> alpha_level,</a>
-<a class="sourceLine" id="cb67-3" title="3">                            <span class="dt">verbose =</span> <span class="ot">FALSE</span>)</a></code></pre></div>
+<div class="sourceCode" id="cb67"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb67-1"><a href="one-way-anova.html#cb67-1"></a>exact_result &lt;-<span class="st"> </span><span class="kw">ANOVA_exact</span>(design_result,</span>
+<span id="cb67-2"><a href="one-way-anova.html#cb67-2"></a>                            <span class="dt">alpha_level =</span> alpha_level,</span>
+<span id="cb67-3"><a href="one-way-anova.html#cb67-3"></a>                            <span class="dt">verbose =</span> <span class="ot">FALSE</span>)</span></code></pre></div>
 <table class="table" style="margin-left: auto; margin-right: auto;">
 <caption>
 <span id="tab:unnamed-chunk-52">Table 2.12: </span>Exact ANOVA Result
@@ -1025,25 +1033,25 @@ factor1
 <div id="four-conditions-medium-effect-size" class="section level3">
 <h3><span class="header-section-number">2.2.2</span> Four conditions, medium effect size</h3>
 <p>This simulation should yield a medium effect size (0.588) across four independent conditions.</p>
-<div class="sourceCode" id="cb68"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb68-1" title="1">K &lt;-<span class="st"> </span><span class="dv">4</span></a>
-<a class="sourceLine" id="cb68-2" title="2">ES &lt;-<span class="st"> </span><span class="fl">.0588</span></a>
-<a class="sourceLine" id="cb68-3" title="3">mu &lt;-<span class="st"> </span><span class="kw">mu_from_ES</span>(<span class="dt">K =</span> K, <span class="dt">ES =</span> ES)</a>
-<a class="sourceLine" id="cb68-4" title="4">n &lt;-<span class="st"> </span><span class="dv">5000</span></a>
-<a class="sourceLine" id="cb68-5" title="5">sd &lt;-<span class="st"> </span><span class="dv">1</span></a>
-<a class="sourceLine" id="cb68-6" title="6">r &lt;-<span class="st"> </span><span class="dv">0</span></a>
-<a class="sourceLine" id="cb68-7" title="7">string =<span class="st"> </span><span class="kw">paste</span>(K,<span class="st">&quot;b&quot;</span>,<span class="dt">sep =</span> <span class="st">&quot;&quot;</span>)</a></code></pre></div>
-<div class="sourceCode" id="cb69"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb69-1" title="1">design_result &lt;-<span class="st"> </span><span class="kw">ANOVA_design</span>(</a>
-<a class="sourceLine" id="cb69-2" title="2">  <span class="dt">design =</span> string,</a>
-<a class="sourceLine" id="cb69-3" title="3">  <span class="dt">n =</span> n,</a>
-<a class="sourceLine" id="cb69-4" title="4">  <span class="dt">mu =</span> mu,</a>
-<a class="sourceLine" id="cb69-5" title="5">  <span class="dt">sd =</span> sd,</a>
-<a class="sourceLine" id="cb69-6" title="6">  <span class="dt">r =</span> r,</a>
-<a class="sourceLine" id="cb69-7" title="7">  <span class="dt">labelnames =</span> <span class="kw">c</span>(<span class="st">&quot;factor1&quot;</span>, <span class="st">&quot;level1&quot;</span>, <span class="st">&quot;level2&quot;</span>, <span class="st">&quot;level3&quot;</span>, <span class="st">&quot;level4&quot;</span>)</a>
-<a class="sourceLine" id="cb69-8" title="8">  )</a></code></pre></div>
-<div class="sourceCode" id="cb70"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb70-1" title="1">simulation_result &lt;-<span class="st"> </span><span class="kw">ANOVA_power</span>(design_result, </a>
-<a class="sourceLine" id="cb70-2" title="2">                                 <span class="dt">alpha_level =</span> alpha_level, </a>
-<a class="sourceLine" id="cb70-3" title="3">                                 <span class="dt">nsims =</span> nsims,</a>
-<a class="sourceLine" id="cb70-4" title="4">                                 <span class="dt">verbose =</span> <span class="ot">FALSE</span>)</a></code></pre></div>
+<div class="sourceCode" id="cb68"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb68-1"><a href="one-way-anova.html#cb68-1"></a>K &lt;-<span class="st"> </span><span class="dv">4</span></span>
+<span id="cb68-2"><a href="one-way-anova.html#cb68-2"></a>ES &lt;-<span class="st"> </span><span class="fl">.0588</span></span>
+<span id="cb68-3"><a href="one-way-anova.html#cb68-3"></a>mu &lt;-<span class="st"> </span><span class="kw">mu_from_ES</span>(<span class="dt">K =</span> K, <span class="dt">ES =</span> ES)</span>
+<span id="cb68-4"><a href="one-way-anova.html#cb68-4"></a>n &lt;-<span class="st"> </span><span class="dv">5000</span></span>
+<span id="cb68-5"><a href="one-way-anova.html#cb68-5"></a>sd &lt;-<span class="st"> </span><span class="dv">1</span></span>
+<span id="cb68-6"><a href="one-way-anova.html#cb68-6"></a>r &lt;-<span class="st"> </span><span class="dv">0</span></span>
+<span id="cb68-7"><a href="one-way-anova.html#cb68-7"></a>string =<span class="st"> </span><span class="kw">paste</span>(K,<span class="st">&quot;b&quot;</span>,<span class="dt">sep =</span> <span class="st">&quot;&quot;</span>)</span></code></pre></div>
+<div class="sourceCode" id="cb69"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb69-1"><a href="one-way-anova.html#cb69-1"></a>design_result &lt;-<span class="st"> </span><span class="kw">ANOVA_design</span>(</span>
+<span id="cb69-2"><a href="one-way-anova.html#cb69-2"></a>  <span class="dt">design =</span> string,</span>
+<span id="cb69-3"><a href="one-way-anova.html#cb69-3"></a>  <span class="dt">n =</span> n,</span>
+<span id="cb69-4"><a href="one-way-anova.html#cb69-4"></a>  <span class="dt">mu =</span> mu,</span>
+<span id="cb69-5"><a href="one-way-anova.html#cb69-5"></a>  <span class="dt">sd =</span> sd,</span>
+<span id="cb69-6"><a href="one-way-anova.html#cb69-6"></a>  <span class="dt">r =</span> r,</span>
+<span id="cb69-7"><a href="one-way-anova.html#cb69-7"></a>  <span class="dt">labelnames =</span> <span class="kw">c</span>(<span class="st">&quot;factor1&quot;</span>, <span class="st">&quot;level1&quot;</span>, <span class="st">&quot;level2&quot;</span>, <span class="st">&quot;level3&quot;</span>, <span class="st">&quot;level4&quot;</span>)</span>
+<span id="cb69-8"><a href="one-way-anova.html#cb69-8"></a>  )</span></code></pre></div>
+<div class="sourceCode" id="cb70"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb70-1"><a href="one-way-anova.html#cb70-1"></a>simulation_result &lt;-<span class="st"> </span><span class="kw">ANOVA_power</span>(design_result, </span>
+<span id="cb70-2"><a href="one-way-anova.html#cb70-2"></a>                                 <span class="dt">alpha_level =</span> alpha_level, </span>
+<span id="cb70-3"><a href="one-way-anova.html#cb70-3"></a>                                 <span class="dt">nsims =</span> nsims,</span>
+<span id="cb70-4"><a href="one-way-anova.html#cb70-4"></a>                                 <span class="dt">verbose =</span> <span class="ot">FALSE</span>)</span></code></pre></div>
 <table class="table" style="margin-left: auto; margin-right: auto;">
 <caption>
 <span id="tab:unnamed-chunk-56">Table 2.13: </span>Simulated ANOVA Result
@@ -1074,9 +1082,9 @@ anova_factor1
 </tr>
 </tbody>
 </table>
-<div class="sourceCode" id="cb71"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb71-1" title="1">exact_result &lt;-<span class="st"> </span><span class="kw">ANOVA_exact</span>(design_result,</a>
-<a class="sourceLine" id="cb71-2" title="2">                            <span class="dt">alpha_level =</span> alpha_level,</a>
-<a class="sourceLine" id="cb71-3" title="3">                            <span class="dt">verbose =</span> <span class="ot">FALSE</span>)</a></code></pre></div>
+<div class="sourceCode" id="cb71"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb71-1"><a href="one-way-anova.html#cb71-1"></a>exact_result &lt;-<span class="st"> </span><span class="kw">ANOVA_exact</span>(design_result,</span>
+<span id="cb71-2"><a href="one-way-anova.html#cb71-2"></a>                            <span class="dt">alpha_level =</span> alpha_level,</span>
+<span id="cb71-3"><a href="one-way-anova.html#cb71-3"></a>                            <span class="dt">verbose =</span> <span class="ot">FALSE</span>)</span></code></pre></div>
 <table class="table" style="margin-left: auto; margin-right: auto;">
 <caption>
 <span id="tab:unnamed-chunk-58">Table 2.14: </span>Exact ANOVA Result
@@ -1124,23 +1132,23 @@ factor1
 <div id="two-conditions-large-effect-size" class="section level3">
 <h3><span class="header-section-number">2.2.3</span> Two conditions, large effect size</h3>
 <p>We can simulate a one-way ANOVA that should yield a large effect size (0.1379) across two conditions.</p>
-<div class="sourceCode" id="cb72"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb72-1" title="1">K &lt;-<span class="st"> </span><span class="dv">2</span></a>
-<a class="sourceLine" id="cb72-2" title="2">ES &lt;-<span class="st"> </span><span class="fl">.1379</span></a>
-<a class="sourceLine" id="cb72-3" title="3">mu &lt;-<span class="st"> </span><span class="kw">mu_from_ES</span>(<span class="dt">K =</span> K, <span class="dt">ES =</span> ES)</a>
-<a class="sourceLine" id="cb72-4" title="4">n &lt;-<span class="st"> </span><span class="dv">5000</span></a>
-<a class="sourceLine" id="cb72-5" title="5">sd &lt;-<span class="st"> </span><span class="dv">1</span></a>
-<a class="sourceLine" id="cb72-6" title="6">r &lt;-<span class="st"> </span><span class="dv">0</span></a>
-<a class="sourceLine" id="cb72-7" title="7">string =<span class="st"> </span><span class="kw">paste</span>(K,<span class="st">&quot;b&quot;</span>,<span class="dt">sep =</span> <span class="st">&quot;&quot;</span>)</a></code></pre></div>
-<div class="sourceCode" id="cb73"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb73-1" title="1">design_result &lt;-<span class="st"> </span><span class="kw">ANOVA_design</span>(<span class="dt">design =</span> string,</a>
-<a class="sourceLine" id="cb73-2" title="2">                   <span class="dt">n =</span> n, </a>
-<a class="sourceLine" id="cb73-3" title="3">                   <span class="dt">mu =</span> mu, </a>
-<a class="sourceLine" id="cb73-4" title="4">                   <span class="dt">sd =</span> sd, </a>
-<a class="sourceLine" id="cb73-5" title="5">                   <span class="dt">r =</span> r, </a>
-<a class="sourceLine" id="cb73-6" title="6">                   <span class="dt">labelnames =</span> <span class="kw">c</span>(<span class="st">&quot;factor1&quot;</span>, <span class="st">&quot;level1&quot;</span>, <span class="st">&quot;level2&quot;</span>))</a></code></pre></div>
-<div class="sourceCode" id="cb74"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb74-1" title="1">simulation_result &lt;-<span class="st"> </span><span class="kw">ANOVA_power</span>(design_result, </a>
-<a class="sourceLine" id="cb74-2" title="2">                                 <span class="dt">alpha_level =</span> alpha_level, </a>
-<a class="sourceLine" id="cb74-3" title="3">                                 <span class="dt">nsims =</span> nsims,</a>
-<a class="sourceLine" id="cb74-4" title="4">                                 <span class="dt">verbose =</span> <span class="ot">FALSE</span>)</a></code></pre></div>
+<div class="sourceCode" id="cb72"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb72-1"><a href="one-way-anova.html#cb72-1"></a>K &lt;-<span class="st"> </span><span class="dv">2</span></span>
+<span id="cb72-2"><a href="one-way-anova.html#cb72-2"></a>ES &lt;-<span class="st"> </span><span class="fl">.1379</span></span>
+<span id="cb72-3"><a href="one-way-anova.html#cb72-3"></a>mu &lt;-<span class="st"> </span><span class="kw">mu_from_ES</span>(<span class="dt">K =</span> K, <span class="dt">ES =</span> ES)</span>
+<span id="cb72-4"><a href="one-way-anova.html#cb72-4"></a>n &lt;-<span class="st"> </span><span class="dv">5000</span></span>
+<span id="cb72-5"><a href="one-way-anova.html#cb72-5"></a>sd &lt;-<span class="st"> </span><span class="dv">1</span></span>
+<span id="cb72-6"><a href="one-way-anova.html#cb72-6"></a>r &lt;-<span class="st"> </span><span class="dv">0</span></span>
+<span id="cb72-7"><a href="one-way-anova.html#cb72-7"></a>string =<span class="st"> </span><span class="kw">paste</span>(K,<span class="st">&quot;b&quot;</span>,<span class="dt">sep =</span> <span class="st">&quot;&quot;</span>)</span></code></pre></div>
+<div class="sourceCode" id="cb73"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb73-1"><a href="one-way-anova.html#cb73-1"></a>design_result &lt;-<span class="st"> </span><span class="kw">ANOVA_design</span>(<span class="dt">design =</span> string,</span>
+<span id="cb73-2"><a href="one-way-anova.html#cb73-2"></a>                   <span class="dt">n =</span> n, </span>
+<span id="cb73-3"><a href="one-way-anova.html#cb73-3"></a>                   <span class="dt">mu =</span> mu, </span>
+<span id="cb73-4"><a href="one-way-anova.html#cb73-4"></a>                   <span class="dt">sd =</span> sd, </span>
+<span id="cb73-5"><a href="one-way-anova.html#cb73-5"></a>                   <span class="dt">r =</span> r, </span>
+<span id="cb73-6"><a href="one-way-anova.html#cb73-6"></a>                   <span class="dt">labelnames =</span> <span class="kw">c</span>(<span class="st">&quot;factor1&quot;</span>, <span class="st">&quot;level1&quot;</span>, <span class="st">&quot;level2&quot;</span>))</span></code></pre></div>
+<div class="sourceCode" id="cb74"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb74-1"><a href="one-way-anova.html#cb74-1"></a>simulation_result &lt;-<span class="st"> </span><span class="kw">ANOVA_power</span>(design_result, </span>
+<span id="cb74-2"><a href="one-way-anova.html#cb74-2"></a>                                 <span class="dt">alpha_level =</span> alpha_level, </span>
+<span id="cb74-3"><a href="one-way-anova.html#cb74-3"></a>                                 <span class="dt">nsims =</span> nsims,</span>
+<span id="cb74-4"><a href="one-way-anova.html#cb74-4"></a>                                 <span class="dt">verbose =</span> <span class="ot">FALSE</span>)</span></code></pre></div>
 <table class="table" style="margin-left: auto; margin-right: auto;">
 <caption>
 <span id="tab:unnamed-chunk-62">Table 2.15: </span>Simulated ANOVA Result
@@ -1171,9 +1179,9 @@ anova_factor1
 </tr>
 </tbody>
 </table>
-<div class="sourceCode" id="cb75"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb75-1" title="1">exact_result &lt;-<span class="st"> </span><span class="kw">ANOVA_exact</span>(design_result,</a>
-<a class="sourceLine" id="cb75-2" title="2">                            <span class="dt">alpha_level =</span> alpha_level,</a>
-<a class="sourceLine" id="cb75-3" title="3">                            <span class="dt">verbose =</span> <span class="ot">FALSE</span>)</a></code></pre></div>
+<div class="sourceCode" id="cb75"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb75-1"><a href="one-way-anova.html#cb75-1"></a>exact_result &lt;-<span class="st"> </span><span class="kw">ANOVA_exact</span>(design_result,</span>
+<span id="cb75-2"><a href="one-way-anova.html#cb75-2"></a>                            <span class="dt">alpha_level =</span> alpha_level,</span>
+<span id="cb75-3"><a href="one-way-anova.html#cb75-3"></a>                            <span class="dt">verbose =</span> <span class="ot">FALSE</span>)</span></code></pre></div>
 <table class="table" style="margin-left: auto; margin-right: auto;">
 <caption>
 <span id="tab:unnamed-chunk-64">Table 2.16: </span>Exact ANOVA Result

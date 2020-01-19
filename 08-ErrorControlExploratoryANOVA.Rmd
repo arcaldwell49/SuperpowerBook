@@ -1,6 +1,9 @@
 # Error Control in Exploratory ANOVA
 ```{r include=FALSE}
 load("data/error_data.RData")
+library(Superpower)
+library(magrittr)
+library(kableExtra)
 ```
 In a 2 x 2 x 2 design, an ANOVA will give the test results for three main effects, three two-way interactions, and one three-way interaction. That’s 7 statistical tests. The probability of making at least one type I error in a single 2 x 2 x 2 ANOVA is $1-(0.95)^7 = 30$%.
 
@@ -43,7 +46,7 @@ We can calculate the number of significant results for each test (which should b
 
 ```{r}
 apply(as.matrix(simulation_result_8.1$sim_data[(1:7)]), 2, 
-    function(x) round(mean(ifelse(x < alpha_level, 1, 0) * 100),4))
+    function(x) round(mean(ifelse(x < alpha_level, 1, 0)),4))
 ```
 
 This is the type I error rate for each test. When we talk about error rate inflation due to multiple comparisons, we are talking about the probability that you conclude there is an effect, when there is actually no effect, when there is a significant effect for the main effect of condition 1, or condition 2, or condition 3, or for the two-way interaction between condition 1 and 2, or condition 1 and 3, or condition 2 and 3, or in the threeway interaction. 
@@ -53,7 +56,7 @@ To calculate this error rate we do not just add the 7 error rates (so 7 * 5% - 3
 ```{r}
 sum(apply(as.matrix(simulation_result_8.1$sim_data[(1:7)]), 1, 
     function(x) 
-      round(mean(ifelse(x < alpha_level, 1, 0) * 100),4)) > 0)/nsims*100
+      round(mean(ifelse(x < alpha_level, 1, 0)),4)) > 0) / nsims
 ```
 
 The question is what we should do about this alpha inflation. It is undesirable if you perform exploratory ANOVA's and are fooled too often by type I errors, which will not replicate if you try to build on them. Therefore, you need to control the type I error rate. 
@@ -112,7 +115,12 @@ knitr::kable(simulation_result_8.2$pc_results,
 ```{r}
 sum(apply(as.matrix(simulation_result_8.2$sim_data[(1:7)]), 1, 
     function(x) 
-      round(mean(ifelse(x < alpha_level, 1, 0) * 100),4)) > 0)/nsims*100
+      round(mean(ifelse(x < alpha_level, 1, 0) * 100),4)) > 0) / nsims
 ```
 
-We see it is close to 5%. Note that error rates have variation, and even in a few thousand simulations, the error rate in the sample of studies can easily be half a percentage point higher or lower. But *in the long run* the error rate should equal the alpha level. Furthermore, note that the [Holm-Bonferroni](https://en.wikipedia.org/wiki/Holm%E2%80%93Bonferroni_method) method is slightly more powerful than the Bonferroni procedure (which is simply $\alpha$ divided by the numner of tests). There are more powerful procedures to control the type I error rate, which require more assumptions. For a small number of tests, they Holm-Bonferroni procedure works well. Alternative procedure to control error rates can be found in the [multcomp](https://cran.r-project.org/web/packages/multcomp/index.html) R package [@R-multcomp].  
+We see it is close to 5%. 
+Note that error rates have variation, and even in a ten thousand simulations, the error rate in the sample of studies can easily be half a percentage point higher or lower (see [this blog](https://daniellakens.blogspot.com/2020/01/observed-alpha-levels-why-statistical.html). 
+But *in the long run* the error rate should equal the alpha level. Furthermore, note that the [Holm-Bonferroni](https://en.wikipedia.org/wiki/Holm%E2%80%93Bonferroni_method) method is slightly more powerful than the Bonferroni procedure (which is simply $\alpha$ divided by the number of tests). 
+There are more powerful procedures to control the type I error rate, which require making more assumptions. 
+For a small number of tests, they Holm-Bonferroni procedure works well. 
+Alternative procedures to control error rates can be found in the [multcomp](https://cran.r-project.org/web/packages/multcomp/index.html) R package [@R-multcomp].  

@@ -56,3 +56,5 @@ simulation_result_8.2 <- ANOVA_power(design_result,
                                  alpha_level = alpha_level,
                                  p_adjust = p_adjust,
                                  verbose = FALSE)
+
+save.image("data/error_data.Rdata")
