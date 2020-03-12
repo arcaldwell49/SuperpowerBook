@@ -150,7 +150,7 @@ knitr::kable(exact_result$main_results,
   kable_styling(latex_options = "hold_position")
 ```
 
-The simulation confirms that for the *F*-test for the ANOVA we have 90% power. This is also what Gpower tells us what would happen based on a post-hoc power analysis with an *f* of 0.2303587, 2 groups, 200 participants in total (100 in each between subject condition), and an alpha of 5%.
+The simulation confirms that for the *F*-test for the ANOVA we have 90% power. This is also what g\*power tells us what would happen based on a post-hoc power analysis with an *f* of 0.2303587, 2 groups, 200 participants in total (100 in each between subject condition), and an alpha of 5%.
 
 ![](screenshots/gpower_8.png)
 
@@ -214,13 +214,13 @@ knitr::kable(exact_result$main_results,
   kable_styling(latex_options = "hold_position")
 ```
 
-We stored the result from the power analysis in an object. This allows us to request plots (which are not printed automatically) showing the *p*-value distribution. If we request `simulation_result$plot1` we get the p-value distribution for the ANOVA:
+We stored the result from the power analysis in an object. This allows us to request plots (which are not printed automatically) showing the *p*-value distribution. If we request `simulation_result$plot1` we get the *p*-value distribution for the ANOVA:
 
 ```{r echo=FALSE}
 simulation_result_2.5$plot1
 ```
 
-If we request `simulation_result$plot2` we get the p-value distribution for the paired comparisons (in this case only one):
+If we request `simulation_result$plot2` we get the *p*-value distribution for the paired comparisons (in this case only one):
 
 ```{r echo=FALSE}
 simulation_result_2.5$plot2
@@ -230,7 +230,7 @@ simulation_result_2.5$plot2
 
 ### Three conditions
 
-Imagine we aim to design a study to test the hypothesis that giving people a pet to take care of will increase their life satisfaction. We have a control condition, a 'cat' pet condition, and a 'dog' pet condition. We can simulate a One-Way ANOVA with a specified alpha, sample size, and effect size, on see the statistical power we would have for the ANOVA and the follow-up comparisons. We expect all pets to increase life-satisfaction compared to the control condition. Obviously, we also expect the people who are in the 'dog' pet condition to have even greater life-satisfaction than people in the 'cat' pet condition. Based on work by Pavot and Diener (1993) we believe that we can expect responses on the life-satifaction scale to have a mean of approximately 24 in our population, with a standard deviation of 6.4. We expect having a pet increases life satisfaction with approximately 2.2 scale points for participants who get a cat, and 2.6 scale points for participants who get a dog. We initially consider collecting data from 150 participants in total, with 50 participants in each condition. But before we proceed with the data collection, we examine the statistical power our design would have to detect the differences we predict.
+Imagine we aim to design a study to test the hypothesis that giving people a pet to take care of will increase their life satisfaction. We have a control condition, a 'cat' pet condition, and a 'dog' pet condition. We can simulate a One-Way ANOVA with a specified alpha, sample size, and effect size, to see the statistical power we would have for the ANOVA and the follow-up comparisons. We expect all pets to increase life-satisfaction compared to the control condition. Obviously, we also expect the people who are in the 'dog' pet condition to have even greater life-satisfaction than people in the 'cat' pet condition. Based on work by Pavot and Diener (1993) we believe that we can expect responses on the life-satifaction scale to have a mean of approximately 24 in our population, with a standard deviation of 6.4. We expect having a pet increases life satisfaction with approximately 2.2 scale points for participants who get a cat, and 2.6 scale points for participants who get a dog. We initially consider collecting data from 150 participants in total, with 50 participants in each condition. But before we proceed with the data collection, we examine the statistical power our design would have to detect the differences we predict.
 
 ```{r}
 string <- "3b"
@@ -280,7 +280,7 @@ knitr::kable(exact_result$main_results,
   kable_styling(latex_options = "hold_position")
 ```
 
-The result shows that you would have quite low power with 50 participants, both for the overall ANOVA (just around 50% power), as for the follow up comparisons (approximately 40% power for the control vs cat condition, around 50% for the control vs dogs condition, and a really low power (around 6%, just above the Type 1 error rate of 5%) for the expected difference between cats and dogs.
+The result shows that you would have quite low power with 50 participants, both for the overall ANOVA (just around 50% power), as for the follow up comparisons (approximately 40% power for the control vs cat condition, around 50% for the control vs dogs condition, and really low power (around 6%, just above the Type 1 error rate of 5%) for the expected difference between cats and dogs.
 
 ### Power for simple effects
 
@@ -288,7 +288,7 @@ We are typically not just interested in the ANOVA, but also in follow up compari
 
 For our example, Cohen's d (the standardized mean difference) is 2.2/6.4, or d = 0.34375 for the difference between the control condition and cats, 2.6/6.4 of d = 0.40625 for the difference between the control condition and dogs, and 0.4/6.4 or d = 0.0625 for the difference between cats and dogs as pets.
 
-We can easily compute the expected power for these simple comparisons using the pwr package.
+We can easily compute the expected power for these simple comparisons using the `pwr` package.
 
 ```{r}
 pwr.t.test(
@@ -319,7 +319,7 @@ pwr.t.test(
 
 This analysis tells us that running the study with 50 participants in each condition is more likely to *not* yield a significant test result, even if our expected pattern of differences is true, than that we will observe a *p*-value smaller than our alpha level. This is not optimal.
 
-Let's mathematically explore which pattern of means we would need to expect to habe 90% power for the ANOVA with 50 participants in each group. We can use the pwr package in R to compute a sensitivity analysis that tells us the effect size, in Cohen's *f*, that we are able to detect with 3 groups and 50 partiicpants in each group, in order to achive 90% power with an alpha level of 5%.
+Let's mathematically explore which pattern of means we would need to expect to have 90% power for the ANOVA with 50 participants in each group. We can use the `pwr` package in R to compute a sensitivity analysis that tells us the effect size, in Cohen's *f*, that we are able to detect with 3 groups and 50 partiicpants in each group, in order to achive 90% power with an alpha level of 5%.
 
 ```{r}
 K <- 3
@@ -350,7 +350,7 @@ mu <- mu * sd
 mu
 ```
 
-We can compute a pattern of means, given a standard deviation of 6.4, that would give us an effect size of f = 0.2934, or eta-squared of 0.0793. We should be able to accomplish this is the means are -2.300104, 0.000000, and 2.300104. We can use these values to confirm the ANOVA has 90% power.
+We can compute a pattern of means, given a standard deviation of 6.4, that would give us an effect size of f = 0.2934, or eta-squared of 0.0793. We should be able to accomplish this if the means are -2.300104, 0.000000, and 2.300104. We can use these values to confirm the ANOVA has 90% power.
 
 ```{r}
 design_result <- ANOVA_design(
@@ -474,7 +474,7 @@ Eta-squared (idential to partial eta-squared for one-way ANOVA's) has benchmarks
 
 ### Three conditions, small effect size
 
-We can simulate a one-factor anova setting means to achieve a certain effect size. Eta-squared is biased. Thus, the eta-squared we calculate based on the observed data overestimates the population effect size. This bias is largest for smaller sample sizes. Thus, to test whether the simulation yields the expected effect size, we use extremele large sample sizes in each between subject condition (n = 5000). This simulation should yield a small effect size (0.099)
+We can simulate a one-factor anova, setting means to achieve a certain effect size. Eta-squared is biased. Thus, the eta-squared we calculate based on the observed data overestimates the population effect size. This bias is largest for smaller sample sizes. Thus, to test whether the simulation yields the expected effect size, we use extremele large sample sizes in each between subject condition (n = 5000). This simulation should yield a small effect size (0.099)
 
 ```{r effect_size}
 K <- 3
@@ -527,7 +527,7 @@ The resulting effect size estimate from the simulation is very close to 0.0099
 
 ### Four conditions, medium effect size
 
-This simulation should yield a medium effect size (0.588) across four independent conditions.
+This simulation should yield a medium effect size (0.0588) across four independent conditions.
 
 ```{r}
 K <- 4
@@ -578,7 +578,7 @@ knitr::kable(exact_result$main_results,
   kable_styling(latex_options = "hold_position")
 ```
 
-Results are very close to 0.588.
+Results are very close to 0.0588.
 
 ### Two conditions, large effect size
 

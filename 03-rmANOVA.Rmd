@@ -8,7 +8,7 @@ In a repeated measures design multiple observations are collected from the same 
 
 ### Two conditions, medium effect size
 
-To illustrate the effect of correated observations, we start by simulating data for a medium effect size for a dependent (or paired, or within-subject) *t*-test. Let's first look at Gpower @faul2007g. If we want to perform an a-priori power analysis, we are asked to fill in the effect size dz. As @cohen1988spa writes, "The Z subscript is used to emphasize the fact that our raw score unit is no longer X or Y, but Z", where Z are the difference scores of X-Y. 
+To illustrate the effect of correated observations, we start by simulating data for a medium effect size for a dependent (or paired, or within-subject) *t*-test. Let's first look at g*power @faul2007g. If we want to perform an a-priori power analysis, we are asked to fill in the effect size dz. As @cohen1988spa writes, "The Z subscript is used to emphasize the fact that our raw score unit is no longer X or Y, but Z", where Z are the difference scores of X-Y. 
 
 ![](screenshots/gpower_9.png)
 
@@ -43,7 +43,7 @@ pwr.t.test(d = 0.05,
 ```
 \newpage
 
-There is no equivalent "fz" for Cohen's *f* for a within subject ANOVA. For two groups, we can directly compute Cohen's *f* from Cohen's d for two groups, as @cohen1988spa describes, because f = 1/2d. For a d = 0.5, f = 0.25. In Gpower we can run a 2 group within-subject power analysis for ANOVA. We plan for 80% power, and reproduce the anaysis above for the dependent *t*-test. This works because the correlation is set to 0.5, when d = dz, and thus the transformation of f=1/2d works.  
+There is no equivalent "fz" for Cohen's *f* for a within subject ANOVA. For two groups, we can directly compute Cohen's *f* from Cohen's d for two groups, as @cohen1988spa describes, because f = 1/2d. For a d = 0.5, f = 0.25. In g\*power we can run a 2 group within-subject power analysis for ANOVA. We plan for 80% power, and reproduce the anaysis above for the dependent *t*-test. This works because the correlation is set to 0.5, when d = dz, and thus the transformation of f=1/2d works.  
 
 ![](screenshots/gpower_1.png)
 
@@ -55,7 +55,7 @@ If we change the correlation to 0.7 and keep all other settings the same, the re
 
 \newpage
 
-To reproduce this analysis in Gpower with a dependent *t*-test we need to change dz following the formula above, $d_{z}=\frac{0.5}{\sqrt{2(1-0.7)}}$, which yields dz = `r 0.5/sqrt(2*(1-0.7))`. If we enter this value in Gpower for an a-priori power analysis, we get the exact same results (as we should, since an repeated measures ANOVA with 2 groups equals a dependent *t*-test). This example illustrates that the correlation between dependent variables always factors into a power analysis, both for a dependent *t*-test, and for a repeated measures ANOVA. Because a dependent *t*-test uses dz the correlation might be less visible, but given the relation between d and dz, the correlation is always taken into account and can greatly improve power for within designs compared to between designs.
+To reproduce this analysis in g\*power with a dependent *t*-test we need to change dz following the formula above, $d_{z}=\frac{0.5}{\sqrt{2(1-0.7)}}$, which yields dz = `r 0.5/sqrt(2*(1-0.7))`. If we enter this value in g\*power for an a-priori power analysis, we get the exact same results (as we should, since an repeated measures ANOVA with 2 groups equals a dependent *t*-test). This example illustrates that the correlation between dependent variables always factors into a power analysis, both for a dependent *t*-test, and for a repeated measures ANOVA. Because a dependent *t*-test uses dz the correlation might be less visible, but given the relation between d and dz, the correlation is always taken into account and can greatly improve power for within designs compared to between designs.
 
 ![](screenshots/gpower_10.png)
 
@@ -110,7 +110,7 @@ The results of the simulation are indeed very close to 80.777%. Note that the si
 
 \newpage
 
-We should see a larger dz if we increase the correlation, keeping the sample size the same, following the example in Gpower above. We repeat the simulation, and the only difference is a correlation between dependent variables of 0.7. This should yield an effect size dz = `r 0.5/sqrt(2*(1-0.7))`.
+We should see a larger dz if we increase the correlation, keeping the sample size the same, following the example in g\*power above. We repeat the simulation, and the only difference is a correlation between dependent variables of 0.7. This should yield an effect size dz = `r 0.5/sqrt(2*(1-0.7))`.
 
 ```{r}
 K <- 2
@@ -171,7 +171,7 @@ f <- 0.5*0.6454972
 f 
 ```
 
-Entering this f in Gpower, with a correlation of 0.5, yields the same as entering `f = 0.25` and `correlation = 0.7`.
+Entering this f in g\*power, with a correlation of 0.5, yields the same as entering `f = 0.25` and `correlation = 0.7`.
 
 \newpage
 
@@ -221,10 +221,10 @@ For each of these patterns, there is a fixed relationship between f and d for an
 For any given range of means, d, the minimum standard deviation, f1, results when the remaining k - 2 means are concentrated at the mean of the means (0 when expressed in standard units),  i.e., half-way between the largest and smallest.
 
 **Pattern 2**
-A pattern of medium variability results when the k meansare equally spaced over the range, and therefore at intervals of d/(k- 1).
+A pattern of medium variability results when the k means are equally spaced over the range, and therefore at intervals of d/(k- 1).
 
 **Pattern 3** 
-It is demonstrable and intuitively evident that for any given range the dispersion which yield~ the maximum standard deviation has the k means falling at both extremes of the range. When k is even, !k fall at - !d and the other !k fall at + !d; when k is odd, (k + I )/2 of the means fall at either end and the (k- 1)/2 remaining means at the other. With this pattern, for all even numbers of means, use formula (8.2.12). When k is odd, and there is thus one more mean at one extreme than at the other, use formula (8.2.13).
+It is demonstrable and intuitively evident that for any given range the dispersion which yields the maximum standard deviation has the k means falling at both extremes of the range. When k is even, !k fall at - !d and the other !k fall at + !d; when k is odd, (k + 1 )/2 of the means fall at either end and the (k- 1)/2 remaining means at the other. With this pattern, for all even numbers of means, use formula (8.2.12). When k is odd, and there is thus one more mean at one extreme than at the other, use formula (8.2.13).
 
 ```{r}
 calc_f_d_eta <- function(mu, sd, variability){
@@ -261,11 +261,11 @@ res$f
 res$d
 ```
 
-We see the Cohen's *f* value is 0.2618914 and d = 0.5555556. The Cohen's *f* is not perfectly accurate - it is assuming the pattern of means is 3.8, 4.3, 4.3, and not 3.8, 4.2, 4.3. If the means and sd is known, it is best to calculate Cohen's *f* directly from these values.
+We see the Cohen's *f* value is 0.2618914 and d = 0.5555556. The Cohen's *f* is not perfectly accurate - it is assuming the pattern of means is 3.8, 4.3, 4.3, and not 3.8, 4.2, 4.3. If the means and sds are known, it is best to calculate Cohen's *f* directly from these values.
 
 ### Three within conditions, medium effect size
 
-We can perform power analyses for within designs using simuations. We set groups to 3 for the simulation, n = 20, and the correlation between dependent variables to 0.8. If the true effect size is f = 0.25, and the alpha level is 0.05, the power is 96.6%. In this case, we simulate data with means -0.3061862, 0.0000000, and 0.3061862, and set the sd to 1. 
+We can perform power analyses for within designs using simulations. We set groups to 3 for the simulation, n = 20, and the correlation between dependent variables to 0.8. If the true effect size is f = 0.25, and the alpha level is 0.05, the power is 96.6%. In this case, we simulate data with means -0.3061862, 0.0000000, and 0.3061862, and set the sd to 1. 
 
 ```{r}
 K <- 3
@@ -360,7 +360,7 @@ power_oneway_within(design_result)$Cohen_f_SPSS
 
 \newpage
 
-We can even check the calculation of Cohen's *f* SPSS style in GPower. We take the GPower settings as illustrated above. We click the 'Options' button, and check the radiobutton next to 'As in SPSS'. Click ok, and you will notice that the 'Corr among rep measures' field has disappeared. The correlation does not need to be entered seperately, but is incorporated in Cohen's *f*. The value of Cohen's *f*, which was 0.25, has changed into 0.7024394. This is the SPSS equivalent. The value is much larger. This value, and it's corresponding partial eta-squared, incorporate the correlation between observations. 
+We can even check the calculation of Cohen's *f* SPSS style in g\*power We take the g\*power settings as illustrated above. We click the 'Options' button, and check the radio button next to 'As in SPSS'. Click ok, and you will notice that the 'Corr among rep measures' field has disappeared. The correlation does not need to be entered seperately, but is incorporated in Cohen's *f*. The value of Cohen's *f*, which was 0.25, has changed into 0.7024394. This is the SPSS equivalent. The value is much larger. This value, and it's corresponding partial eta-squared, incorporate the correlation between observations. 
 
 ![](screenshots/gpower_14.png)
 
