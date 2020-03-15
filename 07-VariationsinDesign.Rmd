@@ -178,7 +178,7 @@ Cohen_f
 
 The `SS_A` or the sum of squares for the main effect, is 900 for two groups, and the `SS_error` for the error term is 10000. When we add a group, `SS_A` is 900, and the `SS_error` is 15000. Because the added condition falls exactly on the grand mean (83), the sum of squared for this extra group is 0. In other words, it does nothing to increase the signal that there is a difference between groups. However, the sum of squares for the error, which is a function of the total sample size, is increased, which reduces the effect size. So, adding a condition that falls on the grand mean reduces the power for the main effect of the ANOVA. Obviously, adding such a group has other benefits, such as being able to compare the two means to a new third condition. 
 
-We already saw that adding a condition that has a mean as extreme as one of the existing groups also reduces the power. Let's again do the calculations step by step when the extra group has a mean as extreme as one of the two original conditions. 
+We already saw that adding a condition that has a mean as extreme as one of the existing groups increases the power. Let's again do the calculations step by step when the extra group has a mean as extreme as one of the two original conditions. 
 
 ```{r}
 #Three groups
@@ -367,17 +367,24 @@ design_result <- ANOVA_design(
   r = r
 )
 
-power_oneway_within(design_result)$power
-power_oneway_within(design_result)$Cohen_f
-power_oneway_within(design_result)$Cohen_f_SPSS
-power_oneway_within(design_result)$lambda
-power_oneway_within(design_result)$F_critical
+print(paste0("power: ", power_oneway_within(design_result)$power, "\nCohen's F: ", power_oneway_within(design_result)$Cohen_f,
+             "\nCohen's F (SPSS): ", power_oneway_within(design_result)$Cohen_f_SPSS,
+             "\nlambda: ", power_oneway_within(design_result)$lambda,
+             "\nCritical F: ",
+             power_oneway_within(design_result)$F_critical
+             ))
+
+# power_oneway_within(design_result)$power
+# power_oneway_within(design_result)$Cohen_f
+# power_oneway_within(design_result)$Cohen_f_SPSS
+# power_oneway_within(design_result)$lambda
+# power_oneway_within(design_result)$F_critical
 ```
 
 This set of designs where we increase the number of conditions demonstrates a common pattern where the power initially increases, but then starts to decrease. 
 Again, the exact pattern (and when the power starts to decrease) depends on the effect size and sample size. 
 Note also that the effect size (Cohen's f) decreases as we add conditions, but the increased sample size compensates for this when calculating power. 
-When using power analysis software such as GPower [@faul2007g], this is important to realize. 
+When using power analysis software such as g\*power [@faul2007g], this is important to realize. 
 You can't just power for a medium effect size, and then keep adding conditions under the assumption that the increased power you see in the program will become a reality.
 Increasing the number of conditions will reduce the effect size, and therefore, adding conditions will not automatically increase power (and might even decrease it). 
 

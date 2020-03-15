@@ -296,13 +296,13 @@ colnames(mean_mat) <- c("no hunger", "very hungry")
 mean_mat
 ```
 
-The first main effect tests the marginal means if we sum over rows, 22.5 vs 20. 
+The first main effect tests the marginal means if we sum over rows, 20 (apple) vs 22.5 (banana).
 
 ```{r}
 rowMeans(mean_mat)
 ```
 
-The second main effect tests the marginal means over the rows, which is also 22.5 vs 20. 
+The second main effect tests the marginal means over the rows, which is also 20 vs 22.5. 
 
 ```{r}
 colMeans(mean_mat)
@@ -310,9 +310,13 @@ colMeans(mean_mat)
 
 The interaction tests whether the average effect of hunger on liking fruit differs in the presence of bananas. In the presence of bananas the effect of hunger on the desireability of fruit is 5 scalepoints. The average effect (that we get from the marginal means) of hunger on fruit desireability is 2.5 (22.5-20). In other words, the interaction tests whether the difference effect between hunger and no hunger is different in the presence of an apple versus in the presence of a banana. 
 
-Mathematically the interaction effect is computed as the difference between a cell mean and the grand mean, the marginal mean in row i and the grand mean, and the marginal mean in column j and grand mean. For example, for the very hungry-banana condition this is: 25 (the value in the cell) - (21.25 [the grand mean] + 1.25 [the marginal mean in row 2, 22.5, minus the grand mean of 21.25] + 1.25 [the marginal mean in column 2, 22.5, minus the grand mean of 21.25]). 25 - (21.25 + (22.5-21.25) + (22.5-21.25)) = 1.25. 
+Mathematically the interaction effect is computed as the difference between a cell mean and the grand mean, the marginal mean in row i and the grand mean, and the marginal mean in column j and grand mean. For example, for the very hungry-banana condition this is:
 
-We can repeat this for every cell, and get for no hunger-apple: $20 - (21.25 + (20-21.25) + (20-21.25)) = 1.25$, for very hungry apple: $20 - (21.25 + (22.5-21.25) + (20-21.25)) = 1.25$, and no hunger-banana: $20 - (21.25 + (20-21.25) + (22.5-21.25)) = 1.25$. These values are used to calculate the sum of squares.
+$$\underbrace{25}_\text{cell value} - (\underbrace{21.5}_\text{grand mean} + \underbrace{(22.5-21.25)}_\text{row2 mean - grand mean} + \underbrace{(22.5-21.25)}_\text{col2 mean - grand mean}) = 1.25$$
+
+We can repeat this for every cell, and get for no hunger-apple: $20 - (21.25 + (20-21.25) + (20-21.25)) = 1.25$, for very hungry apple: $20 - (21.25 + (22.5-21.25) + (20-21.25)) = 1.25$, and no hunger-banana: $20 - (21.25 + (20-21.25) + (22.5-21.25)) = 1.25$. 
+<br/>
+These values are used to calculate the sum of squares.
 
 ```{r}
 a1 <- mean_mat[1,1] - (mean(mean_mat) + 
@@ -350,7 +354,7 @@ Neither of the main effects is now significant, as the marginal means are 22.5 v
 ```{r}
 string <- "2b*2b"
 n <- 300
-mu <- c(25, 20, 20, 25) #All means are equal - so there is no real difference.
+mu <- c(25, 20, 20, 25) #All marginal means are equal - so there is no real difference.
 # Enter means in the order that matches the labels below.
 sd <- 20
 labelnames <- c("fruit", "apple", "banana", 
