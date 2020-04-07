@@ -49,9 +49,9 @@ apply(as.matrix(simulation_result_8.1$sim_data[(1:7)]), 2,
     function(x) round(mean(ifelse(x < alpha_level, 1, 0)),4))
 ```
 
-This is the type I error rate for each test. When we talk about error rate inflation due to multiple comparisons, we are talking about the probability that you conclude there is an effect, when there is actually no effect, when there is a significant effect for the main effect of condition 1, or condition 2, or condition 3, or for the two-way interaction between condition 1 and 2, or condition 1 and 3, or condition 2 and 3, or in the threeway interaction. 
+This is the type I error rate for each test. The familywise error rate referrs to the probability of one or more of the tests in the ANOVA being significant, even though none of the 7 effects exist (3 main effects, 3 two-way interactions, and 1 three-way interaction). 
 
-To calculate this error rate we do not just add the 7 error rates (so 7 * 5% - 35%). Instead, we calculate the probability that there will be at least one significant result in an ANOVA we perform. Some ANOVA results will have multiple significant results, just due to the type I error rate (e.g., a significant result for the three-way interaction, and for the main effect of condition 1) but such an ANOVA is counted only once. If we calculate this percentage from our simulations, we see the number is indeed very close to 1-(0.95)^7 = 30%.  
+To calculate this error rate we do not just add the 7 error rates (so 7 * 5% - 35%). Instead, we calculate the probability that there will be at least one significant result in an ANOVA we perform. Some ANOVA results will have multiple significant results, just due to the type I error rate (e.g., a significant result for the three-way interaction, and for the main effect of condition 1) but such an ANOVA is counted only once. If we calculate this percentage from our simulations, we see the number is indeed very close to $1-(0.95)^7 = 30%$.  
 
 ```{r}
 sum(apply(as.matrix(simulation_result_8.1$sim_data[(1:7)]), 1, 
@@ -59,9 +59,9 @@ sum(apply(as.matrix(simulation_result_8.1$sim_data[(1:7)]), 1,
       round(mean(ifelse(x < alpha_level, 1, 0)),4)) > 0) / nsims
 ```
 
-The question is what we should do about this alpha inflation. It is undesirable if you perform exploratory ANOVA's and are fooled too often by type I errors, which will not replicate if you try to build on them. Therefore, you need to control the type I error rate. 
+But what we should do about this alpha inflation? We do not want to perform exploratory ANOVAs and observe more type I errors than expected, because these significant effects will often not replicate if you try to build on them. Therefore, you need to control the type I error rate. 
 
-In the simulation code, which relies on the afex package, there is the option to set p_adjust. In the simulation above, p_adjust was set to "none". This means no adjustment is mage to which p-values are considered to be significant, and the alpha level is used as it is set in the simulation (above this was 0.05).
+In the simulation code, which relies on the afex package, there is the option to set p_adjust. In the simulation above, `p_adjust` was set to `"none"`. This means no adjustment is made to alpha level for each test (above this was 0.05).
 
 Afex relies on the `p.adjust` functon in the `stats` package in base R (more information is available [here](https://www.rdocumentation.org/packages/stats/versions/3.1.1/topics/p.adjust)). From the package details: 
 
@@ -71,7 +71,7 @@ Afex relies on the `p.adjust` functon in the `stats` package in base R (more inf
 
 >The "BH" (aka "fdr") and "BY" method of Benjamini, Hochberg, and Yekutieli control the false discovery rate, the expected proportion of false discoveries amongst the rejected hypotheses. The false discovery rate is a less stringent condition than the family-wise error rate, so these methods are more powerful than the others.
 
-Let's re-run the simulation twith the Holm-Bonferroni correction, which is simple and require no assumptions.
+Let's re-run the simulation with the Holm-Bonferroni correction, which is simple and require no assumptions.
 
 ```{r}
 string <- "2b*2b*2b"
