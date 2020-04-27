@@ -1,0 +1,390 @@
+# Appendix 1: Direct Comparison to pwr2ppl {-}
+
+In this appendix we have included the performance of `Superpower` to the `pwr2ppl` package using Chris Aberson's examples in [*Applied Power Analysis for the Behavioral Sciences*](https://www.crcpress.com/Applied-Power-Analysis-for-the-Behavioral-Sciences-2nd-Edition/Aberson/p/book/9781138044593) (2nd edition).
+
+## Examples from Chapter 5
+
+### Example 5.1/5.2
+
+In this example, Aberson proposes a study expecting an average "score" of 80, 82, 82, and 86 for the control and three treatment groups respectively. The common standard deviation is 10 and the sample size per cell is 60.
+
+```{r aberson_appendix}
+
+design_result <- ANOVA_design(design = "4b",
+                              n = 60,
+                              sd = 10,
+                              mu = c(80, 82, 82, 86),
+                              labelnames = c("DORM",
+                              "Control",
+                              "T1",
+                              "T2",
+                              "T3"),
+                              plot = TRUE)
+
+```
+
+Now we calculate the analytical result from `Superpower`.
+
+```{r}
+analytical_result <- power_oneway_between(design_result)
+
+analytical_result$power
+```
+
+The `ANOVA_exact` result.
+
+```{r}
+exact_result <- ANOVA_exact(design_result, verbose = FALSE)
+
+exact_result$main_results
+```
+
+
+And these match `pwr2ppl`.
+
+```{r echo=TRUE, message=TRUE}
+anova1f_4(m1 = 80, m2 = 82, m3 = 82, m4 = 86,
+          s1 = 10, s2 = 10, s3 = 10, s4 = 10,
+          n1 = 60, n2 = 60, n3 = 60, n4 = 60)
+
+
+```
+
+### Example 5.3
+
+Now a 2 x 2 between-subject ANOVA.
+
+```{r aberson_5.3.2}
+
+design_result <- ANOVA_design(design = "2b*2b",
+                              n = 100,
+                              sd = 1.7,
+                              mu = c(.85, .85, 
+                                     0, .6),
+                              plot = TRUE)
+
+```
+
+Now we calculate the analytical result from `Superpower`.
+
+```{r}
+analytical_result <- power_twoway_between(design_result)
+
+analytical_result$power_A
+
+analytical_result$power_B
+
+analytical_result$power_AB
+```
+
+The `ANOVA_exact` result.
+
+```{r}
+exact_result <- ANOVA_exact(design_result, verbose = FALSE)
+
+exact_result$main_results
+```
+
+
+And these match `pwr2ppl`. From Table 5.12.
+
+```{r echo=TRUE, message=TRUE}
+anova2x2(m1.1 = 0.85, m1.2 = 0.85, m2.1 = 0.00, m2.2 = 0.60,
+         s1.1 = 1.7, s1.2 = 1.7, s2.1 = 1.7, s2.2 = 1.7,
+         n1.1 = 100, n1.2 = 100, n2.1 = 100, n2.2 = 100,
+         alpha = .05)
+
+
+```
+
+Now we can increase the sample size to 250 per cell
+
+```{r aberson_5.3}
+
+design_result <- ANOVA_design(design = "2b*2b",
+                              n = 250,
+                              sd = 1.7,
+                              mu = c(.85, .85, 
+                                     0, .6),
+                              plot = TRUE)
+
+```
+
+Now we calculate the analytical result from `Superpower`.
+
+```{r}
+analytical_result <- power_twoway_between(design_result)
+
+analytical_result$power_A
+
+analytical_result$power_B
+
+analytical_result$power_AB
+```
+
+The `ANOVA_exact` result.
+
+```{r}
+exact_result <- ANOVA_exact(design_result, verbose = FALSE)
+
+exact_result$main_results
+```
+
+
+And these match `pwr2ppl`.
+
+```{r echo=TRUE, message=TRUE}
+anova2x2(m1.1 = 0.85, m1.2 = 0.85, m2.1 = 0.00, m2.2 = 0.60,
+         s1.1 = 1.7, s1.2 = 1.7, s2.1 = 1.7, s2.2 = 1.7,
+         n1.1 = 250, n1.2 = 250, n2.1 = 250, n2.2 = 250,
+         alpha = .05)
+
+
+```
+
+
+## Examples from Chapter 6
+
+Repeated measures ANOVAs
+
+### Example from Table 6.2
+
+
+```{r aberson_6.2}
+
+design_result <- ANOVA_design(design = "4w",
+                              n = 25,
+                              sd = c(.4,.5,.6,.7),
+                              mu = c(-.25, .00, .10, .15),
+                              r = c(.50, 
+                                    .30,
+                                    .15, 
+                                    .5,
+                                    .30, 
+                                    .50),
+                              plot = TRUE)
+
+design_result$cor_mat
+
+```
+
+There is no analytical result from `Superpower` when the correlations vary.
+
+Now we prouce 3 `ANOVA_exact` results representing no sphericity correction, Greenhouse-Geisser, and Huynh-Feldt corrected results.
+
+```{r}
+exact_result <- ANOVA_exact(design_result, verbose = FALSE)
+
+exact_result$main_results
+
+exact_result <- ANOVA_exact(design_result,
+                            correction = "GG",
+                            verbose = FALSE)
+
+exact_result$main_results
+
+exact_result <- ANOVA_exact(design_result,
+                            correction = "HF",
+                            verbose = FALSE)
+
+exact_result$main_results
+```
+
+
+And these match `pwr2ppl`. 
+
+```{r echo=TRUE, message=TRUE}
+win1F(m1 = -.25, m2 = .00, m3 = .10, m4 = .15,
+      s1 = .4, s2 = .5, s3 = .6, s4 = .7,
+      r12 = .50, r13 = .30,
+      r14 = .15, r23 = .5,
+      r24 = .30, r34 = .50,
+      n = 25)
+
+
+```
+
+### Example from Table 6.6
+
+
+```{r aberson_6.6}
+
+design_result <- ANOVA_design(design = "4w",
+                              n = 100,
+                              sd = c(.4,.5,2.5,2),
+                              mu = c(-.25, .00, .10, .15),
+                              r = c(.50, 
+                                    .30,
+                                    .1, 
+                                    .5,
+                                    .30, 
+                                    .40),
+                              plot = TRUE)
+
+design_result$cor_mat
+
+```
+
+There is no analytical result from `Superpower` when the correlations vary.
+
+Now we prouce 3 `ANOVA_exact` results representing no sphericity correction, Greenhouse-Geisser, and Huynh-Feldt corrected results.
+
+```{r}
+exact_result <- ANOVA_exact(design_result, verbose = FALSE)
+
+exact_result$main_results
+
+exact_result <- ANOVA_exact(design_result,
+                            correction = "GG",
+                            verbose = FALSE)
+
+exact_result$main_results
+
+exact_result <- ANOVA_exact(design_result,
+                            correction = "HF",
+                            verbose = FALSE)
+
+exact_result$main_results
+```
+
+
+And these match `pwr2ppl`. 
+
+```{r echo=TRUE, message=TRUE}
+win1F(m1 = -.25, m2 = .00, m3 = .10, m4 = .15,
+      s1 = .4, s2 = .5, s3 = 2.5, s4 = 2.0,
+      r12 = .50, r13 = .30, r14 = .10,
+      r23 = .5, r24 = .30, r34 = .40,
+      n = 100)
+
+
+```
+
+### Example from Table 6.8
+
+
+```{r aberson_6.8}
+
+design_result <- ANOVA_design(design = "2w*4w",
+                              n = 80,
+                              sd = c(.4,0.5, 
+                                     2.5,2.0, 
+                                     0.4,0.5, 
+                                     2.5,2.0),
+                              mu = c(-0.25,0.0, 
+                                     0.10,0.15, 
+                                     -0.25,0.10, 
+                                     0.30,0.35),
+                              r = c(.5),
+                              plot = TRUE)
+
+design_result$cor_mat
+
+```
+
+There is no analytical result from `Superpower` for two-way within subjects designs.
+
+Now we prouce 3 `ANOVA_exact` results representing no sphericity correction, Greenhouse-Geisser, and Huynh-Feldt corrected results.
+
+```{r}
+
+#In comparision to pwr2ppl the main effects are "flipped"
+# e.g. Superpower a = pwr2ppl "B"
+exact_result <- ANOVA_exact(design_result, verbose = FALSE)
+
+exact_result$main_results
+
+exact_result <- ANOVA_exact(design_result,
+                            correction = "GG",
+                            verbose = FALSE)
+
+exact_result$main_results
+
+exact_result <- ANOVA_exact(design_result,
+                            correction = "HF",
+                            verbose = FALSE)
+
+exact_result$main_results
+```
+
+
+And these match `pwr2ppl`. 
+
+```{r echo=TRUE, message=TRUE}
+win2F(m1.1 = -.25, m2.1 = 0,
+      m3.1 = .10, m4.1 = .15,
+      m1.2 = -.25, m2.2 = .10,
+      m3.2 = .30, m4.2 = .35,
+      s1.1 = .4, s2.1 = .5,
+      s3.1 = 2.5, s4.1 = 2.0,
+      s1.2 = .4, s2.2 = .5,
+      s3.2 = 2.5, s4.2 = 2.0,
+      r = .5, n = 80)
+
+
+```
+
+## Example from Chapter 7
+
+Mixed effect ANOVA
+
+### From Table 7.2
+
+In this case we must write out an entire correlation matrix.
+This means the diagonal element is equal to 1 and the off-diagonal elements corresponding to between-subjects factors are equal to zero.
+
+```{r aberson_7.2}
+design_result <- ANOVA_design("2b*4w",
+                              n = 50,
+                              sd = c(.4, .5, 0.6, .7,
+                                     .4, .5, .6, .7),
+                              r = c(1.0,0.5,0.3,0.15,0.0,0.0,0.0,0.0,
+                                    0.5,1.0,0.5,0.3,0.0,0.0,0.0,0.0,
+                                    0.3,0.5,1.0,0.5,0.0,0.0,0.0,0.0,
+                                    0.15,0.3,0.5,1.0,0.0,0.0,0.0,0.0,
+                                    0.0,0.0,0.0,0.0,1.0,0.5,0.3,0.15,
+                                    0.0,0.0,0.0,0.0,0.5,1.0,0.5,0.3,
+                                    0.0,0.0,0.0,0.0,0.3,0.5,1.0,0.5,
+                                    0.0,0.0,0.0,0.0,0.15,0.3,0.5,1.0),
+                              mu = c(-.25, 0.0, 0.10, 0.15,
+                                     -.25,-.25,-.25,-.25))
+
+design_result$cor_mat
+```
+
+Now the results from `ANOVA_exact`.
+
+```{r}
+exact_result <- ANOVA_exact(design_result,
+                            correction = "none",
+                            verbose = FALSE)
+
+exact_result$main_results
+
+exact_result <- ANOVA_exact(design_result,
+                            correction = "GG",
+                            verbose = FALSE)
+
+exact_result$main_results
+
+exact_result <- ANOVA_exact(design_result,
+                            correction = "HF",
+                            verbose = FALSE)
+
+exact_result$main_results
+```
+
+And the results from `pwr2ppl`.
+
+```{r echo=TRUE, message=TRUE}
+win1bg1(m1.1 = -.25, m2.1 = 0, m3.1 = 0.10, m4.1 = .15, 
+        m1.2 = -.25, m2.2 = -.25, m3.2 = -.25, m4.2 = -.25, 
+        s1.1 = .4, s2.1 = .5, s3.1 = 0.6, s4.1 = .7, s1.2 = .4, 
+        s2.2 = .5, s3.2 = .6, s4.2 = .7,
+        n = 50, 
+        r1.2_1 = .5, r1.3_1 = .3, r1.4_1 = .15, 
+        r2.3_1 = .5, r2.4_1 = .3, r3.4_1 = .5, 
+        r1.2_2 = .5, r1.3_2 = .3, r1.4_2 = .15, 
+        r2.3_2 = .5, r2.4_2 = .3, r3.4_2 = .5)
+```
+
