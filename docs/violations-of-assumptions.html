@@ -21,10 +21,10 @@
   <meta name="twitter:description" content="This is a book describing the capabilities of the Superpower R package." />
   
 
-<meta name="author" content="Aaron R. Caldwell &amp; Daniël Lakens" />
+<meta name="author" content="Aaron R. Caldwell, Daniël Lakens, and Chelsea M. Parlett-Pelleriti" />
 
 
-<meta name="date" content="2020-04-27" />
+<meta name="date" content="2020-04-28" />
 
   <meta name="viewport" content="width=device-width, initial-scale=1" />
   <meta name="apple-mobile-web-app-capable" content="yes" />
@@ -32,7 +32,7 @@
   
   
 <link rel="prev" href="power-curve.html"/>
-<link rel="next" href="estimated-marginal-means-making-specific-comparisons.html"/>
+<link rel="next" href="estimated-marginal-means.html"/>
 <script src="libs/jquery-2.2.3/jquery.min.js"></script>
 <link href="libs/gitbook-2.6.7/css/style.css" rel="stylesheet" />
 <link href="libs/gitbook-2.6.7/css/plugin-table.css" rel="stylesheet" />
@@ -208,13 +208,13 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 <li class="chapter" data-level="11.2.1" data-path="violations-of-assumptions.html"><a href="violations-of-assumptions.html#manova-or-sphericity-adjustment"><i class="fa fa-check"></i><b>11.2.1</b> MANOVA or Sphericity Adjustment?</a></li>
 </ul></li>
 </ul></li>
-<li class="chapter" data-level="12" data-path="estimated-marginal-means-making-specific-comparisons.html"><a href="estimated-marginal-means-making-specific-comparisons.html"><i class="fa fa-check"></i><b>12</b> Estimated Marginal Means: Making Specific Comparisons</a><ul>
-<li class="chapter" data-level="12.1" data-path="estimated-marginal-means-making-specific-comparisons.html"><a href="estimated-marginal-means-making-specific-comparisons.html#a-note-of-caution"><i class="fa fa-check"></i><b>12.1</b> A note of caution</a></li>
-<li class="chapter" data-level="12.2" data-path="estimated-marginal-means-making-specific-comparisons.html"><a href="estimated-marginal-means-making-specific-comparisons.html#pairwise-comparisons"><i class="fa fa-check"></i><b>12.2</b> Pairwise Comparisons</a></li>
-<li class="chapter" data-level="12.3" data-path="estimated-marginal-means-making-specific-comparisons.html"><a href="estimated-marginal-means-making-specific-comparisons.html#customized-emmeans-contrasts"><i class="fa fa-check"></i><b>12.3</b> Customized <code>emmeans</code> contrasts</a></li>
-<li class="chapter" data-level="12.4" data-path="estimated-marginal-means-making-specific-comparisons.html"><a href="estimated-marginal-means-making-specific-comparisons.html#equivalence-and-non-superiority-inferiority-tests"><i class="fa fa-check"></i><b>12.4</b> Equivalence and non-superiority/-inferiority tests</a></li>
-<li class="chapter" data-level="12.5" data-path="estimated-marginal-means-making-specific-comparisons.html"><a href="estimated-marginal-means-making-specific-comparisons.html#joint-tests"><i class="fa fa-check"></i><b>12.5</b> Joint tests</a></li>
-<li class="chapter" data-level="12.6" data-path="estimated-marginal-means-making-specific-comparisons.html"><a href="estimated-marginal-means-making-specific-comparisons.html#monte-carlo-simulations"><i class="fa fa-check"></i><b>12.6</b> Monte Carlo Simulations</a></li>
+<li class="chapter" data-level="12" data-path="estimated-marginal-means.html"><a href="estimated-marginal-means.html"><i class="fa fa-check"></i><b>12</b> Estimated Marginal Means</a><ul>
+<li class="chapter" data-level="12.1" data-path="estimated-marginal-means.html"><a href="estimated-marginal-means.html#a-note-of-caution"><i class="fa fa-check"></i><b>12.1</b> A note of caution</a></li>
+<li class="chapter" data-level="12.2" data-path="estimated-marginal-means.html"><a href="estimated-marginal-means.html#pairwise-comparisons"><i class="fa fa-check"></i><b>12.2</b> Pairwise Comparisons</a></li>
+<li class="chapter" data-level="12.3" data-path="estimated-marginal-means.html"><a href="estimated-marginal-means.html#customized-emmeans-contrasts"><i class="fa fa-check"></i><b>12.3</b> Customized <code>emmeans</code> contrasts</a></li>
+<li class="chapter" data-level="12.4" data-path="estimated-marginal-means.html"><a href="estimated-marginal-means.html#equivalence-and-non-superiority-inferiority-tests"><i class="fa fa-check"></i><b>12.4</b> Equivalence and non-superiority/-inferiority tests</a></li>
+<li class="chapter" data-level="12.5" data-path="estimated-marginal-means.html"><a href="estimated-marginal-means.html#joint-tests"><i class="fa fa-check"></i><b>12.5</b> Joint tests</a></li>
+<li class="chapter" data-level="12.6" data-path="estimated-marginal-means.html"><a href="estimated-marginal-means.html#monte-carlo-simulations"><i class="fa fa-check"></i><b>12.6</b> Monte Carlo Simulations</a></li>
 </ul></li>
 <li class="chapter" data-level="" data-path="appendix-1-direct-comparison-to-pwr2ppl.html"><a href="appendix-1-direct-comparison-to-pwr2ppl.html"><i class="fa fa-check"></i>Appendix 1: Direct Comparison to pwr2ppl</a><ul>
 <li class="chapter" data-level="12.7" data-path="appendix-1-direct-comparison-to-pwr2ppl.html"><a href="appendix-1-direct-comparison-to-pwr2ppl.html#examples-from-chapter-5"><i class="fa fa-check"></i><b>12.7</b> Examples from Chapter 5</a><ul>
@@ -368,7 +368,7 @@ Researchers can simulate both the expected reality when the null hypothesis is t
 <p>As we saw above, the unadjusted repeated measures ANOVA has an elevated type I error rate, but the MANOVA analysis and corrections control Type 1 error rates well.</p>
 <table class="table" style="margin-left: auto; margin-right: auto;">
 <caption>
-<span id="tab:unnamed-chunk-271">Table 11.1: </span>Simulated MANOVA Result
+<span id="tab:unnamed-chunk-270">Table 11.1: </span>Simulated MANOVA Result
 </caption>
 <thead>
 <tr>
@@ -400,7 +400,7 @@ manova_a
 </table>
 <table class="table" style="margin-left: auto; margin-right: auto;">
 <caption>
-<span id="tab:unnamed-chunk-272">Table 11.2: </span>Simulated ANOVA Result
+<span id="tab:unnamed-chunk-271">Table 11.2: </span>Simulated ANOVA Result
 </caption>
 <thead>
 <tr>
@@ -430,7 +430,7 @@ anova_a
 </table>
 <table class="table" style="margin-left: auto; margin-right: auto;">
 <caption>
-<span id="tab:unnamed-chunk-273">Table 11.3: </span>Simulated ANOVA Result
+<span id="tab:unnamed-chunk-272">Table 11.3: </span>Simulated ANOVA Result
 </caption>
 <thead>
 <tr>
@@ -474,7 +474,7 @@ We can now directly compare the power of the MANOVA or <code>HF</code>-adjusted 
 <span id="cb578-10"><a href="violations-of-assumptions.html#cb578-10"></a><span class="co">#                                      verbose = FALSE)</span></span></code></pre></div>
 <table class="table" style="margin-left: auto; margin-right: auto;">
 <caption>
-<span id="tab:unnamed-chunk-275">Table 11.4: </span>Simulated ANOVA Result
+<span id="tab:unnamed-chunk-274">Table 11.4: </span>Simulated ANOVA Result
 </caption>
 <thead>
 <tr>
@@ -504,7 +504,7 @@ anova_a
 </table>
 <table class="table" style="margin-left: auto; margin-right: auto;">
 <caption>
-<span id="tab:unnamed-chunk-276">Table 11.5: </span>Simulated MANOVA Result
+<span id="tab:unnamed-chunk-275">Table 11.5: </span>Simulated MANOVA Result
 </caption>
 <thead>
 <tr>
@@ -557,7 +557,7 @@ The difference in power between univariate and multivariate output is diminished
         </div>
       </div>
 <a href="power-curve.html" class="navigation navigation-prev " aria-label="Previous page"><i class="fa fa-angle-left"></i></a>
-<a href="estimated-marginal-means-making-specific-comparisons.html" class="navigation navigation-next " aria-label="Next page"><i class="fa fa-angle-right"></i></a>
+<a href="estimated-marginal-means.html" class="navigation navigation-next " aria-label="Next page"><i class="fa fa-angle-right"></i></a>
     </div>
   </div>
 <script src="libs/gitbook-2.6.7/js/app.min.js"></script>

@@ -21,10 +21,10 @@
   <meta name="twitter:description" content="This is a book describing the capabilities of the Superpower R package." />
   
 
-<meta name="author" content="Aaron R. Caldwell &amp; Daniël Lakens" />
+<meta name="author" content="Aaron R. Caldwell, Daniël Lakens, and Chelsea M. Parlett-Pelleriti" />
 
 
-<meta name="date" content="2020-04-27" />
+<meta name="date" content="2020-04-28" />
 
   <meta name="viewport" content="width=device-width, initial-scale=1" />
   <meta name="apple-mobile-web-app-capable" content="yes" />
@@ -208,13 +208,13 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 <li class="chapter" data-level="11.2.1" data-path="violations-of-assumptions.html"><a href="violations-of-assumptions.html#manova-or-sphericity-adjustment"><i class="fa fa-check"></i><b>11.2.1</b> MANOVA or Sphericity Adjustment?</a></li>
 </ul></li>
 </ul></li>
-<li class="chapter" data-level="12" data-path="estimated-marginal-means-making-specific-comparisons.html"><a href="estimated-marginal-means-making-specific-comparisons.html"><i class="fa fa-check"></i><b>12</b> Estimated Marginal Means: Making Specific Comparisons</a><ul>
-<li class="chapter" data-level="12.1" data-path="estimated-marginal-means-making-specific-comparisons.html"><a href="estimated-marginal-means-making-specific-comparisons.html#a-note-of-caution"><i class="fa fa-check"></i><b>12.1</b> A note of caution</a></li>
-<li class="chapter" data-level="12.2" data-path="estimated-marginal-means-making-specific-comparisons.html"><a href="estimated-marginal-means-making-specific-comparisons.html#pairwise-comparisons"><i class="fa fa-check"></i><b>12.2</b> Pairwise Comparisons</a></li>
-<li class="chapter" data-level="12.3" data-path="estimated-marginal-means-making-specific-comparisons.html"><a href="estimated-marginal-means-making-specific-comparisons.html#customized-emmeans-contrasts"><i class="fa fa-check"></i><b>12.3</b> Customized <code>emmeans</code> contrasts</a></li>
-<li class="chapter" data-level="12.4" data-path="estimated-marginal-means-making-specific-comparisons.html"><a href="estimated-marginal-means-making-specific-comparisons.html#equivalence-and-non-superiority-inferiority-tests"><i class="fa fa-check"></i><b>12.4</b> Equivalence and non-superiority/-inferiority tests</a></li>
-<li class="chapter" data-level="12.5" data-path="estimated-marginal-means-making-specific-comparisons.html"><a href="estimated-marginal-means-making-specific-comparisons.html#joint-tests"><i class="fa fa-check"></i><b>12.5</b> Joint tests</a></li>
-<li class="chapter" data-level="12.6" data-path="estimated-marginal-means-making-specific-comparisons.html"><a href="estimated-marginal-means-making-specific-comparisons.html#monte-carlo-simulations"><i class="fa fa-check"></i><b>12.6</b> Monte Carlo Simulations</a></li>
+<li class="chapter" data-level="12" data-path="estimated-marginal-means.html"><a href="estimated-marginal-means.html"><i class="fa fa-check"></i><b>12</b> Estimated Marginal Means</a><ul>
+<li class="chapter" data-level="12.1" data-path="estimated-marginal-means.html"><a href="estimated-marginal-means.html#a-note-of-caution"><i class="fa fa-check"></i><b>12.1</b> A note of caution</a></li>
+<li class="chapter" data-level="12.2" data-path="estimated-marginal-means.html"><a href="estimated-marginal-means.html#pairwise-comparisons"><i class="fa fa-check"></i><b>12.2</b> Pairwise Comparisons</a></li>
+<li class="chapter" data-level="12.3" data-path="estimated-marginal-means.html"><a href="estimated-marginal-means.html#customized-emmeans-contrasts"><i class="fa fa-check"></i><b>12.3</b> Customized <code>emmeans</code> contrasts</a></li>
+<li class="chapter" data-level="12.4" data-path="estimated-marginal-means.html"><a href="estimated-marginal-means.html#equivalence-and-non-superiority-inferiority-tests"><i class="fa fa-check"></i><b>12.4</b> Equivalence and non-superiority/-inferiority tests</a></li>
+<li class="chapter" data-level="12.5" data-path="estimated-marginal-means.html"><a href="estimated-marginal-means.html#joint-tests"><i class="fa fa-check"></i><b>12.5</b> Joint tests</a></li>
+<li class="chapter" data-level="12.6" data-path="estimated-marginal-means.html"><a href="estimated-marginal-means.html#monte-carlo-simulations"><i class="fa fa-check"></i><b>12.6</b> Monte Carlo Simulations</a></li>
 </ul></li>
 <li class="chapter" data-level="" data-path="appendix-1-direct-comparison-to-pwr2ppl.html"><a href="appendix-1-direct-comparison-to-pwr2ppl.html"><i class="fa fa-check"></i>Appendix 1: Direct Comparison to pwr2ppl</a><ul>
 <li class="chapter" data-level="12.7" data-path="appendix-1-direct-comparison-to-pwr2ppl.html"><a href="appendix-1-direct-comparison-to-pwr2ppl.html#examples-from-chapter-5"><i class="fa fa-check"></i><b>12.7</b> Examples from Chapter 5</a><ul>
@@ -269,22 +269,22 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 <p>MOREpower 6.0 by <span class="citation">Campbell and Thompson (<a href="#ref-Campbell2012MorePower6F" role="doc-biblioref">2012</a>)</span> is standalone software for power analysis for ANOVA, t-tests, correlations, and tests of proportions. It outperforms Gpower, in that it allows researchers to perform power analyses for a much wider range of designs. It allows a maximum of 9 levels per factor. Users can solve for N, power or effect size. An ANOVA effect size may be specified in terms of the effect-related variance explained (partial eta-squared) or in terms of a test statistic (<em>F</em>, mean square treatment [MST], or <em>t</em>).</p>
 <p>Compared to <code>Superpower</code>, it does not provide all tests at once, it does not provide simple comparisons, it does not incorporate corrections for multiple comparisons, and it does not allow users to enter the means, sd’s, and correlations.</p>
 <p>We can replicate the independent <em>t</em>-test example in MOREpower:</p>
-<div class="sourceCode" id="cb747"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb747-1"><a href="appendix-2-direct-comparison-to-morepower.html#cb747-1"></a>string &lt;-<span class="st"> &quot;2b&quot;</span></span>
-<span id="cb747-2"><a href="appendix-2-direct-comparison-to-morepower.html#cb747-2"></a>n &lt;-<span class="st"> </span><span class="dv">100</span></span>
-<span id="cb747-3"><a href="appendix-2-direct-comparison-to-morepower.html#cb747-3"></a>mu &lt;-<span class="st"> </span><span class="kw">c</span>(<span class="dv">24</span>, <span class="fl">26.2</span>)</span>
-<span id="cb747-4"><a href="appendix-2-direct-comparison-to-morepower.html#cb747-4"></a>sd &lt;-<span class="st"> </span><span class="fl">6.4</span></span>
-<span id="cb747-5"><a href="appendix-2-direct-comparison-to-morepower.html#cb747-5"></a>labelnames &lt;-<span class="st"> </span><span class="kw">c</span>(<span class="st">&quot;condition&quot;</span>, <span class="st">&quot;control&quot;</span>, <span class="st">&quot;pet&quot;</span>) <span class="co">#</span></span>
-<span id="cb747-6"><a href="appendix-2-direct-comparison-to-morepower.html#cb747-6"></a><span class="co"># the label names should be in the order of the means specified above.</span></span>
-<span id="cb747-7"><a href="appendix-2-direct-comparison-to-morepower.html#cb747-7"></a>design_result &lt;-<span class="st"> </span><span class="kw">ANOVA_design</span>(<span class="dt">design =</span> string,</span>
-<span id="cb747-8"><a href="appendix-2-direct-comparison-to-morepower.html#cb747-8"></a>                              <span class="dt">n =</span> n,</span>
-<span id="cb747-9"><a href="appendix-2-direct-comparison-to-morepower.html#cb747-9"></a>                              <span class="dt">mu =</span> mu,</span>
-<span id="cb747-10"><a href="appendix-2-direct-comparison-to-morepower.html#cb747-10"></a>                              <span class="dt">sd =</span> sd,</span>
-<span id="cb747-11"><a href="appendix-2-direct-comparison-to-morepower.html#cb747-11"></a>                              <span class="dt">labelnames =</span> labelnames)</span>
-<span id="cb747-12"><a href="appendix-2-direct-comparison-to-morepower.html#cb747-12"></a>alpha_level &lt;-<span class="st"> </span><span class="fl">0.05</span></span>
-<span id="cb747-13"><a href="appendix-2-direct-comparison-to-morepower.html#cb747-13"></a></span>
-<span id="cb747-14"><a href="appendix-2-direct-comparison-to-morepower.html#cb747-14"></a>exact_result &lt;-<span class="st"> </span><span class="kw">ANOVA_exact</span>(design_result,</span>
-<span id="cb747-15"><a href="appendix-2-direct-comparison-to-morepower.html#cb747-15"></a>                            <span class="dt">alpha_level =</span> alpha_level,</span>
-<span id="cb747-16"><a href="appendix-2-direct-comparison-to-morepower.html#cb747-16"></a>                            <span class="dt">verbose =</span> <span class="ot">TRUE</span>)</span></code></pre></div>
+<div class="sourceCode" id="cb734"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb734-1"><a href="appendix-2-direct-comparison-to-morepower.html#cb734-1"></a>string &lt;-<span class="st"> &quot;2b&quot;</span></span>
+<span id="cb734-2"><a href="appendix-2-direct-comparison-to-morepower.html#cb734-2"></a>n &lt;-<span class="st"> </span><span class="dv">100</span></span>
+<span id="cb734-3"><a href="appendix-2-direct-comparison-to-morepower.html#cb734-3"></a>mu &lt;-<span class="st"> </span><span class="kw">c</span>(<span class="dv">24</span>, <span class="fl">26.2</span>)</span>
+<span id="cb734-4"><a href="appendix-2-direct-comparison-to-morepower.html#cb734-4"></a>sd &lt;-<span class="st"> </span><span class="fl">6.4</span></span>
+<span id="cb734-5"><a href="appendix-2-direct-comparison-to-morepower.html#cb734-5"></a>labelnames &lt;-<span class="st"> </span><span class="kw">c</span>(<span class="st">&quot;condition&quot;</span>, <span class="st">&quot;control&quot;</span>, <span class="st">&quot;pet&quot;</span>) <span class="co">#</span></span>
+<span id="cb734-6"><a href="appendix-2-direct-comparison-to-morepower.html#cb734-6"></a><span class="co"># the label names should be in the order of the means specified above.</span></span>
+<span id="cb734-7"><a href="appendix-2-direct-comparison-to-morepower.html#cb734-7"></a>design_result &lt;-<span class="st"> </span><span class="kw">ANOVA_design</span>(<span class="dt">design =</span> string,</span>
+<span id="cb734-8"><a href="appendix-2-direct-comparison-to-morepower.html#cb734-8"></a>                              <span class="dt">n =</span> n,</span>
+<span id="cb734-9"><a href="appendix-2-direct-comparison-to-morepower.html#cb734-9"></a>                              <span class="dt">mu =</span> mu,</span>
+<span id="cb734-10"><a href="appendix-2-direct-comparison-to-morepower.html#cb734-10"></a>                              <span class="dt">sd =</span> sd,</span>
+<span id="cb734-11"><a href="appendix-2-direct-comparison-to-morepower.html#cb734-11"></a>                              <span class="dt">labelnames =</span> labelnames)</span>
+<span id="cb734-12"><a href="appendix-2-direct-comparison-to-morepower.html#cb734-12"></a>alpha_level &lt;-<span class="st"> </span><span class="fl">0.05</span></span>
+<span id="cb734-13"><a href="appendix-2-direct-comparison-to-morepower.html#cb734-13"></a></span>
+<span id="cb734-14"><a href="appendix-2-direct-comparison-to-morepower.html#cb734-14"></a>exact_result &lt;-<span class="st"> </span><span class="kw">ANOVA_exact</span>(design_result,</span>
+<span id="cb734-15"><a href="appendix-2-direct-comparison-to-morepower.html#cb734-15"></a>                            <span class="dt">alpha_level =</span> alpha_level,</span>
+<span id="cb734-16"><a href="appendix-2-direct-comparison-to-morepower.html#cb734-16"></a>                            <span class="dt">verbose =</span> <span class="ot">TRUE</span>)</span></code></pre></div>
 <pre><code>## Power and Effect sizes for ANOVA tests
 ##             power partial_eta_squared cohen_f non_centrality
 ## condition 67.6857               0.029  0.1727         5.9082
@@ -292,39 +292,39 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 ## Power and Effect sizes for pairwise comparisons (t-tests)
 ##                                   power effect_size
 ## p_condition_control_condition_pet 67.69        0.34</code></pre>
-<div class="sourceCode" id="cb749"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb749-1"><a href="appendix-2-direct-comparison-to-morepower.html#cb749-1"></a>exact_result<span class="op">$</span>main_result<span class="op">$</span>partial_eta_squared</span></code></pre></div>
+<div class="sourceCode" id="cb736"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb736-1"><a href="appendix-2-direct-comparison-to-morepower.html#cb736-1"></a>exact_result<span class="op">$</span>main_result<span class="op">$</span>partial_eta_squared</span></code></pre></div>
 <pre><code>## [1] 0.02897482</code></pre>
-<div class="sourceCode" id="cb751"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb751-1"><a href="appendix-2-direct-comparison-to-morepower.html#cb751-1"></a>exact_result<span class="op">$</span>main_result<span class="op">$</span>power</span></code></pre></div>
+<div class="sourceCode" id="cb738"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb738-1"><a href="appendix-2-direct-comparison-to-morepower.html#cb738-1"></a>exact_result<span class="op">$</span>main_result<span class="op">$</span>power</span></code></pre></div>
 <pre><code>## [1] 67.68572</code></pre>
 <p><img src="screenshots/morepower_1.png" /></p>
 <p>We see the power estimates almost perfectly align with MOREpower if we enter partial eta-squared of 0.02897482, sample = 200 (MOREpower requires entering the total N, not N per condition).</p>
 <p>We can also replicate the dependent <em>t</em>-test example in MOREpower.</p>
-<div class="sourceCode" id="cb753"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb753-1"><a href="appendix-2-direct-comparison-to-morepower.html#cb753-1"></a>K &lt;-<span class="st"> </span><span class="dv">2</span></span>
-<span id="cb753-2"><a href="appendix-2-direct-comparison-to-morepower.html#cb753-2"></a>n &lt;-<span class="st"> </span><span class="dv">34</span></span>
-<span id="cb753-3"><a href="appendix-2-direct-comparison-to-morepower.html#cb753-3"></a>sd &lt;-<span class="st"> </span><span class="dv">1</span></span>
-<span id="cb753-4"><a href="appendix-2-direct-comparison-to-morepower.html#cb753-4"></a>r &lt;-<span class="st"> </span><span class="fl">0.5</span></span>
-<span id="cb753-5"><a href="appendix-2-direct-comparison-to-morepower.html#cb753-5"></a>alpha =<span class="st"> </span><span class="fl">0.05</span></span>
-<span id="cb753-6"><a href="appendix-2-direct-comparison-to-morepower.html#cb753-6"></a>f &lt;-<span class="st"> </span><span class="fl">0.25</span></span>
-<span id="cb753-7"><a href="appendix-2-direct-comparison-to-morepower.html#cb753-7"></a>f2 &lt;-<span class="st"> </span>f<span class="op">^</span><span class="dv">2</span></span>
-<span id="cb753-8"><a href="appendix-2-direct-comparison-to-morepower.html#cb753-8"></a>ES &lt;-<span class="st"> </span>f2<span class="op">/</span>(f2 <span class="op">+</span><span class="st"> </span><span class="dv">1</span>)</span>
-<span id="cb753-9"><a href="appendix-2-direct-comparison-to-morepower.html#cb753-9"></a>ES</span></code></pre></div>
+<div class="sourceCode" id="cb740"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb740-1"><a href="appendix-2-direct-comparison-to-morepower.html#cb740-1"></a>K &lt;-<span class="st"> </span><span class="dv">2</span></span>
+<span id="cb740-2"><a href="appendix-2-direct-comparison-to-morepower.html#cb740-2"></a>n &lt;-<span class="st"> </span><span class="dv">34</span></span>
+<span id="cb740-3"><a href="appendix-2-direct-comparison-to-morepower.html#cb740-3"></a>sd &lt;-<span class="st"> </span><span class="dv">1</span></span>
+<span id="cb740-4"><a href="appendix-2-direct-comparison-to-morepower.html#cb740-4"></a>r &lt;-<span class="st"> </span><span class="fl">0.5</span></span>
+<span id="cb740-5"><a href="appendix-2-direct-comparison-to-morepower.html#cb740-5"></a>alpha =<span class="st"> </span><span class="fl">0.05</span></span>
+<span id="cb740-6"><a href="appendix-2-direct-comparison-to-morepower.html#cb740-6"></a>f &lt;-<span class="st"> </span><span class="fl">0.25</span></span>
+<span id="cb740-7"><a href="appendix-2-direct-comparison-to-morepower.html#cb740-7"></a>f2 &lt;-<span class="st"> </span>f<span class="op">^</span><span class="dv">2</span></span>
+<span id="cb740-8"><a href="appendix-2-direct-comparison-to-morepower.html#cb740-8"></a>ES &lt;-<span class="st"> </span>f2<span class="op">/</span>(f2 <span class="op">+</span><span class="st"> </span><span class="dv">1</span>)</span>
+<span id="cb740-9"><a href="appendix-2-direct-comparison-to-morepower.html#cb740-9"></a>ES</span></code></pre></div>
 <pre><code>## [1] 0.05882353</code></pre>
-<div class="sourceCode" id="cb755"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb755-1"><a href="appendix-2-direct-comparison-to-morepower.html#cb755-1"></a>mu &lt;-<span class="st"> </span><span class="kw">mu_from_ES</span>(<span class="dt">K =</span> K, <span class="dt">ES =</span> ES)</span>
-<span id="cb755-2"><a href="appendix-2-direct-comparison-to-morepower.html#cb755-2"></a>design =<span class="st"> </span><span class="kw">paste</span>(K,<span class="st">&quot;w&quot;</span>,<span class="dt">sep =</span> <span class="st">&quot;&quot;</span>)</span>
-<span id="cb755-3"><a href="appendix-2-direct-comparison-to-morepower.html#cb755-3"></a>labelnames &lt;-<span class="st"> </span><span class="kw">c</span>(<span class="st">&quot;speed&quot;</span>, <span class="st">&quot;fast&quot;</span>, <span class="st">&quot;slow&quot;</span>)</span>
-<span id="cb755-4"><a href="appendix-2-direct-comparison-to-morepower.html#cb755-4"></a></span>
-<span id="cb755-5"><a href="appendix-2-direct-comparison-to-morepower.html#cb755-5"></a>design_result &lt;-<span class="st"> </span><span class="kw">ANOVA_design</span>(<span class="dt">design =</span> design,</span>
-<span id="cb755-6"><a href="appendix-2-direct-comparison-to-morepower.html#cb755-6"></a>                   <span class="dt">n =</span> n, </span>
-<span id="cb755-7"><a href="appendix-2-direct-comparison-to-morepower.html#cb755-7"></a>                   <span class="dt">mu =</span> mu, </span>
-<span id="cb755-8"><a href="appendix-2-direct-comparison-to-morepower.html#cb755-8"></a>                   <span class="dt">sd =</span> sd, </span>
-<span id="cb755-9"><a href="appendix-2-direct-comparison-to-morepower.html#cb755-9"></a>                   <span class="dt">r =</span> r, </span>
-<span id="cb755-10"><a href="appendix-2-direct-comparison-to-morepower.html#cb755-10"></a>                   <span class="dt">labelnames =</span> labelnames)</span>
-<span id="cb755-11"><a href="appendix-2-direct-comparison-to-morepower.html#cb755-11"></a></span>
-<span id="cb755-12"><a href="appendix-2-direct-comparison-to-morepower.html#cb755-12"></a>alpha_level &lt;-<span class="st"> </span><span class="fl">0.05</span></span>
-<span id="cb755-13"><a href="appendix-2-direct-comparison-to-morepower.html#cb755-13"></a></span>
-<span id="cb755-14"><a href="appendix-2-direct-comparison-to-morepower.html#cb755-14"></a>exact_result &lt;-<span class="st"> </span><span class="kw">ANOVA_exact</span>(design_result,</span>
-<span id="cb755-15"><a href="appendix-2-direct-comparison-to-morepower.html#cb755-15"></a>                            <span class="dt">alpha_level =</span> alpha_level,</span>
-<span id="cb755-16"><a href="appendix-2-direct-comparison-to-morepower.html#cb755-16"></a>                            <span class="dt">verbose =</span> <span class="ot">TRUE</span>)</span></code></pre></div>
+<div class="sourceCode" id="cb742"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb742-1"><a href="appendix-2-direct-comparison-to-morepower.html#cb742-1"></a>mu &lt;-<span class="st"> </span><span class="kw">mu_from_ES</span>(<span class="dt">K =</span> K, <span class="dt">ES =</span> ES)</span>
+<span id="cb742-2"><a href="appendix-2-direct-comparison-to-morepower.html#cb742-2"></a>design =<span class="st"> </span><span class="kw">paste</span>(K,<span class="st">&quot;w&quot;</span>,<span class="dt">sep =</span> <span class="st">&quot;&quot;</span>)</span>
+<span id="cb742-3"><a href="appendix-2-direct-comparison-to-morepower.html#cb742-3"></a>labelnames &lt;-<span class="st"> </span><span class="kw">c</span>(<span class="st">&quot;speed&quot;</span>, <span class="st">&quot;fast&quot;</span>, <span class="st">&quot;slow&quot;</span>)</span>
+<span id="cb742-4"><a href="appendix-2-direct-comparison-to-morepower.html#cb742-4"></a></span>
+<span id="cb742-5"><a href="appendix-2-direct-comparison-to-morepower.html#cb742-5"></a>design_result &lt;-<span class="st"> </span><span class="kw">ANOVA_design</span>(<span class="dt">design =</span> design,</span>
+<span id="cb742-6"><a href="appendix-2-direct-comparison-to-morepower.html#cb742-6"></a>                   <span class="dt">n =</span> n, </span>
+<span id="cb742-7"><a href="appendix-2-direct-comparison-to-morepower.html#cb742-7"></a>                   <span class="dt">mu =</span> mu, </span>
+<span id="cb742-8"><a href="appendix-2-direct-comparison-to-morepower.html#cb742-8"></a>                   <span class="dt">sd =</span> sd, </span>
+<span id="cb742-9"><a href="appendix-2-direct-comparison-to-morepower.html#cb742-9"></a>                   <span class="dt">r =</span> r, </span>
+<span id="cb742-10"><a href="appendix-2-direct-comparison-to-morepower.html#cb742-10"></a>                   <span class="dt">labelnames =</span> labelnames)</span>
+<span id="cb742-11"><a href="appendix-2-direct-comparison-to-morepower.html#cb742-11"></a></span>
+<span id="cb742-12"><a href="appendix-2-direct-comparison-to-morepower.html#cb742-12"></a>alpha_level &lt;-<span class="st"> </span><span class="fl">0.05</span></span>
+<span id="cb742-13"><a href="appendix-2-direct-comparison-to-morepower.html#cb742-13"></a></span>
+<span id="cb742-14"><a href="appendix-2-direct-comparison-to-morepower.html#cb742-14"></a>exact_result &lt;-<span class="st"> </span><span class="kw">ANOVA_exact</span>(design_result,</span>
+<span id="cb742-15"><a href="appendix-2-direct-comparison-to-morepower.html#cb742-15"></a>                            <span class="dt">alpha_level =</span> alpha_level,</span>
+<span id="cb742-16"><a href="appendix-2-direct-comparison-to-morepower.html#cb742-16"></a>                            <span class="dt">verbose =</span> <span class="ot">TRUE</span>)</span></code></pre></div>
 <pre><code>## Power and Effect sizes for ANOVA tests
 ##         power partial_eta_squared cohen_f non_centrality
 ## speed 80.7778              0.2048  0.5075            8.5
@@ -332,38 +332,38 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 ## Power and Effect sizes for pairwise comparisons (t-tests)
 ##                         power effect_size
 ## p_speed_fast_speed_slow 80.78         0.5</code></pre>
-<div class="sourceCode" id="cb757"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb757-1"><a href="appendix-2-direct-comparison-to-morepower.html#cb757-1"></a>exact_result<span class="op">$</span>main_result<span class="op">$</span>partial_eta_squared</span></code></pre></div>
+<div class="sourceCode" id="cb744"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb744-1"><a href="appendix-2-direct-comparison-to-morepower.html#cb744-1"></a>exact_result<span class="op">$</span>main_result<span class="op">$</span>partial_eta_squared</span></code></pre></div>
 <pre><code>## [1] 0.2048193</code></pre>
-<div class="sourceCode" id="cb759"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb759-1"><a href="appendix-2-direct-comparison-to-morepower.html#cb759-1"></a>exact_result<span class="op">$</span>main_result<span class="op">$</span>power</span></code></pre></div>
+<div class="sourceCode" id="cb746"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb746-1"><a href="appendix-2-direct-comparison-to-morepower.html#cb746-1"></a>exact_result<span class="op">$</span>main_result<span class="op">$</span>power</span></code></pre></div>
 <pre><code>## [1] 80.77775</code></pre>
 <p><img src="screenshots/morepower_2.png" /></p>
 <p>We can also replicate the 3-group within ANOVA example in MOREpower.</p>
-<div class="sourceCode" id="cb761"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb761-1"><a href="appendix-2-direct-comparison-to-morepower.html#cb761-1"></a>K &lt;-<span class="st"> </span><span class="dv">3</span></span>
-<span id="cb761-2"><a href="appendix-2-direct-comparison-to-morepower.html#cb761-2"></a>n &lt;-<span class="st"> </span><span class="dv">20</span></span>
-<span id="cb761-3"><a href="appendix-2-direct-comparison-to-morepower.html#cb761-3"></a>sd &lt;-<span class="st"> </span><span class="dv">1</span></span>
-<span id="cb761-4"><a href="appendix-2-direct-comparison-to-morepower.html#cb761-4"></a>r &lt;-<span class="st"> </span><span class="fl">0.8</span></span>
-<span id="cb761-5"><a href="appendix-2-direct-comparison-to-morepower.html#cb761-5"></a>alpha =<span class="st"> </span><span class="fl">0.05</span></span>
-<span id="cb761-6"><a href="appendix-2-direct-comparison-to-morepower.html#cb761-6"></a>f &lt;-<span class="st"> </span><span class="fl">0.25</span></span>
-<span id="cb761-7"><a href="appendix-2-direct-comparison-to-morepower.html#cb761-7"></a>f2 &lt;-<span class="st"> </span>f<span class="op">^</span><span class="dv">2</span></span>
-<span id="cb761-8"><a href="appendix-2-direct-comparison-to-morepower.html#cb761-8"></a>ES &lt;-<span class="st"> </span>f2 <span class="op">/</span><span class="st"> </span>(f2 <span class="op">+</span><span class="st"> </span><span class="dv">1</span>)</span>
-<span id="cb761-9"><a href="appendix-2-direct-comparison-to-morepower.html#cb761-9"></a>ES</span></code></pre></div>
+<div class="sourceCode" id="cb748"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb748-1"><a href="appendix-2-direct-comparison-to-morepower.html#cb748-1"></a>K &lt;-<span class="st"> </span><span class="dv">3</span></span>
+<span id="cb748-2"><a href="appendix-2-direct-comparison-to-morepower.html#cb748-2"></a>n &lt;-<span class="st"> </span><span class="dv">20</span></span>
+<span id="cb748-3"><a href="appendix-2-direct-comparison-to-morepower.html#cb748-3"></a>sd &lt;-<span class="st"> </span><span class="dv">1</span></span>
+<span id="cb748-4"><a href="appendix-2-direct-comparison-to-morepower.html#cb748-4"></a>r &lt;-<span class="st"> </span><span class="fl">0.8</span></span>
+<span id="cb748-5"><a href="appendix-2-direct-comparison-to-morepower.html#cb748-5"></a>alpha =<span class="st"> </span><span class="fl">0.05</span></span>
+<span id="cb748-6"><a href="appendix-2-direct-comparison-to-morepower.html#cb748-6"></a>f &lt;-<span class="st"> </span><span class="fl">0.25</span></span>
+<span id="cb748-7"><a href="appendix-2-direct-comparison-to-morepower.html#cb748-7"></a>f2 &lt;-<span class="st"> </span>f<span class="op">^</span><span class="dv">2</span></span>
+<span id="cb748-8"><a href="appendix-2-direct-comparison-to-morepower.html#cb748-8"></a>ES &lt;-<span class="st"> </span>f2 <span class="op">/</span><span class="st"> </span>(f2 <span class="op">+</span><span class="st"> </span><span class="dv">1</span>)</span>
+<span id="cb748-9"><a href="appendix-2-direct-comparison-to-morepower.html#cb748-9"></a>ES</span></code></pre></div>
 <pre><code>## [1] 0.05882353</code></pre>
-<div class="sourceCode" id="cb763"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb763-1"><a href="appendix-2-direct-comparison-to-morepower.html#cb763-1"></a>mu &lt;-<span class="st"> </span><span class="kw">mu_from_ES</span>(<span class="dt">K =</span> K, <span class="dt">ES =</span> ES)</span>
-<span id="cb763-2"><a href="appendix-2-direct-comparison-to-morepower.html#cb763-2"></a></span>
-<span id="cb763-3"><a href="appendix-2-direct-comparison-to-morepower.html#cb763-3"></a>design =<span class="st"> </span><span class="kw">paste</span>(K, <span class="st">&quot;w&quot;</span>, <span class="dt">sep =</span> <span class="st">&quot;&quot;</span>)</span>
-<span id="cb763-4"><a href="appendix-2-direct-comparison-to-morepower.html#cb763-4"></a>labelnames &lt;-<span class="st"> </span><span class="kw">c</span>(<span class="st">&quot;speed&quot;</span>, <span class="st">&quot;fast&quot;</span>, <span class="st">&quot;medium&quot;</span>, <span class="st">&quot;slow&quot;</span>)</span>
-<span id="cb763-5"><a href="appendix-2-direct-comparison-to-morepower.html#cb763-5"></a>design_result &lt;-<span class="st"> </span><span class="kw">ANOVA_design</span>(<span class="dt">design =</span> design,</span>
-<span id="cb763-6"><a href="appendix-2-direct-comparison-to-morepower.html#cb763-6"></a>                   <span class="dt">n =</span> n, </span>
-<span id="cb763-7"><a href="appendix-2-direct-comparison-to-morepower.html#cb763-7"></a>                   <span class="dt">mu =</span> mu, </span>
-<span id="cb763-8"><a href="appendix-2-direct-comparison-to-morepower.html#cb763-8"></a>                   <span class="dt">sd =</span> sd, </span>
-<span id="cb763-9"><a href="appendix-2-direct-comparison-to-morepower.html#cb763-9"></a>                   <span class="dt">r =</span> r, </span>
-<span id="cb763-10"><a href="appendix-2-direct-comparison-to-morepower.html#cb763-10"></a>                   <span class="dt">labelnames =</span> labelnames)</span>
-<span id="cb763-11"><a href="appendix-2-direct-comparison-to-morepower.html#cb763-11"></a></span>
-<span id="cb763-12"><a href="appendix-2-direct-comparison-to-morepower.html#cb763-12"></a>alpha_level &lt;-<span class="st"> </span><span class="fl">0.05</span></span>
-<span id="cb763-13"><a href="appendix-2-direct-comparison-to-morepower.html#cb763-13"></a></span>
-<span id="cb763-14"><a href="appendix-2-direct-comparison-to-morepower.html#cb763-14"></a>exact_result &lt;-<span class="st"> </span><span class="kw">ANOVA_exact</span>(design_result,</span>
-<span id="cb763-15"><a href="appendix-2-direct-comparison-to-morepower.html#cb763-15"></a>                            <span class="dt">alpha_level =</span> alpha_level,</span>
-<span id="cb763-16"><a href="appendix-2-direct-comparison-to-morepower.html#cb763-16"></a>                            <span class="dt">verbose =</span> <span class="ot">TRUE</span>)</span></code></pre></div>
+<div class="sourceCode" id="cb750"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb750-1"><a href="appendix-2-direct-comparison-to-morepower.html#cb750-1"></a>mu &lt;-<span class="st"> </span><span class="kw">mu_from_ES</span>(<span class="dt">K =</span> K, <span class="dt">ES =</span> ES)</span>
+<span id="cb750-2"><a href="appendix-2-direct-comparison-to-morepower.html#cb750-2"></a></span>
+<span id="cb750-3"><a href="appendix-2-direct-comparison-to-morepower.html#cb750-3"></a>design =<span class="st"> </span><span class="kw">paste</span>(K, <span class="st">&quot;w&quot;</span>, <span class="dt">sep =</span> <span class="st">&quot;&quot;</span>)</span>
+<span id="cb750-4"><a href="appendix-2-direct-comparison-to-morepower.html#cb750-4"></a>labelnames &lt;-<span class="st"> </span><span class="kw">c</span>(<span class="st">&quot;speed&quot;</span>, <span class="st">&quot;fast&quot;</span>, <span class="st">&quot;medium&quot;</span>, <span class="st">&quot;slow&quot;</span>)</span>
+<span id="cb750-5"><a href="appendix-2-direct-comparison-to-morepower.html#cb750-5"></a>design_result &lt;-<span class="st"> </span><span class="kw">ANOVA_design</span>(<span class="dt">design =</span> design,</span>
+<span id="cb750-6"><a href="appendix-2-direct-comparison-to-morepower.html#cb750-6"></a>                   <span class="dt">n =</span> n, </span>
+<span id="cb750-7"><a href="appendix-2-direct-comparison-to-morepower.html#cb750-7"></a>                   <span class="dt">mu =</span> mu, </span>
+<span id="cb750-8"><a href="appendix-2-direct-comparison-to-morepower.html#cb750-8"></a>                   <span class="dt">sd =</span> sd, </span>
+<span id="cb750-9"><a href="appendix-2-direct-comparison-to-morepower.html#cb750-9"></a>                   <span class="dt">r =</span> r, </span>
+<span id="cb750-10"><a href="appendix-2-direct-comparison-to-morepower.html#cb750-10"></a>                   <span class="dt">labelnames =</span> labelnames)</span>
+<span id="cb750-11"><a href="appendix-2-direct-comparison-to-morepower.html#cb750-11"></a></span>
+<span id="cb750-12"><a href="appendix-2-direct-comparison-to-morepower.html#cb750-12"></a>alpha_level &lt;-<span class="st"> </span><span class="fl">0.05</span></span>
+<span id="cb750-13"><a href="appendix-2-direct-comparison-to-morepower.html#cb750-13"></a></span>
+<span id="cb750-14"><a href="appendix-2-direct-comparison-to-morepower.html#cb750-14"></a>exact_result &lt;-<span class="st"> </span><span class="kw">ANOVA_exact</span>(design_result,</span>
+<span id="cb750-15"><a href="appendix-2-direct-comparison-to-morepower.html#cb750-15"></a>                            <span class="dt">alpha_level =</span> alpha_level,</span>
+<span id="cb750-16"><a href="appendix-2-direct-comparison-to-morepower.html#cb750-16"></a>                            <span class="dt">verbose =</span> <span class="ot">TRUE</span>)</span></code></pre></div>
 <pre><code>## Power and Effect sizes for ANOVA tests
 ##         power partial_eta_squared cohen_f non_centrality
 ## speed 96.9163              0.3304  0.7024          18.75
@@ -373,8 +373,8 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 ## p_speed_fast_speed_medium 53.79        0.48
 ## p_speed_fast_speed_slow   98.39        0.97
 ## p_speed_medium_speed_slow 53.79        0.48</code></pre>
-<div class="sourceCode" id="cb765"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb765-1"><a href="appendix-2-direct-comparison-to-morepower.html#cb765-1"></a><span class="co">#MSE, for MOREpower</span></span>
-<span id="cb765-2"><a href="appendix-2-direct-comparison-to-morepower.html#cb765-2"></a>exact_result[[<span class="st">&quot;aov_result&quot;</span>]][[<span class="st">&quot;anova_table&quot;</span>]]</span></code></pre></div>
+<div class="sourceCode" id="cb752"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb752-1"><a href="appendix-2-direct-comparison-to-morepower.html#cb752-1"></a><span class="co">#MSE, for MOREpower</span></span>
+<span id="cb752-2"><a href="appendix-2-direct-comparison-to-morepower.html#cb752-2"></a>exact_result[[<span class="st">&quot;aov_result&quot;</span>]][[<span class="st">&quot;anova_table&quot;</span>]]</span></code></pre></div>
 <pre><code>## Anova Table (Type 3 tests)
 ## 
 ## Response: y
@@ -382,29 +382,29 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 ## speed      2     38 0.2 9.375 0.3304 0.0004904 ***
 ## ---
 ## Signif. codes:  0 &#39;***&#39; 0.001 &#39;**&#39; 0.01 &#39;*&#39; 0.05 &#39;.&#39; 0.1 &#39; &#39; 1</code></pre>
-<div class="sourceCode" id="cb767"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb767-1"><a href="appendix-2-direct-comparison-to-morepower.html#cb767-1"></a><span class="co">#POWER</span></span>
-<span id="cb767-2"><a href="appendix-2-direct-comparison-to-morepower.html#cb767-2"></a>exact_result<span class="op">$</span>main_result<span class="op">$</span>power</span></code></pre></div>
+<div class="sourceCode" id="cb754"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb754-1"><a href="appendix-2-direct-comparison-to-morepower.html#cb754-1"></a><span class="co">#POWER</span></span>
+<span id="cb754-2"><a href="appendix-2-direct-comparison-to-morepower.html#cb754-2"></a>exact_result<span class="op">$</span>main_result<span class="op">$</span>power</span></code></pre></div>
 <pre><code>## [1] 96.91634</code></pre>
 <p><img src="screenshots/morepower_3.png" /></p>
 <p>We can reproduce the 2x2 ANOVA example in MOREpower.</p>
-<div class="sourceCode" id="cb769"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb769-1"><a href="appendix-2-direct-comparison-to-morepower.html#cb769-1"></a>mu =<span class="st"> </span><span class="kw">c</span>(<span class="dv">700</span>, <span class="dv">670</span>, <span class="dv">670</span>, <span class="dv">700</span>) </span>
-<span id="cb769-2"><a href="appendix-2-direct-comparison-to-morepower.html#cb769-2"></a>sigma =<span class="st"> </span><span class="dv">150</span>  <span class="co"># population standard deviation</span></span>
-<span id="cb769-3"><a href="appendix-2-direct-comparison-to-morepower.html#cb769-3"></a>n &lt;-<span class="st"> </span><span class="dv">25</span></span>
-<span id="cb769-4"><a href="appendix-2-direct-comparison-to-morepower.html#cb769-4"></a>sd &lt;-<span class="st"> </span><span class="dv">150</span></span>
-<span id="cb769-5"><a href="appendix-2-direct-comparison-to-morepower.html#cb769-5"></a>r &lt;-<span class="st"> </span><span class="fl">0.75</span></span>
-<span id="cb769-6"><a href="appendix-2-direct-comparison-to-morepower.html#cb769-6"></a>string =<span class="st"> &quot;2w*2w&quot;</span></span>
-<span id="cb769-7"><a href="appendix-2-direct-comparison-to-morepower.html#cb769-7"></a>alpha_level &lt;-<span class="st"> </span><span class="fl">0.05</span></span>
-<span id="cb769-8"><a href="appendix-2-direct-comparison-to-morepower.html#cb769-8"></a>labelnames =<span class="st"> </span><span class="kw">c</span>(<span class="st">&quot;age&quot;</span>, <span class="st">&quot;old&quot;</span>, <span class="st">&quot;young&quot;</span>, <span class="st">&quot;color&quot;</span>, <span class="st">&quot;blue&quot;</span>, <span class="st">&quot;red&quot;</span>)</span>
-<span id="cb769-9"><a href="appendix-2-direct-comparison-to-morepower.html#cb769-9"></a>design_result &lt;-<span class="st"> </span><span class="kw">ANOVA_design</span>(<span class="dt">design =</span> string,</span>
-<span id="cb769-10"><a href="appendix-2-direct-comparison-to-morepower.html#cb769-10"></a>                              <span class="dt">n =</span> n, </span>
-<span id="cb769-11"><a href="appendix-2-direct-comparison-to-morepower.html#cb769-11"></a>                              <span class="dt">mu =</span> mu, </span>
-<span id="cb769-12"><a href="appendix-2-direct-comparison-to-morepower.html#cb769-12"></a>                              <span class="dt">sd =</span> sd, </span>
-<span id="cb769-13"><a href="appendix-2-direct-comparison-to-morepower.html#cb769-13"></a>                              <span class="dt">r =</span> r, </span>
-<span id="cb769-14"><a href="appendix-2-direct-comparison-to-morepower.html#cb769-14"></a>                              <span class="dt">labelnames =</span> labelnames)</span>
-<span id="cb769-15"><a href="appendix-2-direct-comparison-to-morepower.html#cb769-15"></a></span>
-<span id="cb769-16"><a href="appendix-2-direct-comparison-to-morepower.html#cb769-16"></a>simulation_result &lt;-<span class="st"> </span><span class="kw">ANOVA_exact</span>(design_result, </span>
-<span id="cb769-17"><a href="appendix-2-direct-comparison-to-morepower.html#cb769-17"></a>                                 <span class="dt">alpha_level =</span> alpha_level, </span>
-<span id="cb769-18"><a href="appendix-2-direct-comparison-to-morepower.html#cb769-18"></a>                                 <span class="dt">verbose =</span> <span class="ot">TRUE</span>)</span></code></pre></div>
+<div class="sourceCode" id="cb756"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb756-1"><a href="appendix-2-direct-comparison-to-morepower.html#cb756-1"></a>mu =<span class="st"> </span><span class="kw">c</span>(<span class="dv">700</span>, <span class="dv">670</span>, <span class="dv">670</span>, <span class="dv">700</span>) </span>
+<span id="cb756-2"><a href="appendix-2-direct-comparison-to-morepower.html#cb756-2"></a>sigma =<span class="st"> </span><span class="dv">150</span>  <span class="co"># population standard deviation</span></span>
+<span id="cb756-3"><a href="appendix-2-direct-comparison-to-morepower.html#cb756-3"></a>n &lt;-<span class="st"> </span><span class="dv">25</span></span>
+<span id="cb756-4"><a href="appendix-2-direct-comparison-to-morepower.html#cb756-4"></a>sd &lt;-<span class="st"> </span><span class="dv">150</span></span>
+<span id="cb756-5"><a href="appendix-2-direct-comparison-to-morepower.html#cb756-5"></a>r &lt;-<span class="st"> </span><span class="fl">0.75</span></span>
+<span id="cb756-6"><a href="appendix-2-direct-comparison-to-morepower.html#cb756-6"></a>string =<span class="st"> &quot;2w*2w&quot;</span></span>
+<span id="cb756-7"><a href="appendix-2-direct-comparison-to-morepower.html#cb756-7"></a>alpha_level &lt;-<span class="st"> </span><span class="fl">0.05</span></span>
+<span id="cb756-8"><a href="appendix-2-direct-comparison-to-morepower.html#cb756-8"></a>labelnames =<span class="st"> </span><span class="kw">c</span>(<span class="st">&quot;age&quot;</span>, <span class="st">&quot;old&quot;</span>, <span class="st">&quot;young&quot;</span>, <span class="st">&quot;color&quot;</span>, <span class="st">&quot;blue&quot;</span>, <span class="st">&quot;red&quot;</span>)</span>
+<span id="cb756-9"><a href="appendix-2-direct-comparison-to-morepower.html#cb756-9"></a>design_result &lt;-<span class="st"> </span><span class="kw">ANOVA_design</span>(<span class="dt">design =</span> string,</span>
+<span id="cb756-10"><a href="appendix-2-direct-comparison-to-morepower.html#cb756-10"></a>                              <span class="dt">n =</span> n, </span>
+<span id="cb756-11"><a href="appendix-2-direct-comparison-to-morepower.html#cb756-11"></a>                              <span class="dt">mu =</span> mu, </span>
+<span id="cb756-12"><a href="appendix-2-direct-comparison-to-morepower.html#cb756-12"></a>                              <span class="dt">sd =</span> sd, </span>
+<span id="cb756-13"><a href="appendix-2-direct-comparison-to-morepower.html#cb756-13"></a>                              <span class="dt">r =</span> r, </span>
+<span id="cb756-14"><a href="appendix-2-direct-comparison-to-morepower.html#cb756-14"></a>                              <span class="dt">labelnames =</span> labelnames)</span>
+<span id="cb756-15"><a href="appendix-2-direct-comparison-to-morepower.html#cb756-15"></a></span>
+<span id="cb756-16"><a href="appendix-2-direct-comparison-to-morepower.html#cb756-16"></a>simulation_result &lt;-<span class="st"> </span><span class="kw">ANOVA_exact</span>(design_result, </span>
+<span id="cb756-17"><a href="appendix-2-direct-comparison-to-morepower.html#cb756-17"></a>                                 <span class="dt">alpha_level =</span> alpha_level, </span>
+<span id="cb756-18"><a href="appendix-2-direct-comparison-to-morepower.html#cb756-18"></a>                                 <span class="dt">verbose =</span> <span class="ot">TRUE</span>)</span></code></pre></div>
 <pre><code>## Power and Effect sizes for ANOVA tests
 ##             power partial_eta_squared cohen_f non_centrality
 ## age        5.0000              0.0000  0.0000              0
@@ -419,30 +419,30 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 ## p_age_old_color_red_age_young_color_blue     5.0        0.00
 ## p_age_old_color_red_age_young_color_red     27.4        0.28
 ## p_age_young_color_blue_age_young_color_red  27.4        0.28</code></pre>
-<div class="sourceCode" id="cb771"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb771-1"><a href="appendix-2-direct-comparison-to-morepower.html#cb771-1"></a>simulation_result<span class="op">$</span>main_result<span class="op">$</span>partial_eta_squared[<span class="dv">3</span>]</span></code></pre></div>
+<div class="sourceCode" id="cb758"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb758-1"><a href="appendix-2-direct-comparison-to-morepower.html#cb758-1"></a>simulation_result<span class="op">$</span>main_result<span class="op">$</span>partial_eta_squared[<span class="dv">3</span>]</span></code></pre></div>
 <pre><code>## [1] 0.1428571</code></pre>
 <p>This result reproduces the analysis in MOREpower, for a 2x2 within design, with a sample of 25, and eta-squared of 0.1428571.</p>
 <p><img src="screenshots/morepower_4.png" /></p>
 <p>Let’s replicate the 2x2x2 full between analysis (total N = 400, effects sizes differ for each test):</p>
-<div class="sourceCode" id="cb773"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb773-1"><a href="appendix-2-direct-comparison-to-morepower.html#cb773-1"></a><span class="co"># With 2x2x2 designs,</span></span>
-<span id="cb773-2"><a href="appendix-2-direct-comparison-to-morepower.html#cb773-2"></a><span class="co"># the names for paired comparisons can become very long.</span></span>
-<span id="cb773-3"><a href="appendix-2-direct-comparison-to-morepower.html#cb773-3"></a><span class="co"># So here I abbreviate terms:</span></span>
-<span id="cb773-4"><a href="appendix-2-direct-comparison-to-morepower.html#cb773-4"></a><span class="co"># Size, Color, and Cognitive Load, have values:</span></span>
-<span id="cb773-5"><a href="appendix-2-direct-comparison-to-morepower.html#cb773-5"></a><span class="co"># b = big, s = small, g = green,</span></span>
-<span id="cb773-6"><a href="appendix-2-direct-comparison-to-morepower.html#cb773-6"></a><span class="co"># r = red, pres = present, abs = absent.</span></span>
-<span id="cb773-7"><a href="appendix-2-direct-comparison-to-morepower.html#cb773-7"></a>labelnames &lt;-<span class="st"> </span><span class="kw">c</span>(<span class="st">&quot;Size&quot;</span>, <span class="st">&quot;b&quot;</span>, <span class="st">&quot;s&quot;</span>, <span class="st">&quot;Color&quot;</span>, <span class="st">&quot;g&quot;</span>, <span class="st">&quot;r&quot;</span>,</span>
-<span id="cb773-8"><a href="appendix-2-direct-comparison-to-morepower.html#cb773-8"></a>                <span class="st">&quot;Load&quot;</span>, <span class="st">&quot;pres&quot;</span>, <span class="st">&quot;abs&quot;</span>) <span class="co">#</span></span>
-<span id="cb773-9"><a href="appendix-2-direct-comparison-to-morepower.html#cb773-9"></a>design_result &lt;-<span class="st"> </span><span class="kw">ANOVA_design</span>(<span class="dt">design =</span> <span class="st">&quot;2b*2b*2b&quot;</span>,</span>
-<span id="cb773-10"><a href="appendix-2-direct-comparison-to-morepower.html#cb773-10"></a>                              <span class="co">#sample size per group</span></span>
-<span id="cb773-11"><a href="appendix-2-direct-comparison-to-morepower.html#cb773-11"></a>                              <span class="dt">n =</span> <span class="dv">50</span>,</span>
-<span id="cb773-12"><a href="appendix-2-direct-comparison-to-morepower.html#cb773-12"></a>                              <span class="co">#pattern of means</span></span>
-<span id="cb773-13"><a href="appendix-2-direct-comparison-to-morepower.html#cb773-13"></a>                              <span class="dt">mu =</span> <span class="kw">c</span>(<span class="dv">2</span>, <span class="dv">2</span>, <span class="dv">6</span>, <span class="dv">1</span>, <span class="dv">6</span>, <span class="dv">6</span>, <span class="dv">1</span>, <span class="dv">8</span>),</span>
-<span id="cb773-14"><a href="appendix-2-direct-comparison-to-morepower.html#cb773-14"></a>                              <span class="dt">sd =</span> <span class="dv">10</span>, <span class="co">#standard deviation</span></span>
-<span id="cb773-15"><a href="appendix-2-direct-comparison-to-morepower.html#cb773-15"></a>                              <span class="dt">labelnames =</span> labelnames)</span>
-<span id="cb773-16"><a href="appendix-2-direct-comparison-to-morepower.html#cb773-16"></a></span>
-<span id="cb773-17"><a href="appendix-2-direct-comparison-to-morepower.html#cb773-17"></a>exact_result &lt;-<span class="st"> </span><span class="kw">ANOVA_exact</span>(design_result,</span>
-<span id="cb773-18"><a href="appendix-2-direct-comparison-to-morepower.html#cb773-18"></a>                            <span class="dt">alpha_level =</span> alpha_level,</span>
-<span id="cb773-19"><a href="appendix-2-direct-comparison-to-morepower.html#cb773-19"></a>                            <span class="dt">verbose =</span> <span class="ot">TRUE</span>)</span></code></pre></div>
+<div class="sourceCode" id="cb760"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb760-1"><a href="appendix-2-direct-comparison-to-morepower.html#cb760-1"></a><span class="co"># With 2x2x2 designs,</span></span>
+<span id="cb760-2"><a href="appendix-2-direct-comparison-to-morepower.html#cb760-2"></a><span class="co"># the names for paired comparisons can become very long.</span></span>
+<span id="cb760-3"><a href="appendix-2-direct-comparison-to-morepower.html#cb760-3"></a><span class="co"># So here I abbreviate terms:</span></span>
+<span id="cb760-4"><a href="appendix-2-direct-comparison-to-morepower.html#cb760-4"></a><span class="co"># Size, Color, and Cognitive Load, have values:</span></span>
+<span id="cb760-5"><a href="appendix-2-direct-comparison-to-morepower.html#cb760-5"></a><span class="co"># b = big, s = small, g = green,</span></span>
+<span id="cb760-6"><a href="appendix-2-direct-comparison-to-morepower.html#cb760-6"></a><span class="co"># r = red, pres = present, abs = absent.</span></span>
+<span id="cb760-7"><a href="appendix-2-direct-comparison-to-morepower.html#cb760-7"></a>labelnames &lt;-<span class="st"> </span><span class="kw">c</span>(<span class="st">&quot;Size&quot;</span>, <span class="st">&quot;b&quot;</span>, <span class="st">&quot;s&quot;</span>, <span class="st">&quot;Color&quot;</span>, <span class="st">&quot;g&quot;</span>, <span class="st">&quot;r&quot;</span>,</span>
+<span id="cb760-8"><a href="appendix-2-direct-comparison-to-morepower.html#cb760-8"></a>                <span class="st">&quot;Load&quot;</span>, <span class="st">&quot;pres&quot;</span>, <span class="st">&quot;abs&quot;</span>) <span class="co">#</span></span>
+<span id="cb760-9"><a href="appendix-2-direct-comparison-to-morepower.html#cb760-9"></a>design_result &lt;-<span class="st"> </span><span class="kw">ANOVA_design</span>(<span class="dt">design =</span> <span class="st">&quot;2b*2b*2b&quot;</span>,</span>
+<span id="cb760-10"><a href="appendix-2-direct-comparison-to-morepower.html#cb760-10"></a>                              <span class="co">#sample size per group</span></span>
+<span id="cb760-11"><a href="appendix-2-direct-comparison-to-morepower.html#cb760-11"></a>                              <span class="dt">n =</span> <span class="dv">50</span>,</span>
+<span id="cb760-12"><a href="appendix-2-direct-comparison-to-morepower.html#cb760-12"></a>                              <span class="co">#pattern of means</span></span>
+<span id="cb760-13"><a href="appendix-2-direct-comparison-to-morepower.html#cb760-13"></a>                              <span class="dt">mu =</span> <span class="kw">c</span>(<span class="dv">2</span>, <span class="dv">2</span>, <span class="dv">6</span>, <span class="dv">1</span>, <span class="dv">6</span>, <span class="dv">6</span>, <span class="dv">1</span>, <span class="dv">8</span>),</span>
+<span id="cb760-14"><a href="appendix-2-direct-comparison-to-morepower.html#cb760-14"></a>                              <span class="dt">sd =</span> <span class="dv">10</span>, <span class="co">#standard deviation</span></span>
+<span id="cb760-15"><a href="appendix-2-direct-comparison-to-morepower.html#cb760-15"></a>                              <span class="dt">labelnames =</span> labelnames)</span>
+<span id="cb760-16"><a href="appendix-2-direct-comparison-to-morepower.html#cb760-16"></a></span>
+<span id="cb760-17"><a href="appendix-2-direct-comparison-to-morepower.html#cb760-17"></a>exact_result &lt;-<span class="st"> </span><span class="kw">ANOVA_exact</span>(design_result,</span>
+<span id="cb760-18"><a href="appendix-2-direct-comparison-to-morepower.html#cb760-18"></a>                            <span class="dt">alpha_level =</span> alpha_level,</span>
+<span id="cb760-19"><a href="appendix-2-direct-comparison-to-morepower.html#cb760-19"></a>                            <span class="dt">verbose =</span> <span class="ot">TRUE</span>)</span></code></pre></div>
 <pre><code>## Power and Effect sizes for ANOVA tests
 ##                   power partial_eta_squared cohen_f non_centrality
 ## Size            70.3301              0.0157  0.1263           6.25
@@ -483,30 +483,31 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 ## p_Size_s_Color_g_Load_abs_Size_s_Color_r_Load_pres  69.69        -0.5
 ## p_Size_s_Color_g_Load_abs_Size_s_Color_r_Load_abs   16.77         0.2
 ## p_Size_s_Color_r_Load_pres_Size_s_Color_r_Load_abs  93.39         0.7</code></pre>
-<div class="sourceCode" id="cb775"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb775-1"><a href="appendix-2-direct-comparison-to-morepower.html#cb775-1"></a>exact_result<span class="op">$</span>main_result<span class="op">$</span>partial_eta_squared</span></code></pre></div>
-<pre><code>## [1] 0.0156936598 0.0000000000 0.0006373486 0.0057070387 0.0224438903 0.0006373486 0.0224438903</code></pre>
+<div class="sourceCode" id="cb762"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb762-1"><a href="appendix-2-direct-comparison-to-morepower.html#cb762-1"></a>exact_result<span class="op">$</span>main_result<span class="op">$</span>partial_eta_squared</span></code></pre></div>
+<pre><code>## [1] 0.0156936598 0.0000000000 0.0006373486 0.0057070387 0.0224438903
+## [6] 0.0006373486 0.0224438903</code></pre>
 <p>This result is nicely reproduced in MOREpower, both for the 2x2 effects, and the 2x2x2 between effects.</p>
 <p><img src="screenshots/morepower_5.png" /></p>
 <p>And finally, let’s replicate the 2x2 full within analysis.</p>
-<div class="sourceCode" id="cb777"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb777-1"><a href="appendix-2-direct-comparison-to-morepower.html#cb777-1"></a>mu =<span class="st"> </span><span class="kw">c</span>(<span class="dv">2</span>,<span class="dv">1</span>,<span class="dv">4</span>,<span class="dv">2</span>)</span>
-<span id="cb777-2"><a href="appendix-2-direct-comparison-to-morepower.html#cb777-2"></a>n &lt;-<span class="st"> </span><span class="dv">20</span></span>
-<span id="cb777-3"><a href="appendix-2-direct-comparison-to-morepower.html#cb777-3"></a>sd &lt;-<span class="st"> </span><span class="dv">5</span></span>
-<span id="cb777-4"><a href="appendix-2-direct-comparison-to-morepower.html#cb777-4"></a>r &lt;-<span class="st"> </span><span class="kw">c</span>(</span>
-<span id="cb777-5"><a href="appendix-2-direct-comparison-to-morepower.html#cb777-5"></a>  <span class="fl">0.8</span>, <span class="fl">0.5</span>, <span class="fl">0.4</span>,</span>
-<span id="cb777-6"><a href="appendix-2-direct-comparison-to-morepower.html#cb777-6"></a>  <span class="fl">0.4</span>, <span class="fl">0.5</span>,</span>
-<span id="cb777-7"><a href="appendix-2-direct-comparison-to-morepower.html#cb777-7"></a>  <span class="fl">0.8</span></span>
-<span id="cb777-8"><a href="appendix-2-direct-comparison-to-morepower.html#cb777-8"></a>)</span>
-<span id="cb777-9"><a href="appendix-2-direct-comparison-to-morepower.html#cb777-9"></a>string =<span class="st"> &quot;2w*2w&quot;</span></span>
-<span id="cb777-10"><a href="appendix-2-direct-comparison-to-morepower.html#cb777-10"></a>labelnames =<span class="st"> </span><span class="kw">c</span>(<span class="st">&quot;A&quot;</span>, <span class="st">&quot;a1&quot;</span>, <span class="st">&quot;a2&quot;</span>, <span class="st">&quot;B&quot;</span>, <span class="st">&quot;b1&quot;</span>, <span class="st">&quot;b2&quot;</span>)</span>
-<span id="cb777-11"><a href="appendix-2-direct-comparison-to-morepower.html#cb777-11"></a>design_result &lt;-<span class="st"> </span><span class="kw">ANOVA_design</span>(<span class="dt">design =</span> string,</span>
-<span id="cb777-12"><a href="appendix-2-direct-comparison-to-morepower.html#cb777-12"></a>                              <span class="dt">n =</span> n,</span>
-<span id="cb777-13"><a href="appendix-2-direct-comparison-to-morepower.html#cb777-13"></a>                              <span class="dt">mu =</span> mu,</span>
-<span id="cb777-14"><a href="appendix-2-direct-comparison-to-morepower.html#cb777-14"></a>                              <span class="dt">sd =</span> sd,</span>
-<span id="cb777-15"><a href="appendix-2-direct-comparison-to-morepower.html#cb777-15"></a>                              <span class="dt">r =</span> r,</span>
-<span id="cb777-16"><a href="appendix-2-direct-comparison-to-morepower.html#cb777-16"></a>                              <span class="dt">labelnames =</span> labelnames)</span>
-<span id="cb777-17"><a href="appendix-2-direct-comparison-to-morepower.html#cb777-17"></a>exact_result &lt;-<span class="st"> </span><span class="kw">ANOVA_exact</span>(design_result,</span>
-<span id="cb777-18"><a href="appendix-2-direct-comparison-to-morepower.html#cb777-18"></a>                            <span class="dt">alpha_level =</span> alpha_level,</span>
-<span id="cb777-19"><a href="appendix-2-direct-comparison-to-morepower.html#cb777-19"></a>                            <span class="dt">verbose =</span> <span class="ot">TRUE</span>)</span></code></pre></div>
+<div class="sourceCode" id="cb764"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb764-1"><a href="appendix-2-direct-comparison-to-morepower.html#cb764-1"></a>mu =<span class="st"> </span><span class="kw">c</span>(<span class="dv">2</span>,<span class="dv">1</span>,<span class="dv">4</span>,<span class="dv">2</span>)</span>
+<span id="cb764-2"><a href="appendix-2-direct-comparison-to-morepower.html#cb764-2"></a>n &lt;-<span class="st"> </span><span class="dv">20</span></span>
+<span id="cb764-3"><a href="appendix-2-direct-comparison-to-morepower.html#cb764-3"></a>sd &lt;-<span class="st"> </span><span class="dv">5</span></span>
+<span id="cb764-4"><a href="appendix-2-direct-comparison-to-morepower.html#cb764-4"></a>r &lt;-<span class="st"> </span><span class="kw">c</span>(</span>
+<span id="cb764-5"><a href="appendix-2-direct-comparison-to-morepower.html#cb764-5"></a>  <span class="fl">0.8</span>, <span class="fl">0.5</span>, <span class="fl">0.4</span>,</span>
+<span id="cb764-6"><a href="appendix-2-direct-comparison-to-morepower.html#cb764-6"></a>  <span class="fl">0.4</span>, <span class="fl">0.5</span>,</span>
+<span id="cb764-7"><a href="appendix-2-direct-comparison-to-morepower.html#cb764-7"></a>  <span class="fl">0.8</span></span>
+<span id="cb764-8"><a href="appendix-2-direct-comparison-to-morepower.html#cb764-8"></a>)</span>
+<span id="cb764-9"><a href="appendix-2-direct-comparison-to-morepower.html#cb764-9"></a>string =<span class="st"> &quot;2w*2w&quot;</span></span>
+<span id="cb764-10"><a href="appendix-2-direct-comparison-to-morepower.html#cb764-10"></a>labelnames =<span class="st"> </span><span class="kw">c</span>(<span class="st">&quot;A&quot;</span>, <span class="st">&quot;a1&quot;</span>, <span class="st">&quot;a2&quot;</span>, <span class="st">&quot;B&quot;</span>, <span class="st">&quot;b1&quot;</span>, <span class="st">&quot;b2&quot;</span>)</span>
+<span id="cb764-11"><a href="appendix-2-direct-comparison-to-morepower.html#cb764-11"></a>design_result &lt;-<span class="st"> </span><span class="kw">ANOVA_design</span>(<span class="dt">design =</span> string,</span>
+<span id="cb764-12"><a href="appendix-2-direct-comparison-to-morepower.html#cb764-12"></a>                              <span class="dt">n =</span> n,</span>
+<span id="cb764-13"><a href="appendix-2-direct-comparison-to-morepower.html#cb764-13"></a>                              <span class="dt">mu =</span> mu,</span>
+<span id="cb764-14"><a href="appendix-2-direct-comparison-to-morepower.html#cb764-14"></a>                              <span class="dt">sd =</span> sd,</span>
+<span id="cb764-15"><a href="appendix-2-direct-comparison-to-morepower.html#cb764-15"></a>                              <span class="dt">r =</span> r,</span>
+<span id="cb764-16"><a href="appendix-2-direct-comparison-to-morepower.html#cb764-16"></a>                              <span class="dt">labelnames =</span> labelnames)</span>
+<span id="cb764-17"><a href="appendix-2-direct-comparison-to-morepower.html#cb764-17"></a>exact_result &lt;-<span class="st"> </span><span class="kw">ANOVA_exact</span>(design_result,</span>
+<span id="cb764-18"><a href="appendix-2-direct-comparison-to-morepower.html#cb764-18"></a>                            <span class="dt">alpha_level =</span> alpha_level,</span>
+<span id="cb764-19"><a href="appendix-2-direct-comparison-to-morepower.html#cb764-19"></a>                            <span class="dt">verbose =</span> <span class="ot">TRUE</span>)</span></code></pre></div>
 <pre><code>## Power and Effect sizes for ANOVA tests
 ##       power partial_eta_squared cohen_f non_centrality
 ## A   26.9175              0.0952  0.3244              2
@@ -521,9 +522,9 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 ## p_A_a1_B_b2_A_a2_B_b1 64.23        0.55
 ## p_A_a1_B_b2_A_a2_B_b2 13.60        0.20
 ## p_A_a2_B_b1_A_a2_B_b2 76.52       -0.63</code></pre>
-<div class="sourceCode" id="cb779"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb779-1"><a href="appendix-2-direct-comparison-to-morepower.html#cb779-1"></a>exact_result<span class="op">$</span>main_result<span class="op">$</span>partial_eta_squared</span></code></pre></div>
+<div class="sourceCode" id="cb766"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb766-1"><a href="appendix-2-direct-comparison-to-morepower.html#cb766-1"></a>exact_result<span class="op">$</span>main_result<span class="op">$</span>partial_eta_squared</span></code></pre></div>
 <pre><code>## [1] 0.0952381 0.2400000 0.0952381</code></pre>
-<div class="sourceCode" id="cb781"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb781-1"><a href="appendix-2-direct-comparison-to-morepower.html#cb781-1"></a>exact_result<span class="op">$</span>main_result<span class="op">$</span>power</span></code></pre></div>
+<div class="sourceCode" id="cb768"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb768-1"><a href="appendix-2-direct-comparison-to-morepower.html#cb768-1"></a>exact_result<span class="op">$</span>main_result<span class="op">$</span>power</span></code></pre></div>
 <pre><code>## [1] 26.91752 64.22587 26.91752</code></pre>
 <p>This result is also reproduced in MOREpower, both for the main effect, and the 2x2 within interaction effect.</p>
 <p><img src="screenshots/morepower_6.png" /></p>
