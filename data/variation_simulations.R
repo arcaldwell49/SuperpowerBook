@@ -24,3 +24,5 @@ simulation_result_7.1 <- ANOVA_power(design_result,
                                  alpha_level = alpha_level, 
                                  nsims = nsims,
                                  verbose = FALSE)
+
+save.image("data/variation_dta.RData")

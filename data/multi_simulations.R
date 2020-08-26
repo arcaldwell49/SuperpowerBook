@@ -89,3 +89,4 @@ rm(design_result_power)
 rm(design_result_power2)
 
 
+save.image("data/multi_data.RData")

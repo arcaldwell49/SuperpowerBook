@@ -365,3 +365,4 @@ plot4 <- ggplot(long_data, aes(x = n, y = power,color = as.factor(corr_diff))) +
   scale_color_viridis_d() + facet_wrap( ~ factor, ncol=2)
 
 
+save.image("data/powercurve_data.RData")

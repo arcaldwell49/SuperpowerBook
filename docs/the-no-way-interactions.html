@@ -6,7 +6,7 @@
   <meta http-equiv="X-UA-Compatible" content="IE=edge" />
   <title>Chapter 6 The ‘No-Way’ Interactions | Power Analysis with Superpower</title>
   <meta name="description" content="This is a book describing the capabilities of the Superpower R package." />
-  <meta name="generator" content="bookdown 0.18 and GitBook 2.6.7" />
+  <meta name="generator" content="bookdown 0.20 and GitBook 2.6.7" />
 
   <meta property="og:title" content="Chapter 6 The ‘No-Way’ Interactions | Power Analysis with Superpower" />
   <meta property="og:type" content="book" />
@@ -24,7 +24,7 @@
 <meta name="author" content="Aaron R. Caldwell, Daniël Lakens, and Chelsea M. Parlett-Pelleriti" />
 
 
-<meta name="date" content="2020-04-28" />
+<meta name="date" content="2020-08-26" />
 
   <meta name="viewport" content="width=device-width, initial-scale=1" />
   <meta name="apple-mobile-web-app-capable" content="yes" />
@@ -50,6 +50,7 @@
 
 
 
+<script src="libs/accessible-code-block-0.0.1/empty-anchor.js"></script>
 <script src="libs/kePrint-0.0.1/kePrint.js"></script>
 
 
@@ -201,6 +202,7 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 <li class="chapter" data-level="10.2" data-path="power-curve.html"><a href="power-curve.html#explore-increase-in-effect-size-for-cross-over-interactions."><i class="fa fa-check"></i><b>10.2</b> Explore increase in effect size for cross-over interactions.</a></li>
 <li class="chapter" data-level="10.3" data-path="power-curve.html"><a href="power-curve.html#explore-increase-in-correlation-in-moderated-interactions."><i class="fa fa-check"></i><b>10.3</b> Explore increase in correlation in moderated interactions.</a></li>
 <li class="chapter" data-level="10.4" data-path="power-curve.html"><a href="power-curve.html#increasing-correlation-in-on-factor-decreases-power-in-second-factor"><i class="fa fa-check"></i><b>10.4</b> Increasing correlation in on factor decreases power in second factor</a></li>
+<li class="chapter" data-level="10.5" data-path="power-curve.html"><a href="power-curve.html#code-to-reproduce-power-curve-figures"><i class="fa fa-check"></i><b>10.5</b> Code to Reproduce Power Curve Figures</a></li>
 </ul></li>
 <li class="chapter" data-level="11" data-path="violations-of-assumptions.html"><a href="violations-of-assumptions.html"><i class="fa fa-check"></i><b>11</b> Violations of Assumptions</a><ul>
 <li class="chapter" data-level="11.1" data-path="violations-of-assumptions.html"><a href="violations-of-assumptions.html#violation-of-heterogeneity-assumption"><i class="fa fa-check"></i><b>11.1</b> Violation of Heterogeneity Assumption</a></li>
@@ -231,7 +233,7 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 </ul></li>
 </ul></li>
 <li class="chapter" data-level="" data-path="appendix-3-comparison-to-brysbaert.html"><a href="appendix-3-comparison-to-brysbaert.html"><i class="fa fa-check"></i>Appendix 3: Comparison to Brysbaert</a><ul>
-<li class="chapter" data-level="12.10" data-path="appendix-3-comparison-to-brysbaert.html"><a href="appendix-3-comparison-to-brysbaert.html#one-way-anova-1"><i class="fa fa-check"></i><b>12.10</b> One-Way ANOVA</a><ul>
+<li class="chapter" data-level="12.10" data-path="one-way-anova.html"><a href="one-way-anova.html#one-way-anova"><i class="fa fa-check"></i><b>12.10</b> One-Way ANOVA</a><ul>
 <li class="chapter" data-level="12.10.1" data-path="appendix-3-comparison-to-brysbaert.html"><a href="appendix-3-comparison-to-brysbaert.html#three-conditions-replication"><i class="fa fa-check"></i><b>12.10.1</b> Three conditions replication</a></li>
 <li class="chapter" data-level="12.10.2" data-path="appendix-3-comparison-to-brysbaert.html"><a href="appendix-3-comparison-to-brysbaert.html#variation-1"><i class="fa fa-check"></i><b>12.10.2</b> Variation 1</a></li>
 <li class="chapter" data-level="12.10.3" data-path="appendix-3-comparison-to-brysbaert.html"><a href="appendix-3-comparison-to-brysbaert.html#three-conditions-replication-1"><i class="fa fa-check"></i><b>12.10.3</b> Three conditions replication</a></li>
@@ -267,154 +269,154 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 <div id="the-no-way-interactions" class="section level1">
 <h1><span class="header-section-number">Chapter 6</span> The ‘No-Way’ Interactions</h1>
 <p>In the 17th Data Colada blog post titled <a href="http://datacolada.org/17">No-way Interactions</a> <span class="citation">Simonsohn (<a href="#ref-simonsohn_2014" role="doc-biblioref">2014</a>)</span> discusses how a moderated interaction (the effect is there in one condition, but disappears in another condition) requires at least twice as many subjects per cell as a study that simply aims to show the simple effect. For example, see the plot below. Assume the score on the vertical axis is desire for fruit, as a function of the fruit that is available (an apple or a banana) and how hungry people are (not, or very). We see there is a difference between the participants desire for a banana compared to an apple, but only for participants who are very hungry. The point that is made is that you need twice as many participants in each cell to have power for the interaction, as you need for the simple effect.</p>
-<div class="sourceCode" id="cb347"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb347-1"><a href="the-no-way-interactions.html#cb347-1"></a>string &lt;-<span class="st"> &quot;2b*2b&quot;</span></span>
-<span id="cb347-2"><a href="the-no-way-interactions.html#cb347-2"></a>n &lt;-<span class="st"> </span><span class="dv">20</span></span>
-<span id="cb347-3"><a href="the-no-way-interactions.html#cb347-3"></a><span class="co"># All means are equal - so there is no real difference.</span></span>
-<span id="cb347-4"><a href="the-no-way-interactions.html#cb347-4"></a><span class="co"># Enter means in the order that matches the labels below.</span></span>
-<span id="cb347-5"><a href="the-no-way-interactions.html#cb347-5"></a>mu &lt;-<span class="st"> </span><span class="kw">c</span>(<span class="dv">20</span>, <span class="dv">20</span>, <span class="dv">20</span>, <span class="dv">25</span>) </span>
-<span id="cb347-6"><a href="the-no-way-interactions.html#cb347-6"></a>sd &lt;-<span class="st"> </span><span class="fl">0.5</span></span>
-<span id="cb347-7"><a href="the-no-way-interactions.html#cb347-7"></a>labelnames &lt;-<span class="st"> </span><span class="kw">c</span>(<span class="st">&quot;fruit&quot;</span>, <span class="st">&quot;apple&quot;</span>, <span class="st">&quot;banana&quot;</span>, </span>
-<span id="cb347-8"><a href="the-no-way-interactions.html#cb347-8"></a>                <span class="st">&quot;hunger&quot;</span>, <span class="st">&quot;no hunger&quot;</span>, <span class="st">&quot;very hungry&quot;</span>) <span class="co">#</span></span>
-<span id="cb347-9"><a href="the-no-way-interactions.html#cb347-9"></a><span class="co"># the label names should be in the order of the means specified above.</span></span>
-<span id="cb347-10"><a href="the-no-way-interactions.html#cb347-10"></a>design_result &lt;-<span class="st"> </span><span class="kw">ANOVA_design</span>(<span class="dt">design =</span> string,</span>
-<span id="cb347-11"><a href="the-no-way-interactions.html#cb347-11"></a>                   <span class="dt">n =</span> n, </span>
-<span id="cb347-12"><a href="the-no-way-interactions.html#cb347-12"></a>                   <span class="dt">mu =</span> mu, </span>
-<span id="cb347-13"><a href="the-no-way-interactions.html#cb347-13"></a>                   <span class="dt">sd =</span> sd, </span>
-<span id="cb347-14"><a href="the-no-way-interactions.html#cb347-14"></a>                   <span class="dt">labelnames =</span> labelnames,</span>
-<span id="cb347-15"><a href="the-no-way-interactions.html#cb347-15"></a>                   <span class="dt">plot =</span> <span class="ot">TRUE</span>)</span></code></pre></div>
+<div class="sourceCode" id="cb364"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb364-1"><a href="the-no-way-interactions.html#cb364-1"></a>string &lt;-<span class="st"> &quot;2b*2b&quot;</span></span>
+<span id="cb364-2"><a href="the-no-way-interactions.html#cb364-2"></a>n &lt;-<span class="st"> </span><span class="dv">20</span></span>
+<span id="cb364-3"><a href="the-no-way-interactions.html#cb364-3"></a><span class="co"># All means are equal - so there is no real difference.</span></span>
+<span id="cb364-4"><a href="the-no-way-interactions.html#cb364-4"></a><span class="co"># Enter means in the order that matches the labels below.</span></span>
+<span id="cb364-5"><a href="the-no-way-interactions.html#cb364-5"></a>mu &lt;-<span class="st"> </span><span class="kw">c</span>(<span class="dv">20</span>, <span class="dv">20</span>, <span class="dv">20</span>, <span class="dv">25</span>) </span>
+<span id="cb364-6"><a href="the-no-way-interactions.html#cb364-6"></a>sd &lt;-<span class="st"> </span><span class="fl">0.5</span></span>
+<span id="cb364-7"><a href="the-no-way-interactions.html#cb364-7"></a>labelnames &lt;-<span class="st"> </span><span class="kw">c</span>(<span class="st">&quot;fruit&quot;</span>, <span class="st">&quot;apple&quot;</span>, <span class="st">&quot;banana&quot;</span>, </span>
+<span id="cb364-8"><a href="the-no-way-interactions.html#cb364-8"></a>                <span class="st">&quot;hunger&quot;</span>, <span class="st">&quot;no hunger&quot;</span>, <span class="st">&quot;very hungry&quot;</span>) <span class="co">#</span></span>
+<span id="cb364-9"><a href="the-no-way-interactions.html#cb364-9"></a><span class="co"># the label names should be in the order of the means specified above.</span></span>
+<span id="cb364-10"><a href="the-no-way-interactions.html#cb364-10"></a>design_result &lt;-<span class="st"> </span><span class="kw">ANOVA_design</span>(<span class="dt">design =</span> string,</span>
+<span id="cb364-11"><a href="the-no-way-interactions.html#cb364-11"></a>                   <span class="dt">n =</span> n, </span>
+<span id="cb364-12"><a href="the-no-way-interactions.html#cb364-12"></a>                   <span class="dt">mu =</span> mu, </span>
+<span id="cb364-13"><a href="the-no-way-interactions.html#cb364-13"></a>                   <span class="dt">sd =</span> sd, </span>
+<span id="cb364-14"><a href="the-no-way-interactions.html#cb364-14"></a>                   <span class="dt">labelnames =</span> labelnames,</span>
+<span id="cb364-15"><a href="the-no-way-interactions.html#cb364-15"></a>                   <span class="dt">plot =</span> <span class="ot">TRUE</span>)</span></code></pre></div>
 <p><img src="SuperpowerValidation_files/figure-html/unnamed-chunk-183-1.png" width="672" /></p>
 <p>We can reproduce the simulations in the Data Colada blog post, using the original code.</p>
-<div class="sourceCode" id="cb348"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb348-1"><a href="the-no-way-interactions.html#cb348-1"></a><span class="co">#R-Code</span></span>
-<span id="cb348-2"><a href="the-no-way-interactions.html#cb348-2"></a><span class="co">#</span></span>
-<span id="cb348-3"><a href="the-no-way-interactions.html#cb348-3"></a><span class="co">#Written by Uri Simonsohn, March 2014</span></span>
-<span id="cb348-4"><a href="the-no-way-interactions.html#cb348-4"></a><span class="co">#</span></span>
-<span id="cb348-5"><a href="the-no-way-interactions.html#cb348-5"></a><span class="co">#</span></span>
-<span id="cb348-6"><a href="the-no-way-interactions.html#cb348-6"></a><span class="co">#In DataColada[17] </span></span>
-<span id="cb348-7"><a href="the-no-way-interactions.html#cb348-7"></a><span class="co"># I propose that 2x2 interaction studies need 2x the sample size</span></span>
-<span id="cb348-8"><a href="the-no-way-interactions.html#cb348-8"></a><span class="co">#http://datacolada.org/2014/03/10/17-no-way-interactions</span></span>
-<span id="cb348-9"><a href="the-no-way-interactions.html#cb348-9"></a><span class="co">#In a companion ,pdf I show the simple math behind it</span></span>
-<span id="cb348-10"><a href="the-no-way-interactions.html#cb348-10"></a><span class="co">#</span></span>
-<span id="cb348-11"><a href="the-no-way-interactions.html#cb348-11"></a><span class="co">#</span></span>
-<span id="cb348-12"><a href="the-no-way-interactions.html#cb348-12"></a><span class="co">#Simulations are often more persuasive than math, so here it goes.</span></span>
-<span id="cb348-13"><a href="the-no-way-interactions.html#cb348-13"></a><span class="co">#I run simulations that compute power for 2 and 4 cell design, </span></span>
-<span id="cb348-14"><a href="the-no-way-interactions.html#cb348-14"></a><span class="co"># the latter testing the interaction</span></span>
-<span id="cb348-15"><a href="the-no-way-interactions.html#cb348-15"></a><span class="co">###############################################################################</span></span>
-<span id="cb348-16"><a href="the-no-way-interactions.html#cb348-16"></a><span class="co">#Create function that computes power of Studies 1 and 2, </span></span>
-<span id="cb348-17"><a href="the-no-way-interactions.html#cb348-17"></a><span class="co"># where Study 1  has 2 cells and tests a simple effect</span></span>
-<span id="cb348-18"><a href="the-no-way-interactions.html#cb348-18"></a><span class="co">#and Study 2 has 4 cells and tests the interaction</span></span>
-<span id="cb348-19"><a href="the-no-way-interactions.html#cb348-19"></a>colada17 =<span class="st"> </span><span class="cf">function</span>(d1,d2,n1,n2,simtot)</span>
-<span id="cb348-20"><a href="the-no-way-interactions.html#cb348-20"></a>  {</span>
-<span id="cb348-21"><a href="the-no-way-interactions.html#cb348-21"></a>  <span class="co">#n1: sample size, per cell, study 1</span></span>
-<span id="cb348-22"><a href="the-no-way-interactions.html#cb348-22"></a>  <span class="co">#n2: sample size, per cell, study 2</span></span>
-<span id="cb348-23"><a href="the-no-way-interactions.html#cb348-23"></a>  <span class="co">#d1: simple effect M1-M2</span></span>
-<span id="cb348-24"><a href="the-no-way-interactions.html#cb348-24"></a>  <span class="co">#d2: moderated effect M3-M4, </span></span>
-<span id="cb348-25"><a href="the-no-way-interactions.html#cb348-25"></a>  <span class="co"># full elimination of effect implies d2=0</span></span>
-<span id="cb348-26"><a href="the-no-way-interactions.html#cb348-26"></a>  <span class="co">#simtot: how many simulations to run</span></span>
-<span id="cb348-27"><a href="the-no-way-interactions.html#cb348-27"></a>  <span class="co">#Here we will store results</span></span>
-<span id="cb348-28"><a href="the-no-way-interactions.html#cb348-28"></a>      p1 =<span class="st"> </span><span class="kw">c</span>()    <span class="co">#p-values for Study 1</span></span>
-<span id="cb348-29"><a href="the-no-way-interactions.html#cb348-29"></a>      p2 =<span class="st"> </span><span class="kw">c</span>()    <span class="co">#p-values for Study 2</span></span>
-<span id="cb348-30"><a href="the-no-way-interactions.html#cb348-30"></a>  <span class="cf">for</span> (i <span class="cf">in</span> <span class="dv">1</span><span class="op">:</span>simtot) {</span>
-<span id="cb348-31"><a href="the-no-way-interactions.html#cb348-31"></a>    <span class="co">#draw data 4 samples</span></span>
-<span id="cb348-32"><a href="the-no-way-interactions.html#cb348-32"></a>    y1 =<span class="st"> </span><span class="kw">rnorm</span>(<span class="dt">n =</span> <span class="kw">max</span>(n1, n2), <span class="dt">mean =</span> d1)</span>
-<span id="cb348-33"><a href="the-no-way-interactions.html#cb348-33"></a>    y2 =<span class="st"> </span><span class="kw">rnorm</span>(<span class="dt">n =</span> <span class="kw">max</span>(n1, n2))</span>
-<span id="cb348-34"><a href="the-no-way-interactions.html#cb348-34"></a>    y3 =<span class="st"> </span><span class="kw">rnorm</span>(<span class="dt">n =</span> <span class="kw">max</span>(n1, n2), <span class="dt">mean =</span> d2)</span>
-<span id="cb348-35"><a href="the-no-way-interactions.html#cb348-35"></a>    y4 =<span class="st"> </span><span class="kw">rnorm</span>(<span class="dt">n =</span> <span class="kw">max</span>(n1, n2))</span>
-<span id="cb348-36"><a href="the-no-way-interactions.html#cb348-36"></a>    </span>
-<span id="cb348-37"><a href="the-no-way-interactions.html#cb348-37"></a>    <span class="co">#GET DATA READY FOR ANOVA  </span></span>
-<span id="cb348-38"><a href="the-no-way-interactions.html#cb348-38"></a>    y =<span class="st"> </span><span class="kw">c</span>(y1, y2, y3, y4)          <span class="co">#the d.v.</span></span>
-<span id="cb348-39"><a href="the-no-way-interactions.html#cb348-39"></a>    nrep =<span class="st"> </span><span class="kw">rep</span>(n2, <span class="dv">4</span>)</span>
-<span id="cb348-40"><a href="the-no-way-interactions.html#cb348-40"></a>    A =<span class="st"> </span><span class="kw">rep</span>(<span class="kw">c</span>(<span class="dv">1</span>, <span class="dv">1</span>, <span class="dv">0</span>, <span class="dv">0</span>), <span class="dt">times =</span> nrep)</span>
-<span id="cb348-41"><a href="the-no-way-interactions.html#cb348-41"></a>    B =<span class="st"> </span><span class="kw">rep</span>(<span class="kw">c</span>(<span class="dv">1</span>, <span class="dv">0</span>, <span class="dv">1</span>, <span class="dv">0</span>), <span class="dt">times =</span> nrep)</span>
-<span id="cb348-42"><a href="the-no-way-interactions.html#cb348-42"></a>    </span>
-<span id="cb348-43"><a href="the-no-way-interactions.html#cb348-43"></a>    <span class="co">#STUDY 1</span></span>
-<span id="cb348-44"><a href="the-no-way-interactions.html#cb348-44"></a>      <span class="co">#Do a t-test on the first n1 observations</span></span>
-<span id="cb348-45"><a href="the-no-way-interactions.html#cb348-45"></a>      p1.k =<span class="st"> </span><span class="kw">t.test</span>(y1[<span class="dv">1</span><span class="op">:</span>n1], y2[<span class="dv">1</span><span class="op">:</span>n1], <span class="dt">var.equal =</span> <span class="ot">TRUE</span>)<span class="op">$</span>p.value  </span>
-<span id="cb348-46"><a href="the-no-way-interactions.html#cb348-46"></a>    </span>
-<span id="cb348-47"><a href="the-no-way-interactions.html#cb348-47"></a>    <span class="co">#STUDY 2</span></span>
-<span id="cb348-48"><a href="the-no-way-interactions.html#cb348-48"></a>      <span class="co">#Do anova, keep p-value of the interaction</span></span>
-<span id="cb348-49"><a href="the-no-way-interactions.html#cb348-49"></a>      p2.k =<span class="st"> </span><span class="kw">anova</span>(<span class="kw">lm</span>(y <span class="op">~</span><span class="st"> </span>A <span class="op">*</span><span class="st"> </span>B))[<span class="st">&quot;A:B&quot;</span>, <span class="st">&quot;Pr(&gt;F)&quot;</span>]             </span>
-<span id="cb348-50"><a href="the-no-way-interactions.html#cb348-50"></a>        </span>
-<span id="cb348-51"><a href="the-no-way-interactions.html#cb348-51"></a>      <span class="co">#Store the results</span></span>
-<span id="cb348-52"><a href="the-no-way-interactions.html#cb348-52"></a>      p1 =<span class="st"> </span><span class="kw">c</span>(p1, p1.k)</span>
-<span id="cb348-53"><a href="the-no-way-interactions.html#cb348-53"></a>      p2 =<span class="st"> </span><span class="kw">c</span>(p2, p2.k)</span>
-<span id="cb348-54"><a href="the-no-way-interactions.html#cb348-54"></a>    </span>
-<span id="cb348-55"><a href="the-no-way-interactions.html#cb348-55"></a>      }</span>
-<span id="cb348-56"><a href="the-no-way-interactions.html#cb348-56"></a>  </span>
-<span id="cb348-57"><a href="the-no-way-interactions.html#cb348-57"></a>  <span class="co">#What share off comparisons are significant</span></span>
-<span id="cb348-58"><a href="the-no-way-interactions.html#cb348-58"></a>      <span class="co">#Simple test using estimate of variance from 2 cells only</span></span>
-<span id="cb348-59"><a href="the-no-way-interactions.html#cb348-59"></a>      power1 =<span class="st"> </span><span class="kw">sum</span>(p1 <span class="op">&lt;=</span><span class="st"> </span><span class="fl">.05</span>) <span class="op">/</span><span class="st"> </span>simtot  </span>
-<span id="cb348-60"><a href="the-no-way-interactions.html#cb348-60"></a>      <span class="co">#Interaction</span></span>
-<span id="cb348-61"><a href="the-no-way-interactions.html#cb348-61"></a>      power2 =<span class="st"> </span><span class="kw">sum</span>(p2 <span class="op">&lt;=</span><span class="st"> </span><span class="fl">.05</span>) <span class="op">/</span><span class="st"> </span>simtot  </span>
-<span id="cb348-62"><a href="the-no-way-interactions.html#cb348-62"></a>  </span>
-<span id="cb348-63"><a href="the-no-way-interactions.html#cb348-63"></a>    <span class="kw">cat</span>(<span class="st">&quot;</span><span class="ch">\n</span><span class="st">Study 1 is powered to:&quot;</span>,<span class="kw">round</span>(power1,<span class="dv">2</span>))</span>
-<span id="cb348-64"><a href="the-no-way-interactions.html#cb348-64"></a>    <span class="kw">cat</span>(<span class="st">&quot;</span><span class="ch">\n</span><span class="st">Study 2 is powered to:&quot;</span>,<span class="kw">round</span>(power2,<span class="dv">2</span>))</span>
-<span id="cb348-65"><a href="the-no-way-interactions.html#cb348-65"></a>  </span>
-<span id="cb348-66"><a href="the-no-way-interactions.html#cb348-66"></a>    }</span>
-<span id="cb348-67"><a href="the-no-way-interactions.html#cb348-67"></a>    </span>
-<span id="cb348-68"><a href="the-no-way-interactions.html#cb348-68"></a>    </span>
-<span id="cb348-69"><a href="the-no-way-interactions.html#cb348-69"></a><span class="co">#Same power for 2n regardless of n and d</span></span></code></pre></div>
-<div class="sourceCode" id="cb349"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb349-1"><a href="the-no-way-interactions.html#cb349-1"></a>  <span class="kw">colada17</span>(<span class="dt">simtot =</span> <span class="dv">2000</span>, <span class="dt">n1 =</span> <span class="dv">20</span>, <span class="dt">n2 =</span> <span class="dv">40</span>, <span class="dt">d1 =</span> <span class="dv">1</span>, <span class="dt">d2 =</span> <span class="dv">0</span>)  </span></code></pre></div>
+<div class="sourceCode" id="cb365"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb365-1"><a href="the-no-way-interactions.html#cb365-1"></a><span class="co">#R-Code</span></span>
+<span id="cb365-2"><a href="the-no-way-interactions.html#cb365-2"></a><span class="co">#</span></span>
+<span id="cb365-3"><a href="the-no-way-interactions.html#cb365-3"></a><span class="co">#Written by Uri Simonsohn, March 2014</span></span>
+<span id="cb365-4"><a href="the-no-way-interactions.html#cb365-4"></a><span class="co">#</span></span>
+<span id="cb365-5"><a href="the-no-way-interactions.html#cb365-5"></a><span class="co">#</span></span>
+<span id="cb365-6"><a href="the-no-way-interactions.html#cb365-6"></a><span class="co">#In DataColada[17] </span></span>
+<span id="cb365-7"><a href="the-no-way-interactions.html#cb365-7"></a><span class="co"># I propose that 2x2 interaction studies need 2x the sample size</span></span>
+<span id="cb365-8"><a href="the-no-way-interactions.html#cb365-8"></a><span class="co">#http://datacolada.org/2014/03/10/17-no-way-interactions</span></span>
+<span id="cb365-9"><a href="the-no-way-interactions.html#cb365-9"></a><span class="co">#In a companion ,pdf I show the simple math behind it</span></span>
+<span id="cb365-10"><a href="the-no-way-interactions.html#cb365-10"></a><span class="co">#</span></span>
+<span id="cb365-11"><a href="the-no-way-interactions.html#cb365-11"></a><span class="co">#</span></span>
+<span id="cb365-12"><a href="the-no-way-interactions.html#cb365-12"></a><span class="co">#Simulations are often more persuasive than math, so here it goes.</span></span>
+<span id="cb365-13"><a href="the-no-way-interactions.html#cb365-13"></a><span class="co">#I run simulations that compute power for 2 and 4 cell design, </span></span>
+<span id="cb365-14"><a href="the-no-way-interactions.html#cb365-14"></a><span class="co"># the latter testing the interaction</span></span>
+<span id="cb365-15"><a href="the-no-way-interactions.html#cb365-15"></a><span class="co">###############################################################################</span></span>
+<span id="cb365-16"><a href="the-no-way-interactions.html#cb365-16"></a><span class="co">#Create function that computes power of Studies 1 and 2, </span></span>
+<span id="cb365-17"><a href="the-no-way-interactions.html#cb365-17"></a><span class="co"># where Study 1  has 2 cells and tests a simple effect</span></span>
+<span id="cb365-18"><a href="the-no-way-interactions.html#cb365-18"></a><span class="co">#and Study 2 has 4 cells and tests the interaction</span></span>
+<span id="cb365-19"><a href="the-no-way-interactions.html#cb365-19"></a>colada17 =<span class="st"> </span><span class="cf">function</span>(d1,d2,n1,n2,simtot)</span>
+<span id="cb365-20"><a href="the-no-way-interactions.html#cb365-20"></a>  {</span>
+<span id="cb365-21"><a href="the-no-way-interactions.html#cb365-21"></a>  <span class="co">#n1: sample size, per cell, study 1</span></span>
+<span id="cb365-22"><a href="the-no-way-interactions.html#cb365-22"></a>  <span class="co">#n2: sample size, per cell, study 2</span></span>
+<span id="cb365-23"><a href="the-no-way-interactions.html#cb365-23"></a>  <span class="co">#d1: simple effect M1-M2</span></span>
+<span id="cb365-24"><a href="the-no-way-interactions.html#cb365-24"></a>  <span class="co">#d2: moderated effect M3-M4, </span></span>
+<span id="cb365-25"><a href="the-no-way-interactions.html#cb365-25"></a>  <span class="co"># full elimination of effect implies d2=0</span></span>
+<span id="cb365-26"><a href="the-no-way-interactions.html#cb365-26"></a>  <span class="co">#simtot: how many simulations to run</span></span>
+<span id="cb365-27"><a href="the-no-way-interactions.html#cb365-27"></a>  <span class="co">#Here we will store results</span></span>
+<span id="cb365-28"><a href="the-no-way-interactions.html#cb365-28"></a>      p1 =<span class="st"> </span><span class="kw">c</span>()    <span class="co">#p-values for Study 1</span></span>
+<span id="cb365-29"><a href="the-no-way-interactions.html#cb365-29"></a>      p2 =<span class="st"> </span><span class="kw">c</span>()    <span class="co">#p-values for Study 2</span></span>
+<span id="cb365-30"><a href="the-no-way-interactions.html#cb365-30"></a>  <span class="cf">for</span> (i <span class="cf">in</span> <span class="dv">1</span><span class="op">:</span>simtot) {</span>
+<span id="cb365-31"><a href="the-no-way-interactions.html#cb365-31"></a>    <span class="co">#draw data 4 samples</span></span>
+<span id="cb365-32"><a href="the-no-way-interactions.html#cb365-32"></a>    y1 =<span class="st"> </span><span class="kw">rnorm</span>(<span class="dt">n =</span> <span class="kw">max</span>(n1, n2), <span class="dt">mean =</span> d1)</span>
+<span id="cb365-33"><a href="the-no-way-interactions.html#cb365-33"></a>    y2 =<span class="st"> </span><span class="kw">rnorm</span>(<span class="dt">n =</span> <span class="kw">max</span>(n1, n2))</span>
+<span id="cb365-34"><a href="the-no-way-interactions.html#cb365-34"></a>    y3 =<span class="st"> </span><span class="kw">rnorm</span>(<span class="dt">n =</span> <span class="kw">max</span>(n1, n2), <span class="dt">mean =</span> d2)</span>
+<span id="cb365-35"><a href="the-no-way-interactions.html#cb365-35"></a>    y4 =<span class="st"> </span><span class="kw">rnorm</span>(<span class="dt">n =</span> <span class="kw">max</span>(n1, n2))</span>
+<span id="cb365-36"><a href="the-no-way-interactions.html#cb365-36"></a>    </span>
+<span id="cb365-37"><a href="the-no-way-interactions.html#cb365-37"></a>    <span class="co">#GET DATA READY FOR ANOVA  </span></span>
+<span id="cb365-38"><a href="the-no-way-interactions.html#cb365-38"></a>    y =<span class="st"> </span><span class="kw">c</span>(y1, y2, y3, y4)          <span class="co">#the d.v.</span></span>
+<span id="cb365-39"><a href="the-no-way-interactions.html#cb365-39"></a>    nrep =<span class="st"> </span><span class="kw">rep</span>(n2, <span class="dv">4</span>)</span>
+<span id="cb365-40"><a href="the-no-way-interactions.html#cb365-40"></a>    A =<span class="st"> </span><span class="kw">rep</span>(<span class="kw">c</span>(<span class="dv">1</span>, <span class="dv">1</span>, <span class="dv">0</span>, <span class="dv">0</span>), <span class="dt">times =</span> nrep)</span>
+<span id="cb365-41"><a href="the-no-way-interactions.html#cb365-41"></a>    B =<span class="st"> </span><span class="kw">rep</span>(<span class="kw">c</span>(<span class="dv">1</span>, <span class="dv">0</span>, <span class="dv">1</span>, <span class="dv">0</span>), <span class="dt">times =</span> nrep)</span>
+<span id="cb365-42"><a href="the-no-way-interactions.html#cb365-42"></a>    </span>
+<span id="cb365-43"><a href="the-no-way-interactions.html#cb365-43"></a>    <span class="co">#STUDY 1</span></span>
+<span id="cb365-44"><a href="the-no-way-interactions.html#cb365-44"></a>      <span class="co">#Do a t-test on the first n1 observations</span></span>
+<span id="cb365-45"><a href="the-no-way-interactions.html#cb365-45"></a>      p1.k =<span class="st"> </span><span class="kw">t.test</span>(y1[<span class="dv">1</span><span class="op">:</span>n1], y2[<span class="dv">1</span><span class="op">:</span>n1], <span class="dt">var.equal =</span> <span class="ot">TRUE</span>)<span class="op">$</span>p.value  </span>
+<span id="cb365-46"><a href="the-no-way-interactions.html#cb365-46"></a>    </span>
+<span id="cb365-47"><a href="the-no-way-interactions.html#cb365-47"></a>    <span class="co">#STUDY 2</span></span>
+<span id="cb365-48"><a href="the-no-way-interactions.html#cb365-48"></a>      <span class="co">#Do anova, keep p-value of the interaction</span></span>
+<span id="cb365-49"><a href="the-no-way-interactions.html#cb365-49"></a>      p2.k =<span class="st"> </span><span class="kw">anova</span>(<span class="kw">lm</span>(y <span class="op">~</span><span class="st"> </span>A <span class="op">*</span><span class="st"> </span>B))[<span class="st">&quot;A:B&quot;</span>, <span class="st">&quot;Pr(&gt;F)&quot;</span>]             </span>
+<span id="cb365-50"><a href="the-no-way-interactions.html#cb365-50"></a>        </span>
+<span id="cb365-51"><a href="the-no-way-interactions.html#cb365-51"></a>      <span class="co">#Store the results</span></span>
+<span id="cb365-52"><a href="the-no-way-interactions.html#cb365-52"></a>      p1 =<span class="st"> </span><span class="kw">c</span>(p1, p1.k)</span>
+<span id="cb365-53"><a href="the-no-way-interactions.html#cb365-53"></a>      p2 =<span class="st"> </span><span class="kw">c</span>(p2, p2.k)</span>
+<span id="cb365-54"><a href="the-no-way-interactions.html#cb365-54"></a>    </span>
+<span id="cb365-55"><a href="the-no-way-interactions.html#cb365-55"></a>      }</span>
+<span id="cb365-56"><a href="the-no-way-interactions.html#cb365-56"></a>  </span>
+<span id="cb365-57"><a href="the-no-way-interactions.html#cb365-57"></a>  <span class="co">#What share off comparisons are significant</span></span>
+<span id="cb365-58"><a href="the-no-way-interactions.html#cb365-58"></a>      <span class="co">#Simple test using estimate of variance from 2 cells only</span></span>
+<span id="cb365-59"><a href="the-no-way-interactions.html#cb365-59"></a>      power1 =<span class="st"> </span><span class="kw">sum</span>(p1 <span class="op">&lt;=</span><span class="st"> </span><span class="fl">.05</span>) <span class="op">/</span><span class="st"> </span>simtot  </span>
+<span id="cb365-60"><a href="the-no-way-interactions.html#cb365-60"></a>      <span class="co">#Interaction</span></span>
+<span id="cb365-61"><a href="the-no-way-interactions.html#cb365-61"></a>      power2 =<span class="st"> </span><span class="kw">sum</span>(p2 <span class="op">&lt;=</span><span class="st"> </span><span class="fl">.05</span>) <span class="op">/</span><span class="st"> </span>simtot  </span>
+<span id="cb365-62"><a href="the-no-way-interactions.html#cb365-62"></a>  </span>
+<span id="cb365-63"><a href="the-no-way-interactions.html#cb365-63"></a>    <span class="kw">cat</span>(<span class="st">&quot;</span><span class="ch">\n</span><span class="st">Study 1 is powered to:&quot;</span>,<span class="kw">round</span>(power1,<span class="dv">2</span>))</span>
+<span id="cb365-64"><a href="the-no-way-interactions.html#cb365-64"></a>    <span class="kw">cat</span>(<span class="st">&quot;</span><span class="ch">\n</span><span class="st">Study 2 is powered to:&quot;</span>,<span class="kw">round</span>(power2,<span class="dv">2</span>))</span>
+<span id="cb365-65"><a href="the-no-way-interactions.html#cb365-65"></a>  </span>
+<span id="cb365-66"><a href="the-no-way-interactions.html#cb365-66"></a>    }</span>
+<span id="cb365-67"><a href="the-no-way-interactions.html#cb365-67"></a>    </span>
+<span id="cb365-68"><a href="the-no-way-interactions.html#cb365-68"></a>	</span>
+<span id="cb365-69"><a href="the-no-way-interactions.html#cb365-69"></a><span class="co">#Same power for 2n regardless of n and d</span></span></code></pre></div>
+<div class="sourceCode" id="cb366"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb366-1"><a href="the-no-way-interactions.html#cb366-1"></a>  <span class="kw">colada17</span>(<span class="dt">simtot =</span> <span class="dv">2000</span>, <span class="dt">n1 =</span> <span class="dv">20</span>, <span class="dt">n2 =</span> <span class="dv">40</span>, <span class="dt">d1 =</span> <span class="dv">1</span>, <span class="dt">d2 =</span> <span class="dv">0</span>)  </span></code></pre></div>
 <pre><code>## 
-## Study 1 is powered to: 0.85</code></pre>
+## Study 1 is powered to: 0.88</code></pre>
 <pre><code>## 
 ## Study 2 is powered to: 0.89</code></pre>
-<div class="sourceCode" id="cb352"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb352-1"><a href="the-no-way-interactions.html#cb352-1"></a>  <span class="kw">colada17</span>(<span class="dt">simtot =</span> <span class="dv">2000</span>, <span class="dt">n1 =</span> <span class="dv">50</span>, <span class="dt">n2 =</span> <span class="dv">100</span>, <span class="dt">d1 =</span> <span class="fl">.3</span>, <span class="dt">d2 =</span> <span class="dv">0</span>)</span></code></pre></div>
+<div class="sourceCode" id="cb369"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb369-1"><a href="the-no-way-interactions.html#cb369-1"></a>  <span class="kw">colada17</span>(<span class="dt">simtot =</span> <span class="dv">2000</span>, <span class="dt">n1 =</span> <span class="dv">50</span>, <span class="dt">n2 =</span> <span class="dv">100</span>, <span class="dt">d1 =</span> <span class="fl">.3</span>, <span class="dt">d2 =</span> <span class="dv">0</span>)</span></code></pre></div>
 <pre><code>## 
-## Study 1 is powered to: 0.33</code></pre>
+## Study 1 is powered to: 0.3</code></pre>
 <pre><code>## 
-## Study 2 is powered to: 0.32</code></pre>
-<div class="sourceCode" id="cb355"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb355-1"><a href="the-no-way-interactions.html#cb355-1"></a>  <span class="kw">colada17</span>(<span class="dt">simtot =</span> <span class="dv">2000</span>, <span class="dt">n1 =</span> <span class="dv">150</span>, <span class="dt">n2 =</span> <span class="dv">300</span>, <span class="dt">d1 =</span> <span class="fl">.25</span>, <span class="dt">d2 =</span> <span class="dv">0</span>)</span></code></pre></div>
+## Study 2 is powered to: 0.31</code></pre>
+<div class="sourceCode" id="cb372"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb372-1"><a href="the-no-way-interactions.html#cb372-1"></a>  <span class="kw">colada17</span>(<span class="dt">simtot =</span> <span class="dv">2000</span>, <span class="dt">n1 =</span> <span class="dv">150</span>, <span class="dt">n2 =</span> <span class="dv">300</span>, <span class="dt">d1 =</span> <span class="fl">.25</span>, <span class="dt">d2 =</span> <span class="dv">0</span>)</span></code></pre></div>
 <pre><code>## 
-## Study 1 is powered to: 0.56</code></pre>
+## Study 1 is powered to: 0.57</code></pre>
 <pre><code>## 
-## Study 2 is powered to: 0.58</code></pre>
-<div class="sourceCode" id="cb358"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb358-1"><a href="the-no-way-interactions.html#cb358-1"></a><span class="co">#Need 4n if effect is 70% attenuated</span></span>
-<span id="cb358-2"><a href="the-no-way-interactions.html#cb358-2"></a>  <span class="kw">colada17</span>(<span class="dt">simtot =</span> <span class="dv">2000</span>, <span class="dt">n1 =</span> <span class="dv">25</span>, <span class="dt">n2 =</span> <span class="dv">100</span>, <span class="dt">d1 =</span> <span class="fl">.5</span>, <span class="dt">d2 =</span> <span class="fl">.3</span> <span class="op">*</span><span class="st"> </span><span class="fl">.5</span>)</span></code></pre></div>
+## Study 2 is powered to: 0.57</code></pre>
+<div class="sourceCode" id="cb375"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb375-1"><a href="the-no-way-interactions.html#cb375-1"></a><span class="co">#Need 4n if effect is 70% attenuated</span></span>
+<span id="cb375-2"><a href="the-no-way-interactions.html#cb375-2"></a>  <span class="kw">colada17</span>(<span class="dt">simtot =</span> <span class="dv">2000</span>, <span class="dt">n1 =</span> <span class="dv">25</span>, <span class="dt">n2 =</span> <span class="dv">100</span>, <span class="dt">d1 =</span> <span class="fl">.5</span>, <span class="dt">d2 =</span> <span class="fl">.3</span> <span class="op">*</span><span class="st"> </span><span class="fl">.5</span>)</span></code></pre></div>
 <pre><code>## 
-## Study 1 is powered to: 0.4</code></pre>
+## Study 1 is powered to: 0.41</code></pre>
 <pre><code>## 
 ## Study 2 is powered to: 0.4</code></pre>
-<div class="sourceCode" id="cb361"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb361-1"><a href="the-no-way-interactions.html#cb361-1"></a>  <span class="kw">colada17</span>(<span class="dt">simtot =</span> <span class="dv">2000</span>, <span class="dt">n1 =</span> <span class="dv">50</span>, <span class="dt">n2 =</span> <span class="dv">200</span>, <span class="dt">d1 =</span> <span class="fl">.5</span>, <span class="dt">d2 =</span> <span class="fl">.3</span> <span class="op">*</span><span class="st"> </span><span class="fl">.5</span>)</span></code></pre></div>
+<div class="sourceCode" id="cb378"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb378-1"><a href="the-no-way-interactions.html#cb378-1"></a>  <span class="kw">colada17</span>(<span class="dt">simtot =</span> <span class="dv">2000</span>, <span class="dt">n1 =</span> <span class="dv">50</span>, <span class="dt">n2 =</span> <span class="dv">200</span>, <span class="dt">d1 =</span> <span class="fl">.5</span>, <span class="dt">d2 =</span> <span class="fl">.3</span> <span class="op">*</span><span class="st"> </span><span class="fl">.5</span>)</span></code></pre></div>
 <pre><code>## 
-## Study 1 is powered to: 0.71</code></pre>
+## Study 1 is powered to: 0.69</code></pre>
 <pre><code>## 
-## Study 2 is powered to: 0.68</code></pre>
-<div class="sourceCode" id="cb364"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb364-1"><a href="the-no-way-interactions.html#cb364-1"></a>  <span class="kw">colada17</span>(<span class="dt">simtot =</span> <span class="dv">2000</span>, <span class="dt">n1 =</span> <span class="dv">22</span>, <span class="dt">n2 =</span> <span class="dv">88</span>, <span class="dt">d1 =</span> <span class="fl">.41</span>, <span class="dt">d2 =</span> <span class="fl">.3</span> <span class="op">*</span><span class="st"> </span><span class="fl">.41</span>)</span></code></pre></div>
+## Study 2 is powered to: 0.7</code></pre>
+<div class="sourceCode" id="cb381"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb381-1"><a href="the-no-way-interactions.html#cb381-1"></a>  <span class="kw">colada17</span>(<span class="dt">simtot =</span> <span class="dv">2000</span>, <span class="dt">n1 =</span> <span class="dv">22</span>, <span class="dt">n2 =</span> <span class="dv">88</span>, <span class="dt">d1 =</span> <span class="fl">.41</span>, <span class="dt">d2 =</span> <span class="fl">.3</span> <span class="op">*</span><span class="st"> </span><span class="fl">.41</span>)</span></code></pre></div>
 <pre><code>## 
-## Study 1 is powered to: 0.28</code></pre>
+## Study 1 is powered to: 0.26</code></pre>
 <pre><code>## 
-## Study 2 is powered to: 0.25</code></pre>
-<div class="sourceCode" id="cb367"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb367-1"><a href="the-no-way-interactions.html#cb367-1"></a><span class="co">#underpowered if run with the same n</span></span>
-<span id="cb367-2"><a href="the-no-way-interactions.html#cb367-2"></a><span class="kw">colada17</span>(<span class="dt">simtot =</span> nsims, <span class="dt">n1 =</span> <span class="dv">20</span>, <span class="dt">n2 =</span> <span class="dv">20</span>, <span class="dt">d1 =</span> <span class="dv">1</span>, <span class="dt">d2 =</span> <span class="dv">0</span>)  </span></code></pre></div>
+## Study 2 is powered to: 0.27</code></pre>
+<div class="sourceCode" id="cb384"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb384-1"><a href="the-no-way-interactions.html#cb384-1"></a><span class="co">#underpowered if run with the same n</span></span>
+<span id="cb384-2"><a href="the-no-way-interactions.html#cb384-2"></a><span class="kw">colada17</span>(<span class="dt">simtot =</span> nsims, <span class="dt">n1 =</span> <span class="dv">20</span>, <span class="dt">n2 =</span> <span class="dv">20</span>, <span class="dt">d1 =</span> <span class="dv">1</span>, <span class="dt">d2 =</span> <span class="dv">0</span>)  </span></code></pre></div>
 <pre><code>## 
 ## Study 1 is powered to: 0.87</code></pre>
 <pre><code>## 
-## Study 2 is powered to: 0.59</code></pre>
+## Study 2 is powered to: 0.6</code></pre>
 <p>And we can reproduce the results using the <code>ANOVA_exact</code> function.</p>
-<div class="sourceCode" id="cb370"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb370-1"><a href="the-no-way-interactions.html#cb370-1"></a><span class="co">#Study 1</span></span>
-<span id="cb370-2"><a href="the-no-way-interactions.html#cb370-2"></a>string &lt;-<span class="st"> &quot;2b*2b&quot;</span></span>
-<span id="cb370-3"><a href="the-no-way-interactions.html#cb370-3"></a>n &lt;-<span class="st"> </span><span class="dv">10</span></span>
-<span id="cb370-4"><a href="the-no-way-interactions.html#cb370-4"></a><span class="co"># All means are equal - so there is no real difference.</span></span>
-<span id="cb370-5"><a href="the-no-way-interactions.html#cb370-5"></a><span class="co"># Enter means in the order that matches the labels below.</span></span>
-<span id="cb370-6"><a href="the-no-way-interactions.html#cb370-6"></a>mu &lt;-<span class="st"> </span><span class="kw">c</span>(<span class="dv">1</span>, <span class="dv">2</span>, <span class="dv">1</span>, <span class="dv">2</span>) </span>
-<span id="cb370-7"><a href="the-no-way-interactions.html#cb370-7"></a>sd &lt;-<span class="st"> </span><span class="dv">1</span></span>
-<span id="cb370-8"><a href="the-no-way-interactions.html#cb370-8"></a></span>
-<span id="cb370-9"><a href="the-no-way-interactions.html#cb370-9"></a><span class="co"># the label names should be in the order of the means specified above.</span></span>
-<span id="cb370-10"><a href="the-no-way-interactions.html#cb370-10"></a>design_result &lt;-<span class="st"> </span><span class="kw">ANOVA_design</span>(<span class="dt">design =</span> string,</span>
-<span id="cb370-11"><a href="the-no-way-interactions.html#cb370-11"></a>                   <span class="dt">n =</span> n, </span>
-<span id="cb370-12"><a href="the-no-way-interactions.html#cb370-12"></a>                   <span class="dt">mu =</span> mu, </span>
-<span id="cb370-13"><a href="the-no-way-interactions.html#cb370-13"></a>                   <span class="dt">sd =</span> sd, </span>
-<span id="cb370-14"><a href="the-no-way-interactions.html#cb370-14"></a>                   <span class="dt">plot =</span> <span class="ot">TRUE</span>)</span></code></pre></div>
+<div class="sourceCode" id="cb387"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb387-1"><a href="the-no-way-interactions.html#cb387-1"></a><span class="co">#Study 1</span></span>
+<span id="cb387-2"><a href="the-no-way-interactions.html#cb387-2"></a>string &lt;-<span class="st"> &quot;2b*2b&quot;</span></span>
+<span id="cb387-3"><a href="the-no-way-interactions.html#cb387-3"></a>n &lt;-<span class="st"> </span><span class="dv">10</span></span>
+<span id="cb387-4"><a href="the-no-way-interactions.html#cb387-4"></a><span class="co"># All means are equal - so there is no real difference.</span></span>
+<span id="cb387-5"><a href="the-no-way-interactions.html#cb387-5"></a><span class="co"># Enter means in the order that matches the labels below.</span></span>
+<span id="cb387-6"><a href="the-no-way-interactions.html#cb387-6"></a>mu &lt;-<span class="st"> </span><span class="kw">c</span>(<span class="dv">1</span>, <span class="dv">2</span>, <span class="dv">1</span>, <span class="dv">2</span>) </span>
+<span id="cb387-7"><a href="the-no-way-interactions.html#cb387-7"></a>sd &lt;-<span class="st"> </span><span class="dv">1</span></span>
+<span id="cb387-8"><a href="the-no-way-interactions.html#cb387-8"></a></span>
+<span id="cb387-9"><a href="the-no-way-interactions.html#cb387-9"></a><span class="co"># the label names should be in the order of the means specified above.</span></span>
+<span id="cb387-10"><a href="the-no-way-interactions.html#cb387-10"></a>design_result &lt;-<span class="st"> </span><span class="kw">ANOVA_design</span>(<span class="dt">design =</span> string,</span>
+<span id="cb387-11"><a href="the-no-way-interactions.html#cb387-11"></a>                   <span class="dt">n =</span> n, </span>
+<span id="cb387-12"><a href="the-no-way-interactions.html#cb387-12"></a>                   <span class="dt">mu =</span> mu, </span>
+<span id="cb387-13"><a href="the-no-way-interactions.html#cb387-13"></a>                   <span class="dt">sd =</span> sd, </span>
+<span id="cb387-14"><a href="the-no-way-interactions.html#cb387-14"></a>                   <span class="dt">plot =</span> <span class="ot">TRUE</span>)</span></code></pre></div>
 <p><img src="SuperpowerValidation_files/figure-html/unnamed-chunk-199-1.png" width="672" /></p>
-<div class="sourceCode" id="cb371"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb371-1"><a href="the-no-way-interactions.html#cb371-1"></a>alpha_level &lt;-<span class="st"> </span><span class="fl">0.05</span> <span class="co">#We set the alpha level at 0.05. </span></span>
-<span id="cb371-2"><a href="the-no-way-interactions.html#cb371-2"></a></span>
-<span id="cb371-3"><a href="the-no-way-interactions.html#cb371-3"></a>exact_result &lt;-<span class="st"> </span><span class="kw">ANOVA_exact</span>(design_result, </span>
-<span id="cb371-4"><a href="the-no-way-interactions.html#cb371-4"></a>                            <span class="dt">alpha_level =</span> alpha_level,</span>
-<span id="cb371-5"><a href="the-no-way-interactions.html#cb371-5"></a>                            <span class="dt">verbose =</span> <span class="ot">FALSE</span>)</span>
-<span id="cb371-6"><a href="the-no-way-interactions.html#cb371-6"></a></span>
-<span id="cb371-7"><a href="the-no-way-interactions.html#cb371-7"></a>knitr<span class="op">::</span><span class="kw">kable</span>(exact_result<span class="op">$</span>main_results[<span class="dv">2</span>,], </span>
-<span id="cb371-8"><a href="the-no-way-interactions.html#cb371-8"></a>             <span class="dt">caption =</span> <span class="st">&quot;ANOVA Results&quot;</span>)<span class="op">%&gt;%</span></span>
-<span id="cb371-9"><a href="the-no-way-interactions.html#cb371-9"></a><span class="st">  </span><span class="kw">kable_styling</span>(<span class="dt">latex_options =</span> <span class="st">&quot;hold_position&quot;</span>)</span></code></pre></div>
+<div class="sourceCode" id="cb388"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb388-1"><a href="the-no-way-interactions.html#cb388-1"></a>alpha_level &lt;-<span class="st"> </span><span class="fl">0.05</span> <span class="co">#We set the alpha level at 0.05. </span></span>
+<span id="cb388-2"><a href="the-no-way-interactions.html#cb388-2"></a></span>
+<span id="cb388-3"><a href="the-no-way-interactions.html#cb388-3"></a>exact_result &lt;-<span class="st"> </span><span class="kw">ANOVA_exact</span>(design_result, </span>
+<span id="cb388-4"><a href="the-no-way-interactions.html#cb388-4"></a>                            <span class="dt">alpha_level =</span> alpha_level,</span>
+<span id="cb388-5"><a href="the-no-way-interactions.html#cb388-5"></a>                            <span class="dt">verbose =</span> <span class="ot">FALSE</span>)</span>
+<span id="cb388-6"><a href="the-no-way-interactions.html#cb388-6"></a></span>
+<span id="cb388-7"><a href="the-no-way-interactions.html#cb388-7"></a>knitr<span class="op">::</span><span class="kw">kable</span>(exact_result<span class="op">$</span>main_results[<span class="dv">2</span>,], </span>
+<span id="cb388-8"><a href="the-no-way-interactions.html#cb388-8"></a>             <span class="dt">caption =</span> <span class="st">&quot;ANOVA Results&quot;</span>)<span class="op">%&gt;%</span></span>
+<span id="cb388-9"><a href="the-no-way-interactions.html#cb388-9"></a><span class="st">  </span><span class="kw">kable_styling</span>(<span class="dt">latex_options =</span> <span class="st">&quot;hold_position&quot;</span>)</span></code></pre></div>
 <table class="table" style="margin-left: auto; margin-right: auto;">
 <caption>
 <span id="tab:unnamed-chunk-199">Table 6.1: </span>ANOVA Results
@@ -457,30 +459,30 @@ b
 </tr>
 </tbody>
 </table>
-<div class="sourceCode" id="cb372"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb372-1"><a href="the-no-way-interactions.html#cb372-1"></a><span class="co">#Study 2</span></span>
-<span id="cb372-2"><a href="the-no-way-interactions.html#cb372-2"></a>string &lt;-<span class="st"> &quot;2b*2b&quot;</span></span>
-<span id="cb372-3"><a href="the-no-way-interactions.html#cb372-3"></a>n &lt;-<span class="st"> </span><span class="dv">20</span></span>
-<span id="cb372-4"><a href="the-no-way-interactions.html#cb372-4"></a><span class="co"># All means are equal - so there is no real difference.</span></span>
-<span id="cb372-5"><a href="the-no-way-interactions.html#cb372-5"></a><span class="co"># Enter means in the order that matches the labels below.</span></span>
-<span id="cb372-6"><a href="the-no-way-interactions.html#cb372-6"></a>mu &lt;-<span class="st"> </span><span class="kw">c</span>(<span class="dv">1</span>, <span class="dv">2</span>, <span class="dv">1</span>, <span class="dv">3</span>) </span>
-<span id="cb372-7"><a href="the-no-way-interactions.html#cb372-7"></a>sd &lt;-<span class="st"> </span><span class="dv">1</span></span>
-<span id="cb372-8"><a href="the-no-way-interactions.html#cb372-8"></a></span>
-<span id="cb372-9"><a href="the-no-way-interactions.html#cb372-9"></a><span class="co"># the label names should be in the order of the means specified above.</span></span>
-<span id="cb372-10"><a href="the-no-way-interactions.html#cb372-10"></a>design_result &lt;-<span class="st"> </span><span class="kw">ANOVA_design</span>(<span class="dt">design =</span> string,</span>
-<span id="cb372-11"><a href="the-no-way-interactions.html#cb372-11"></a>                   <span class="dt">n =</span> n, </span>
-<span id="cb372-12"><a href="the-no-way-interactions.html#cb372-12"></a>                   <span class="dt">mu =</span> mu, </span>
-<span id="cb372-13"><a href="the-no-way-interactions.html#cb372-13"></a>                   <span class="dt">sd =</span> sd, </span>
-<span id="cb372-14"><a href="the-no-way-interactions.html#cb372-14"></a>                   <span class="dt">plot =</span> <span class="ot">TRUE</span>)</span></code></pre></div>
+<div class="sourceCode" id="cb389"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb389-1"><a href="the-no-way-interactions.html#cb389-1"></a><span class="co">#Study 2</span></span>
+<span id="cb389-2"><a href="the-no-way-interactions.html#cb389-2"></a>string &lt;-<span class="st"> &quot;2b*2b&quot;</span></span>
+<span id="cb389-3"><a href="the-no-way-interactions.html#cb389-3"></a>n &lt;-<span class="st"> </span><span class="dv">20</span></span>
+<span id="cb389-4"><a href="the-no-way-interactions.html#cb389-4"></a><span class="co"># All means are equal - so there is no real difference.</span></span>
+<span id="cb389-5"><a href="the-no-way-interactions.html#cb389-5"></a><span class="co"># Enter means in the order that matches the labels below.</span></span>
+<span id="cb389-6"><a href="the-no-way-interactions.html#cb389-6"></a>mu &lt;-<span class="st"> </span><span class="kw">c</span>(<span class="dv">1</span>, <span class="dv">2</span>, <span class="dv">1</span>, <span class="dv">3</span>) </span>
+<span id="cb389-7"><a href="the-no-way-interactions.html#cb389-7"></a>sd &lt;-<span class="st"> </span><span class="dv">1</span></span>
+<span id="cb389-8"><a href="the-no-way-interactions.html#cb389-8"></a></span>
+<span id="cb389-9"><a href="the-no-way-interactions.html#cb389-9"></a><span class="co"># the label names should be in the order of the means specified above.</span></span>
+<span id="cb389-10"><a href="the-no-way-interactions.html#cb389-10"></a>design_result &lt;-<span class="st"> </span><span class="kw">ANOVA_design</span>(<span class="dt">design =</span> string,</span>
+<span id="cb389-11"><a href="the-no-way-interactions.html#cb389-11"></a>                   <span class="dt">n =</span> n, </span>
+<span id="cb389-12"><a href="the-no-way-interactions.html#cb389-12"></a>                   <span class="dt">mu =</span> mu, </span>
+<span id="cb389-13"><a href="the-no-way-interactions.html#cb389-13"></a>                   <span class="dt">sd =</span> sd, </span>
+<span id="cb389-14"><a href="the-no-way-interactions.html#cb389-14"></a>                   <span class="dt">plot =</span> <span class="ot">TRUE</span>)</span></code></pre></div>
 <p><img src="SuperpowerValidation_files/figure-html/unnamed-chunk-199-2.png" width="672" /></p>
-<div class="sourceCode" id="cb373"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb373-1"><a href="the-no-way-interactions.html#cb373-1"></a>alpha_level &lt;-<span class="st"> </span><span class="fl">0.05</span> <span class="co">#We set the alpha level at 0.05. </span></span>
-<span id="cb373-2"><a href="the-no-way-interactions.html#cb373-2"></a></span>
-<span id="cb373-3"><a href="the-no-way-interactions.html#cb373-3"></a>exact_result &lt;-<span class="st"> </span><span class="kw">ANOVA_exact</span>(design_result, </span>
-<span id="cb373-4"><a href="the-no-way-interactions.html#cb373-4"></a>                            <span class="dt">alpha_level =</span> alpha_level,</span>
-<span id="cb373-5"><a href="the-no-way-interactions.html#cb373-5"></a>                            <span class="dt">verbose =</span> <span class="ot">FALSE</span>)</span>
-<span id="cb373-6"><a href="the-no-way-interactions.html#cb373-6"></a></span>
-<span id="cb373-7"><a href="the-no-way-interactions.html#cb373-7"></a>knitr<span class="op">::</span><span class="kw">kable</span>(exact_result<span class="op">$</span>main_results[<span class="dv">3</span>,], </span>
-<span id="cb373-8"><a href="the-no-way-interactions.html#cb373-8"></a>             <span class="dt">caption =</span> <span class="st">&quot;ANOVA Results&quot;</span>)<span class="op">%&gt;%</span></span>
-<span id="cb373-9"><a href="the-no-way-interactions.html#cb373-9"></a><span class="st">  </span><span class="kw">kable_styling</span>(<span class="dt">latex_options =</span> <span class="st">&quot;hold_position&quot;</span>)</span></code></pre></div>
+<div class="sourceCode" id="cb390"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb390-1"><a href="the-no-way-interactions.html#cb390-1"></a>alpha_level &lt;-<span class="st"> </span><span class="fl">0.05</span> <span class="co">#We set the alpha level at 0.05. </span></span>
+<span id="cb390-2"><a href="the-no-way-interactions.html#cb390-2"></a></span>
+<span id="cb390-3"><a href="the-no-way-interactions.html#cb390-3"></a>exact_result &lt;-<span class="st"> </span><span class="kw">ANOVA_exact</span>(design_result, </span>
+<span id="cb390-4"><a href="the-no-way-interactions.html#cb390-4"></a>                            <span class="dt">alpha_level =</span> alpha_level,</span>
+<span id="cb390-5"><a href="the-no-way-interactions.html#cb390-5"></a>                            <span class="dt">verbose =</span> <span class="ot">FALSE</span>)</span>
+<span id="cb390-6"><a href="the-no-way-interactions.html#cb390-6"></a></span>
+<span id="cb390-7"><a href="the-no-way-interactions.html#cb390-7"></a>knitr<span class="op">::</span><span class="kw">kable</span>(exact_result<span class="op">$</span>main_results[<span class="dv">3</span>,], </span>
+<span id="cb390-8"><a href="the-no-way-interactions.html#cb390-8"></a>             <span class="dt">caption =</span> <span class="st">&quot;ANOVA Results&quot;</span>)<span class="op">%&gt;%</span></span>
+<span id="cb390-9"><a href="the-no-way-interactions.html#cb390-9"></a><span class="st">  </span><span class="kw">kable_styling</span>(<span class="dt">latex_options =</span> <span class="st">&quot;hold_position&quot;</span>)</span></code></pre></div>
 <table class="table" style="margin-left: auto; margin-right: auto;">
 <caption>
 <span id="tab:unnamed-chunk-199">Table 6.1: </span>ANOVA Results
@@ -524,47 +526,48 @@ a:b
 </tbody>
 </table>
 <p>We see we get the same power for the anova_fruit:hunger interaction and for the simple effect p_fruit_apple_hunger_very hungry_fruit_banana_hunger_very hungry as the simulations by Uri Simonsohn in his blog post.</p>
-<div class="sourceCode" id="cb374"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb374-1"><a href="the-no-way-interactions.html#cb374-1"></a><span class="co">#Same power for 2n regardless of n and d</span></span>
-<span id="cb374-2"><a href="the-no-way-interactions.html#cb374-2"></a><span class="kw">colada17</span>(<span class="dt">simtot =</span> <span class="dv">10000</span>, <span class="dt">n1 =</span> <span class="dv">20</span>, <span class="dt">n2 =</span> <span class="dv">40</span>, <span class="dt">d1 =</span> <span class="dv">1</span>, <span class="dt">d2 =</span> <span class="dv">0</span>)  </span>
-<span id="cb374-3"><a href="the-no-way-interactions.html#cb374-3"></a></span>
-<span id="cb374-4"><a href="the-no-way-interactions.html#cb374-4"></a><span class="kw">colada17</span>(<span class="dt">simtot =</span> <span class="dv">10000</span>, <span class="dt">n1 =</span> <span class="dv">20</span>, <span class="dt">n2 =</span> <span class="dv">40</span>, <span class="dt">d1 =</span> <span class="dv">1</span>, <span class="dt">d2 =</span> <span class="dv">0</span>) </span></code></pre></div>
+<div class="sourceCode" id="cb391"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb391-1"><a href="the-no-way-interactions.html#cb391-1"></a><span class="co">#Same power for 2n regardless of n and d</span></span>
+<span id="cb391-2"><a href="the-no-way-interactions.html#cb391-2"></a><span class="kw">colada17</span>(<span class="dt">simtot =</span> <span class="dv">10000</span>, <span class="dt">n1 =</span> <span class="dv">20</span>, <span class="dt">n2 =</span> <span class="dv">40</span>, <span class="dt">d1 =</span> <span class="dv">1</span>, <span class="dt">d2 =</span> <span class="dv">0</span>)  </span>
+<span id="cb391-3"><a href="the-no-way-interactions.html#cb391-3"></a></span>
+<span id="cb391-4"><a href="the-no-way-interactions.html#cb391-4"></a><span class="kw">colada17</span>(<span class="dt">simtot =</span> <span class="dv">10000</span>, <span class="dt">n1 =</span> <span class="dv">20</span>, <span class="dt">n2 =</span> <span class="dv">40</span>, <span class="dt">d1 =</span> <span class="dv">1</span>, <span class="dt">d2 =</span> <span class="dv">0</span>) </span></code></pre></div>
 <pre><code>## 
-## Study 1 is powered to: 0.87</code></pre>
+## Study 1 is powered to: 0.86</code></pre>
 <pre><code>## 
 ## Study 2 is powered to: 0.88</code></pre>
-<div class="sourceCode" id="cb377"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb377-1"><a href="the-no-way-interactions.html#cb377-1"></a><span class="kw">colada17</span>(<span class="dt">simtot =</span> <span class="dv">10000</span>, <span class="dt">n1 =</span> <span class="dv">50</span>, <span class="dt">n2 =</span> <span class="dv">100</span>, <span class="dt">d1 =</span> <span class="fl">.3</span>, <span class="dt">d2 =</span> <span class="dv">0</span>)</span></code></pre></div>
+<div class="sourceCode" id="cb394"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb394-1"><a href="the-no-way-interactions.html#cb394-1"></a><span class="kw">colada17</span>(<span class="dt">simtot =</span> <span class="dv">10000</span>, <span class="dt">n1 =</span> <span class="dv">50</span>, <span class="dt">n2 =</span> <span class="dv">100</span>, <span class="dt">d1 =</span> <span class="fl">.3</span>, <span class="dt">d2 =</span> <span class="dv">0</span>)</span></code></pre></div>
 <pre><code>## 
-## Study 1 is powered to: 0.32</code></pre>
+## Study 1 is powered to: 0.31</code></pre>
 <pre><code>## 
-## Study 2 is powered to: 0.33</code></pre>
-<div class="sourceCode" id="cb380"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb380-1"><a href="the-no-way-interactions.html#cb380-1"></a><span class="kw">colada17</span>(<span class="dt">simtot =</span> <span class="dv">10000</span>, <span class="dt">n1 =</span> <span class="dv">150</span>, <span class="dt">n2 =</span> <span class="dv">300</span>, <span class="dt">d1 =</span> <span class="fl">.25</span>, <span class="dt">d2 =</span> <span class="dv">0</span>)</span></code></pre></div>
+## Study 2 is powered to: 0.32</code></pre>
+<div class="sourceCode" id="cb397"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb397-1"><a href="the-no-way-interactions.html#cb397-1"></a><span class="kw">colada17</span>(<span class="dt">simtot =</span> <span class="dv">10000</span>, <span class="dt">n1 =</span> <span class="dv">150</span>, <span class="dt">n2 =</span> <span class="dv">300</span>, <span class="dt">d1 =</span> <span class="fl">.25</span>, <span class="dt">d2 =</span> <span class="dv">0</span>)</span></code></pre></div>
 <pre><code>## 
 ## Study 1 is powered to: 0.58</code></pre>
 <pre><code>## 
 ## Study 2 is powered to: 0.58</code></pre>
 <p>We can also reproduce the last example by adjusting the means and standard deviation. With 150 people, and a Cohen’s d of 0.25 (the difference is 5, the sd 20, so 5/20 = 0.25) we should reproduce the power for the simple effect.</p>
-<div class="sourceCode" id="cb383"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb383-1"><a href="the-no-way-interactions.html#cb383-1"></a>string &lt;-<span class="st"> &quot;2b*2b&quot;</span></span>
-<span id="cb383-2"><a href="the-no-way-interactions.html#cb383-2"></a>n &lt;-<span class="st"> </span><span class="dv">150</span></span>
-<span id="cb383-3"><a href="the-no-way-interactions.html#cb383-3"></a>mu &lt;-<span class="st"> </span><span class="kw">c</span>(<span class="dv">20</span>, <span class="dv">20</span>, <span class="dv">20</span>, <span class="dv">25</span>) <span class="co">#All means are equal - so there is no real difference.</span></span>
-<span id="cb383-4"><a href="the-no-way-interactions.html#cb383-4"></a><span class="co"># Enter means in the order that matches the labels below.</span></span>
-<span id="cb383-5"><a href="the-no-way-interactions.html#cb383-5"></a>sd &lt;-<span class="st"> </span><span class="dv">20</span></span>
-<span id="cb383-6"><a href="the-no-way-interactions.html#cb383-6"></a>labelnames &lt;-<span class="st"> </span><span class="kw">c</span>(<span class="st">&quot;fruit&quot;</span>, <span class="st">&quot;apple&quot;</span>, <span class="st">&quot;banana&quot;</span>, </span>
-<span id="cb383-7"><a href="the-no-way-interactions.html#cb383-7"></a>                <span class="st">&quot;hunger&quot;</span>, <span class="st">&quot;no hunger&quot;</span>, <span class="st">&quot;very hungry&quot;</span>) <span class="co">#</span></span>
-<span id="cb383-8"><a href="the-no-way-interactions.html#cb383-8"></a><span class="co"># the label names should be in the order of the means specified above.</span></span>
-<span id="cb383-9"><a href="the-no-way-interactions.html#cb383-9"></a>design_result &lt;-<span class="st"> </span><span class="kw">ANOVA_design</span>(<span class="dt">design =</span> string,</span>
-<span id="cb383-10"><a href="the-no-way-interactions.html#cb383-10"></a>                   <span class="dt">n =</span> n, </span>
-<span id="cb383-11"><a href="the-no-way-interactions.html#cb383-11"></a>                   <span class="dt">mu =</span> mu, </span>
-<span id="cb383-12"><a href="the-no-way-interactions.html#cb383-12"></a>                   <span class="dt">sd =</span> sd, </span>
-<span id="cb383-13"><a href="the-no-way-interactions.html#cb383-13"></a>                   <span class="dt">labelnames =</span> labelnames)</span>
-<span id="cb383-14"><a href="the-no-way-interactions.html#cb383-14"></a>alpha_level &lt;-<span class="st"> </span><span class="fl">0.05</span> <span class="co">#We set the alpha level at 0.05. </span></span>
-<span id="cb383-15"><a href="the-no-way-interactions.html#cb383-15"></a></span>
-<span id="cb383-16"><a href="the-no-way-interactions.html#cb383-16"></a>exact_result &lt;-<span class="st"> </span><span class="kw">ANOVA_exact</span>(design_result, </span>
-<span id="cb383-17"><a href="the-no-way-interactions.html#cb383-17"></a>                            <span class="dt">alpha_level =</span> alpha_level,</span>
-<span id="cb383-18"><a href="the-no-way-interactions.html#cb383-18"></a>                            <span class="dt">verbose =</span> <span class="ot">FALSE</span>)</span>
-<span id="cb383-19"><a href="the-no-way-interactions.html#cb383-19"></a></span>
-<span id="cb383-20"><a href="the-no-way-interactions.html#cb383-20"></a>knitr<span class="op">::</span><span class="kw">kable</span>(exact_result<span class="op">$</span>main_results[<span class="dv">2</span>,], </span>
-<span id="cb383-21"><a href="the-no-way-interactions.html#cb383-21"></a>             <span class="dt">caption =</span> <span class="st">&quot;ANOVA Results&quot;</span>)<span class="op">%&gt;%</span></span>
-<span id="cb383-22"><a href="the-no-way-interactions.html#cb383-22"></a><span class="st">  </span><span class="kw">kable_styling</span>(<span class="dt">latex_options =</span> <span class="st">&quot;hold_position&quot;</span>)</span></code></pre></div>
+<div class="sourceCode" id="cb400"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb400-1"><a href="the-no-way-interactions.html#cb400-1"></a>string &lt;-<span class="st"> &quot;2b*2b&quot;</span></span>
+<span id="cb400-2"><a href="the-no-way-interactions.html#cb400-2"></a>n &lt;-<span class="st"> </span><span class="dv">150</span></span>
+<span id="cb400-3"><a href="the-no-way-interactions.html#cb400-3"></a>mu &lt;-<span class="st"> </span><span class="kw">c</span>(<span class="dv">20</span>, <span class="dv">20</span>, <span class="dv">20</span>, <span class="dv">25</span>) <span class="co">#All means are equal - so there is no real difference.</span></span>
+<span id="cb400-4"><a href="the-no-way-interactions.html#cb400-4"></a><span class="co"># Enter means in the order that matches the labels below.</span></span>
+<span id="cb400-5"><a href="the-no-way-interactions.html#cb400-5"></a>sd &lt;-<span class="st"> </span><span class="dv">20</span></span>
+<span id="cb400-6"><a href="the-no-way-interactions.html#cb400-6"></a>labelnames &lt;-<span class="st"> </span><span class="kw">c</span>(<span class="st">&quot;fruit&quot;</span>, <span class="st">&quot;apple&quot;</span>, <span class="st">&quot;banana&quot;</span>, </span>
+<span id="cb400-7"><a href="the-no-way-interactions.html#cb400-7"></a>                <span class="st">&quot;hunger&quot;</span>, <span class="st">&quot;no hunger&quot;</span>, <span class="st">&quot;very hungry&quot;</span>) <span class="co">#</span></span>
+<span id="cb400-8"><a href="the-no-way-interactions.html#cb400-8"></a><span class="co"># the label names should be in the order of the means specified above.</span></span>
+<span id="cb400-9"><a href="the-no-way-interactions.html#cb400-9"></a>design_result &lt;-<span class="st"> </span><span class="kw">ANOVA_design</span>(<span class="dt">design =</span> string,</span>
+<span id="cb400-10"><a href="the-no-way-interactions.html#cb400-10"></a>                   <span class="dt">n =</span> n, </span>
+<span id="cb400-11"><a href="the-no-way-interactions.html#cb400-11"></a>                   <span class="dt">mu =</span> mu, </span>
+<span id="cb400-12"><a href="the-no-way-interactions.html#cb400-12"></a>                   <span class="dt">sd =</span> sd, </span>
+<span id="cb400-13"><a href="the-no-way-interactions.html#cb400-13"></a>                   <span class="dt">labelnames =</span> labelnames)</span></code></pre></div>
+<p><img src="SuperpowerValidation_files/figure-html/unnamed-chunk-206-1.png" width="672" /></p>
+<div class="sourceCode" id="cb401"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb401-1"><a href="the-no-way-interactions.html#cb401-1"></a>alpha_level &lt;-<span class="st"> </span><span class="fl">0.05</span> <span class="co">#We set the alpha level at 0.05. </span></span>
+<span id="cb401-2"><a href="the-no-way-interactions.html#cb401-2"></a></span>
+<span id="cb401-3"><a href="the-no-way-interactions.html#cb401-3"></a>exact_result &lt;-<span class="st"> </span><span class="kw">ANOVA_exact</span>(design_result, </span>
+<span id="cb401-4"><a href="the-no-way-interactions.html#cb401-4"></a>                            <span class="dt">alpha_level =</span> alpha_level,</span>
+<span id="cb401-5"><a href="the-no-way-interactions.html#cb401-5"></a>                            <span class="dt">verbose =</span> <span class="ot">FALSE</span>)</span>
+<span id="cb401-6"><a href="the-no-way-interactions.html#cb401-6"></a></span>
+<span id="cb401-7"><a href="the-no-way-interactions.html#cb401-7"></a>knitr<span class="op">::</span><span class="kw">kable</span>(exact_result<span class="op">$</span>main_results[<span class="dv">2</span>,], </span>
+<span id="cb401-8"><a href="the-no-way-interactions.html#cb401-8"></a>             <span class="dt">caption =</span> <span class="st">&quot;ANOVA Results&quot;</span>)<span class="op">%&gt;%</span></span>
+<span id="cb401-9"><a href="the-no-way-interactions.html#cb401-9"></a><span class="st">  </span><span class="kw">kable_styling</span>(<span class="dt">latex_options =</span> <span class="st">&quot;hold_position&quot;</span>)</span></code></pre></div>
 <table class="table" style="margin-left: auto; margin-right: auto;">
 <caption>
 <span id="tab:unnamed-chunk-206">Table 6.2: </span>ANOVA Results
@@ -608,22 +611,23 @@ hunger
 </tbody>
 </table>
 <p>And changing the sample size to 300 should reproduce the power for the interaction in the ANOVA.</p>
-<div class="sourceCode" id="cb384"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb384-1"><a href="the-no-way-interactions.html#cb384-1"></a>string &lt;-<span class="st"> &quot;2b*2b&quot;</span></span>
-<span id="cb384-2"><a href="the-no-way-interactions.html#cb384-2"></a>n &lt;-<span class="st"> </span><span class="dv">300</span></span>
-<span id="cb384-3"><a href="the-no-way-interactions.html#cb384-3"></a>mu &lt;-<span class="st"> </span><span class="kw">c</span>(<span class="dv">20</span>, <span class="dv">20</span>, <span class="dv">20</span>, <span class="dv">25</span>) <span class="co">#All means are equal - so there is no real difference.</span></span>
-<span id="cb384-4"><a href="the-no-way-interactions.html#cb384-4"></a><span class="co"># Enter means in the order that matches the labels below.</span></span>
-<span id="cb384-5"><a href="the-no-way-interactions.html#cb384-5"></a>sd &lt;-<span class="st"> </span><span class="dv">20</span></span>
-<span id="cb384-6"><a href="the-no-way-interactions.html#cb384-6"></a>labelnames &lt;-<span class="st"> </span><span class="kw">c</span>(<span class="st">&quot;fruit&quot;</span>, <span class="st">&quot;apple&quot;</span>, <span class="st">&quot;banana&quot;</span>, </span>
-<span id="cb384-7"><a href="the-no-way-interactions.html#cb384-7"></a>                <span class="st">&quot;hunger&quot;</span>, <span class="st">&quot;no hunger&quot;</span>, <span class="st">&quot;very hungry&quot;</span>) <span class="co">#</span></span>
-<span id="cb384-8"><a href="the-no-way-interactions.html#cb384-8"></a><span class="co"># the label names should be in the order of the means specified above.</span></span>
-<span id="cb384-9"><a href="the-no-way-interactions.html#cb384-9"></a>design_result &lt;-<span class="st"> </span><span class="kw">ANOVA_design</span>(<span class="dt">design =</span> string,</span>
-<span id="cb384-10"><a href="the-no-way-interactions.html#cb384-10"></a>                   <span class="dt">n =</span> n, </span>
-<span id="cb384-11"><a href="the-no-way-interactions.html#cb384-11"></a>                   <span class="dt">mu =</span> mu, </span>
-<span id="cb384-12"><a href="the-no-way-interactions.html#cb384-12"></a>                   <span class="dt">sd =</span> sd, </span>
-<span id="cb384-13"><a href="the-no-way-interactions.html#cb384-13"></a>                   <span class="dt">labelnames =</span> labelnames)</span>
-<span id="cb384-14"><a href="the-no-way-interactions.html#cb384-14"></a>alpha_level &lt;-<span class="st"> </span><span class="fl">0.05</span> <span class="co">#We set the alpha level at 0.05. </span></span>
-<span id="cb384-15"><a href="the-no-way-interactions.html#cb384-15"></a></span>
-<span id="cb384-16"><a href="the-no-way-interactions.html#cb384-16"></a>exact_result &lt;-<span class="st"> </span><span class="kw">ANOVA_exact</span>(design_result, <span class="dt">alpha_level =</span> alpha_level)</span></code></pre></div>
+<div class="sourceCode" id="cb402"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb402-1"><a href="the-no-way-interactions.html#cb402-1"></a>string &lt;-<span class="st"> &quot;2b*2b&quot;</span></span>
+<span id="cb402-2"><a href="the-no-way-interactions.html#cb402-2"></a>n &lt;-<span class="st"> </span><span class="dv">300</span></span>
+<span id="cb402-3"><a href="the-no-way-interactions.html#cb402-3"></a>mu &lt;-<span class="st"> </span><span class="kw">c</span>(<span class="dv">20</span>, <span class="dv">20</span>, <span class="dv">20</span>, <span class="dv">25</span>) <span class="co">#All means are equal - so there is no real difference.</span></span>
+<span id="cb402-4"><a href="the-no-way-interactions.html#cb402-4"></a><span class="co"># Enter means in the order that matches the labels below.</span></span>
+<span id="cb402-5"><a href="the-no-way-interactions.html#cb402-5"></a>sd &lt;-<span class="st"> </span><span class="dv">20</span></span>
+<span id="cb402-6"><a href="the-no-way-interactions.html#cb402-6"></a>labelnames &lt;-<span class="st"> </span><span class="kw">c</span>(<span class="st">&quot;fruit&quot;</span>, <span class="st">&quot;apple&quot;</span>, <span class="st">&quot;banana&quot;</span>, </span>
+<span id="cb402-7"><a href="the-no-way-interactions.html#cb402-7"></a>                <span class="st">&quot;hunger&quot;</span>, <span class="st">&quot;no hunger&quot;</span>, <span class="st">&quot;very hungry&quot;</span>) <span class="co">#</span></span>
+<span id="cb402-8"><a href="the-no-way-interactions.html#cb402-8"></a><span class="co"># the label names should be in the order of the means specified above.</span></span>
+<span id="cb402-9"><a href="the-no-way-interactions.html#cb402-9"></a>design_result &lt;-<span class="st"> </span><span class="kw">ANOVA_design</span>(<span class="dt">design =</span> string,</span>
+<span id="cb402-10"><a href="the-no-way-interactions.html#cb402-10"></a>                   <span class="dt">n =</span> n, </span>
+<span id="cb402-11"><a href="the-no-way-interactions.html#cb402-11"></a>                   <span class="dt">mu =</span> mu, </span>
+<span id="cb402-12"><a href="the-no-way-interactions.html#cb402-12"></a>                   <span class="dt">sd =</span> sd, </span>
+<span id="cb402-13"><a href="the-no-way-interactions.html#cb402-13"></a>                   <span class="dt">labelnames =</span> labelnames)</span></code></pre></div>
+<p><img src="SuperpowerValidation_files/figure-html/unnamed-chunk-207-1.png" width="672" /></p>
+<div class="sourceCode" id="cb403"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb403-1"><a href="the-no-way-interactions.html#cb403-1"></a>alpha_level &lt;-<span class="st"> </span><span class="fl">0.05</span> <span class="co">#We set the alpha level at 0.05. </span></span>
+<span id="cb403-2"><a href="the-no-way-interactions.html#cb403-2"></a></span>
+<span id="cb403-3"><a href="the-no-way-interactions.html#cb403-3"></a>exact_result &lt;-<span class="st"> </span><span class="kw">ANOVA_exact</span>(design_result, <span class="dt">alpha_level =</span> alpha_level)</span></code></pre></div>
 <pre><code>## Power and Effect sizes for ANOVA tests
 ##                power partial_eta_squared cohen_f non_centrality
 ## fruit        58.0592              0.0039  0.0626         4.6875
@@ -645,9 +649,9 @@ hunger
 ## p_fruit_apple_hunger_very hungry_fruit_banana_hunger_no hunger          0.00
 ## p_fruit_apple_hunger_very hungry_fruit_banana_hunger_very hungry        0.25
 ## p_fruit_banana_hunger_no hunger_fruit_banana_hunger_very hungry         0.25</code></pre>
-<div class="sourceCode" id="cb386"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb386-1"><a href="the-no-way-interactions.html#cb386-1"></a>knitr<span class="op">::</span><span class="kw">kable</span>(exact_result<span class="op">$</span>main_results[<span class="dv">3</span>,], </span>
-<span id="cb386-2"><a href="the-no-way-interactions.html#cb386-2"></a>             <span class="dt">caption =</span> <span class="st">&quot;ANOVA Results&quot;</span>)<span class="op">%&gt;%</span></span>
-<span id="cb386-3"><a href="the-no-way-interactions.html#cb386-3"></a><span class="st">  </span><span class="kw">kable_styling</span>(<span class="dt">latex_options =</span> <span class="st">&quot;hold_position&quot;</span>)</span></code></pre></div>
+<div class="sourceCode" id="cb405"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb405-1"><a href="the-no-way-interactions.html#cb405-1"></a>knitr<span class="op">::</span><span class="kw">kable</span>(exact_result<span class="op">$</span>main_results[<span class="dv">3</span>,], </span>
+<span id="cb405-2"><a href="the-no-way-interactions.html#cb405-2"></a>             <span class="dt">caption =</span> <span class="st">&quot;ANOVA Results&quot;</span>)<span class="op">%&gt;%</span></span>
+<span id="cb405-3"><a href="the-no-way-interactions.html#cb405-3"></a><span class="st">  </span><span class="kw">kable_styling</span>(<span class="dt">latex_options =</span> <span class="st">&quot;hold_position&quot;</span>)</span></code></pre></div>
 <table class="table" style="margin-left: auto; margin-right: auto;">
 <caption>
 <span id="tab:unnamed-chunk-207">Table 6.3: </span>ANOVA Results
@@ -691,21 +695,21 @@ fruit:hunger
 </tbody>
 </table>
 <p>Now if we look at the power analysis table for the last simulation, we see that the power for the ANOVA is the same for the main effect of fruit, the main effect of hunger, and the main effect of the interaction. All the effect sizes are equal as well. We can understand why if we look at the means in a 2x2 table:</p>
-<div class="sourceCode" id="cb387"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb387-1"><a href="the-no-way-interactions.html#cb387-1"></a>mean_mat &lt;-<span class="st"> </span><span class="kw">t</span>(<span class="kw">matrix</span>(mu, </span>
-<span id="cb387-2"><a href="the-no-way-interactions.html#cb387-2"></a>                     <span class="dt">nrow =</span> <span class="dv">2</span>,</span>
-<span id="cb387-3"><a href="the-no-way-interactions.html#cb387-3"></a>                     <span class="dt">ncol =</span> <span class="dv">2</span>)) <span class="co">#Create a mean matrix</span></span>
-<span id="cb387-4"><a href="the-no-way-interactions.html#cb387-4"></a><span class="kw">rownames</span>(mean_mat) &lt;-<span class="st"> </span><span class="kw">c</span>(<span class="st">&quot;apple&quot;</span>, <span class="st">&quot;banana&quot;</span>)</span>
-<span id="cb387-5"><a href="the-no-way-interactions.html#cb387-5"></a><span class="kw">colnames</span>(mean_mat) &lt;-<span class="st"> </span><span class="kw">c</span>(<span class="st">&quot;no hunger&quot;</span>, <span class="st">&quot;very hungry&quot;</span>)</span>
-<span id="cb387-6"><a href="the-no-way-interactions.html#cb387-6"></a>mean_mat</span></code></pre></div>
+<div class="sourceCode" id="cb406"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb406-1"><a href="the-no-way-interactions.html#cb406-1"></a>mean_mat &lt;-<span class="st"> </span><span class="kw">t</span>(<span class="kw">matrix</span>(mu, </span>
+<span id="cb406-2"><a href="the-no-way-interactions.html#cb406-2"></a>                     <span class="dt">nrow =</span> <span class="dv">2</span>,</span>
+<span id="cb406-3"><a href="the-no-way-interactions.html#cb406-3"></a>                     <span class="dt">ncol =</span> <span class="dv">2</span>)) <span class="co">#Create a mean matrix</span></span>
+<span id="cb406-4"><a href="the-no-way-interactions.html#cb406-4"></a><span class="kw">rownames</span>(mean_mat) &lt;-<span class="st"> </span><span class="kw">c</span>(<span class="st">&quot;apple&quot;</span>, <span class="st">&quot;banana&quot;</span>)</span>
+<span id="cb406-5"><a href="the-no-way-interactions.html#cb406-5"></a><span class="kw">colnames</span>(mean_mat) &lt;-<span class="st"> </span><span class="kw">c</span>(<span class="st">&quot;no hunger&quot;</span>, <span class="st">&quot;very hungry&quot;</span>)</span>
+<span id="cb406-6"><a href="the-no-way-interactions.html#cb406-6"></a>mean_mat</span></code></pre></div>
 <pre><code>##        no hunger very hungry
 ## apple         20          20
 ## banana        20          25</code></pre>
 <p>The first main effect tests the marginal means if we sum over rows, 20 (apple) vs 22.5 (banana).</p>
-<div class="sourceCode" id="cb389"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb389-1"><a href="the-no-way-interactions.html#cb389-1"></a><span class="kw">rowMeans</span>(mean_mat)</span></code></pre></div>
+<div class="sourceCode" id="cb408"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb408-1"><a href="the-no-way-interactions.html#cb408-1"></a><span class="kw">rowMeans</span>(mean_mat)</span></code></pre></div>
 <pre><code>##  apple banana 
 ##   20.0   22.5</code></pre>
 <p>The second main effect tests the marginal means over the rows, which is also 20 vs 22.5.</p>
-<div class="sourceCode" id="cb391"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb391-1"><a href="the-no-way-interactions.html#cb391-1"></a><span class="kw">colMeans</span>(mean_mat)</span></code></pre></div>
+<div class="sourceCode" id="cb410"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb410-1"><a href="the-no-way-interactions.html#cb410-1"></a><span class="kw">colMeans</span>(mean_mat)</span></code></pre></div>
 <pre><code>##   no hunger very hungry 
 ##        20.0        22.5</code></pre>
 <p>The interaction tests whether the average effect of hunger on liking fruit differs in the presence of bananas. In the presence of bananas the effect of hunger on the desireability of fruit is 5 scalepoints. The average effect (that we get from the marginal means) of hunger on fruit desireability is 2.5 (22.5-20). In other words, the interaction tests whether the difference effect between hunger and no hunger is different in the presence of an apple versus in the presence of a banana.</p>
@@ -714,55 +718,56 @@ fruit:hunger
 <p>We can repeat this for every cell, and get for no hunger-apple: <span class="math inline">\(20 - (21.25 + (20-21.25) + (20-21.25)) = 1.25\)</span>, for very hungry apple: <span class="math inline">\(20 - (21.25 + (22.5-21.25) + (20-21.25)) = 1.25\)</span>, and no hunger-banana: <span class="math inline">\(20 - (21.25 + (20-21.25) + (22.5-21.25)) = 1.25\)</span>.
 <br/>
 These values are used to calculate the sum of squares.</p>
-<div class="sourceCode" id="cb393"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb393-1"><a href="the-no-way-interactions.html#cb393-1"></a>a1 &lt;-<span class="st"> </span>mean_mat[<span class="dv">1</span>,<span class="dv">1</span>] <span class="op">-</span><span class="st"> </span>(<span class="kw">mean</span>(mean_mat) <span class="op">+</span><span class="st"> </span></span>
-<span id="cb393-2"><a href="the-no-way-interactions.html#cb393-2"></a><span class="st">                         </span>(<span class="kw">mean</span>(mean_mat[<span class="dv">1</span>,]) <span class="op">-</span><span class="st"> </span><span class="kw">mean</span>(mean_mat)) <span class="op">+</span><span class="st"> </span></span>
-<span id="cb393-3"><a href="the-no-way-interactions.html#cb393-3"></a><span class="st">                         </span>(<span class="kw">mean</span>(mean_mat[,<span class="dv">1</span>]) <span class="op">-</span><span class="st"> </span><span class="kw">mean</span>(mean_mat)))</span>
-<span id="cb393-4"><a href="the-no-way-interactions.html#cb393-4"></a>a2 &lt;-<span class="st"> </span>mean_mat[<span class="dv">1</span>,<span class="dv">2</span>] <span class="op">-</span><span class="st"> </span>(<span class="kw">mean</span>(mean_mat) <span class="op">+</span><span class="st"> </span></span>
-<span id="cb393-5"><a href="the-no-way-interactions.html#cb393-5"></a><span class="st">                         </span>(<span class="kw">mean</span>(mean_mat[<span class="dv">1</span>,]) <span class="op">-</span><span class="st"> </span><span class="kw">mean</span>(mean_mat)) <span class="op">+</span><span class="st"> </span></span>
-<span id="cb393-6"><a href="the-no-way-interactions.html#cb393-6"></a><span class="st">                         </span>(<span class="kw">mean</span>(mean_mat[,<span class="dv">2</span>]) <span class="op">-</span><span class="st"> </span><span class="kw">mean</span>(mean_mat)))</span>
-<span id="cb393-7"><a href="the-no-way-interactions.html#cb393-7"></a>b1 &lt;-<span class="st"> </span>mean_mat[<span class="dv">2</span>,<span class="dv">1</span>] <span class="op">-</span><span class="st"> </span>(<span class="kw">mean</span>(mean_mat) <span class="op">+</span><span class="st"> </span></span>
-<span id="cb393-8"><a href="the-no-way-interactions.html#cb393-8"></a><span class="st">                         </span>(<span class="kw">mean</span>(mean_mat[<span class="dv">2</span>,]) <span class="op">-</span><span class="st"> </span><span class="kw">mean</span>(mean_mat)) <span class="op">+</span><span class="st"> </span></span>
-<span id="cb393-9"><a href="the-no-way-interactions.html#cb393-9"></a><span class="st">                         </span>(<span class="kw">mean</span>(mean_mat[,<span class="dv">1</span>]) <span class="op">-</span><span class="st"> </span><span class="kw">mean</span>(mean_mat)))</span>
-<span id="cb393-10"><a href="the-no-way-interactions.html#cb393-10"></a>b2 &lt;-<span class="st"> </span>mean_mat[<span class="dv">2</span>,<span class="dv">2</span>] <span class="op">-</span><span class="st"> </span>(<span class="kw">mean</span>(mean_mat) <span class="op">+</span><span class="st"> </span></span>
-<span id="cb393-11"><a href="the-no-way-interactions.html#cb393-11"></a><span class="st">                         </span>(<span class="kw">mean</span>(mean_mat[<span class="dv">2</span>,]) <span class="op">-</span><span class="st"> </span><span class="kw">mean</span>(mean_mat)) <span class="op">+</span><span class="st"> </span></span>
-<span id="cb393-12"><a href="the-no-way-interactions.html#cb393-12"></a><span class="st">                         </span>(<span class="kw">mean</span>(mean_mat[,<span class="dv">2</span>]) <span class="op">-</span><span class="st"> </span><span class="kw">mean</span>(mean_mat)))</span>
-<span id="cb393-13"><a href="the-no-way-interactions.html#cb393-13"></a></span>
-<span id="cb393-14"><a href="the-no-way-interactions.html#cb393-14"></a>SS_ab &lt;-<span class="st"> </span>n <span class="op">*</span><span class="st"> </span><span class="kw">sum</span>(<span class="kw">c</span>(a1, a2, b1, b2)<span class="op">^</span><span class="dv">2</span>)</span></code></pre></div>
+<div class="sourceCode" id="cb412"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb412-1"><a href="the-no-way-interactions.html#cb412-1"></a>a1 &lt;-<span class="st"> </span>mean_mat[<span class="dv">1</span>,<span class="dv">1</span>] <span class="op">-</span><span class="st"> </span>(<span class="kw">mean</span>(mean_mat) <span class="op">+</span><span class="st"> </span></span>
+<span id="cb412-2"><a href="the-no-way-interactions.html#cb412-2"></a><span class="st">                         </span>(<span class="kw">mean</span>(mean_mat[<span class="dv">1</span>,]) <span class="op">-</span><span class="st"> </span><span class="kw">mean</span>(mean_mat)) <span class="op">+</span><span class="st"> </span></span>
+<span id="cb412-3"><a href="the-no-way-interactions.html#cb412-3"></a><span class="st">                         </span>(<span class="kw">mean</span>(mean_mat[,<span class="dv">1</span>]) <span class="op">-</span><span class="st"> </span><span class="kw">mean</span>(mean_mat)))</span>
+<span id="cb412-4"><a href="the-no-way-interactions.html#cb412-4"></a>a2 &lt;-<span class="st"> </span>mean_mat[<span class="dv">1</span>,<span class="dv">2</span>] <span class="op">-</span><span class="st"> </span>(<span class="kw">mean</span>(mean_mat) <span class="op">+</span><span class="st"> </span></span>
+<span id="cb412-5"><a href="the-no-way-interactions.html#cb412-5"></a><span class="st">                         </span>(<span class="kw">mean</span>(mean_mat[<span class="dv">1</span>,]) <span class="op">-</span><span class="st"> </span><span class="kw">mean</span>(mean_mat)) <span class="op">+</span><span class="st"> </span></span>
+<span id="cb412-6"><a href="the-no-way-interactions.html#cb412-6"></a><span class="st">                         </span>(<span class="kw">mean</span>(mean_mat[,<span class="dv">2</span>]) <span class="op">-</span><span class="st"> </span><span class="kw">mean</span>(mean_mat)))</span>
+<span id="cb412-7"><a href="the-no-way-interactions.html#cb412-7"></a>b1 &lt;-<span class="st"> </span>mean_mat[<span class="dv">2</span>,<span class="dv">1</span>] <span class="op">-</span><span class="st"> </span>(<span class="kw">mean</span>(mean_mat) <span class="op">+</span><span class="st"> </span></span>
+<span id="cb412-8"><a href="the-no-way-interactions.html#cb412-8"></a><span class="st">                         </span>(<span class="kw">mean</span>(mean_mat[<span class="dv">2</span>,]) <span class="op">-</span><span class="st"> </span><span class="kw">mean</span>(mean_mat)) <span class="op">+</span><span class="st"> </span></span>
+<span id="cb412-9"><a href="the-no-way-interactions.html#cb412-9"></a><span class="st">                         </span>(<span class="kw">mean</span>(mean_mat[,<span class="dv">1</span>]) <span class="op">-</span><span class="st"> </span><span class="kw">mean</span>(mean_mat)))</span>
+<span id="cb412-10"><a href="the-no-way-interactions.html#cb412-10"></a>b2 &lt;-<span class="st"> </span>mean_mat[<span class="dv">2</span>,<span class="dv">2</span>] <span class="op">-</span><span class="st"> </span>(<span class="kw">mean</span>(mean_mat) <span class="op">+</span><span class="st"> </span></span>
+<span id="cb412-11"><a href="the-no-way-interactions.html#cb412-11"></a><span class="st">                         </span>(<span class="kw">mean</span>(mean_mat[<span class="dv">2</span>,]) <span class="op">-</span><span class="st"> </span><span class="kw">mean</span>(mean_mat)) <span class="op">+</span><span class="st"> </span></span>
+<span id="cb412-12"><a href="the-no-way-interactions.html#cb412-12"></a><span class="st">                         </span>(<span class="kw">mean</span>(mean_mat[,<span class="dv">2</span>]) <span class="op">-</span><span class="st"> </span><span class="kw">mean</span>(mean_mat)))</span>
+<span id="cb412-13"><a href="the-no-way-interactions.html#cb412-13"></a></span>
+<span id="cb412-14"><a href="the-no-way-interactions.html#cb412-14"></a>SS_ab &lt;-<span class="st"> </span>n <span class="op">*</span><span class="st"> </span><span class="kw">sum</span>(<span class="kw">c</span>(a1, a2, b1, b2)<span class="op">^</span><span class="dv">2</span>)</span></code></pre></div>
 <p>The sum of squares is dependent on the sample size, as can be seen in the code above. The larger the sample size, the larger the sum of squares, and therefore (all else equal) the larger the <em>F</em>-statistic, and the smaller the <em>p</em>-value. We see from the simulations that all three tests have the same effect size, and therefore the same power.</p>
 <p>Interactions can have more power than main effects if the effect size of the interaction is larger than the effect size of the main effects. An example of this is a cross-over interaction. For example, let’s take a 2x2 matrix of means with a crossover interaction:</p>
-<div class="sourceCode" id="cb394"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb394-1"><a href="the-no-way-interactions.html#cb394-1"></a>mu &lt;-<span class="st"> </span><span class="kw">c</span>(<span class="dv">25</span>, <span class="dv">20</span>, <span class="dv">20</span>, <span class="dv">25</span>)</span>
-<span id="cb394-2"><a href="the-no-way-interactions.html#cb394-2"></a>mean_mat &lt;-<span class="st"> </span><span class="kw">t</span>(<span class="kw">matrix</span>(mu, </span>
-<span id="cb394-3"><a href="the-no-way-interactions.html#cb394-3"></a>                     <span class="dt">nrow =</span> <span class="dv">2</span>,</span>
-<span id="cb394-4"><a href="the-no-way-interactions.html#cb394-4"></a>                     <span class="dt">ncol =</span> <span class="dv">2</span>)) <span class="co">#Create a mean matrix</span></span>
-<span id="cb394-5"><a href="the-no-way-interactions.html#cb394-5"></a><span class="kw">rownames</span>(mean_mat) &lt;-<span class="st"> </span><span class="kw">c</span>(<span class="st">&quot;apple&quot;</span>, <span class="st">&quot;banana&quot;</span>)</span>
-<span id="cb394-6"><a href="the-no-way-interactions.html#cb394-6"></a><span class="kw">colnames</span>(mean_mat) &lt;-<span class="st"> </span><span class="kw">c</span>(<span class="st">&quot;no hunger&quot;</span>, <span class="st">&quot;very hungry&quot;</span>)</span>
-<span id="cb394-7"><a href="the-no-way-interactions.html#cb394-7"></a>mean_mat</span></code></pre></div>
+<div class="sourceCode" id="cb413"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb413-1"><a href="the-no-way-interactions.html#cb413-1"></a>mu &lt;-<span class="st"> </span><span class="kw">c</span>(<span class="dv">25</span>, <span class="dv">20</span>, <span class="dv">20</span>, <span class="dv">25</span>)</span>
+<span id="cb413-2"><a href="the-no-way-interactions.html#cb413-2"></a>mean_mat &lt;-<span class="st"> </span><span class="kw">t</span>(<span class="kw">matrix</span>(mu, </span>
+<span id="cb413-3"><a href="the-no-way-interactions.html#cb413-3"></a>                     <span class="dt">nrow =</span> <span class="dv">2</span>,</span>
+<span id="cb413-4"><a href="the-no-way-interactions.html#cb413-4"></a>                     <span class="dt">ncol =</span> <span class="dv">2</span>)) <span class="co">#Create a mean matrix</span></span>
+<span id="cb413-5"><a href="the-no-way-interactions.html#cb413-5"></a><span class="kw">rownames</span>(mean_mat) &lt;-<span class="st"> </span><span class="kw">c</span>(<span class="st">&quot;apple&quot;</span>, <span class="st">&quot;banana&quot;</span>)</span>
+<span id="cb413-6"><a href="the-no-way-interactions.html#cb413-6"></a><span class="kw">colnames</span>(mean_mat) &lt;-<span class="st"> </span><span class="kw">c</span>(<span class="st">&quot;no hunger&quot;</span>, <span class="st">&quot;very hungry&quot;</span>)</span>
+<span id="cb413-7"><a href="the-no-way-interactions.html#cb413-7"></a>mean_mat</span></code></pre></div>
 <pre><code>##        no hunger very hungry
 ## apple         25          20
 ## banana        20          25</code></pre>
 <p>Neither of the main effects is now significant, as the marginal means are 22.5 vs 22.5 for both main effects. The interaction is much stronger, however. We are testing whether the average effect of hunger on the desireability of fruit is different in the presence of bananas. Since the average effect is 0, and the effect of hunger on the desireability of bananas is 5, so the effect size is now twice as large.</p>
-<div class="sourceCode" id="cb396"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb396-1"><a href="the-no-way-interactions.html#cb396-1"></a>string &lt;-<span class="st"> &quot;2b*2b&quot;</span></span>
-<span id="cb396-2"><a href="the-no-way-interactions.html#cb396-2"></a>n &lt;-<span class="st"> </span><span class="dv">300</span></span>
-<span id="cb396-3"><a href="the-no-way-interactions.html#cb396-3"></a>mu &lt;-<span class="st"> </span><span class="kw">c</span>(<span class="dv">25</span>, <span class="dv">20</span>, <span class="dv">20</span>, <span class="dv">25</span>) <span class="co">#All marginal means are equal - so there is no real difference.</span></span>
-<span id="cb396-4"><a href="the-no-way-interactions.html#cb396-4"></a><span class="co"># Enter means in the order that matches the labels below.</span></span>
-<span id="cb396-5"><a href="the-no-way-interactions.html#cb396-5"></a>sd &lt;-<span class="st"> </span><span class="dv">20</span></span>
-<span id="cb396-6"><a href="the-no-way-interactions.html#cb396-6"></a>labelnames &lt;-<span class="st"> </span><span class="kw">c</span>(<span class="st">&quot;fruit&quot;</span>, <span class="st">&quot;apple&quot;</span>, <span class="st">&quot;banana&quot;</span>, </span>
-<span id="cb396-7"><a href="the-no-way-interactions.html#cb396-7"></a>                <span class="st">&quot;hunger&quot;</span>, <span class="st">&quot;no hunger&quot;</span>, <span class="st">&quot;very hungry&quot;</span>) <span class="co">#</span></span>
-<span id="cb396-8"><a href="the-no-way-interactions.html#cb396-8"></a><span class="co"># the label names should be in the order of the means specified above.</span></span>
-<span id="cb396-9"><a href="the-no-way-interactions.html#cb396-9"></a>design_result &lt;-<span class="st"> </span><span class="kw">ANOVA_design</span>(<span class="dt">design =</span> string,</span>
-<span id="cb396-10"><a href="the-no-way-interactions.html#cb396-10"></a>                   <span class="dt">n =</span> n, </span>
-<span id="cb396-11"><a href="the-no-way-interactions.html#cb396-11"></a>                   <span class="dt">mu =</span> mu, </span>
-<span id="cb396-12"><a href="the-no-way-interactions.html#cb396-12"></a>                   <span class="dt">sd =</span> sd, </span>
-<span id="cb396-13"><a href="the-no-way-interactions.html#cb396-13"></a>                   <span class="dt">labelnames =</span> labelnames)</span>
-<span id="cb396-14"><a href="the-no-way-interactions.html#cb396-14"></a>alpha_level &lt;-<span class="st"> </span><span class="fl">0.05</span> <span class="co">#We set the alpha level at 0.05. </span></span>
-<span id="cb396-15"><a href="the-no-way-interactions.html#cb396-15"></a></span>
-<span id="cb396-16"><a href="the-no-way-interactions.html#cb396-16"></a>exact_result &lt;-<span class="st"> </span><span class="kw">ANOVA_exact</span>(design_result, </span>
-<span id="cb396-17"><a href="the-no-way-interactions.html#cb396-17"></a>                            <span class="dt">alpha_level =</span> alpha_level,</span>
-<span id="cb396-18"><a href="the-no-way-interactions.html#cb396-18"></a>                            <span class="dt">verbose =</span> <span class="ot">FALSE</span>)</span>
-<span id="cb396-19"><a href="the-no-way-interactions.html#cb396-19"></a></span>
-<span id="cb396-20"><a href="the-no-way-interactions.html#cb396-20"></a>knitr<span class="op">::</span><span class="kw">kable</span>(exact_result<span class="op">$</span>main_results, </span>
-<span id="cb396-21"><a href="the-no-way-interactions.html#cb396-21"></a>             <span class="dt">caption =</span> <span class="st">&quot;ANOVA Results&quot;</span>)<span class="op">%&gt;%</span></span>
-<span id="cb396-22"><a href="the-no-way-interactions.html#cb396-22"></a><span class="st">  </span><span class="kw">kable_styling</span>(<span class="dt">latex_options =</span> <span class="st">&quot;hold_position&quot;</span>)</span></code></pre></div>
+<div class="sourceCode" id="cb415"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb415-1"><a href="the-no-way-interactions.html#cb415-1"></a>string &lt;-<span class="st"> &quot;2b*2b&quot;</span></span>
+<span id="cb415-2"><a href="the-no-way-interactions.html#cb415-2"></a>n &lt;-<span class="st"> </span><span class="dv">300</span></span>
+<span id="cb415-3"><a href="the-no-way-interactions.html#cb415-3"></a>mu &lt;-<span class="st"> </span><span class="kw">c</span>(<span class="dv">25</span>, <span class="dv">20</span>, <span class="dv">20</span>, <span class="dv">25</span>) <span class="co">#All marginal means are equal - so there is no real difference.</span></span>
+<span id="cb415-4"><a href="the-no-way-interactions.html#cb415-4"></a><span class="co"># Enter means in the order that matches the labels below.</span></span>
+<span id="cb415-5"><a href="the-no-way-interactions.html#cb415-5"></a>sd &lt;-<span class="st"> </span><span class="dv">20</span></span>
+<span id="cb415-6"><a href="the-no-way-interactions.html#cb415-6"></a>labelnames &lt;-<span class="st"> </span><span class="kw">c</span>(<span class="st">&quot;fruit&quot;</span>, <span class="st">&quot;apple&quot;</span>, <span class="st">&quot;banana&quot;</span>, </span>
+<span id="cb415-7"><a href="the-no-way-interactions.html#cb415-7"></a>                <span class="st">&quot;hunger&quot;</span>, <span class="st">&quot;no hunger&quot;</span>, <span class="st">&quot;very hungry&quot;</span>) <span class="co">#</span></span>
+<span id="cb415-8"><a href="the-no-way-interactions.html#cb415-8"></a><span class="co"># the label names should be in the order of the means specified above.</span></span>
+<span id="cb415-9"><a href="the-no-way-interactions.html#cb415-9"></a>design_result &lt;-<span class="st"> </span><span class="kw">ANOVA_design</span>(<span class="dt">design =</span> string,</span>
+<span id="cb415-10"><a href="the-no-way-interactions.html#cb415-10"></a>                   <span class="dt">n =</span> n, </span>
+<span id="cb415-11"><a href="the-no-way-interactions.html#cb415-11"></a>                   <span class="dt">mu =</span> mu, </span>
+<span id="cb415-12"><a href="the-no-way-interactions.html#cb415-12"></a>                   <span class="dt">sd =</span> sd, </span>
+<span id="cb415-13"><a href="the-no-way-interactions.html#cb415-13"></a>                   <span class="dt">labelnames =</span> labelnames)</span></code></pre></div>
+<p><img src="SuperpowerValidation_files/figure-html/unnamed-chunk-213-1.png" width="672" /></p>
+<div class="sourceCode" id="cb416"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb416-1"><a href="the-no-way-interactions.html#cb416-1"></a>alpha_level &lt;-<span class="st"> </span><span class="fl">0.05</span> <span class="co">#We set the alpha level at 0.05. </span></span>
+<span id="cb416-2"><a href="the-no-way-interactions.html#cb416-2"></a></span>
+<span id="cb416-3"><a href="the-no-way-interactions.html#cb416-3"></a>exact_result &lt;-<span class="st"> </span><span class="kw">ANOVA_exact</span>(design_result, </span>
+<span id="cb416-4"><a href="the-no-way-interactions.html#cb416-4"></a>                            <span class="dt">alpha_level =</span> alpha_level,</span>
+<span id="cb416-5"><a href="the-no-way-interactions.html#cb416-5"></a>                            <span class="dt">verbose =</span> <span class="ot">FALSE</span>)</span>
+<span id="cb416-6"><a href="the-no-way-interactions.html#cb416-6"></a></span>
+<span id="cb416-7"><a href="the-no-way-interactions.html#cb416-7"></a>knitr<span class="op">::</span><span class="kw">kable</span>(exact_result<span class="op">$</span>main_results, </span>
+<span id="cb416-8"><a href="the-no-way-interactions.html#cb416-8"></a>             <span class="dt">caption =</span> <span class="st">&quot;ANOVA Results&quot;</span>)<span class="op">%&gt;%</span></span>
+<span id="cb416-9"><a href="the-no-way-interactions.html#cb416-9"></a><span class="st">  </span><span class="kw">kable_styling</span>(<span class="dt">latex_options =</span> <span class="st">&quot;hold_position&quot;</span>)</span></code></pre></div>
 <table class="table" style="margin-left: auto; margin-right: auto;">
 <caption>
 <span id="tab:unnamed-chunk-213">Table 6.4: </span>ANOVA Results
@@ -840,12 +845,12 @@ fruit:hunger
 </tbody>
 </table>
 <p>We can also reproduce the power analysis using the analytic functions in <code>Superpower</code>:</p>
-<div class="sourceCode" id="cb397"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb397-1"><a href="the-no-way-interactions.html#cb397-1"></a>power_analytic &lt;-<span class="st"> </span><span class="kw">power_twoway_between</span>(design_result)</span>
-<span id="cb397-2"><a href="the-no-way-interactions.html#cb397-2"></a>power_analytic<span class="op">$</span>power_A</span></code></pre></div>
+<div class="sourceCode" id="cb417"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb417-1"><a href="the-no-way-interactions.html#cb417-1"></a>power_analytic &lt;-<span class="st"> </span><span class="kw">power_twoway_between</span>(design_result)</span>
+<span id="cb417-2"><a href="the-no-way-interactions.html#cb417-2"></a>power_analytic<span class="op">$</span>power_A</span></code></pre></div>
 <pre><code>## [1] 5</code></pre>
-<div class="sourceCode" id="cb399"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb399-1"><a href="the-no-way-interactions.html#cb399-1"></a>power_analytic<span class="op">$</span>power_B</span></code></pre></div>
+<div class="sourceCode" id="cb419"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb419-1"><a href="the-no-way-interactions.html#cb419-1"></a>power_analytic<span class="op">$</span>power_B</span></code></pre></div>
 <pre><code>## [1] 5</code></pre>
-<div class="sourceCode" id="cb401"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb401-1"><a href="the-no-way-interactions.html#cb401-1"></a>power_analytic<span class="op">$</span>power_AB</span></code></pre></div>
+<div class="sourceCode" id="cb421"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb421-1"><a href="the-no-way-interactions.html#cb421-1"></a>power_analytic<span class="op">$</span>power_AB</span></code></pre></div>
 <pre><code>## [1] 99.10259</code></pre>
 
 </div>

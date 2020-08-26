@@ -65,4 +65,4 @@ power_result_hfeffect <- ANOVA_power(design_result_power,
                                      nsims = nsims, 
                                      verbose = FALSE)
 
-save.image("data/assumption_violation.Rdata")
+save.image("data/assumption_violation.RData")

@@ -293,3 +293,5 @@ simulation_result_3.7$sim_data <- NULL
 simulation_result_3.5$plot1 <- NULL
 simulation_result_3.5$plot2 <- NULL
 simulation_result_3.5$sim_data <- NULL
+
+save.image("data/rmANOVA_data.RData")
