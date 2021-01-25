@@ -6,7 +6,7 @@
   <meta http-equiv="X-UA-Compatible" content="IE=edge" />
   <title>Chapter 9 Analytic Power Functions | Power Analysis with Superpower</title>
   <meta name="description" content="This is a book describing the capabilities of the Superpower R package." />
-  <meta name="generator" content="bookdown 0.20 and GitBook 2.6.7" />
+  <meta name="generator" content="bookdown 0.21 and GitBook 2.6.7" />
 
   <meta property="og:title" content="Chapter 9 Analytic Power Functions | Power Analysis with Superpower" />
   <meta property="og:type" content="book" />
@@ -24,7 +24,7 @@
 <meta name="author" content="Aaron R. Caldwell, Daniël Lakens, and Chelsea M. Parlett-Pelleriti" />
 
 
-<meta name="date" content="2020-08-26" />
+<meta name="date" content="2021-01-25" />
 
   <meta name="viewport" content="width=device-width, initial-scale=1" />
   <meta name="apple-mobile-web-app-capable" content="yes" />
@@ -51,7 +51,10 @@
 
 
 <script src="libs/accessible-code-block-0.0.1/empty-anchor.js"></script>
+<link href="libs/anchor-sections-1.0/anchor-sections.css" rel="stylesheet" />
+<script src="libs/anchor-sections-1.0/anchor-sections.js"></script>
 <script src="libs/kePrint-0.0.1/kePrint.js"></script>
+<link href="libs/lightable-0.0.1/lightable.css" rel="stylesheet" />
 
 
 <style type="text/css">
@@ -233,7 +236,7 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 </ul></li>
 </ul></li>
 <li class="chapter" data-level="" data-path="appendix-3-comparison-to-brysbaert.html"><a href="appendix-3-comparison-to-brysbaert.html"><i class="fa fa-check"></i>Appendix 3: Comparison to Brysbaert</a><ul>
-<li class="chapter" data-level="12.10" data-path="one-way-anova.html"><a href="one-way-anova.html#one-way-anova"><i class="fa fa-check"></i><b>12.10</b> One-Way ANOVA</a><ul>
+<li class="chapter" data-level="12.10" data-path="appendix-3-comparison-to-brysbaert.html"><a href="appendix-3-comparison-to-brysbaert.html#one-way-anova-1"><i class="fa fa-check"></i><b>12.10</b> One-Way ANOVA</a><ul>
 <li class="chapter" data-level="12.10.1" data-path="appendix-3-comparison-to-brysbaert.html"><a href="appendix-3-comparison-to-brysbaert.html#three-conditions-replication"><i class="fa fa-check"></i><b>12.10.1</b> Three conditions replication</a></li>
 <li class="chapter" data-level="12.10.2" data-path="appendix-3-comparison-to-brysbaert.html"><a href="appendix-3-comparison-to-brysbaert.html#variation-1"><i class="fa fa-check"></i><b>12.10.2</b> Variation 1</a></li>
 <li class="chapter" data-level="12.10.3" data-path="appendix-3-comparison-to-brysbaert.html"><a href="appendix-3-comparison-to-brysbaert.html#three-conditions-replication-1"><i class="fa fa-check"></i><b>12.10.3</b> Three conditions replication</a></li>
@@ -332,7 +335,7 @@ a
 <div class="sourceCode" id="cb582"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb582-1"><a href="analytic-power-functions.html#cb582-1"></a><span class="co">#using default alpha level of .05</span></span>
 <span id="cb582-2"><a href="analytic-power-functions.html#cb582-2"></a><span class="kw">power_oneway_between</span>(design_result)<span class="op">$</span>power </span></code></pre></div>
 <pre><code>## [1] 81.21291</code></pre>
-<p>This is a generalized function for one-way ANOVA’s for any number of groups. It is in part based on code from the <code>pwr2ppl</code> <span class="citation">(Aberson <a href="#ref-R-pwr2ppl" role="doc-biblioref">2019</a>)</span> package (but Aberson’s code allows for different n per condition, and different sd per condition).</p>
+<p>This is a generalized function for one-way ANOVA’s for any number of groups. It is in part based on code from the <code>pwr2ppl</code> <span class="citation">(Aberson <a href="#ref-R-pwr2ppl" role="doc-biblioref">2020</a>)</span> package (but Aberson’s code allows for different n per condition, and different sd per condition).</p>
 <div class="sourceCode" id="cb584"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb584-1"><a href="analytic-power-functions.html#cb584-1"></a>pwr2ppl<span class="op">::</span><span class="kw">anova1f_4</span>(<span class="dt">m1 =</span> <span class="dv">80</span>, <span class="dt">m2 =</span> <span class="dv">82</span>, <span class="dt">m3 =</span> <span class="dv">82</span>, <span class="dt">m4 =</span> <span class="dv">86</span>,</span>
 <span id="cb584-2"><a href="analytic-power-functions.html#cb584-2"></a>          <span class="dt">s1 =</span> <span class="dv">10</span>, <span class="dt">s2 =</span> <span class="dv">10</span>, <span class="dt">s3 =</span> <span class="dv">10</span>, <span class="dt">s4 =</span> <span class="dv">10</span>,</span>
 <span id="cb584-3"><a href="analytic-power-functions.html#cb584-3"></a>          <span class="dt">n1 =</span> <span class="dv">60</span>, <span class="dt">n2 =</span> <span class="dv">60</span>, <span class="dt">n3 =</span> <span class="dv">60</span>, <span class="dt">n4 =</span> <span class="dv">60</span>,</span>
@@ -458,7 +461,7 @@ a:b
 <pre><code>## [1] 59.78655</code></pre>
 <div class="sourceCode" id="cb594"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb594-1"><a href="analytic-power-functions.html#cb594-1"></a>power_res<span class="op">$</span>power_AB</span></code></pre></div>
 <pre><code>## [1] 59.78655</code></pre>
-<p>We can compare these results to <span class="citation">(Aberson <a href="#ref-R-pwr2ppl" role="doc-biblioref">2019</a>)</span>, as well.</p>
+<p>We can compare these results to <span class="citation">(Aberson <a href="#ref-R-pwr2ppl" role="doc-biblioref">2020</a>)</span>, as well.</p>
 <div class="sourceCode" id="cb596"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb596-1"><a href="analytic-power-functions.html#cb596-1"></a>pwr2ppl<span class="op">::</span><span class="kw">anova2x2</span>(<span class="dt">m1.1 =</span> <span class="dv">20</span>,</span>
 <span id="cb596-2"><a href="analytic-power-functions.html#cb596-2"></a>         <span class="dt">m1.2 =</span> <span class="dv">20</span>,</span>
 <span id="cb596-3"><a href="analytic-power-functions.html#cb596-3"></a>         <span class="dt">m2.1 =</span> <span class="dv">20</span>,</span>
@@ -584,10 +587,10 @@ a:b
 <h3>References</h3>
 <div id="refs" class="references">
 <div id="ref-R-pwr2ppl">
-<p>Aberson, Chris. 2019. <em>Pwr2ppl: Power Analyses for Common Designs (Power to the People)</em>. <a href="https://CRAN.R-project.org/package=pwr2ppl">https://CRAN.R-project.org/package=pwr2ppl</a>.</p>
+<p>Aberson, Chris. 2020. <em>Pwr2ppl: Power Analyses for Common Designs (Power to the People)</em>. <a href="https://CRAN.R-project.org/package=pwr2ppl">https://CRAN.R-project.org/package=pwr2ppl</a>.</p>
 </div>
 <div id="ref-R-pwr">
-<p>Champely, Stephane. 2020. <em>Pwr: Basic Functions for Power Analysis</em>. <a href="https://CRAN.R-project.org/package=pwr">https://CRAN.R-project.org/package=pwr</a>.</p>
+<p>Champely, Stephane. 2020. <em>Pwr: Basic Functions for Power Analysis</em>. <a href="https://github.com/heliosdrm/pwr">https://github.com/heliosdrm/pwr</a>.</p>
 </div>
 <div id="ref-faul2007g">
 <p>Faul, Franz, Edgar Erdfelder, Albert-Georg Lang, and Axel Buchner. 2007. “G*Power 3: A Flexible Statistical Power Analysis Program for the Social, Behavioral, and Biomedical Sciences.” <em>Behavior Research Methods</em> 39 (2): 175–91. <a href="http://www.psychologie.hhu.de/arbeitsgruppen/allgemeine-psychologie-und-arbeitspsychologie/gpower.html">http://www.psychologie.hhu.de/arbeitsgruppen/allgemeine-psychologie-und-arbeitspsychologie/gpower.html</a>.</p>

@@ -6,7 +6,7 @@
   <meta http-equiv="X-UA-Compatible" content="IE=edge" />
   <title>Power Analysis with Superpower</title>
   <meta name="description" content="This is a book describing the capabilities of the Superpower R package." />
-  <meta name="generator" content="bookdown 0.20 and GitBook 2.6.7" />
+  <meta name="generator" content="bookdown 0.21 and GitBook 2.6.7" />
 
   <meta property="og:title" content="Power Analysis with Superpower" />
   <meta property="og:type" content="book" />
@@ -24,7 +24,7 @@
 <meta name="author" content="Aaron R. Caldwell, Daniël Lakens, and Chelsea M. Parlett-Pelleriti" />
 
 
-<meta name="date" content="2020-08-26" />
+<meta name="date" content="2021-01-25" />
 
   <meta name="viewport" content="width=device-width, initial-scale=1" />
   <meta name="apple-mobile-web-app-capable" content="yes" />
@@ -51,7 +51,10 @@
 
 
 <script src="libs/accessible-code-block-0.0.1/empty-anchor.js"></script>
+<link href="libs/anchor-sections-1.0/anchor-sections.css" rel="stylesheet" />
+<script src="libs/anchor-sections-1.0/anchor-sections.js"></script>
 <script src="libs/kePrint-0.0.1/kePrint.js"></script>
+<link href="libs/lightable-0.0.1/lightable.css" rel="stylesheet" />
 
 
 <style type="text/css">
@@ -233,7 +236,7 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 </ul></li>
 </ul></li>
 <li class="chapter" data-level="" data-path="appendix-3-comparison-to-brysbaert.html"><a href="appendix-3-comparison-to-brysbaert.html"><i class="fa fa-check"></i>Appendix 3: Comparison to Brysbaert</a><ul>
-<li class="chapter" data-level="12.10" data-path="one-way-anova.html"><a href="one-way-anova.html#one-way-anova"><i class="fa fa-check"></i><b>12.10</b> One-Way ANOVA</a><ul>
+<li class="chapter" data-level="12.10" data-path="appendix-3-comparison-to-brysbaert.html"><a href="appendix-3-comparison-to-brysbaert.html#one-way-anova-1"><i class="fa fa-check"></i><b>12.10</b> One-Way ANOVA</a><ul>
 <li class="chapter" data-level="12.10.1" data-path="appendix-3-comparison-to-brysbaert.html"><a href="appendix-3-comparison-to-brysbaert.html#three-conditions-replication"><i class="fa fa-check"></i><b>12.10.1</b> Three conditions replication</a></li>
 <li class="chapter" data-level="12.10.2" data-path="appendix-3-comparison-to-brysbaert.html"><a href="appendix-3-comparison-to-brysbaert.html#variation-1"><i class="fa fa-check"></i><b>12.10.2</b> Variation 1</a></li>
 <li class="chapter" data-level="12.10.3" data-path="appendix-3-comparison-to-brysbaert.html"><a href="appendix-3-comparison-to-brysbaert.html#three-conditions-replication-1"><i class="fa fa-check"></i><b>12.10.3</b> Three conditions replication</a></li>
@@ -269,16 +272,16 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 <div id="header">
 <h1 class="title">Power Analysis with Superpower</h1>
 <p class="author"><em>Aaron R. Caldwell, Daniël Lakens, and Chelsea M. Parlett-Pelleriti</em></p>
-<p class="date"><em>2020-08-26</em></p>
+<p class="date"><em>2021-01-25</em></p>
 </div>
 <div id="preface" class="section level1 unnumbered">
 <h1>Preface</h1>
 <p><strong>This book is still being developed. If you have any comments to improve this book, let us know.</strong></p>
-<p>This book was compiled with R version 4.0.2 (2020-06-22).</p>
+<p>This book was compiled with R version 4.0.3 (2020-10-10).</p>
 <p>The goal of <code>Superpower</code> is to easily simulate factorial designs and empirically calculate power using a simulation approach.
 The R package is intended to be utilized for prospective (a priori) power analysis. Calculating <a href="http://daniellakens.blogspot.com/2014/12/observed-power-and-what-to-do-if-your.html">post hoc power</a> is not a useful thing to do for single studies.</p>
 <p>This package, and book, expect readers to have some familiarity with R <span class="citation">(<a href="#ref-R-base" role="doc-biblioref">2020</a>)</span>. However, we have created two Shiny apps (for the <a href="https://arcaldwell49.github.io/project/shinypowerapp/"><code>ANOVA_power</code></a> &amp; <a href="https://arcaldwell49.github.io/project/shinyexactapp/"><code>ANOVA_exact</code></a> functions respectively) to help use <code>Superpower</code> if you are not familiar with R. Reading through the examples in this book, and reproducing them in the Shiny apps, is probably the easiest way to get started with power analyses in Superpower.</p>
-<p>In this book we will display a variety of ways the <code>Superpower</code> package can be used for power analysis and sample size planning for factorial experimental designs. We also included various examples of the performance of <code>Superpower</code> against other R packages (e.g., <code>pwr2ppl</code> by <span class="citation">Aberson (<a href="#ref-R-pwr2ppl" role="doc-biblioref">2019</a>)</span> and <code>pwr</code> by <span class="citation">Champely (<a href="#ref-R-pwr" role="doc-biblioref">2020</a>)</span>) and statistical programs (such as G*Power <span class="citation">Faul et al. (<a href="#ref-faul2007g" role="doc-biblioref">2007</a>)</span>, MOREpower <span class="citation">Campbell and Thompson (<a href="#ref-Campbell2012MorePower6F" role="doc-biblioref">2012</a>)</span>, and SAS’s <code>PROC GLMPOWER</code> <span class="citation">(<a href="#ref-SASglmpower" role="doc-biblioref">2015</a>)</span>). All uses of the <code>ANOVA_power</code> function have been run with 10000 iterations (<code>nsims = 10000</code>). If you have any issues using <code>Superpower</code> or want to expand its capabilities please raise the issue on our <a href="https://github.com/arcaldwell49/Superpower/issues">GitHub</a> repository.</p>
+<p>In this book we will display a variety of ways the <code>Superpower</code> package can be used for power analysis and sample size planning for factorial experimental designs. We also included various examples of the performance of <code>Superpower</code> against other R packages (e.g., <code>pwr2ppl</code> by <span class="citation">Aberson (<a href="#ref-R-pwr2ppl" role="doc-biblioref">2020</a>)</span> and <code>pwr</code> by <span class="citation">Champely (<a href="#ref-R-pwr" role="doc-biblioref">2020</a>)</span>) and statistical programs (such as G*Power <span class="citation">Faul et al. (<a href="#ref-faul2007g" role="doc-biblioref">2007</a>)</span>, MOREpower <span class="citation">Campbell and Thompson (<a href="#ref-Campbell2012MorePower6F" role="doc-biblioref">2012</a>)</span>, and SAS’s <code>PROC GLMPOWER</code> <span class="citation">(<a href="#ref-SASglmpower" role="doc-biblioref">2015</a>)</span>). All uses of the <code>ANOVA_power</code> function have been run with 10000 iterations (<code>nsims = 10000</code>). If you have any issues using <code>Superpower</code> or want to expand its capabilities please raise the issue on our <a href="https://github.com/arcaldwell49/Superpower/issues">GitHub</a> repository.</p>
 <div id="contributors" class="section level3 unnumbered">
 <h3>Contributors</h3>
 <p>Daniël Lakens <img src="screenshots/orcid.png" /> <a href="https://orcid.org/0000-0002-0247-239X" class="uri">https://orcid.org/0000-0002-0247-239X</a>.</p>
@@ -294,13 +297,13 @@ The R package is intended to be utilized for prospective (a priori) power analys
 <h3>References</h3>
 <div id="refs" class="references">
 <div id="ref-R-pwr2ppl">
-<p>Aberson, Chris. 2019. <em>Pwr2ppl: Power Analyses for Common Designs (Power to the People)</em>. <a href="https://CRAN.R-project.org/package=pwr2ppl">https://CRAN.R-project.org/package=pwr2ppl</a>.</p>
+<p>Aberson, Chris. 2020. <em>Pwr2ppl: Power Analyses for Common Designs (Power to the People)</em>. <a href="https://CRAN.R-project.org/package=pwr2ppl">https://CRAN.R-project.org/package=pwr2ppl</a>.</p>
 </div>
 <div id="ref-Campbell2012MorePower6F">
 <p>Campbell, Jamie, and Valerie A. Thompson. 2012. “MorePower 6.0 for Anova with Relational Confidence Intervals and Bayesian Analysis.” <em>Behavior Research Methods</em> 44: 1255–65. <a href="https://doi.org/10.3758/s13428-012-0186-0">https://doi.org/10.3758/s13428-012-0186-0</a>.</p>
 </div>
 <div id="ref-R-pwr">
-<p>Champely, Stephane. 2020. <em>Pwr: Basic Functions for Power Analysis</em>. <a href="https://CRAN.R-project.org/package=pwr">https://CRAN.R-project.org/package=pwr</a>.</p>
+<p>Champely, Stephane. 2020. <em>Pwr: Basic Functions for Power Analysis</em>. <a href="https://github.com/heliosdrm/pwr">https://github.com/heliosdrm/pwr</a>.</p>
 </div>
 <div id="ref-faul2007g">
 <p>Faul, Franz, Edgar Erdfelder, Albert-Georg Lang, and Axel Buchner. 2007. “G*Power 3: A Flexible Statistical Power Analysis Program for the Social, Behavioral, and Biomedical Sciences.” <em>Behavior Research Methods</em> 39 (2): 175–91. <a href="http://www.psychologie.hhu.de/arbeitsgruppen/allgemeine-psychologie-und-arbeitspsychologie/gpower.html">http://www.psychologie.hhu.de/arbeitsgruppen/allgemeine-psychologie-und-arbeitspsychologie/gpower.html</a>.</p>
