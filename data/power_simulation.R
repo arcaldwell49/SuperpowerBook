@@ -477,3 +477,5 @@ simulation_result_2.9$plot2 <- NULL
 simulation_result_2.7$sim_data <- NULL
 simulation_result_2.7$plot1 <- NULL
 simulation_result_2.7$plot2 <- NULL
+
+save.image("data/oneway_data.RData")

@@ -6,7 +6,7 @@
   <meta http-equiv="X-UA-Compatible" content="IE=edge" />
   <title>Appendix 1: Direct Comparison to pwr2ppl | Power Analysis with Superpower</title>
   <meta name="description" content="This is a book describing the capabilities of the Superpower R package." />
-  <meta name="generator" content="bookdown 0.18 and GitBook 2.6.7" />
+  <meta name="generator" content="bookdown 0.21 and GitBook 2.6.7" />
 
   <meta property="og:title" content="Appendix 1: Direct Comparison to pwr2ppl | Power Analysis with Superpower" />
   <meta property="og:type" content="book" />
@@ -24,7 +24,7 @@
 <meta name="author" content="Aaron R. Caldwell, Daniël Lakens, and Chelsea M. Parlett-Pelleriti" />
 
 
-<meta name="date" content="2020-04-28" />
+<meta name="date" content="2021-01-25" />
 
   <meta name="viewport" content="width=device-width, initial-scale=1" />
   <meta name="apple-mobile-web-app-capable" content="yes" />
@@ -50,7 +50,11 @@
 
 
 
+<script src="libs/accessible-code-block-0.0.1/empty-anchor.js"></script>
+<link href="libs/anchor-sections-1.0/anchor-sections.css" rel="stylesheet" />
+<script src="libs/anchor-sections-1.0/anchor-sections.js"></script>
 <script src="libs/kePrint-0.0.1/kePrint.js"></script>
+<link href="libs/lightable-0.0.1/lightable.css" rel="stylesheet" />
 
 
 <style type="text/css">
@@ -201,6 +205,7 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 <li class="chapter" data-level="10.2" data-path="power-curve.html"><a href="power-curve.html#explore-increase-in-effect-size-for-cross-over-interactions."><i class="fa fa-check"></i><b>10.2</b> Explore increase in effect size for cross-over interactions.</a></li>
 <li class="chapter" data-level="10.3" data-path="power-curve.html"><a href="power-curve.html#explore-increase-in-correlation-in-moderated-interactions."><i class="fa fa-check"></i><b>10.3</b> Explore increase in correlation in moderated interactions.</a></li>
 <li class="chapter" data-level="10.4" data-path="power-curve.html"><a href="power-curve.html#increasing-correlation-in-on-factor-decreases-power-in-second-factor"><i class="fa fa-check"></i><b>10.4</b> Increasing correlation in on factor decreases power in second factor</a></li>
+<li class="chapter" data-level="10.5" data-path="power-curve.html"><a href="power-curve.html#code-to-reproduce-power-curve-figures"><i class="fa fa-check"></i><b>10.5</b> Code to Reproduce Power Curve Figures</a></li>
 </ul></li>
 <li class="chapter" data-level="11" data-path="violations-of-assumptions.html"><a href="violations-of-assumptions.html"><i class="fa fa-check"></i><b>11</b> Violations of Assumptions</a><ul>
 <li class="chapter" data-level="11.1" data-path="violations-of-assumptions.html"><a href="violations-of-assumptions.html#violation-of-heterogeneity-assumption"><i class="fa fa-check"></i><b>11.1</b> Violation of Heterogeneity Assumption</a></li>
@@ -272,99 +277,99 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 <div id="example-5.15.2" class="section level3">
 <h3><span class="header-section-number">12.7.1</span> Example 5.1/5.2</h3>
 <p>In this example, Aberson proposes a study expecting an average “score” of 80, 82, 82, and 86 for the control and three treatment groups respectively. The common standard deviation is 10 and the sample size per cell is 60.</p>
-<div class="sourceCode" id="cb593"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb593-1"><a href="appendix-1-direct-comparison-to-pwr2ppl.html#cb593-1"></a>design_result &lt;-<span class="st"> </span><span class="kw">ANOVA_design</span>(<span class="dt">design =</span> <span class="st">&quot;4b&quot;</span>,</span>
-<span id="cb593-2"><a href="appendix-1-direct-comparison-to-pwr2ppl.html#cb593-2"></a>                              <span class="dt">n =</span> <span class="dv">60</span>,</span>
-<span id="cb593-3"><a href="appendix-1-direct-comparison-to-pwr2ppl.html#cb593-3"></a>                              <span class="dt">sd =</span> <span class="dv">10</span>,</span>
-<span id="cb593-4"><a href="appendix-1-direct-comparison-to-pwr2ppl.html#cb593-4"></a>                              <span class="dt">mu =</span> <span class="kw">c</span>(<span class="dv">80</span>, <span class="dv">82</span>, <span class="dv">82</span>, <span class="dv">86</span>),</span>
-<span id="cb593-5"><a href="appendix-1-direct-comparison-to-pwr2ppl.html#cb593-5"></a>                              <span class="dt">labelnames =</span> <span class="kw">c</span>(<span class="st">&quot;DORM&quot;</span>,</span>
-<span id="cb593-6"><a href="appendix-1-direct-comparison-to-pwr2ppl.html#cb593-6"></a>                              <span class="st">&quot;Control&quot;</span>,</span>
-<span id="cb593-7"><a href="appendix-1-direct-comparison-to-pwr2ppl.html#cb593-7"></a>                              <span class="st">&quot;T1&quot;</span>,</span>
-<span id="cb593-8"><a href="appendix-1-direct-comparison-to-pwr2ppl.html#cb593-8"></a>                              <span class="st">&quot;T2&quot;</span>,</span>
-<span id="cb593-9"><a href="appendix-1-direct-comparison-to-pwr2ppl.html#cb593-9"></a>                              <span class="st">&quot;T3&quot;</span>),</span>
-<span id="cb593-10"><a href="appendix-1-direct-comparison-to-pwr2ppl.html#cb593-10"></a>                              <span class="dt">plot =</span> <span class="ot">TRUE</span>)</span></code></pre></div>
+<div class="sourceCode" id="cb636"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb636-1"><a href="appendix-1-direct-comparison-to-pwr2ppl.html#cb636-1"></a>design_result &lt;-<span class="st"> </span><span class="kw">ANOVA_design</span>(<span class="dt">design =</span> <span class="st">&quot;4b&quot;</span>,</span>
+<span id="cb636-2"><a href="appendix-1-direct-comparison-to-pwr2ppl.html#cb636-2"></a>                              <span class="dt">n =</span> <span class="dv">60</span>,</span>
+<span id="cb636-3"><a href="appendix-1-direct-comparison-to-pwr2ppl.html#cb636-3"></a>                              <span class="dt">sd =</span> <span class="dv">10</span>,</span>
+<span id="cb636-4"><a href="appendix-1-direct-comparison-to-pwr2ppl.html#cb636-4"></a>                              <span class="dt">mu =</span> <span class="kw">c</span>(<span class="dv">80</span>, <span class="dv">82</span>, <span class="dv">82</span>, <span class="dv">86</span>),</span>
+<span id="cb636-5"><a href="appendix-1-direct-comparison-to-pwr2ppl.html#cb636-5"></a>                              <span class="dt">labelnames =</span> <span class="kw">c</span>(<span class="st">&quot;DORM&quot;</span>,</span>
+<span id="cb636-6"><a href="appendix-1-direct-comparison-to-pwr2ppl.html#cb636-6"></a>                              <span class="st">&quot;Control&quot;</span>,</span>
+<span id="cb636-7"><a href="appendix-1-direct-comparison-to-pwr2ppl.html#cb636-7"></a>                              <span class="st">&quot;T1&quot;</span>,</span>
+<span id="cb636-8"><a href="appendix-1-direct-comparison-to-pwr2ppl.html#cb636-8"></a>                              <span class="st">&quot;T2&quot;</span>,</span>
+<span id="cb636-9"><a href="appendix-1-direct-comparison-to-pwr2ppl.html#cb636-9"></a>                              <span class="st">&quot;T3&quot;</span>),</span>
+<span id="cb636-10"><a href="appendix-1-direct-comparison-to-pwr2ppl.html#cb636-10"></a>                              <span class="dt">plot =</span> <span class="ot">TRUE</span>)</span></code></pre></div>
 <p><img src="SuperpowerValidation_files/figure-html/aberson_appendix-1.png" width="672" /></p>
 <p>Now we calculate the analytical result from <code>Superpower</code>.</p>
-<div class="sourceCode" id="cb594"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb594-1"><a href="appendix-1-direct-comparison-to-pwr2ppl.html#cb594-1"></a>analytical_result &lt;-<span class="st"> </span><span class="kw">power_oneway_between</span>(design_result)</span>
-<span id="cb594-2"><a href="appendix-1-direct-comparison-to-pwr2ppl.html#cb594-2"></a></span>
-<span id="cb594-3"><a href="appendix-1-direct-comparison-to-pwr2ppl.html#cb594-3"></a>analytical_result<span class="op">$</span>power</span></code></pre></div>
+<div class="sourceCode" id="cb637"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb637-1"><a href="appendix-1-direct-comparison-to-pwr2ppl.html#cb637-1"></a>analytical_result &lt;-<span class="st"> </span><span class="kw">power_oneway_between</span>(design_result)</span>
+<span id="cb637-2"><a href="appendix-1-direct-comparison-to-pwr2ppl.html#cb637-2"></a></span>
+<span id="cb637-3"><a href="appendix-1-direct-comparison-to-pwr2ppl.html#cb637-3"></a>analytical_result<span class="op">$</span>power</span></code></pre></div>
 <pre><code>## [1] 81.21291</code></pre>
 <p>The <code>ANOVA_exact</code> result.</p>
-<div class="sourceCode" id="cb596"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb596-1"><a href="appendix-1-direct-comparison-to-pwr2ppl.html#cb596-1"></a>exact_result &lt;-<span class="st"> </span><span class="kw">ANOVA_exact</span>(design_result, <span class="dt">verbose =</span> <span class="ot">FALSE</span>)</span>
-<span id="cb596-2"><a href="appendix-1-direct-comparison-to-pwr2ppl.html#cb596-2"></a></span>
-<span id="cb596-3"><a href="appendix-1-direct-comparison-to-pwr2ppl.html#cb596-3"></a>exact_result<span class="op">$</span>main_results</span></code></pre></div>
+<div class="sourceCode" id="cb639"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb639-1"><a href="appendix-1-direct-comparison-to-pwr2ppl.html#cb639-1"></a>exact_result &lt;-<span class="st"> </span><span class="kw">ANOVA_exact</span>(design_result, <span class="dt">verbose =</span> <span class="ot">FALSE</span>)</span>
+<span id="cb639-2"><a href="appendix-1-direct-comparison-to-pwr2ppl.html#cb639-2"></a></span>
+<span id="cb639-3"><a href="appendix-1-direct-comparison-to-pwr2ppl.html#cb639-3"></a>exact_result<span class="op">$</span>main_results</span></code></pre></div>
 <pre><code>##         power partial_eta_squared   cohen_f non_centrality
 ## DORM 81.21291          0.04607922 0.2197842           11.4</code></pre>
 <p>And these match <code>pwr2ppl</code>.</p>
-<div class="sourceCode" id="cb598"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb598-1"><a href="appendix-1-direct-comparison-to-pwr2ppl.html#cb598-1"></a><span class="kw">anova1f_4</span>(<span class="dt">m1 =</span> <span class="dv">80</span>, <span class="dt">m2 =</span> <span class="dv">82</span>, <span class="dt">m3 =</span> <span class="dv">82</span>, <span class="dt">m4 =</span> <span class="dv">86</span>,</span>
-<span id="cb598-2"><a href="appendix-1-direct-comparison-to-pwr2ppl.html#cb598-2"></a>          <span class="dt">s1 =</span> <span class="dv">10</span>, <span class="dt">s2 =</span> <span class="dv">10</span>, <span class="dt">s3 =</span> <span class="dv">10</span>, <span class="dt">s4 =</span> <span class="dv">10</span>,</span>
-<span id="cb598-3"><a href="appendix-1-direct-comparison-to-pwr2ppl.html#cb598-3"></a>          <span class="dt">n1 =</span> <span class="dv">60</span>, <span class="dt">n2 =</span> <span class="dv">60</span>, <span class="dt">n3 =</span> <span class="dv">60</span>, <span class="dt">n4 =</span> <span class="dv">60</span>)</span></code></pre></div>
+<div class="sourceCode" id="cb641"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb641-1"><a href="appendix-1-direct-comparison-to-pwr2ppl.html#cb641-1"></a><span class="kw">anova1f_4</span>(<span class="dt">m1 =</span> <span class="dv">80</span>, <span class="dt">m2 =</span> <span class="dv">82</span>, <span class="dt">m3 =</span> <span class="dv">82</span>, <span class="dt">m4 =</span> <span class="dv">86</span>,</span>
+<span id="cb641-2"><a href="appendix-1-direct-comparison-to-pwr2ppl.html#cb641-2"></a>          <span class="dt">s1 =</span> <span class="dv">10</span>, <span class="dt">s2 =</span> <span class="dv">10</span>, <span class="dt">s3 =</span> <span class="dv">10</span>, <span class="dt">s4 =</span> <span class="dv">10</span>,</span>
+<span id="cb641-3"><a href="appendix-1-direct-comparison-to-pwr2ppl.html#cb641-3"></a>          <span class="dt">n1 =</span> <span class="dv">60</span>, <span class="dt">n2 =</span> <span class="dv">60</span>, <span class="dt">n3 =</span> <span class="dv">60</span>, <span class="dt">n4 =</span> <span class="dv">60</span>)</span></code></pre></div>
 <pre><code>## Power  = 0.812 for eta-squared = 0.05</code></pre>
 </div>
 <div id="example-5.3" class="section level3">
 <h3><span class="header-section-number">12.7.2</span> Example 5.3</h3>
 <p>Now a 2 x 2 between-subject ANOVA.</p>
-<div class="sourceCode" id="cb600"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb600-1"><a href="appendix-1-direct-comparison-to-pwr2ppl.html#cb600-1"></a>design_result &lt;-<span class="st"> </span><span class="kw">ANOVA_design</span>(<span class="dt">design =</span> <span class="st">&quot;2b*2b&quot;</span>,</span>
-<span id="cb600-2"><a href="appendix-1-direct-comparison-to-pwr2ppl.html#cb600-2"></a>                              <span class="dt">n =</span> <span class="dv">100</span>,</span>
-<span id="cb600-3"><a href="appendix-1-direct-comparison-to-pwr2ppl.html#cb600-3"></a>                              <span class="dt">sd =</span> <span class="fl">1.7</span>,</span>
-<span id="cb600-4"><a href="appendix-1-direct-comparison-to-pwr2ppl.html#cb600-4"></a>                              <span class="dt">mu =</span> <span class="kw">c</span>(.<span class="dv">85</span>, <span class="fl">.85</span>, </span>
-<span id="cb600-5"><a href="appendix-1-direct-comparison-to-pwr2ppl.html#cb600-5"></a>                                     <span class="dv">0</span>, <span class="fl">.6</span>),</span>
-<span id="cb600-6"><a href="appendix-1-direct-comparison-to-pwr2ppl.html#cb600-6"></a>                              <span class="dt">plot =</span> <span class="ot">TRUE</span>)</span></code></pre></div>
+<div class="sourceCode" id="cb643"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb643-1"><a href="appendix-1-direct-comparison-to-pwr2ppl.html#cb643-1"></a>design_result &lt;-<span class="st"> </span><span class="kw">ANOVA_design</span>(<span class="dt">design =</span> <span class="st">&quot;2b*2b&quot;</span>,</span>
+<span id="cb643-2"><a href="appendix-1-direct-comparison-to-pwr2ppl.html#cb643-2"></a>                              <span class="dt">n =</span> <span class="dv">100</span>,</span>
+<span id="cb643-3"><a href="appendix-1-direct-comparison-to-pwr2ppl.html#cb643-3"></a>                              <span class="dt">sd =</span> <span class="fl">1.7</span>,</span>
+<span id="cb643-4"><a href="appendix-1-direct-comparison-to-pwr2ppl.html#cb643-4"></a>                              <span class="dt">mu =</span> <span class="kw">c</span>(.<span class="dv">85</span>, <span class="fl">.85</span>, </span>
+<span id="cb643-5"><a href="appendix-1-direct-comparison-to-pwr2ppl.html#cb643-5"></a>                                     <span class="dv">0</span>, <span class="fl">.6</span>),</span>
+<span id="cb643-6"><a href="appendix-1-direct-comparison-to-pwr2ppl.html#cb643-6"></a>                              <span class="dt">plot =</span> <span class="ot">TRUE</span>)</span></code></pre></div>
 <p><img src="SuperpowerValidation_files/figure-html/aberson_5.3.2-1.png" width="672" /></p>
 <p>Now we calculate the analytical result from <code>Superpower</code>.</p>
-<div class="sourceCode" id="cb601"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb601-1"><a href="appendix-1-direct-comparison-to-pwr2ppl.html#cb601-1"></a>analytical_result &lt;-<span class="st"> </span><span class="kw">power_twoway_between</span>(design_result)</span>
-<span id="cb601-2"><a href="appendix-1-direct-comparison-to-pwr2ppl.html#cb601-2"></a></span>
-<span id="cb601-3"><a href="appendix-1-direct-comparison-to-pwr2ppl.html#cb601-3"></a>analytical_result<span class="op">$</span>power_A</span></code></pre></div>
+<div class="sourceCode" id="cb644"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb644-1"><a href="appendix-1-direct-comparison-to-pwr2ppl.html#cb644-1"></a>analytical_result &lt;-<span class="st"> </span><span class="kw">power_twoway_between</span>(design_result)</span>
+<span id="cb644-2"><a href="appendix-1-direct-comparison-to-pwr2ppl.html#cb644-2"></a></span>
+<span id="cb644-3"><a href="appendix-1-direct-comparison-to-pwr2ppl.html#cb644-3"></a>analytical_result<span class="op">$</span>power_A</span></code></pre></div>
 <pre><code>## [1] 89.75072</code></pre>
-<div class="sourceCode" id="cb603"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb603-1"><a href="appendix-1-direct-comparison-to-pwr2ppl.html#cb603-1"></a>analytical_result<span class="op">$</span>power_B</span></code></pre></div>
+<div class="sourceCode" id="cb646"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb646-1"><a href="appendix-1-direct-comparison-to-pwr2ppl.html#cb646-1"></a>analytical_result<span class="op">$</span>power_B</span></code></pre></div>
 <pre><code>## [1] 42.10204</code></pre>
-<div class="sourceCode" id="cb605"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb605-1"><a href="appendix-1-direct-comparison-to-pwr2ppl.html#cb605-1"></a>analytical_result<span class="op">$</span>power_AB</span></code></pre></div>
+<div class="sourceCode" id="cb648"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb648-1"><a href="appendix-1-direct-comparison-to-pwr2ppl.html#cb648-1"></a>analytical_result<span class="op">$</span>power_AB</span></code></pre></div>
 <pre><code>## [1] 42.10204</code></pre>
 <p>The <code>ANOVA_exact</code> result.</p>
-<div class="sourceCode" id="cb607"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb607-1"><a href="appendix-1-direct-comparison-to-pwr2ppl.html#cb607-1"></a>exact_result &lt;-<span class="st"> </span><span class="kw">ANOVA_exact</span>(design_result, <span class="dt">verbose =</span> <span class="ot">FALSE</span>)</span>
-<span id="cb607-2"><a href="appendix-1-direct-comparison-to-pwr2ppl.html#cb607-2"></a></span>
-<span id="cb607-3"><a href="appendix-1-direct-comparison-to-pwr2ppl.html#cb607-3"></a>exact_result<span class="op">$</span>main_results</span></code></pre></div>
+<div class="sourceCode" id="cb650"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb650-1"><a href="appendix-1-direct-comparison-to-pwr2ppl.html#cb650-1"></a>exact_result &lt;-<span class="st"> </span><span class="kw">ANOVA_exact</span>(design_result, <span class="dt">verbose =</span> <span class="ot">FALSE</span>)</span>
+<span id="cb650-2"><a href="appendix-1-direct-comparison-to-pwr2ppl.html#cb650-2"></a></span>
+<span id="cb650-3"><a href="appendix-1-direct-comparison-to-pwr2ppl.html#cb650-3"></a>exact_result<span class="op">$</span>main_results</span></code></pre></div>
 <pre><code>##        power partial_eta_squared    cohen_f non_centrality
 ## a   89.75072         0.025751475 0.16257965      10.467128
 ## b   42.10204         0.007802747 0.08867981       3.114187
 ## a:b 42.10204         0.007802747 0.08867981       3.114187</code></pre>
 <p>And these match <code>pwr2ppl</code>. From Table 5.12.</p>
-<div class="sourceCode" id="cb609"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb609-1"><a href="appendix-1-direct-comparison-to-pwr2ppl.html#cb609-1"></a><span class="kw">anova2x2</span>(<span class="dt">m1.1 =</span> <span class="fl">0.85</span>, <span class="dt">m1.2 =</span> <span class="fl">0.85</span>, <span class="dt">m2.1 =</span> <span class="fl">0.00</span>, <span class="dt">m2.2 =</span> <span class="fl">0.60</span>,</span>
-<span id="cb609-2"><a href="appendix-1-direct-comparison-to-pwr2ppl.html#cb609-2"></a>         <span class="dt">s1.1 =</span> <span class="fl">1.7</span>, <span class="dt">s1.2 =</span> <span class="fl">1.7</span>, <span class="dt">s2.1 =</span> <span class="fl">1.7</span>, <span class="dt">s2.2 =</span> <span class="fl">1.7</span>,</span>
-<span id="cb609-3"><a href="appendix-1-direct-comparison-to-pwr2ppl.html#cb609-3"></a>         <span class="dt">n1.1 =</span> <span class="dv">100</span>, <span class="dt">n1.2 =</span> <span class="dv">100</span>, <span class="dt">n2.1 =</span> <span class="dv">100</span>, <span class="dt">n2.2 =</span> <span class="dv">100</span>,</span>
-<span id="cb609-4"><a href="appendix-1-direct-comparison-to-pwr2ppl.html#cb609-4"></a>         <span class="dt">alpha =</span> <span class="fl">.05</span>)</span></code></pre></div>
+<div class="sourceCode" id="cb652"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb652-1"><a href="appendix-1-direct-comparison-to-pwr2ppl.html#cb652-1"></a><span class="kw">anova2x2</span>(<span class="dt">m1.1 =</span> <span class="fl">0.85</span>, <span class="dt">m1.2 =</span> <span class="fl">0.85</span>, <span class="dt">m2.1 =</span> <span class="fl">0.00</span>, <span class="dt">m2.2 =</span> <span class="fl">0.60</span>,</span>
+<span id="cb652-2"><a href="appendix-1-direct-comparison-to-pwr2ppl.html#cb652-2"></a>         <span class="dt">s1.1 =</span> <span class="fl">1.7</span>, <span class="dt">s1.2 =</span> <span class="fl">1.7</span>, <span class="dt">s2.1 =</span> <span class="fl">1.7</span>, <span class="dt">s2.2 =</span> <span class="fl">1.7</span>,</span>
+<span id="cb652-3"><a href="appendix-1-direct-comparison-to-pwr2ppl.html#cb652-3"></a>         <span class="dt">n1.1 =</span> <span class="dv">100</span>, <span class="dt">n1.2 =</span> <span class="dv">100</span>, <span class="dt">n2.1 =</span> <span class="dv">100</span>, <span class="dt">n2.2 =</span> <span class="dv">100</span>,</span>
+<span id="cb652-4"><a href="appendix-1-direct-comparison-to-pwr2ppl.html#cb652-4"></a>         <span class="dt">alpha =</span> <span class="fl">.05</span>)</span></code></pre></div>
 <pre><code>## Power for Main Effect Factor A = 0.898</code></pre>
 <pre><code>## Power for Main Effect Factor B = 0.421</code></pre>
 <pre><code>## Power for Interaction AxB = 0.421</code></pre>
 <p>Now we can increase the sample size to 250 per cell</p>
-<div class="sourceCode" id="cb613"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb613-1"><a href="appendix-1-direct-comparison-to-pwr2ppl.html#cb613-1"></a>design_result &lt;-<span class="st"> </span><span class="kw">ANOVA_design</span>(<span class="dt">design =</span> <span class="st">&quot;2b*2b&quot;</span>,</span>
-<span id="cb613-2"><a href="appendix-1-direct-comparison-to-pwr2ppl.html#cb613-2"></a>                              <span class="dt">n =</span> <span class="dv">250</span>,</span>
-<span id="cb613-3"><a href="appendix-1-direct-comparison-to-pwr2ppl.html#cb613-3"></a>                              <span class="dt">sd =</span> <span class="fl">1.7</span>,</span>
-<span id="cb613-4"><a href="appendix-1-direct-comparison-to-pwr2ppl.html#cb613-4"></a>                              <span class="dt">mu =</span> <span class="kw">c</span>(.<span class="dv">85</span>, <span class="fl">.85</span>, </span>
-<span id="cb613-5"><a href="appendix-1-direct-comparison-to-pwr2ppl.html#cb613-5"></a>                                     <span class="dv">0</span>, <span class="fl">.6</span>),</span>
-<span id="cb613-6"><a href="appendix-1-direct-comparison-to-pwr2ppl.html#cb613-6"></a>                              <span class="dt">plot =</span> <span class="ot">TRUE</span>)</span></code></pre></div>
+<div class="sourceCode" id="cb656"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb656-1"><a href="appendix-1-direct-comparison-to-pwr2ppl.html#cb656-1"></a>design_result &lt;-<span class="st"> </span><span class="kw">ANOVA_design</span>(<span class="dt">design =</span> <span class="st">&quot;2b*2b&quot;</span>,</span>
+<span id="cb656-2"><a href="appendix-1-direct-comparison-to-pwr2ppl.html#cb656-2"></a>                              <span class="dt">n =</span> <span class="dv">250</span>,</span>
+<span id="cb656-3"><a href="appendix-1-direct-comparison-to-pwr2ppl.html#cb656-3"></a>                              <span class="dt">sd =</span> <span class="fl">1.7</span>,</span>
+<span id="cb656-4"><a href="appendix-1-direct-comparison-to-pwr2ppl.html#cb656-4"></a>                              <span class="dt">mu =</span> <span class="kw">c</span>(.<span class="dv">85</span>, <span class="fl">.85</span>, </span>
+<span id="cb656-5"><a href="appendix-1-direct-comparison-to-pwr2ppl.html#cb656-5"></a>                                     <span class="dv">0</span>, <span class="fl">.6</span>),</span>
+<span id="cb656-6"><a href="appendix-1-direct-comparison-to-pwr2ppl.html#cb656-6"></a>                              <span class="dt">plot =</span> <span class="ot">TRUE</span>)</span></code></pre></div>
 <p><img src="SuperpowerValidation_files/figure-html/aberson_5.3-1.png" width="672" /></p>
 <p>Now we calculate the analytical result from <code>Superpower</code>.</p>
-<div class="sourceCode" id="cb614"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb614-1"><a href="appendix-1-direct-comparison-to-pwr2ppl.html#cb614-1"></a>analytical_result &lt;-<span class="st"> </span><span class="kw">power_twoway_between</span>(design_result)</span>
-<span id="cb614-2"><a href="appendix-1-direct-comparison-to-pwr2ppl.html#cb614-2"></a></span>
-<span id="cb614-3"><a href="appendix-1-direct-comparison-to-pwr2ppl.html#cb614-3"></a>analytical_result<span class="op">$</span>power_A</span></code></pre></div>
+<div class="sourceCode" id="cb657"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb657-1"><a href="appendix-1-direct-comparison-to-pwr2ppl.html#cb657-1"></a>analytical_result &lt;-<span class="st"> </span><span class="kw">power_twoway_between</span>(design_result)</span>
+<span id="cb657-2"><a href="appendix-1-direct-comparison-to-pwr2ppl.html#cb657-2"></a></span>
+<span id="cb657-3"><a href="appendix-1-direct-comparison-to-pwr2ppl.html#cb657-3"></a>analytical_result<span class="op">$</span>power_A</span></code></pre></div>
 <pre><code>## [1] 99.91852</code></pre>
-<div class="sourceCode" id="cb616"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb616-1"><a href="appendix-1-direct-comparison-to-pwr2ppl.html#cb616-1"></a>analytical_result<span class="op">$</span>power_B</span></code></pre></div>
+<div class="sourceCode" id="cb659"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb659-1"><a href="appendix-1-direct-comparison-to-pwr2ppl.html#cb659-1"></a>analytical_result<span class="op">$</span>power_B</span></code></pre></div>
 <pre><code>## [1] 79.60496</code></pre>
-<div class="sourceCode" id="cb618"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb618-1"><a href="appendix-1-direct-comparison-to-pwr2ppl.html#cb618-1"></a>analytical_result<span class="op">$</span>power_AB</span></code></pre></div>
+<div class="sourceCode" id="cb661"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb661-1"><a href="appendix-1-direct-comparison-to-pwr2ppl.html#cb661-1"></a>analytical_result<span class="op">$</span>power_AB</span></code></pre></div>
 <pre><code>## [1] 79.60496</code></pre>
 <p>The <code>ANOVA_exact</code> result.</p>
-<div class="sourceCode" id="cb620"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb620-1"><a href="appendix-1-direct-comparison-to-pwr2ppl.html#cb620-1"></a>exact_result &lt;-<span class="st"> </span><span class="kw">ANOVA_exact</span>(design_result, <span class="dt">verbose =</span> <span class="ot">FALSE</span>)</span>
-<span id="cb620-2"><a href="appendix-1-direct-comparison-to-pwr2ppl.html#cb620-2"></a></span>
-<span id="cb620-3"><a href="appendix-1-direct-comparison-to-pwr2ppl.html#cb620-3"></a>exact_result<span class="op">$</span>main_results</span></code></pre></div>
+<div class="sourceCode" id="cb663"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb663-1"><a href="appendix-1-direct-comparison-to-pwr2ppl.html#cb663-1"></a>exact_result &lt;-<span class="st"> </span><span class="kw">ANOVA_exact</span>(design_result, <span class="dt">verbose =</span> <span class="ot">FALSE</span>)</span>
+<span id="cb663-2"><a href="appendix-1-direct-comparison-to-pwr2ppl.html#cb663-2"></a></span>
+<span id="cb663-3"><a href="appendix-1-direct-comparison-to-pwr2ppl.html#cb663-3"></a>exact_result<span class="op">$</span>main_results</span></code></pre></div>
 <pre><code>##        power partial_eta_squared   cohen_f non_centrality
 ## a   99.91852         0.025600317 0.1620892      26.167820
 ## b   79.60496         0.007756107 0.0884123       7.785467
 ## a:b 79.60496         0.007756107 0.0884123       7.785467</code></pre>
 <p>And these match <code>pwr2ppl</code>.</p>
-<div class="sourceCode" id="cb622"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb622-1"><a href="appendix-1-direct-comparison-to-pwr2ppl.html#cb622-1"></a><span class="kw">anova2x2</span>(<span class="dt">m1.1 =</span> <span class="fl">0.85</span>, <span class="dt">m1.2 =</span> <span class="fl">0.85</span>, <span class="dt">m2.1 =</span> <span class="fl">0.00</span>, <span class="dt">m2.2 =</span> <span class="fl">0.60</span>,</span>
-<span id="cb622-2"><a href="appendix-1-direct-comparison-to-pwr2ppl.html#cb622-2"></a>         <span class="dt">s1.1 =</span> <span class="fl">1.7</span>, <span class="dt">s1.2 =</span> <span class="fl">1.7</span>, <span class="dt">s2.1 =</span> <span class="fl">1.7</span>, <span class="dt">s2.2 =</span> <span class="fl">1.7</span>,</span>
-<span id="cb622-3"><a href="appendix-1-direct-comparison-to-pwr2ppl.html#cb622-3"></a>         <span class="dt">n1.1 =</span> <span class="dv">250</span>, <span class="dt">n1.2 =</span> <span class="dv">250</span>, <span class="dt">n2.1 =</span> <span class="dv">250</span>, <span class="dt">n2.2 =</span> <span class="dv">250</span>,</span>
-<span id="cb622-4"><a href="appendix-1-direct-comparison-to-pwr2ppl.html#cb622-4"></a>         <span class="dt">alpha =</span> <span class="fl">.05</span>)</span></code></pre></div>
+<div class="sourceCode" id="cb665"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb665-1"><a href="appendix-1-direct-comparison-to-pwr2ppl.html#cb665-1"></a><span class="kw">anova2x2</span>(<span class="dt">m1.1 =</span> <span class="fl">0.85</span>, <span class="dt">m1.2 =</span> <span class="fl">0.85</span>, <span class="dt">m2.1 =</span> <span class="fl">0.00</span>, <span class="dt">m2.2 =</span> <span class="fl">0.60</span>,</span>
+<span id="cb665-2"><a href="appendix-1-direct-comparison-to-pwr2ppl.html#cb665-2"></a>         <span class="dt">s1.1 =</span> <span class="fl">1.7</span>, <span class="dt">s1.2 =</span> <span class="fl">1.7</span>, <span class="dt">s2.1 =</span> <span class="fl">1.7</span>, <span class="dt">s2.2 =</span> <span class="fl">1.7</span>,</span>
+<span id="cb665-3"><a href="appendix-1-direct-comparison-to-pwr2ppl.html#cb665-3"></a>         <span class="dt">n1.1 =</span> <span class="dv">250</span>, <span class="dt">n1.2 =</span> <span class="dv">250</span>, <span class="dt">n2.1 =</span> <span class="dv">250</span>, <span class="dt">n2.2 =</span> <span class="dv">250</span>,</span>
+<span id="cb665-4"><a href="appendix-1-direct-comparison-to-pwr2ppl.html#cb665-4"></a>         <span class="dt">alpha =</span> <span class="fl">.05</span>)</span></code></pre></div>
 <pre><code>## Power for Main Effect Factor A = 0.999</code></pre>
 <pre><code>## Power for Main Effect Factor B = 0.796</code></pre>
 <pre><code>## Power for Interaction AxB = 0.796</code></pre>
@@ -375,19 +380,19 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 <p>Repeated measures ANOVAs</p>
 <div id="example-from-table-6.2" class="section level3">
 <h3><span class="header-section-number">12.8.1</span> Example from Table 6.2</h3>
-<div class="sourceCode" id="cb626"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb626-1"><a href="appendix-1-direct-comparison-to-pwr2ppl.html#cb626-1"></a>design_result &lt;-<span class="st"> </span><span class="kw">ANOVA_design</span>(<span class="dt">design =</span> <span class="st">&quot;4w&quot;</span>,</span>
-<span id="cb626-2"><a href="appendix-1-direct-comparison-to-pwr2ppl.html#cb626-2"></a>                              <span class="dt">n =</span> <span class="dv">25</span>,</span>
-<span id="cb626-3"><a href="appendix-1-direct-comparison-to-pwr2ppl.html#cb626-3"></a>                              <span class="dt">sd =</span> <span class="kw">c</span>(.<span class="dv">4</span>,.<span class="dv">5</span>,.<span class="dv">6</span>,.<span class="dv">7</span>),</span>
-<span id="cb626-4"><a href="appendix-1-direct-comparison-to-pwr2ppl.html#cb626-4"></a>                              <span class="dt">mu =</span> <span class="kw">c</span>(<span class="op">-</span>.<span class="dv">25</span>, <span class="fl">.00</span>, <span class="fl">.10</span>, <span class="fl">.15</span>),</span>
-<span id="cb626-5"><a href="appendix-1-direct-comparison-to-pwr2ppl.html#cb626-5"></a>                              <span class="dt">r =</span> <span class="kw">c</span>(.<span class="dv">50</span>, </span>
-<span id="cb626-6"><a href="appendix-1-direct-comparison-to-pwr2ppl.html#cb626-6"></a>                                    <span class="fl">.30</span>,</span>
-<span id="cb626-7"><a href="appendix-1-direct-comparison-to-pwr2ppl.html#cb626-7"></a>                                    <span class="fl">.15</span>, </span>
-<span id="cb626-8"><a href="appendix-1-direct-comparison-to-pwr2ppl.html#cb626-8"></a>                                    <span class="fl">.5</span>,</span>
-<span id="cb626-9"><a href="appendix-1-direct-comparison-to-pwr2ppl.html#cb626-9"></a>                                    <span class="fl">.30</span>, </span>
-<span id="cb626-10"><a href="appendix-1-direct-comparison-to-pwr2ppl.html#cb626-10"></a>                                    <span class="fl">.50</span>),</span>
-<span id="cb626-11"><a href="appendix-1-direct-comparison-to-pwr2ppl.html#cb626-11"></a>                              <span class="dt">plot =</span> <span class="ot">TRUE</span>)</span></code></pre></div>
+<div class="sourceCode" id="cb669"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb669-1"><a href="appendix-1-direct-comparison-to-pwr2ppl.html#cb669-1"></a>design_result &lt;-<span class="st"> </span><span class="kw">ANOVA_design</span>(<span class="dt">design =</span> <span class="st">&quot;4w&quot;</span>,</span>
+<span id="cb669-2"><a href="appendix-1-direct-comparison-to-pwr2ppl.html#cb669-2"></a>                              <span class="dt">n =</span> <span class="dv">25</span>,</span>
+<span id="cb669-3"><a href="appendix-1-direct-comparison-to-pwr2ppl.html#cb669-3"></a>                              <span class="dt">sd =</span> <span class="kw">c</span>(.<span class="dv">4</span>,.<span class="dv">5</span>,.<span class="dv">6</span>,.<span class="dv">7</span>),</span>
+<span id="cb669-4"><a href="appendix-1-direct-comparison-to-pwr2ppl.html#cb669-4"></a>                              <span class="dt">mu =</span> <span class="kw">c</span>(<span class="op">-</span>.<span class="dv">25</span>, <span class="fl">.00</span>, <span class="fl">.10</span>, <span class="fl">.15</span>),</span>
+<span id="cb669-5"><a href="appendix-1-direct-comparison-to-pwr2ppl.html#cb669-5"></a>                              <span class="dt">r =</span> <span class="kw">c</span>(.<span class="dv">50</span>, </span>
+<span id="cb669-6"><a href="appendix-1-direct-comparison-to-pwr2ppl.html#cb669-6"></a>                                    <span class="fl">.30</span>,</span>
+<span id="cb669-7"><a href="appendix-1-direct-comparison-to-pwr2ppl.html#cb669-7"></a>                                    <span class="fl">.15</span>, </span>
+<span id="cb669-8"><a href="appendix-1-direct-comparison-to-pwr2ppl.html#cb669-8"></a>                                    <span class="fl">.5</span>,</span>
+<span id="cb669-9"><a href="appendix-1-direct-comparison-to-pwr2ppl.html#cb669-9"></a>                                    <span class="fl">.30</span>, </span>
+<span id="cb669-10"><a href="appendix-1-direct-comparison-to-pwr2ppl.html#cb669-10"></a>                                    <span class="fl">.50</span>),</span>
+<span id="cb669-11"><a href="appendix-1-direct-comparison-to-pwr2ppl.html#cb669-11"></a>                              <span class="dt">plot =</span> <span class="ot">TRUE</span>)</span></code></pre></div>
 <p><img src="SuperpowerValidation_files/figure-html/aberson_6.2-1.png" width="672" /></p>
-<div class="sourceCode" id="cb627"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb627-1"><a href="appendix-1-direct-comparison-to-pwr2ppl.html#cb627-1"></a>design_result<span class="op">$</span>cor_mat</span></code></pre></div>
+<div class="sourceCode" id="cb670"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb670-1"><a href="appendix-1-direct-comparison-to-pwr2ppl.html#cb670-1"></a>design_result<span class="op">$</span>cor_mat</span></code></pre></div>
 <pre><code>##      a1  a2  a3   a4
 ## a1 1.00 0.5 0.3 0.15
 ## a2 0.50 1.0 0.5 0.30
@@ -395,32 +400,32 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 ## a4 0.15 0.3 0.5 1.00</code></pre>
 <p>There is no analytical result from <code>Superpower</code> when the correlations vary.</p>
 <p>Now we prouce 3 <code>ANOVA_exact</code> results representing no sphericity correction, Greenhouse-Geisser, and Huynh-Feldt corrected results.</p>
-<div class="sourceCode" id="cb629"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb629-1"><a href="appendix-1-direct-comparison-to-pwr2ppl.html#cb629-1"></a>exact_result &lt;-<span class="st"> </span><span class="kw">ANOVA_exact</span>(design_result, <span class="dt">verbose =</span> <span class="ot">FALSE</span>)</span>
-<span id="cb629-2"><a href="appendix-1-direct-comparison-to-pwr2ppl.html#cb629-2"></a></span>
-<span id="cb629-3"><a href="appendix-1-direct-comparison-to-pwr2ppl.html#cb629-3"></a>exact_result<span class="op">$</span>main_results</span></code></pre></div>
+<div class="sourceCode" id="cb672"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb672-1"><a href="appendix-1-direct-comparison-to-pwr2ppl.html#cb672-1"></a>exact_result &lt;-<span class="st"> </span><span class="kw">ANOVA_exact</span>(design_result, <span class="dt">verbose =</span> <span class="ot">FALSE</span>)</span>
+<span id="cb672-2"><a href="appendix-1-direct-comparison-to-pwr2ppl.html#cb672-2"></a></span>
+<span id="cb672-3"><a href="appendix-1-direct-comparison-to-pwr2ppl.html#cb672-3"></a>exact_result<span class="op">$</span>main_results</span></code></pre></div>
 <pre><code>##      power partial_eta_squared   cohen_f non_centrality
 ## a 80.94999           0.1404744 0.4042678       11.76713</code></pre>
-<div class="sourceCode" id="cb631"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb631-1"><a href="appendix-1-direct-comparison-to-pwr2ppl.html#cb631-1"></a>exact_result &lt;-<span class="st"> </span><span class="kw">ANOVA_exact</span>(design_result,</span>
-<span id="cb631-2"><a href="appendix-1-direct-comparison-to-pwr2ppl.html#cb631-2"></a>                            <span class="dt">correction =</span> <span class="st">&quot;GG&quot;</span>,</span>
-<span id="cb631-3"><a href="appendix-1-direct-comparison-to-pwr2ppl.html#cb631-3"></a>                            <span class="dt">verbose =</span> <span class="ot">FALSE</span>)</span>
-<span id="cb631-4"><a href="appendix-1-direct-comparison-to-pwr2ppl.html#cb631-4"></a></span>
-<span id="cb631-5"><a href="appendix-1-direct-comparison-to-pwr2ppl.html#cb631-5"></a>exact_result<span class="op">$</span>main_results</span></code></pre></div>
+<div class="sourceCode" id="cb674"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb674-1"><a href="appendix-1-direct-comparison-to-pwr2ppl.html#cb674-1"></a>exact_result &lt;-<span class="st"> </span><span class="kw">ANOVA_exact</span>(design_result,</span>
+<span id="cb674-2"><a href="appendix-1-direct-comparison-to-pwr2ppl.html#cb674-2"></a>                            <span class="dt">correction =</span> <span class="st">&quot;GG&quot;</span>,</span>
+<span id="cb674-3"><a href="appendix-1-direct-comparison-to-pwr2ppl.html#cb674-3"></a>                            <span class="dt">verbose =</span> <span class="ot">FALSE</span>)</span>
+<span id="cb674-4"><a href="appendix-1-direct-comparison-to-pwr2ppl.html#cb674-4"></a></span>
+<span id="cb674-5"><a href="appendix-1-direct-comparison-to-pwr2ppl.html#cb674-5"></a>exact_result<span class="op">$</span>main_results</span></code></pre></div>
 <pre><code>##      power partial_eta_squared   cohen_f non_centrality
 ## a 74.45876           0.1404744 0.4042678       9.585214</code></pre>
-<div class="sourceCode" id="cb633"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb633-1"><a href="appendix-1-direct-comparison-to-pwr2ppl.html#cb633-1"></a>exact_result &lt;-<span class="st"> </span><span class="kw">ANOVA_exact</span>(design_result,</span>
-<span id="cb633-2"><a href="appendix-1-direct-comparison-to-pwr2ppl.html#cb633-2"></a>                            <span class="dt">correction =</span> <span class="st">&quot;HF&quot;</span>,</span>
-<span id="cb633-3"><a href="appendix-1-direct-comparison-to-pwr2ppl.html#cb633-3"></a>                            <span class="dt">verbose =</span> <span class="ot">FALSE</span>)</span>
-<span id="cb633-4"><a href="appendix-1-direct-comparison-to-pwr2ppl.html#cb633-4"></a></span>
-<span id="cb633-5"><a href="appendix-1-direct-comparison-to-pwr2ppl.html#cb633-5"></a>exact_result<span class="op">$</span>main_results</span></code></pre></div>
+<div class="sourceCode" id="cb676"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb676-1"><a href="appendix-1-direct-comparison-to-pwr2ppl.html#cb676-1"></a>exact_result &lt;-<span class="st"> </span><span class="kw">ANOVA_exact</span>(design_result,</span>
+<span id="cb676-2"><a href="appendix-1-direct-comparison-to-pwr2ppl.html#cb676-2"></a>                            <span class="dt">correction =</span> <span class="st">&quot;HF&quot;</span>,</span>
+<span id="cb676-3"><a href="appendix-1-direct-comparison-to-pwr2ppl.html#cb676-3"></a>                            <span class="dt">verbose =</span> <span class="ot">FALSE</span>)</span>
+<span id="cb676-4"><a href="appendix-1-direct-comparison-to-pwr2ppl.html#cb676-4"></a></span>
+<span id="cb676-5"><a href="appendix-1-direct-comparison-to-pwr2ppl.html#cb676-5"></a>exact_result<span class="op">$</span>main_results</span></code></pre></div>
 <pre><code>##      power partial_eta_squared   cohen_f non_centrality
 ## a 78.14498           0.1404744 0.4042678       10.75258</code></pre>
 <p>And these match <code>pwr2ppl</code>.</p>
-<div class="sourceCode" id="cb635"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb635-1"><a href="appendix-1-direct-comparison-to-pwr2ppl.html#cb635-1"></a><span class="kw">win1F</span>(<span class="dt">m1 =</span> <span class="fl">-.25</span>, <span class="dt">m2 =</span> <span class="fl">.00</span>, <span class="dt">m3 =</span> <span class="fl">.10</span>, <span class="dt">m4 =</span> <span class="fl">.15</span>,</span>
-<span id="cb635-2"><a href="appendix-1-direct-comparison-to-pwr2ppl.html#cb635-2"></a>      <span class="dt">s1 =</span> <span class="fl">.4</span>, <span class="dt">s2 =</span> <span class="fl">.5</span>, <span class="dt">s3 =</span> <span class="fl">.6</span>, <span class="dt">s4 =</span> <span class="fl">.7</span>,</span>
-<span id="cb635-3"><a href="appendix-1-direct-comparison-to-pwr2ppl.html#cb635-3"></a>      <span class="dt">r12 =</span> <span class="fl">.50</span>, <span class="dt">r13 =</span> <span class="fl">.30</span>,</span>
-<span id="cb635-4"><a href="appendix-1-direct-comparison-to-pwr2ppl.html#cb635-4"></a>      <span class="dt">r14 =</span> <span class="fl">.15</span>, <span class="dt">r23 =</span> <span class="fl">.5</span>,</span>
-<span id="cb635-5"><a href="appendix-1-direct-comparison-to-pwr2ppl.html#cb635-5"></a>      <span class="dt">r24 =</span> <span class="fl">.30</span>, <span class="dt">r34 =</span> <span class="fl">.50</span>,</span>
-<span id="cb635-6"><a href="appendix-1-direct-comparison-to-pwr2ppl.html#cb635-6"></a>      <span class="dt">n =</span> <span class="dv">25</span>)</span></code></pre></div>
+<div class="sourceCode" id="cb678"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb678-1"><a href="appendix-1-direct-comparison-to-pwr2ppl.html#cb678-1"></a><span class="kw">win1F</span>(<span class="dt">m1 =</span> <span class="fl">-.25</span>, <span class="dt">m2 =</span> <span class="fl">.00</span>, <span class="dt">m3 =</span> <span class="fl">.10</span>, <span class="dt">m4 =</span> <span class="fl">.15</span>,</span>
+<span id="cb678-2"><a href="appendix-1-direct-comparison-to-pwr2ppl.html#cb678-2"></a>      <span class="dt">s1 =</span> <span class="fl">.4</span>, <span class="dt">s2 =</span> <span class="fl">.5</span>, <span class="dt">s3 =</span> <span class="fl">.6</span>, <span class="dt">s4 =</span> <span class="fl">.7</span>,</span>
+<span id="cb678-3"><a href="appendix-1-direct-comparison-to-pwr2ppl.html#cb678-3"></a>      <span class="dt">r12 =</span> <span class="fl">.50</span>, <span class="dt">r13 =</span> <span class="fl">.30</span>,</span>
+<span id="cb678-4"><a href="appendix-1-direct-comparison-to-pwr2ppl.html#cb678-4"></a>      <span class="dt">r14 =</span> <span class="fl">.15</span>, <span class="dt">r23 =</span> <span class="fl">.5</span>,</span>
+<span id="cb678-5"><a href="appendix-1-direct-comparison-to-pwr2ppl.html#cb678-5"></a>      <span class="dt">r24 =</span> <span class="fl">.30</span>, <span class="dt">r34 =</span> <span class="fl">.50</span>,</span>
+<span id="cb678-6"><a href="appendix-1-direct-comparison-to-pwr2ppl.html#cb678-6"></a>      <span class="dt">n =</span> <span class="dv">25</span>)</span></code></pre></div>
 <pre><code>## partial eta-squared = 0.14</code></pre>
 <pre><code>## Power (Unadjusted) for n = 25 is 0.809</code></pre>
 <pre><code>## Power H-F Adjusted (Epsilon = 0.914) for n = 25 is 0.782</code></pre>
@@ -428,19 +433,19 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 </div>
 <div id="example-from-table-6.6" class="section level3">
 <h3><span class="header-section-number">12.8.2</span> Example from Table 6.6</h3>
-<div class="sourceCode" id="cb640"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb640-1"><a href="appendix-1-direct-comparison-to-pwr2ppl.html#cb640-1"></a>design_result &lt;-<span class="st"> </span><span class="kw">ANOVA_design</span>(<span class="dt">design =</span> <span class="st">&quot;4w&quot;</span>,</span>
-<span id="cb640-2"><a href="appendix-1-direct-comparison-to-pwr2ppl.html#cb640-2"></a>                              <span class="dt">n =</span> <span class="dv">100</span>,</span>
-<span id="cb640-3"><a href="appendix-1-direct-comparison-to-pwr2ppl.html#cb640-3"></a>                              <span class="dt">sd =</span> <span class="kw">c</span>(.<span class="dv">4</span>,.<span class="dv">5</span>,<span class="fl">2.5</span>,<span class="dv">2</span>),</span>
-<span id="cb640-4"><a href="appendix-1-direct-comparison-to-pwr2ppl.html#cb640-4"></a>                              <span class="dt">mu =</span> <span class="kw">c</span>(<span class="op">-</span>.<span class="dv">25</span>, <span class="fl">.00</span>, <span class="fl">.10</span>, <span class="fl">.15</span>),</span>
-<span id="cb640-5"><a href="appendix-1-direct-comparison-to-pwr2ppl.html#cb640-5"></a>                              <span class="dt">r =</span> <span class="kw">c</span>(.<span class="dv">50</span>, </span>
-<span id="cb640-6"><a href="appendix-1-direct-comparison-to-pwr2ppl.html#cb640-6"></a>                                    <span class="fl">.30</span>,</span>
-<span id="cb640-7"><a href="appendix-1-direct-comparison-to-pwr2ppl.html#cb640-7"></a>                                    <span class="fl">.1</span>, </span>
-<span id="cb640-8"><a href="appendix-1-direct-comparison-to-pwr2ppl.html#cb640-8"></a>                                    <span class="fl">.5</span>,</span>
-<span id="cb640-9"><a href="appendix-1-direct-comparison-to-pwr2ppl.html#cb640-9"></a>                                    <span class="fl">.30</span>, </span>
-<span id="cb640-10"><a href="appendix-1-direct-comparison-to-pwr2ppl.html#cb640-10"></a>                                    <span class="fl">.40</span>),</span>
-<span id="cb640-11"><a href="appendix-1-direct-comparison-to-pwr2ppl.html#cb640-11"></a>                              <span class="dt">plot =</span> <span class="ot">TRUE</span>)</span></code></pre></div>
+<div class="sourceCode" id="cb683"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb683-1"><a href="appendix-1-direct-comparison-to-pwr2ppl.html#cb683-1"></a>design_result &lt;-<span class="st"> </span><span class="kw">ANOVA_design</span>(<span class="dt">design =</span> <span class="st">&quot;4w&quot;</span>,</span>
+<span id="cb683-2"><a href="appendix-1-direct-comparison-to-pwr2ppl.html#cb683-2"></a>                              <span class="dt">n =</span> <span class="dv">100</span>,</span>
+<span id="cb683-3"><a href="appendix-1-direct-comparison-to-pwr2ppl.html#cb683-3"></a>                              <span class="dt">sd =</span> <span class="kw">c</span>(.<span class="dv">4</span>,.<span class="dv">5</span>,<span class="fl">2.5</span>,<span class="dv">2</span>),</span>
+<span id="cb683-4"><a href="appendix-1-direct-comparison-to-pwr2ppl.html#cb683-4"></a>                              <span class="dt">mu =</span> <span class="kw">c</span>(<span class="op">-</span>.<span class="dv">25</span>, <span class="fl">.00</span>, <span class="fl">.10</span>, <span class="fl">.15</span>),</span>
+<span id="cb683-5"><a href="appendix-1-direct-comparison-to-pwr2ppl.html#cb683-5"></a>                              <span class="dt">r =</span> <span class="kw">c</span>(.<span class="dv">50</span>, </span>
+<span id="cb683-6"><a href="appendix-1-direct-comparison-to-pwr2ppl.html#cb683-6"></a>                                    <span class="fl">.30</span>,</span>
+<span id="cb683-7"><a href="appendix-1-direct-comparison-to-pwr2ppl.html#cb683-7"></a>                                    <span class="fl">.1</span>, </span>
+<span id="cb683-8"><a href="appendix-1-direct-comparison-to-pwr2ppl.html#cb683-8"></a>                                    <span class="fl">.5</span>,</span>
+<span id="cb683-9"><a href="appendix-1-direct-comparison-to-pwr2ppl.html#cb683-9"></a>                                    <span class="fl">.30</span>, </span>
+<span id="cb683-10"><a href="appendix-1-direct-comparison-to-pwr2ppl.html#cb683-10"></a>                                    <span class="fl">.40</span>),</span>
+<span id="cb683-11"><a href="appendix-1-direct-comparison-to-pwr2ppl.html#cb683-11"></a>                              <span class="dt">plot =</span> <span class="ot">TRUE</span>)</span></code></pre></div>
 <p><img src="SuperpowerValidation_files/figure-html/aberson_6.6-1.png" width="672" /></p>
-<div class="sourceCode" id="cb641"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb641-1"><a href="appendix-1-direct-comparison-to-pwr2ppl.html#cb641-1"></a>design_result<span class="op">$</span>cor_mat</span></code></pre></div>
+<div class="sourceCode" id="cb684"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb684-1"><a href="appendix-1-direct-comparison-to-pwr2ppl.html#cb684-1"></a>design_result<span class="op">$</span>cor_mat</span></code></pre></div>
 <pre><code>##     a1  a2  a3  a4
 ## a1 1.0 0.5 0.3 0.1
 ## a2 0.5 1.0 0.5 0.3
@@ -448,31 +453,31 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 ## a4 0.1 0.3 0.4 1.0</code></pre>
 <p>There is no analytical result from <code>Superpower</code> when the correlations vary.</p>
 <p>Now we prouce 3 <code>ANOVA_exact</code> results representing no sphericity correction, Greenhouse-Geisser, and Huynh-Feldt corrected results.</p>
-<div class="sourceCode" id="cb643"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb643-1"><a href="appendix-1-direct-comparison-to-pwr2ppl.html#cb643-1"></a>exact_result &lt;-<span class="st"> </span><span class="kw">ANOVA_exact</span>(design_result, <span class="dt">verbose =</span> <span class="ot">FALSE</span>)</span>
-<span id="cb643-2"><a href="appendix-1-direct-comparison-to-pwr2ppl.html#cb643-2"></a></span>
-<span id="cb643-3"><a href="appendix-1-direct-comparison-to-pwr2ppl.html#cb643-3"></a>exact_result<span class="op">$</span>main_results</span></code></pre></div>
+<div class="sourceCode" id="cb686"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb686-1"><a href="appendix-1-direct-comparison-to-pwr2ppl.html#cb686-1"></a>exact_result &lt;-<span class="st"> </span><span class="kw">ANOVA_exact</span>(design_result, <span class="dt">verbose =</span> <span class="ot">FALSE</span>)</span>
+<span id="cb686-2"><a href="appendix-1-direct-comparison-to-pwr2ppl.html#cb686-2"></a></span>
+<span id="cb686-3"><a href="appendix-1-direct-comparison-to-pwr2ppl.html#cb686-3"></a>exact_result<span class="op">$</span>main_results</span></code></pre></div>
 <pre><code>##      power partial_eta_squared   cohen_f non_centrality
 ## a 39.74802          0.01502077 0.1234902       4.529201</code></pre>
-<div class="sourceCode" id="cb645"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb645-1"><a href="appendix-1-direct-comparison-to-pwr2ppl.html#cb645-1"></a>exact_result &lt;-<span class="st"> </span><span class="kw">ANOVA_exact</span>(design_result,</span>
-<span id="cb645-2"><a href="appendix-1-direct-comparison-to-pwr2ppl.html#cb645-2"></a>                            <span class="dt">correction =</span> <span class="st">&quot;GG&quot;</span>,</span>
-<span id="cb645-3"><a href="appendix-1-direct-comparison-to-pwr2ppl.html#cb645-3"></a>                            <span class="dt">verbose =</span> <span class="ot">FALSE</span>)</span>
-<span id="cb645-4"><a href="appendix-1-direct-comparison-to-pwr2ppl.html#cb645-4"></a></span>
-<span id="cb645-5"><a href="appendix-1-direct-comparison-to-pwr2ppl.html#cb645-5"></a>exact_result<span class="op">$</span>main_results</span></code></pre></div>
+<div class="sourceCode" id="cb688"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb688-1"><a href="appendix-1-direct-comparison-to-pwr2ppl.html#cb688-1"></a>exact_result &lt;-<span class="st"> </span><span class="kw">ANOVA_exact</span>(design_result,</span>
+<span id="cb688-2"><a href="appendix-1-direct-comparison-to-pwr2ppl.html#cb688-2"></a>                            <span class="dt">correction =</span> <span class="st">&quot;GG&quot;</span>,</span>
+<span id="cb688-3"><a href="appendix-1-direct-comparison-to-pwr2ppl.html#cb688-3"></a>                            <span class="dt">verbose =</span> <span class="ot">FALSE</span>)</span>
+<span id="cb688-4"><a href="appendix-1-direct-comparison-to-pwr2ppl.html#cb688-4"></a></span>
+<span id="cb688-5"><a href="appendix-1-direct-comparison-to-pwr2ppl.html#cb688-5"></a>exact_result<span class="op">$</span>main_results</span></code></pre></div>
 <pre><code>##      power partial_eta_squared   cohen_f non_centrality
 ## a 31.78652          0.01502077 0.1234902       2.997994</code></pre>
-<div class="sourceCode" id="cb647"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb647-1"><a href="appendix-1-direct-comparison-to-pwr2ppl.html#cb647-1"></a>exact_result &lt;-<span class="st"> </span><span class="kw">ANOVA_exact</span>(design_result,</span>
-<span id="cb647-2"><a href="appendix-1-direct-comparison-to-pwr2ppl.html#cb647-2"></a>                            <span class="dt">correction =</span> <span class="st">&quot;HF&quot;</span>,</span>
-<span id="cb647-3"><a href="appendix-1-direct-comparison-to-pwr2ppl.html#cb647-3"></a>                            <span class="dt">verbose =</span> <span class="ot">FALSE</span>)</span>
-<span id="cb647-4"><a href="appendix-1-direct-comparison-to-pwr2ppl.html#cb647-4"></a></span>
-<span id="cb647-5"><a href="appendix-1-direct-comparison-to-pwr2ppl.html#cb647-5"></a>exact_result<span class="op">$</span>main_results</span></code></pre></div>
+<div class="sourceCode" id="cb690"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb690-1"><a href="appendix-1-direct-comparison-to-pwr2ppl.html#cb690-1"></a>exact_result &lt;-<span class="st"> </span><span class="kw">ANOVA_exact</span>(design_result,</span>
+<span id="cb690-2"><a href="appendix-1-direct-comparison-to-pwr2ppl.html#cb690-2"></a>                            <span class="dt">correction =</span> <span class="st">&quot;HF&quot;</span>,</span>
+<span id="cb690-3"><a href="appendix-1-direct-comparison-to-pwr2ppl.html#cb690-3"></a>                            <span class="dt">verbose =</span> <span class="ot">FALSE</span>)</span>
+<span id="cb690-4"><a href="appendix-1-direct-comparison-to-pwr2ppl.html#cb690-4"></a></span>
+<span id="cb690-5"><a href="appendix-1-direct-comparison-to-pwr2ppl.html#cb690-5"></a>exact_result<span class="op">$</span>main_results</span></code></pre></div>
 <pre><code>##      power partial_eta_squared   cohen_f non_centrality
 ## a 32.12295          0.01502077 0.1234902       3.059139</code></pre>
 <p>And these match <code>pwr2ppl</code>.</p>
-<div class="sourceCode" id="cb649"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb649-1"><a href="appendix-1-direct-comparison-to-pwr2ppl.html#cb649-1"></a><span class="kw">win1F</span>(<span class="dt">m1 =</span> <span class="fl">-.25</span>, <span class="dt">m2 =</span> <span class="fl">.00</span>, <span class="dt">m3 =</span> <span class="fl">.10</span>, <span class="dt">m4 =</span> <span class="fl">.15</span>,</span>
-<span id="cb649-2"><a href="appendix-1-direct-comparison-to-pwr2ppl.html#cb649-2"></a>      <span class="dt">s1 =</span> <span class="fl">.4</span>, <span class="dt">s2 =</span> <span class="fl">.5</span>, <span class="dt">s3 =</span> <span class="fl">2.5</span>, <span class="dt">s4 =</span> <span class="fl">2.0</span>,</span>
-<span id="cb649-3"><a href="appendix-1-direct-comparison-to-pwr2ppl.html#cb649-3"></a>      <span class="dt">r12 =</span> <span class="fl">.50</span>, <span class="dt">r13 =</span> <span class="fl">.30</span>, <span class="dt">r14 =</span> <span class="fl">.10</span>,</span>
-<span id="cb649-4"><a href="appendix-1-direct-comparison-to-pwr2ppl.html#cb649-4"></a>      <span class="dt">r23 =</span> <span class="fl">.5</span>, <span class="dt">r24 =</span> <span class="fl">.30</span>, <span class="dt">r34 =</span> <span class="fl">.40</span>,</span>
-<span id="cb649-5"><a href="appendix-1-direct-comparison-to-pwr2ppl.html#cb649-5"></a>      <span class="dt">n =</span> <span class="dv">100</span>)</span></code></pre></div>
+<div class="sourceCode" id="cb692"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb692-1"><a href="appendix-1-direct-comparison-to-pwr2ppl.html#cb692-1"></a><span class="kw">win1F</span>(<span class="dt">m1 =</span> <span class="fl">-.25</span>, <span class="dt">m2 =</span> <span class="fl">.00</span>, <span class="dt">m3 =</span> <span class="fl">.10</span>, <span class="dt">m4 =</span> <span class="fl">.15</span>,</span>
+<span id="cb692-2"><a href="appendix-1-direct-comparison-to-pwr2ppl.html#cb692-2"></a>      <span class="dt">s1 =</span> <span class="fl">.4</span>, <span class="dt">s2 =</span> <span class="fl">.5</span>, <span class="dt">s3 =</span> <span class="fl">2.5</span>, <span class="dt">s4 =</span> <span class="fl">2.0</span>,</span>
+<span id="cb692-3"><a href="appendix-1-direct-comparison-to-pwr2ppl.html#cb692-3"></a>      <span class="dt">r12 =</span> <span class="fl">.50</span>, <span class="dt">r13 =</span> <span class="fl">.30</span>, <span class="dt">r14 =</span> <span class="fl">.10</span>,</span>
+<span id="cb692-4"><a href="appendix-1-direct-comparison-to-pwr2ppl.html#cb692-4"></a>      <span class="dt">r23 =</span> <span class="fl">.5</span>, <span class="dt">r24 =</span> <span class="fl">.30</span>, <span class="dt">r34 =</span> <span class="fl">.40</span>,</span>
+<span id="cb692-5"><a href="appendix-1-direct-comparison-to-pwr2ppl.html#cb692-5"></a>      <span class="dt">n =</span> <span class="dv">100</span>)</span></code></pre></div>
 <pre><code>## partial eta-squared = 0.015</code></pre>
 <pre><code>## Power (Unadjusted) for n = 100 is 0.397</code></pre>
 <pre><code>## Power H-F Adjusted (Epsilon = 0.675) for n = 100 is 0.321</code></pre>
@@ -480,20 +485,20 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 </div>
 <div id="example-from-table-6.8" class="section level3">
 <h3><span class="header-section-number">12.8.3</span> Example from Table 6.8</h3>
-<div class="sourceCode" id="cb654"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb654-1"><a href="appendix-1-direct-comparison-to-pwr2ppl.html#cb654-1"></a>design_result &lt;-<span class="st"> </span><span class="kw">ANOVA_design</span>(<span class="dt">design =</span> <span class="st">&quot;2w*4w&quot;</span>,</span>
-<span id="cb654-2"><a href="appendix-1-direct-comparison-to-pwr2ppl.html#cb654-2"></a>                              <span class="dt">n =</span> <span class="dv">80</span>,</span>
-<span id="cb654-3"><a href="appendix-1-direct-comparison-to-pwr2ppl.html#cb654-3"></a>                              <span class="dt">sd =</span> <span class="kw">c</span>(.<span class="dv">4</span>,<span class="fl">0.5</span>, </span>
-<span id="cb654-4"><a href="appendix-1-direct-comparison-to-pwr2ppl.html#cb654-4"></a>                                     <span class="fl">2.5</span>,<span class="fl">2.0</span>, </span>
-<span id="cb654-5"><a href="appendix-1-direct-comparison-to-pwr2ppl.html#cb654-5"></a>                                     <span class="fl">0.4</span>,<span class="fl">0.5</span>, </span>
-<span id="cb654-6"><a href="appendix-1-direct-comparison-to-pwr2ppl.html#cb654-6"></a>                                     <span class="fl">2.5</span>,<span class="fl">2.0</span>),</span>
-<span id="cb654-7"><a href="appendix-1-direct-comparison-to-pwr2ppl.html#cb654-7"></a>                              <span class="dt">mu =</span> <span class="kw">c</span>(<span class="op">-</span><span class="fl">0.25</span>,<span class="fl">0.0</span>, </span>
-<span id="cb654-8"><a href="appendix-1-direct-comparison-to-pwr2ppl.html#cb654-8"></a>                                     <span class="fl">0.10</span>,<span class="fl">0.15</span>, </span>
-<span id="cb654-9"><a href="appendix-1-direct-comparison-to-pwr2ppl.html#cb654-9"></a>                                     <span class="fl">-0.25</span>,<span class="fl">0.10</span>, </span>
-<span id="cb654-10"><a href="appendix-1-direct-comparison-to-pwr2ppl.html#cb654-10"></a>                                     <span class="fl">0.30</span>,<span class="fl">0.35</span>),</span>
-<span id="cb654-11"><a href="appendix-1-direct-comparison-to-pwr2ppl.html#cb654-11"></a>                              <span class="dt">r =</span> <span class="kw">c</span>(.<span class="dv">5</span>),</span>
-<span id="cb654-12"><a href="appendix-1-direct-comparison-to-pwr2ppl.html#cb654-12"></a>                              <span class="dt">plot =</span> <span class="ot">TRUE</span>)</span></code></pre></div>
+<div class="sourceCode" id="cb697"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb697-1"><a href="appendix-1-direct-comparison-to-pwr2ppl.html#cb697-1"></a>design_result &lt;-<span class="st"> </span><span class="kw">ANOVA_design</span>(<span class="dt">design =</span> <span class="st">&quot;2w*4w&quot;</span>,</span>
+<span id="cb697-2"><a href="appendix-1-direct-comparison-to-pwr2ppl.html#cb697-2"></a>                              <span class="dt">n =</span> <span class="dv">80</span>,</span>
+<span id="cb697-3"><a href="appendix-1-direct-comparison-to-pwr2ppl.html#cb697-3"></a>                              <span class="dt">sd =</span> <span class="kw">c</span>(.<span class="dv">4</span>,<span class="fl">0.5</span>, </span>
+<span id="cb697-4"><a href="appendix-1-direct-comparison-to-pwr2ppl.html#cb697-4"></a>                                     <span class="fl">2.5</span>,<span class="fl">2.0</span>, </span>
+<span id="cb697-5"><a href="appendix-1-direct-comparison-to-pwr2ppl.html#cb697-5"></a>                                     <span class="fl">0.4</span>,<span class="fl">0.5</span>, </span>
+<span id="cb697-6"><a href="appendix-1-direct-comparison-to-pwr2ppl.html#cb697-6"></a>                                     <span class="fl">2.5</span>,<span class="fl">2.0</span>),</span>
+<span id="cb697-7"><a href="appendix-1-direct-comparison-to-pwr2ppl.html#cb697-7"></a>                              <span class="dt">mu =</span> <span class="kw">c</span>(<span class="op">-</span><span class="fl">0.25</span>,<span class="fl">0.0</span>, </span>
+<span id="cb697-8"><a href="appendix-1-direct-comparison-to-pwr2ppl.html#cb697-8"></a>                                     <span class="fl">0.10</span>,<span class="fl">0.15</span>, </span>
+<span id="cb697-9"><a href="appendix-1-direct-comparison-to-pwr2ppl.html#cb697-9"></a>                                     <span class="fl">-0.25</span>,<span class="fl">0.10</span>, </span>
+<span id="cb697-10"><a href="appendix-1-direct-comparison-to-pwr2ppl.html#cb697-10"></a>                                     <span class="fl">0.30</span>,<span class="fl">0.35</span>),</span>
+<span id="cb697-11"><a href="appendix-1-direct-comparison-to-pwr2ppl.html#cb697-11"></a>                              <span class="dt">r =</span> <span class="kw">c</span>(.<span class="dv">5</span>),</span>
+<span id="cb697-12"><a href="appendix-1-direct-comparison-to-pwr2ppl.html#cb697-12"></a>                              <span class="dt">plot =</span> <span class="ot">TRUE</span>)</span></code></pre></div>
 <p><img src="SuperpowerValidation_files/figure-html/aberson_6.8-1.png" width="672" /></p>
-<div class="sourceCode" id="cb655"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb655-1"><a href="appendix-1-direct-comparison-to-pwr2ppl.html#cb655-1"></a>design_result<span class="op">$</span>cor_mat</span></code></pre></div>
+<div class="sourceCode" id="cb698"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb698-1"><a href="appendix-1-direct-comparison-to-pwr2ppl.html#cb698-1"></a>design_result<span class="op">$</span>cor_mat</span></code></pre></div>
 <pre><code>##       a1_b1 a1_b2 a1_b3 a1_b4 a2_b1 a2_b2 a2_b3 a2_b4
 ## a1_b1   1.0   0.5   0.5   0.5   0.5   0.5   0.5   0.5
 ## a1_b2   0.5   1.0   0.5   0.5   0.5   0.5   0.5   0.5
@@ -505,43 +510,43 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 ## a2_b4   0.5   0.5   0.5   0.5   0.5   0.5   0.5   1.0</code></pre>
 <p>There is no analytical result from <code>Superpower</code> for two-way within subjects designs.</p>
 <p>Now we prouce 3 <code>ANOVA_exact</code> results representing no sphericity correction, Greenhouse-Geisser, and Huynh-Feldt corrected results.</p>
-<div class="sourceCode" id="cb657"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb657-1"><a href="appendix-1-direct-comparison-to-pwr2ppl.html#cb657-1"></a><span class="co">#In comparision to pwr2ppl the main effects are &quot;flipped&quot;</span></span>
-<span id="cb657-2"><a href="appendix-1-direct-comparison-to-pwr2ppl.html#cb657-2"></a><span class="co"># e.g. Superpower a = pwr2ppl &quot;B&quot;</span></span>
-<span id="cb657-3"><a href="appendix-1-direct-comparison-to-pwr2ppl.html#cb657-3"></a>exact_result &lt;-<span class="st"> </span><span class="kw">ANOVA_exact</span>(design_result, <span class="dt">verbose =</span> <span class="ot">FALSE</span>)</span>
-<span id="cb657-4"><a href="appendix-1-direct-comparison-to-pwr2ppl.html#cb657-4"></a></span>
-<span id="cb657-5"><a href="appendix-1-direct-comparison-to-pwr2ppl.html#cb657-5"></a>exact_result<span class="op">$</span>main_results</span></code></pre></div>
+<div class="sourceCode" id="cb700"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb700-1"><a href="appendix-1-direct-comparison-to-pwr2ppl.html#cb700-1"></a><span class="co">#In comparision to pwr2ppl the main effects are &quot;flipped&quot;</span></span>
+<span id="cb700-2"><a href="appendix-1-direct-comparison-to-pwr2ppl.html#cb700-2"></a><span class="co"># e.g. Superpower a = pwr2ppl &quot;B&quot;</span></span>
+<span id="cb700-3"><a href="appendix-1-direct-comparison-to-pwr2ppl.html#cb700-3"></a>exact_result &lt;-<span class="st"> </span><span class="kw">ANOVA_exact</span>(design_result, <span class="dt">verbose =</span> <span class="ot">FALSE</span>)</span>
+<span id="cb700-4"><a href="appendix-1-direct-comparison-to-pwr2ppl.html#cb700-4"></a></span>
+<span id="cb700-5"><a href="appendix-1-direct-comparison-to-pwr2ppl.html#cb700-5"></a>exact_result<span class="op">$</span>main_results</span></code></pre></div>
 <pre><code>##        power partial_eta_squared    cohen_f non_centrality
 ## a   27.24340         0.023198088 0.15410717      1.8761726
 ## b   74.84647         0.040077020 0.20432877      9.8948083
 ## a:b 10.23225         0.003471099 0.05901855      0.8255159</code></pre>
-<div class="sourceCode" id="cb659"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb659-1"><a href="appendix-1-direct-comparison-to-pwr2ppl.html#cb659-1"></a>exact_result &lt;-<span class="st"> </span><span class="kw">ANOVA_exact</span>(design_result,</span>
-<span id="cb659-2"><a href="appendix-1-direct-comparison-to-pwr2ppl.html#cb659-2"></a>                            <span class="dt">correction =</span> <span class="st">&quot;GG&quot;</span>,</span>
-<span id="cb659-3"><a href="appendix-1-direct-comparison-to-pwr2ppl.html#cb659-3"></a>                            <span class="dt">verbose =</span> <span class="ot">FALSE</span>)</span>
-<span id="cb659-4"><a href="appendix-1-direct-comparison-to-pwr2ppl.html#cb659-4"></a></span>
-<span id="cb659-5"><a href="appendix-1-direct-comparison-to-pwr2ppl.html#cb659-5"></a>exact_result<span class="op">$</span>main_results</span></code></pre></div>
+<div class="sourceCode" id="cb702"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb702-1"><a href="appendix-1-direct-comparison-to-pwr2ppl.html#cb702-1"></a>exact_result &lt;-<span class="st"> </span><span class="kw">ANOVA_exact</span>(design_result,</span>
+<span id="cb702-2"><a href="appendix-1-direct-comparison-to-pwr2ppl.html#cb702-2"></a>                            <span class="dt">correction =</span> <span class="st">&quot;GG&quot;</span>,</span>
+<span id="cb702-3"><a href="appendix-1-direct-comparison-to-pwr2ppl.html#cb702-3"></a>                            <span class="dt">verbose =</span> <span class="ot">FALSE</span>)</span>
+<span id="cb702-4"><a href="appendix-1-direct-comparison-to-pwr2ppl.html#cb702-4"></a></span>
+<span id="cb702-5"><a href="appendix-1-direct-comparison-to-pwr2ppl.html#cb702-5"></a>exact_result<span class="op">$</span>main_results</span></code></pre></div>
 <pre><code>##         power partial_eta_squared    cohen_f non_centrality
 ## a   27.243403         0.023198088 0.15410717      1.8761726
 ## b   58.540772         0.040077020 0.20432877      5.9072378
 ## a:b  9.130272         0.003471099 0.05901855      0.5072161</code></pre>
-<div class="sourceCode" id="cb661"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb661-1"><a href="appendix-1-direct-comparison-to-pwr2ppl.html#cb661-1"></a>exact_result &lt;-<span class="st"> </span><span class="kw">ANOVA_exact</span>(design_result,</span>
-<span id="cb661-2"><a href="appendix-1-direct-comparison-to-pwr2ppl.html#cb661-2"></a>                            <span class="dt">correction =</span> <span class="st">&quot;HF&quot;</span>,</span>
-<span id="cb661-3"><a href="appendix-1-direct-comparison-to-pwr2ppl.html#cb661-3"></a>                            <span class="dt">verbose =</span> <span class="ot">FALSE</span>)</span>
-<span id="cb661-4"><a href="appendix-1-direct-comparison-to-pwr2ppl.html#cb661-4"></a></span>
-<span id="cb661-5"><a href="appendix-1-direct-comparison-to-pwr2ppl.html#cb661-5"></a>exact_result<span class="op">$</span>main_results</span></code></pre></div>
+<div class="sourceCode" id="cb704"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb704-1"><a href="appendix-1-direct-comparison-to-pwr2ppl.html#cb704-1"></a>exact_result &lt;-<span class="st"> </span><span class="kw">ANOVA_exact</span>(design_result,</span>
+<span id="cb704-2"><a href="appendix-1-direct-comparison-to-pwr2ppl.html#cb704-2"></a>                            <span class="dt">correction =</span> <span class="st">&quot;HF&quot;</span>,</span>
+<span id="cb704-3"><a href="appendix-1-direct-comparison-to-pwr2ppl.html#cb704-3"></a>                            <span class="dt">verbose =</span> <span class="ot">FALSE</span>)</span>
+<span id="cb704-4"><a href="appendix-1-direct-comparison-to-pwr2ppl.html#cb704-4"></a></span>
+<span id="cb704-5"><a href="appendix-1-direct-comparison-to-pwr2ppl.html#cb704-5"></a>exact_result<span class="op">$</span>main_results</span></code></pre></div>
 <pre><code>##         power partial_eta_squared    cohen_f non_centrality
 ## a   27.243403         0.023198088 0.15410717      1.8761726
 ## b   59.182337         0.040077020 0.20432877      6.0353398
 ## a:b  9.174188         0.003471099 0.05901855      0.5187745</code></pre>
 <p>And these match <code>pwr2ppl</code>.</p>
-<div class="sourceCode" id="cb663"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb663-1"><a href="appendix-1-direct-comparison-to-pwr2ppl.html#cb663-1"></a><span class="kw">win2F</span>(<span class="dt">m1.1 =</span> <span class="fl">-.25</span>, <span class="dt">m2.1 =</span> <span class="dv">0</span>,</span>
-<span id="cb663-2"><a href="appendix-1-direct-comparison-to-pwr2ppl.html#cb663-2"></a>      <span class="dt">m3.1 =</span> <span class="fl">.10</span>, <span class="dt">m4.1 =</span> <span class="fl">.15</span>,</span>
-<span id="cb663-3"><a href="appendix-1-direct-comparison-to-pwr2ppl.html#cb663-3"></a>      <span class="dt">m1.2 =</span> <span class="fl">-.25</span>, <span class="dt">m2.2 =</span> <span class="fl">.10</span>,</span>
-<span id="cb663-4"><a href="appendix-1-direct-comparison-to-pwr2ppl.html#cb663-4"></a>      <span class="dt">m3.2 =</span> <span class="fl">.30</span>, <span class="dt">m4.2 =</span> <span class="fl">.35</span>,</span>
-<span id="cb663-5"><a href="appendix-1-direct-comparison-to-pwr2ppl.html#cb663-5"></a>      <span class="dt">s1.1 =</span> <span class="fl">.4</span>, <span class="dt">s2.1 =</span> <span class="fl">.5</span>,</span>
-<span id="cb663-6"><a href="appendix-1-direct-comparison-to-pwr2ppl.html#cb663-6"></a>      <span class="dt">s3.1 =</span> <span class="fl">2.5</span>, <span class="dt">s4.1 =</span> <span class="fl">2.0</span>,</span>
-<span id="cb663-7"><a href="appendix-1-direct-comparison-to-pwr2ppl.html#cb663-7"></a>      <span class="dt">s1.2 =</span> <span class="fl">.4</span>, <span class="dt">s2.2 =</span> <span class="fl">.5</span>,</span>
-<span id="cb663-8"><a href="appendix-1-direct-comparison-to-pwr2ppl.html#cb663-8"></a>      <span class="dt">s3.2 =</span> <span class="fl">2.5</span>, <span class="dt">s4.2 =</span> <span class="fl">2.0</span>,</span>
-<span id="cb663-9"><a href="appendix-1-direct-comparison-to-pwr2ppl.html#cb663-9"></a>      <span class="dt">r =</span> <span class="fl">.5</span>, <span class="dt">n =</span> <span class="dv">80</span>)</span></code></pre></div>
+<div class="sourceCode" id="cb706"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb706-1"><a href="appendix-1-direct-comparison-to-pwr2ppl.html#cb706-1"></a><span class="kw">win2F</span>(<span class="dt">m1.1 =</span> <span class="fl">-.25</span>, <span class="dt">m2.1 =</span> <span class="dv">0</span>,</span>
+<span id="cb706-2"><a href="appendix-1-direct-comparison-to-pwr2ppl.html#cb706-2"></a>      <span class="dt">m3.1 =</span> <span class="fl">.10</span>, <span class="dt">m4.1 =</span> <span class="fl">.15</span>,</span>
+<span id="cb706-3"><a href="appendix-1-direct-comparison-to-pwr2ppl.html#cb706-3"></a>      <span class="dt">m1.2 =</span> <span class="fl">-.25</span>, <span class="dt">m2.2 =</span> <span class="fl">.10</span>,</span>
+<span id="cb706-4"><a href="appendix-1-direct-comparison-to-pwr2ppl.html#cb706-4"></a>      <span class="dt">m3.2 =</span> <span class="fl">.30</span>, <span class="dt">m4.2 =</span> <span class="fl">.35</span>,</span>
+<span id="cb706-5"><a href="appendix-1-direct-comparison-to-pwr2ppl.html#cb706-5"></a>      <span class="dt">s1.1 =</span> <span class="fl">.4</span>, <span class="dt">s2.1 =</span> <span class="fl">.5</span>,</span>
+<span id="cb706-6"><a href="appendix-1-direct-comparison-to-pwr2ppl.html#cb706-6"></a>      <span class="dt">s3.1 =</span> <span class="fl">2.5</span>, <span class="dt">s4.1 =</span> <span class="fl">2.0</span>,</span>
+<span id="cb706-7"><a href="appendix-1-direct-comparison-to-pwr2ppl.html#cb706-7"></a>      <span class="dt">s1.2 =</span> <span class="fl">.4</span>, <span class="dt">s2.2 =</span> <span class="fl">.5</span>,</span>
+<span id="cb706-8"><a href="appendix-1-direct-comparison-to-pwr2ppl.html#cb706-8"></a>      <span class="dt">s3.2 =</span> <span class="fl">2.5</span>, <span class="dt">s4.2 =</span> <span class="fl">2.0</span>,</span>
+<span id="cb706-9"><a href="appendix-1-direct-comparison-to-pwr2ppl.html#cb706-9"></a>      <span class="dt">r =</span> <span class="fl">.5</span>, <span class="dt">n =</span> <span class="dv">80</span>)</span></code></pre></div>
 <pre><code>## Partial eta-squared Factor A = 0.04</code></pre>
 <pre><code>## Power Factor A (Unadjusted) for n = 80 is 0.748</code></pre>
 <pre><code>## Power Factor A H-F Adjusted (Epsilon = 0.61) for n = 80 is 0.592</code></pre>
@@ -562,22 +567,22 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 <h3><span class="header-section-number">12.9.1</span> From Table 7.2</h3>
 <p>In this case we must write out an entire correlation matrix.
 This means the diagonal element is equal to 1 and the off-diagonal elements corresponding to between-subjects factors are equal to zero.</p>
-<div class="sourceCode" id="cb675"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb675-1"><a href="appendix-1-direct-comparison-to-pwr2ppl.html#cb675-1"></a>design_result &lt;-<span class="st"> </span><span class="kw">ANOVA_design</span>(<span class="st">&quot;2b*4w&quot;</span>,</span>
-<span id="cb675-2"><a href="appendix-1-direct-comparison-to-pwr2ppl.html#cb675-2"></a>                              <span class="dt">n =</span> <span class="dv">50</span>,</span>
-<span id="cb675-3"><a href="appendix-1-direct-comparison-to-pwr2ppl.html#cb675-3"></a>                              <span class="dt">sd =</span> <span class="kw">c</span>(.<span class="dv">4</span>, <span class="fl">.5</span>, <span class="fl">0.6</span>, <span class="fl">.7</span>,</span>
-<span id="cb675-4"><a href="appendix-1-direct-comparison-to-pwr2ppl.html#cb675-4"></a>                                     <span class="fl">.4</span>, <span class="fl">.5</span>, <span class="fl">.6</span>, <span class="fl">.7</span>),</span>
-<span id="cb675-5"><a href="appendix-1-direct-comparison-to-pwr2ppl.html#cb675-5"></a>                              <span class="dt">r =</span> <span class="kw">c</span>(<span class="fl">1.0</span>,<span class="fl">0.5</span>,<span class="fl">0.3</span>,<span class="fl">0.15</span>,<span class="fl">0.0</span>,<span class="fl">0.0</span>,<span class="fl">0.0</span>,<span class="fl">0.0</span>,</span>
-<span id="cb675-6"><a href="appendix-1-direct-comparison-to-pwr2ppl.html#cb675-6"></a>                                    <span class="fl">0.5</span>,<span class="fl">1.0</span>,<span class="fl">0.5</span>,<span class="fl">0.3</span>,<span class="fl">0.0</span>,<span class="fl">0.0</span>,<span class="fl">0.0</span>,<span class="fl">0.0</span>,</span>
-<span id="cb675-7"><a href="appendix-1-direct-comparison-to-pwr2ppl.html#cb675-7"></a>                                    <span class="fl">0.3</span>,<span class="fl">0.5</span>,<span class="fl">1.0</span>,<span class="fl">0.5</span>,<span class="fl">0.0</span>,<span class="fl">0.0</span>,<span class="fl">0.0</span>,<span class="fl">0.0</span>,</span>
-<span id="cb675-8"><a href="appendix-1-direct-comparison-to-pwr2ppl.html#cb675-8"></a>                                    <span class="fl">0.15</span>,<span class="fl">0.3</span>,<span class="fl">0.5</span>,<span class="fl">1.0</span>,<span class="fl">0.0</span>,<span class="fl">0.0</span>,<span class="fl">0.0</span>,<span class="fl">0.0</span>,</span>
-<span id="cb675-9"><a href="appendix-1-direct-comparison-to-pwr2ppl.html#cb675-9"></a>                                    <span class="fl">0.0</span>,<span class="fl">0.0</span>,<span class="fl">0.0</span>,<span class="fl">0.0</span>,<span class="fl">1.0</span>,<span class="fl">0.5</span>,<span class="fl">0.3</span>,<span class="fl">0.15</span>,</span>
-<span id="cb675-10"><a href="appendix-1-direct-comparison-to-pwr2ppl.html#cb675-10"></a>                                    <span class="fl">0.0</span>,<span class="fl">0.0</span>,<span class="fl">0.0</span>,<span class="fl">0.0</span>,<span class="fl">0.5</span>,<span class="fl">1.0</span>,<span class="fl">0.5</span>,<span class="fl">0.3</span>,</span>
-<span id="cb675-11"><a href="appendix-1-direct-comparison-to-pwr2ppl.html#cb675-11"></a>                                    <span class="fl">0.0</span>,<span class="fl">0.0</span>,<span class="fl">0.0</span>,<span class="fl">0.0</span>,<span class="fl">0.3</span>,<span class="fl">0.5</span>,<span class="fl">1.0</span>,<span class="fl">0.5</span>,</span>
-<span id="cb675-12"><a href="appendix-1-direct-comparison-to-pwr2ppl.html#cb675-12"></a>                                    <span class="fl">0.0</span>,<span class="fl">0.0</span>,<span class="fl">0.0</span>,<span class="fl">0.0</span>,<span class="fl">0.15</span>,<span class="fl">0.3</span>,<span class="fl">0.5</span>,<span class="fl">1.0</span>),</span>
-<span id="cb675-13"><a href="appendix-1-direct-comparison-to-pwr2ppl.html#cb675-13"></a>                              <span class="dt">mu =</span> <span class="kw">c</span>(<span class="op">-</span>.<span class="dv">25</span>, <span class="fl">0.0</span>, <span class="fl">0.10</span>, <span class="fl">0.15</span>,</span>
-<span id="cb675-14"><a href="appendix-1-direct-comparison-to-pwr2ppl.html#cb675-14"></a>                                     <span class="fl">-.25</span>,<span class="op">-</span>.<span class="dv">25</span>,<span class="op">-</span>.<span class="dv">25</span>,<span class="op">-</span>.<span class="dv">25</span>))</span>
-<span id="cb675-15"><a href="appendix-1-direct-comparison-to-pwr2ppl.html#cb675-15"></a></span>
-<span id="cb675-16"><a href="appendix-1-direct-comparison-to-pwr2ppl.html#cb675-16"></a>design_result<span class="op">$</span>cor_mat</span></code></pre></div>
+<div class="sourceCode" id="cb718"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb718-1"><a href="appendix-1-direct-comparison-to-pwr2ppl.html#cb718-1"></a>design_result &lt;-<span class="st"> </span><span class="kw">ANOVA_design</span>(<span class="st">&quot;2b*4w&quot;</span>,</span>
+<span id="cb718-2"><a href="appendix-1-direct-comparison-to-pwr2ppl.html#cb718-2"></a>                              <span class="dt">n =</span> <span class="dv">50</span>,</span>
+<span id="cb718-3"><a href="appendix-1-direct-comparison-to-pwr2ppl.html#cb718-3"></a>                              <span class="dt">sd =</span> <span class="kw">c</span>(.<span class="dv">4</span>, <span class="fl">.5</span>, <span class="fl">0.6</span>, <span class="fl">.7</span>,</span>
+<span id="cb718-4"><a href="appendix-1-direct-comparison-to-pwr2ppl.html#cb718-4"></a>                                     <span class="fl">.4</span>, <span class="fl">.5</span>, <span class="fl">.6</span>, <span class="fl">.7</span>),</span>
+<span id="cb718-5"><a href="appendix-1-direct-comparison-to-pwr2ppl.html#cb718-5"></a>                              <span class="dt">r =</span> <span class="kw">c</span>(<span class="fl">1.0</span>,<span class="fl">0.5</span>,<span class="fl">0.3</span>,<span class="fl">0.15</span>,<span class="fl">0.0</span>,<span class="fl">0.0</span>,<span class="fl">0.0</span>,<span class="fl">0.0</span>,</span>
+<span id="cb718-6"><a href="appendix-1-direct-comparison-to-pwr2ppl.html#cb718-6"></a>                                    <span class="fl">0.5</span>,<span class="fl">1.0</span>,<span class="fl">0.5</span>,<span class="fl">0.3</span>,<span class="fl">0.0</span>,<span class="fl">0.0</span>,<span class="fl">0.0</span>,<span class="fl">0.0</span>,</span>
+<span id="cb718-7"><a href="appendix-1-direct-comparison-to-pwr2ppl.html#cb718-7"></a>                                    <span class="fl">0.3</span>,<span class="fl">0.5</span>,<span class="fl">1.0</span>,<span class="fl">0.5</span>,<span class="fl">0.0</span>,<span class="fl">0.0</span>,<span class="fl">0.0</span>,<span class="fl">0.0</span>,</span>
+<span id="cb718-8"><a href="appendix-1-direct-comparison-to-pwr2ppl.html#cb718-8"></a>                                    <span class="fl">0.15</span>,<span class="fl">0.3</span>,<span class="fl">0.5</span>,<span class="fl">1.0</span>,<span class="fl">0.0</span>,<span class="fl">0.0</span>,<span class="fl">0.0</span>,<span class="fl">0.0</span>,</span>
+<span id="cb718-9"><a href="appendix-1-direct-comparison-to-pwr2ppl.html#cb718-9"></a>                                    <span class="fl">0.0</span>,<span class="fl">0.0</span>,<span class="fl">0.0</span>,<span class="fl">0.0</span>,<span class="fl">1.0</span>,<span class="fl">0.5</span>,<span class="fl">0.3</span>,<span class="fl">0.15</span>,</span>
+<span id="cb718-10"><a href="appendix-1-direct-comparison-to-pwr2ppl.html#cb718-10"></a>                                    <span class="fl">0.0</span>,<span class="fl">0.0</span>,<span class="fl">0.0</span>,<span class="fl">0.0</span>,<span class="fl">0.5</span>,<span class="fl">1.0</span>,<span class="fl">0.5</span>,<span class="fl">0.3</span>,</span>
+<span id="cb718-11"><a href="appendix-1-direct-comparison-to-pwr2ppl.html#cb718-11"></a>                                    <span class="fl">0.0</span>,<span class="fl">0.0</span>,<span class="fl">0.0</span>,<span class="fl">0.0</span>,<span class="fl">0.3</span>,<span class="fl">0.5</span>,<span class="fl">1.0</span>,<span class="fl">0.5</span>,</span>
+<span id="cb718-12"><a href="appendix-1-direct-comparison-to-pwr2ppl.html#cb718-12"></a>                                    <span class="fl">0.0</span>,<span class="fl">0.0</span>,<span class="fl">0.0</span>,<span class="fl">0.0</span>,<span class="fl">0.15</span>,<span class="fl">0.3</span>,<span class="fl">0.5</span>,<span class="fl">1.0</span>),</span>
+<span id="cb718-13"><a href="appendix-1-direct-comparison-to-pwr2ppl.html#cb718-13"></a>                              <span class="dt">mu =</span> <span class="kw">c</span>(<span class="op">-</span>.<span class="dv">25</span>, <span class="fl">0.0</span>, <span class="fl">0.10</span>, <span class="fl">0.15</span>,</span>
+<span id="cb718-14"><a href="appendix-1-direct-comparison-to-pwr2ppl.html#cb718-14"></a>                                     <span class="fl">-.25</span>,<span class="op">-</span>.<span class="dv">25</span>,<span class="op">-</span>.<span class="dv">25</span>,<span class="op">-</span>.<span class="dv">25</span>))</span></code></pre></div>
+<p><img src="SuperpowerValidation_files/figure-html/aberson_7.2-1.png" width="672" /></p>
+<div class="sourceCode" id="cb719"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb719-1"><a href="appendix-1-direct-comparison-to-pwr2ppl.html#cb719-1"></a>design_result<span class="op">$</span>cor_mat</span></code></pre></div>
 <pre><code>##       a1_b1 a1_b2 a1_b3 a1_b4 a2_b1 a2_b2 a2_b3 a2_b4
 ## a1_b1  1.00   0.5   0.3  0.15  0.00   0.0   0.0  0.00
 ## a1_b2  0.50   1.0   0.5  0.30  0.00   0.0   0.0  0.00
@@ -588,43 +593,43 @@ This means the diagonal element is equal to 1 and the off-diagonal elements corr
 ## a2_b3  0.00   0.0   0.0  0.00  0.30   0.5   1.0  0.50
 ## a2_b4  0.00   0.0   0.0  0.00  0.15   0.3   0.5  1.00</code></pre>
 <p>Now the results from <code>ANOVA_exact</code>.</p>
-<div class="sourceCode" id="cb677"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb677-1"><a href="appendix-1-direct-comparison-to-pwr2ppl.html#cb677-1"></a>exact_result &lt;-<span class="st"> </span><span class="kw">ANOVA_exact</span>(design_result,</span>
-<span id="cb677-2"><a href="appendix-1-direct-comparison-to-pwr2ppl.html#cb677-2"></a>                            <span class="dt">correction =</span> <span class="st">&quot;none&quot;</span>,</span>
-<span id="cb677-3"><a href="appendix-1-direct-comparison-to-pwr2ppl.html#cb677-3"></a>                            <span class="dt">verbose =</span> <span class="ot">FALSE</span>)</span>
-<span id="cb677-4"><a href="appendix-1-direct-comparison-to-pwr2ppl.html#cb677-4"></a></span>
-<span id="cb677-5"><a href="appendix-1-direct-comparison-to-pwr2ppl.html#cb677-5"></a>exact_result<span class="op">$</span>main_results</span></code></pre></div>
+<div class="sourceCode" id="cb721"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb721-1"><a href="appendix-1-direct-comparison-to-pwr2ppl.html#cb721-1"></a>exact_result &lt;-<span class="st"> </span><span class="kw">ANOVA_exact</span>(design_result,</span>
+<span id="cb721-2"><a href="appendix-1-direct-comparison-to-pwr2ppl.html#cb721-2"></a>                            <span class="dt">correction =</span> <span class="st">&quot;none&quot;</span>,</span>
+<span id="cb721-3"><a href="appendix-1-direct-comparison-to-pwr2ppl.html#cb721-3"></a>                            <span class="dt">verbose =</span> <span class="ot">FALSE</span>)</span>
+<span id="cb721-4"><a href="appendix-1-direct-comparison-to-pwr2ppl.html#cb721-4"></a></span>
+<span id="cb721-5"><a href="appendix-1-direct-comparison-to-pwr2ppl.html#cb721-5"></a>exact_result<span class="op">$</span>main_results</span></code></pre></div>
 <pre><code>##        power partial_eta_squared   cohen_f non_centrality
 ## a   86.42918          0.08878976 0.3121563       9.549274
 ## b   82.68405          0.03848397 0.2000607      11.767135
 ## a:b 82.68405          0.03848397 0.2000607      11.767135</code></pre>
-<div class="sourceCode" id="cb679"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb679-1"><a href="appendix-1-direct-comparison-to-pwr2ppl.html#cb679-1"></a>exact_result &lt;-<span class="st"> </span><span class="kw">ANOVA_exact</span>(design_result,</span>
-<span id="cb679-2"><a href="appendix-1-direct-comparison-to-pwr2ppl.html#cb679-2"></a>                            <span class="dt">correction =</span> <span class="st">&quot;GG&quot;</span>,</span>
-<span id="cb679-3"><a href="appendix-1-direct-comparison-to-pwr2ppl.html#cb679-3"></a>                            <span class="dt">verbose =</span> <span class="ot">FALSE</span>)</span>
-<span id="cb679-4"><a href="appendix-1-direct-comparison-to-pwr2ppl.html#cb679-4"></a></span>
-<span id="cb679-5"><a href="appendix-1-direct-comparison-to-pwr2ppl.html#cb679-5"></a>exact_result<span class="op">$</span>main_results</span></code></pre></div>
+<div class="sourceCode" id="cb723"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb723-1"><a href="appendix-1-direct-comparison-to-pwr2ppl.html#cb723-1"></a>exact_result &lt;-<span class="st"> </span><span class="kw">ANOVA_exact</span>(design_result,</span>
+<span id="cb723-2"><a href="appendix-1-direct-comparison-to-pwr2ppl.html#cb723-2"></a>                            <span class="dt">correction =</span> <span class="st">&quot;GG&quot;</span>,</span>
+<span id="cb723-3"><a href="appendix-1-direct-comparison-to-pwr2ppl.html#cb723-3"></a>                            <span class="dt">verbose =</span> <span class="ot">FALSE</span>)</span>
+<span id="cb723-4"><a href="appendix-1-direct-comparison-to-pwr2ppl.html#cb723-4"></a></span>
+<span id="cb723-5"><a href="appendix-1-direct-comparison-to-pwr2ppl.html#cb723-5"></a>exact_result<span class="op">$</span>main_results</span></code></pre></div>
 <pre><code>##        power partial_eta_squared   cohen_f non_centrality
 ## a   86.42918          0.08878976 0.3121563       9.549274
 ## b   76.47495          0.03848397 0.2000607       9.585214
 ## a:b 76.47495          0.03848397 0.2000607       9.585214</code></pre>
-<div class="sourceCode" id="cb681"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb681-1"><a href="appendix-1-direct-comparison-to-pwr2ppl.html#cb681-1"></a>exact_result &lt;-<span class="st"> </span><span class="kw">ANOVA_exact</span>(design_result,</span>
-<span id="cb681-2"><a href="appendix-1-direct-comparison-to-pwr2ppl.html#cb681-2"></a>                            <span class="dt">correction =</span> <span class="st">&quot;HF&quot;</span>,</span>
-<span id="cb681-3"><a href="appendix-1-direct-comparison-to-pwr2ppl.html#cb681-3"></a>                            <span class="dt">verbose =</span> <span class="ot">FALSE</span>)</span>
-<span id="cb681-4"><a href="appendix-1-direct-comparison-to-pwr2ppl.html#cb681-4"></a></span>
-<span id="cb681-5"><a href="appendix-1-direct-comparison-to-pwr2ppl.html#cb681-5"></a>exact_result<span class="op">$</span>main_results</span></code></pre></div>
+<div class="sourceCode" id="cb725"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb725-1"><a href="appendix-1-direct-comparison-to-pwr2ppl.html#cb725-1"></a>exact_result &lt;-<span class="st"> </span><span class="kw">ANOVA_exact</span>(design_result,</span>
+<span id="cb725-2"><a href="appendix-1-direct-comparison-to-pwr2ppl.html#cb725-2"></a>                            <span class="dt">correction =</span> <span class="st">&quot;HF&quot;</span>,</span>
+<span id="cb725-3"><a href="appendix-1-direct-comparison-to-pwr2ppl.html#cb725-3"></a>                            <span class="dt">verbose =</span> <span class="ot">FALSE</span>)</span>
+<span id="cb725-4"><a href="appendix-1-direct-comparison-to-pwr2ppl.html#cb725-4"></a></span>
+<span id="cb725-5"><a href="appendix-1-direct-comparison-to-pwr2ppl.html#cb725-5"></a>exact_result<span class="op">$</span>main_results</span></code></pre></div>
 <pre><code>##        power partial_eta_squared   cohen_f non_centrality
 ## a   86.42918          0.08878976 0.3121563       9.549274
 ## b   77.31933          0.03848397 0.2000607       9.848557
 ## a:b 77.31933          0.03848397 0.2000607       9.848557</code></pre>
 <p>And the results from <code>pwr2ppl</code>.</p>
-<div class="sourceCode" id="cb683"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb683-1"><a href="appendix-1-direct-comparison-to-pwr2ppl.html#cb683-1"></a><span class="kw">win1bg1</span>(<span class="dt">m1.1 =</span> <span class="fl">-.25</span>, <span class="dt">m2.1 =</span> <span class="dv">0</span>, <span class="dt">m3.1 =</span> <span class="fl">0.10</span>, <span class="dt">m4.1 =</span> <span class="fl">.15</span>, </span>
-<span id="cb683-2"><a href="appendix-1-direct-comparison-to-pwr2ppl.html#cb683-2"></a>        <span class="dt">m1.2 =</span> <span class="fl">-.25</span>, <span class="dt">m2.2 =</span> <span class="fl">-.25</span>, <span class="dt">m3.2 =</span> <span class="fl">-.25</span>, <span class="dt">m4.2 =</span> <span class="fl">-.25</span>, </span>
-<span id="cb683-3"><a href="appendix-1-direct-comparison-to-pwr2ppl.html#cb683-3"></a>        <span class="dt">s1.1 =</span> <span class="fl">.4</span>, <span class="dt">s2.1 =</span> <span class="fl">.5</span>, <span class="dt">s3.1 =</span> <span class="fl">0.6</span>, <span class="dt">s4.1 =</span> <span class="fl">.7</span>, <span class="dt">s1.2 =</span> <span class="fl">.4</span>, </span>
-<span id="cb683-4"><a href="appendix-1-direct-comparison-to-pwr2ppl.html#cb683-4"></a>        <span class="dt">s2.2 =</span> <span class="fl">.5</span>, <span class="dt">s3.2 =</span> <span class="fl">.6</span>, <span class="dt">s4.2 =</span> <span class="fl">.7</span>,</span>
-<span id="cb683-5"><a href="appendix-1-direct-comparison-to-pwr2ppl.html#cb683-5"></a>        <span class="dt">n =</span> <span class="dv">50</span>, </span>
-<span id="cb683-6"><a href="appendix-1-direct-comparison-to-pwr2ppl.html#cb683-6"></a>        <span class="dt">r1.2_1 =</span> <span class="fl">.5</span>, <span class="dt">r1.3_1 =</span> <span class="fl">.3</span>, <span class="dt">r1.4_1 =</span> <span class="fl">.15</span>, </span>
-<span id="cb683-7"><a href="appendix-1-direct-comparison-to-pwr2ppl.html#cb683-7"></a>        <span class="dt">r2.3_1 =</span> <span class="fl">.5</span>, <span class="dt">r2.4_1 =</span> <span class="fl">.3</span>, <span class="dt">r3.4_1 =</span> <span class="fl">.5</span>, </span>
-<span id="cb683-8"><a href="appendix-1-direct-comparison-to-pwr2ppl.html#cb683-8"></a>        <span class="dt">r1.2_2 =</span> <span class="fl">.5</span>, <span class="dt">r1.3_2 =</span> <span class="fl">.3</span>, <span class="dt">r1.4_2 =</span> <span class="fl">.15</span>, </span>
-<span id="cb683-9"><a href="appendix-1-direct-comparison-to-pwr2ppl.html#cb683-9"></a>        <span class="dt">r2.3_2 =</span> <span class="fl">.5</span>, <span class="dt">r2.4_2 =</span> <span class="fl">.3</span>, <span class="dt">r3.4_2 =</span> <span class="fl">.5</span>)</span></code></pre></div>
+<div class="sourceCode" id="cb727"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb727-1"><a href="appendix-1-direct-comparison-to-pwr2ppl.html#cb727-1"></a><span class="kw">win1bg1</span>(<span class="dt">m1.1 =</span> <span class="fl">-.25</span>, <span class="dt">m2.1 =</span> <span class="dv">0</span>, <span class="dt">m3.1 =</span> <span class="fl">0.10</span>, <span class="dt">m4.1 =</span> <span class="fl">.15</span>, </span>
+<span id="cb727-2"><a href="appendix-1-direct-comparison-to-pwr2ppl.html#cb727-2"></a>        <span class="dt">m1.2 =</span> <span class="fl">-.25</span>, <span class="dt">m2.2 =</span> <span class="fl">-.25</span>, <span class="dt">m3.2 =</span> <span class="fl">-.25</span>, <span class="dt">m4.2 =</span> <span class="fl">-.25</span>, </span>
+<span id="cb727-3"><a href="appendix-1-direct-comparison-to-pwr2ppl.html#cb727-3"></a>        <span class="dt">s1.1 =</span> <span class="fl">.4</span>, <span class="dt">s2.1 =</span> <span class="fl">.5</span>, <span class="dt">s3.1 =</span> <span class="fl">0.6</span>, <span class="dt">s4.1 =</span> <span class="fl">.7</span>, <span class="dt">s1.2 =</span> <span class="fl">.4</span>, </span>
+<span id="cb727-4"><a href="appendix-1-direct-comparison-to-pwr2ppl.html#cb727-4"></a>        <span class="dt">s2.2 =</span> <span class="fl">.5</span>, <span class="dt">s3.2 =</span> <span class="fl">.6</span>, <span class="dt">s4.2 =</span> <span class="fl">.7</span>,</span>
+<span id="cb727-5"><a href="appendix-1-direct-comparison-to-pwr2ppl.html#cb727-5"></a>        <span class="dt">n =</span> <span class="dv">50</span>, </span>
+<span id="cb727-6"><a href="appendix-1-direct-comparison-to-pwr2ppl.html#cb727-6"></a>        <span class="dt">r1.2_1 =</span> <span class="fl">.5</span>, <span class="dt">r1.3_1 =</span> <span class="fl">.3</span>, <span class="dt">r1.4_1 =</span> <span class="fl">.15</span>, </span>
+<span id="cb727-7"><a href="appendix-1-direct-comparison-to-pwr2ppl.html#cb727-7"></a>        <span class="dt">r2.3_1 =</span> <span class="fl">.5</span>, <span class="dt">r2.4_1 =</span> <span class="fl">.3</span>, <span class="dt">r3.4_1 =</span> <span class="fl">.5</span>, </span>
+<span id="cb727-8"><a href="appendix-1-direct-comparison-to-pwr2ppl.html#cb727-8"></a>        <span class="dt">r1.2_2 =</span> <span class="fl">.5</span>, <span class="dt">r1.3_2 =</span> <span class="fl">.3</span>, <span class="dt">r1.4_2 =</span> <span class="fl">.15</span>, </span>
+<span id="cb727-9"><a href="appendix-1-direct-comparison-to-pwr2ppl.html#cb727-9"></a>        <span class="dt">r2.3_2 =</span> <span class="fl">.5</span>, <span class="dt">r2.4_2 =</span> <span class="fl">.3</span>, <span class="dt">r3.4_2 =</span> <span class="fl">.5</span>)</span></code></pre></div>
 <pre><code>## Partial eta-squared Factor A = 0.089</code></pre>
 <pre><code>## Power Factor A (Between) for n = 50 is 0.864</code></pre>
 <pre><code>## Partial eta-squared Factor B = 0.038</code></pre>

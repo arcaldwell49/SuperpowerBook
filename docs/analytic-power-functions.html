@@ -6,7 +6,7 @@
   <meta http-equiv="X-UA-Compatible" content="IE=edge" />
   <title>Chapter 9 Analytic Power Functions | Power Analysis with Superpower</title>
   <meta name="description" content="This is a book describing the capabilities of the Superpower R package." />
-  <meta name="generator" content="bookdown 0.18 and GitBook 2.6.7" />
+  <meta name="generator" content="bookdown 0.21 and GitBook 2.6.7" />
 
   <meta property="og:title" content="Chapter 9 Analytic Power Functions | Power Analysis with Superpower" />
   <meta property="og:type" content="book" />
@@ -24,7 +24,7 @@
 <meta name="author" content="Aaron R. Caldwell, Daniël Lakens, and Chelsea M. Parlett-Pelleriti" />
 
 
-<meta name="date" content="2020-04-28" />
+<meta name="date" content="2021-01-25" />
 
   <meta name="viewport" content="width=device-width, initial-scale=1" />
   <meta name="apple-mobile-web-app-capable" content="yes" />
@@ -50,7 +50,11 @@
 
 
 
+<script src="libs/accessible-code-block-0.0.1/empty-anchor.js"></script>
+<link href="libs/anchor-sections-1.0/anchor-sections.css" rel="stylesheet" />
+<script src="libs/anchor-sections-1.0/anchor-sections.js"></script>
 <script src="libs/kePrint-0.0.1/kePrint.js"></script>
+<link href="libs/lightable-0.0.1/lightable.css" rel="stylesheet" />
 
 
 <style type="text/css">
@@ -201,6 +205,7 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 <li class="chapter" data-level="10.2" data-path="power-curve.html"><a href="power-curve.html#explore-increase-in-effect-size-for-cross-over-interactions."><i class="fa fa-check"></i><b>10.2</b> Explore increase in effect size for cross-over interactions.</a></li>
 <li class="chapter" data-level="10.3" data-path="power-curve.html"><a href="power-curve.html#explore-increase-in-correlation-in-moderated-interactions."><i class="fa fa-check"></i><b>10.3</b> Explore increase in correlation in moderated interactions.</a></li>
 <li class="chapter" data-level="10.4" data-path="power-curve.html"><a href="power-curve.html#increasing-correlation-in-on-factor-decreases-power-in-second-factor"><i class="fa fa-check"></i><b>10.4</b> Increasing correlation in on factor decreases power in second factor</a></li>
+<li class="chapter" data-level="10.5" data-path="power-curve.html"><a href="power-curve.html#code-to-reproduce-power-curve-figures"><i class="fa fa-check"></i><b>10.5</b> Code to Reproduce Power Curve Figures</a></li>
 </ul></li>
 <li class="chapter" data-level="11" data-path="violations-of-assumptions.html"><a href="violations-of-assumptions.html"><i class="fa fa-check"></i><b>11</b> Violations of Assumptions</a><ul>
 <li class="chapter" data-level="11.1" data-path="violations-of-assumptions.html"><a href="violations-of-assumptions.html#violation-of-heterogeneity-assumption"><i class="fa fa-check"></i><b>11.1</b> Violation of Heterogeneity Assumption</a></li>
@@ -270,21 +275,20 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 <div id="one-way-between-subjects-anova" class="section level2">
 <h2><span class="header-section-number">9.1</span> One-Way Between Subjects ANOVA</h2>
 <p>First, we can setup a one-way design with four levels, and perform a exact simulation power analysis with the <code>ANOVA_exact</code> function.</p>
-<div class="sourceCode" id="cb544"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb544-1"><a href="analytic-power-functions.html#cb544-1"></a>string &lt;-<span class="st"> &quot;4b&quot;</span></span>
-<span id="cb544-2"><a href="analytic-power-functions.html#cb544-2"></a>n &lt;-<span class="st"> </span><span class="dv">60</span></span>
-<span id="cb544-3"><a href="analytic-power-functions.html#cb544-3"></a>mu &lt;-<span class="st"> </span><span class="kw">c</span>(<span class="dv">80</span>, <span class="dv">82</span>, <span class="dv">82</span>, <span class="dv">86</span>) </span>
-<span id="cb544-4"><a href="analytic-power-functions.html#cb544-4"></a></span>
-<span id="cb544-5"><a href="analytic-power-functions.html#cb544-5"></a><span class="co"># Enter means in the order that matches the labels below.</span></span>
-<span id="cb544-6"><a href="analytic-power-functions.html#cb544-6"></a>sd &lt;-<span class="st"> </span><span class="dv">10</span></span>
-<span id="cb544-7"><a href="analytic-power-functions.html#cb544-7"></a>design_result &lt;-<span class="st"> </span><span class="kw">ANOVA_design</span>(<span class="dt">design =</span> string,</span>
-<span id="cb544-8"><a href="analytic-power-functions.html#cb544-8"></a>                   <span class="dt">n =</span> n, </span>
-<span id="cb544-9"><a href="analytic-power-functions.html#cb544-9"></a>                   <span class="dt">mu =</span> mu, </span>
-<span id="cb544-10"><a href="analytic-power-functions.html#cb544-10"></a>                   <span class="dt">sd =</span> sd)</span>
-<span id="cb544-11"><a href="analytic-power-functions.html#cb544-11"></a></span>
-<span id="cb544-12"><a href="analytic-power-functions.html#cb544-12"></a></span>
-<span id="cb544-13"><a href="analytic-power-functions.html#cb544-13"></a>exact_result &lt;-<span class="st"> </span><span class="kw">ANOVA_exact</span>(design_result,</span>
-<span id="cb544-14"><a href="analytic-power-functions.html#cb544-14"></a>                            <span class="dt">alpha_level =</span> alpha_level,</span>
-<span id="cb544-15"><a href="analytic-power-functions.html#cb544-15"></a>                            <span class="dt">verbose =</span> <span class="ot">FALSE</span>)</span></code></pre></div>
+<div class="sourceCode" id="cb580"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb580-1"><a href="analytic-power-functions.html#cb580-1"></a>string &lt;-<span class="st"> &quot;4b&quot;</span></span>
+<span id="cb580-2"><a href="analytic-power-functions.html#cb580-2"></a>n &lt;-<span class="st"> </span><span class="dv">60</span></span>
+<span id="cb580-3"><a href="analytic-power-functions.html#cb580-3"></a>mu &lt;-<span class="st"> </span><span class="kw">c</span>(<span class="dv">80</span>, <span class="dv">82</span>, <span class="dv">82</span>, <span class="dv">86</span>) </span>
+<span id="cb580-4"><a href="analytic-power-functions.html#cb580-4"></a></span>
+<span id="cb580-5"><a href="analytic-power-functions.html#cb580-5"></a><span class="co"># Enter means in the order that matches the labels below.</span></span>
+<span id="cb580-6"><a href="analytic-power-functions.html#cb580-6"></a>sd &lt;-<span class="st"> </span><span class="dv">10</span></span>
+<span id="cb580-7"><a href="analytic-power-functions.html#cb580-7"></a>design_result &lt;-<span class="st"> </span><span class="kw">ANOVA_design</span>(<span class="dt">design =</span> string,</span>
+<span id="cb580-8"><a href="analytic-power-functions.html#cb580-8"></a>                   <span class="dt">n =</span> n, </span>
+<span id="cb580-9"><a href="analytic-power-functions.html#cb580-9"></a>                   <span class="dt">mu =</span> mu, </span>
+<span id="cb580-10"><a href="analytic-power-functions.html#cb580-10"></a>                   <span class="dt">sd =</span> sd)</span></code></pre></div>
+<p><img src="SuperpowerValidation_files/figure-html/unnamed-chunk-245-1.png" width="672" /></p>
+<div class="sourceCode" id="cb581"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb581-1"><a href="analytic-power-functions.html#cb581-1"></a>exact_result &lt;-<span class="st"> </span><span class="kw">ANOVA_exact</span>(design_result,</span>
+<span id="cb581-2"><a href="analytic-power-functions.html#cb581-2"></a>                            <span class="dt">alpha_level =</span> alpha_level,</span>
+<span id="cb581-3"><a href="analytic-power-functions.html#cb581-3"></a>                            <span class="dt">verbose =</span> <span class="ot">FALSE</span>)</span></code></pre></div>
 <table class="table" style="margin-left: auto; margin-right: auto;">
 <caption>
 <span id="tab:unnamed-chunk-246">Table 9.1: </span>Exact ANOVA Result
@@ -328,20 +332,20 @@ a
 </tbody>
 </table>
 <p>We can also calculate power analytically with a <code>Superpower</code> function.</p>
-<div class="sourceCode" id="cb545"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb545-1"><a href="analytic-power-functions.html#cb545-1"></a><span class="co">#using default alpha level of .05</span></span>
-<span id="cb545-2"><a href="analytic-power-functions.html#cb545-2"></a><span class="kw">power_oneway_between</span>(design_result)<span class="op">$</span>power </span></code></pre></div>
+<div class="sourceCode" id="cb582"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb582-1"><a href="analytic-power-functions.html#cb582-1"></a><span class="co">#using default alpha level of .05</span></span>
+<span id="cb582-2"><a href="analytic-power-functions.html#cb582-2"></a><span class="kw">power_oneway_between</span>(design_result)<span class="op">$</span>power </span></code></pre></div>
 <pre><code>## [1] 81.21291</code></pre>
-<p>This is a generalized function for one-way ANOVA’s for any number of groups. It is in part based on code from the <code>pwr2ppl</code> <span class="citation">(Aberson <a href="#ref-R-pwr2ppl" role="doc-biblioref">2019</a>)</span> package (but Aberson’s code allows for different n per condition, and different sd per condition).</p>
-<div class="sourceCode" id="cb547"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb547-1"><a href="analytic-power-functions.html#cb547-1"></a>pwr2ppl<span class="op">::</span><span class="kw">anova1f_4</span>(<span class="dt">m1 =</span> <span class="dv">80</span>, <span class="dt">m2 =</span> <span class="dv">82</span>, <span class="dt">m3 =</span> <span class="dv">82</span>, <span class="dt">m4 =</span> <span class="dv">86</span>,</span>
-<span id="cb547-2"><a href="analytic-power-functions.html#cb547-2"></a>          <span class="dt">s1 =</span> <span class="dv">10</span>, <span class="dt">s2 =</span> <span class="dv">10</span>, <span class="dt">s3 =</span> <span class="dv">10</span>, <span class="dt">s4 =</span> <span class="dv">10</span>,</span>
-<span id="cb547-3"><a href="analytic-power-functions.html#cb547-3"></a>          <span class="dt">n1 =</span> <span class="dv">60</span>, <span class="dt">n2 =</span> <span class="dv">60</span>, <span class="dt">n3 =</span> <span class="dv">60</span>, <span class="dt">n4 =</span> <span class="dv">60</span>,</span>
-<span id="cb547-4"><a href="analytic-power-functions.html#cb547-4"></a>          <span class="dt">alpha =</span> <span class="fl">.05</span>)</span></code></pre></div>
+<p>This is a generalized function for one-way ANOVA’s for any number of groups. It is in part based on code from the <code>pwr2ppl</code> <span class="citation">(Aberson <a href="#ref-R-pwr2ppl" role="doc-biblioref">2020</a>)</span> package (but Aberson’s code allows for different n per condition, and different sd per condition).</p>
+<div class="sourceCode" id="cb584"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb584-1"><a href="analytic-power-functions.html#cb584-1"></a>pwr2ppl<span class="op">::</span><span class="kw">anova1f_4</span>(<span class="dt">m1 =</span> <span class="dv">80</span>, <span class="dt">m2 =</span> <span class="dv">82</span>, <span class="dt">m3 =</span> <span class="dv">82</span>, <span class="dt">m4 =</span> <span class="dv">86</span>,</span>
+<span id="cb584-2"><a href="analytic-power-functions.html#cb584-2"></a>          <span class="dt">s1 =</span> <span class="dv">10</span>, <span class="dt">s2 =</span> <span class="dv">10</span>, <span class="dt">s3 =</span> <span class="dv">10</span>, <span class="dt">s4 =</span> <span class="dv">10</span>,</span>
+<span id="cb584-3"><a href="analytic-power-functions.html#cb584-3"></a>          <span class="dt">n1 =</span> <span class="dv">60</span>, <span class="dt">n2 =</span> <span class="dv">60</span>, <span class="dt">n3 =</span> <span class="dv">60</span>, <span class="dt">n4 =</span> <span class="dv">60</span>,</span>
+<span id="cb584-4"><a href="analytic-power-functions.html#cb584-4"></a>          <span class="dt">alpha =</span> <span class="fl">.05</span>)</span></code></pre></div>
 <pre><code>## Power  = 0.812 for eta-squared = 0.05</code></pre>
-<p>We can also use the function in the <code>pwr</code> package <span class="citation">(Champely <a href="#ref-R-pwr" role="doc-biblioref">2018</a>)</span>. Note that we need to calculate <em>f</em> to use this function, which is based on the means and sd, as illustrated in the formulas above.</p>
-<div class="sourceCode" id="cb549"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb549-1"><a href="analytic-power-functions.html#cb549-1"></a>pwr<span class="op">::</span><span class="kw">pwr.anova.test</span>(<span class="dt">n =</span> <span class="dv">60</span>,</span>
-<span id="cb549-2"><a href="analytic-power-functions.html#cb549-2"></a>               <span class="dt">k =</span> <span class="dv">4</span>,</span>
-<span id="cb549-3"><a href="analytic-power-functions.html#cb549-3"></a>               <span class="dt">f =</span> <span class="fl">0.2179449</span>,</span>
-<span id="cb549-4"><a href="analytic-power-functions.html#cb549-4"></a>               <span class="dt">sig.level =</span> <span class="fl">0.05</span>)</span></code></pre></div>
+<p>We can also use the function in the <code>pwr</code> package <span class="citation">(Champely <a href="#ref-R-pwr" role="doc-biblioref">2020</a>)</span>. Note that we need to calculate <em>f</em> to use this function, which is based on the means and sd, as illustrated in the formulas above.</p>
+<div class="sourceCode" id="cb586"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb586-1"><a href="analytic-power-functions.html#cb586-1"></a>pwr<span class="op">::</span><span class="kw">pwr.anova.test</span>(<span class="dt">n =</span> <span class="dv">60</span>,</span>
+<span id="cb586-2"><a href="analytic-power-functions.html#cb586-2"></a>               <span class="dt">k =</span> <span class="dv">4</span>,</span>
+<span id="cb586-3"><a href="analytic-power-functions.html#cb586-3"></a>               <span class="dt">f =</span> <span class="fl">0.2179449</span>,</span>
+<span id="cb586-4"><a href="analytic-power-functions.html#cb586-4"></a>               <span class="dt">sig.level =</span> <span class="fl">0.05</span>)</span></code></pre></div>
 <pre><code>## 
 ##      Balanced one-way analysis of variance power calculation 
 ## 
@@ -358,20 +362,20 @@ a
 <div id="two-way-between-subject-interaction" class="section level2">
 <h2><span class="header-section-number">9.2</span> Two-way Between Subject Interaction</h2>
 <p>Now, we will setup a 2x2 between-subject ANOVA.</p>
-<div class="sourceCode" id="cb551"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb551-1"><a href="analytic-power-functions.html#cb551-1"></a>string &lt;-<span class="st"> &quot;2b*2b&quot;</span></span>
-<span id="cb551-2"><a href="analytic-power-functions.html#cb551-2"></a>n &lt;-<span class="st"> </span><span class="dv">20</span></span>
-<span id="cb551-3"><a href="analytic-power-functions.html#cb551-3"></a>mu &lt;-<span class="st"> </span><span class="kw">c</span>(<span class="dv">20</span>, <span class="dv">20</span>, <span class="dv">20</span>, <span class="dv">25</span>) </span>
-<span id="cb551-4"><a href="analytic-power-functions.html#cb551-4"></a><span class="co"># Enter means in the order that matches the labels below.</span></span>
-<span id="cb551-5"><a href="analytic-power-functions.html#cb551-5"></a>sd &lt;-<span class="st"> </span><span class="dv">5</span></span>
-<span id="cb551-6"><a href="analytic-power-functions.html#cb551-6"></a></span>
-<span id="cb551-7"><a href="analytic-power-functions.html#cb551-7"></a>design_result &lt;-<span class="st"> </span><span class="kw">ANOVA_design</span>(<span class="dt">design =</span> string,</span>
-<span id="cb551-8"><a href="analytic-power-functions.html#cb551-8"></a>                   <span class="dt">n =</span> n, </span>
-<span id="cb551-9"><a href="analytic-power-functions.html#cb551-9"></a>                   <span class="dt">mu =</span> mu, </span>
-<span id="cb551-10"><a href="analytic-power-functions.html#cb551-10"></a>                   <span class="dt">sd =</span> sd)</span>
-<span id="cb551-11"><a href="analytic-power-functions.html#cb551-11"></a></span>
-<span id="cb551-12"><a href="analytic-power-functions.html#cb551-12"></a>exact_result &lt;-<span class="st"> </span><span class="kw">ANOVA_exact</span>(design_result,</span>
-<span id="cb551-13"><a href="analytic-power-functions.html#cb551-13"></a>                            <span class="dt">alpha_level =</span> alpha_level,</span>
-<span id="cb551-14"><a href="analytic-power-functions.html#cb551-14"></a>                            <span class="dt">verbose =</span> <span class="ot">FALSE</span>)</span></code></pre></div>
+<div class="sourceCode" id="cb588"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb588-1"><a href="analytic-power-functions.html#cb588-1"></a>string &lt;-<span class="st"> &quot;2b*2b&quot;</span></span>
+<span id="cb588-2"><a href="analytic-power-functions.html#cb588-2"></a>n &lt;-<span class="st"> </span><span class="dv">20</span></span>
+<span id="cb588-3"><a href="analytic-power-functions.html#cb588-3"></a>mu &lt;-<span class="st"> </span><span class="kw">c</span>(<span class="dv">20</span>, <span class="dv">20</span>, <span class="dv">20</span>, <span class="dv">25</span>) </span>
+<span id="cb588-4"><a href="analytic-power-functions.html#cb588-4"></a><span class="co"># Enter means in the order that matches the labels below.</span></span>
+<span id="cb588-5"><a href="analytic-power-functions.html#cb588-5"></a>sd &lt;-<span class="st"> </span><span class="dv">5</span></span>
+<span id="cb588-6"><a href="analytic-power-functions.html#cb588-6"></a></span>
+<span id="cb588-7"><a href="analytic-power-functions.html#cb588-7"></a>design_result &lt;-<span class="st"> </span><span class="kw">ANOVA_design</span>(<span class="dt">design =</span> string,</span>
+<span id="cb588-8"><a href="analytic-power-functions.html#cb588-8"></a>                   <span class="dt">n =</span> n, </span>
+<span id="cb588-9"><a href="analytic-power-functions.html#cb588-9"></a>                   <span class="dt">mu =</span> mu, </span>
+<span id="cb588-10"><a href="analytic-power-functions.html#cb588-10"></a>                   <span class="dt">sd =</span> sd)</span></code></pre></div>
+<p><img src="SuperpowerValidation_files/figure-html/unnamed-chunk-250-1.png" width="672" /></p>
+<div class="sourceCode" id="cb589"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb589-1"><a href="analytic-power-functions.html#cb589-1"></a>exact_result &lt;-<span class="st"> </span><span class="kw">ANOVA_exact</span>(design_result,</span>
+<span id="cb589-2"><a href="analytic-power-functions.html#cb589-2"></a>                            <span class="dt">alpha_level =</span> alpha_level,</span>
+<span id="cb589-3"><a href="analytic-power-functions.html#cb589-3"></a>                            <span class="dt">verbose =</span> <span class="ot">FALSE</span>)</span></code></pre></div>
 <table class="table" style="margin-left: auto; margin-right: auto;">
 <caption>
 <span id="tab:unnamed-chunk-251">Table 9.2: </span>Exact ANOVA Result
@@ -449,29 +453,29 @@ a:b
 </tbody>
 </table>
 <p>Now, let’s use the analytic function <code>power_twoway_between</code>.</p>
-<div class="sourceCode" id="cb552"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb552-1"><a href="analytic-power-functions.html#cb552-1"></a><span class="co">#using default alpha level of .05</span></span>
-<span id="cb552-2"><a href="analytic-power-functions.html#cb552-2"></a>power_res &lt;-<span class="st"> </span><span class="kw">power_twoway_between</span>(design_result) </span>
-<span id="cb552-3"><a href="analytic-power-functions.html#cb552-3"></a>power_res<span class="op">$</span>power_A</span></code></pre></div>
+<div class="sourceCode" id="cb590"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb590-1"><a href="analytic-power-functions.html#cb590-1"></a><span class="co">#using default alpha level of .05</span></span>
+<span id="cb590-2"><a href="analytic-power-functions.html#cb590-2"></a>power_res &lt;-<span class="st"> </span><span class="kw">power_twoway_between</span>(design_result) </span>
+<span id="cb590-3"><a href="analytic-power-functions.html#cb590-3"></a>power_res<span class="op">$</span>power_A</span></code></pre></div>
 <pre><code>## [1] 59.78655</code></pre>
-<div class="sourceCode" id="cb554"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb554-1"><a href="analytic-power-functions.html#cb554-1"></a>power_res<span class="op">$</span>power_B</span></code></pre></div>
+<div class="sourceCode" id="cb592"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb592-1"><a href="analytic-power-functions.html#cb592-1"></a>power_res<span class="op">$</span>power_B</span></code></pre></div>
 <pre><code>## [1] 59.78655</code></pre>
-<div class="sourceCode" id="cb556"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb556-1"><a href="analytic-power-functions.html#cb556-1"></a>power_res<span class="op">$</span>power_AB</span></code></pre></div>
+<div class="sourceCode" id="cb594"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb594-1"><a href="analytic-power-functions.html#cb594-1"></a>power_res<span class="op">$</span>power_AB</span></code></pre></div>
 <pre><code>## [1] 59.78655</code></pre>
-<p>We can compare these results to <span class="citation">(Aberson <a href="#ref-R-pwr2ppl" role="doc-biblioref">2019</a>)</span>, as well.</p>
-<div class="sourceCode" id="cb558"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb558-1"><a href="analytic-power-functions.html#cb558-1"></a>pwr2ppl<span class="op">::</span><span class="kw">anova2x2</span>(<span class="dt">m1.1 =</span> <span class="dv">20</span>,</span>
-<span id="cb558-2"><a href="analytic-power-functions.html#cb558-2"></a>         <span class="dt">m1.2 =</span> <span class="dv">20</span>,</span>
-<span id="cb558-3"><a href="analytic-power-functions.html#cb558-3"></a>         <span class="dt">m2.1 =</span> <span class="dv">20</span>,</span>
-<span id="cb558-4"><a href="analytic-power-functions.html#cb558-4"></a>         <span class="dt">m2.2 =</span> <span class="dv">25</span>,</span>
-<span id="cb558-5"><a href="analytic-power-functions.html#cb558-5"></a>         <span class="dt">s1.1 =</span> <span class="dv">5</span>,</span>
-<span id="cb558-6"><a href="analytic-power-functions.html#cb558-6"></a>         <span class="dt">s1.2 =</span> <span class="dv">5</span>,</span>
-<span id="cb558-7"><a href="analytic-power-functions.html#cb558-7"></a>         <span class="dt">s2.1 =</span> <span class="dv">5</span>,</span>
-<span id="cb558-8"><a href="analytic-power-functions.html#cb558-8"></a>         <span class="dt">s2.2 =</span> <span class="dv">5</span>,</span>
-<span id="cb558-9"><a href="analytic-power-functions.html#cb558-9"></a>         <span class="dt">n1.1 =</span> <span class="dv">20</span>,</span>
-<span id="cb558-10"><a href="analytic-power-functions.html#cb558-10"></a>         <span class="dt">n1.2 =</span> <span class="dv">20</span>,</span>
-<span id="cb558-11"><a href="analytic-power-functions.html#cb558-11"></a>         <span class="dt">n2.1 =</span> <span class="dv">20</span>,</span>
-<span id="cb558-12"><a href="analytic-power-functions.html#cb558-12"></a>         <span class="dt">n2.2 =</span> <span class="dv">20</span>,</span>
-<span id="cb558-13"><a href="analytic-power-functions.html#cb558-13"></a>         <span class="dt">alpha =</span> <span class="fl">.05</span>,</span>
-<span id="cb558-14"><a href="analytic-power-functions.html#cb558-14"></a>         <span class="dt">all =</span> <span class="st">&quot;OFF&quot;</span>)</span></code></pre></div>
+<p>We can compare these results to <span class="citation">(Aberson <a href="#ref-R-pwr2ppl" role="doc-biblioref">2020</a>)</span>, as well.</p>
+<div class="sourceCode" id="cb596"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb596-1"><a href="analytic-power-functions.html#cb596-1"></a>pwr2ppl<span class="op">::</span><span class="kw">anova2x2</span>(<span class="dt">m1.1 =</span> <span class="dv">20</span>,</span>
+<span id="cb596-2"><a href="analytic-power-functions.html#cb596-2"></a>         <span class="dt">m1.2 =</span> <span class="dv">20</span>,</span>
+<span id="cb596-3"><a href="analytic-power-functions.html#cb596-3"></a>         <span class="dt">m2.1 =</span> <span class="dv">20</span>,</span>
+<span id="cb596-4"><a href="analytic-power-functions.html#cb596-4"></a>         <span class="dt">m2.2 =</span> <span class="dv">25</span>,</span>
+<span id="cb596-5"><a href="analytic-power-functions.html#cb596-5"></a>         <span class="dt">s1.1 =</span> <span class="dv">5</span>,</span>
+<span id="cb596-6"><a href="analytic-power-functions.html#cb596-6"></a>         <span class="dt">s1.2 =</span> <span class="dv">5</span>,</span>
+<span id="cb596-7"><a href="analytic-power-functions.html#cb596-7"></a>         <span class="dt">s2.1 =</span> <span class="dv">5</span>,</span>
+<span id="cb596-8"><a href="analytic-power-functions.html#cb596-8"></a>         <span class="dt">s2.2 =</span> <span class="dv">5</span>,</span>
+<span id="cb596-9"><a href="analytic-power-functions.html#cb596-9"></a>         <span class="dt">n1.1 =</span> <span class="dv">20</span>,</span>
+<span id="cb596-10"><a href="analytic-power-functions.html#cb596-10"></a>         <span class="dt">n1.2 =</span> <span class="dv">20</span>,</span>
+<span id="cb596-11"><a href="analytic-power-functions.html#cb596-11"></a>         <span class="dt">n2.1 =</span> <span class="dv">20</span>,</span>
+<span id="cb596-12"><a href="analytic-power-functions.html#cb596-12"></a>         <span class="dt">n2.2 =</span> <span class="dv">20</span>,</span>
+<span id="cb596-13"><a href="analytic-power-functions.html#cb596-13"></a>         <span class="dt">alpha =</span> <span class="fl">.05</span>,</span>
+<span id="cb596-14"><a href="analytic-power-functions.html#cb596-14"></a>         <span class="dt">all =</span> <span class="st">&quot;OFF&quot;</span>)</span></code></pre></div>
 <pre><code>## Power for Main Effect Factor A = 0.598</code></pre>
 <pre><code>## Power for Main Effect Factor B = 0.598</code></pre>
 <pre><code>## Power for Interaction AxB = 0.598</code></pre>
@@ -479,20 +483,20 @@ a:b
 <div id="x3-between-subject-anova" class="section level2">
 <h2><span class="header-section-number">9.3</span> 3x3 Between Subject ANOVA</h2>
 <p>We can extend this function to a two-way design with 3 levels.</p>
-<div class="sourceCode" id="cb562"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb562-1"><a href="analytic-power-functions.html#cb562-1"></a>string &lt;-<span class="st"> &quot;3b*3b&quot;</span></span>
-<span id="cb562-2"><a href="analytic-power-functions.html#cb562-2"></a>n &lt;-<span class="st"> </span><span class="dv">20</span></span>
-<span id="cb562-3"><a href="analytic-power-functions.html#cb562-3"></a>mu &lt;-<span class="st"> </span><span class="kw">c</span>(<span class="dv">20</span>, <span class="dv">20</span>, <span class="dv">20</span>, <span class="dv">20</span>, <span class="dv">20</span>, <span class="dv">20</span>, <span class="dv">20</span>, <span class="dv">20</span>, <span class="dv">25</span>) </span>
-<span id="cb562-4"><a href="analytic-power-functions.html#cb562-4"></a><span class="co"># Enter means in the order that matches the labels below.</span></span>
-<span id="cb562-5"><a href="analytic-power-functions.html#cb562-5"></a>sd &lt;-<span class="st"> </span><span class="dv">5</span></span>
-<span id="cb562-6"><a href="analytic-power-functions.html#cb562-6"></a></span>
-<span id="cb562-7"><a href="analytic-power-functions.html#cb562-7"></a>design_result &lt;-<span class="st"> </span><span class="kw">ANOVA_design</span>(<span class="dt">design =</span> string,</span>
-<span id="cb562-8"><a href="analytic-power-functions.html#cb562-8"></a>                   <span class="dt">n =</span> n, </span>
-<span id="cb562-9"><a href="analytic-power-functions.html#cb562-9"></a>                   <span class="dt">mu =</span> mu, </span>
-<span id="cb562-10"><a href="analytic-power-functions.html#cb562-10"></a>                   <span class="dt">sd =</span> sd)</span>
-<span id="cb562-11"><a href="analytic-power-functions.html#cb562-11"></a></span>
-<span id="cb562-12"><a href="analytic-power-functions.html#cb562-12"></a>exact_result &lt;-<span class="st"> </span><span class="kw">ANOVA_exact</span>(design_result,</span>
-<span id="cb562-13"><a href="analytic-power-functions.html#cb562-13"></a>                            <span class="dt">alpha_level =</span> alpha_level,</span>
-<span id="cb562-14"><a href="analytic-power-functions.html#cb562-14"></a>                            <span class="dt">verbose =</span> <span class="ot">FALSE</span>)</span></code></pre></div>
+<div class="sourceCode" id="cb600"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb600-1"><a href="analytic-power-functions.html#cb600-1"></a>string &lt;-<span class="st"> &quot;3b*3b&quot;</span></span>
+<span id="cb600-2"><a href="analytic-power-functions.html#cb600-2"></a>n &lt;-<span class="st"> </span><span class="dv">20</span></span>
+<span id="cb600-3"><a href="analytic-power-functions.html#cb600-3"></a>mu &lt;-<span class="st"> </span><span class="kw">c</span>(<span class="dv">20</span>, <span class="dv">20</span>, <span class="dv">20</span>, <span class="dv">20</span>, <span class="dv">20</span>, <span class="dv">20</span>, <span class="dv">20</span>, <span class="dv">20</span>, <span class="dv">25</span>) </span>
+<span id="cb600-4"><a href="analytic-power-functions.html#cb600-4"></a><span class="co"># Enter means in the order that matches the labels below.</span></span>
+<span id="cb600-5"><a href="analytic-power-functions.html#cb600-5"></a>sd &lt;-<span class="st"> </span><span class="dv">5</span></span>
+<span id="cb600-6"><a href="analytic-power-functions.html#cb600-6"></a></span>
+<span id="cb600-7"><a href="analytic-power-functions.html#cb600-7"></a>design_result &lt;-<span class="st"> </span><span class="kw">ANOVA_design</span>(<span class="dt">design =</span> string,</span>
+<span id="cb600-8"><a href="analytic-power-functions.html#cb600-8"></a>                   <span class="dt">n =</span> n, </span>
+<span id="cb600-9"><a href="analytic-power-functions.html#cb600-9"></a>                   <span class="dt">mu =</span> mu, </span>
+<span id="cb600-10"><a href="analytic-power-functions.html#cb600-10"></a>                   <span class="dt">sd =</span> sd)</span></code></pre></div>
+<p><img src="SuperpowerValidation_files/figure-html/unnamed-chunk-254-1.png" width="672" /></p>
+<div class="sourceCode" id="cb601"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb601-1"><a href="analytic-power-functions.html#cb601-1"></a>exact_result &lt;-<span class="st"> </span><span class="kw">ANOVA_exact</span>(design_result,</span>
+<span id="cb601-2"><a href="analytic-power-functions.html#cb601-2"></a>                            <span class="dt">alpha_level =</span> alpha_level,</span>
+<span id="cb601-3"><a href="analytic-power-functions.html#cb601-3"></a>                            <span class="dt">verbose =</span> <span class="ot">FALSE</span>)</span></code></pre></div>
 <table class="table" style="margin-left: auto; margin-right: auto;">
 <caption>
 <span id="tab:unnamed-chunk-255">Table 9.3: </span>Exact ANOVA Result
@@ -569,13 +573,13 @@ a:b
 </tr>
 </tbody>
 </table>
-<div class="sourceCode" id="cb563"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb563-1"><a href="analytic-power-functions.html#cb563-1"></a><span class="co">#using default alpha level of .05</span></span>
-<span id="cb563-2"><a href="analytic-power-functions.html#cb563-2"></a>power_res &lt;-<span class="st"> </span><span class="kw">power_twoway_between</span>(design_result) </span>
-<span id="cb563-3"><a href="analytic-power-functions.html#cb563-3"></a>power_res<span class="op">$</span>power_A</span></code></pre></div>
+<div class="sourceCode" id="cb602"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb602-1"><a href="analytic-power-functions.html#cb602-1"></a><span class="co">#using default alpha level of .05</span></span>
+<span id="cb602-2"><a href="analytic-power-functions.html#cb602-2"></a>power_res &lt;-<span class="st"> </span><span class="kw">power_twoway_between</span>(design_result) </span>
+<span id="cb602-3"><a href="analytic-power-functions.html#cb602-3"></a>power_res<span class="op">$</span>power_A</span></code></pre></div>
 <pre><code>## [1] 44.86306</code></pre>
-<div class="sourceCode" id="cb565"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb565-1"><a href="analytic-power-functions.html#cb565-1"></a>power_res<span class="op">$</span>power_B</span></code></pre></div>
+<div class="sourceCode" id="cb604"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb604-1"><a href="analytic-power-functions.html#cb604-1"></a>power_res<span class="op">$</span>power_B</span></code></pre></div>
 <pre><code>## [1] 44.86306</code></pre>
-<div class="sourceCode" id="cb567"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb567-1"><a href="analytic-power-functions.html#cb567-1"></a>power_res<span class="op">$</span>power_AB</span></code></pre></div>
+<div class="sourceCode" id="cb606"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb606-1"><a href="analytic-power-functions.html#cb606-1"></a>power_res<span class="op">$</span>power_AB</span></code></pre></div>
 <pre><code>## [1] 64.34127</code></pre>
 
 </div>
@@ -583,10 +587,10 @@ a:b
 <h3>References</h3>
 <div id="refs" class="references">
 <div id="ref-R-pwr2ppl">
-<p>Aberson, Chris. 2019. <em>Pwr2ppl: Power Analyses for Common Designs (Power to the People)</em>. <a href="https://CRAN.R-project.org/package=pwr2ppl">https://CRAN.R-project.org/package=pwr2ppl</a>.</p>
+<p>Aberson, Chris. 2020. <em>Pwr2ppl: Power Analyses for Common Designs (Power to the People)</em>. <a href="https://CRAN.R-project.org/package=pwr2ppl">https://CRAN.R-project.org/package=pwr2ppl</a>.</p>
 </div>
 <div id="ref-R-pwr">
-<p>Champely, Stephane. 2018. <em>Pwr: Basic Functions for Power Analysis</em>. <a href="https://CRAN.R-project.org/package=pwr">https://CRAN.R-project.org/package=pwr</a>.</p>
+<p>Champely, Stephane. 2020. <em>Pwr: Basic Functions for Power Analysis</em>. <a href="https://github.com/heliosdrm/pwr">https://github.com/heliosdrm/pwr</a>.</p>
 </div>
 <div id="ref-faul2007g">
 <p>Faul, Franz, Edgar Erdfelder, Albert-Georg Lang, and Axel Buchner. 2007. “G*Power 3: A Flexible Statistical Power Analysis Program for the Social, Behavioral, and Biomedical Sciences.” <em>Behavior Research Methods</em> 39 (2): 175–91. <a href="http://www.psychologie.hhu.de/arbeitsgruppen/allgemeine-psychologie-und-arbeitspsychologie/gpower.html">http://www.psychologie.hhu.de/arbeitsgruppen/allgemeine-psychologie-und-arbeitspsychologie/gpower.html</a>.</p>

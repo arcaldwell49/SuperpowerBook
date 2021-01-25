@@ -97,3 +97,5 @@ simulation_result_5.5$pc_results <- NULL
 
 simulation_result_5.7$plot1 <- NULL
 simulation_result_5.7$plot2 <- NULL
+
+save.image("data/threeway_data.RData")

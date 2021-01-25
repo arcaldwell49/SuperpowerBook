@@ -120,3 +120,5 @@ simulation_result_4.9 <- ANOVA_power(design_result,
                                  alpha_level = alpha_level, 
                                  nsims = nsims,
                                  verbose = FALSE)
+
+save.image("data/mixed_data.RData")

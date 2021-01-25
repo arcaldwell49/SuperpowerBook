@@ -91,4 +91,5 @@ colada_9 <- colada17(simtot = 10000, n1 = 50, n2 = 100, d1 = .3, d2 = 0)
 
 colada_10 <- colada17(simtot = 10000, n1 = 150, n2 = 300, d1 = .25, d2 = 0)
 
+save.image("data/noway_data.RData")
 

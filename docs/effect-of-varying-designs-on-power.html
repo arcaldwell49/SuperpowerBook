@@ -6,7 +6,7 @@
   <meta http-equiv="X-UA-Compatible" content="IE=edge" />
   <title>Chapter 7 Effect of Varying Designs on Power | Power Analysis with Superpower</title>
   <meta name="description" content="This is a book describing the capabilities of the Superpower R package." />
-  <meta name="generator" content="bookdown 0.18 and GitBook 2.6.7" />
+  <meta name="generator" content="bookdown 0.21 and GitBook 2.6.7" />
 
   <meta property="og:title" content="Chapter 7 Effect of Varying Designs on Power | Power Analysis with Superpower" />
   <meta property="og:type" content="book" />
@@ -24,7 +24,7 @@
 <meta name="author" content="Aaron R. Caldwell, Daniël Lakens, and Chelsea M. Parlett-Pelleriti" />
 
 
-<meta name="date" content="2020-04-28" />
+<meta name="date" content="2021-01-25" />
 
   <meta name="viewport" content="width=device-width, initial-scale=1" />
   <meta name="apple-mobile-web-app-capable" content="yes" />
@@ -50,7 +50,11 @@
 
 
 
+<script src="libs/accessible-code-block-0.0.1/empty-anchor.js"></script>
+<link href="libs/anchor-sections-1.0/anchor-sections.css" rel="stylesheet" />
+<script src="libs/anchor-sections-1.0/anchor-sections.js"></script>
 <script src="libs/kePrint-0.0.1/kePrint.js"></script>
+<link href="libs/lightable-0.0.1/lightable.css" rel="stylesheet" />
 
 
 <style type="text/css">
@@ -201,6 +205,7 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 <li class="chapter" data-level="10.2" data-path="power-curve.html"><a href="power-curve.html#explore-increase-in-effect-size-for-cross-over-interactions."><i class="fa fa-check"></i><b>10.2</b> Explore increase in effect size for cross-over interactions.</a></li>
 <li class="chapter" data-level="10.3" data-path="power-curve.html"><a href="power-curve.html#explore-increase-in-correlation-in-moderated-interactions."><i class="fa fa-check"></i><b>10.3</b> Explore increase in correlation in moderated interactions.</a></li>
 <li class="chapter" data-level="10.4" data-path="power-curve.html"><a href="power-curve.html#increasing-correlation-in-on-factor-decreases-power-in-second-factor"><i class="fa fa-check"></i><b>10.4</b> Increasing correlation in on factor decreases power in second factor</a></li>
+<li class="chapter" data-level="10.5" data-path="power-curve.html"><a href="power-curve.html#code-to-reproduce-power-curve-figures"><i class="fa fa-check"></i><b>10.5</b> Code to Reproduce Power Curve Figures</a></li>
 </ul></li>
 <li class="chapter" data-level="11" data-path="violations-of-assumptions.html"><a href="violations-of-assumptions.html"><i class="fa fa-check"></i><b>11</b> Violations of Assumptions</a><ul>
 <li class="chapter" data-level="11.1" data-path="violations-of-assumptions.html"><a href="violations-of-assumptions.html#violation-of-heterogeneity-assumption"><i class="fa fa-check"></i><b>11.1</b> Violation of Heterogeneity Assumption</a></li>
@@ -268,27 +273,28 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 <h1><span class="header-section-number">Chapter 7</span> Effect of Varying Designs on Power</h1>
 <p>Researchers might consider what the effects on the statistical power of their design is, when they add participants. Participants can be added to an additional condition, or to the existing design.</p>
 <p>In a one-way ANOVA adding a condition means, for example, going from a 1x2 to a 1x3 design. For example, in addition to a control and intensive training condition, we add a light training condition.</p>
-<div class="sourceCode" id="cb403"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb403-1"><a href="effect-of-varying-designs-on-power.html#cb403-1"></a>string &lt;-<span class="st"> &quot;2b&quot;</span></span>
-<span id="cb403-2"><a href="effect-of-varying-designs-on-power.html#cb403-2"></a>n &lt;-<span class="st"> </span><span class="dv">50</span></span>
-<span id="cb403-3"><a href="effect-of-varying-designs-on-power.html#cb403-3"></a>mu &lt;-<span class="st"> </span><span class="kw">c</span>(<span class="dv">80</span>, <span class="dv">86</span>) </span>
-<span id="cb403-4"><a href="effect-of-varying-designs-on-power.html#cb403-4"></a>sd &lt;-<span class="st"> </span><span class="dv">10</span></span>
-<span id="cb403-5"><a href="effect-of-varying-designs-on-power.html#cb403-5"></a>labelnames &lt;-<span class="st"> </span><span class="kw">c</span>(<span class="st">&quot;Condition&quot;</span>, <span class="st">&quot;control&quot;</span>, <span class="st">&quot;intensive_training&quot;</span>) </span>
-<span id="cb403-6"><a href="effect-of-varying-designs-on-power.html#cb403-6"></a>design_result &lt;-<span class="st"> </span><span class="kw">ANOVA_design</span>(<span class="dt">design =</span> string,</span>
-<span id="cb403-7"><a href="effect-of-varying-designs-on-power.html#cb403-7"></a>                   <span class="dt">n =</span> n, </span>
-<span id="cb403-8"><a href="effect-of-varying-designs-on-power.html#cb403-8"></a>                   <span class="dt">mu =</span> mu, </span>
-<span id="cb403-9"><a href="effect-of-varying-designs-on-power.html#cb403-9"></a>                   <span class="dt">sd =</span> sd, </span>
-<span id="cb403-10"><a href="effect-of-varying-designs-on-power.html#cb403-10"></a>                   <span class="dt">labelnames =</span> labelnames)</span>
-<span id="cb403-11"><a href="effect-of-varying-designs-on-power.html#cb403-11"></a><span class="co"># Power for the given N in the design_result</span></span>
-<span id="cb403-12"><a href="effect-of-varying-designs-on-power.html#cb403-12"></a><span class="kw">power_oneway_between</span>(design_result)<span class="op">$</span>power</span></code></pre></div>
+<div class="sourceCode" id="cb423"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb423-1"><a href="effect-of-varying-designs-on-power.html#cb423-1"></a>string &lt;-<span class="st"> &quot;2b&quot;</span></span>
+<span id="cb423-2"><a href="effect-of-varying-designs-on-power.html#cb423-2"></a>n &lt;-<span class="st"> </span><span class="dv">50</span></span>
+<span id="cb423-3"><a href="effect-of-varying-designs-on-power.html#cb423-3"></a>mu &lt;-<span class="st"> </span><span class="kw">c</span>(<span class="dv">80</span>, <span class="dv">86</span>) </span>
+<span id="cb423-4"><a href="effect-of-varying-designs-on-power.html#cb423-4"></a>sd &lt;-<span class="st"> </span><span class="dv">10</span></span>
+<span id="cb423-5"><a href="effect-of-varying-designs-on-power.html#cb423-5"></a>labelnames &lt;-<span class="st"> </span><span class="kw">c</span>(<span class="st">&quot;Condition&quot;</span>, <span class="st">&quot;control&quot;</span>, <span class="st">&quot;intensive_training&quot;</span>) </span>
+<span id="cb423-6"><a href="effect-of-varying-designs-on-power.html#cb423-6"></a>design_result &lt;-<span class="st"> </span><span class="kw">ANOVA_design</span>(<span class="dt">design =</span> string,</span>
+<span id="cb423-7"><a href="effect-of-varying-designs-on-power.html#cb423-7"></a>                   <span class="dt">n =</span> n, </span>
+<span id="cb423-8"><a href="effect-of-varying-designs-on-power.html#cb423-8"></a>                   <span class="dt">mu =</span> mu, </span>
+<span id="cb423-9"><a href="effect-of-varying-designs-on-power.html#cb423-9"></a>                   <span class="dt">sd =</span> sd, </span>
+<span id="cb423-10"><a href="effect-of-varying-designs-on-power.html#cb423-10"></a>                   <span class="dt">labelnames =</span> labelnames)</span></code></pre></div>
+<p><img src="SuperpowerValidation_files/figure-html/variations_in_design-1.png" width="672" /></p>
+<div class="sourceCode" id="cb424"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb424-1"><a href="effect-of-varying-designs-on-power.html#cb424-1"></a><span class="co"># Power for the given N in the design_result</span></span>
+<span id="cb424-2"><a href="effect-of-varying-designs-on-power.html#cb424-2"></a><span class="kw">power_oneway_between</span>(design_result)<span class="op">$</span>power</span></code></pre></div>
 <pre><code>## [1] 84.38754</code></pre>
-<div class="sourceCode" id="cb405"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb405-1"><a href="effect-of-varying-designs-on-power.html#cb405-1"></a><span class="kw">power_oneway_between</span>(design_result)<span class="op">$</span>Cohen_f</span></code></pre></div>
+<div class="sourceCode" id="cb426"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb426-1"><a href="effect-of-varying-designs-on-power.html#cb426-1"></a><span class="kw">power_oneway_between</span>(design_result)<span class="op">$</span>Cohen_f</span></code></pre></div>
 <pre><code>## [1] 0.3</code></pre>
-<div class="sourceCode" id="cb407"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb407-1"><a href="effect-of-varying-designs-on-power.html#cb407-1"></a><span class="kw">power_oneway_between</span>(design_result)<span class="op">$</span>eta_p_<span class="dv">2</span></span></code></pre></div>
+<div class="sourceCode" id="cb428"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb428-1"><a href="effect-of-varying-designs-on-power.html#cb428-1"></a><span class="kw">power_oneway_between</span>(design_result)<span class="op">$</span>eta_p_<span class="dv">2</span></span></code></pre></div>
 <pre><code>## [1] 0.08256881</code></pre>
-<div class="sourceCode" id="cb409"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb409-1"><a href="effect-of-varying-designs-on-power.html#cb409-1"></a>simulation_result &lt;-<span class="st"> </span><span class="kw">ANOVA_power</span>(design_result, </span>
-<span id="cb409-2"><a href="effect-of-varying-designs-on-power.html#cb409-2"></a>                                 <span class="dt">alpha_level =</span> alpha_level, </span>
-<span id="cb409-3"><a href="effect-of-varying-designs-on-power.html#cb409-3"></a>                                 <span class="dt">nsims =</span> nsims,</span>
-<span id="cb409-4"><a href="effect-of-varying-designs-on-power.html#cb409-4"></a>                                 <span class="dt">verbose =</span> <span class="ot">FALSE</span>)</span></code></pre></div>
+<div class="sourceCode" id="cb430"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb430-1"><a href="effect-of-varying-designs-on-power.html#cb430-1"></a>simulation_result &lt;-<span class="st"> </span><span class="kw">ANOVA_power</span>(design_result, </span>
+<span id="cb430-2"><a href="effect-of-varying-designs-on-power.html#cb430-2"></a>                                 <span class="dt">alpha_level =</span> alpha_level, </span>
+<span id="cb430-3"><a href="effect-of-varying-designs-on-power.html#cb430-3"></a>                                 <span class="dt">nsims =</span> nsims,</span>
+<span id="cb430-4"><a href="effect-of-varying-designs-on-power.html#cb430-4"></a>                                 <span class="dt">verbose =</span> <span class="ot">FALSE</span>)</span></code></pre></div>
 <table class="table" style="margin-left: auto; margin-right: auto;">
 <caption>
 <span id="tab:unnamed-chunk-217">Table 7.1: </span>Simulated ANOVA Result
@@ -319,9 +325,9 @@ anova_Condition
 </tr>
 </tbody>
 </table>
-<div class="sourceCode" id="cb410"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb410-1"><a href="effect-of-varying-designs-on-power.html#cb410-1"></a>exact_result &lt;-<span class="st"> </span><span class="kw">ANOVA_exact</span>(design_result,</span>
-<span id="cb410-2"><a href="effect-of-varying-designs-on-power.html#cb410-2"></a>                            <span class="dt">alpha_level =</span> alpha_level,</span>
-<span id="cb410-3"><a href="effect-of-varying-designs-on-power.html#cb410-3"></a>                            <span class="dt">verbose =</span> <span class="ot">FALSE</span>)</span></code></pre></div>
+<div class="sourceCode" id="cb431"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb431-1"><a href="effect-of-varying-designs-on-power.html#cb431-1"></a>exact_result &lt;-<span class="st"> </span><span class="kw">ANOVA_exact</span>(design_result,</span>
+<span id="cb431-2"><a href="effect-of-varying-designs-on-power.html#cb431-2"></a>                            <span class="dt">alpha_level =</span> alpha_level,</span>
+<span id="cb431-3"><a href="effect-of-varying-designs-on-power.html#cb431-3"></a>                            <span class="dt">verbose =</span> <span class="ot">FALSE</span>)</span></code></pre></div>
 <table class="table" style="margin-left: auto; margin-right: auto;">
 <caption>
 <span id="tab:unnamed-chunk-219">Table 7.2: </span>Exact ANOVA Result
@@ -366,30 +372,35 @@ Condition
 </table>
 <p>We now addd a condition. Let’s assume the ‘light training’ condition falls in between the other two means.</p>
 <p>And we can see power across sample sizes</p>
-<div class="sourceCode" id="cb411"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb411-1"><a href="effect-of-varying-designs-on-power.html#cb411-1"></a><span class="co"># Plot power curve (from 5 to 100)</span></span>
-<span id="cb411-2"><a href="effect-of-varying-designs-on-power.html#cb411-2"></a><span class="kw">plot_power</span>(design_result, <span class="dt">max_n =</span> <span class="dv">100</span>)</span></code></pre></div>
-<div class="sourceCode" id="cb412"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb412-1"><a href="effect-of-varying-designs-on-power.html#cb412-1"></a>string &lt;-<span class="st"> &quot;3b&quot;</span></span>
-<span id="cb412-2"><a href="effect-of-varying-designs-on-power.html#cb412-2"></a>n &lt;-<span class="st"> </span><span class="dv">50</span></span>
-<span id="cb412-3"><a href="effect-of-varying-designs-on-power.html#cb412-3"></a>mu &lt;-<span class="st"> </span><span class="kw">c</span>(<span class="dv">80</span>, <span class="dv">83</span>, <span class="dv">86</span>)</span>
-<span id="cb412-4"><a href="effect-of-varying-designs-on-power.html#cb412-4"></a>sd &lt;-<span class="st"> </span><span class="dv">10</span></span>
-<span id="cb412-5"><a href="effect-of-varying-designs-on-power.html#cb412-5"></a>labelnames &lt;-<span class="st"> </span><span class="kw">c</span>(<span class="st">&quot;Condition&quot;</span>, <span class="st">&quot;control&quot;</span>, <span class="st">&quot;light_training&quot;</span>, <span class="st">&quot;intensive_training&quot;</span>)</span>
-<span id="cb412-6"><a href="effect-of-varying-designs-on-power.html#cb412-6"></a>design_result &lt;-<span class="st"> </span><span class="kw">ANOVA_design</span>(</span>
-<span id="cb412-7"><a href="effect-of-varying-designs-on-power.html#cb412-7"></a>  <span class="dt">design =</span> string,</span>
-<span id="cb412-8"><a href="effect-of-varying-designs-on-power.html#cb412-8"></a>  <span class="dt">n =</span> n,</span>
-<span id="cb412-9"><a href="effect-of-varying-designs-on-power.html#cb412-9"></a>  <span class="dt">mu =</span> mu,</span>
-<span id="cb412-10"><a href="effect-of-varying-designs-on-power.html#cb412-10"></a>  <span class="dt">sd =</span> sd,</span>
-<span id="cb412-11"><a href="effect-of-varying-designs-on-power.html#cb412-11"></a>  <span class="dt">labelnames =</span> labelnames</span>
-<span id="cb412-12"><a href="effect-of-varying-designs-on-power.html#cb412-12"></a>)</span>
-<span id="cb412-13"><a href="effect-of-varying-designs-on-power.html#cb412-13"></a><span class="co"># Power for the given N in the design_result</span></span>
-<span id="cb412-14"><a href="effect-of-varying-designs-on-power.html#cb412-14"></a><span class="kw">power_oneway_between</span>(design_result)<span class="op">$</span>power</span></code></pre></div>
+<div class="sourceCode" id="cb432"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb432-1"><a href="effect-of-varying-designs-on-power.html#cb432-1"></a><span class="co"># Plot power curve (from 5 to 100)</span></span>
+<span id="cb432-2"><a href="effect-of-varying-designs-on-power.html#cb432-2"></a><span class="kw">plot_power</span>(design_result, <span class="dt">max_n =</span> <span class="dv">100</span>)</span></code></pre></div>
+<p><img src="SuperpowerValidation_files/figure-html/unnamed-chunk-220-1.png" width="672" /></p>
+<pre><code>## Achieved Power and Sample Size for ANOVA-level effects
+##    variable                  label  n achieved_power desired_power
+## 1 Condition Desired Power Achieved 60          90.31            90</code></pre>
+<div class="sourceCode" id="cb434"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb434-1"><a href="effect-of-varying-designs-on-power.html#cb434-1"></a>string &lt;-<span class="st"> &quot;3b&quot;</span></span>
+<span id="cb434-2"><a href="effect-of-varying-designs-on-power.html#cb434-2"></a>n &lt;-<span class="st"> </span><span class="dv">50</span></span>
+<span id="cb434-3"><a href="effect-of-varying-designs-on-power.html#cb434-3"></a>mu &lt;-<span class="st"> </span><span class="kw">c</span>(<span class="dv">80</span>, <span class="dv">83</span>, <span class="dv">86</span>)</span>
+<span id="cb434-4"><a href="effect-of-varying-designs-on-power.html#cb434-4"></a>sd &lt;-<span class="st"> </span><span class="dv">10</span></span>
+<span id="cb434-5"><a href="effect-of-varying-designs-on-power.html#cb434-5"></a>labelnames &lt;-<span class="st"> </span><span class="kw">c</span>(<span class="st">&quot;Condition&quot;</span>, <span class="st">&quot;control&quot;</span>, <span class="st">&quot;light_training&quot;</span>, <span class="st">&quot;intensive_training&quot;</span>)</span>
+<span id="cb434-6"><a href="effect-of-varying-designs-on-power.html#cb434-6"></a>design_result &lt;-<span class="st"> </span><span class="kw">ANOVA_design</span>(</span>
+<span id="cb434-7"><a href="effect-of-varying-designs-on-power.html#cb434-7"></a>  <span class="dt">design =</span> string,</span>
+<span id="cb434-8"><a href="effect-of-varying-designs-on-power.html#cb434-8"></a>  <span class="dt">n =</span> n,</span>
+<span id="cb434-9"><a href="effect-of-varying-designs-on-power.html#cb434-9"></a>  <span class="dt">mu =</span> mu,</span>
+<span id="cb434-10"><a href="effect-of-varying-designs-on-power.html#cb434-10"></a>  <span class="dt">sd =</span> sd,</span>
+<span id="cb434-11"><a href="effect-of-varying-designs-on-power.html#cb434-11"></a>  <span class="dt">labelnames =</span> labelnames</span>
+<span id="cb434-12"><a href="effect-of-varying-designs-on-power.html#cb434-12"></a>)</span></code></pre></div>
+<p><img src="SuperpowerValidation_files/figure-html/unnamed-chunk-221-1.png" width="672" /></p>
+<div class="sourceCode" id="cb435"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb435-1"><a href="effect-of-varying-designs-on-power.html#cb435-1"></a><span class="co"># Power for the given N in the design_result</span></span>
+<span id="cb435-2"><a href="effect-of-varying-designs-on-power.html#cb435-2"></a><span class="kw">power_oneway_between</span>(design_result)<span class="op">$</span>power</span></code></pre></div>
 <pre><code>## [1] 76.16545</code></pre>
-<div class="sourceCode" id="cb414"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb414-1"><a href="effect-of-varying-designs-on-power.html#cb414-1"></a><span class="kw">power_oneway_between</span>(design_result)<span class="op">$</span>Cohen_f</span></code></pre></div>
+<div class="sourceCode" id="cb437"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb437-1"><a href="effect-of-varying-designs-on-power.html#cb437-1"></a><span class="kw">power_oneway_between</span>(design_result)<span class="op">$</span>Cohen_f</span></code></pre></div>
 <pre><code>## [1] 0.244949</code></pre>
-<div class="sourceCode" id="cb416"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb416-1"><a href="effect-of-varying-designs-on-power.html#cb416-1"></a><span class="kw">power_oneway_between</span>(design_result)<span class="op">$</span>eta_p_<span class="dv">2</span></span></code></pre></div>
+<div class="sourceCode" id="cb439"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb439-1"><a href="effect-of-varying-designs-on-power.html#cb439-1"></a><span class="kw">power_oneway_between</span>(design_result)<span class="op">$</span>eta_p_<span class="dv">2</span></span></code></pre></div>
 <pre><code>## [1] 0.05660377</code></pre>
-<div class="sourceCode" id="cb418"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb418-1"><a href="effect-of-varying-designs-on-power.html#cb418-1"></a>exact_result &lt;-<span class="st"> </span><span class="kw">ANOVA_exact</span>(design_result,</span>
-<span id="cb418-2"><a href="effect-of-varying-designs-on-power.html#cb418-2"></a>                            <span class="dt">alpha_level =</span> alpha_level,</span>
-<span id="cb418-3"><a href="effect-of-varying-designs-on-power.html#cb418-3"></a>                            <span class="dt">verbose =</span> <span class="ot">FALSE</span>)</span></code></pre></div>
+<div class="sourceCode" id="cb441"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb441-1"><a href="effect-of-varying-designs-on-power.html#cb441-1"></a>exact_result &lt;-<span class="st"> </span><span class="kw">ANOVA_exact</span>(design_result,</span>
+<span id="cb441-2"><a href="effect-of-varying-designs-on-power.html#cb441-2"></a>                            <span class="dt">alpha_level =</span> alpha_level,</span>
+<span id="cb441-3"><a href="effect-of-varying-designs-on-power.html#cb441-3"></a>                            <span class="dt">verbose =</span> <span class="ot">FALSE</span>)</span></code></pre></div>
 <table class="table" style="margin-left: auto; margin-right: auto;">
 <caption>
 <span id="tab:unnamed-chunk-222">Table 7.3: </span>Exact ANOVA Result
@@ -433,149 +444,157 @@ Condition
 </tbody>
 </table>
 <p>We see that adding a condition that falls between the other two means reduces our power. Let’s instead assume that the ‘light training’ condition is not different from the control condition. In other words, the mean we add is as extreme as one of the existing means.</p>
-<div class="sourceCode" id="cb419"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb419-1"><a href="effect-of-varying-designs-on-power.html#cb419-1"></a><span class="co"># Plot power curve (from 5 to 100)</span></span>
-<span id="cb419-2"><a href="effect-of-varying-designs-on-power.html#cb419-2"></a><span class="kw">plot_power</span>(design_result, <span class="dt">max_n =</span> <span class="dv">100</span>)</span></code></pre></div>
-<div class="sourceCode" id="cb420"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb420-1"><a href="effect-of-varying-designs-on-power.html#cb420-1"></a>string &lt;-<span class="st"> &quot;3b&quot;</span></span>
-<span id="cb420-2"><a href="effect-of-varying-designs-on-power.html#cb420-2"></a>n &lt;-<span class="st"> </span><span class="dv">50</span></span>
-<span id="cb420-3"><a href="effect-of-varying-designs-on-power.html#cb420-3"></a>mu &lt;-<span class="st"> </span><span class="kw">c</span>(<span class="dv">80</span>, <span class="dv">80</span>, <span class="dv">86</span>)</span>
-<span id="cb420-4"><a href="effect-of-varying-designs-on-power.html#cb420-4"></a>sd &lt;-<span class="st"> </span><span class="dv">10</span></span>
-<span id="cb420-5"><a href="effect-of-varying-designs-on-power.html#cb420-5"></a>labelnames &lt;-<span class="st"> </span><span class="kw">c</span>(<span class="st">&quot;Condition&quot;</span>, <span class="st">&quot;control&quot;</span>, <span class="st">&quot;light_training&quot;</span>, <span class="st">&quot;intensive_training&quot;</span>)</span>
-<span id="cb420-6"><a href="effect-of-varying-designs-on-power.html#cb420-6"></a>design_result &lt;-<span class="st"> </span><span class="kw">ANOVA_design</span>(</span>
-<span id="cb420-7"><a href="effect-of-varying-designs-on-power.html#cb420-7"></a>  <span class="dt">design =</span> string,</span>
-<span id="cb420-8"><a href="effect-of-varying-designs-on-power.html#cb420-8"></a>  <span class="dt">n =</span> n,</span>
-<span id="cb420-9"><a href="effect-of-varying-designs-on-power.html#cb420-9"></a>  <span class="dt">mu =</span> mu,</span>
-<span id="cb420-10"><a href="effect-of-varying-designs-on-power.html#cb420-10"></a>  <span class="dt">sd =</span> sd,</span>
-<span id="cb420-11"><a href="effect-of-varying-designs-on-power.html#cb420-11"></a>  <span class="dt">labelnames =</span> labelnames</span>
-<span id="cb420-12"><a href="effect-of-varying-designs-on-power.html#cb420-12"></a>)</span>
-<span id="cb420-13"><a href="effect-of-varying-designs-on-power.html#cb420-13"></a></span>
-<span id="cb420-14"><a href="effect-of-varying-designs-on-power.html#cb420-14"></a><span class="co"># Power for the given N in the design_result</span></span>
-<span id="cb420-15"><a href="effect-of-varying-designs-on-power.html#cb420-15"></a><span class="kw">power_oneway_between</span>(design_result)<span class="op">$</span>power</span></code></pre></div>
+<div class="sourceCode" id="cb442"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb442-1"><a href="effect-of-varying-designs-on-power.html#cb442-1"></a><span class="co"># Plot power curve (from 5 to 100)</span></span>
+<span id="cb442-2"><a href="effect-of-varying-designs-on-power.html#cb442-2"></a><span class="kw">plot_power</span>(design_result, <span class="dt">max_n =</span> <span class="dv">100</span>)</span></code></pre></div>
+<p><img src="SuperpowerValidation_files/figure-html/unnamed-chunk-223-1.png" width="672" /></p>
+<pre><code>## Achieved Power and Sample Size for ANOVA-level effects
+##    variable                  label  n achieved_power desired_power
+## 1 Condition Desired Power Achieved 72          90.29            90</code></pre>
+<div class="sourceCode" id="cb444"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb444-1"><a href="effect-of-varying-designs-on-power.html#cb444-1"></a>string &lt;-<span class="st"> &quot;3b&quot;</span></span>
+<span id="cb444-2"><a href="effect-of-varying-designs-on-power.html#cb444-2"></a>n &lt;-<span class="st"> </span><span class="dv">50</span></span>
+<span id="cb444-3"><a href="effect-of-varying-designs-on-power.html#cb444-3"></a>mu &lt;-<span class="st"> </span><span class="kw">c</span>(<span class="dv">80</span>, <span class="dv">80</span>, <span class="dv">86</span>)</span>
+<span id="cb444-4"><a href="effect-of-varying-designs-on-power.html#cb444-4"></a>sd &lt;-<span class="st"> </span><span class="dv">10</span></span>
+<span id="cb444-5"><a href="effect-of-varying-designs-on-power.html#cb444-5"></a>labelnames &lt;-<span class="st"> </span><span class="kw">c</span>(<span class="st">&quot;Condition&quot;</span>, <span class="st">&quot;control&quot;</span>, <span class="st">&quot;light_training&quot;</span>, <span class="st">&quot;intensive_training&quot;</span>)</span>
+<span id="cb444-6"><a href="effect-of-varying-designs-on-power.html#cb444-6"></a>design_result &lt;-<span class="st"> </span><span class="kw">ANOVA_design</span>(</span>
+<span id="cb444-7"><a href="effect-of-varying-designs-on-power.html#cb444-7"></a>  <span class="dt">design =</span> string,</span>
+<span id="cb444-8"><a href="effect-of-varying-designs-on-power.html#cb444-8"></a>  <span class="dt">n =</span> n,</span>
+<span id="cb444-9"><a href="effect-of-varying-designs-on-power.html#cb444-9"></a>  <span class="dt">mu =</span> mu,</span>
+<span id="cb444-10"><a href="effect-of-varying-designs-on-power.html#cb444-10"></a>  <span class="dt">sd =</span> sd,</span>
+<span id="cb444-11"><a href="effect-of-varying-designs-on-power.html#cb444-11"></a>  <span class="dt">labelnames =</span> labelnames</span>
+<span id="cb444-12"><a href="effect-of-varying-designs-on-power.html#cb444-12"></a>)</span></code></pre></div>
+<p><img src="SuperpowerValidation_files/figure-html/unnamed-chunk-224-1.png" width="672" /></p>
+<div class="sourceCode" id="cb445"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb445-1"><a href="effect-of-varying-designs-on-power.html#cb445-1"></a><span class="co"># Power for the given N in the design_result</span></span>
+<span id="cb445-2"><a href="effect-of-varying-designs-on-power.html#cb445-2"></a><span class="kw">power_oneway_between</span>(design_result)<span class="op">$</span>power</span></code></pre></div>
 <pre><code>## [1] 87.62941</code></pre>
-<div class="sourceCode" id="cb422"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb422-1"><a href="effect-of-varying-designs-on-power.html#cb422-1"></a><span class="kw">power_oneway_between</span>(design_result)<span class="op">$</span>Cohen_f</span></code></pre></div>
+<div class="sourceCode" id="cb447"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb447-1"><a href="effect-of-varying-designs-on-power.html#cb447-1"></a><span class="kw">power_oneway_between</span>(design_result)<span class="op">$</span>Cohen_f</span></code></pre></div>
 <pre><code>## [1] 0.2828427</code></pre>
-<div class="sourceCode" id="cb424"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb424-1"><a href="effect-of-varying-designs-on-power.html#cb424-1"></a><span class="kw">power_oneway_between</span>(design_result)<span class="op">$</span>eta_p_<span class="dv">2</span></span></code></pre></div>
+<div class="sourceCode" id="cb449"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb449-1"><a href="effect-of-varying-designs-on-power.html#cb449-1"></a><span class="kw">power_oneway_between</span>(design_result)<span class="op">$</span>eta_p_<span class="dv">2</span></span></code></pre></div>
 <pre><code>## [1] 0.07407407</code></pre>
 <p>Now power has increased. This is not always true. The power is a function of many factors in the design, incuding the effect size (Cohen’s <em>f</em>) and the total sample size (and the degrees of freedom and number of groups). But as we will see below, as we keep adding conditions, the power will reduce, even if initially, the power might increase.</p>
-<div class="sourceCode" id="cb426"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb426-1"><a href="effect-of-varying-designs-on-power.html#cb426-1"></a><span class="co"># Plot power curve (from 5 to 100)</span></span>
-<span id="cb426-2"><a href="effect-of-varying-designs-on-power.html#cb426-2"></a><span class="kw">plot_power</span>(design_result,<span class="dt">max_n =</span> <span class="dv">100</span>)</span></code></pre></div>
+<div class="sourceCode" id="cb451"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb451-1"><a href="effect-of-varying-designs-on-power.html#cb451-1"></a><span class="co"># Plot power curve (from 5 to 100)</span></span>
+<span id="cb451-2"><a href="effect-of-varying-designs-on-power.html#cb451-2"></a><span class="kw">plot_power</span>(design_result,<span class="dt">max_n =</span> <span class="dv">100</span>)</span></code></pre></div>
+<p><img src="SuperpowerValidation_files/figure-html/unnamed-chunk-225-1.png" width="672" /></p>
+<pre><code>## Achieved Power and Sample Size for ANOVA-level effects
+##    variable                  label  n achieved_power desired_power
+## 1 Condition Desired Power Achieved 54          90.15            90</code></pre>
 <p>It helps to think of these different designs in terms of either partial eta-squared, or Cohen’s <em>f</em> (the one can easily be converted into the other).</p>
-<div class="sourceCode" id="cb427"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb427-1"><a href="effect-of-varying-designs-on-power.html#cb427-1"></a><span class="co">#Two groups</span></span>
-<span id="cb427-2"><a href="effect-of-varying-designs-on-power.html#cb427-2"></a>mu &lt;-<span class="st"> </span><span class="kw">c</span>(<span class="dv">80</span>, <span class="dv">86</span>)</span>
-<span id="cb427-3"><a href="effect-of-varying-designs-on-power.html#cb427-3"></a>sd =<span class="st"> </span><span class="dv">10</span></span>
-<span id="cb427-4"><a href="effect-of-varying-designs-on-power.html#cb427-4"></a>n &lt;-<span class="st"> </span><span class="dv">50</span> <span class="co">#sample size per condition</span></span>
-<span id="cb427-5"><a href="effect-of-varying-designs-on-power.html#cb427-5"></a>mean_mat &lt;-<span class="st"> </span><span class="kw">t</span>(<span class="kw">matrix</span>(mu, <span class="dt">nrow =</span> <span class="dv">2</span>, <span class="dt">ncol =</span> <span class="dv">1</span>)) <span class="co">#Create a mean matrix</span></span>
-<span id="cb427-6"><a href="effect-of-varying-designs-on-power.html#cb427-6"></a><span class="co"># Using the sweep function to remove rowmeans from the matrix</span></span>
-<span id="cb427-7"><a href="effect-of-varying-designs-on-power.html#cb427-7"></a>mean_mat_res &lt;-<span class="st"> </span><span class="kw">sweep</span>(mean_mat, <span class="dv">2</span>, <span class="kw">rowMeans</span>(mean_mat))</span>
-<span id="cb427-8"><a href="effect-of-varying-designs-on-power.html#cb427-8"></a>mean_mat_res</span></code></pre></div>
+<div class="sourceCode" id="cb453"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb453-1"><a href="effect-of-varying-designs-on-power.html#cb453-1"></a><span class="co">#Two groups</span></span>
+<span id="cb453-2"><a href="effect-of-varying-designs-on-power.html#cb453-2"></a>mu &lt;-<span class="st"> </span><span class="kw">c</span>(<span class="dv">80</span>, <span class="dv">86</span>)</span>
+<span id="cb453-3"><a href="effect-of-varying-designs-on-power.html#cb453-3"></a>sd =<span class="st"> </span><span class="dv">10</span></span>
+<span id="cb453-4"><a href="effect-of-varying-designs-on-power.html#cb453-4"></a>n &lt;-<span class="st"> </span><span class="dv">50</span> <span class="co">#sample size per condition</span></span>
+<span id="cb453-5"><a href="effect-of-varying-designs-on-power.html#cb453-5"></a>mean_mat &lt;-<span class="st"> </span><span class="kw">t</span>(<span class="kw">matrix</span>(mu, <span class="dt">nrow =</span> <span class="dv">2</span>, <span class="dt">ncol =</span> <span class="dv">1</span>)) <span class="co">#Create a mean matrix</span></span>
+<span id="cb453-6"><a href="effect-of-varying-designs-on-power.html#cb453-6"></a><span class="co"># Using the sweep function to remove rowmeans from the matrix</span></span>
+<span id="cb453-7"><a href="effect-of-varying-designs-on-power.html#cb453-7"></a>mean_mat_res &lt;-<span class="st"> </span><span class="kw">sweep</span>(mean_mat, <span class="dv">2</span>, <span class="kw">rowMeans</span>(mean_mat))</span>
+<span id="cb453-8"><a href="effect-of-varying-designs-on-power.html#cb453-8"></a>mean_mat_res</span></code></pre></div>
 <pre><code>##      [,1] [,2]
 ## [1,]   -3    3</code></pre>
-<div class="sourceCode" id="cb429"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb429-1"><a href="effect-of-varying-designs-on-power.html#cb429-1"></a>MS_a &lt;-<span class="st"> </span>n <span class="op">*</span><span class="st"> </span>(<span class="kw">sum</span>(mean_mat_res <span class="op">^</span><span class="st"> </span><span class="dv">2</span>) <span class="op">/</span><span class="st"> </span>(<span class="dv">2</span> <span class="op">-</span><span class="st"> </span><span class="dv">1</span>))</span>
-<span id="cb429-2"><a href="effect-of-varying-designs-on-power.html#cb429-2"></a>MS_a</span></code></pre></div>
+<div class="sourceCode" id="cb455"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb455-1"><a href="effect-of-varying-designs-on-power.html#cb455-1"></a>MS_a &lt;-<span class="st"> </span>n <span class="op">*</span><span class="st"> </span>(<span class="kw">sum</span>(mean_mat_res <span class="op">^</span><span class="st"> </span><span class="dv">2</span>) <span class="op">/</span><span class="st"> </span>(<span class="dv">2</span> <span class="op">-</span><span class="st"> </span><span class="dv">1</span>))</span>
+<span id="cb455-2"><a href="effect-of-varying-designs-on-power.html#cb455-2"></a>MS_a</span></code></pre></div>
 <pre><code>## [1] 900</code></pre>
-<div class="sourceCode" id="cb431"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb431-1"><a href="effect-of-varying-designs-on-power.html#cb431-1"></a>SS_A &lt;-<span class="st"> </span>n <span class="op">*</span><span class="st"> </span><span class="kw">sum</span>(mean_mat_res <span class="op">^</span><span class="st"> </span><span class="dv">2</span>)</span>
-<span id="cb431-2"><a href="effect-of-varying-designs-on-power.html#cb431-2"></a>SS_A</span></code></pre></div>
+<div class="sourceCode" id="cb457"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb457-1"><a href="effect-of-varying-designs-on-power.html#cb457-1"></a>SS_A &lt;-<span class="st"> </span>n <span class="op">*</span><span class="st"> </span><span class="kw">sum</span>(mean_mat_res <span class="op">^</span><span class="st"> </span><span class="dv">2</span>)</span>
+<span id="cb457-2"><a href="effect-of-varying-designs-on-power.html#cb457-2"></a>SS_A</span></code></pre></div>
 <pre><code>## [1] 900</code></pre>
-<div class="sourceCode" id="cb433"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb433-1"><a href="effect-of-varying-designs-on-power.html#cb433-1"></a>MS_error &lt;-<span class="st"> </span>sd <span class="op">^</span><span class="st"> </span><span class="dv">2</span></span>
-<span id="cb433-2"><a href="effect-of-varying-designs-on-power.html#cb433-2"></a>MS_error</span></code></pre></div>
+<div class="sourceCode" id="cb459"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb459-1"><a href="effect-of-varying-designs-on-power.html#cb459-1"></a>MS_error &lt;-<span class="st"> </span>sd <span class="op">^</span><span class="st"> </span><span class="dv">2</span></span>
+<span id="cb459-2"><a href="effect-of-varying-designs-on-power.html#cb459-2"></a>MS_error</span></code></pre></div>
 <pre><code>## [1] 100</code></pre>
-<div class="sourceCode" id="cb435"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb435-1"><a href="effect-of-varying-designs-on-power.html#cb435-1"></a>SS_error &lt;-<span class="st"> </span>MS_error <span class="op">*</span><span class="st"> </span>(n <span class="op">*</span><span class="st"> </span><span class="dv">2</span>)</span>
-<span id="cb435-2"><a href="effect-of-varying-designs-on-power.html#cb435-2"></a>SS_error</span></code></pre></div>
+<div class="sourceCode" id="cb461"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb461-1"><a href="effect-of-varying-designs-on-power.html#cb461-1"></a>SS_error &lt;-<span class="st"> </span>MS_error <span class="op">*</span><span class="st"> </span>(n <span class="op">*</span><span class="st"> </span><span class="dv">2</span>)</span>
+<span id="cb461-2"><a href="effect-of-varying-designs-on-power.html#cb461-2"></a>SS_error</span></code></pre></div>
 <pre><code>## [1] 10000</code></pre>
-<div class="sourceCode" id="cb437"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb437-1"><a href="effect-of-varying-designs-on-power.html#cb437-1"></a>eta_p_<span class="dv">2</span> &lt;-<span class="st"> </span>SS_A <span class="op">/</span><span class="st"> </span>(SS_A <span class="op">+</span><span class="st"> </span>SS_error)</span>
-<span id="cb437-2"><a href="effect-of-varying-designs-on-power.html#cb437-2"></a>eta_p_<span class="dv">2</span></span></code></pre></div>
+<div class="sourceCode" id="cb463"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb463-1"><a href="effect-of-varying-designs-on-power.html#cb463-1"></a>eta_p_<span class="dv">2</span> &lt;-<span class="st"> </span>SS_A <span class="op">/</span><span class="st"> </span>(SS_A <span class="op">+</span><span class="st"> </span>SS_error)</span>
+<span id="cb463-2"><a href="effect-of-varying-designs-on-power.html#cb463-2"></a>eta_p_<span class="dv">2</span></span></code></pre></div>
 <pre><code>## [1] 0.08256881</code></pre>
-<div class="sourceCode" id="cb439"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb439-1"><a href="effect-of-varying-designs-on-power.html#cb439-1"></a>f_<span class="dv">2</span> &lt;-<span class="st"> </span>eta_p_<span class="dv">2</span> <span class="op">/</span><span class="st"> </span>(<span class="dv">1</span> <span class="op">-</span><span class="st"> </span>eta_p_<span class="dv">2</span>)</span>
-<span id="cb439-2"><a href="effect-of-varying-designs-on-power.html#cb439-2"></a>f_<span class="dv">2</span></span></code></pre></div>
+<div class="sourceCode" id="cb465"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb465-1"><a href="effect-of-varying-designs-on-power.html#cb465-1"></a>f_<span class="dv">2</span> &lt;-<span class="st"> </span>eta_p_<span class="dv">2</span> <span class="op">/</span><span class="st"> </span>(<span class="dv">1</span> <span class="op">-</span><span class="st"> </span>eta_p_<span class="dv">2</span>)</span>
+<span id="cb465-2"><a href="effect-of-varying-designs-on-power.html#cb465-2"></a>f_<span class="dv">2</span></span></code></pre></div>
 <pre><code>## [1] 0.09</code></pre>
-<div class="sourceCode" id="cb441"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb441-1"><a href="effect-of-varying-designs-on-power.html#cb441-1"></a>Cohen_f &lt;-<span class="st"> </span><span class="kw">sqrt</span>(f_<span class="dv">2</span>)</span>
-<span id="cb441-2"><a href="effect-of-varying-designs-on-power.html#cb441-2"></a>Cohen_f</span></code></pre></div>
+<div class="sourceCode" id="cb467"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb467-1"><a href="effect-of-varying-designs-on-power.html#cb467-1"></a>Cohen_f &lt;-<span class="st"> </span><span class="kw">sqrt</span>(f_<span class="dv">2</span>)</span>
+<span id="cb467-2"><a href="effect-of-varying-designs-on-power.html#cb467-2"></a>Cohen_f</span></code></pre></div>
 <pre><code>## [1] 0.3</code></pre>
-<div class="sourceCode" id="cb443"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb443-1"><a href="effect-of-varying-designs-on-power.html#cb443-1"></a><span class="co">#Three groups</span></span>
-<span id="cb443-2"><a href="effect-of-varying-designs-on-power.html#cb443-2"></a>mu &lt;-<span class="st"> </span><span class="kw">c</span>(<span class="dv">80</span>, <span class="dv">83</span>, <span class="dv">86</span>)</span>
-<span id="cb443-3"><a href="effect-of-varying-designs-on-power.html#cb443-3"></a>sd =<span class="st"> </span><span class="dv">10</span></span>
-<span id="cb443-4"><a href="effect-of-varying-designs-on-power.html#cb443-4"></a>n &lt;-<span class="st"> </span><span class="dv">50</span></span>
-<span id="cb443-5"><a href="effect-of-varying-designs-on-power.html#cb443-5"></a>mean_mat &lt;-<span class="st"> </span><span class="kw">t</span>(<span class="kw">matrix</span>(mu, <span class="dt">nrow =</span> <span class="dv">3</span>, <span class="dt">ncol =</span> <span class="dv">1</span>)) <span class="co">#Create a mean matrix</span></span>
-<span id="cb443-6"><a href="effect-of-varying-designs-on-power.html#cb443-6"></a><span class="co"># Using the sweep function to remove rowmeans from the matrix</span></span>
-<span id="cb443-7"><a href="effect-of-varying-designs-on-power.html#cb443-7"></a>mean_mat_res &lt;-<span class="st"> </span><span class="kw">sweep</span>(mean_mat, <span class="dv">2</span>, <span class="kw">rowMeans</span>(mean_mat))</span>
-<span id="cb443-8"><a href="effect-of-varying-designs-on-power.html#cb443-8"></a>mean_mat_res</span></code></pre></div>
+<div class="sourceCode" id="cb469"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb469-1"><a href="effect-of-varying-designs-on-power.html#cb469-1"></a><span class="co">#Three groups</span></span>
+<span id="cb469-2"><a href="effect-of-varying-designs-on-power.html#cb469-2"></a>mu &lt;-<span class="st"> </span><span class="kw">c</span>(<span class="dv">80</span>, <span class="dv">83</span>, <span class="dv">86</span>)</span>
+<span id="cb469-3"><a href="effect-of-varying-designs-on-power.html#cb469-3"></a>sd =<span class="st"> </span><span class="dv">10</span></span>
+<span id="cb469-4"><a href="effect-of-varying-designs-on-power.html#cb469-4"></a>n &lt;-<span class="st"> </span><span class="dv">50</span></span>
+<span id="cb469-5"><a href="effect-of-varying-designs-on-power.html#cb469-5"></a>mean_mat &lt;-<span class="st"> </span><span class="kw">t</span>(<span class="kw">matrix</span>(mu, <span class="dt">nrow =</span> <span class="dv">3</span>, <span class="dt">ncol =</span> <span class="dv">1</span>)) <span class="co">#Create a mean matrix</span></span>
+<span id="cb469-6"><a href="effect-of-varying-designs-on-power.html#cb469-6"></a><span class="co"># Using the sweep function to remove rowmeans from the matrix</span></span>
+<span id="cb469-7"><a href="effect-of-varying-designs-on-power.html#cb469-7"></a>mean_mat_res &lt;-<span class="st"> </span><span class="kw">sweep</span>(mean_mat, <span class="dv">2</span>, <span class="kw">rowMeans</span>(mean_mat))</span>
+<span id="cb469-8"><a href="effect-of-varying-designs-on-power.html#cb469-8"></a>mean_mat_res</span></code></pre></div>
 <pre><code>##      [,1] [,2] [,3]
 ## [1,]   -3    0    3</code></pre>
-<div class="sourceCode" id="cb445"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb445-1"><a href="effect-of-varying-designs-on-power.html#cb445-1"></a>MS_a &lt;-<span class="st"> </span>n <span class="op">*</span><span class="st"> </span>(<span class="kw">sum</span>(mean_mat_res <span class="op">^</span><span class="st"> </span><span class="dv">2</span>) <span class="op">/</span><span class="st"> </span>(<span class="dv">3</span> <span class="op">-</span><span class="st"> </span><span class="dv">1</span>))</span>
-<span id="cb445-2"><a href="effect-of-varying-designs-on-power.html#cb445-2"></a>MS_a</span></code></pre></div>
+<div class="sourceCode" id="cb471"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb471-1"><a href="effect-of-varying-designs-on-power.html#cb471-1"></a>MS_a &lt;-<span class="st"> </span>n <span class="op">*</span><span class="st"> </span>(<span class="kw">sum</span>(mean_mat_res <span class="op">^</span><span class="st"> </span><span class="dv">2</span>) <span class="op">/</span><span class="st"> </span>(<span class="dv">3</span> <span class="op">-</span><span class="st"> </span><span class="dv">1</span>))</span>
+<span id="cb471-2"><a href="effect-of-varying-designs-on-power.html#cb471-2"></a>MS_a</span></code></pre></div>
 <pre><code>## [1] 450</code></pre>
-<div class="sourceCode" id="cb447"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb447-1"><a href="effect-of-varying-designs-on-power.html#cb447-1"></a>SS_A &lt;-<span class="st"> </span>n <span class="op">*</span><span class="st"> </span><span class="kw">sum</span>(mean_mat_res <span class="op">^</span><span class="st"> </span><span class="dv">2</span>)</span>
-<span id="cb447-2"><a href="effect-of-varying-designs-on-power.html#cb447-2"></a>SS_A</span></code></pre></div>
+<div class="sourceCode" id="cb473"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb473-1"><a href="effect-of-varying-designs-on-power.html#cb473-1"></a>SS_A &lt;-<span class="st"> </span>n <span class="op">*</span><span class="st"> </span><span class="kw">sum</span>(mean_mat_res <span class="op">^</span><span class="st"> </span><span class="dv">2</span>)</span>
+<span id="cb473-2"><a href="effect-of-varying-designs-on-power.html#cb473-2"></a>SS_A</span></code></pre></div>
 <pre><code>## [1] 900</code></pre>
-<div class="sourceCode" id="cb449"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb449-1"><a href="effect-of-varying-designs-on-power.html#cb449-1"></a>MS_error &lt;-<span class="st"> </span>sd <span class="op">^</span><span class="st"> </span><span class="dv">2</span></span>
-<span id="cb449-2"><a href="effect-of-varying-designs-on-power.html#cb449-2"></a>MS_error</span></code></pre></div>
+<div class="sourceCode" id="cb475"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb475-1"><a href="effect-of-varying-designs-on-power.html#cb475-1"></a>MS_error &lt;-<span class="st"> </span>sd <span class="op">^</span><span class="st"> </span><span class="dv">2</span></span>
+<span id="cb475-2"><a href="effect-of-varying-designs-on-power.html#cb475-2"></a>MS_error</span></code></pre></div>
 <pre><code>## [1] 100</code></pre>
-<div class="sourceCode" id="cb451"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb451-1"><a href="effect-of-varying-designs-on-power.html#cb451-1"></a>SS_error &lt;-<span class="st"> </span>MS_error <span class="op">*</span><span class="st"> </span>(n <span class="op">*</span><span class="st"> </span><span class="dv">3</span>)</span>
-<span id="cb451-2"><a href="effect-of-varying-designs-on-power.html#cb451-2"></a>SS_error</span></code></pre></div>
+<div class="sourceCode" id="cb477"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb477-1"><a href="effect-of-varying-designs-on-power.html#cb477-1"></a>SS_error &lt;-<span class="st"> </span>MS_error <span class="op">*</span><span class="st"> </span>(n <span class="op">*</span><span class="st"> </span><span class="dv">3</span>)</span>
+<span id="cb477-2"><a href="effect-of-varying-designs-on-power.html#cb477-2"></a>SS_error</span></code></pre></div>
 <pre><code>## [1] 15000</code></pre>
-<div class="sourceCode" id="cb453"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb453-1"><a href="effect-of-varying-designs-on-power.html#cb453-1"></a>eta_p_<span class="dv">2</span> &lt;-<span class="st"> </span>SS_A <span class="op">/</span><span class="st"> </span>(SS_A <span class="op">+</span><span class="st"> </span>SS_error)</span>
-<span id="cb453-2"><a href="effect-of-varying-designs-on-power.html#cb453-2"></a>eta_p_<span class="dv">2</span></span></code></pre></div>
+<div class="sourceCode" id="cb479"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb479-1"><a href="effect-of-varying-designs-on-power.html#cb479-1"></a>eta_p_<span class="dv">2</span> &lt;-<span class="st"> </span>SS_A <span class="op">/</span><span class="st"> </span>(SS_A <span class="op">+</span><span class="st"> </span>SS_error)</span>
+<span id="cb479-2"><a href="effect-of-varying-designs-on-power.html#cb479-2"></a>eta_p_<span class="dv">2</span></span></code></pre></div>
 <pre><code>## [1] 0.05660377</code></pre>
-<div class="sourceCode" id="cb455"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb455-1"><a href="effect-of-varying-designs-on-power.html#cb455-1"></a>f_<span class="dv">2</span> &lt;-<span class="st"> </span>eta_p_<span class="dv">2</span> <span class="op">/</span><span class="st"> </span>(<span class="dv">1</span> <span class="op">-</span><span class="st"> </span>eta_p_<span class="dv">2</span>)</span>
-<span id="cb455-2"><a href="effect-of-varying-designs-on-power.html#cb455-2"></a>f_<span class="dv">2</span></span></code></pre></div>
+<div class="sourceCode" id="cb481"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb481-1"><a href="effect-of-varying-designs-on-power.html#cb481-1"></a>f_<span class="dv">2</span> &lt;-<span class="st"> </span>eta_p_<span class="dv">2</span> <span class="op">/</span><span class="st"> </span>(<span class="dv">1</span> <span class="op">-</span><span class="st"> </span>eta_p_<span class="dv">2</span>)</span>
+<span id="cb481-2"><a href="effect-of-varying-designs-on-power.html#cb481-2"></a>f_<span class="dv">2</span></span></code></pre></div>
 <pre><code>## [1] 0.06</code></pre>
-<div class="sourceCode" id="cb457"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb457-1"><a href="effect-of-varying-designs-on-power.html#cb457-1"></a>Cohen_f &lt;-<span class="st"> </span><span class="kw">sqrt</span>(f_<span class="dv">2</span>)</span>
-<span id="cb457-2"><a href="effect-of-varying-designs-on-power.html#cb457-2"></a>Cohen_f</span></code></pre></div>
+<div class="sourceCode" id="cb483"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb483-1"><a href="effect-of-varying-designs-on-power.html#cb483-1"></a>Cohen_f &lt;-<span class="st"> </span><span class="kw">sqrt</span>(f_<span class="dv">2</span>)</span>
+<span id="cb483-2"><a href="effect-of-varying-designs-on-power.html#cb483-2"></a>Cohen_f</span></code></pre></div>
 <pre><code>## [1] 0.244949</code></pre>
 <p>The <code>SS_A</code> or the sum of squares for the main effect, is 900 for two groups, and the <code>SS_error</code> for the error term is 10000. When we add a group, <code>SS_A</code> is 900, and the <code>SS_error</code> is 15000. Because the added condition falls exactly on the grand mean (83), the sum of squared for this extra group is 0. In other words, it does nothing to increase the signal that there is a difference between groups. However, the sum of squares for the error, which is a function of the total sample size, is increased, which reduces the effect size. So, adding a condition that falls on the grand mean reduces the power for the main effect of the ANOVA. Obviously, adding such a group has other benefits, such as being able to compare the two means to a new third condition.</p>
 <p>We already saw that adding a condition that has a mean as extreme as one of the existing groups increases the power. Let’s again do the calculations step by step when the extra group has a mean as extreme as one of the two original conditions.</p>
-<div class="sourceCode" id="cb459"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb459-1"><a href="effect-of-varying-designs-on-power.html#cb459-1"></a><span class="co">#Three groups</span></span>
-<span id="cb459-2"><a href="effect-of-varying-designs-on-power.html#cb459-2"></a>mu &lt;-<span class="st"> </span><span class="kw">c</span>(<span class="dv">80</span>, <span class="dv">80</span>, <span class="dv">86</span>)</span>
-<span id="cb459-3"><a href="effect-of-varying-designs-on-power.html#cb459-3"></a>sd =<span class="st"> </span><span class="dv">10</span></span>
-<span id="cb459-4"><a href="effect-of-varying-designs-on-power.html#cb459-4"></a>n &lt;-<span class="st"> </span><span class="dv">50</span></span>
-<span id="cb459-5"><a href="effect-of-varying-designs-on-power.html#cb459-5"></a>mean_mat &lt;-<span class="st"> </span><span class="kw">t</span>(<span class="kw">matrix</span>(mu, <span class="dt">nrow =</span> <span class="dv">3</span>, <span class="dt">ncol =</span> <span class="dv">1</span>)) <span class="co">#Create a mean matrix</span></span>
-<span id="cb459-6"><a href="effect-of-varying-designs-on-power.html#cb459-6"></a><span class="co"># Using the sweep function to remove rowmeans from the matrix</span></span>
-<span id="cb459-7"><a href="effect-of-varying-designs-on-power.html#cb459-7"></a>mean_mat_res &lt;-<span class="st"> </span><span class="kw">sweep</span>(mean_mat, <span class="dv">2</span>, <span class="kw">rowMeans</span>(mean_mat))</span>
-<span id="cb459-8"><a href="effect-of-varying-designs-on-power.html#cb459-8"></a>mean_mat_res</span></code></pre></div>
+<div class="sourceCode" id="cb485"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb485-1"><a href="effect-of-varying-designs-on-power.html#cb485-1"></a><span class="co">#Three groups</span></span>
+<span id="cb485-2"><a href="effect-of-varying-designs-on-power.html#cb485-2"></a>mu &lt;-<span class="st"> </span><span class="kw">c</span>(<span class="dv">80</span>, <span class="dv">80</span>, <span class="dv">86</span>)</span>
+<span id="cb485-3"><a href="effect-of-varying-designs-on-power.html#cb485-3"></a>sd =<span class="st"> </span><span class="dv">10</span></span>
+<span id="cb485-4"><a href="effect-of-varying-designs-on-power.html#cb485-4"></a>n &lt;-<span class="st"> </span><span class="dv">50</span></span>
+<span id="cb485-5"><a href="effect-of-varying-designs-on-power.html#cb485-5"></a>mean_mat &lt;-<span class="st"> </span><span class="kw">t</span>(<span class="kw">matrix</span>(mu, <span class="dt">nrow =</span> <span class="dv">3</span>, <span class="dt">ncol =</span> <span class="dv">1</span>)) <span class="co">#Create a mean matrix</span></span>
+<span id="cb485-6"><a href="effect-of-varying-designs-on-power.html#cb485-6"></a><span class="co"># Using the sweep function to remove rowmeans from the matrix</span></span>
+<span id="cb485-7"><a href="effect-of-varying-designs-on-power.html#cb485-7"></a>mean_mat_res &lt;-<span class="st"> </span><span class="kw">sweep</span>(mean_mat, <span class="dv">2</span>, <span class="kw">rowMeans</span>(mean_mat))</span>
+<span id="cb485-8"><a href="effect-of-varying-designs-on-power.html#cb485-8"></a>mean_mat_res</span></code></pre></div>
 <pre><code>##      [,1] [,2] [,3]
 ## [1,]   -2   -2    4</code></pre>
-<div class="sourceCode" id="cb461"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb461-1"><a href="effect-of-varying-designs-on-power.html#cb461-1"></a>MS_a &lt;-<span class="st"> </span>n <span class="op">*</span><span class="st"> </span>(<span class="kw">sum</span>(mean_mat_res <span class="op">^</span><span class="st"> </span><span class="dv">2</span>) <span class="op">/</span><span class="st"> </span>(<span class="dv">3</span> <span class="op">-</span><span class="st"> </span><span class="dv">1</span>))</span>
-<span id="cb461-2"><a href="effect-of-varying-designs-on-power.html#cb461-2"></a>MS_a</span></code></pre></div>
+<div class="sourceCode" id="cb487"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb487-1"><a href="effect-of-varying-designs-on-power.html#cb487-1"></a>MS_a &lt;-<span class="st"> </span>n <span class="op">*</span><span class="st"> </span>(<span class="kw">sum</span>(mean_mat_res <span class="op">^</span><span class="st"> </span><span class="dv">2</span>) <span class="op">/</span><span class="st"> </span>(<span class="dv">3</span> <span class="op">-</span><span class="st"> </span><span class="dv">1</span>))</span>
+<span id="cb487-2"><a href="effect-of-varying-designs-on-power.html#cb487-2"></a>MS_a</span></code></pre></div>
 <pre><code>## [1] 600</code></pre>
-<div class="sourceCode" id="cb463"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb463-1"><a href="effect-of-varying-designs-on-power.html#cb463-1"></a>SS_A &lt;-<span class="st"> </span>n <span class="op">*</span><span class="st"> </span><span class="kw">sum</span>(mean_mat_res <span class="op">^</span><span class="st"> </span><span class="dv">2</span>)</span>
-<span id="cb463-2"><a href="effect-of-varying-designs-on-power.html#cb463-2"></a>SS_A</span></code></pre></div>
+<div class="sourceCode" id="cb489"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb489-1"><a href="effect-of-varying-designs-on-power.html#cb489-1"></a>SS_A &lt;-<span class="st"> </span>n <span class="op">*</span><span class="st"> </span><span class="kw">sum</span>(mean_mat_res <span class="op">^</span><span class="st"> </span><span class="dv">2</span>)</span>
+<span id="cb489-2"><a href="effect-of-varying-designs-on-power.html#cb489-2"></a>SS_A</span></code></pre></div>
 <pre><code>## [1] 1200</code></pre>
-<div class="sourceCode" id="cb465"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb465-1"><a href="effect-of-varying-designs-on-power.html#cb465-1"></a>MS_error &lt;-<span class="st"> </span>sd <span class="op">^</span><span class="st"> </span><span class="dv">2</span></span>
-<span id="cb465-2"><a href="effect-of-varying-designs-on-power.html#cb465-2"></a>MS_error</span></code></pre></div>
+<div class="sourceCode" id="cb491"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb491-1"><a href="effect-of-varying-designs-on-power.html#cb491-1"></a>MS_error &lt;-<span class="st"> </span>sd <span class="op">^</span><span class="st"> </span><span class="dv">2</span></span>
+<span id="cb491-2"><a href="effect-of-varying-designs-on-power.html#cb491-2"></a>MS_error</span></code></pre></div>
 <pre><code>## [1] 100</code></pre>
-<div class="sourceCode" id="cb467"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb467-1"><a href="effect-of-varying-designs-on-power.html#cb467-1"></a>SS_error &lt;-<span class="st"> </span>MS_error <span class="op">*</span><span class="st"> </span>(n <span class="op">*</span><span class="st"> </span><span class="dv">3</span>)</span>
-<span id="cb467-2"><a href="effect-of-varying-designs-on-power.html#cb467-2"></a>SS_error</span></code></pre></div>
+<div class="sourceCode" id="cb493"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb493-1"><a href="effect-of-varying-designs-on-power.html#cb493-1"></a>SS_error &lt;-<span class="st"> </span>MS_error <span class="op">*</span><span class="st"> </span>(n <span class="op">*</span><span class="st"> </span><span class="dv">3</span>)</span>
+<span id="cb493-2"><a href="effect-of-varying-designs-on-power.html#cb493-2"></a>SS_error</span></code></pre></div>
 <pre><code>## [1] 15000</code></pre>
-<div class="sourceCode" id="cb469"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb469-1"><a href="effect-of-varying-designs-on-power.html#cb469-1"></a>eta_p_<span class="dv">2</span> &lt;-<span class="st"> </span>SS_A <span class="op">/</span><span class="st"> </span>(SS_A <span class="op">+</span><span class="st"> </span>SS_error)</span>
-<span id="cb469-2"><a href="effect-of-varying-designs-on-power.html#cb469-2"></a>eta_p_<span class="dv">2</span></span></code></pre></div>
+<div class="sourceCode" id="cb495"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb495-1"><a href="effect-of-varying-designs-on-power.html#cb495-1"></a>eta_p_<span class="dv">2</span> &lt;-<span class="st"> </span>SS_A <span class="op">/</span><span class="st"> </span>(SS_A <span class="op">+</span><span class="st"> </span>SS_error)</span>
+<span id="cb495-2"><a href="effect-of-varying-designs-on-power.html#cb495-2"></a>eta_p_<span class="dv">2</span></span></code></pre></div>
 <pre><code>## [1] 0.07407407</code></pre>
-<div class="sourceCode" id="cb471"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb471-1"><a href="effect-of-varying-designs-on-power.html#cb471-1"></a>f_<span class="dv">2</span> &lt;-<span class="st"> </span>eta_p_<span class="dv">2</span> <span class="op">/</span><span class="st"> </span>(<span class="dv">1</span> <span class="op">-</span><span class="st"> </span>eta_p_<span class="dv">2</span>)</span>
-<span id="cb471-2"><a href="effect-of-varying-designs-on-power.html#cb471-2"></a>f_<span class="dv">2</span></span></code></pre></div>
+<div class="sourceCode" id="cb497"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb497-1"><a href="effect-of-varying-designs-on-power.html#cb497-1"></a>f_<span class="dv">2</span> &lt;-<span class="st"> </span>eta_p_<span class="dv">2</span> <span class="op">/</span><span class="st"> </span>(<span class="dv">1</span> <span class="op">-</span><span class="st"> </span>eta_p_<span class="dv">2</span>)</span>
+<span id="cb497-2"><a href="effect-of-varying-designs-on-power.html#cb497-2"></a>f_<span class="dv">2</span></span></code></pre></div>
 <pre><code>## [1] 0.08</code></pre>
-<div class="sourceCode" id="cb473"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb473-1"><a href="effect-of-varying-designs-on-power.html#cb473-1"></a>Cohen_f &lt;-<span class="st"> </span><span class="kw">sqrt</span>(f_<span class="dv">2</span>)</span>
-<span id="cb473-2"><a href="effect-of-varying-designs-on-power.html#cb473-2"></a>Cohen_f</span></code></pre></div>
+<div class="sourceCode" id="cb499"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb499-1"><a href="effect-of-varying-designs-on-power.html#cb499-1"></a>Cohen_f &lt;-<span class="st"> </span><span class="kw">sqrt</span>(f_<span class="dv">2</span>)</span>
+<span id="cb499-2"><a href="effect-of-varying-designs-on-power.html#cb499-2"></a>Cohen_f</span></code></pre></div>
 <pre><code>## [1] 0.2828427</code></pre>
 <p>We see the sum of squares of the error stays the same - 15000 - because it is only determined by the standard error and the sample size, but not by the differences in the means. This is an increase of 5000 compared to the 2 group design. The sum of squares (the second component that determines the size of partial eta-squared) increases, which increases Cohen’s <em>f</em>.</p>
 <div id="within-designs" class="section level2">
 <h2><span class="header-section-number">7.1</span> Within Designs</h2>
 <p>Now imagine our design described above was a within design. The means and sd remain the same. We collect 50 participants (instead of 100, or 50 per group, for the between design). Let’s first assume the two samples are completely uncorrelated.</p>
-<div class="sourceCode" id="cb475"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb475-1"><a href="effect-of-varying-designs-on-power.html#cb475-1"></a>string &lt;-<span class="st"> &quot;2w&quot;</span></span>
-<span id="cb475-2"><a href="effect-of-varying-designs-on-power.html#cb475-2"></a>n &lt;-<span class="st"> </span><span class="dv">50</span></span>
-<span id="cb475-3"><a href="effect-of-varying-designs-on-power.html#cb475-3"></a>mu &lt;-<span class="st"> </span><span class="kw">c</span>(<span class="dv">80</span>, <span class="dv">86</span>)</span>
-<span id="cb475-4"><a href="effect-of-varying-designs-on-power.html#cb475-4"></a>sd &lt;-<span class="st"> </span><span class="dv">10</span></span>
-<span id="cb475-5"><a href="effect-of-varying-designs-on-power.html#cb475-5"></a>labelnames &lt;-<span class="st"> </span><span class="kw">c</span>(<span class="st">&quot;Condition&quot;</span>, <span class="st">&quot;control&quot;</span>, <span class="st">&quot;intensive_training&quot;</span>) <span class="co">#</span></span>
-<span id="cb475-6"><a href="effect-of-varying-designs-on-power.html#cb475-6"></a>design_result &lt;-<span class="st"> </span><span class="kw">ANOVA_design</span>(</span>
-<span id="cb475-7"><a href="effect-of-varying-designs-on-power.html#cb475-7"></a>  <span class="dt">design =</span> string,</span>
-<span id="cb475-8"><a href="effect-of-varying-designs-on-power.html#cb475-8"></a>  <span class="dt">n =</span> n,</span>
-<span id="cb475-9"><a href="effect-of-varying-designs-on-power.html#cb475-9"></a>  <span class="dt">mu =</span> mu,</span>
-<span id="cb475-10"><a href="effect-of-varying-designs-on-power.html#cb475-10"></a>  <span class="dt">sd =</span> sd,</span>
-<span id="cb475-11"><a href="effect-of-varying-designs-on-power.html#cb475-11"></a>  <span class="dt">labelnames =</span> labelnames</span>
-<span id="cb475-12"><a href="effect-of-varying-designs-on-power.html#cb475-12"></a>)</span>
-<span id="cb475-13"><a href="effect-of-varying-designs-on-power.html#cb475-13"></a></span>
-<span id="cb475-14"><a href="effect-of-varying-designs-on-power.html#cb475-14"></a><span class="kw">power_oneway_within</span>(design_result)<span class="op">$</span>power</span></code></pre></div>
+<div class="sourceCode" id="cb501"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb501-1"><a href="effect-of-varying-designs-on-power.html#cb501-1"></a>string &lt;-<span class="st"> &quot;2w&quot;</span></span>
+<span id="cb501-2"><a href="effect-of-varying-designs-on-power.html#cb501-2"></a>n &lt;-<span class="st"> </span><span class="dv">50</span></span>
+<span id="cb501-3"><a href="effect-of-varying-designs-on-power.html#cb501-3"></a>mu &lt;-<span class="st"> </span><span class="kw">c</span>(<span class="dv">80</span>, <span class="dv">86</span>)</span>
+<span id="cb501-4"><a href="effect-of-varying-designs-on-power.html#cb501-4"></a>sd &lt;-<span class="st"> </span><span class="dv">10</span></span>
+<span id="cb501-5"><a href="effect-of-varying-designs-on-power.html#cb501-5"></a>labelnames &lt;-<span class="st"> </span><span class="kw">c</span>(<span class="st">&quot;Condition&quot;</span>, <span class="st">&quot;control&quot;</span>, <span class="st">&quot;intensive_training&quot;</span>) <span class="co">#</span></span>
+<span id="cb501-6"><a href="effect-of-varying-designs-on-power.html#cb501-6"></a>design_result &lt;-<span class="st"> </span><span class="kw">ANOVA_design</span>(</span>
+<span id="cb501-7"><a href="effect-of-varying-designs-on-power.html#cb501-7"></a>  <span class="dt">design =</span> string,</span>
+<span id="cb501-8"><a href="effect-of-varying-designs-on-power.html#cb501-8"></a>  <span class="dt">n =</span> n,</span>
+<span id="cb501-9"><a href="effect-of-varying-designs-on-power.html#cb501-9"></a>  <span class="dt">mu =</span> mu,</span>
+<span id="cb501-10"><a href="effect-of-varying-designs-on-power.html#cb501-10"></a>  <span class="dt">sd =</span> sd,</span>
+<span id="cb501-11"><a href="effect-of-varying-designs-on-power.html#cb501-11"></a>  <span class="dt">labelnames =</span> labelnames</span>
+<span id="cb501-12"><a href="effect-of-varying-designs-on-power.html#cb501-12"></a>)</span></code></pre></div>
+<p><img src="SuperpowerValidation_files/figure-html/unnamed-chunk-228-1.png" width="672" /></p>
+<div class="sourceCode" id="cb502"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb502-1"><a href="effect-of-varying-designs-on-power.html#cb502-1"></a><span class="kw">power_oneway_within</span>(design_result)<span class="op">$</span>power</span></code></pre></div>
 <pre><code>## [1] 83.66436</code></pre>
-<div class="sourceCode" id="cb477"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb477-1"><a href="effect-of-varying-designs-on-power.html#cb477-1"></a>exact_result &lt;-<span class="st"> </span><span class="kw">ANOVA_exact</span>(design_result,</span>
-<span id="cb477-2"><a href="effect-of-varying-designs-on-power.html#cb477-2"></a>                            <span class="dt">alpha_level =</span> alpha_level,</span>
-<span id="cb477-3"><a href="effect-of-varying-designs-on-power.html#cb477-3"></a>                            <span class="dt">verbose =</span> <span class="ot">FALSE</span>)</span></code></pre></div>
+<div class="sourceCode" id="cb504"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb504-1"><a href="effect-of-varying-designs-on-power.html#cb504-1"></a>exact_result &lt;-<span class="st"> </span><span class="kw">ANOVA_exact</span>(design_result,</span>
+<span id="cb504-2"><a href="effect-of-varying-designs-on-power.html#cb504-2"></a>                            <span class="dt">alpha_level =</span> alpha_level,</span>
+<span id="cb504-3"><a href="effect-of-varying-designs-on-power.html#cb504-3"></a>                            <span class="dt">verbose =</span> <span class="ot">FALSE</span>)</span></code></pre></div>
 <table class="table" style="margin-left: auto; margin-right: auto;">
 <caption>
 <span id="tab:unnamed-chunk-230">Table 7.4: </span>Exact ANOVA Result
@@ -619,24 +638,24 @@ Condition
 </tbody>
 </table>
 <p>We see power is ever so slightly less than for the between subject design. This is due to the loss in degrees of freedom, which is <span class="math inline">\(2(n-1)\)</span> for between designs, and <span class="math inline">\(n-1\)</span> for within designs. But as the correlation increases, the power advantage of within designs becomes stronger.</p>
-<div class="sourceCode" id="cb478"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb478-1"><a href="effect-of-varying-designs-on-power.html#cb478-1"></a>string &lt;-<span class="st"> &quot;3w&quot;</span></span>
-<span id="cb478-2"><a href="effect-of-varying-designs-on-power.html#cb478-2"></a>n &lt;-<span class="st"> </span><span class="dv">50</span></span>
-<span id="cb478-3"><a href="effect-of-varying-designs-on-power.html#cb478-3"></a>mu &lt;-<span class="st"> </span><span class="kw">c</span>(<span class="dv">80</span>, <span class="dv">83</span>, <span class="dv">86</span>)</span>
-<span id="cb478-4"><a href="effect-of-varying-designs-on-power.html#cb478-4"></a>sd &lt;-<span class="st"> </span><span class="dv">10</span></span>
-<span id="cb478-5"><a href="effect-of-varying-designs-on-power.html#cb478-5"></a>labelnames &lt;-<span class="st"> </span><span class="kw">c</span>(<span class="st">&quot;Condition&quot;</span>, <span class="st">&quot;control&quot;</span>, <span class="st">&quot;light_training&quot;</span>, <span class="st">&quot;intensive_training&quot;</span>)</span>
-<span id="cb478-6"><a href="effect-of-varying-designs-on-power.html#cb478-6"></a>design_result &lt;-<span class="st"> </span><span class="kw">ANOVA_design</span>(</span>
-<span id="cb478-7"><a href="effect-of-varying-designs-on-power.html#cb478-7"></a>  <span class="dt">design =</span> string,</span>
-<span id="cb478-8"><a href="effect-of-varying-designs-on-power.html#cb478-8"></a>  <span class="dt">n =</span> n,</span>
-<span id="cb478-9"><a href="effect-of-varying-designs-on-power.html#cb478-9"></a>  <span class="dt">mu =</span> mu,</span>
-<span id="cb478-10"><a href="effect-of-varying-designs-on-power.html#cb478-10"></a>  <span class="dt">sd =</span> sd,</span>
-<span id="cb478-11"><a href="effect-of-varying-designs-on-power.html#cb478-11"></a>  <span class="dt">labelnames =</span> labelnames</span>
-<span id="cb478-12"><a href="effect-of-varying-designs-on-power.html#cb478-12"></a>)</span>
-<span id="cb478-13"><a href="effect-of-varying-designs-on-power.html#cb478-13"></a></span>
-<span id="cb478-14"><a href="effect-of-varying-designs-on-power.html#cb478-14"></a><span class="kw">power_oneway_within</span>(design_result)<span class="op">$</span>power</span></code></pre></div>
+<div class="sourceCode" id="cb505"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb505-1"><a href="effect-of-varying-designs-on-power.html#cb505-1"></a>string &lt;-<span class="st"> &quot;3w&quot;</span></span>
+<span id="cb505-2"><a href="effect-of-varying-designs-on-power.html#cb505-2"></a>n &lt;-<span class="st"> </span><span class="dv">50</span></span>
+<span id="cb505-3"><a href="effect-of-varying-designs-on-power.html#cb505-3"></a>mu &lt;-<span class="st"> </span><span class="kw">c</span>(<span class="dv">80</span>, <span class="dv">83</span>, <span class="dv">86</span>)</span>
+<span id="cb505-4"><a href="effect-of-varying-designs-on-power.html#cb505-4"></a>sd &lt;-<span class="st"> </span><span class="dv">10</span></span>
+<span id="cb505-5"><a href="effect-of-varying-designs-on-power.html#cb505-5"></a>labelnames &lt;-<span class="st"> </span><span class="kw">c</span>(<span class="st">&quot;Condition&quot;</span>, <span class="st">&quot;control&quot;</span>, <span class="st">&quot;light_training&quot;</span>, <span class="st">&quot;intensive_training&quot;</span>)</span>
+<span id="cb505-6"><a href="effect-of-varying-designs-on-power.html#cb505-6"></a>design_result &lt;-<span class="st"> </span><span class="kw">ANOVA_design</span>(</span>
+<span id="cb505-7"><a href="effect-of-varying-designs-on-power.html#cb505-7"></a>  <span class="dt">design =</span> string,</span>
+<span id="cb505-8"><a href="effect-of-varying-designs-on-power.html#cb505-8"></a>  <span class="dt">n =</span> n,</span>
+<span id="cb505-9"><a href="effect-of-varying-designs-on-power.html#cb505-9"></a>  <span class="dt">mu =</span> mu,</span>
+<span id="cb505-10"><a href="effect-of-varying-designs-on-power.html#cb505-10"></a>  <span class="dt">sd =</span> sd,</span>
+<span id="cb505-11"><a href="effect-of-varying-designs-on-power.html#cb505-11"></a>  <span class="dt">labelnames =</span> labelnames</span>
+<span id="cb505-12"><a href="effect-of-varying-designs-on-power.html#cb505-12"></a>)</span></code></pre></div>
+<p><img src="SuperpowerValidation_files/figure-html/unnamed-chunk-231-1.png" width="672" /></p>
+<div class="sourceCode" id="cb506"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb506-1"><a href="effect-of-varying-designs-on-power.html#cb506-1"></a><span class="kw">power_oneway_within</span>(design_result)<span class="op">$</span>power</span></code></pre></div>
 <pre><code>## [1] 75.70841</code></pre>
-<div class="sourceCode" id="cb480"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb480-1"><a href="effect-of-varying-designs-on-power.html#cb480-1"></a>exact_result &lt;-<span class="st"> </span><span class="kw">ANOVA_exact</span>(design_result,</span>
-<span id="cb480-2"><a href="effect-of-varying-designs-on-power.html#cb480-2"></a>                            <span class="dt">alpha_level =</span> alpha_level,</span>
-<span id="cb480-3"><a href="effect-of-varying-designs-on-power.html#cb480-3"></a>                            <span class="dt">verbose =</span> <span class="ot">FALSE</span>)</span></code></pre></div>
+<div class="sourceCode" id="cb508"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb508-1"><a href="effect-of-varying-designs-on-power.html#cb508-1"></a>exact_result &lt;-<span class="st"> </span><span class="kw">ANOVA_exact</span>(design_result,</span>
+<span id="cb508-2"><a href="effect-of-varying-designs-on-power.html#cb508-2"></a>                            <span class="dt">alpha_level =</span> alpha_level,</span>
+<span id="cb508-3"><a href="effect-of-varying-designs-on-power.html#cb508-3"></a>                            <span class="dt">verbose =</span> <span class="ot">FALSE</span>)</span></code></pre></div>
 <table class="table" style="margin-left: auto; margin-right: auto;">
 <caption>
 <span id="tab:unnamed-chunk-233">Table 7.5: </span>Exact ANOVA Result
@@ -680,131 +699,133 @@ Condition
 </tbody>
 </table>
 <p>When we add a a condition in a within design where we expect the mean to be identical to the grand mean, we again see that the power decreases. This similarly shows that adding a condition that equals the grand mean to a within subject design does not come for free, but has a power cost.</p>
-<div class="sourceCode" id="cb481"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb481-1"><a href="effect-of-varying-designs-on-power.html#cb481-1"></a>n &lt;-<span class="st"> </span><span class="dv">30</span></span>
-<span id="cb481-2"><a href="effect-of-varying-designs-on-power.html#cb481-2"></a>sd &lt;-<span class="st"> </span><span class="dv">10</span></span>
-<span id="cb481-3"><a href="effect-of-varying-designs-on-power.html#cb481-3"></a>r &lt;-<span class="st"> </span><span class="fl">0.5</span></span>
-<span id="cb481-4"><a href="effect-of-varying-designs-on-power.html#cb481-4"></a>string &lt;-<span class="st"> &quot;2w&quot;</span></span>
-<span id="cb481-5"><a href="effect-of-varying-designs-on-power.html#cb481-5"></a>mu &lt;-<span class="st"> </span><span class="kw">c</span>(<span class="dv">0</span>, <span class="dv">5</span>) </span>
-<span id="cb481-6"><a href="effect-of-varying-designs-on-power.html#cb481-6"></a>design_result &lt;-<span class="st"> </span><span class="kw">ANOVA_design</span>(</span>
-<span id="cb481-7"><a href="effect-of-varying-designs-on-power.html#cb481-7"></a>  <span class="dt">design =</span> string,</span>
-<span id="cb481-8"><a href="effect-of-varying-designs-on-power.html#cb481-8"></a>  <span class="dt">n =</span> n,</span>
-<span id="cb481-9"><a href="effect-of-varying-designs-on-power.html#cb481-9"></a>  <span class="dt">mu =</span> mu,</span>
-<span id="cb481-10"><a href="effect-of-varying-designs-on-power.html#cb481-10"></a>  <span class="dt">sd =</span> sd,</span>
-<span id="cb481-11"><a href="effect-of-varying-designs-on-power.html#cb481-11"></a>  <span class="dt">r =</span> r</span>
-<span id="cb481-12"><a href="effect-of-varying-designs-on-power.html#cb481-12"></a>)</span>
-<span id="cb481-13"><a href="effect-of-varying-designs-on-power.html#cb481-13"></a></span>
-<span id="cb481-14"><a href="effect-of-varying-designs-on-power.html#cb481-14"></a><span class="kw">power_oneway_within</span>(design_result)<span class="op">$</span>power</span></code></pre></div>
+<div class="sourceCode" id="cb509"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb509-1"><a href="effect-of-varying-designs-on-power.html#cb509-1"></a>n &lt;-<span class="st"> </span><span class="dv">30</span></span>
+<span id="cb509-2"><a href="effect-of-varying-designs-on-power.html#cb509-2"></a>sd &lt;-<span class="st"> </span><span class="dv">10</span></span>
+<span id="cb509-3"><a href="effect-of-varying-designs-on-power.html#cb509-3"></a>r &lt;-<span class="st"> </span><span class="fl">0.5</span></span>
+<span id="cb509-4"><a href="effect-of-varying-designs-on-power.html#cb509-4"></a>string &lt;-<span class="st"> &quot;2w&quot;</span></span>
+<span id="cb509-5"><a href="effect-of-varying-designs-on-power.html#cb509-5"></a>mu &lt;-<span class="st"> </span><span class="kw">c</span>(<span class="dv">0</span>, <span class="dv">5</span>) </span>
+<span id="cb509-6"><a href="effect-of-varying-designs-on-power.html#cb509-6"></a>design_result &lt;-<span class="st"> </span><span class="kw">ANOVA_design</span>(</span>
+<span id="cb509-7"><a href="effect-of-varying-designs-on-power.html#cb509-7"></a>  <span class="dt">design =</span> string,</span>
+<span id="cb509-8"><a href="effect-of-varying-designs-on-power.html#cb509-8"></a>  <span class="dt">n =</span> n,</span>
+<span id="cb509-9"><a href="effect-of-varying-designs-on-power.html#cb509-9"></a>  <span class="dt">mu =</span> mu,</span>
+<span id="cb509-10"><a href="effect-of-varying-designs-on-power.html#cb509-10"></a>  <span class="dt">sd =</span> sd,</span>
+<span id="cb509-11"><a href="effect-of-varying-designs-on-power.html#cb509-11"></a>  <span class="dt">r =</span> r</span>
+<span id="cb509-12"><a href="effect-of-varying-designs-on-power.html#cb509-12"></a>)</span></code></pre></div>
+<p><img src="SuperpowerValidation_files/figure-html/unnamed-chunk-234-1.png" width="672" /></p>
+<div class="sourceCode" id="cb510"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb510-1"><a href="effect-of-varying-designs-on-power.html#cb510-1"></a><span class="kw">power_oneway_within</span>(design_result)<span class="op">$</span>power</span></code></pre></div>
 <pre><code>## [1] 75.39647</code></pre>
-<div class="sourceCode" id="cb483"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb483-1"><a href="effect-of-varying-designs-on-power.html#cb483-1"></a><span class="kw">power_oneway_within</span>(design_result)<span class="op">$</span>Cohen_f</span></code></pre></div>
+<div class="sourceCode" id="cb512"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb512-1"><a href="effect-of-varying-designs-on-power.html#cb512-1"></a><span class="kw">power_oneway_within</span>(design_result)<span class="op">$</span>Cohen_f</span></code></pre></div>
 <pre><code>## [1] 0.25</code></pre>
-<div class="sourceCode" id="cb485"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb485-1"><a href="effect-of-varying-designs-on-power.html#cb485-1"></a><span class="kw">power_oneway_within</span>(design_result)<span class="op">$</span>Cohen_f_SPSS</span></code></pre></div>
+<div class="sourceCode" id="cb514"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb514-1"><a href="effect-of-varying-designs-on-power.html#cb514-1"></a><span class="kw">power_oneway_within</span>(design_result)<span class="op">$</span>Cohen_f_SPSS</span></code></pre></div>
 <pre><code>## [1] 0.5085476</code></pre>
-<div class="sourceCode" id="cb487"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb487-1"><a href="effect-of-varying-designs-on-power.html#cb487-1"></a><span class="kw">power_oneway_within</span>(design_result)<span class="op">$</span>lambda</span></code></pre></div>
+<div class="sourceCode" id="cb516"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb516-1"><a href="effect-of-varying-designs-on-power.html#cb516-1"></a><span class="kw">power_oneway_within</span>(design_result)<span class="op">$</span>lambda</span></code></pre></div>
 <pre><code>## [1] 7.5</code></pre>
-<div class="sourceCode" id="cb489"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb489-1"><a href="effect-of-varying-designs-on-power.html#cb489-1"></a><span class="kw">power_oneway_within</span>(design_result)<span class="op">$</span>F_critical</span></code></pre></div>
+<div class="sourceCode" id="cb518"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb518-1"><a href="effect-of-varying-designs-on-power.html#cb518-1"></a><span class="kw">power_oneway_within</span>(design_result)<span class="op">$</span>F_critical</span></code></pre></div>
 <pre><code>## [1] 4.182964</code></pre>
-<div class="sourceCode" id="cb491"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb491-1"><a href="effect-of-varying-designs-on-power.html#cb491-1"></a>string &lt;-<span class="st"> &quot;3w&quot;</span></span>
-<span id="cb491-2"><a href="effect-of-varying-designs-on-power.html#cb491-2"></a>mu &lt;-<span class="st"> </span><span class="kw">c</span>(<span class="dv">0</span>, <span class="dv">0</span>, <span class="dv">5</span>)</span>
-<span id="cb491-3"><a href="effect-of-varying-designs-on-power.html#cb491-3"></a></span>
-<span id="cb491-4"><a href="effect-of-varying-designs-on-power.html#cb491-4"></a>design_result &lt;-<span class="st"> </span><span class="kw">ANOVA_design</span>(</span>
-<span id="cb491-5"><a href="effect-of-varying-designs-on-power.html#cb491-5"></a>  <span class="dt">design =</span> string,</span>
-<span id="cb491-6"><a href="effect-of-varying-designs-on-power.html#cb491-6"></a>  <span class="dt">n =</span> n,</span>
-<span id="cb491-7"><a href="effect-of-varying-designs-on-power.html#cb491-7"></a>  <span class="dt">mu =</span> mu,</span>
-<span id="cb491-8"><a href="effect-of-varying-designs-on-power.html#cb491-8"></a>  <span class="dt">sd =</span> sd,</span>
-<span id="cb491-9"><a href="effect-of-varying-designs-on-power.html#cb491-9"></a>  <span class="dt">r =</span> r</span>
-<span id="cb491-10"><a href="effect-of-varying-designs-on-power.html#cb491-10"></a>)</span>
-<span id="cb491-11"><a href="effect-of-varying-designs-on-power.html#cb491-11"></a></span>
-<span id="cb491-12"><a href="effect-of-varying-designs-on-power.html#cb491-12"></a><span class="kw">power_oneway_within</span>(design_result)<span class="op">$</span>power</span></code></pre></div>
+<div class="sourceCode" id="cb520"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb520-1"><a href="effect-of-varying-designs-on-power.html#cb520-1"></a>string &lt;-<span class="st"> &quot;3w&quot;</span></span>
+<span id="cb520-2"><a href="effect-of-varying-designs-on-power.html#cb520-2"></a>mu &lt;-<span class="st"> </span><span class="kw">c</span>(<span class="dv">0</span>, <span class="dv">0</span>, <span class="dv">5</span>)</span>
+<span id="cb520-3"><a href="effect-of-varying-designs-on-power.html#cb520-3"></a></span>
+<span id="cb520-4"><a href="effect-of-varying-designs-on-power.html#cb520-4"></a>design_result &lt;-<span class="st"> </span><span class="kw">ANOVA_design</span>(</span>
+<span id="cb520-5"><a href="effect-of-varying-designs-on-power.html#cb520-5"></a>  <span class="dt">design =</span> string,</span>
+<span id="cb520-6"><a href="effect-of-varying-designs-on-power.html#cb520-6"></a>  <span class="dt">n =</span> n,</span>
+<span id="cb520-7"><a href="effect-of-varying-designs-on-power.html#cb520-7"></a>  <span class="dt">mu =</span> mu,</span>
+<span id="cb520-8"><a href="effect-of-varying-designs-on-power.html#cb520-8"></a>  <span class="dt">sd =</span> sd,</span>
+<span id="cb520-9"><a href="effect-of-varying-designs-on-power.html#cb520-9"></a>  <span class="dt">r =</span> r</span>
+<span id="cb520-10"><a href="effect-of-varying-designs-on-power.html#cb520-10"></a>)</span></code></pre></div>
+<p><img src="SuperpowerValidation_files/figure-html/unnamed-chunk-234-2.png" width="672" /></p>
+<div class="sourceCode" id="cb521"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb521-1"><a href="effect-of-varying-designs-on-power.html#cb521-1"></a><span class="kw">power_oneway_within</span>(design_result)<span class="op">$</span>power</span></code></pre></div>
 <pre><code>## [1] 79.37037</code></pre>
-<div class="sourceCode" id="cb493"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb493-1"><a href="effect-of-varying-designs-on-power.html#cb493-1"></a><span class="kw">power_oneway_within</span>(design_result)<span class="op">$</span>Cohen_f</span></code></pre></div>
-<pre><code>## [1] 0.2357023</code></pre>
-<div class="sourceCode" id="cb495"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb495-1"><a href="effect-of-varying-designs-on-power.html#cb495-1"></a><span class="kw">power_oneway_within</span>(design_result)<span class="op">$</span>Cohen_f_SPSS</span></code></pre></div>
-<pre><code>## [1] 0.4152274</code></pre>
-<div class="sourceCode" id="cb497"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb497-1"><a href="effect-of-varying-designs-on-power.html#cb497-1"></a><span class="kw">power_oneway_within</span>(design_result)<span class="op">$</span>lambda</span></code></pre></div>
-<pre><code>## [1] 10</code></pre>
-<div class="sourceCode" id="cb499"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb499-1"><a href="effect-of-varying-designs-on-power.html#cb499-1"></a><span class="kw">power_oneway_within</span>(design_result)<span class="op">$</span>F_critical</span></code></pre></div>
-<pre><code>## [1] 3.155932</code></pre>
-<div class="sourceCode" id="cb501"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb501-1"><a href="effect-of-varying-designs-on-power.html#cb501-1"></a>string &lt;-<span class="st"> &quot;4w&quot;</span></span>
-<span id="cb501-2"><a href="effect-of-varying-designs-on-power.html#cb501-2"></a>mu &lt;-<span class="st"> </span><span class="kw">c</span>(<span class="dv">0</span>, <span class="dv">0</span>, <span class="dv">0</span>, <span class="dv">5</span>)</span>
-<span id="cb501-3"><a href="effect-of-varying-designs-on-power.html#cb501-3"></a>design_result &lt;-<span class="st"> </span><span class="kw">ANOVA_design</span>(</span>
-<span id="cb501-4"><a href="effect-of-varying-designs-on-power.html#cb501-4"></a>  <span class="dt">design =</span> string,</span>
-<span id="cb501-5"><a href="effect-of-varying-designs-on-power.html#cb501-5"></a>  <span class="dt">n =</span> n,</span>
-<span id="cb501-6"><a href="effect-of-varying-designs-on-power.html#cb501-6"></a>  <span class="dt">mu =</span> mu,</span>
-<span id="cb501-7"><a href="effect-of-varying-designs-on-power.html#cb501-7"></a>  <span class="dt">sd =</span> sd,</span>
-<span id="cb501-8"><a href="effect-of-varying-designs-on-power.html#cb501-8"></a>  <span class="dt">r =</span> r</span>
-<span id="cb501-9"><a href="effect-of-varying-designs-on-power.html#cb501-9"></a>)</span>
-<span id="cb501-10"><a href="effect-of-varying-designs-on-power.html#cb501-10"></a></span>
-<span id="cb501-11"><a href="effect-of-varying-designs-on-power.html#cb501-11"></a><span class="kw">power_oneway_within</span>(design_result)<span class="op">$</span>power</span></code></pre></div>
-<pre><code>## [1] 79.40126</code></pre>
-<div class="sourceCode" id="cb503"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb503-1"><a href="effect-of-varying-designs-on-power.html#cb503-1"></a><span class="kw">power_oneway_within</span>(design_result)<span class="op">$</span>Cohen_f</span></code></pre></div>
-<pre><code>## [1] 0.2165064</code></pre>
-<div class="sourceCode" id="cb505"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb505-1"><a href="effect-of-varying-designs-on-power.html#cb505-1"></a><span class="kw">power_oneway_within</span>(design_result)<span class="op">$</span>Cohen_f_SPSS</span></code></pre></div>
-<pre><code>## [1] 0.3595975</code></pre>
-<div class="sourceCode" id="cb507"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb507-1"><a href="effect-of-varying-designs-on-power.html#cb507-1"></a><span class="kw">power_oneway_within</span>(design_result)<span class="op">$</span>lambda</span></code></pre></div>
-<pre><code>## [1] 11.25</code></pre>
-<div class="sourceCode" id="cb509"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb509-1"><a href="effect-of-varying-designs-on-power.html#cb509-1"></a><span class="kw">power_oneway_within</span>(design_result)<span class="op">$</span>F_critical</span></code></pre></div>
-<pre><code>## [1] 2.709402</code></pre>
-<div class="sourceCode" id="cb511"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb511-1"><a href="effect-of-varying-designs-on-power.html#cb511-1"></a>string &lt;-<span class="st"> &quot;5w&quot;</span></span>
-<span id="cb511-2"><a href="effect-of-varying-designs-on-power.html#cb511-2"></a>mu &lt;-<span class="st"> </span><span class="kw">c</span>(<span class="dv">0</span>, <span class="dv">0</span>, <span class="dv">0</span>, <span class="dv">0</span>, <span class="dv">5</span>) </span>
-<span id="cb511-3"><a href="effect-of-varying-designs-on-power.html#cb511-3"></a></span>
-<span id="cb511-4"><a href="effect-of-varying-designs-on-power.html#cb511-4"></a>design_result &lt;-<span class="st"> </span><span class="kw">ANOVA_design</span>(</span>
-<span id="cb511-5"><a href="effect-of-varying-designs-on-power.html#cb511-5"></a>  <span class="dt">design =</span> string,</span>
-<span id="cb511-6"><a href="effect-of-varying-designs-on-power.html#cb511-6"></a>  <span class="dt">n =</span> n,</span>
-<span id="cb511-7"><a href="effect-of-varying-designs-on-power.html#cb511-7"></a>  <span class="dt">mu =</span> mu,</span>
-<span id="cb511-8"><a href="effect-of-varying-designs-on-power.html#cb511-8"></a>  <span class="dt">sd =</span> sd,</span>
-<span id="cb511-9"><a href="effect-of-varying-designs-on-power.html#cb511-9"></a>  <span class="dt">r =</span> r</span>
-<span id="cb511-10"><a href="effect-of-varying-designs-on-power.html#cb511-10"></a>)</span>
-<span id="cb511-11"><a href="effect-of-varying-designs-on-power.html#cb511-11"></a><span class="kw">power_oneway_within</span>(design_result)<span class="op">$</span>power</span></code></pre></div>
-<pre><code>## [1] 78.38682</code></pre>
-<div class="sourceCode" id="cb513"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb513-1"><a href="effect-of-varying-designs-on-power.html#cb513-1"></a><span class="kw">power_oneway_within</span>(design_result)<span class="op">$</span>Cohen_f</span></code></pre></div>
-<pre><code>## [1] 0.2</code></pre>
-<div class="sourceCode" id="cb515"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb515-1"><a href="effect-of-varying-designs-on-power.html#cb515-1"></a><span class="kw">power_oneway_within</span>(design_result)<span class="op">$</span>Cohen_f_SPSS</span></code></pre></div>
-<pre><code>## [1] 0.3216338</code></pre>
-<div class="sourceCode" id="cb517"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb517-1"><a href="effect-of-varying-designs-on-power.html#cb517-1"></a><span class="kw">power_oneway_within</span>(design_result)<span class="op">$</span>lambda</span></code></pre></div>
-<pre><code>## [1] 12</code></pre>
-<div class="sourceCode" id="cb519"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb519-1"><a href="effect-of-varying-designs-on-power.html#cb519-1"></a><span class="kw">power_oneway_within</span>(design_result)<span class="op">$</span>F_critical</span></code></pre></div>
-<pre><code>## [1] 2.44988</code></pre>
-<div class="sourceCode" id="cb521"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb521-1"><a href="effect-of-varying-designs-on-power.html#cb521-1"></a>string &lt;-<span class="st"> &quot;6w&quot;</span></span>
-<span id="cb521-2"><a href="effect-of-varying-designs-on-power.html#cb521-2"></a>mu &lt;-<span class="st"> </span><span class="kw">c</span>(<span class="dv">0</span>, <span class="dv">0</span>, <span class="dv">0</span>, <span class="dv">0</span>, <span class="dv">0</span>, <span class="dv">5</span>) </span>
-<span id="cb521-3"><a href="effect-of-varying-designs-on-power.html#cb521-3"></a>design_result &lt;-<span class="st"> </span><span class="kw">ANOVA_design</span>(</span>
-<span id="cb521-4"><a href="effect-of-varying-designs-on-power.html#cb521-4"></a>  <span class="dt">design =</span> string,</span>
-<span id="cb521-5"><a href="effect-of-varying-designs-on-power.html#cb521-5"></a>  <span class="dt">n =</span> n,</span>
-<span id="cb521-6"><a href="effect-of-varying-designs-on-power.html#cb521-6"></a>  <span class="dt">mu =</span> mu,</span>
-<span id="cb521-7"><a href="effect-of-varying-designs-on-power.html#cb521-7"></a>  <span class="dt">sd =</span> sd,</span>
-<span id="cb521-8"><a href="effect-of-varying-designs-on-power.html#cb521-8"></a>  <span class="dt">r =</span> r</span>
-<span id="cb521-9"><a href="effect-of-varying-designs-on-power.html#cb521-9"></a>)</span>
-<span id="cb521-10"><a href="effect-of-varying-designs-on-power.html#cb521-10"></a><span class="kw">power_oneway_within</span>(design_result)<span class="op">$</span>power</span></code></pre></div>
-<pre><code>## [1] 76.99592</code></pre>
 <div class="sourceCode" id="cb523"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb523-1"><a href="effect-of-varying-designs-on-power.html#cb523-1"></a><span class="kw">power_oneway_within</span>(design_result)<span class="op">$</span>Cohen_f</span></code></pre></div>
-<pre><code>## [1] 0.186339</code></pre>
+<pre><code>## [1] 0.2357023</code></pre>
 <div class="sourceCode" id="cb525"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb525-1"><a href="effect-of-varying-designs-on-power.html#cb525-1"></a><span class="kw">power_oneway_within</span>(design_result)<span class="op">$</span>Cohen_f_SPSS</span></code></pre></div>
-<pre><code>## [1] 0.2936101</code></pre>
+<pre><code>## [1] 0.4152274</code></pre>
 <div class="sourceCode" id="cb527"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb527-1"><a href="effect-of-varying-designs-on-power.html#cb527-1"></a><span class="kw">power_oneway_within</span>(design_result)<span class="op">$</span>lambda</span></code></pre></div>
-<pre><code>## [1] 12.5</code></pre>
+<pre><code>## [1] 10</code></pre>
 <div class="sourceCode" id="cb529"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb529-1"><a href="effect-of-varying-designs-on-power.html#cb529-1"></a><span class="kw">power_oneway_within</span>(design_result)<span class="op">$</span>F_critical</span></code></pre></div>
-<pre><code>## [1] 2.276603</code></pre>
-<div class="sourceCode" id="cb531"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb531-1"><a href="effect-of-varying-designs-on-power.html#cb531-1"></a>string &lt;-<span class="st"> &quot;7w&quot;</span></span>
-<span id="cb531-2"><a href="effect-of-varying-designs-on-power.html#cb531-2"></a>mu &lt;-<span class="st"> </span><span class="kw">c</span>(<span class="dv">0</span>, <span class="dv">0</span>, <span class="dv">0</span>, <span class="dv">0</span>, <span class="dv">0</span>, <span class="dv">0</span>, <span class="dv">5</span>) </span>
+<pre><code>## [1] 3.155932</code></pre>
+<div class="sourceCode" id="cb531"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb531-1"><a href="effect-of-varying-designs-on-power.html#cb531-1"></a>string &lt;-<span class="st"> &quot;4w&quot;</span></span>
+<span id="cb531-2"><a href="effect-of-varying-designs-on-power.html#cb531-2"></a>mu &lt;-<span class="st"> </span><span class="kw">c</span>(<span class="dv">0</span>, <span class="dv">0</span>, <span class="dv">0</span>, <span class="dv">5</span>)</span>
 <span id="cb531-3"><a href="effect-of-varying-designs-on-power.html#cb531-3"></a>design_result &lt;-<span class="st"> </span><span class="kw">ANOVA_design</span>(</span>
 <span id="cb531-4"><a href="effect-of-varying-designs-on-power.html#cb531-4"></a>  <span class="dt">design =</span> string,</span>
 <span id="cb531-5"><a href="effect-of-varying-designs-on-power.html#cb531-5"></a>  <span class="dt">n =</span> n,</span>
 <span id="cb531-6"><a href="effect-of-varying-designs-on-power.html#cb531-6"></a>  <span class="dt">mu =</span> mu,</span>
 <span id="cb531-7"><a href="effect-of-varying-designs-on-power.html#cb531-7"></a>  <span class="dt">sd =</span> sd,</span>
 <span id="cb531-8"><a href="effect-of-varying-designs-on-power.html#cb531-8"></a>  <span class="dt">r =</span> r</span>
-<span id="cb531-9"><a href="effect-of-varying-designs-on-power.html#cb531-9"></a>)</span>
-<span id="cb531-10"><a href="effect-of-varying-designs-on-power.html#cb531-10"></a></span>
-<span id="cb531-11"><a href="effect-of-varying-designs-on-power.html#cb531-11"></a><span class="kw">print</span>(<span class="kw">paste0</span>(<span class="st">&quot;power: &quot;</span>, <span class="kw">power_oneway_within</span>(design_result)<span class="op">$</span>power, <span class="st">&quot;</span><span class="ch">\n</span><span class="st">Cohen&#39;s F: &quot;</span>, <span class="kw">power_oneway_within</span>(design_result)<span class="op">$</span>Cohen_f,</span>
-<span id="cb531-12"><a href="effect-of-varying-designs-on-power.html#cb531-12"></a>             <span class="st">&quot;</span><span class="ch">\n</span><span class="st">Cohen&#39;s F (SPSS): &quot;</span>, <span class="kw">power_oneway_within</span>(design_result)<span class="op">$</span>Cohen_f_SPSS,</span>
-<span id="cb531-13"><a href="effect-of-varying-designs-on-power.html#cb531-13"></a>             <span class="st">&quot;</span><span class="ch">\n</span><span class="st">lambda: &quot;</span>, <span class="kw">power_oneway_within</span>(design_result)<span class="op">$</span>lambda,</span>
-<span id="cb531-14"><a href="effect-of-varying-designs-on-power.html#cb531-14"></a>             <span class="st">&quot;</span><span class="ch">\n</span><span class="st">Critical F: &quot;</span>,</span>
-<span id="cb531-15"><a href="effect-of-varying-designs-on-power.html#cb531-15"></a>             <span class="kw">power_oneway_within</span>(design_result)<span class="op">$</span>F_critical</span>
-<span id="cb531-16"><a href="effect-of-varying-designs-on-power.html#cb531-16"></a>             ))</span></code></pre></div>
+<span id="cb531-9"><a href="effect-of-varying-designs-on-power.html#cb531-9"></a>)</span></code></pre></div>
+<p><img src="SuperpowerValidation_files/figure-html/unnamed-chunk-234-3.png" width="672" /></p>
+<div class="sourceCode" id="cb532"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb532-1"><a href="effect-of-varying-designs-on-power.html#cb532-1"></a><span class="kw">power_oneway_within</span>(design_result)<span class="op">$</span>power</span></code></pre></div>
+<pre><code>## [1] 79.40126</code></pre>
+<div class="sourceCode" id="cb534"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb534-1"><a href="effect-of-varying-designs-on-power.html#cb534-1"></a><span class="kw">power_oneway_within</span>(design_result)<span class="op">$</span>Cohen_f</span></code></pre></div>
+<pre><code>## [1] 0.2165064</code></pre>
+<div class="sourceCode" id="cb536"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb536-1"><a href="effect-of-varying-designs-on-power.html#cb536-1"></a><span class="kw">power_oneway_within</span>(design_result)<span class="op">$</span>Cohen_f_SPSS</span></code></pre></div>
+<pre><code>## [1] 0.3595975</code></pre>
+<div class="sourceCode" id="cb538"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb538-1"><a href="effect-of-varying-designs-on-power.html#cb538-1"></a><span class="kw">power_oneway_within</span>(design_result)<span class="op">$</span>lambda</span></code></pre></div>
+<pre><code>## [1] 11.25</code></pre>
+<div class="sourceCode" id="cb540"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb540-1"><a href="effect-of-varying-designs-on-power.html#cb540-1"></a><span class="kw">power_oneway_within</span>(design_result)<span class="op">$</span>F_critical</span></code></pre></div>
+<pre><code>## [1] 2.709402</code></pre>
+<div class="sourceCode" id="cb542"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb542-1"><a href="effect-of-varying-designs-on-power.html#cb542-1"></a>string &lt;-<span class="st"> &quot;5w&quot;</span></span>
+<span id="cb542-2"><a href="effect-of-varying-designs-on-power.html#cb542-2"></a>mu &lt;-<span class="st"> </span><span class="kw">c</span>(<span class="dv">0</span>, <span class="dv">0</span>, <span class="dv">0</span>, <span class="dv">0</span>, <span class="dv">5</span>) </span>
+<span id="cb542-3"><a href="effect-of-varying-designs-on-power.html#cb542-3"></a></span>
+<span id="cb542-4"><a href="effect-of-varying-designs-on-power.html#cb542-4"></a>design_result &lt;-<span class="st"> </span><span class="kw">ANOVA_design</span>(</span>
+<span id="cb542-5"><a href="effect-of-varying-designs-on-power.html#cb542-5"></a>  <span class="dt">design =</span> string,</span>
+<span id="cb542-6"><a href="effect-of-varying-designs-on-power.html#cb542-6"></a>  <span class="dt">n =</span> n,</span>
+<span id="cb542-7"><a href="effect-of-varying-designs-on-power.html#cb542-7"></a>  <span class="dt">mu =</span> mu,</span>
+<span id="cb542-8"><a href="effect-of-varying-designs-on-power.html#cb542-8"></a>  <span class="dt">sd =</span> sd,</span>
+<span id="cb542-9"><a href="effect-of-varying-designs-on-power.html#cb542-9"></a>  <span class="dt">r =</span> r</span>
+<span id="cb542-10"><a href="effect-of-varying-designs-on-power.html#cb542-10"></a>)</span></code></pre></div>
+<p><img src="SuperpowerValidation_files/figure-html/unnamed-chunk-234-4.png" width="672" /></p>
+<div class="sourceCode" id="cb543"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb543-1"><a href="effect-of-varying-designs-on-power.html#cb543-1"></a><span class="kw">power_oneway_within</span>(design_result)<span class="op">$</span>power</span></code></pre></div>
+<pre><code>## [1] 78.38682</code></pre>
+<div class="sourceCode" id="cb545"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb545-1"><a href="effect-of-varying-designs-on-power.html#cb545-1"></a><span class="kw">power_oneway_within</span>(design_result)<span class="op">$</span>Cohen_f</span></code></pre></div>
+<pre><code>## [1] 0.2</code></pre>
+<div class="sourceCode" id="cb547"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb547-1"><a href="effect-of-varying-designs-on-power.html#cb547-1"></a><span class="kw">power_oneway_within</span>(design_result)<span class="op">$</span>Cohen_f_SPSS</span></code></pre></div>
+<pre><code>## [1] 0.3216338</code></pre>
+<div class="sourceCode" id="cb549"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb549-1"><a href="effect-of-varying-designs-on-power.html#cb549-1"></a><span class="kw">power_oneway_within</span>(design_result)<span class="op">$</span>lambda</span></code></pre></div>
+<pre><code>## [1] 12</code></pre>
+<div class="sourceCode" id="cb551"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb551-1"><a href="effect-of-varying-designs-on-power.html#cb551-1"></a><span class="kw">power_oneway_within</span>(design_result)<span class="op">$</span>F_critical</span></code></pre></div>
+<pre><code>## [1] 2.44988</code></pre>
+<div class="sourceCode" id="cb553"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb553-1"><a href="effect-of-varying-designs-on-power.html#cb553-1"></a>string &lt;-<span class="st"> &quot;6w&quot;</span></span>
+<span id="cb553-2"><a href="effect-of-varying-designs-on-power.html#cb553-2"></a>mu &lt;-<span class="st"> </span><span class="kw">c</span>(<span class="dv">0</span>, <span class="dv">0</span>, <span class="dv">0</span>, <span class="dv">0</span>, <span class="dv">0</span>, <span class="dv">5</span>) </span>
+<span id="cb553-3"><a href="effect-of-varying-designs-on-power.html#cb553-3"></a>design_result &lt;-<span class="st"> </span><span class="kw">ANOVA_design</span>(</span>
+<span id="cb553-4"><a href="effect-of-varying-designs-on-power.html#cb553-4"></a>  <span class="dt">design =</span> string,</span>
+<span id="cb553-5"><a href="effect-of-varying-designs-on-power.html#cb553-5"></a>  <span class="dt">n =</span> n,</span>
+<span id="cb553-6"><a href="effect-of-varying-designs-on-power.html#cb553-6"></a>  <span class="dt">mu =</span> mu,</span>
+<span id="cb553-7"><a href="effect-of-varying-designs-on-power.html#cb553-7"></a>  <span class="dt">sd =</span> sd,</span>
+<span id="cb553-8"><a href="effect-of-varying-designs-on-power.html#cb553-8"></a>  <span class="dt">r =</span> r</span>
+<span id="cb553-9"><a href="effect-of-varying-designs-on-power.html#cb553-9"></a>)</span></code></pre></div>
+<p><img src="SuperpowerValidation_files/figure-html/unnamed-chunk-234-5.png" width="672" /></p>
+<div class="sourceCode" id="cb554"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb554-1"><a href="effect-of-varying-designs-on-power.html#cb554-1"></a><span class="kw">power_oneway_within</span>(design_result)<span class="op">$</span>power</span></code></pre></div>
+<pre><code>## [1] 76.99592</code></pre>
+<div class="sourceCode" id="cb556"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb556-1"><a href="effect-of-varying-designs-on-power.html#cb556-1"></a><span class="kw">power_oneway_within</span>(design_result)<span class="op">$</span>Cohen_f</span></code></pre></div>
+<pre><code>## [1] 0.186339</code></pre>
+<div class="sourceCode" id="cb558"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb558-1"><a href="effect-of-varying-designs-on-power.html#cb558-1"></a><span class="kw">power_oneway_within</span>(design_result)<span class="op">$</span>Cohen_f_SPSS</span></code></pre></div>
+<pre><code>## [1] 0.2936101</code></pre>
+<div class="sourceCode" id="cb560"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb560-1"><a href="effect-of-varying-designs-on-power.html#cb560-1"></a><span class="kw">power_oneway_within</span>(design_result)<span class="op">$</span>lambda</span></code></pre></div>
+<pre><code>## [1] 12.5</code></pre>
+<div class="sourceCode" id="cb562"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb562-1"><a href="effect-of-varying-designs-on-power.html#cb562-1"></a><span class="kw">power_oneway_within</span>(design_result)<span class="op">$</span>F_critical</span></code></pre></div>
+<pre><code>## [1] 2.276603</code></pre>
+<div class="sourceCode" id="cb564"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb564-1"><a href="effect-of-varying-designs-on-power.html#cb564-1"></a>string &lt;-<span class="st"> &quot;7w&quot;</span></span>
+<span id="cb564-2"><a href="effect-of-varying-designs-on-power.html#cb564-2"></a>mu &lt;-<span class="st"> </span><span class="kw">c</span>(<span class="dv">0</span>, <span class="dv">0</span>, <span class="dv">0</span>, <span class="dv">0</span>, <span class="dv">0</span>, <span class="dv">0</span>, <span class="dv">5</span>) </span>
+<span id="cb564-3"><a href="effect-of-varying-designs-on-power.html#cb564-3"></a>design_result &lt;-<span class="st"> </span><span class="kw">ANOVA_design</span>(</span>
+<span id="cb564-4"><a href="effect-of-varying-designs-on-power.html#cb564-4"></a>  <span class="dt">design =</span> string,</span>
+<span id="cb564-5"><a href="effect-of-varying-designs-on-power.html#cb564-5"></a>  <span class="dt">n =</span> n,</span>
+<span id="cb564-6"><a href="effect-of-varying-designs-on-power.html#cb564-6"></a>  <span class="dt">mu =</span> mu,</span>
+<span id="cb564-7"><a href="effect-of-varying-designs-on-power.html#cb564-7"></a>  <span class="dt">sd =</span> sd,</span>
+<span id="cb564-8"><a href="effect-of-varying-designs-on-power.html#cb564-8"></a>  <span class="dt">r =</span> r</span>
+<span id="cb564-9"><a href="effect-of-varying-designs-on-power.html#cb564-9"></a>)</span></code></pre></div>
+<p><img src="SuperpowerValidation_files/figure-html/unnamed-chunk-234-6.png" width="672" /></p>
+<div class="sourceCode" id="cb565"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb565-1"><a href="effect-of-varying-designs-on-power.html#cb565-1"></a><span class="kw">print</span>(<span class="kw">paste0</span>(<span class="st">&quot;power: &quot;</span>, <span class="kw">power_oneway_within</span>(design_result)<span class="op">$</span>power, <span class="st">&quot;</span><span class="ch">\n</span><span class="st">Cohen&#39;s F: &quot;</span>, <span class="kw">power_oneway_within</span>(design_result)<span class="op">$</span>Cohen_f,</span>
+<span id="cb565-2"><a href="effect-of-varying-designs-on-power.html#cb565-2"></a>             <span class="st">&quot;</span><span class="ch">\n</span><span class="st">Cohen&#39;s F (SPSS): &quot;</span>, <span class="kw">power_oneway_within</span>(design_result)<span class="op">$</span>Cohen_f_SPSS,</span>
+<span id="cb565-3"><a href="effect-of-varying-designs-on-power.html#cb565-3"></a>             <span class="st">&quot;</span><span class="ch">\n</span><span class="st">lambda: &quot;</span>, <span class="kw">power_oneway_within</span>(design_result)<span class="op">$</span>lambda,</span>
+<span id="cb565-4"><a href="effect-of-varying-designs-on-power.html#cb565-4"></a>             <span class="st">&quot;</span><span class="ch">\n</span><span class="st">Critical F: &quot;</span>,</span>
+<span id="cb565-5"><a href="effect-of-varying-designs-on-power.html#cb565-5"></a>             <span class="kw">power_oneway_within</span>(design_result)<span class="op">$</span>F_critical</span>
+<span id="cb565-6"><a href="effect-of-varying-designs-on-power.html#cb565-6"></a>             ))</span></code></pre></div>
 <pre><code>## [1] &quot;power: 75.4600950274594\nCohen&#39;s F: 0.174963553055941\nCohen&#39;s F (SPSS): 0.271830141109781\nlambda: 12.8571428571429\nCritical F: 2.15101618343483&quot;</code></pre>
-<div class="sourceCode" id="cb533"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb533-1"><a href="effect-of-varying-designs-on-power.html#cb533-1"></a><span class="co"># power_oneway_within(design_result)$power</span></span>
-<span id="cb533-2"><a href="effect-of-varying-designs-on-power.html#cb533-2"></a><span class="co"># power_oneway_within(design_result)$Cohen_f</span></span>
-<span id="cb533-3"><a href="effect-of-varying-designs-on-power.html#cb533-3"></a><span class="co"># power_oneway_within(design_result)$Cohen_f_SPSS</span></span>
-<span id="cb533-4"><a href="effect-of-varying-designs-on-power.html#cb533-4"></a><span class="co"># power_oneway_within(design_result)$lambda</span></span>
-<span id="cb533-5"><a href="effect-of-varying-designs-on-power.html#cb533-5"></a><span class="co"># power_oneway_within(design_result)$F_critical</span></span></code></pre></div>
+<div class="sourceCode" id="cb567"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb567-1"><a href="effect-of-varying-designs-on-power.html#cb567-1"></a><span class="co"># power_oneway_within(design_result)$power</span></span>
+<span id="cb567-2"><a href="effect-of-varying-designs-on-power.html#cb567-2"></a><span class="co"># power_oneway_within(design_result)$Cohen_f</span></span>
+<span id="cb567-3"><a href="effect-of-varying-designs-on-power.html#cb567-3"></a><span class="co"># power_oneway_within(design_result)$Cohen_f_SPSS</span></span>
+<span id="cb567-4"><a href="effect-of-varying-designs-on-power.html#cb567-4"></a><span class="co"># power_oneway_within(design_result)$lambda</span></span>
+<span id="cb567-5"><a href="effect-of-varying-designs-on-power.html#cb567-5"></a><span class="co"># power_oneway_within(design_result)$F_critical</span></span></code></pre></div>
 <p>This set of designs where we increase the number of conditions demonstrates a common pattern where the power initially increases, but then starts to decrease.
 Again, the exact pattern (and when the power starts to decrease) depends on the effect size and sample size.
 Note also that the effect size (Cohen’s f) decreases as we add conditions, but the increased sample size compensates for this when calculating power.
