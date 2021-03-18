@@ -4,11 +4,11 @@
 
   <meta charset="utf-8" />
   <meta http-equiv="X-UA-Compatible" content="IE=edge" />
-  <title>Chapter 11 Violations of Assumptions | Power Analysis with Superpower</title>
+  <title>Chapter 12 Violations of Assumptions | Power Analysis with Superpower</title>
   <meta name="description" content="This is a book describing the capabilities of the Superpower R package." />
   <meta name="generator" content="bookdown 0.21 and GitBook 2.6.7" />
 
-  <meta property="og:title" content="Chapter 11 Violations of Assumptions | Power Analysis with Superpower" />
+  <meta property="og:title" content="Chapter 12 Violations of Assumptions | Power Analysis with Superpower" />
   <meta property="og:type" content="book" />
   
   
@@ -16,15 +16,15 @@
   
 
   <meta name="twitter:card" content="summary" />
-  <meta name="twitter:title" content="Chapter 11 Violations of Assumptions | Power Analysis with Superpower" />
+  <meta name="twitter:title" content="Chapter 12 Violations of Assumptions | Power Analysis with Superpower" />
   
   <meta name="twitter:description" content="This is a book describing the capabilities of the Superpower R package." />
   
 
-<meta name="author" content="Aaron R. Caldwell, Daniël Lakens, and Chelsea M. Parlett-Pelleriti" />
+<meta name="author" content="Aaron R. Caldwell, Daniël Lakens, Chelsea M. Parlett-Pelleriti, and Guy Prochilo" />
 
 
-<meta name="date" content="2021-01-25" />
+<meta name="date" content="2021-03-17" />
 
   <meta name="viewport" content="width=device-width, initial-scale=1" />
   <meta name="apple-mobile-web-app-capable" content="yes" />
@@ -33,6 +33,7 @@
   
 <link rel="prev" href="power-curve.html"/>
 <link rel="next" href="estimated-marginal-means.html"/>
+<script src="libs/header-attrs-2.7/header-attrs.js"></script>
 <script src="libs/jquery-2.2.3/jquery.min.js"></script>
 <link href="libs/gitbook-2.6.7/css/style.css" rel="stylesheet" />
 <link href="libs/gitbook-2.6.7/css/plugin-table.css" rel="stylesheet" />
@@ -50,26 +51,23 @@
 
 
 
-<script src="libs/accessible-code-block-0.0.1/empty-anchor.js"></script>
-<link href="libs/anchor-sections-1.0/anchor-sections.css" rel="stylesheet" />
-<script src="libs/anchor-sections-1.0/anchor-sections.js"></script>
 <script src="libs/kePrint-0.0.1/kePrint.js"></script>
 <link href="libs/lightable-0.0.1/lightable.css" rel="stylesheet" />
 
 
 <style type="text/css">
-code.sourceCode > span { display: inline-block; line-height: 1.25; }
-code.sourceCode > span { color: inherit; text-decoration: inherit; }
-code.sourceCode > span:empty { height: 1.2em; }
+pre > code.sourceCode { white-space: pre; position: relative; }
+pre > code.sourceCode > span { display: inline-block; line-height: 1.25; }
+pre > code.sourceCode > span:empty { height: 1.2em; }
 .sourceCode { overflow: visible; }
-code.sourceCode { white-space: pre; position: relative; }
+code.sourceCode > span { color: inherit; text-decoration: inherit; }
 pre.sourceCode { margin: 0; }
 @media screen {
 div.sourceCode { overflow: auto; }
 }
 @media print {
-code.sourceCode { white-space: pre-wrap; }
-code.sourceCode > span { text-indent: -5em; padding-left: 5em; }
+pre > code.sourceCode { white-space: pre-wrap; }
+pre > code.sourceCode > span { text-indent: -5em; padding-left: 5em; }
 }
 pre.numberSource code
   { counter-reset: source-line 0; }
@@ -89,7 +87,7 @@ pre.numberSource { margin-left: 3em; border-left: 1px solid #aaaaaa;  padding-le
 div.sourceCode
   {   }
 @media screen {
-code.sourceCode > span > a:first-child::before { text-decoration: underline; }
+pre > code.sourceCode > span > a:first-child::before { text-decoration: underline; }
 }
 code span.al { color: #ff0000; font-weight: bold; } /* Alert */
 code span.an { color: #60a0b0; font-weight: bold; font-style: italic; } /* Annotation */
@@ -138,113 +136,156 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 <li><a href="./">Superpower</a></li>
 
 <li class="divider"></li>
-<li class="chapter" data-level="" data-path="index.html"><a href="index.html"><i class="fa fa-check"></i>Preface</a><ul>
+<li class="chapter" data-level="" data-path="index.html"><a href="index.html"><i class="fa fa-check"></i>Preface</a>
+<ul>
 <li class="chapter" data-level="" data-path="index.html"><a href="index.html#contributors"><i class="fa fa-check"></i>Contributors</a></li>
 <li class="chapter" data-level="" data-path="index.html"><a href="index.html#funding"><i class="fa fa-check"></i>Funding</a></li>
 </ul></li>
-<li class="chapter" data-level="1" data-path="the-experimental-design.html"><a href="the-experimental-design.html"><i class="fa fa-check"></i><b>1</b> The Experimental Design</a><ul>
-<li class="chapter" data-level="1.1" data-path="the-experimental-design.html"><a href="the-experimental-design.html#anova_design-function"><i class="fa fa-check"></i><b>1.1</b> ANOVA_design function</a><ul>
-<li class="chapter" data-level="1.1.1" data-path="the-experimental-design.html"><a href="the-experimental-design.html#specifying-the-design-using-design"><i class="fa fa-check"></i><b>1.1.1</b> Specifying the design using <code>design</code></a></li>
-<li class="chapter" data-level="1.1.2" data-path="the-experimental-design.html"><a href="the-experimental-design.html#specifying-the-means-using-mu"><i class="fa fa-check"></i><b>1.1.2</b> Specifying the means using <code>mu</code></a></li>
-<li class="chapter" data-level="1.1.3" data-path="the-experimental-design.html"><a href="the-experimental-design.html#specifying-label-names"><i class="fa fa-check"></i><b>1.1.3</b> Specifying label names</a></li>
-<li class="chapter" data-level="1.1.4" data-path="the-experimental-design.html"><a href="the-experimental-design.html#specifying-the-correlation"><i class="fa fa-check"></i><b>1.1.4</b> Specifying the correlation</a></li>
-<li class="chapter" data-level="1.1.5" data-path="the-experimental-design.html"><a href="the-experimental-design.html#specifying-the-sample-size"><i class="fa fa-check"></i><b>1.1.5</b> Specifying the sample size</a></li>
-<li class="chapter" data-level="1.1.6" data-path="the-experimental-design.html"><a href="the-experimental-design.html#specifying-the-standard-deviation"><i class="fa fa-check"></i><b>1.1.6</b> Specifying the standard deviation</a></li>
+<li class="chapter" data-level="1" data-path="introduction-to-power-analysis.html"><a href="introduction-to-power-analysis.html"><i class="fa fa-check"></i><b>1</b> Introduction to Power Analysis</a>
+<ul>
+<li class="chapter" data-level="1.1" data-path="introduction-to-power-analysis.html"><a href="introduction-to-power-analysis.html#overview-of-power-analysis"><i class="fa fa-check"></i><b>1.1</b> Overview of Power Analysis</a></li>
+<li class="chapter" data-level="1.2" data-path="introduction-to-power-analysis.html"><a href="introduction-to-power-analysis.html#error-and-power"><i class="fa fa-check"></i><b>1.2</b> Error and Power</a></li>
+<li class="chapter" data-level="1.3" data-path="introduction-to-power-analysis.html"><a href="introduction-to-power-analysis.html#effect-size"><i class="fa fa-check"></i><b>1.3</b> Effect size</a></li>
+<li class="chapter" data-level="1.4" data-path="introduction-to-power-analysis.html"><a href="introduction-to-power-analysis.html#samp_vs_pop"><i class="fa fa-check"></i><b>1.4</b> Sample effect size vs. population effect size</a></li>
+<li class="chapter" data-level="1.5" data-path="introduction-to-power-analysis.html"><a href="introduction-to-power-analysis.html#safeguard-effect-size"><i class="fa fa-check"></i><b>1.5</b> Safeguard Effect Size</a></li>
+<li class="chapter" data-level="1.6" data-path="introduction-to-power-analysis.html"><a href="introduction-to-power-analysis.html#post-hoc-power-analysis"><i class="fa fa-check"></i><b>1.6</b> <em>Post hoc</em> power analysis</a>
+<ul>
+<li class="chapter" data-level="1.6.1" data-path="introduction-to-power-analysis.html"><a href="introduction-to-power-analysis.html#the-sample-effect-size-is-not-the-population-effect-size"><i class="fa fa-check"></i><b>1.6.1</b> The sample effect size is <em>not</em> the population effect size</a></li>
+<li class="chapter" data-level="1.6.2" data-path="introduction-to-power-analysis.html"><a href="introduction-to-power-analysis.html#post-hoc-power-is-merely-a-transformation-of-your-obtained-p-value"><i class="fa fa-check"></i><b>1.6.2</b> <em>Post hoc</em> power is merely a transformation of your obtained <em>p</em> value</a></li>
+</ul></li>
+<li class="chapter" data-level="1.7" data-path="introduction-to-power-analysis.html"><a href="introduction-to-power-analysis.html#the-minimal-detectable-effect-size"><i class="fa fa-check"></i><b>1.7</b> The Minimal Detectable Effect Size</a></li>
+<li class="chapter" data-level="1.8" data-path="introduction-to-power-analysis.html"><a href="introduction-to-power-analysis.html#the-winners-curse"><i class="fa fa-check"></i><b>1.8</b> <em>The Winner’s Curse</em></a></li>
+<li class="chapter" data-level="1.9" data-path="introduction-to-power-analysis.html"><a href="introduction-to-power-analysis.html#smallest-effect-size-of-interest"><i class="fa fa-check"></i><b>1.9</b> Smallest effect size of interest</a></li>
+<li class="chapter" data-level="1.10" data-path="introduction-to-power-analysis.html"><a href="introduction-to-power-analysis.html#power-vs.-precision"><i class="fa fa-check"></i><b>1.10</b> Power vs. Precision</a></li>
+</ul></li>
+<li class="chapter" data-level="2" data-path="the-experimental-design.html"><a href="the-experimental-design.html"><i class="fa fa-check"></i><b>2</b> The Experimental Design</a>
+<ul>
+<li class="chapter" data-level="2.1" data-path="the-experimental-design.html"><a href="the-experimental-design.html#anova_design-function"><i class="fa fa-check"></i><b>2.1</b> ANOVA_design function</a>
+<ul>
+<li class="chapter" data-level="2.1.1" data-path="the-experimental-design.html"><a href="the-experimental-design.html#specifying-the-design-using-design"><i class="fa fa-check"></i><b>2.1.1</b> Specifying the design using <code>design</code></a></li>
+<li class="chapter" data-level="2.1.2" data-path="the-experimental-design.html"><a href="the-experimental-design.html#specifying-the-means-using-mu"><i class="fa fa-check"></i><b>2.1.2</b> Specifying the means using <code>mu</code></a></li>
+<li class="chapter" data-level="2.1.3" data-path="the-experimental-design.html"><a href="the-experimental-design.html#specifying-label-names"><i class="fa fa-check"></i><b>2.1.3</b> Specifying label names</a></li>
+<li class="chapter" data-level="2.1.4" data-path="the-experimental-design.html"><a href="the-experimental-design.html#specifying-the-correlation"><i class="fa fa-check"></i><b>2.1.4</b> Specifying the correlation</a></li>
+<li class="chapter" data-level="2.1.5" data-path="the-experimental-design.html"><a href="the-experimental-design.html#specifying-the-sample-size"><i class="fa fa-check"></i><b>2.1.5</b> Specifying the sample size</a></li>
+<li class="chapter" data-level="2.1.6" data-path="the-experimental-design.html"><a href="the-experimental-design.html#specifying-the-standard-deviation"><i class="fa fa-check"></i><b>2.1.6</b> Specifying the standard deviation</a></li>
 </ul></li>
 </ul></li>
-<li class="chapter" data-level="2" data-path="one-way-anova.html"><a href="one-way-anova.html"><i class="fa fa-check"></i><b>2</b> One-Way ANOVA</a><ul>
-<li class="chapter" data-level="2.1" data-path="one-way-anova.html"><a href="one-way-anova.html#introduction"><i class="fa fa-check"></i><b>2.1</b> Introduction</a><ul>
-<li class="chapter" data-level="2.1.1" data-path="one-way-anova.html"><a href="one-way-anova.html#two-conditions"><i class="fa fa-check"></i><b>2.1.1</b> Two conditions</a></li>
-<li class="chapter" data-level="2.1.2" data-path="one-way-anova.html"><a href="one-way-anova.html#three-conditions"><i class="fa fa-check"></i><b>2.1.2</b> Three conditions</a></li>
-<li class="chapter" data-level="2.1.3" data-path="one-way-anova.html"><a href="one-way-anova.html#power-for-simple-effects"><i class="fa fa-check"></i><b>2.1.3</b> Power for simple effects</a></li>
+<li class="chapter" data-level="3" data-path="one-way-anova.html"><a href="one-way-anova.html"><i class="fa fa-check"></i><b>3</b> One-Way ANOVA</a>
+<ul>
+<li class="chapter" data-level="3.1" data-path="one-way-anova.html"><a href="one-way-anova.html#introduction"><i class="fa fa-check"></i><b>3.1</b> Introduction</a>
+<ul>
+<li class="chapter" data-level="3.1.1" data-path="one-way-anova.html"><a href="one-way-anova.html#two-conditions"><i class="fa fa-check"></i><b>3.1.1</b> Two conditions</a></li>
+<li class="chapter" data-level="3.1.2" data-path="one-way-anova.html"><a href="one-way-anova.html#three-conditions"><i class="fa fa-check"></i><b>3.1.2</b> Three conditions</a></li>
+<li class="chapter" data-level="3.1.3" data-path="one-way-anova.html"><a href="one-way-anova.html#power-for-simple-effects"><i class="fa fa-check"></i><b>3.1.3</b> Power for simple effects</a></li>
 </ul></li>
-<li class="chapter" data-level="2.2" data-path="one-way-anova.html"><a href="one-way-anova.html#effect-size-estimates-for-one-way-anova"><i class="fa fa-check"></i><b>2.2</b> Effect Size Estimates for One-Way ANOVA</a><ul>
-<li class="chapter" data-level="2.2.1" data-path="one-way-anova.html"><a href="one-way-anova.html#three-conditions-small-effect-size"><i class="fa fa-check"></i><b>2.2.1</b> Three conditions, small effect size</a></li>
-<li class="chapter" data-level="2.2.2" data-path="one-way-anova.html"><a href="one-way-anova.html#four-conditions-medium-effect-size"><i class="fa fa-check"></i><b>2.2.2</b> Four conditions, medium effect size</a></li>
-<li class="chapter" data-level="2.2.3" data-path="one-way-anova.html"><a href="one-way-anova.html#two-conditions-large-effect-size"><i class="fa fa-check"></i><b>2.2.3</b> Two conditions, large effect size</a></li>
-</ul></li>
-</ul></li>
-<li class="chapter" data-level="3" data-path="repeated-measures-anova.html"><a href="repeated-measures-anova.html"><i class="fa fa-check"></i><b>3</b> Repeated Measures ANOVA</a><ul>
-<li class="chapter" data-level="3.1" data-path="repeated-measures-anova.html"><a href="repeated-measures-anova.html#part-1"><i class="fa fa-check"></i><b>3.1</b> Part 1</a><ul>
-<li class="chapter" data-level="3.1.1" data-path="repeated-measures-anova.html"><a href="repeated-measures-anova.html#two-conditions-medium-effect-size"><i class="fa fa-check"></i><b>3.1.1</b> Two conditions, medium effect size</a></li>
-</ul></li>
-<li class="chapter" data-level="3.2" data-path="repeated-measures-anova.html"><a href="repeated-measures-anova.html#part-2"><i class="fa fa-check"></i><b>3.2</b> Part 2</a><ul>
-<li class="chapter" data-level="3.2.1" data-path="repeated-measures-anova.html"><a href="repeated-measures-anova.html#the-relation-between-cohens-f-and-cohens-d"><i class="fa fa-check"></i><b>3.2.1</b> The relation between Cohen’s f and Cohen’s d</a></li>
-<li class="chapter" data-level="3.2.2" data-path="repeated-measures-anova.html"><a href="repeated-measures-anova.html#three-within-conditions-medium-effect-size"><i class="fa fa-check"></i><b>3.2.2</b> Three within conditions, medium effect size</a></li>
-</ul></li>
-<li class="chapter" data-level="3.3" data-path="repeated-measures-anova.html"><a href="repeated-measures-anova.html#part-3"><i class="fa fa-check"></i><b>3.3</b> Part 3</a></li>
-<li class="chapter" data-level="3.4" data-path="repeated-measures-anova.html"><a href="repeated-measures-anova.html#part-4"><i class="fa fa-check"></i><b>3.4</b> Part 4</a><ul>
-<li class="chapter" data-level="3.4.1" data-path="repeated-measures-anova.html"><a href="repeated-measures-anova.html#x2-anova-within-within-design"><i class="fa fa-check"></i><b>3.4.1</b> 2x2 ANOVA, within-within design</a></li>
-<li class="chapter" data-level="3.4.2" data-path="repeated-measures-anova.html"><a href="repeated-measures-anova.html#examine-variation-of-means-and-correlation"><i class="fa fa-check"></i><b>3.4.2</b> Examine variation of means and correlation</a></li>
-</ul></li>
-<li class="chapter" data-level="3.5" data-path="repeated-measures-anova.html"><a href="repeated-measures-anova.html#part-5"><i class="fa fa-check"></i><b>3.5</b> Part 5</a><ul>
-<li class="chapter" data-level="3.5.1" data-path="repeated-measures-anova.html"><a href="repeated-measures-anova.html#x2-anova-within-design"><i class="fa fa-check"></i><b>3.5.1</b> 2x2 ANOVA, within design</a></li>
-</ul></li>
-<li class="chapter" data-level="3.6" data-path="repeated-measures-anova.html"><a href="repeated-measures-anova.html#multivariate-anova-manova"><i class="fa fa-check"></i><b>3.6</b> Multivariate ANOVA (MANOVA)</a></li>
-</ul></li>
-<li class="chapter" data-level="4" data-path="mixed-anova.html"><a href="mixed-anova.html"><i class="fa fa-check"></i><b>4</b> Mixed ANOVA</a><ul>
-<li class="chapter" data-level="4.1" data-path="mixed-anova.html"><a href="mixed-anova.html#simple-mixed-designs"><i class="fa fa-check"></i><b>4.1</b> Simple Mixed Designs</a></li>
-<li class="chapter" data-level="4.2" data-path="mixed-anova.html"><a href="mixed-anova.html#complex-mixed-designs"><i class="fa fa-check"></i><b>4.2</b> Complex Mixed Designs</a><ul>
-<li class="chapter" data-level="4.2.1" data-path="mixed-anova.html"><a href="mixed-anova.html#b3w-design"><i class="fa fa-check"></i><b>4.2.1</b> 2b*3w Design</a></li>
-<li class="chapter" data-level="4.2.2" data-path="mixed-anova.html"><a href="mixed-anova.html#b4w-design"><i class="fa fa-check"></i><b>4.2.2</b> 2b*4w Design</a></li>
+<li class="chapter" data-level="3.2" data-path="one-way-anova.html"><a href="one-way-anova.html#effect-size-estimates-for-one-way-anova"><i class="fa fa-check"></i><b>3.2</b> Effect Size Estimates for One-Way ANOVA</a>
+<ul>
+<li class="chapter" data-level="3.2.1" data-path="one-way-anova.html"><a href="one-way-anova.html#three-conditions-small-effect-size"><i class="fa fa-check"></i><b>3.2.1</b> Three conditions, small effect size</a></li>
+<li class="chapter" data-level="3.2.2" data-path="one-way-anova.html"><a href="one-way-anova.html#four-conditions-medium-effect-size"><i class="fa fa-check"></i><b>3.2.2</b> Four conditions, medium effect size</a></li>
+<li class="chapter" data-level="3.2.3" data-path="one-way-anova.html"><a href="one-way-anova.html#two-conditions-large-effect-size"><i class="fa fa-check"></i><b>3.2.3</b> Two conditions, large effect size</a></li>
 </ul></li>
 </ul></li>
-<li class="chapter" data-level="5" data-path="power-for-three-way-interactions.html"><a href="power-for-three-way-interactions.html"><i class="fa fa-check"></i><b>5</b> Power for Three-way Interactions</a></li>
-<li class="chapter" data-level="6" data-path="the-no-way-interactions.html"><a href="the-no-way-interactions.html"><i class="fa fa-check"></i><b>6</b> The ‘No-Way’ Interactions</a></li>
-<li class="chapter" data-level="7" data-path="effect-of-varying-designs-on-power.html"><a href="effect-of-varying-designs-on-power.html"><i class="fa fa-check"></i><b>7</b> Effect of Varying Designs on Power</a><ul>
-<li class="chapter" data-level="7.1" data-path="effect-of-varying-designs-on-power.html"><a href="effect-of-varying-designs-on-power.html#within-designs"><i class="fa fa-check"></i><b>7.1</b> Within Designs</a></li>
+<li class="chapter" data-level="4" data-path="repeated-measures-anova.html"><a href="repeated-measures-anova.html"><i class="fa fa-check"></i><b>4</b> Repeated Measures ANOVA</a>
+<ul>
+<li class="chapter" data-level="4.1" data-path="repeated-measures-anova.html"><a href="repeated-measures-anova.html#part-1"><i class="fa fa-check"></i><b>4.1</b> Part 1</a>
+<ul>
+<li class="chapter" data-level="4.1.1" data-path="repeated-measures-anova.html"><a href="repeated-measures-anova.html#two-conditions-medium-effect-size"><i class="fa fa-check"></i><b>4.1.1</b> Two conditions, medium effect size</a></li>
 </ul></li>
-<li class="chapter" data-level="8" data-path="error-control-in-exploratory-anova.html"><a href="error-control-in-exploratory-anova.html"><i class="fa fa-check"></i><b>8</b> Error Control in Exploratory ANOVA</a></li>
-<li class="chapter" data-level="9" data-path="analytic-power-functions.html"><a href="analytic-power-functions.html"><i class="fa fa-check"></i><b>9</b> Analytic Power Functions</a><ul>
-<li class="chapter" data-level="9.1" data-path="analytic-power-functions.html"><a href="analytic-power-functions.html#one-way-between-subjects-anova"><i class="fa fa-check"></i><b>9.1</b> One-Way Between Subjects ANOVA</a></li>
-<li class="chapter" data-level="9.2" data-path="analytic-power-functions.html"><a href="analytic-power-functions.html#two-way-between-subject-interaction"><i class="fa fa-check"></i><b>9.2</b> Two-way Between Subject Interaction</a></li>
-<li class="chapter" data-level="9.3" data-path="analytic-power-functions.html"><a href="analytic-power-functions.html#x3-between-subject-anova"><i class="fa fa-check"></i><b>9.3</b> 3x3 Between Subject ANOVA</a></li>
+<li class="chapter" data-level="4.2" data-path="repeated-measures-anova.html"><a href="repeated-measures-anova.html#part-2"><i class="fa fa-check"></i><b>4.2</b> Part 2</a>
+<ul>
+<li class="chapter" data-level="4.2.1" data-path="repeated-measures-anova.html"><a href="repeated-measures-anova.html#the-relation-between-cohens-f-and-cohens-d"><i class="fa fa-check"></i><b>4.2.1</b> The relation between Cohen’s f and Cohen’s d</a></li>
+<li class="chapter" data-level="4.2.2" data-path="repeated-measures-anova.html"><a href="repeated-measures-anova.html#three-within-conditions-medium-effect-size"><i class="fa fa-check"></i><b>4.2.2</b> Three within conditions, medium effect size</a></li>
 </ul></li>
-<li class="chapter" data-level="10" data-path="power-curve.html"><a href="power-curve.html"><i class="fa fa-check"></i><b>10</b> Power Curve</a><ul>
-<li class="chapter" data-level="10.1" data-path="power-curve.html"><a href="power-curve.html#explore-increase-in-effect-size-for-moderated-interactions."><i class="fa fa-check"></i><b>10.1</b> Explore increase in effect size for moderated interactions.</a></li>
-<li class="chapter" data-level="10.2" data-path="power-curve.html"><a href="power-curve.html#explore-increase-in-effect-size-for-cross-over-interactions."><i class="fa fa-check"></i><b>10.2</b> Explore increase in effect size for cross-over interactions.</a></li>
-<li class="chapter" data-level="10.3" data-path="power-curve.html"><a href="power-curve.html#explore-increase-in-correlation-in-moderated-interactions."><i class="fa fa-check"></i><b>10.3</b> Explore increase in correlation in moderated interactions.</a></li>
-<li class="chapter" data-level="10.4" data-path="power-curve.html"><a href="power-curve.html#increasing-correlation-in-on-factor-decreases-power-in-second-factor"><i class="fa fa-check"></i><b>10.4</b> Increasing correlation in on factor decreases power in second factor</a></li>
-<li class="chapter" data-level="10.5" data-path="power-curve.html"><a href="power-curve.html#code-to-reproduce-power-curve-figures"><i class="fa fa-check"></i><b>10.5</b> Code to Reproduce Power Curve Figures</a></li>
+<li class="chapter" data-level="4.3" data-path="repeated-measures-anova.html"><a href="repeated-measures-anova.html#part-3"><i class="fa fa-check"></i><b>4.3</b> Part 3</a></li>
+<li class="chapter" data-level="4.4" data-path="repeated-measures-anova.html"><a href="repeated-measures-anova.html#part-4"><i class="fa fa-check"></i><b>4.4</b> Part 4</a>
+<ul>
+<li class="chapter" data-level="4.4.1" data-path="repeated-measures-anova.html"><a href="repeated-measures-anova.html#x2-anova-within-within-design"><i class="fa fa-check"></i><b>4.4.1</b> 2x2 ANOVA, within-within design</a></li>
+<li class="chapter" data-level="4.4.2" data-path="repeated-measures-anova.html"><a href="repeated-measures-anova.html#examine-variation-of-means-and-correlation"><i class="fa fa-check"></i><b>4.4.2</b> Examine variation of means and correlation</a></li>
 </ul></li>
-<li class="chapter" data-level="11" data-path="violations-of-assumptions.html"><a href="violations-of-assumptions.html"><i class="fa fa-check"></i><b>11</b> Violations of Assumptions</a><ul>
-<li class="chapter" data-level="11.1" data-path="violations-of-assumptions.html"><a href="violations-of-assumptions.html#violation-of-heterogeneity-assumption"><i class="fa fa-check"></i><b>11.1</b> Violation of Heterogeneity Assumption</a></li>
-<li class="chapter" data-level="11.2" data-path="violations-of-assumptions.html"><a href="violations-of-assumptions.html#violation-of-the-sphericity-assumption"><i class="fa fa-check"></i><b>11.2</b> Violation of the sphericity assumption</a><ul>
-<li class="chapter" data-level="11.2.1" data-path="violations-of-assumptions.html"><a href="violations-of-assumptions.html#manova-or-sphericity-adjustment"><i class="fa fa-check"></i><b>11.2.1</b> MANOVA or Sphericity Adjustment?</a></li>
+<li class="chapter" data-level="4.5" data-path="repeated-measures-anova.html"><a href="repeated-measures-anova.html#part-5"><i class="fa fa-check"></i><b>4.5</b> Part 5</a>
+<ul>
+<li class="chapter" data-level="4.5.1" data-path="repeated-measures-anova.html"><a href="repeated-measures-anova.html#x2-anova-within-design"><i class="fa fa-check"></i><b>4.5.1</b> 2x2 ANOVA, within design</a></li>
 </ul></li>
+<li class="chapter" data-level="4.6" data-path="repeated-measures-anova.html"><a href="repeated-measures-anova.html#multivariate-anova-manova"><i class="fa fa-check"></i><b>4.6</b> Multivariate ANOVA (MANOVA)</a></li>
 </ul></li>
-<li class="chapter" data-level="12" data-path="estimated-marginal-means.html"><a href="estimated-marginal-means.html"><i class="fa fa-check"></i><b>12</b> Estimated Marginal Means</a><ul>
-<li class="chapter" data-level="12.1" data-path="estimated-marginal-means.html"><a href="estimated-marginal-means.html#a-note-of-caution"><i class="fa fa-check"></i><b>12.1</b> A note of caution</a></li>
-<li class="chapter" data-level="12.2" data-path="estimated-marginal-means.html"><a href="estimated-marginal-means.html#pairwise-comparisons"><i class="fa fa-check"></i><b>12.2</b> Pairwise Comparisons</a></li>
-<li class="chapter" data-level="12.3" data-path="estimated-marginal-means.html"><a href="estimated-marginal-means.html#customized-emmeans-contrasts"><i class="fa fa-check"></i><b>12.3</b> Customized <code>emmeans</code> contrasts</a></li>
-<li class="chapter" data-level="12.4" data-path="estimated-marginal-means.html"><a href="estimated-marginal-means.html#equivalence-and-non-superiority-inferiority-tests"><i class="fa fa-check"></i><b>12.4</b> Equivalence and non-superiority/-inferiority tests</a></li>
-<li class="chapter" data-level="12.5" data-path="estimated-marginal-means.html"><a href="estimated-marginal-means.html#joint-tests"><i class="fa fa-check"></i><b>12.5</b> Joint tests</a></li>
-<li class="chapter" data-level="12.6" data-path="estimated-marginal-means.html"><a href="estimated-marginal-means.html#monte-carlo-simulations"><i class="fa fa-check"></i><b>12.6</b> Monte Carlo Simulations</a></li>
-</ul></li>
-<li class="chapter" data-level="" data-path="appendix-1-direct-comparison-to-pwr2ppl.html"><a href="appendix-1-direct-comparison-to-pwr2ppl.html"><i class="fa fa-check"></i>Appendix 1: Direct Comparison to pwr2ppl</a><ul>
-<li class="chapter" data-level="12.7" data-path="appendix-1-direct-comparison-to-pwr2ppl.html"><a href="appendix-1-direct-comparison-to-pwr2ppl.html#examples-from-chapter-5"><i class="fa fa-check"></i><b>12.7</b> Examples from Chapter 5</a><ul>
-<li class="chapter" data-level="12.7.1" data-path="appendix-1-direct-comparison-to-pwr2ppl.html"><a href="appendix-1-direct-comparison-to-pwr2ppl.html#example-5.15.2"><i class="fa fa-check"></i><b>12.7.1</b> Example 5.1/5.2</a></li>
-<li class="chapter" data-level="12.7.2" data-path="appendix-1-direct-comparison-to-pwr2ppl.html"><a href="appendix-1-direct-comparison-to-pwr2ppl.html#example-5.3"><i class="fa fa-check"></i><b>12.7.2</b> Example 5.3</a></li>
-</ul></li>
-<li class="chapter" data-level="12.8" data-path="appendix-1-direct-comparison-to-pwr2ppl.html"><a href="appendix-1-direct-comparison-to-pwr2ppl.html#examples-from-chapter-6"><i class="fa fa-check"></i><b>12.8</b> Examples from Chapter 6</a><ul>
-<li class="chapter" data-level="12.8.1" data-path="appendix-1-direct-comparison-to-pwr2ppl.html"><a href="appendix-1-direct-comparison-to-pwr2ppl.html#example-from-table-6.2"><i class="fa fa-check"></i><b>12.8.1</b> Example from Table 6.2</a></li>
-<li class="chapter" data-level="12.8.2" data-path="appendix-1-direct-comparison-to-pwr2ppl.html"><a href="appendix-1-direct-comparison-to-pwr2ppl.html#example-from-table-6.6"><i class="fa fa-check"></i><b>12.8.2</b> Example from Table 6.6</a></li>
-<li class="chapter" data-level="12.8.3" data-path="appendix-1-direct-comparison-to-pwr2ppl.html"><a href="appendix-1-direct-comparison-to-pwr2ppl.html#example-from-table-6.8"><i class="fa fa-check"></i><b>12.8.3</b> Example from Table 6.8</a></li>
-</ul></li>
-<li class="chapter" data-level="12.9" data-path="appendix-1-direct-comparison-to-pwr2ppl.html"><a href="appendix-1-direct-comparison-to-pwr2ppl.html#example-from-chapter-7"><i class="fa fa-check"></i><b>12.9</b> Example from Chapter 7</a><ul>
-<li class="chapter" data-level="12.9.1" data-path="appendix-1-direct-comparison-to-pwr2ppl.html"><a href="appendix-1-direct-comparison-to-pwr2ppl.html#from-table-7.2"><i class="fa fa-check"></i><b>12.9.1</b> From Table 7.2</a></li>
+<li class="chapter" data-level="5" data-path="mixed-anova.html"><a href="mixed-anova.html"><i class="fa fa-check"></i><b>5</b> Mixed ANOVA</a>
+<ul>
+<li class="chapter" data-level="5.1" data-path="mixed-anova.html"><a href="mixed-anova.html#simple-mixed-designs"><i class="fa fa-check"></i><b>5.1</b> Simple Mixed Designs</a></li>
+<li class="chapter" data-level="5.2" data-path="mixed-anova.html"><a href="mixed-anova.html#complex-mixed-designs"><i class="fa fa-check"></i><b>5.2</b> Complex Mixed Designs</a>
+<ul>
+<li class="chapter" data-level="5.2.1" data-path="mixed-anova.html"><a href="mixed-anova.html#b3w-design"><i class="fa fa-check"></i><b>5.2.1</b> 2b*3w Design</a></li>
+<li class="chapter" data-level="5.2.2" data-path="mixed-anova.html"><a href="mixed-anova.html#b4w-design"><i class="fa fa-check"></i><b>5.2.2</b> 2b*4w Design</a></li>
 </ul></li>
 </ul></li>
-<li class="chapter" data-level="" data-path="appendix-3-comparison-to-brysbaert.html"><a href="appendix-3-comparison-to-brysbaert.html"><i class="fa fa-check"></i>Appendix 3: Comparison to Brysbaert</a><ul>
-<li class="chapter" data-level="12.10" data-path="appendix-3-comparison-to-brysbaert.html"><a href="appendix-3-comparison-to-brysbaert.html#one-way-anova-1"><i class="fa fa-check"></i><b>12.10</b> One-Way ANOVA</a><ul>
-<li class="chapter" data-level="12.10.1" data-path="appendix-3-comparison-to-brysbaert.html"><a href="appendix-3-comparison-to-brysbaert.html#three-conditions-replication"><i class="fa fa-check"></i><b>12.10.1</b> Three conditions replication</a></li>
-<li class="chapter" data-level="12.10.2" data-path="appendix-3-comparison-to-brysbaert.html"><a href="appendix-3-comparison-to-brysbaert.html#variation-1"><i class="fa fa-check"></i><b>12.10.2</b> Variation 1</a></li>
-<li class="chapter" data-level="12.10.3" data-path="appendix-3-comparison-to-brysbaert.html"><a href="appendix-3-comparison-to-brysbaert.html#three-conditions-replication-1"><i class="fa fa-check"></i><b>12.10.3</b> Three conditions replication</a></li>
-<li class="chapter" data-level="12.10.4" data-path="appendix-3-comparison-to-brysbaert.html"><a href="appendix-3-comparison-to-brysbaert.html#variation-2"><i class="fa fa-check"></i><b>12.10.4</b> Variation 2</a></li>
-<li class="chapter" data-level="12.10.5" data-path="appendix-3-comparison-to-brysbaert.html"><a href="appendix-3-comparison-to-brysbaert.html#three-conditions-replication-2"><i class="fa fa-check"></i><b>12.10.5</b> Three conditions replication</a></li>
+<li class="chapter" data-level="6" data-path="power-for-three-way-interactions.html"><a href="power-for-three-way-interactions.html"><i class="fa fa-check"></i><b>6</b> Power for Three-way Interactions</a></li>
+<li class="chapter" data-level="7" data-path="the-no-way-interactions.html"><a href="the-no-way-interactions.html"><i class="fa fa-check"></i><b>7</b> The ‘No-Way’ Interactions</a></li>
+<li class="chapter" data-level="8" data-path="effect-of-varying-designs-on-power.html"><a href="effect-of-varying-designs-on-power.html"><i class="fa fa-check"></i><b>8</b> Effect of Varying Designs on Power</a>
+<ul>
+<li class="chapter" data-level="8.1" data-path="effect-of-varying-designs-on-power.html"><a href="effect-of-varying-designs-on-power.html#within-designs"><i class="fa fa-check"></i><b>8.1</b> Within Designs</a></li>
 </ul></li>
-<li class="chapter" data-level="12.11" data-path="appendix-3-comparison-to-brysbaert.html"><a href="appendix-3-comparison-to-brysbaert.html#repeated-measures"><i class="fa fa-check"></i><b>12.11</b> Repeated Measures</a><ul>
-<li class="chapter" data-level="12.11.1" data-path="appendix-3-comparison-to-brysbaert.html"><a href="appendix-3-comparison-to-brysbaert.html#reproducing-brysbaert-variation-1-changing-correlation"><i class="fa fa-check"></i><b>12.11.1</b> Reproducing Brysbaert Variation 1: Changing Correlation</a></li>
+<li class="chapter" data-level="9" data-path="error-control-in-exploratory-anova.html"><a href="error-control-in-exploratory-anova.html"><i class="fa fa-check"></i><b>9</b> Error Control in Exploratory ANOVA</a></li>
+<li class="chapter" data-level="10" data-path="analytic-power-functions.html"><a href="analytic-power-functions.html"><i class="fa fa-check"></i><b>10</b> Analytic Power Functions</a>
+<ul>
+<li class="chapter" data-level="10.1" data-path="analytic-power-functions.html"><a href="analytic-power-functions.html#one-way-between-subjects-anova"><i class="fa fa-check"></i><b>10.1</b> One-Way Between Subjects ANOVA</a></li>
+<li class="chapter" data-level="10.2" data-path="analytic-power-functions.html"><a href="analytic-power-functions.html#two-way-between-subject-interaction"><i class="fa fa-check"></i><b>10.2</b> Two-way Between Subject Interaction</a></li>
+<li class="chapter" data-level="10.3" data-path="analytic-power-functions.html"><a href="analytic-power-functions.html#x3-between-subject-anova"><i class="fa fa-check"></i><b>10.3</b> 3x3 Between Subject ANOVA</a></li>
+</ul></li>
+<li class="chapter" data-level="11" data-path="power-curve.html"><a href="power-curve.html"><i class="fa fa-check"></i><b>11</b> Power Curve</a>
+<ul>
+<li class="chapter" data-level="11.1" data-path="power-curve.html"><a href="power-curve.html#explore-increase-in-effect-size-for-moderated-interactions."><i class="fa fa-check"></i><b>11.1</b> Explore increase in effect size for moderated interactions.</a></li>
+<li class="chapter" data-level="11.2" data-path="power-curve.html"><a href="power-curve.html#explore-increase-in-effect-size-for-cross-over-interactions."><i class="fa fa-check"></i><b>11.2</b> Explore increase in effect size for cross-over interactions.</a></li>
+<li class="chapter" data-level="11.3" data-path="power-curve.html"><a href="power-curve.html#explore-increase-in-correlation-in-moderated-interactions."><i class="fa fa-check"></i><b>11.3</b> Explore increase in correlation in moderated interactions.</a></li>
+<li class="chapter" data-level="11.4" data-path="power-curve.html"><a href="power-curve.html#increasing-correlation-in-on-factor-decreases-power-in-second-factor"><i class="fa fa-check"></i><b>11.4</b> Increasing correlation in on factor decreases power in second factor</a></li>
+<li class="chapter" data-level="11.5" data-path="power-curve.html"><a href="power-curve.html#code-to-reproduce-power-curve-figures"><i class="fa fa-check"></i><b>11.5</b> Code to Reproduce Power Curve Figures</a></li>
+</ul></li>
+<li class="chapter" data-level="12" data-path="violations-of-assumptions.html"><a href="violations-of-assumptions.html"><i class="fa fa-check"></i><b>12</b> Violations of Assumptions</a>
+<ul>
+<li class="chapter" data-level="12.1" data-path="violations-of-assumptions.html"><a href="violations-of-assumptions.html#violation-of-heterogeneity-assumption"><i class="fa fa-check"></i><b>12.1</b> Violation of Heterogeneity Assumption</a></li>
+<li class="chapter" data-level="12.2" data-path="violations-of-assumptions.html"><a href="violations-of-assumptions.html#violation-of-the-sphericity-assumption"><i class="fa fa-check"></i><b>12.2</b> Violation of the sphericity assumption</a>
+<ul>
+<li class="chapter" data-level="12.2.1" data-path="violations-of-assumptions.html"><a href="violations-of-assumptions.html#manova-or-sphericity-adjustment"><i class="fa fa-check"></i><b>12.2.1</b> MANOVA or Sphericity Adjustment?</a></li>
+</ul></li>
+</ul></li>
+<li class="chapter" data-level="13" data-path="estimated-marginal-means.html"><a href="estimated-marginal-means.html"><i class="fa fa-check"></i><b>13</b> Estimated Marginal Means</a>
+<ul>
+<li class="chapter" data-level="13.1" data-path="estimated-marginal-means.html"><a href="estimated-marginal-means.html#a-note-of-caution"><i class="fa fa-check"></i><b>13.1</b> A note of caution</a></li>
+<li class="chapter" data-level="13.2" data-path="estimated-marginal-means.html"><a href="estimated-marginal-means.html#pairwise-comparisons"><i class="fa fa-check"></i><b>13.2</b> Pairwise Comparisons</a></li>
+<li class="chapter" data-level="13.3" data-path="estimated-marginal-means.html"><a href="estimated-marginal-means.html#customized-emmeans-contrasts"><i class="fa fa-check"></i><b>13.3</b> Customized <code>emmeans</code> contrasts</a></li>
+<li class="chapter" data-level="13.4" data-path="estimated-marginal-means.html"><a href="estimated-marginal-means.html#equivalence-and-non-superiority-inferiority-tests"><i class="fa fa-check"></i><b>13.4</b> Equivalence and non-superiority/-inferiority tests</a></li>
+<li class="chapter" data-level="13.5" data-path="estimated-marginal-means.html"><a href="estimated-marginal-means.html#joint-tests"><i class="fa fa-check"></i><b>13.5</b> Joint tests</a></li>
+<li class="chapter" data-level="13.6" data-path="estimated-marginal-means.html"><a href="estimated-marginal-means.html#monte-carlo-simulations"><i class="fa fa-check"></i><b>13.6</b> Monte Carlo Simulations</a></li>
+</ul></li>
+<li class="chapter" data-level="" data-path="appendix-1-direct-comparison-to-pwr2ppl.html"><a href="appendix-1-direct-comparison-to-pwr2ppl.html"><i class="fa fa-check"></i>Appendix 1: Direct Comparison to pwr2ppl</a>
+<ul>
+<li class="chapter" data-level="13.7" data-path="appendix-1-direct-comparison-to-pwr2ppl.html"><a href="appendix-1-direct-comparison-to-pwr2ppl.html#examples-from-chapter-5"><i class="fa fa-check"></i><b>13.7</b> Examples from Chapter 5</a>
+<ul>
+<li class="chapter" data-level="13.7.1" data-path="appendix-1-direct-comparison-to-pwr2ppl.html"><a href="appendix-1-direct-comparison-to-pwr2ppl.html#example-5.15.2"><i class="fa fa-check"></i><b>13.7.1</b> Example 5.1/5.2</a></li>
+<li class="chapter" data-level="13.7.2" data-path="appendix-1-direct-comparison-to-pwr2ppl.html"><a href="appendix-1-direct-comparison-to-pwr2ppl.html#example-5.3"><i class="fa fa-check"></i><b>13.7.2</b> Example 5.3</a></li>
+</ul></li>
+<li class="chapter" data-level="13.8" data-path="appendix-1-direct-comparison-to-pwr2ppl.html"><a href="appendix-1-direct-comparison-to-pwr2ppl.html#examples-from-chapter-6"><i class="fa fa-check"></i><b>13.8</b> Examples from Chapter 6</a>
+<ul>
+<li class="chapter" data-level="13.8.1" data-path="appendix-1-direct-comparison-to-pwr2ppl.html"><a href="appendix-1-direct-comparison-to-pwr2ppl.html#example-from-table-6.2"><i class="fa fa-check"></i><b>13.8.1</b> Example from Table 6.2</a></li>
+<li class="chapter" data-level="13.8.2" data-path="appendix-1-direct-comparison-to-pwr2ppl.html"><a href="appendix-1-direct-comparison-to-pwr2ppl.html#example-from-table-6.6"><i class="fa fa-check"></i><b>13.8.2</b> Example from Table 6.6</a></li>
+<li class="chapter" data-level="13.8.3" data-path="appendix-1-direct-comparison-to-pwr2ppl.html"><a href="appendix-1-direct-comparison-to-pwr2ppl.html#example-from-table-6.8"><i class="fa fa-check"></i><b>13.8.3</b> Example from Table 6.8</a></li>
+</ul></li>
+<li class="chapter" data-level="13.9" data-path="appendix-1-direct-comparison-to-pwr2ppl.html"><a href="appendix-1-direct-comparison-to-pwr2ppl.html#example-from-chapter-7"><i class="fa fa-check"></i><b>13.9</b> Example from Chapter 7</a>
+<ul>
+<li class="chapter" data-level="13.9.1" data-path="appendix-1-direct-comparison-to-pwr2ppl.html"><a href="appendix-1-direct-comparison-to-pwr2ppl.html#from-table-7.2"><i class="fa fa-check"></i><b>13.9.1</b> From Table 7.2</a></li>
+</ul></li>
+</ul></li>
+<li class="chapter" data-level="" data-path="appendix-3-comparison-to-brysbaert.html"><a href="appendix-3-comparison-to-brysbaert.html"><i class="fa fa-check"></i>Appendix 3: Comparison to Brysbaert</a>
+<ul>
+<li class="chapter" data-level="13.10" data-path="appendix-3-comparison-to-brysbaert.html"><a href="appendix-3-comparison-to-brysbaert.html#one-way-anova-1"><i class="fa fa-check"></i><b>13.10</b> One-Way ANOVA</a>
+<ul>
+<li class="chapter" data-level="13.10.1" data-path="appendix-3-comparison-to-brysbaert.html"><a href="appendix-3-comparison-to-brysbaert.html#three-conditions-replication"><i class="fa fa-check"></i><b>13.10.1</b> Three conditions replication</a></li>
+<li class="chapter" data-level="13.10.2" data-path="appendix-3-comparison-to-brysbaert.html"><a href="appendix-3-comparison-to-brysbaert.html#variation-1"><i class="fa fa-check"></i><b>13.10.2</b> Variation 1</a></li>
+<li class="chapter" data-level="13.10.3" data-path="appendix-3-comparison-to-brysbaert.html"><a href="appendix-3-comparison-to-brysbaert.html#three-conditions-replication-1"><i class="fa fa-check"></i><b>13.10.3</b> Three conditions replication</a></li>
+<li class="chapter" data-level="13.10.4" data-path="appendix-3-comparison-to-brysbaert.html"><a href="appendix-3-comparison-to-brysbaert.html#variation-2"><i class="fa fa-check"></i><b>13.10.4</b> Variation 2</a></li>
+<li class="chapter" data-level="13.10.5" data-path="appendix-3-comparison-to-brysbaert.html"><a href="appendix-3-comparison-to-brysbaert.html#three-conditions-replication-2"><i class="fa fa-check"></i><b>13.10.5</b> Three conditions replication</a></li>
+</ul></li>
+<li class="chapter" data-level="13.11" data-path="appendix-3-comparison-to-brysbaert.html"><a href="appendix-3-comparison-to-brysbaert.html#repeated-measures"><i class="fa fa-check"></i><b>13.11</b> Repeated Measures</a>
+<ul>
+<li class="chapter" data-level="13.11.1" data-path="appendix-3-comparison-to-brysbaert.html"><a href="appendix-3-comparison-to-brysbaert.html#reproducing-brysbaert-variation-1-changing-correlation"><i class="fa fa-check"></i><b>13.11.1</b> Reproducing Brysbaert Variation 1: Changing Correlation</a></li>
 </ul></li>
 </ul></li>
 <li class="chapter" data-level="" data-path="appendix-2-direct-comparison-to-morepower.html"><a href="appendix-2-direct-comparison-to-morepower.html"><i class="fa fa-check"></i>Appendix 2: Direct Comparison to MOREpower</a></li>
@@ -269,65 +310,65 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
           <div class="page-inner">
 
             <section class="normal" id="section-">
-<div id="violations-of-assumptions" class="section level1">
-<h1><span class="header-section-number">Chapter 11</span> Violations of Assumptions</h1>
+<div id="violations-of-assumptions" class="section level1" number="12">
+<h1><span class="header-section-number">Chapter 12</span> Violations of Assumptions</h1>
 <p>So far we have shown how simulations can be useful for power analyses for ANOVA designs where all assumptions of the statistical tests are met.
 An ANOVA is quite robust against violations of the normality assumption, which means the Type 1 error rate remains close to the alpha level specified in the test. Violations of the homogeneity of variances assumption can be more impactful, especially when sample sizes are unequal between conditions.
 When the equal variances assumption is violated for a one-way ANOVA, Welch’s <em>F</em>-test is a good default.</p>
 <p>When the sphericity assumption in within designs is violated (when the variances of the differences between all pairs are not equal) a sphericity correction can be applied (e.g., the Greenhouse-Geisser or Huynh-Feldt correction) or a Multivariate ANOVA (MANOVA) can be performed.
 Alternative approaches for ANOVA designs with multiple between factors exist, such as heteroskedasticity robust standard errors.
 Superpower allows researchers to perform power analyses for unequal variances (or correlations) applying sphercity corrections, or a MANOVA. We aim to include the option to perform Welch’s <em>F</em>-test in the future.</p>
-<div id="violation-of-heterogeneity-assumption" class="section level2">
-<h2><span class="header-section-number">11.1</span> Violation of Heterogeneity Assumption</h2>
-<p>Although some recommendations have been provided to assist researchers to choose an approach to deal with violations of the homogeneity assumption <span class="citation">(Algina and Keselman <a href="#ref-algina_detecting_1997" role="doc-biblioref">1997</a>)</span>, it is often unclear if these violations of the homogeneity assumption are consequential for a given study.
+<div id="violation-of-heterogeneity-assumption" class="section level2" number="12.1">
+<h2><span class="header-section-number">12.1</span> Violation of Heterogeneity Assumption</h2>
+<p>Although some recommendations have been provided to assist researchers to choose an approach to deal with violations of the homogeneity assumption <span class="citation">(<a href="references.html#ref-algina_detecting_1997" role="doc-biblioref">Algina and Keselman 1997</a>)</span>, it is often unclear if these violations of the homogeneity assumption are consequential for a given study.
 So far we have used simulations in Superpower to simulate patterns of means where there is a true effect, but we can also simulate a null effect.
 Such Monte Carlo simulation studies are used in published articles to examine the Type 1 error rate under a range of assumptions and while performing different tests.
 Superpower makes it easy to perform such simulations studies for the specific scenario a researcher is faced with, and can help to make a decision whether violations of assumptions are something to worry about, and whether choices to deal with violations are sufficient.</p>
-<div class="sourceCode" id="cb613"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb613-1"><a href="violations-of-assumptions.html#cb613-1"></a>design_result_violation &lt;-<span class="st"> </span><span class="kw">ANOVA_design</span>(</span>
-<span id="cb613-2"><a href="violations-of-assumptions.html#cb613-2"></a>  <span class="dt">design =</span> <span class="st">&quot;2b*2b&quot;</span>,</span>
-<span id="cb613-3"><a href="violations-of-assumptions.html#cb613-3"></a>  <span class="dt">n =</span> <span class="kw">c</span>(<span class="dv">20</span>, <span class="dv">80</span>, <span class="dv">40</span>, <span class="dv">80</span>),</span>
-<span id="cb613-4"><a href="violations-of-assumptions.html#cb613-4"></a>  <span class="dt">mu =</span> <span class="kw">c</span>(<span class="dv">0</span>, <span class="dv">0</span>, <span class="dv">0</span>, <span class="dv">0</span>),</span>
-<span id="cb613-5"><a href="violations-of-assumptions.html#cb613-5"></a>  <span class="dt">sd =</span> <span class="kw">c</span>(<span class="dv">3</span>, <span class="dv">1</span>, <span class="dv">5</span>, <span class="dv">1</span>),</span>
-<span id="cb613-6"><a href="violations-of-assumptions.html#cb613-6"></a>  <span class="dt">labelnames =</span> <span class="kw">c</span>(<span class="st">&quot;condition&quot;</span>, <span class="st">&quot;cheerful&quot;</span>, <span class="st">&quot;sad&quot;</span>, <span class="st">&quot;voice&quot;</span>, <span class="st">&quot;human&quot;</span>, <span class="st">&quot;robot&quot;</span>))</span></code></pre></div>
+<div class="sourceCode" id="cb648"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb648-1"><a href="violations-of-assumptions.html#cb648-1" aria-hidden="true" tabindex="-1"></a>design_result_violation <span class="ot">&lt;-</span> <span class="fu">ANOVA_design</span>(</span>
+<span id="cb648-2"><a href="violations-of-assumptions.html#cb648-2" aria-hidden="true" tabindex="-1"></a>  <span class="at">design =</span> <span class="st">&quot;2b*2b&quot;</span>,</span>
+<span id="cb648-3"><a href="violations-of-assumptions.html#cb648-3" aria-hidden="true" tabindex="-1"></a>  <span class="at">n =</span> <span class="fu">c</span>(<span class="dv">20</span>, <span class="dv">80</span>, <span class="dv">40</span>, <span class="dv">80</span>),</span>
+<span id="cb648-4"><a href="violations-of-assumptions.html#cb648-4" aria-hidden="true" tabindex="-1"></a>  <span class="at">mu =</span> <span class="fu">c</span>(<span class="dv">0</span>, <span class="dv">0</span>, <span class="dv">0</span>, <span class="dv">0</span>),</span>
+<span id="cb648-5"><a href="violations-of-assumptions.html#cb648-5" aria-hidden="true" tabindex="-1"></a>  <span class="at">sd =</span> <span class="fu">c</span>(<span class="dv">3</span>, <span class="dv">1</span>, <span class="dv">5</span>, <span class="dv">1</span>),</span>
+<span id="cb648-6"><a href="violations-of-assumptions.html#cb648-6" aria-hidden="true" tabindex="-1"></a>  <span class="at">labelnames =</span> <span class="fu">c</span>(<span class="st">&quot;condition&quot;</span>, <span class="st">&quot;cheerful&quot;</span>, <span class="st">&quot;sad&quot;</span>, <span class="st">&quot;voice&quot;</span>, <span class="st">&quot;human&quot;</span>, <span class="st">&quot;robot&quot;</span>))</span></code></pre></div>
 <p><img src="SuperpowerValidation_files/figure-html/sphercity_1-1.png" width="672" /></p>
-<div class="sourceCode" id="cb614"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb614-1"><a href="violations-of-assumptions.html#cb614-1"></a><span class="co"># power_result_violation &lt;- ANOVA_power(</span></span>
-<span id="cb614-2"><a href="violations-of-assumptions.html#cb614-2"></a><span class="co">#    design_result_violation,</span></span>
-<span id="cb614-3"><a href="violations-of-assumptions.html#cb614-3"></a><span class="co">#    nsims = 10000,</span></span>
-<span id="cb614-4"><a href="violations-of-assumptions.html#cb614-4"></a><span class="co">#    verbose = TRUE)</span></span>
-<span id="cb614-5"><a href="violations-of-assumptions.html#cb614-5"></a></span>
-<span id="cb614-6"><a href="violations-of-assumptions.html#cb614-6"></a>design_result_violation_<span class="dv">2</span> &lt;-<span class="st"> </span><span class="kw">ANOVA_design</span>(</span>
-<span id="cb614-7"><a href="violations-of-assumptions.html#cb614-7"></a>  <span class="dt">design =</span> <span class="st">&quot;2b*2b&quot;</span>,</span>
-<span id="cb614-8"><a href="violations-of-assumptions.html#cb614-8"></a>  <span class="dt">n =</span> <span class="kw">c</span>(<span class="dv">80</span>, <span class="dv">80</span>, <span class="dv">80</span>, <span class="dv">80</span>),</span>
-<span id="cb614-9"><a href="violations-of-assumptions.html#cb614-9"></a>  <span class="dt">mu =</span> <span class="kw">c</span>(<span class="dv">0</span>, <span class="dv">0</span>, <span class="dv">0</span>, <span class="dv">0</span>),</span>
-<span id="cb614-10"><a href="violations-of-assumptions.html#cb614-10"></a>  <span class="dt">sd =</span> <span class="kw">c</span>(<span class="dv">3</span>, <span class="dv">1</span>, <span class="dv">5</span>, <span class="dv">1</span>),</span>
-<span id="cb614-11"><a href="violations-of-assumptions.html#cb614-11"></a>  <span class="dt">labelnames =</span> <span class="kw">c</span>(<span class="st">&quot;condition&quot;</span>, <span class="st">&quot;cheerful&quot;</span>, <span class="st">&quot;sad&quot;</span>, <span class="st">&quot;voice&quot;</span>, <span class="st">&quot;human&quot;</span>, <span class="st">&quot;robot&quot;</span>))</span></code></pre></div>
+<div class="sourceCode" id="cb649"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb649-1"><a href="violations-of-assumptions.html#cb649-1" aria-hidden="true" tabindex="-1"></a><span class="co"># power_result_violation &lt;- ANOVA_power(</span></span>
+<span id="cb649-2"><a href="violations-of-assumptions.html#cb649-2" aria-hidden="true" tabindex="-1"></a><span class="co">#    design_result_violation,</span></span>
+<span id="cb649-3"><a href="violations-of-assumptions.html#cb649-3" aria-hidden="true" tabindex="-1"></a><span class="co">#    nsims = 10000,</span></span>
+<span id="cb649-4"><a href="violations-of-assumptions.html#cb649-4" aria-hidden="true" tabindex="-1"></a><span class="co">#    verbose = TRUE)</span></span>
+<span id="cb649-5"><a href="violations-of-assumptions.html#cb649-5" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb649-6"><a href="violations-of-assumptions.html#cb649-6" aria-hidden="true" tabindex="-1"></a>design_result_violation_2 <span class="ot">&lt;-</span> <span class="fu">ANOVA_design</span>(</span>
+<span id="cb649-7"><a href="violations-of-assumptions.html#cb649-7" aria-hidden="true" tabindex="-1"></a>  <span class="at">design =</span> <span class="st">&quot;2b*2b&quot;</span>,</span>
+<span id="cb649-8"><a href="violations-of-assumptions.html#cb649-8" aria-hidden="true" tabindex="-1"></a>  <span class="at">n =</span> <span class="fu">c</span>(<span class="dv">80</span>, <span class="dv">80</span>, <span class="dv">80</span>, <span class="dv">80</span>),</span>
+<span id="cb649-9"><a href="violations-of-assumptions.html#cb649-9" aria-hidden="true" tabindex="-1"></a>  <span class="at">mu =</span> <span class="fu">c</span>(<span class="dv">0</span>, <span class="dv">0</span>, <span class="dv">0</span>, <span class="dv">0</span>),</span>
+<span id="cb649-10"><a href="violations-of-assumptions.html#cb649-10" aria-hidden="true" tabindex="-1"></a>  <span class="at">sd =</span> <span class="fu">c</span>(<span class="dv">3</span>, <span class="dv">1</span>, <span class="dv">5</span>, <span class="dv">1</span>),</span>
+<span id="cb649-11"><a href="violations-of-assumptions.html#cb649-11" aria-hidden="true" tabindex="-1"></a>  <span class="at">labelnames =</span> <span class="fu">c</span>(<span class="st">&quot;condition&quot;</span>, <span class="st">&quot;cheerful&quot;</span>, <span class="st">&quot;sad&quot;</span>, <span class="st">&quot;voice&quot;</span>, <span class="st">&quot;human&quot;</span>, <span class="st">&quot;robot&quot;</span>))</span></code></pre></div>
 <p><img src="SuperpowerValidation_files/figure-html/sphercity_1-2.png" width="672" /></p>
-<div class="sourceCode" id="cb615"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb615-1"><a href="violations-of-assumptions.html#cb615-1"></a><span class="co"># power_result_violation_2 &lt;- ANOVA_power_unequal_n(</span></span>
-<span id="cb615-2"><a href="violations-of-assumptions.html#cb615-2"></a><span class="co">#    design_result_violation_2,</span></span>
-<span id="cb615-3"><a href="violations-of-assumptions.html#cb615-3"></a><span class="co">#    nsims = 10000,</span></span>
-<span id="cb615-4"><a href="violations-of-assumptions.html#cb615-4"></a><span class="co">#    verbose = TRUE)</span></span></code></pre></div>
+<div class="sourceCode" id="cb650"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb650-1"><a href="violations-of-assumptions.html#cb650-1" aria-hidden="true" tabindex="-1"></a><span class="co"># power_result_violation_2 &lt;- ANOVA_power_unequal_n(</span></span>
+<span id="cb650-2"><a href="violations-of-assumptions.html#cb650-2" aria-hidden="true" tabindex="-1"></a><span class="co">#    design_result_violation_2,</span></span>
+<span id="cb650-3"><a href="violations-of-assumptions.html#cb650-3" aria-hidden="true" tabindex="-1"></a><span class="co">#    nsims = 10000,</span></span>
+<span id="cb650-4"><a href="violations-of-assumptions.html#cb650-4" aria-hidden="true" tabindex="-1"></a><span class="co">#    verbose = TRUE)</span></span></code></pre></div>
 <p>As an example, let’s revisit our earlier 2x2 between subjects design.
 Balanced designs (the same sample size in each condition) reduce the impact of violations of the homogeneity assumption, but let’s assume that for some reason sample sizes varied between 20 and 80 per cell, and the population standard violations varied extremely across conditions (from 1 to 5).
 We can use Superpower to estimate the impact of violating the homogeneity assumption by simulating a null effect (the means in all conditions are the same) and examining the Type 1 error rate.
 We can specify a design with unequal sample sizes and unequal variances as illustrated in the code below.</p>
-<div class="sourceCode" id="cb616"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb616-1"><a href="violations-of-assumptions.html#cb616-1"></a>design_result_violation &lt;-<span class="kw">ANOVA_design</span>(</span>
-<span id="cb616-2"><a href="violations-of-assumptions.html#cb616-2"></a>  <span class="dt">design =</span> <span class="st">&quot;2b*2b&quot;</span>,</span>
-<span id="cb616-3"><a href="violations-of-assumptions.html#cb616-3"></a>  <span class="dt">n =</span> <span class="kw">c</span>(<span class="dv">20</span>, <span class="dv">80</span>, <span class="dv">40</span>, <span class="dv">80</span>),</span>
-<span id="cb616-4"><a href="violations-of-assumptions.html#cb616-4"></a>  <span class="dt">mu =</span> <span class="kw">c</span>(<span class="dv">0</span>, <span class="dv">0</span>, <span class="dv">0</span>, <span class="dv">0</span>),</span>
-<span id="cb616-5"><a href="violations-of-assumptions.html#cb616-5"></a>  <span class="dt">sd =</span> <span class="kw">c</span>(<span class="dv">3</span>, <span class="dv">1</span>, <span class="dv">5</span>, <span class="dv">1</span>),</span>
-<span id="cb616-6"><a href="violations-of-assumptions.html#cb616-6"></a>  <span class="dt">labelnames =</span> <span class="kw">c</span>(<span class="st">&quot;condition&quot;</span>, <span class="st">&quot;cheerful&quot;</span>, <span class="st">&quot;sad&quot;</span>, <span class="st">&quot;voice&quot;</span>, <span class="st">&quot;human&quot;</span>, <span class="st">&quot;robot&quot;</span>))</span>
-<span id="cb616-7"><a href="violations-of-assumptions.html#cb616-7"></a><span class="er">)</span></span>
-<span id="cb616-8"><a href="violations-of-assumptions.html#cb616-8"></a></span>
-<span id="cb616-9"><a href="violations-of-assumptions.html#cb616-9"></a>power_result_violation &lt;-<span class="st"> </span><span class="kw">ANOVA_power</span>(</span>
-<span id="cb616-10"><a href="violations-of-assumptions.html#cb616-10"></a>  design_result_violation,</span>
-<span id="cb616-11"><a href="violations-of-assumptions.html#cb616-11"></a>  <span class="dt">nsims =</span> <span class="dv">100000</span>)</span></code></pre></div>
+<div class="sourceCode" id="cb651"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb651-1"><a href="violations-of-assumptions.html#cb651-1" aria-hidden="true" tabindex="-1"></a>design_result_violation <span class="ot">&lt;-</span><span class="fu">ANOVA_design</span>(</span>
+<span id="cb651-2"><a href="violations-of-assumptions.html#cb651-2" aria-hidden="true" tabindex="-1"></a>  <span class="at">design =</span> <span class="st">&quot;2b*2b&quot;</span>,</span>
+<span id="cb651-3"><a href="violations-of-assumptions.html#cb651-3" aria-hidden="true" tabindex="-1"></a>  <span class="at">n =</span> <span class="fu">c</span>(<span class="dv">20</span>, <span class="dv">80</span>, <span class="dv">40</span>, <span class="dv">80</span>),</span>
+<span id="cb651-4"><a href="violations-of-assumptions.html#cb651-4" aria-hidden="true" tabindex="-1"></a>  <span class="at">mu =</span> <span class="fu">c</span>(<span class="dv">0</span>, <span class="dv">0</span>, <span class="dv">0</span>, <span class="dv">0</span>),</span>
+<span id="cb651-5"><a href="violations-of-assumptions.html#cb651-5" aria-hidden="true" tabindex="-1"></a>  <span class="at">sd =</span> <span class="fu">c</span>(<span class="dv">3</span>, <span class="dv">1</span>, <span class="dv">5</span>, <span class="dv">1</span>),</span>
+<span id="cb651-6"><a href="violations-of-assumptions.html#cb651-6" aria-hidden="true" tabindex="-1"></a>  <span class="at">labelnames =</span> <span class="fu">c</span>(<span class="st">&quot;condition&quot;</span>, <span class="st">&quot;cheerful&quot;</span>, <span class="st">&quot;sad&quot;</span>, <span class="st">&quot;voice&quot;</span>, <span class="st">&quot;human&quot;</span>, <span class="st">&quot;robot&quot;</span>))</span>
+<span id="cb651-7"><a href="violations-of-assumptions.html#cb651-7" aria-hidden="true" tabindex="-1"></a><span class="er">)</span></span>
+<span id="cb651-8"><a href="violations-of-assumptions.html#cb651-8" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb651-9"><a href="violations-of-assumptions.html#cb651-9" aria-hidden="true" tabindex="-1"></a>power_result_violation <span class="ot">&lt;-</span> <span class="fu">ANOVA_power</span>(</span>
+<span id="cb651-10"><a href="violations-of-assumptions.html#cb651-10" aria-hidden="true" tabindex="-1"></a>  design_result_violation,</span>
+<span id="cb651-11"><a href="violations-of-assumptions.html#cb651-11" aria-hidden="true" tabindex="-1"></a>  <span class="at">nsims =</span> <span class="dv">100000</span>)</span></code></pre></div>
 <p>Based on this simulation, the Type 1 error rate for the main effects and interactions for the ANOVA are approximately 14.5%.
 Under these assumptions it is clear that the Type 1 error rate is too high.
 One solution would be to make sure that an experiment has equal sample sizes.
 If we re-run the simulation with equal sample sizes, the Type 1 error rate it reduced to 5.36%, which is acceptable, even though the standard deviations are not equal.</p>
 </div>
-<div id="violation-of-the-sphericity-assumption" class="section level2">
-<h2><span class="header-section-number">11.2</span> Violation of the sphericity assumption</h2>
+<div id="violation-of-the-sphericity-assumption" class="section level2" number="12.2">
+<h2><span class="header-section-number">12.2</span> Violation of the sphericity assumption</h2>
 <p>We can also use Superpower to estimate the impact of violating the assumption of sphericity on the type 1 error rate for a simple one-way repeated measures ANOVA.
 The sphericity assumption entails that the variances of the differences between all possible pairs of within-subject conditions (i.e., levels of the independent variable) are equal.
 This assumption is often tenuous at best in real life, and is typically “adjusted” for by applying a sphericity correction (e.g, Greenhouse-Geisser or Huynh-Feldt adjusted output).</p>
@@ -335,37 +376,37 @@ This assumption is often tenuous at best in real life, and is typically “adjus
 We can simulate an example (below) wherein there are no differences between the repeated measures (i.e., the null-hypothesis is true) and the correlations between the levels vary from <em>r</em> = .05 to <em>r</em> = .90, and the standard deviations from 1 to 7.
 This leads to unequal variances of the differences between conditions, and thus violates the sphericity assumption.
 We scan simulate the consequences be specifying the design in the ANOVA_design function.</p>
-<div class="sourceCode" id="cb617"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb617-1"><a href="violations-of-assumptions.html#cb617-1"></a>design_result_violation_<span class="dv">3</span> &lt;-<span class="st"> </span><span class="kw">ANOVA_design</span>(</span>
-<span id="cb617-2"><a href="violations-of-assumptions.html#cb617-2"></a>  <span class="dt">design =</span> <span class="st">&quot;4w&quot;</span>,</span>
-<span id="cb617-3"><a href="violations-of-assumptions.html#cb617-3"></a>  <span class="dt">n =</span> <span class="dv">29</span>,</span>
-<span id="cb617-4"><a href="violations-of-assumptions.html#cb617-4"></a>  <span class="dt">r =</span> <span class="kw">c</span>(.<span class="dv">05</span>, <span class="fl">.15</span>, <span class="fl">.25</span>, <span class="fl">.55</span>, <span class="fl">.65</span>, <span class="fl">.9</span>),</span>
-<span id="cb617-5"><a href="violations-of-assumptions.html#cb617-5"></a>  <span class="dt">sd =</span> <span class="kw">c</span>(<span class="dv">1</span>,<span class="dv">3</span>,<span class="dv">5</span>,<span class="dv">7</span>),</span>
-<span id="cb617-6"><a href="violations-of-assumptions.html#cb617-6"></a>  <span class="dt">mu =</span> <span class="kw">c</span>(<span class="dv">0</span>, <span class="dv">0</span>, <span class="dv">0</span>, <span class="dv">0</span>)</span>
-<span id="cb617-7"><a href="violations-of-assumptions.html#cb617-7"></a>)</span></code></pre></div>
+<div class="sourceCode" id="cb652"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb652-1"><a href="violations-of-assumptions.html#cb652-1" aria-hidden="true" tabindex="-1"></a>design_result_violation_3 <span class="ot">&lt;-</span> <span class="fu">ANOVA_design</span>(</span>
+<span id="cb652-2"><a href="violations-of-assumptions.html#cb652-2" aria-hidden="true" tabindex="-1"></a>  <span class="at">design =</span> <span class="st">&quot;4w&quot;</span>,</span>
+<span id="cb652-3"><a href="violations-of-assumptions.html#cb652-3" aria-hidden="true" tabindex="-1"></a>  <span class="at">n =</span> <span class="dv">29</span>,</span>
+<span id="cb652-4"><a href="violations-of-assumptions.html#cb652-4" aria-hidden="true" tabindex="-1"></a>  <span class="at">r =</span> <span class="fu">c</span>(.<span class="dv">05</span>, .<span class="dv">15</span>, .<span class="dv">25</span>, .<span class="dv">55</span>, .<span class="dv">65</span>, .<span class="dv">9</span>),</span>
+<span id="cb652-5"><a href="violations-of-assumptions.html#cb652-5" aria-hidden="true" tabindex="-1"></a>  <span class="at">sd =</span> <span class="fu">c</span>(<span class="dv">1</span>,<span class="dv">3</span>,<span class="dv">5</span>,<span class="dv">7</span>),</span>
+<span id="cb652-6"><a href="violations-of-assumptions.html#cb652-6" aria-hidden="true" tabindex="-1"></a>  <span class="at">mu =</span> <span class="fu">c</span>(<span class="dv">0</span>, <span class="dv">0</span>, <span class="dv">0</span>, <span class="dv">0</span>)</span>
+<span id="cb652-7"><a href="violations-of-assumptions.html#cb652-7" aria-hidden="true" tabindex="-1"></a>)</span></code></pre></div>
 <p>We then perform the Monte Carlo simulation using the ANOVA_power function.</p>
-<div class="sourceCode" id="cb618"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb618-1"><a href="violations-of-assumptions.html#cb618-1"></a>power_result_violation_<span class="dv">3</span> &lt;-<span class="st"> </span><span class="kw">ANOVA_power</span>(design_result_violation_<span class="dv">3</span>, </span>
-<span id="cb618-2"><a href="violations-of-assumptions.html#cb618-2"></a>                                        <span class="dt">alpha_level =</span> <span class="fl">0.05</span>, </span>
-<span id="cb618-3"><a href="violations-of-assumptions.html#cb618-3"></a>                                        <span class="dt">nsims =</span> <span class="dv">10000</span>)</span></code></pre></div>
+<div class="sourceCode" id="cb653"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb653-1"><a href="violations-of-assumptions.html#cb653-1" aria-hidden="true" tabindex="-1"></a>power_result_violation_3 <span class="ot">&lt;-</span> <span class="fu">ANOVA_power</span>(design_result_violation_3, </span>
+<span id="cb653-2"><a href="violations-of-assumptions.html#cb653-2" aria-hidden="true" tabindex="-1"></a>                                        <span class="at">alpha_level =</span> <span class="fl">0.05</span>, </span>
+<span id="cb653-3"><a href="violations-of-assumptions.html#cb653-3" aria-hidden="true" tabindex="-1"></a>                                        <span class="at">nsims =</span> <span class="dv">10000</span>)</span></code></pre></div>
 <p>The simulated type 1 error rate for the univariate ANOVA is 8.25%.
 The multivariate ANOVA (MANOVA) does not assume sphericity and therefore should be robust to this pattern of correlations.
 We can then check the MANOVA results and see this analysis approach maintains the Type 1 error rate at 4.91%. Alternatively, we could re-run the simulation with a Greenhouse-Geisser (<code>correction = "GG"</code>) or Huynh-Feldt (<code>correction = "HF"</code>) corrections for sphericity.</p>
-<div class="sourceCode" id="cb619"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb619-1"><a href="violations-of-assumptions.html#cb619-1"></a>power_result_violation_<span class="dv">4</span> &lt;-<span class="st"> </span><span class="kw">ANOVA_power</span>(design_result_violation_<span class="dv">4</span>, </span>
-<span id="cb619-2"><a href="violations-of-assumptions.html#cb619-2"></a>                                        <span class="dt">alpha_level =</span> <span class="fl">0.05</span>, </span>
-<span id="cb619-3"><a href="violations-of-assumptions.html#cb619-3"></a>                                        <span class="dt">nsims =</span> nsims,</span>
-<span id="cb619-4"><a href="violations-of-assumptions.html#cb619-4"></a>                                        <span class="dt">correction =</span> <span class="st">&quot;GG&quot;</span>,</span>
-<span id="cb619-5"><a href="violations-of-assumptions.html#cb619-5"></a>                                        <span class="dt">verbose =</span> <span class="ot">FALSE</span>)</span>
-<span id="cb619-6"><a href="violations-of-assumptions.html#cb619-6"></a>power_result_violation_<span class="dv">5</span> &lt;-<span class="st"> </span><span class="kw">ANOVA_power</span>(design_result_violation_<span class="dv">4</span>, </span>
-<span id="cb619-7"><a href="violations-of-assumptions.html#cb619-7"></a>                                        <span class="dt">alpha_level =</span> <span class="fl">0.05</span>, </span>
-<span id="cb619-8"><a href="violations-of-assumptions.html#cb619-8"></a>                                        <span class="dt">nsims =</span> nsims,</span>
-<span id="cb619-9"><a href="violations-of-assumptions.html#cb619-9"></a>                                        <span class="dt">correction =</span> <span class="st">&quot;HF&quot;</span>,</span>
-<span id="cb619-10"><a href="violations-of-assumptions.html#cb619-10"></a>                                        <span class="dt">verbose =</span> <span class="ot">FALSE</span>)</span></code></pre></div>
+<div class="sourceCode" id="cb654"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb654-1"><a href="violations-of-assumptions.html#cb654-1" aria-hidden="true" tabindex="-1"></a>power_result_violation_4 <span class="ot">&lt;-</span> <span class="fu">ANOVA_power</span>(design_result_violation_4, </span>
+<span id="cb654-2"><a href="violations-of-assumptions.html#cb654-2" aria-hidden="true" tabindex="-1"></a>                                        <span class="at">alpha_level =</span> <span class="fl">0.05</span>, </span>
+<span id="cb654-3"><a href="violations-of-assumptions.html#cb654-3" aria-hidden="true" tabindex="-1"></a>                                        <span class="at">nsims =</span> nsims,</span>
+<span id="cb654-4"><a href="violations-of-assumptions.html#cb654-4" aria-hidden="true" tabindex="-1"></a>                                        <span class="at">correction =</span> <span class="st">&quot;GG&quot;</span>,</span>
+<span id="cb654-5"><a href="violations-of-assumptions.html#cb654-5" aria-hidden="true" tabindex="-1"></a>                                        <span class="at">verbose =</span> <span class="cn">FALSE</span>)</span>
+<span id="cb654-6"><a href="violations-of-assumptions.html#cb654-6" aria-hidden="true" tabindex="-1"></a>power_result_violation_5 <span class="ot">&lt;-</span> <span class="fu">ANOVA_power</span>(design_result_violation_4, </span>
+<span id="cb654-7"><a href="violations-of-assumptions.html#cb654-7" aria-hidden="true" tabindex="-1"></a>                                        <span class="at">alpha_level =</span> <span class="fl">0.05</span>, </span>
+<span id="cb654-8"><a href="violations-of-assumptions.html#cb654-8" aria-hidden="true" tabindex="-1"></a>                                        <span class="at">nsims =</span> nsims,</span>
+<span id="cb654-9"><a href="violations-of-assumptions.html#cb654-9" aria-hidden="true" tabindex="-1"></a>                                        <span class="at">correction =</span> <span class="st">&quot;HF&quot;</span>,</span>
+<span id="cb654-10"><a href="violations-of-assumptions.html#cb654-10" aria-hidden="true" tabindex="-1"></a>                                        <span class="at">verbose =</span> <span class="cn">FALSE</span>)</span></code></pre></div>
 <p>The simulated type 1 error rate for the univariate ANOVA with a Greenhouse-Geisser correction is now 4.82% and it is 5.36% with a Huynh-Feldt correction.
 After we determine which analysis approach best preserves the Type 1 error rate, given assumptions about the data generation model (e.g., the standard deviations and correlations) we could then re-run the simulation with the pattern of means we want to detect and estimate the power for the given design.
 This way, we control our Type 1 error rate, and can estimate our statistical power for an analysis that handles violations of the sphericity assumption.</p>
 <div style="page-break-after: always;"></div>
-<div id="manova-or-sphericity-adjustment" class="section level3">
-<h3><span class="header-section-number">11.2.1</span> MANOVA or Sphericity Adjustment?</h3>
-<p>In our experience, most researchers default to using a Greenhouse-Geisser adjustment for sphericity, but this may not be the most statistical efficient way of dealing with violations of sphercity. While it is tempting to simply say one approach is superior to another, that is not case when the sample size is small (<span class="citation">Maxwell, Delaney, and Kelley (<a href="#ref-maxwell_designing_2004" role="doc-biblioref">2004</a>)</span>, ppg 775).
+<div id="manova-or-sphericity-adjustment" class="section level3" number="12.2.1">
+<h3><span class="header-section-number">12.2.1</span> MANOVA or Sphericity Adjustment?</h3>
+<p>In our experience, most researchers default to using a Greenhouse-Geisser adjustment for sphericity, but this may not be the most statistical efficient way of dealing with violations of sphercity. While it is tempting to simply say one approach is superior to another, that is not case when the sample size is small (<span class="citation"><a href="references.html#ref-maxwell_designing_2004" role="doc-biblioref">Maxwell, Delaney, and Kelley</a> (<a href="references.html#ref-maxwell_designing_2004" role="doc-biblioref">2004</a>)</span>, ppg 775).
 Some general guidelines were proposed by Algina and Keselman (1997):</p>
 <p>MANOVA when <code>levels &lt;= 4, epsilon &lt;= .9, n &gt; levels + 15</code> and <code>5 &lt;= levels &lt;= 8, epsilon &lt;= .85, n &gt; levels + 30</code>.</p>
 <p>However, <code>ANOVA_power</code> can be used to examine whether such general guidelines actually make sense in a specific case.
@@ -373,7 +414,7 @@ Researchers can simulate both the expected reality when the null hypothesis is t
 <p>As we saw above, the unadjusted repeated measures ANOVA has an elevated type I error rate, but the MANOVA analysis and corrections control Type 1 error rates well.</p>
 <table class="table" style="margin-left: auto; margin-right: auto;">
 <caption>
-<span id="tab:unnamed-chunk-271">Table 11.1: </span>Simulated MANOVA Result
+<span id="tab:unnamed-chunk-296">Table 12.1: </span>Simulated MANOVA Result
 </caption>
 <thead>
 <tr>
@@ -405,7 +446,7 @@ manova_a
 </table>
 <table class="table" style="margin-left: auto; margin-right: auto;">
 <caption>
-<span id="tab:unnamed-chunk-272">Table 11.2: </span>Simulated ANOVA Result
+<span id="tab:unnamed-chunk-297">Table 12.2: </span>Simulated ANOVA Result
 </caption>
 <thead>
 <tr>
@@ -435,7 +476,7 @@ anova_a
 </table>
 <table class="table" style="margin-left: auto; margin-right: auto;">
 <caption>
-<span id="tab:unnamed-chunk-273">Table 11.3: </span>Simulated ANOVA Result
+<span id="tab:unnamed-chunk-298">Table 12.3: </span>Simulated ANOVA Result
 </caption>
 <thead>
 <tr>
@@ -467,19 +508,19 @@ anova_a
 <p>Both the sphericity corrections, Greenhouse-Geisser (<code>GG</code>) and Huynh-Feldt (<code>HF</code>), as well as the MANOVA were able to adequately control type I error rate.
 However, Greenhouse-Geisser seemed to be more conservative.
 We can now directly compare the power of the MANOVA or <code>HF</code>-adjusted approach. We can adjust the study design to the alternative, or hypothesized, model with the predicted means of <code>0, 0.75, 1.5, 3</code> instead of the null model.</p>
-<div class="sourceCode" id="cb620"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb620-1"><a href="violations-of-assumptions.html#cb620-1"></a>design_result_power &lt;-<span class="st"> </span><span class="kw">ANOVA_design</span>(<span class="st">&quot;4w&quot;</span>,</span>
-<span id="cb620-2"><a href="violations-of-assumptions.html#cb620-2"></a>                              <span class="dt">n =</span> <span class="dv">29</span>,</span>
-<span id="cb620-3"><a href="violations-of-assumptions.html#cb620-3"></a>                              <span class="dt">r =</span> <span class="kw">c</span>(.<span class="dv">05</span>,.<span class="dv">15</span>,.<span class="dv">25</span>,.<span class="dv">55</span>, <span class="fl">.65</span>, <span class="fl">.9</span>),</span>
-<span id="cb620-4"><a href="violations-of-assumptions.html#cb620-4"></a>                              <span class="dt">sd =</span> <span class="kw">c</span>(<span class="dv">1</span>,<span class="dv">3</span>,<span class="dv">5</span>,<span class="dv">7</span>),</span>
-<span id="cb620-5"><a href="violations-of-assumptions.html#cb620-5"></a>                              <span class="dt">mu=</span> <span class="kw">c</span>(<span class="dv">0</span>,<span class="fl">0.75</span>,<span class="fl">1.5</span>,<span class="dv">3</span>))</span></code></pre></div>
-<p><img src="SuperpowerValidation_files/figure-html/unnamed-chunk-274-1.png" width="672" /></p>
-<div class="sourceCode" id="cb621"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb621-1"><a href="violations-of-assumptions.html#cb621-1"></a><span class="co"># power_result_hfeffect &lt;- ANOVA_power(design_result_power, </span></span>
-<span id="cb621-2"><a href="violations-of-assumptions.html#cb621-2"></a><span class="co">#                                      correction = &quot;HF&quot;,</span></span>
-<span id="cb621-3"><a href="violations-of-assumptions.html#cb621-3"></a><span class="co">#                                      nsims = nsims, </span></span>
-<span id="cb621-4"><a href="violations-of-assumptions.html#cb621-4"></a><span class="co">#                                      verbose = FALSE)</span></span></code></pre></div>
+<div class="sourceCode" id="cb655"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb655-1"><a href="violations-of-assumptions.html#cb655-1" aria-hidden="true" tabindex="-1"></a>design_result_power <span class="ot">&lt;-</span> <span class="fu">ANOVA_design</span>(<span class="st">&quot;4w&quot;</span>,</span>
+<span id="cb655-2"><a href="violations-of-assumptions.html#cb655-2" aria-hidden="true" tabindex="-1"></a>                              <span class="at">n =</span> <span class="dv">29</span>,</span>
+<span id="cb655-3"><a href="violations-of-assumptions.html#cb655-3" aria-hidden="true" tabindex="-1"></a>                              <span class="at">r =</span> <span class="fu">c</span>(.<span class="dv">05</span>,.<span class="dv">15</span>,.<span class="dv">25</span>,.<span class="dv">55</span>, .<span class="dv">65</span>, .<span class="dv">9</span>),</span>
+<span id="cb655-4"><a href="violations-of-assumptions.html#cb655-4" aria-hidden="true" tabindex="-1"></a>                              <span class="at">sd =</span> <span class="fu">c</span>(<span class="dv">1</span>,<span class="dv">3</span>,<span class="dv">5</span>,<span class="dv">7</span>),</span>
+<span id="cb655-5"><a href="violations-of-assumptions.html#cb655-5" aria-hidden="true" tabindex="-1"></a>                              <span class="at">mu=</span> <span class="fu">c</span>(<span class="dv">0</span>,<span class="fl">0.75</span>,<span class="fl">1.5</span>,<span class="dv">3</span>))</span></code></pre></div>
+<p><img src="SuperpowerValidation_files/figure-html/unnamed-chunk-299-1.png" width="672" /></p>
+<div class="sourceCode" id="cb656"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb656-1"><a href="violations-of-assumptions.html#cb656-1" aria-hidden="true" tabindex="-1"></a><span class="co"># power_result_hfeffect &lt;- ANOVA_power(design_result_power, </span></span>
+<span id="cb656-2"><a href="violations-of-assumptions.html#cb656-2" aria-hidden="true" tabindex="-1"></a><span class="co">#                                      correction = &quot;HF&quot;,</span></span>
+<span id="cb656-3"><a href="violations-of-assumptions.html#cb656-3" aria-hidden="true" tabindex="-1"></a><span class="co">#                                      nsims = nsims, </span></span>
+<span id="cb656-4"><a href="violations-of-assumptions.html#cb656-4" aria-hidden="true" tabindex="-1"></a><span class="co">#                                      verbose = FALSE)</span></span></code></pre></div>
 <table class="table" style="margin-left: auto; margin-right: auto;">
 <caption>
-<span id="tab:unnamed-chunk-275">Table 11.4: </span>Simulated ANOVA Result
+<span id="tab:unnamed-chunk-300">Table 12.4: </span>Simulated ANOVA Result
 </caption>
 <thead>
 <tr>
@@ -509,7 +550,7 @@ anova_a
 </table>
 <table class="table" style="margin-left: auto; margin-right: auto;">
 <caption>
-<span id="tab:unnamed-chunk-276">Table 11.5: </span>Simulated MANOVA Result
+<span id="tab:unnamed-chunk-301">Table 12.5: </span>Simulated MANOVA Result
 </caption>
 <thead>
 <tr>
@@ -545,15 +586,6 @@ The HF-adjusted analysis appears to be more powerful for <em>this very specific 
 The difference in power between univariate and multivariate output is diminished when the sample size is increased, and thus researchers could continue to simulate the effect of a larger sample size on the statistical power under different approaches, and make a final decision on the best approach to use in their study, based on assumptions about the data generating process.</p>
 
 </div>
-</div>
-</div>
-<h3>References</h3>
-<div id="refs" class="references">
-<div id="ref-algina_detecting_1997">
-<p>Algina, James, and H. J. Keselman. 1997. “Detecting Repeated Measures Effects with Univariate and Multivariate Statistics.” <em>Psychological Methods</em> 2 (2): 208–18. <a href="https://doi.org/10.1037/1082-989X.2.2.208">https://doi.org/10.1037/1082-989X.2.2.208</a>.</p>
-</div>
-<div id="ref-maxwell_designing_2004">
-<p>Maxwell, S. E., H. D. Delaney, and K. Kelley. 2004. <em>Designing Experiments and Analyzing Data: A Model Comparison Perspective</em>. Avec CD, v. 1. Lawrence Erlbaum Associates. <a href="https://designingexperiments.com/">https://designingexperiments.com/</a>.</p>
 </div>
 </div>
             </section>

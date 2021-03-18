@@ -21,10 +21,10 @@
   <meta name="twitter:description" content="This is a book describing the capabilities of the Superpower R package." />
   
 
-<meta name="author" content="Aaron R. Caldwell, Daniël Lakens, and Chelsea M. Parlett-Pelleriti" />
+<meta name="author" content="Aaron R. Caldwell, Daniël Lakens, Chelsea M. Parlett-Pelleriti, and Guy Prochilo" />
 
 
-<meta name="date" content="2021-01-25" />
+<meta name="date" content="2021-03-17" />
 
   <meta name="viewport" content="width=device-width, initial-scale=1" />
   <meta name="apple-mobile-web-app-capable" content="yes" />
@@ -33,6 +33,7 @@
   
 <link rel="prev" href="appendix-1-direct-comparison-to-pwr2ppl.html"/>
 <link rel="next" href="appendix-2-direct-comparison-to-morepower.html"/>
+<script src="libs/header-attrs-2.7/header-attrs.js"></script>
 <script src="libs/jquery-2.2.3/jquery.min.js"></script>
 <link href="libs/gitbook-2.6.7/css/style.css" rel="stylesheet" />
 <link href="libs/gitbook-2.6.7/css/plugin-table.css" rel="stylesheet" />
@@ -50,26 +51,23 @@
 
 
 
-<script src="libs/accessible-code-block-0.0.1/empty-anchor.js"></script>
-<link href="libs/anchor-sections-1.0/anchor-sections.css" rel="stylesheet" />
-<script src="libs/anchor-sections-1.0/anchor-sections.js"></script>
 <script src="libs/kePrint-0.0.1/kePrint.js"></script>
 <link href="libs/lightable-0.0.1/lightable.css" rel="stylesheet" />
 
 
 <style type="text/css">
-code.sourceCode > span { display: inline-block; line-height: 1.25; }
-code.sourceCode > span { color: inherit; text-decoration: inherit; }
-code.sourceCode > span:empty { height: 1.2em; }
+pre > code.sourceCode { white-space: pre; position: relative; }
+pre > code.sourceCode > span { display: inline-block; line-height: 1.25; }
+pre > code.sourceCode > span:empty { height: 1.2em; }
 .sourceCode { overflow: visible; }
-code.sourceCode { white-space: pre; position: relative; }
+code.sourceCode > span { color: inherit; text-decoration: inherit; }
 pre.sourceCode { margin: 0; }
 @media screen {
 div.sourceCode { overflow: auto; }
 }
 @media print {
-code.sourceCode { white-space: pre-wrap; }
-code.sourceCode > span { text-indent: -5em; padding-left: 5em; }
+pre > code.sourceCode { white-space: pre-wrap; }
+pre > code.sourceCode > span { text-indent: -5em; padding-left: 5em; }
 }
 pre.numberSource code
   { counter-reset: source-line 0; }
@@ -89,7 +87,7 @@ pre.numberSource { margin-left: 3em; border-left: 1px solid #aaaaaa;  padding-le
 div.sourceCode
   {   }
 @media screen {
-code.sourceCode > span > a:first-child::before { text-decoration: underline; }
+pre > code.sourceCode > span > a:first-child::before { text-decoration: underline; }
 }
 code span.al { color: #ff0000; font-weight: bold; } /* Alert */
 code span.an { color: #60a0b0; font-weight: bold; font-style: italic; } /* Annotation */
@@ -138,113 +136,156 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 <li><a href="./">Superpower</a></li>
 
 <li class="divider"></li>
-<li class="chapter" data-level="" data-path="index.html"><a href="index.html"><i class="fa fa-check"></i>Preface</a><ul>
+<li class="chapter" data-level="" data-path="index.html"><a href="index.html"><i class="fa fa-check"></i>Preface</a>
+<ul>
 <li class="chapter" data-level="" data-path="index.html"><a href="index.html#contributors"><i class="fa fa-check"></i>Contributors</a></li>
 <li class="chapter" data-level="" data-path="index.html"><a href="index.html#funding"><i class="fa fa-check"></i>Funding</a></li>
 </ul></li>
-<li class="chapter" data-level="1" data-path="the-experimental-design.html"><a href="the-experimental-design.html"><i class="fa fa-check"></i><b>1</b> The Experimental Design</a><ul>
-<li class="chapter" data-level="1.1" data-path="the-experimental-design.html"><a href="the-experimental-design.html#anova_design-function"><i class="fa fa-check"></i><b>1.1</b> ANOVA_design function</a><ul>
-<li class="chapter" data-level="1.1.1" data-path="the-experimental-design.html"><a href="the-experimental-design.html#specifying-the-design-using-design"><i class="fa fa-check"></i><b>1.1.1</b> Specifying the design using <code>design</code></a></li>
-<li class="chapter" data-level="1.1.2" data-path="the-experimental-design.html"><a href="the-experimental-design.html#specifying-the-means-using-mu"><i class="fa fa-check"></i><b>1.1.2</b> Specifying the means using <code>mu</code></a></li>
-<li class="chapter" data-level="1.1.3" data-path="the-experimental-design.html"><a href="the-experimental-design.html#specifying-label-names"><i class="fa fa-check"></i><b>1.1.3</b> Specifying label names</a></li>
-<li class="chapter" data-level="1.1.4" data-path="the-experimental-design.html"><a href="the-experimental-design.html#specifying-the-correlation"><i class="fa fa-check"></i><b>1.1.4</b> Specifying the correlation</a></li>
-<li class="chapter" data-level="1.1.5" data-path="the-experimental-design.html"><a href="the-experimental-design.html#specifying-the-sample-size"><i class="fa fa-check"></i><b>1.1.5</b> Specifying the sample size</a></li>
-<li class="chapter" data-level="1.1.6" data-path="the-experimental-design.html"><a href="the-experimental-design.html#specifying-the-standard-deviation"><i class="fa fa-check"></i><b>1.1.6</b> Specifying the standard deviation</a></li>
+<li class="chapter" data-level="1" data-path="introduction-to-power-analysis.html"><a href="introduction-to-power-analysis.html"><i class="fa fa-check"></i><b>1</b> Introduction to Power Analysis</a>
+<ul>
+<li class="chapter" data-level="1.1" data-path="introduction-to-power-analysis.html"><a href="introduction-to-power-analysis.html#overview-of-power-analysis"><i class="fa fa-check"></i><b>1.1</b> Overview of Power Analysis</a></li>
+<li class="chapter" data-level="1.2" data-path="introduction-to-power-analysis.html"><a href="introduction-to-power-analysis.html#error-and-power"><i class="fa fa-check"></i><b>1.2</b> Error and Power</a></li>
+<li class="chapter" data-level="1.3" data-path="introduction-to-power-analysis.html"><a href="introduction-to-power-analysis.html#effect-size"><i class="fa fa-check"></i><b>1.3</b> Effect size</a></li>
+<li class="chapter" data-level="1.4" data-path="introduction-to-power-analysis.html"><a href="introduction-to-power-analysis.html#samp_vs_pop"><i class="fa fa-check"></i><b>1.4</b> Sample effect size vs. population effect size</a></li>
+<li class="chapter" data-level="1.5" data-path="introduction-to-power-analysis.html"><a href="introduction-to-power-analysis.html#safeguard-effect-size"><i class="fa fa-check"></i><b>1.5</b> Safeguard Effect Size</a></li>
+<li class="chapter" data-level="1.6" data-path="introduction-to-power-analysis.html"><a href="introduction-to-power-analysis.html#post-hoc-power-analysis"><i class="fa fa-check"></i><b>1.6</b> <em>Post hoc</em> power analysis</a>
+<ul>
+<li class="chapter" data-level="1.6.1" data-path="introduction-to-power-analysis.html"><a href="introduction-to-power-analysis.html#the-sample-effect-size-is-not-the-population-effect-size"><i class="fa fa-check"></i><b>1.6.1</b> The sample effect size is <em>not</em> the population effect size</a></li>
+<li class="chapter" data-level="1.6.2" data-path="introduction-to-power-analysis.html"><a href="introduction-to-power-analysis.html#post-hoc-power-is-merely-a-transformation-of-your-obtained-p-value"><i class="fa fa-check"></i><b>1.6.2</b> <em>Post hoc</em> power is merely a transformation of your obtained <em>p</em> value</a></li>
+</ul></li>
+<li class="chapter" data-level="1.7" data-path="introduction-to-power-analysis.html"><a href="introduction-to-power-analysis.html#the-minimal-detectable-effect-size"><i class="fa fa-check"></i><b>1.7</b> The Minimal Detectable Effect Size</a></li>
+<li class="chapter" data-level="1.8" data-path="introduction-to-power-analysis.html"><a href="introduction-to-power-analysis.html#the-winners-curse"><i class="fa fa-check"></i><b>1.8</b> <em>The Winner’s Curse</em></a></li>
+<li class="chapter" data-level="1.9" data-path="introduction-to-power-analysis.html"><a href="introduction-to-power-analysis.html#smallest-effect-size-of-interest"><i class="fa fa-check"></i><b>1.9</b> Smallest effect size of interest</a></li>
+<li class="chapter" data-level="1.10" data-path="introduction-to-power-analysis.html"><a href="introduction-to-power-analysis.html#power-vs.-precision"><i class="fa fa-check"></i><b>1.10</b> Power vs. Precision</a></li>
+</ul></li>
+<li class="chapter" data-level="2" data-path="the-experimental-design.html"><a href="the-experimental-design.html"><i class="fa fa-check"></i><b>2</b> The Experimental Design</a>
+<ul>
+<li class="chapter" data-level="2.1" data-path="the-experimental-design.html"><a href="the-experimental-design.html#anova_design-function"><i class="fa fa-check"></i><b>2.1</b> ANOVA_design function</a>
+<ul>
+<li class="chapter" data-level="2.1.1" data-path="the-experimental-design.html"><a href="the-experimental-design.html#specifying-the-design-using-design"><i class="fa fa-check"></i><b>2.1.1</b> Specifying the design using <code>design</code></a></li>
+<li class="chapter" data-level="2.1.2" data-path="the-experimental-design.html"><a href="the-experimental-design.html#specifying-the-means-using-mu"><i class="fa fa-check"></i><b>2.1.2</b> Specifying the means using <code>mu</code></a></li>
+<li class="chapter" data-level="2.1.3" data-path="the-experimental-design.html"><a href="the-experimental-design.html#specifying-label-names"><i class="fa fa-check"></i><b>2.1.3</b> Specifying label names</a></li>
+<li class="chapter" data-level="2.1.4" data-path="the-experimental-design.html"><a href="the-experimental-design.html#specifying-the-correlation"><i class="fa fa-check"></i><b>2.1.4</b> Specifying the correlation</a></li>
+<li class="chapter" data-level="2.1.5" data-path="the-experimental-design.html"><a href="the-experimental-design.html#specifying-the-sample-size"><i class="fa fa-check"></i><b>2.1.5</b> Specifying the sample size</a></li>
+<li class="chapter" data-level="2.1.6" data-path="the-experimental-design.html"><a href="the-experimental-design.html#specifying-the-standard-deviation"><i class="fa fa-check"></i><b>2.1.6</b> Specifying the standard deviation</a></li>
 </ul></li>
 </ul></li>
-<li class="chapter" data-level="2" data-path="one-way-anova.html"><a href="one-way-anova.html"><i class="fa fa-check"></i><b>2</b> One-Way ANOVA</a><ul>
-<li class="chapter" data-level="2.1" data-path="one-way-anova.html"><a href="one-way-anova.html#introduction"><i class="fa fa-check"></i><b>2.1</b> Introduction</a><ul>
-<li class="chapter" data-level="2.1.1" data-path="one-way-anova.html"><a href="one-way-anova.html#two-conditions"><i class="fa fa-check"></i><b>2.1.1</b> Two conditions</a></li>
-<li class="chapter" data-level="2.1.2" data-path="one-way-anova.html"><a href="one-way-anova.html#three-conditions"><i class="fa fa-check"></i><b>2.1.2</b> Three conditions</a></li>
-<li class="chapter" data-level="2.1.3" data-path="one-way-anova.html"><a href="one-way-anova.html#power-for-simple-effects"><i class="fa fa-check"></i><b>2.1.3</b> Power for simple effects</a></li>
+<li class="chapter" data-level="3" data-path="one-way-anova.html"><a href="one-way-anova.html"><i class="fa fa-check"></i><b>3</b> One-Way ANOVA</a>
+<ul>
+<li class="chapter" data-level="3.1" data-path="one-way-anova.html"><a href="one-way-anova.html#introduction"><i class="fa fa-check"></i><b>3.1</b> Introduction</a>
+<ul>
+<li class="chapter" data-level="3.1.1" data-path="one-way-anova.html"><a href="one-way-anova.html#two-conditions"><i class="fa fa-check"></i><b>3.1.1</b> Two conditions</a></li>
+<li class="chapter" data-level="3.1.2" data-path="one-way-anova.html"><a href="one-way-anova.html#three-conditions"><i class="fa fa-check"></i><b>3.1.2</b> Three conditions</a></li>
+<li class="chapter" data-level="3.1.3" data-path="one-way-anova.html"><a href="one-way-anova.html#power-for-simple-effects"><i class="fa fa-check"></i><b>3.1.3</b> Power for simple effects</a></li>
 </ul></li>
-<li class="chapter" data-level="2.2" data-path="one-way-anova.html"><a href="one-way-anova.html#effect-size-estimates-for-one-way-anova"><i class="fa fa-check"></i><b>2.2</b> Effect Size Estimates for One-Way ANOVA</a><ul>
-<li class="chapter" data-level="2.2.1" data-path="one-way-anova.html"><a href="one-way-anova.html#three-conditions-small-effect-size"><i class="fa fa-check"></i><b>2.2.1</b> Three conditions, small effect size</a></li>
-<li class="chapter" data-level="2.2.2" data-path="one-way-anova.html"><a href="one-way-anova.html#four-conditions-medium-effect-size"><i class="fa fa-check"></i><b>2.2.2</b> Four conditions, medium effect size</a></li>
-<li class="chapter" data-level="2.2.3" data-path="one-way-anova.html"><a href="one-way-anova.html#two-conditions-large-effect-size"><i class="fa fa-check"></i><b>2.2.3</b> Two conditions, large effect size</a></li>
-</ul></li>
-</ul></li>
-<li class="chapter" data-level="3" data-path="repeated-measures-anova.html"><a href="repeated-measures-anova.html"><i class="fa fa-check"></i><b>3</b> Repeated Measures ANOVA</a><ul>
-<li class="chapter" data-level="3.1" data-path="repeated-measures-anova.html"><a href="repeated-measures-anova.html#part-1"><i class="fa fa-check"></i><b>3.1</b> Part 1</a><ul>
-<li class="chapter" data-level="3.1.1" data-path="repeated-measures-anova.html"><a href="repeated-measures-anova.html#two-conditions-medium-effect-size"><i class="fa fa-check"></i><b>3.1.1</b> Two conditions, medium effect size</a></li>
-</ul></li>
-<li class="chapter" data-level="3.2" data-path="repeated-measures-anova.html"><a href="repeated-measures-anova.html#part-2"><i class="fa fa-check"></i><b>3.2</b> Part 2</a><ul>
-<li class="chapter" data-level="3.2.1" data-path="repeated-measures-anova.html"><a href="repeated-measures-anova.html#the-relation-between-cohens-f-and-cohens-d"><i class="fa fa-check"></i><b>3.2.1</b> The relation between Cohen’s f and Cohen’s d</a></li>
-<li class="chapter" data-level="3.2.2" data-path="repeated-measures-anova.html"><a href="repeated-measures-anova.html#three-within-conditions-medium-effect-size"><i class="fa fa-check"></i><b>3.2.2</b> Three within conditions, medium effect size</a></li>
-</ul></li>
-<li class="chapter" data-level="3.3" data-path="repeated-measures-anova.html"><a href="repeated-measures-anova.html#part-3"><i class="fa fa-check"></i><b>3.3</b> Part 3</a></li>
-<li class="chapter" data-level="3.4" data-path="repeated-measures-anova.html"><a href="repeated-measures-anova.html#part-4"><i class="fa fa-check"></i><b>3.4</b> Part 4</a><ul>
-<li class="chapter" data-level="3.4.1" data-path="repeated-measures-anova.html"><a href="repeated-measures-anova.html#x2-anova-within-within-design"><i class="fa fa-check"></i><b>3.4.1</b> 2x2 ANOVA, within-within design</a></li>
-<li class="chapter" data-level="3.4.2" data-path="repeated-measures-anova.html"><a href="repeated-measures-anova.html#examine-variation-of-means-and-correlation"><i class="fa fa-check"></i><b>3.4.2</b> Examine variation of means and correlation</a></li>
-</ul></li>
-<li class="chapter" data-level="3.5" data-path="repeated-measures-anova.html"><a href="repeated-measures-anova.html#part-5"><i class="fa fa-check"></i><b>3.5</b> Part 5</a><ul>
-<li class="chapter" data-level="3.5.1" data-path="repeated-measures-anova.html"><a href="repeated-measures-anova.html#x2-anova-within-design"><i class="fa fa-check"></i><b>3.5.1</b> 2x2 ANOVA, within design</a></li>
-</ul></li>
-<li class="chapter" data-level="3.6" data-path="repeated-measures-anova.html"><a href="repeated-measures-anova.html#multivariate-anova-manova"><i class="fa fa-check"></i><b>3.6</b> Multivariate ANOVA (MANOVA)</a></li>
-</ul></li>
-<li class="chapter" data-level="4" data-path="mixed-anova.html"><a href="mixed-anova.html"><i class="fa fa-check"></i><b>4</b> Mixed ANOVA</a><ul>
-<li class="chapter" data-level="4.1" data-path="mixed-anova.html"><a href="mixed-anova.html#simple-mixed-designs"><i class="fa fa-check"></i><b>4.1</b> Simple Mixed Designs</a></li>
-<li class="chapter" data-level="4.2" data-path="mixed-anova.html"><a href="mixed-anova.html#complex-mixed-designs"><i class="fa fa-check"></i><b>4.2</b> Complex Mixed Designs</a><ul>
-<li class="chapter" data-level="4.2.1" data-path="mixed-anova.html"><a href="mixed-anova.html#b3w-design"><i class="fa fa-check"></i><b>4.2.1</b> 2b*3w Design</a></li>
-<li class="chapter" data-level="4.2.2" data-path="mixed-anova.html"><a href="mixed-anova.html#b4w-design"><i class="fa fa-check"></i><b>4.2.2</b> 2b*4w Design</a></li>
+<li class="chapter" data-level="3.2" data-path="one-way-anova.html"><a href="one-way-anova.html#effect-size-estimates-for-one-way-anova"><i class="fa fa-check"></i><b>3.2</b> Effect Size Estimates for One-Way ANOVA</a>
+<ul>
+<li class="chapter" data-level="3.2.1" data-path="one-way-anova.html"><a href="one-way-anova.html#three-conditions-small-effect-size"><i class="fa fa-check"></i><b>3.2.1</b> Three conditions, small effect size</a></li>
+<li class="chapter" data-level="3.2.2" data-path="one-way-anova.html"><a href="one-way-anova.html#four-conditions-medium-effect-size"><i class="fa fa-check"></i><b>3.2.2</b> Four conditions, medium effect size</a></li>
+<li class="chapter" data-level="3.2.3" data-path="one-way-anova.html"><a href="one-way-anova.html#two-conditions-large-effect-size"><i class="fa fa-check"></i><b>3.2.3</b> Two conditions, large effect size</a></li>
 </ul></li>
 </ul></li>
-<li class="chapter" data-level="5" data-path="power-for-three-way-interactions.html"><a href="power-for-three-way-interactions.html"><i class="fa fa-check"></i><b>5</b> Power for Three-way Interactions</a></li>
-<li class="chapter" data-level="6" data-path="the-no-way-interactions.html"><a href="the-no-way-interactions.html"><i class="fa fa-check"></i><b>6</b> The ‘No-Way’ Interactions</a></li>
-<li class="chapter" data-level="7" data-path="effect-of-varying-designs-on-power.html"><a href="effect-of-varying-designs-on-power.html"><i class="fa fa-check"></i><b>7</b> Effect of Varying Designs on Power</a><ul>
-<li class="chapter" data-level="7.1" data-path="effect-of-varying-designs-on-power.html"><a href="effect-of-varying-designs-on-power.html#within-designs"><i class="fa fa-check"></i><b>7.1</b> Within Designs</a></li>
+<li class="chapter" data-level="4" data-path="repeated-measures-anova.html"><a href="repeated-measures-anova.html"><i class="fa fa-check"></i><b>4</b> Repeated Measures ANOVA</a>
+<ul>
+<li class="chapter" data-level="4.1" data-path="repeated-measures-anova.html"><a href="repeated-measures-anova.html#part-1"><i class="fa fa-check"></i><b>4.1</b> Part 1</a>
+<ul>
+<li class="chapter" data-level="4.1.1" data-path="repeated-measures-anova.html"><a href="repeated-measures-anova.html#two-conditions-medium-effect-size"><i class="fa fa-check"></i><b>4.1.1</b> Two conditions, medium effect size</a></li>
 </ul></li>
-<li class="chapter" data-level="8" data-path="error-control-in-exploratory-anova.html"><a href="error-control-in-exploratory-anova.html"><i class="fa fa-check"></i><b>8</b> Error Control in Exploratory ANOVA</a></li>
-<li class="chapter" data-level="9" data-path="analytic-power-functions.html"><a href="analytic-power-functions.html"><i class="fa fa-check"></i><b>9</b> Analytic Power Functions</a><ul>
-<li class="chapter" data-level="9.1" data-path="analytic-power-functions.html"><a href="analytic-power-functions.html#one-way-between-subjects-anova"><i class="fa fa-check"></i><b>9.1</b> One-Way Between Subjects ANOVA</a></li>
-<li class="chapter" data-level="9.2" data-path="analytic-power-functions.html"><a href="analytic-power-functions.html#two-way-between-subject-interaction"><i class="fa fa-check"></i><b>9.2</b> Two-way Between Subject Interaction</a></li>
-<li class="chapter" data-level="9.3" data-path="analytic-power-functions.html"><a href="analytic-power-functions.html#x3-between-subject-anova"><i class="fa fa-check"></i><b>9.3</b> 3x3 Between Subject ANOVA</a></li>
+<li class="chapter" data-level="4.2" data-path="repeated-measures-anova.html"><a href="repeated-measures-anova.html#part-2"><i class="fa fa-check"></i><b>4.2</b> Part 2</a>
+<ul>
+<li class="chapter" data-level="4.2.1" data-path="repeated-measures-anova.html"><a href="repeated-measures-anova.html#the-relation-between-cohens-f-and-cohens-d"><i class="fa fa-check"></i><b>4.2.1</b> The relation between Cohen’s f and Cohen’s d</a></li>
+<li class="chapter" data-level="4.2.2" data-path="repeated-measures-anova.html"><a href="repeated-measures-anova.html#three-within-conditions-medium-effect-size"><i class="fa fa-check"></i><b>4.2.2</b> Three within conditions, medium effect size</a></li>
 </ul></li>
-<li class="chapter" data-level="10" data-path="power-curve.html"><a href="power-curve.html"><i class="fa fa-check"></i><b>10</b> Power Curve</a><ul>
-<li class="chapter" data-level="10.1" data-path="power-curve.html"><a href="power-curve.html#explore-increase-in-effect-size-for-moderated-interactions."><i class="fa fa-check"></i><b>10.1</b> Explore increase in effect size for moderated interactions.</a></li>
-<li class="chapter" data-level="10.2" data-path="power-curve.html"><a href="power-curve.html#explore-increase-in-effect-size-for-cross-over-interactions."><i class="fa fa-check"></i><b>10.2</b> Explore increase in effect size for cross-over interactions.</a></li>
-<li class="chapter" data-level="10.3" data-path="power-curve.html"><a href="power-curve.html#explore-increase-in-correlation-in-moderated-interactions."><i class="fa fa-check"></i><b>10.3</b> Explore increase in correlation in moderated interactions.</a></li>
-<li class="chapter" data-level="10.4" data-path="power-curve.html"><a href="power-curve.html#increasing-correlation-in-on-factor-decreases-power-in-second-factor"><i class="fa fa-check"></i><b>10.4</b> Increasing correlation in on factor decreases power in second factor</a></li>
-<li class="chapter" data-level="10.5" data-path="power-curve.html"><a href="power-curve.html#code-to-reproduce-power-curve-figures"><i class="fa fa-check"></i><b>10.5</b> Code to Reproduce Power Curve Figures</a></li>
+<li class="chapter" data-level="4.3" data-path="repeated-measures-anova.html"><a href="repeated-measures-anova.html#part-3"><i class="fa fa-check"></i><b>4.3</b> Part 3</a></li>
+<li class="chapter" data-level="4.4" data-path="repeated-measures-anova.html"><a href="repeated-measures-anova.html#part-4"><i class="fa fa-check"></i><b>4.4</b> Part 4</a>
+<ul>
+<li class="chapter" data-level="4.4.1" data-path="repeated-measures-anova.html"><a href="repeated-measures-anova.html#x2-anova-within-within-design"><i class="fa fa-check"></i><b>4.4.1</b> 2x2 ANOVA, within-within design</a></li>
+<li class="chapter" data-level="4.4.2" data-path="repeated-measures-anova.html"><a href="repeated-measures-anova.html#examine-variation-of-means-and-correlation"><i class="fa fa-check"></i><b>4.4.2</b> Examine variation of means and correlation</a></li>
 </ul></li>
-<li class="chapter" data-level="11" data-path="violations-of-assumptions.html"><a href="violations-of-assumptions.html"><i class="fa fa-check"></i><b>11</b> Violations of Assumptions</a><ul>
-<li class="chapter" data-level="11.1" data-path="violations-of-assumptions.html"><a href="violations-of-assumptions.html#violation-of-heterogeneity-assumption"><i class="fa fa-check"></i><b>11.1</b> Violation of Heterogeneity Assumption</a></li>
-<li class="chapter" data-level="11.2" data-path="violations-of-assumptions.html"><a href="violations-of-assumptions.html#violation-of-the-sphericity-assumption"><i class="fa fa-check"></i><b>11.2</b> Violation of the sphericity assumption</a><ul>
-<li class="chapter" data-level="11.2.1" data-path="violations-of-assumptions.html"><a href="violations-of-assumptions.html#manova-or-sphericity-adjustment"><i class="fa fa-check"></i><b>11.2.1</b> MANOVA or Sphericity Adjustment?</a></li>
+<li class="chapter" data-level="4.5" data-path="repeated-measures-anova.html"><a href="repeated-measures-anova.html#part-5"><i class="fa fa-check"></i><b>4.5</b> Part 5</a>
+<ul>
+<li class="chapter" data-level="4.5.1" data-path="repeated-measures-anova.html"><a href="repeated-measures-anova.html#x2-anova-within-design"><i class="fa fa-check"></i><b>4.5.1</b> 2x2 ANOVA, within design</a></li>
 </ul></li>
+<li class="chapter" data-level="4.6" data-path="repeated-measures-anova.html"><a href="repeated-measures-anova.html#multivariate-anova-manova"><i class="fa fa-check"></i><b>4.6</b> Multivariate ANOVA (MANOVA)</a></li>
 </ul></li>
-<li class="chapter" data-level="12" data-path="estimated-marginal-means.html"><a href="estimated-marginal-means.html"><i class="fa fa-check"></i><b>12</b> Estimated Marginal Means</a><ul>
-<li class="chapter" data-level="12.1" data-path="estimated-marginal-means.html"><a href="estimated-marginal-means.html#a-note-of-caution"><i class="fa fa-check"></i><b>12.1</b> A note of caution</a></li>
-<li class="chapter" data-level="12.2" data-path="estimated-marginal-means.html"><a href="estimated-marginal-means.html#pairwise-comparisons"><i class="fa fa-check"></i><b>12.2</b> Pairwise Comparisons</a></li>
-<li class="chapter" data-level="12.3" data-path="estimated-marginal-means.html"><a href="estimated-marginal-means.html#customized-emmeans-contrasts"><i class="fa fa-check"></i><b>12.3</b> Customized <code>emmeans</code> contrasts</a></li>
-<li class="chapter" data-level="12.4" data-path="estimated-marginal-means.html"><a href="estimated-marginal-means.html#equivalence-and-non-superiority-inferiority-tests"><i class="fa fa-check"></i><b>12.4</b> Equivalence and non-superiority/-inferiority tests</a></li>
-<li class="chapter" data-level="12.5" data-path="estimated-marginal-means.html"><a href="estimated-marginal-means.html#joint-tests"><i class="fa fa-check"></i><b>12.5</b> Joint tests</a></li>
-<li class="chapter" data-level="12.6" data-path="estimated-marginal-means.html"><a href="estimated-marginal-means.html#monte-carlo-simulations"><i class="fa fa-check"></i><b>12.6</b> Monte Carlo Simulations</a></li>
-</ul></li>
-<li class="chapter" data-level="" data-path="appendix-1-direct-comparison-to-pwr2ppl.html"><a href="appendix-1-direct-comparison-to-pwr2ppl.html"><i class="fa fa-check"></i>Appendix 1: Direct Comparison to pwr2ppl</a><ul>
-<li class="chapter" data-level="12.7" data-path="appendix-1-direct-comparison-to-pwr2ppl.html"><a href="appendix-1-direct-comparison-to-pwr2ppl.html#examples-from-chapter-5"><i class="fa fa-check"></i><b>12.7</b> Examples from Chapter 5</a><ul>
-<li class="chapter" data-level="12.7.1" data-path="appendix-1-direct-comparison-to-pwr2ppl.html"><a href="appendix-1-direct-comparison-to-pwr2ppl.html#example-5.15.2"><i class="fa fa-check"></i><b>12.7.1</b> Example 5.1/5.2</a></li>
-<li class="chapter" data-level="12.7.2" data-path="appendix-1-direct-comparison-to-pwr2ppl.html"><a href="appendix-1-direct-comparison-to-pwr2ppl.html#example-5.3"><i class="fa fa-check"></i><b>12.7.2</b> Example 5.3</a></li>
-</ul></li>
-<li class="chapter" data-level="12.8" data-path="appendix-1-direct-comparison-to-pwr2ppl.html"><a href="appendix-1-direct-comparison-to-pwr2ppl.html#examples-from-chapter-6"><i class="fa fa-check"></i><b>12.8</b> Examples from Chapter 6</a><ul>
-<li class="chapter" data-level="12.8.1" data-path="appendix-1-direct-comparison-to-pwr2ppl.html"><a href="appendix-1-direct-comparison-to-pwr2ppl.html#example-from-table-6.2"><i class="fa fa-check"></i><b>12.8.1</b> Example from Table 6.2</a></li>
-<li class="chapter" data-level="12.8.2" data-path="appendix-1-direct-comparison-to-pwr2ppl.html"><a href="appendix-1-direct-comparison-to-pwr2ppl.html#example-from-table-6.6"><i class="fa fa-check"></i><b>12.8.2</b> Example from Table 6.6</a></li>
-<li class="chapter" data-level="12.8.3" data-path="appendix-1-direct-comparison-to-pwr2ppl.html"><a href="appendix-1-direct-comparison-to-pwr2ppl.html#example-from-table-6.8"><i class="fa fa-check"></i><b>12.8.3</b> Example from Table 6.8</a></li>
-</ul></li>
-<li class="chapter" data-level="12.9" data-path="appendix-1-direct-comparison-to-pwr2ppl.html"><a href="appendix-1-direct-comparison-to-pwr2ppl.html#example-from-chapter-7"><i class="fa fa-check"></i><b>12.9</b> Example from Chapter 7</a><ul>
-<li class="chapter" data-level="12.9.1" data-path="appendix-1-direct-comparison-to-pwr2ppl.html"><a href="appendix-1-direct-comparison-to-pwr2ppl.html#from-table-7.2"><i class="fa fa-check"></i><b>12.9.1</b> From Table 7.2</a></li>
+<li class="chapter" data-level="5" data-path="mixed-anova.html"><a href="mixed-anova.html"><i class="fa fa-check"></i><b>5</b> Mixed ANOVA</a>
+<ul>
+<li class="chapter" data-level="5.1" data-path="mixed-anova.html"><a href="mixed-anova.html#simple-mixed-designs"><i class="fa fa-check"></i><b>5.1</b> Simple Mixed Designs</a></li>
+<li class="chapter" data-level="5.2" data-path="mixed-anova.html"><a href="mixed-anova.html#complex-mixed-designs"><i class="fa fa-check"></i><b>5.2</b> Complex Mixed Designs</a>
+<ul>
+<li class="chapter" data-level="5.2.1" data-path="mixed-anova.html"><a href="mixed-anova.html#b3w-design"><i class="fa fa-check"></i><b>5.2.1</b> 2b*3w Design</a></li>
+<li class="chapter" data-level="5.2.2" data-path="mixed-anova.html"><a href="mixed-anova.html#b4w-design"><i class="fa fa-check"></i><b>5.2.2</b> 2b*4w Design</a></li>
 </ul></li>
 </ul></li>
-<li class="chapter" data-level="" data-path="appendix-3-comparison-to-brysbaert.html"><a href="appendix-3-comparison-to-brysbaert.html"><i class="fa fa-check"></i>Appendix 3: Comparison to Brysbaert</a><ul>
-<li class="chapter" data-level="12.10" data-path="appendix-3-comparison-to-brysbaert.html"><a href="appendix-3-comparison-to-brysbaert.html#one-way-anova-1"><i class="fa fa-check"></i><b>12.10</b> One-Way ANOVA</a><ul>
-<li class="chapter" data-level="12.10.1" data-path="appendix-3-comparison-to-brysbaert.html"><a href="appendix-3-comparison-to-brysbaert.html#three-conditions-replication"><i class="fa fa-check"></i><b>12.10.1</b> Three conditions replication</a></li>
-<li class="chapter" data-level="12.10.2" data-path="appendix-3-comparison-to-brysbaert.html"><a href="appendix-3-comparison-to-brysbaert.html#variation-1"><i class="fa fa-check"></i><b>12.10.2</b> Variation 1</a></li>
-<li class="chapter" data-level="12.10.3" data-path="appendix-3-comparison-to-brysbaert.html"><a href="appendix-3-comparison-to-brysbaert.html#three-conditions-replication-1"><i class="fa fa-check"></i><b>12.10.3</b> Three conditions replication</a></li>
-<li class="chapter" data-level="12.10.4" data-path="appendix-3-comparison-to-brysbaert.html"><a href="appendix-3-comparison-to-brysbaert.html#variation-2"><i class="fa fa-check"></i><b>12.10.4</b> Variation 2</a></li>
-<li class="chapter" data-level="12.10.5" data-path="appendix-3-comparison-to-brysbaert.html"><a href="appendix-3-comparison-to-brysbaert.html#three-conditions-replication-2"><i class="fa fa-check"></i><b>12.10.5</b> Three conditions replication</a></li>
+<li class="chapter" data-level="6" data-path="power-for-three-way-interactions.html"><a href="power-for-three-way-interactions.html"><i class="fa fa-check"></i><b>6</b> Power for Three-way Interactions</a></li>
+<li class="chapter" data-level="7" data-path="the-no-way-interactions.html"><a href="the-no-way-interactions.html"><i class="fa fa-check"></i><b>7</b> The ‘No-Way’ Interactions</a></li>
+<li class="chapter" data-level="8" data-path="effect-of-varying-designs-on-power.html"><a href="effect-of-varying-designs-on-power.html"><i class="fa fa-check"></i><b>8</b> Effect of Varying Designs on Power</a>
+<ul>
+<li class="chapter" data-level="8.1" data-path="effect-of-varying-designs-on-power.html"><a href="effect-of-varying-designs-on-power.html#within-designs"><i class="fa fa-check"></i><b>8.1</b> Within Designs</a></li>
 </ul></li>
-<li class="chapter" data-level="12.11" data-path="appendix-3-comparison-to-brysbaert.html"><a href="appendix-3-comparison-to-brysbaert.html#repeated-measures"><i class="fa fa-check"></i><b>12.11</b> Repeated Measures</a><ul>
-<li class="chapter" data-level="12.11.1" data-path="appendix-3-comparison-to-brysbaert.html"><a href="appendix-3-comparison-to-brysbaert.html#reproducing-brysbaert-variation-1-changing-correlation"><i class="fa fa-check"></i><b>12.11.1</b> Reproducing Brysbaert Variation 1: Changing Correlation</a></li>
+<li class="chapter" data-level="9" data-path="error-control-in-exploratory-anova.html"><a href="error-control-in-exploratory-anova.html"><i class="fa fa-check"></i><b>9</b> Error Control in Exploratory ANOVA</a></li>
+<li class="chapter" data-level="10" data-path="analytic-power-functions.html"><a href="analytic-power-functions.html"><i class="fa fa-check"></i><b>10</b> Analytic Power Functions</a>
+<ul>
+<li class="chapter" data-level="10.1" data-path="analytic-power-functions.html"><a href="analytic-power-functions.html#one-way-between-subjects-anova"><i class="fa fa-check"></i><b>10.1</b> One-Way Between Subjects ANOVA</a></li>
+<li class="chapter" data-level="10.2" data-path="analytic-power-functions.html"><a href="analytic-power-functions.html#two-way-between-subject-interaction"><i class="fa fa-check"></i><b>10.2</b> Two-way Between Subject Interaction</a></li>
+<li class="chapter" data-level="10.3" data-path="analytic-power-functions.html"><a href="analytic-power-functions.html#x3-between-subject-anova"><i class="fa fa-check"></i><b>10.3</b> 3x3 Between Subject ANOVA</a></li>
+</ul></li>
+<li class="chapter" data-level="11" data-path="power-curve.html"><a href="power-curve.html"><i class="fa fa-check"></i><b>11</b> Power Curve</a>
+<ul>
+<li class="chapter" data-level="11.1" data-path="power-curve.html"><a href="power-curve.html#explore-increase-in-effect-size-for-moderated-interactions."><i class="fa fa-check"></i><b>11.1</b> Explore increase in effect size for moderated interactions.</a></li>
+<li class="chapter" data-level="11.2" data-path="power-curve.html"><a href="power-curve.html#explore-increase-in-effect-size-for-cross-over-interactions."><i class="fa fa-check"></i><b>11.2</b> Explore increase in effect size for cross-over interactions.</a></li>
+<li class="chapter" data-level="11.3" data-path="power-curve.html"><a href="power-curve.html#explore-increase-in-correlation-in-moderated-interactions."><i class="fa fa-check"></i><b>11.3</b> Explore increase in correlation in moderated interactions.</a></li>
+<li class="chapter" data-level="11.4" data-path="power-curve.html"><a href="power-curve.html#increasing-correlation-in-on-factor-decreases-power-in-second-factor"><i class="fa fa-check"></i><b>11.4</b> Increasing correlation in on factor decreases power in second factor</a></li>
+<li class="chapter" data-level="11.5" data-path="power-curve.html"><a href="power-curve.html#code-to-reproduce-power-curve-figures"><i class="fa fa-check"></i><b>11.5</b> Code to Reproduce Power Curve Figures</a></li>
+</ul></li>
+<li class="chapter" data-level="12" data-path="violations-of-assumptions.html"><a href="violations-of-assumptions.html"><i class="fa fa-check"></i><b>12</b> Violations of Assumptions</a>
+<ul>
+<li class="chapter" data-level="12.1" data-path="violations-of-assumptions.html"><a href="violations-of-assumptions.html#violation-of-heterogeneity-assumption"><i class="fa fa-check"></i><b>12.1</b> Violation of Heterogeneity Assumption</a></li>
+<li class="chapter" data-level="12.2" data-path="violations-of-assumptions.html"><a href="violations-of-assumptions.html#violation-of-the-sphericity-assumption"><i class="fa fa-check"></i><b>12.2</b> Violation of the sphericity assumption</a>
+<ul>
+<li class="chapter" data-level="12.2.1" data-path="violations-of-assumptions.html"><a href="violations-of-assumptions.html#manova-or-sphericity-adjustment"><i class="fa fa-check"></i><b>12.2.1</b> MANOVA or Sphericity Adjustment?</a></li>
+</ul></li>
+</ul></li>
+<li class="chapter" data-level="13" data-path="estimated-marginal-means.html"><a href="estimated-marginal-means.html"><i class="fa fa-check"></i><b>13</b> Estimated Marginal Means</a>
+<ul>
+<li class="chapter" data-level="13.1" data-path="estimated-marginal-means.html"><a href="estimated-marginal-means.html#a-note-of-caution"><i class="fa fa-check"></i><b>13.1</b> A note of caution</a></li>
+<li class="chapter" data-level="13.2" data-path="estimated-marginal-means.html"><a href="estimated-marginal-means.html#pairwise-comparisons"><i class="fa fa-check"></i><b>13.2</b> Pairwise Comparisons</a></li>
+<li class="chapter" data-level="13.3" data-path="estimated-marginal-means.html"><a href="estimated-marginal-means.html#customized-emmeans-contrasts"><i class="fa fa-check"></i><b>13.3</b> Customized <code>emmeans</code> contrasts</a></li>
+<li class="chapter" data-level="13.4" data-path="estimated-marginal-means.html"><a href="estimated-marginal-means.html#equivalence-and-non-superiority-inferiority-tests"><i class="fa fa-check"></i><b>13.4</b> Equivalence and non-superiority/-inferiority tests</a></li>
+<li class="chapter" data-level="13.5" data-path="estimated-marginal-means.html"><a href="estimated-marginal-means.html#joint-tests"><i class="fa fa-check"></i><b>13.5</b> Joint tests</a></li>
+<li class="chapter" data-level="13.6" data-path="estimated-marginal-means.html"><a href="estimated-marginal-means.html#monte-carlo-simulations"><i class="fa fa-check"></i><b>13.6</b> Monte Carlo Simulations</a></li>
+</ul></li>
+<li class="chapter" data-level="" data-path="appendix-1-direct-comparison-to-pwr2ppl.html"><a href="appendix-1-direct-comparison-to-pwr2ppl.html"><i class="fa fa-check"></i>Appendix 1: Direct Comparison to pwr2ppl</a>
+<ul>
+<li class="chapter" data-level="13.7" data-path="appendix-1-direct-comparison-to-pwr2ppl.html"><a href="appendix-1-direct-comparison-to-pwr2ppl.html#examples-from-chapter-5"><i class="fa fa-check"></i><b>13.7</b> Examples from Chapter 5</a>
+<ul>
+<li class="chapter" data-level="13.7.1" data-path="appendix-1-direct-comparison-to-pwr2ppl.html"><a href="appendix-1-direct-comparison-to-pwr2ppl.html#example-5.15.2"><i class="fa fa-check"></i><b>13.7.1</b> Example 5.1/5.2</a></li>
+<li class="chapter" data-level="13.7.2" data-path="appendix-1-direct-comparison-to-pwr2ppl.html"><a href="appendix-1-direct-comparison-to-pwr2ppl.html#example-5.3"><i class="fa fa-check"></i><b>13.7.2</b> Example 5.3</a></li>
+</ul></li>
+<li class="chapter" data-level="13.8" data-path="appendix-1-direct-comparison-to-pwr2ppl.html"><a href="appendix-1-direct-comparison-to-pwr2ppl.html#examples-from-chapter-6"><i class="fa fa-check"></i><b>13.8</b> Examples from Chapter 6</a>
+<ul>
+<li class="chapter" data-level="13.8.1" data-path="appendix-1-direct-comparison-to-pwr2ppl.html"><a href="appendix-1-direct-comparison-to-pwr2ppl.html#example-from-table-6.2"><i class="fa fa-check"></i><b>13.8.1</b> Example from Table 6.2</a></li>
+<li class="chapter" data-level="13.8.2" data-path="appendix-1-direct-comparison-to-pwr2ppl.html"><a href="appendix-1-direct-comparison-to-pwr2ppl.html#example-from-table-6.6"><i class="fa fa-check"></i><b>13.8.2</b> Example from Table 6.6</a></li>
+<li class="chapter" data-level="13.8.3" data-path="appendix-1-direct-comparison-to-pwr2ppl.html"><a href="appendix-1-direct-comparison-to-pwr2ppl.html#example-from-table-6.8"><i class="fa fa-check"></i><b>13.8.3</b> Example from Table 6.8</a></li>
+</ul></li>
+<li class="chapter" data-level="13.9" data-path="appendix-1-direct-comparison-to-pwr2ppl.html"><a href="appendix-1-direct-comparison-to-pwr2ppl.html#example-from-chapter-7"><i class="fa fa-check"></i><b>13.9</b> Example from Chapter 7</a>
+<ul>
+<li class="chapter" data-level="13.9.1" data-path="appendix-1-direct-comparison-to-pwr2ppl.html"><a href="appendix-1-direct-comparison-to-pwr2ppl.html#from-table-7.2"><i class="fa fa-check"></i><b>13.9.1</b> From Table 7.2</a></li>
+</ul></li>
+</ul></li>
+<li class="chapter" data-level="" data-path="appendix-3-comparison-to-brysbaert.html"><a href="appendix-3-comparison-to-brysbaert.html"><i class="fa fa-check"></i>Appendix 3: Comparison to Brysbaert</a>
+<ul>
+<li class="chapter" data-level="13.10" data-path="appendix-3-comparison-to-brysbaert.html"><a href="appendix-3-comparison-to-brysbaert.html#one-way-anova-1"><i class="fa fa-check"></i><b>13.10</b> One-Way ANOVA</a>
+<ul>
+<li class="chapter" data-level="13.10.1" data-path="appendix-3-comparison-to-brysbaert.html"><a href="appendix-3-comparison-to-brysbaert.html#three-conditions-replication"><i class="fa fa-check"></i><b>13.10.1</b> Three conditions replication</a></li>
+<li class="chapter" data-level="13.10.2" data-path="appendix-3-comparison-to-brysbaert.html"><a href="appendix-3-comparison-to-brysbaert.html#variation-1"><i class="fa fa-check"></i><b>13.10.2</b> Variation 1</a></li>
+<li class="chapter" data-level="13.10.3" data-path="appendix-3-comparison-to-brysbaert.html"><a href="appendix-3-comparison-to-brysbaert.html#three-conditions-replication-1"><i class="fa fa-check"></i><b>13.10.3</b> Three conditions replication</a></li>
+<li class="chapter" data-level="13.10.4" data-path="appendix-3-comparison-to-brysbaert.html"><a href="appendix-3-comparison-to-brysbaert.html#variation-2"><i class="fa fa-check"></i><b>13.10.4</b> Variation 2</a></li>
+<li class="chapter" data-level="13.10.5" data-path="appendix-3-comparison-to-brysbaert.html"><a href="appendix-3-comparison-to-brysbaert.html#three-conditions-replication-2"><i class="fa fa-check"></i><b>13.10.5</b> Three conditions replication</a></li>
+</ul></li>
+<li class="chapter" data-level="13.11" data-path="appendix-3-comparison-to-brysbaert.html"><a href="appendix-3-comparison-to-brysbaert.html#repeated-measures"><i class="fa fa-check"></i><b>13.11</b> Repeated Measures</a>
+<ul>
+<li class="chapter" data-level="13.11.1" data-path="appendix-3-comparison-to-brysbaert.html"><a href="appendix-3-comparison-to-brysbaert.html#reproducing-brysbaert-variation-1-changing-correlation"><i class="fa fa-check"></i><b>13.11.1</b> Reproducing Brysbaert Variation 1: Changing Correlation</a></li>
 </ul></li>
 </ul></li>
 <li class="chapter" data-level="" data-path="appendix-2-direct-comparison-to-morepower.html"><a href="appendix-2-direct-comparison-to-morepower.html"><i class="fa fa-check"></i>Appendix 2: Direct Comparison to MOREpower</a></li>
@@ -271,85 +312,85 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
             <section class="normal" id="section-">
 <div id="appendix-3-comparison-to-brysbaert" class="section level1 unnumbered">
 <h1>Appendix 3: Comparison to Brysbaert</h1>
-<div id="one-way-anova-1" class="section level2">
-<h2><span class="header-section-number">12.10</span> One-Way ANOVA</h2>
-<p>Now we will simply replicate the simulations of <span class="citation">Brysbaert (<a href="#ref-brysbaert2019many" role="doc-biblioref">2019</a>)</span>, and compare those results to <code>Superpower</code>. Simulations to estimate the power of an ANOVA with three unrelated groups the effect between the two extreme groups is set to d = .4, the effect for the third group is d = .4 (see below for other situations) we use the built-in aov-test command give sample sizes (all samples sizes are equal).</p>
-<div class="sourceCode" id="cb738"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb738-1"><a href="appendix-3-comparison-to-brysbaert.html#cb738-1"></a><span class="co"># Simulations to estimate the power of an ANOVA </span></span>
-<span id="cb738-2"><a href="appendix-3-comparison-to-brysbaert.html#cb738-2"></a><span class="co">#with three unrelated groups</span></span>
-<span id="cb738-3"><a href="appendix-3-comparison-to-brysbaert.html#cb738-3"></a><span class="co"># the effect between the two extreme groups is set to d = .4, </span></span>
-<span id="cb738-4"><a href="appendix-3-comparison-to-brysbaert.html#cb738-4"></a><span class="co"># the effect for the third group is d = .4 </span></span>
-<span id="cb738-5"><a href="appendix-3-comparison-to-brysbaert.html#cb738-5"></a><span class="co">#(see below for other situations)</span></span>
-<span id="cb738-6"><a href="appendix-3-comparison-to-brysbaert.html#cb738-6"></a><span class="co"># we use the built-in aov-test command</span></span>
-<span id="cb738-7"><a href="appendix-3-comparison-to-brysbaert.html#cb738-7"></a><span class="co"># give sample sizes (all samples sizes are equal)</span></span>
-<span id="cb738-8"><a href="appendix-3-comparison-to-brysbaert.html#cb738-8"></a>N =<span class="st"> </span><span class="dv">90</span></span>
-<span id="cb738-9"><a href="appendix-3-comparison-to-brysbaert.html#cb738-9"></a><span class="co"># give effect size d</span></span>
-<span id="cb738-10"><a href="appendix-3-comparison-to-brysbaert.html#cb738-10"></a>d1 =<span class="st"> </span><span class="fl">.4</span> <span class="co"># difference between the extremes</span></span>
-<span id="cb738-11"><a href="appendix-3-comparison-to-brysbaert.html#cb738-11"></a>d2 =<span class="st"> </span><span class="fl">.4</span> <span class="co"># third condition goes with the highest extreme</span></span>
-<span id="cb738-12"><a href="appendix-3-comparison-to-brysbaert.html#cb738-12"></a><span class="co"># give number of simulations</span></span>
-<span id="cb738-13"><a href="appendix-3-comparison-to-brysbaert.html#cb738-13"></a>nSim =<span class="st"> </span>nsims</span>
-<span id="cb738-14"><a href="appendix-3-comparison-to-brysbaert.html#cb738-14"></a><span class="co"># give alpha levels</span></span>
-<span id="cb738-15"><a href="appendix-3-comparison-to-brysbaert.html#cb738-15"></a><span class="co"># alpha level for the omnibus ANOVA</span></span>
-<span id="cb738-16"><a href="appendix-3-comparison-to-brysbaert.html#cb738-16"></a>alpha1 =<span class="st"> </span><span class="fl">.05</span> </span>
-<span id="cb738-17"><a href="appendix-3-comparison-to-brysbaert.html#cb738-17"></a><span class="co">#alpha level for three post hoc one-tail t-tests Bonferroni correction</span></span>
-<span id="cb738-18"><a href="appendix-3-comparison-to-brysbaert.html#cb738-18"></a>alpha2 =<span class="st"> </span><span class="fl">.05</span> </span></code></pre></div>
-<div class="sourceCode" id="cb739"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb739-1"><a href="appendix-3-comparison-to-brysbaert.html#cb739-1"></a><span class="co"># create vectors to store p-values</span></span>
-<span id="cb739-2"><a href="appendix-3-comparison-to-brysbaert.html#cb739-2"></a>p1 &lt;-<span class="st"> </span><span class="kw">numeric</span>(nSim) <span class="co">#p-value omnibus ANOVA</span></span>
-<span id="cb739-3"><a href="appendix-3-comparison-to-brysbaert.html#cb739-3"></a>p2 &lt;-<span class="st"> </span><span class="kw">numeric</span>(nSim) <span class="co">#p-value first post hoc test</span></span>
-<span id="cb739-4"><a href="appendix-3-comparison-to-brysbaert.html#cb739-4"></a>p3 &lt;-<span class="st"> </span><span class="kw">numeric</span>(nSim) <span class="co">#p-value second post hoc test</span></span>
-<span id="cb739-5"><a href="appendix-3-comparison-to-brysbaert.html#cb739-5"></a>p4 &lt;-<span class="st"> </span><span class="kw">numeric</span>(nSim) <span class="co">#p-value third post hoc test</span></span>
-<span id="cb739-6"><a href="appendix-3-comparison-to-brysbaert.html#cb739-6"></a>pes1 &lt;-<span class="st"> </span><span class="kw">numeric</span>(nSim) <span class="co">#partial eta-squared</span></span>
-<span id="cb739-7"><a href="appendix-3-comparison-to-brysbaert.html#cb739-7"></a>pes2 &lt;-<span class="st"> </span><span class="kw">numeric</span>(nSim) <span class="co">#partial eta-squared two extreme conditions</span></span></code></pre></div>
-<div class="sourceCode" id="cb740"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb740-1"><a href="appendix-3-comparison-to-brysbaert.html#cb740-1"></a><span class="cf">for</span> (i <span class="cf">in</span> <span class="dv">1</span><span class="op">:</span>nSim) {</span>
-<span id="cb740-2"><a href="appendix-3-comparison-to-brysbaert.html#cb740-2"></a></span>
-<span id="cb740-3"><a href="appendix-3-comparison-to-brysbaert.html#cb740-3"></a>x &lt;-<span class="st"> </span><span class="kw">rnorm</span>(<span class="dt">n =</span> N, <span class="dt">mean =</span> <span class="dv">0</span>, <span class="dt">sd =</span> <span class="dv">1</span>)</span>
-<span id="cb740-4"><a href="appendix-3-comparison-to-brysbaert.html#cb740-4"></a>y &lt;-<span class="st"> </span><span class="kw">rnorm</span>(<span class="dt">n =</span> N, <span class="dt">mean =</span> d1, <span class="dt">sd =</span> <span class="dv">1</span>)</span>
-<span id="cb740-5"><a href="appendix-3-comparison-to-brysbaert.html#cb740-5"></a>z &lt;-<span class="st"> </span><span class="kw">rnorm</span>(<span class="dt">n =</span> N, <span class="dt">mean =</span> d2, <span class="dt">sd =</span> <span class="dv">1</span>)</span>
-<span id="cb740-6"><a href="appendix-3-comparison-to-brysbaert.html#cb740-6"></a>data =<span class="st"> </span><span class="kw">c</span>(x, y, z)</span>
-<span id="cb740-7"><a href="appendix-3-comparison-to-brysbaert.html#cb740-7"></a>groups =<span class="st"> </span><span class="kw">factor</span>(<span class="kw">rep</span>(letters[<span class="dv">24</span><span class="op">:</span><span class="dv">26</span>], <span class="dt">each =</span> N))</span>
-<span id="cb740-8"><a href="appendix-3-comparison-to-brysbaert.html#cb740-8"></a>test &lt;-<span class="st"> </span><span class="kw">aov</span>(data <span class="op">~</span><span class="st"> </span>groups)</span>
-<span id="cb740-9"><a href="appendix-3-comparison-to-brysbaert.html#cb740-9"></a>pes1[i] &lt;-<span class="st"> </span><span class="kw">etaSquared</span>(test)[<span class="dv">1</span>, <span class="dv">2</span>]</span>
-<span id="cb740-10"><a href="appendix-3-comparison-to-brysbaert.html#cb740-10"></a>p1[i] &lt;-<span class="st"> </span><span class="kw">summary</span>(test)[[<span class="dv">1</span>]][[<span class="st">&quot;Pr(&gt;F)&quot;</span>]][[<span class="dv">1</span>]]</span>
-<span id="cb740-11"><a href="appendix-3-comparison-to-brysbaert.html#cb740-11"></a>p2[i] &lt;-<span class="st"> </span><span class="kw">t.test</span>(x, y)<span class="op">$</span>p.value</span>
-<span id="cb740-12"><a href="appendix-3-comparison-to-brysbaert.html#cb740-12"></a>p3[i] &lt;-<span class="st"> </span><span class="kw">t.test</span>(x, z)<span class="op">$</span>p.value</span>
-<span id="cb740-13"><a href="appendix-3-comparison-to-brysbaert.html#cb740-13"></a>p4[i] &lt;-<span class="st"> </span><span class="kw">t.test</span>(y, z)<span class="op">$</span>p.value</span>
-<span id="cb740-14"><a href="appendix-3-comparison-to-brysbaert.html#cb740-14"></a>data =<span class="st"> </span><span class="kw">c</span>(x, y)</span>
-<span id="cb740-15"><a href="appendix-3-comparison-to-brysbaert.html#cb740-15"></a>groups =<span class="st"> </span><span class="kw">factor</span>(<span class="kw">rep</span>(letters[<span class="dv">24</span><span class="op">:</span><span class="dv">25</span>], <span class="dt">each =</span> N))</span>
-<span id="cb740-16"><a href="appendix-3-comparison-to-brysbaert.html#cb740-16"></a>test &lt;-<span class="st"> </span><span class="kw">aov</span>(data <span class="op">~</span><span class="st"> </span>groups)</span>
-<span id="cb740-17"><a href="appendix-3-comparison-to-brysbaert.html#cb740-17"></a>pes2[i] &lt;-<span class="st"> </span><span class="kw">etaSquared</span>(test)[<span class="dv">1</span>, <span class="dv">2</span>]</span>
-<span id="cb740-18"><a href="appendix-3-comparison-to-brysbaert.html#cb740-18"></a>}</span></code></pre></div>
-<div class="sourceCode" id="cb741"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb741-1"><a href="appendix-3-comparison-to-brysbaert.html#cb741-1"></a><span class="co"># results are as predicted when omnibus ANOVA is significant,</span></span>
-<span id="cb741-2"><a href="appendix-3-comparison-to-brysbaert.html#cb741-2"></a><span class="co"># t-tests are significant between x and y plus x and z; </span></span>
-<span id="cb741-3"><a href="appendix-3-comparison-to-brysbaert.html#cb741-3"></a><span class="co"># not significant between y and z</span></span>
-<span id="cb741-4"><a href="appendix-3-comparison-to-brysbaert.html#cb741-4"></a><span class="co"># printing all unique tests (adjusted code by DL)</span></span>
-<span id="cb741-5"><a href="appendix-3-comparison-to-brysbaert.html#cb741-5"></a><span class="kw">sum</span>(p1 <span class="op">&lt;</span><span class="st"> </span>alpha1) <span class="op">/</span><span class="st"> </span>nSim</span>
-<span id="cb741-6"><a href="appendix-3-comparison-to-brysbaert.html#cb741-6"></a><span class="kw">sum</span>(p2 <span class="op">&lt;</span><span class="st"> </span>alpha2) <span class="op">/</span><span class="st"> </span>nSim</span>
-<span id="cb741-7"><a href="appendix-3-comparison-to-brysbaert.html#cb741-7"></a><span class="kw">sum</span>(p3 <span class="op">&lt;</span><span class="st"> </span>alpha2) <span class="op">/</span><span class="st"> </span>nSim</span>
-<span id="cb741-8"><a href="appendix-3-comparison-to-brysbaert.html#cb741-8"></a><span class="kw">sum</span>(p4 <span class="op">&lt;</span><span class="st"> </span>alpha2) <span class="op">/</span><span class="st"> </span>nSim</span>
-<span id="cb741-9"><a href="appendix-3-comparison-to-brysbaert.html#cb741-9"></a><span class="kw">mean</span>(pes1)</span>
-<span id="cb741-10"><a href="appendix-3-comparison-to-brysbaert.html#cb741-10"></a><span class="kw">mean</span>(pes2)</span></code></pre></div>
-<div id="three-conditions-replication" class="section level3">
-<h3><span class="header-section-number">12.10.1</span> Three conditions replication</h3>
-<div class="sourceCode" id="cb742"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb742-1"><a href="appendix-3-comparison-to-brysbaert.html#cb742-1"></a>K &lt;-<span class="st"> </span><span class="dv">3</span></span>
-<span id="cb742-2"><a href="appendix-3-comparison-to-brysbaert.html#cb742-2"></a>mu &lt;-<span class="st"> </span><span class="kw">c</span>(<span class="dv">0</span>, <span class="fl">0.4</span>, <span class="fl">0.4</span>)</span>
-<span id="cb742-3"><a href="appendix-3-comparison-to-brysbaert.html#cb742-3"></a>n &lt;-<span class="st"> </span><span class="dv">90</span></span>
-<span id="cb742-4"><a href="appendix-3-comparison-to-brysbaert.html#cb742-4"></a>sd &lt;-<span class="st"> </span><span class="dv">1</span></span>
-<span id="cb742-5"><a href="appendix-3-comparison-to-brysbaert.html#cb742-5"></a>r &lt;-<span class="st"> </span><span class="dv">0</span></span>
-<span id="cb742-6"><a href="appendix-3-comparison-to-brysbaert.html#cb742-6"></a>design =<span class="st"> </span><span class="kw">paste</span>(K, <span class="st">&quot;b&quot;</span>, <span class="dt">sep =</span> <span class="st">&quot;&quot;</span>)</span></code></pre></div>
-<div class="sourceCode" id="cb743"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb743-1"><a href="appendix-3-comparison-to-brysbaert.html#cb743-1"></a>design_result &lt;-<span class="st"> </span><span class="kw">ANOVA_design</span>(</span>
-<span id="cb743-2"><a href="appendix-3-comparison-to-brysbaert.html#cb743-2"></a>  <span class="dt">design =</span> design,</span>
-<span id="cb743-3"><a href="appendix-3-comparison-to-brysbaert.html#cb743-3"></a>  <span class="dt">n =</span> n,</span>
-<span id="cb743-4"><a href="appendix-3-comparison-to-brysbaert.html#cb743-4"></a>  <span class="dt">mu =</span> mu,</span>
-<span id="cb743-5"><a href="appendix-3-comparison-to-brysbaert.html#cb743-5"></a>  <span class="dt">sd =</span> sd,</span>
-<span id="cb743-6"><a href="appendix-3-comparison-to-brysbaert.html#cb743-6"></a>  <span class="dt">labelnames =</span> <span class="kw">c</span>(<span class="st">&quot;factor1&quot;</span>, <span class="st">&quot;level1&quot;</span>, <span class="st">&quot;level2&quot;</span>, <span class="st">&quot;level3&quot;</span>)</span>
-<span id="cb743-7"><a href="appendix-3-comparison-to-brysbaert.html#cb743-7"></a>  )</span></code></pre></div>
-<p><img src="SuperpowerValidation_files/figure-html/unnamed-chunk-311-1.png" width="672" /></p>
-<div class="sourceCode" id="cb744"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb744-1"><a href="appendix-3-comparison-to-brysbaert.html#cb744-1"></a>simulation_result &lt;-<span class="st"> </span><span class="kw">ANOVA_power</span>(design_result, </span>
-<span id="cb744-2"><a href="appendix-3-comparison-to-brysbaert.html#cb744-2"></a>                                 <span class="dt">alpha_level =</span> alpha_level, </span>
-<span id="cb744-3"><a href="appendix-3-comparison-to-brysbaert.html#cb744-3"></a>                                 <span class="dt">nsims =</span> nsims,</span>
-<span id="cb744-4"><a href="appendix-3-comparison-to-brysbaert.html#cb744-4"></a>                                 <span class="dt">verbose =</span> <span class="ot">FALSE</span>)</span></code></pre></div>
+<div id="one-way-anova-1" class="section level2" number="13.10">
+<h2><span class="header-section-number">13.10</span> One-Way ANOVA</h2>
+<p>Now we will simply replicate the simulations of <span class="citation"><a href="references.html#ref-brysbaert2019many" role="doc-biblioref">Brysbaert</a> (<a href="references.html#ref-brysbaert2019many" role="doc-biblioref">2019</a>)</span>, and compare those results to <code>Superpower</code>. Simulations to estimate the power of an ANOVA with three unrelated groups the effect between the two extreme groups is set to d = .4, the effect for the third group is d = .4 (see below for other situations) we use the built-in aov-test command give sample sizes (all samples sizes are equal).</p>
+<div class="sourceCode" id="cb773"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb773-1"><a href="appendix-3-comparison-to-brysbaert.html#cb773-1" aria-hidden="true" tabindex="-1"></a><span class="co"># Simulations to estimate the power of an ANOVA </span></span>
+<span id="cb773-2"><a href="appendix-3-comparison-to-brysbaert.html#cb773-2" aria-hidden="true" tabindex="-1"></a><span class="co">#with three unrelated groups</span></span>
+<span id="cb773-3"><a href="appendix-3-comparison-to-brysbaert.html#cb773-3" aria-hidden="true" tabindex="-1"></a><span class="co"># the effect between the two extreme groups is set to d = .4, </span></span>
+<span id="cb773-4"><a href="appendix-3-comparison-to-brysbaert.html#cb773-4" aria-hidden="true" tabindex="-1"></a><span class="co"># the effect for the third group is d = .4 </span></span>
+<span id="cb773-5"><a href="appendix-3-comparison-to-brysbaert.html#cb773-5" aria-hidden="true" tabindex="-1"></a><span class="co">#(see below for other situations)</span></span>
+<span id="cb773-6"><a href="appendix-3-comparison-to-brysbaert.html#cb773-6" aria-hidden="true" tabindex="-1"></a><span class="co"># we use the built-in aov-test command</span></span>
+<span id="cb773-7"><a href="appendix-3-comparison-to-brysbaert.html#cb773-7" aria-hidden="true" tabindex="-1"></a><span class="co"># give sample sizes (all samples sizes are equal)</span></span>
+<span id="cb773-8"><a href="appendix-3-comparison-to-brysbaert.html#cb773-8" aria-hidden="true" tabindex="-1"></a>N <span class="ot">=</span> <span class="dv">90</span></span>
+<span id="cb773-9"><a href="appendix-3-comparison-to-brysbaert.html#cb773-9" aria-hidden="true" tabindex="-1"></a><span class="co"># give effect size d</span></span>
+<span id="cb773-10"><a href="appendix-3-comparison-to-brysbaert.html#cb773-10" aria-hidden="true" tabindex="-1"></a>d1 <span class="ot">=</span> .<span class="dv">4</span> <span class="co"># difference between the extremes</span></span>
+<span id="cb773-11"><a href="appendix-3-comparison-to-brysbaert.html#cb773-11" aria-hidden="true" tabindex="-1"></a>d2 <span class="ot">=</span> .<span class="dv">4</span> <span class="co"># third condition goes with the highest extreme</span></span>
+<span id="cb773-12"><a href="appendix-3-comparison-to-brysbaert.html#cb773-12" aria-hidden="true" tabindex="-1"></a><span class="co"># give number of simulations</span></span>
+<span id="cb773-13"><a href="appendix-3-comparison-to-brysbaert.html#cb773-13" aria-hidden="true" tabindex="-1"></a>nSim <span class="ot">=</span> nsims</span>
+<span id="cb773-14"><a href="appendix-3-comparison-to-brysbaert.html#cb773-14" aria-hidden="true" tabindex="-1"></a><span class="co"># give alpha levels</span></span>
+<span id="cb773-15"><a href="appendix-3-comparison-to-brysbaert.html#cb773-15" aria-hidden="true" tabindex="-1"></a><span class="co"># alpha level for the omnibus ANOVA</span></span>
+<span id="cb773-16"><a href="appendix-3-comparison-to-brysbaert.html#cb773-16" aria-hidden="true" tabindex="-1"></a>alpha1 <span class="ot">=</span> .<span class="dv">05</span> </span>
+<span id="cb773-17"><a href="appendix-3-comparison-to-brysbaert.html#cb773-17" aria-hidden="true" tabindex="-1"></a><span class="co">#alpha level for three post hoc one-tail t-tests Bonferroni correction</span></span>
+<span id="cb773-18"><a href="appendix-3-comparison-to-brysbaert.html#cb773-18" aria-hidden="true" tabindex="-1"></a>alpha2 <span class="ot">=</span> .<span class="dv">05</span> </span></code></pre></div>
+<div class="sourceCode" id="cb774"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb774-1"><a href="appendix-3-comparison-to-brysbaert.html#cb774-1" aria-hidden="true" tabindex="-1"></a><span class="co"># create vectors to store p-values</span></span>
+<span id="cb774-2"><a href="appendix-3-comparison-to-brysbaert.html#cb774-2" aria-hidden="true" tabindex="-1"></a>p1 <span class="ot">&lt;-</span> <span class="fu">numeric</span>(nSim) <span class="co">#p-value omnibus ANOVA</span></span>
+<span id="cb774-3"><a href="appendix-3-comparison-to-brysbaert.html#cb774-3" aria-hidden="true" tabindex="-1"></a>p2 <span class="ot">&lt;-</span> <span class="fu">numeric</span>(nSim) <span class="co">#p-value first post hoc test</span></span>
+<span id="cb774-4"><a href="appendix-3-comparison-to-brysbaert.html#cb774-4" aria-hidden="true" tabindex="-1"></a>p3 <span class="ot">&lt;-</span> <span class="fu">numeric</span>(nSim) <span class="co">#p-value second post hoc test</span></span>
+<span id="cb774-5"><a href="appendix-3-comparison-to-brysbaert.html#cb774-5" aria-hidden="true" tabindex="-1"></a>p4 <span class="ot">&lt;-</span> <span class="fu">numeric</span>(nSim) <span class="co">#p-value third post hoc test</span></span>
+<span id="cb774-6"><a href="appendix-3-comparison-to-brysbaert.html#cb774-6" aria-hidden="true" tabindex="-1"></a>pes1 <span class="ot">&lt;-</span> <span class="fu">numeric</span>(nSim) <span class="co">#partial eta-squared</span></span>
+<span id="cb774-7"><a href="appendix-3-comparison-to-brysbaert.html#cb774-7" aria-hidden="true" tabindex="-1"></a>pes2 <span class="ot">&lt;-</span> <span class="fu">numeric</span>(nSim) <span class="co">#partial eta-squared two extreme conditions</span></span></code></pre></div>
+<div class="sourceCode" id="cb775"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb775-1"><a href="appendix-3-comparison-to-brysbaert.html#cb775-1" aria-hidden="true" tabindex="-1"></a><span class="cf">for</span> (i <span class="cf">in</span> <span class="dv">1</span><span class="sc">:</span>nSim) {</span>
+<span id="cb775-2"><a href="appendix-3-comparison-to-brysbaert.html#cb775-2" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb775-3"><a href="appendix-3-comparison-to-brysbaert.html#cb775-3" aria-hidden="true" tabindex="-1"></a>x <span class="ot">&lt;-</span> <span class="fu">rnorm</span>(<span class="at">n =</span> N, <span class="at">mean =</span> <span class="dv">0</span>, <span class="at">sd =</span> <span class="dv">1</span>)</span>
+<span id="cb775-4"><a href="appendix-3-comparison-to-brysbaert.html#cb775-4" aria-hidden="true" tabindex="-1"></a>y <span class="ot">&lt;-</span> <span class="fu">rnorm</span>(<span class="at">n =</span> N, <span class="at">mean =</span> d1, <span class="at">sd =</span> <span class="dv">1</span>)</span>
+<span id="cb775-5"><a href="appendix-3-comparison-to-brysbaert.html#cb775-5" aria-hidden="true" tabindex="-1"></a>z <span class="ot">&lt;-</span> <span class="fu">rnorm</span>(<span class="at">n =</span> N, <span class="at">mean =</span> d2, <span class="at">sd =</span> <span class="dv">1</span>)</span>
+<span id="cb775-6"><a href="appendix-3-comparison-to-brysbaert.html#cb775-6" aria-hidden="true" tabindex="-1"></a>data <span class="ot">=</span> <span class="fu">c</span>(x, y, z)</span>
+<span id="cb775-7"><a href="appendix-3-comparison-to-brysbaert.html#cb775-7" aria-hidden="true" tabindex="-1"></a>groups <span class="ot">=</span> <span class="fu">factor</span>(<span class="fu">rep</span>(letters[<span class="dv">24</span><span class="sc">:</span><span class="dv">26</span>], <span class="at">each =</span> N))</span>
+<span id="cb775-8"><a href="appendix-3-comparison-to-brysbaert.html#cb775-8" aria-hidden="true" tabindex="-1"></a>test <span class="ot">&lt;-</span> <span class="fu">aov</span>(data <span class="sc">~</span> groups)</span>
+<span id="cb775-9"><a href="appendix-3-comparison-to-brysbaert.html#cb775-9" aria-hidden="true" tabindex="-1"></a>pes1[i] <span class="ot">&lt;-</span> <span class="fu">etaSquared</span>(test)[<span class="dv">1</span>, <span class="dv">2</span>]</span>
+<span id="cb775-10"><a href="appendix-3-comparison-to-brysbaert.html#cb775-10" aria-hidden="true" tabindex="-1"></a>p1[i] <span class="ot">&lt;-</span> <span class="fu">summary</span>(test)[[<span class="dv">1</span>]][[<span class="st">&quot;Pr(&gt;F)&quot;</span>]][[<span class="dv">1</span>]]</span>
+<span id="cb775-11"><a href="appendix-3-comparison-to-brysbaert.html#cb775-11" aria-hidden="true" tabindex="-1"></a>p2[i] <span class="ot">&lt;-</span> <span class="fu">t.test</span>(x, y)<span class="sc">$</span>p.value</span>
+<span id="cb775-12"><a href="appendix-3-comparison-to-brysbaert.html#cb775-12" aria-hidden="true" tabindex="-1"></a>p3[i] <span class="ot">&lt;-</span> <span class="fu">t.test</span>(x, z)<span class="sc">$</span>p.value</span>
+<span id="cb775-13"><a href="appendix-3-comparison-to-brysbaert.html#cb775-13" aria-hidden="true" tabindex="-1"></a>p4[i] <span class="ot">&lt;-</span> <span class="fu">t.test</span>(y, z)<span class="sc">$</span>p.value</span>
+<span id="cb775-14"><a href="appendix-3-comparison-to-brysbaert.html#cb775-14" aria-hidden="true" tabindex="-1"></a>data <span class="ot">=</span> <span class="fu">c</span>(x, y)</span>
+<span id="cb775-15"><a href="appendix-3-comparison-to-brysbaert.html#cb775-15" aria-hidden="true" tabindex="-1"></a>groups <span class="ot">=</span> <span class="fu">factor</span>(<span class="fu">rep</span>(letters[<span class="dv">24</span><span class="sc">:</span><span class="dv">25</span>], <span class="at">each =</span> N))</span>
+<span id="cb775-16"><a href="appendix-3-comparison-to-brysbaert.html#cb775-16" aria-hidden="true" tabindex="-1"></a>test <span class="ot">&lt;-</span> <span class="fu">aov</span>(data <span class="sc">~</span> groups)</span>
+<span id="cb775-17"><a href="appendix-3-comparison-to-brysbaert.html#cb775-17" aria-hidden="true" tabindex="-1"></a>pes2[i] <span class="ot">&lt;-</span> <span class="fu">etaSquared</span>(test)[<span class="dv">1</span>, <span class="dv">2</span>]</span>
+<span id="cb775-18"><a href="appendix-3-comparison-to-brysbaert.html#cb775-18" aria-hidden="true" tabindex="-1"></a>}</span></code></pre></div>
+<div class="sourceCode" id="cb776"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb776-1"><a href="appendix-3-comparison-to-brysbaert.html#cb776-1" aria-hidden="true" tabindex="-1"></a><span class="co"># results are as predicted when omnibus ANOVA is significant,</span></span>
+<span id="cb776-2"><a href="appendix-3-comparison-to-brysbaert.html#cb776-2" aria-hidden="true" tabindex="-1"></a><span class="co"># t-tests are significant between x and y plus x and z; </span></span>
+<span id="cb776-3"><a href="appendix-3-comparison-to-brysbaert.html#cb776-3" aria-hidden="true" tabindex="-1"></a><span class="co"># not significant between y and z</span></span>
+<span id="cb776-4"><a href="appendix-3-comparison-to-brysbaert.html#cb776-4" aria-hidden="true" tabindex="-1"></a><span class="co"># printing all unique tests (adjusted code by DL)</span></span>
+<span id="cb776-5"><a href="appendix-3-comparison-to-brysbaert.html#cb776-5" aria-hidden="true" tabindex="-1"></a><span class="fu">sum</span>(p1 <span class="sc">&lt;</span> alpha1) <span class="sc">/</span> nSim</span>
+<span id="cb776-6"><a href="appendix-3-comparison-to-brysbaert.html#cb776-6" aria-hidden="true" tabindex="-1"></a><span class="fu">sum</span>(p2 <span class="sc">&lt;</span> alpha2) <span class="sc">/</span> nSim</span>
+<span id="cb776-7"><a href="appendix-3-comparison-to-brysbaert.html#cb776-7" aria-hidden="true" tabindex="-1"></a><span class="fu">sum</span>(p3 <span class="sc">&lt;</span> alpha2) <span class="sc">/</span> nSim</span>
+<span id="cb776-8"><a href="appendix-3-comparison-to-brysbaert.html#cb776-8" aria-hidden="true" tabindex="-1"></a><span class="fu">sum</span>(p4 <span class="sc">&lt;</span> alpha2) <span class="sc">/</span> nSim</span>
+<span id="cb776-9"><a href="appendix-3-comparison-to-brysbaert.html#cb776-9" aria-hidden="true" tabindex="-1"></a><span class="fu">mean</span>(pes1)</span>
+<span id="cb776-10"><a href="appendix-3-comparison-to-brysbaert.html#cb776-10" aria-hidden="true" tabindex="-1"></a><span class="fu">mean</span>(pes2)</span></code></pre></div>
+<div id="three-conditions-replication" class="section level3" number="13.10.1">
+<h3><span class="header-section-number">13.10.1</span> Three conditions replication</h3>
+<div class="sourceCode" id="cb777"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb777-1"><a href="appendix-3-comparison-to-brysbaert.html#cb777-1" aria-hidden="true" tabindex="-1"></a>K <span class="ot">&lt;-</span> <span class="dv">3</span></span>
+<span id="cb777-2"><a href="appendix-3-comparison-to-brysbaert.html#cb777-2" aria-hidden="true" tabindex="-1"></a>mu <span class="ot">&lt;-</span> <span class="fu">c</span>(<span class="dv">0</span>, <span class="fl">0.4</span>, <span class="fl">0.4</span>)</span>
+<span id="cb777-3"><a href="appendix-3-comparison-to-brysbaert.html#cb777-3" aria-hidden="true" tabindex="-1"></a>n <span class="ot">&lt;-</span> <span class="dv">90</span></span>
+<span id="cb777-4"><a href="appendix-3-comparison-to-brysbaert.html#cb777-4" aria-hidden="true" tabindex="-1"></a>sd <span class="ot">&lt;-</span> <span class="dv">1</span></span>
+<span id="cb777-5"><a href="appendix-3-comparison-to-brysbaert.html#cb777-5" aria-hidden="true" tabindex="-1"></a>r <span class="ot">&lt;-</span> <span class="dv">0</span></span>
+<span id="cb777-6"><a href="appendix-3-comparison-to-brysbaert.html#cb777-6" aria-hidden="true" tabindex="-1"></a>design <span class="ot">=</span> <span class="fu">paste</span>(K, <span class="st">&quot;b&quot;</span>, <span class="at">sep =</span> <span class="st">&quot;&quot;</span>)</span></code></pre></div>
+<div class="sourceCode" id="cb778"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb778-1"><a href="appendix-3-comparison-to-brysbaert.html#cb778-1" aria-hidden="true" tabindex="-1"></a>design_result <span class="ot">&lt;-</span> <span class="fu">ANOVA_design</span>(</span>
+<span id="cb778-2"><a href="appendix-3-comparison-to-brysbaert.html#cb778-2" aria-hidden="true" tabindex="-1"></a>  <span class="at">design =</span> design,</span>
+<span id="cb778-3"><a href="appendix-3-comparison-to-brysbaert.html#cb778-3" aria-hidden="true" tabindex="-1"></a>  <span class="at">n =</span> n,</span>
+<span id="cb778-4"><a href="appendix-3-comparison-to-brysbaert.html#cb778-4" aria-hidden="true" tabindex="-1"></a>  <span class="at">mu =</span> mu,</span>
+<span id="cb778-5"><a href="appendix-3-comparison-to-brysbaert.html#cb778-5" aria-hidden="true" tabindex="-1"></a>  <span class="at">sd =</span> sd,</span>
+<span id="cb778-6"><a href="appendix-3-comparison-to-brysbaert.html#cb778-6" aria-hidden="true" tabindex="-1"></a>  <span class="at">labelnames =</span> <span class="fu">c</span>(<span class="st">&quot;factor1&quot;</span>, <span class="st">&quot;level1&quot;</span>, <span class="st">&quot;level2&quot;</span>, <span class="st">&quot;level3&quot;</span>)</span>
+<span id="cb778-7"><a href="appendix-3-comparison-to-brysbaert.html#cb778-7" aria-hidden="true" tabindex="-1"></a>  )</span></code></pre></div>
+<p><img src="SuperpowerValidation_files/figure-html/unnamed-chunk-336-1.png" width="672" /></p>
+<div class="sourceCode" id="cb779"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb779-1"><a href="appendix-3-comparison-to-brysbaert.html#cb779-1" aria-hidden="true" tabindex="-1"></a>simulation_result <span class="ot">&lt;-</span> <span class="fu">ANOVA_power</span>(design_result, </span>
+<span id="cb779-2"><a href="appendix-3-comparison-to-brysbaert.html#cb779-2" aria-hidden="true" tabindex="-1"></a>                                 <span class="at">alpha_level =</span> alpha_level, </span>
+<span id="cb779-3"><a href="appendix-3-comparison-to-brysbaert.html#cb779-3" aria-hidden="true" tabindex="-1"></a>                                 <span class="at">nsims =</span> nsims,</span>
+<span id="cb779-4"><a href="appendix-3-comparison-to-brysbaert.html#cb779-4" aria-hidden="true" tabindex="-1"></a>                                 <span class="at">verbose =</span> <span class="cn">FALSE</span>)</span></code></pre></div>
 <table class="table" style="margin-left: auto; margin-right: auto;">
 <caption>
-<span id="tab:unnamed-chunk-313">Table 12.1: </span>Simulated ANOVA Result
+<span id="tab:unnamed-chunk-338">Table 13.1: </span>Simulated ANOVA Result
 </caption>
 <thead>
 <tr>
@@ -377,12 +418,12 @@ anova_factor1
 </tr>
 </tbody>
 </table>
-<div class="sourceCode" id="cb745"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb745-1"><a href="appendix-3-comparison-to-brysbaert.html#cb745-1"></a>exact_result &lt;-<span class="st"> </span><span class="kw">ANOVA_exact</span>(design_result,</span>
-<span id="cb745-2"><a href="appendix-3-comparison-to-brysbaert.html#cb745-2"></a>                            <span class="dt">alpha_level =</span> alpha_level,</span>
-<span id="cb745-3"><a href="appendix-3-comparison-to-brysbaert.html#cb745-3"></a>                            <span class="dt">verbose =</span> <span class="ot">FALSE</span>)</span></code></pre></div>
+<div class="sourceCode" id="cb780"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb780-1"><a href="appendix-3-comparison-to-brysbaert.html#cb780-1" aria-hidden="true" tabindex="-1"></a>exact_result <span class="ot">&lt;-</span> <span class="fu">ANOVA_exact</span>(design_result,</span>
+<span id="cb780-2"><a href="appendix-3-comparison-to-brysbaert.html#cb780-2" aria-hidden="true" tabindex="-1"></a>                            <span class="at">alpha_level =</span> alpha_level,</span>
+<span id="cb780-3"><a href="appendix-3-comparison-to-brysbaert.html#cb780-3" aria-hidden="true" tabindex="-1"></a>                            <span class="at">verbose =</span> <span class="cn">FALSE</span>)</span></code></pre></div>
 <table class="table" style="margin-left: auto; margin-right: auto;">
 <caption>
-<span id="tab:unnamed-chunk-315">Table 12.2: </span>Exact ANOVA Result
+<span id="tab:unnamed-chunk-340">Table 13.2: </span>Exact ANOVA Result
 </caption>
 <thead>
 <tr>
@@ -423,80 +464,80 @@ factor1
 </tbody>
 </table>
 </div>
-<div id="variation-1" class="section level3">
-<h3><span class="header-section-number">12.10.2</span> Variation 1</h3>
-<div class="sourceCode" id="cb746"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb746-1"><a href="appendix-3-comparison-to-brysbaert.html#cb746-1"></a><span class="co"># give sample sizes (all samples sizes are equal)</span></span>
-<span id="cb746-2"><a href="appendix-3-comparison-to-brysbaert.html#cb746-2"></a>N =<span class="st"> </span><span class="dv">145</span></span>
-<span id="cb746-3"><a href="appendix-3-comparison-to-brysbaert.html#cb746-3"></a><span class="co"># give effect size d</span></span>
-<span id="cb746-4"><a href="appendix-3-comparison-to-brysbaert.html#cb746-4"></a>d1 =<span class="st"> </span><span class="fl">.4</span> <span class="co">#difference between the extremes</span></span>
-<span id="cb746-5"><a href="appendix-3-comparison-to-brysbaert.html#cb746-5"></a>d2 =<span class="st"> </span><span class="fl">.0</span> <span class="co">#third condition goes with the highest extreme</span></span>
-<span id="cb746-6"><a href="appendix-3-comparison-to-brysbaert.html#cb746-6"></a><span class="co"># give number of simulations</span></span>
-<span id="cb746-7"><a href="appendix-3-comparison-to-brysbaert.html#cb746-7"></a>nSim =<span class="st"> </span>nsims</span>
-<span id="cb746-8"><a href="appendix-3-comparison-to-brysbaert.html#cb746-8"></a><span class="co"># give alpha levels</span></span>
-<span id="cb746-9"><a href="appendix-3-comparison-to-brysbaert.html#cb746-9"></a><span class="co">#alpha level for the omnibus ANOVA</span></span>
-<span id="cb746-10"><a href="appendix-3-comparison-to-brysbaert.html#cb746-10"></a>alpha1 =<span class="st"> </span><span class="fl">.05</span> </span>
-<span id="cb746-11"><a href="appendix-3-comparison-to-brysbaert.html#cb746-11"></a><span class="co">#alpha level for three post hoc one-tail t-test Bonferroni correction</span></span>
-<span id="cb746-12"><a href="appendix-3-comparison-to-brysbaert.html#cb746-12"></a>alpha2 =<span class="st"> </span><span class="fl">.05</span> </span></code></pre></div>
-<div class="sourceCode" id="cb747"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb747-1"><a href="appendix-3-comparison-to-brysbaert.html#cb747-1"></a><span class="co"># create vectors to store p-values</span></span>
-<span id="cb747-2"><a href="appendix-3-comparison-to-brysbaert.html#cb747-2"></a>p1 &lt;-<span class="st"> </span><span class="kw">numeric</span>(nSim) <span class="co">#p-value omnibus ANOVA</span></span>
-<span id="cb747-3"><a href="appendix-3-comparison-to-brysbaert.html#cb747-3"></a>p2 &lt;-<span class="st"> </span><span class="kw">numeric</span>(nSim) <span class="co">#p-value first post hoc test</span></span>
-<span id="cb747-4"><a href="appendix-3-comparison-to-brysbaert.html#cb747-4"></a>p3 &lt;-<span class="st"> </span><span class="kw">numeric</span>(nSim) <span class="co">#p-value second post hoc test</span></span>
-<span id="cb747-5"><a href="appendix-3-comparison-to-brysbaert.html#cb747-5"></a>p4 &lt;-<span class="st"> </span><span class="kw">numeric</span>(nSim) <span class="co">#p-value third post hoc test</span></span>
-<span id="cb747-6"><a href="appendix-3-comparison-to-brysbaert.html#cb747-6"></a>pes1 &lt;-<span class="st"> </span><span class="kw">numeric</span>(nSim) <span class="co">#partial eta-squared</span></span>
-<span id="cb747-7"><a href="appendix-3-comparison-to-brysbaert.html#cb747-7"></a>pes2 &lt;-<span class="st"> </span><span class="kw">numeric</span>(nSim) <span class="co">#partial eta-squared two extreme conditions</span></span></code></pre></div>
-<div class="sourceCode" id="cb748"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb748-1"><a href="appendix-3-comparison-to-brysbaert.html#cb748-1"></a><span class="cf">for</span> (i <span class="cf">in</span> <span class="dv">1</span><span class="op">:</span>nSim) {</span>
-<span id="cb748-2"><a href="appendix-3-comparison-to-brysbaert.html#cb748-2"></a></span>
-<span id="cb748-3"><a href="appendix-3-comparison-to-brysbaert.html#cb748-3"></a></span>
-<span id="cb748-4"><a href="appendix-3-comparison-to-brysbaert.html#cb748-4"></a>x &lt;-<span class="st"> </span><span class="kw">rnorm</span>(<span class="dt">n =</span> N, <span class="dt">mean =</span> <span class="dv">0</span>, <span class="dt">sd =</span> <span class="dv">1</span>)</span>
-<span id="cb748-5"><a href="appendix-3-comparison-to-brysbaert.html#cb748-5"></a>y &lt;-<span class="st"> </span><span class="kw">rnorm</span>(<span class="dt">n =</span> N, <span class="dt">mean =</span> d1, <span class="dt">sd =</span> <span class="dv">1</span>)</span>
-<span id="cb748-6"><a href="appendix-3-comparison-to-brysbaert.html#cb748-6"></a>z &lt;-<span class="st"> </span><span class="kw">rnorm</span>(<span class="dt">n =</span> N, <span class="dt">mean =</span> d2, <span class="dt">sd =</span> <span class="dv">1</span>)</span>
-<span id="cb748-7"><a href="appendix-3-comparison-to-brysbaert.html#cb748-7"></a>data =<span class="st"> </span><span class="kw">c</span>(x, y, z)</span>
-<span id="cb748-8"><a href="appendix-3-comparison-to-brysbaert.html#cb748-8"></a>groups =<span class="st"> </span><span class="kw">factor</span>(<span class="kw">rep</span>(letters[<span class="dv">24</span><span class="op">:</span><span class="dv">26</span>], <span class="dt">each =</span> N))</span>
-<span id="cb748-9"><a href="appendix-3-comparison-to-brysbaert.html#cb748-9"></a>test &lt;-<span class="st"> </span><span class="kw">aov</span>(data <span class="op">~</span><span class="st"> </span>groups)</span>
-<span id="cb748-10"><a href="appendix-3-comparison-to-brysbaert.html#cb748-10"></a>pes1[i] &lt;-<span class="st"> </span><span class="kw">etaSquared</span>(test)[<span class="dv">1</span>, <span class="dv">2</span>]</span>
-<span id="cb748-11"><a href="appendix-3-comparison-to-brysbaert.html#cb748-11"></a>p1[i] &lt;-<span class="st"> </span><span class="kw">summary</span>(test)[[<span class="dv">1</span>]][[<span class="st">&quot;Pr(&gt;F)&quot;</span>]][[<span class="dv">1</span>]]</span>
-<span id="cb748-12"><a href="appendix-3-comparison-to-brysbaert.html#cb748-12"></a>p2[i] &lt;-<span class="st"> </span><span class="kw">t.test</span>(x, y)<span class="op">$</span>p.value</span>
-<span id="cb748-13"><a href="appendix-3-comparison-to-brysbaert.html#cb748-13"></a>p3[i] &lt;-<span class="st"> </span><span class="kw">t.test</span>(x, z)<span class="op">$</span>p.value</span>
-<span id="cb748-14"><a href="appendix-3-comparison-to-brysbaert.html#cb748-14"></a>p4[i] &lt;-<span class="st"> </span><span class="kw">t.test</span>(y, z)<span class="op">$</span>p.value</span>
-<span id="cb748-15"><a href="appendix-3-comparison-to-brysbaert.html#cb748-15"></a>data =<span class="st"> </span><span class="kw">c</span>(x, y)</span>
-<span id="cb748-16"><a href="appendix-3-comparison-to-brysbaert.html#cb748-16"></a>groups =<span class="st"> </span><span class="kw">factor</span>(<span class="kw">rep</span>(letters[<span class="dv">24</span><span class="op">:</span><span class="dv">25</span>], <span class="dt">each =</span> N))</span>
-<span id="cb748-17"><a href="appendix-3-comparison-to-brysbaert.html#cb748-17"></a>test &lt;-<span class="st"> </span><span class="kw">aov</span>(data <span class="op">~</span><span class="st"> </span>groups)</span>
-<span id="cb748-18"><a href="appendix-3-comparison-to-brysbaert.html#cb748-18"></a>pes2[i] &lt;-<span class="st"> </span><span class="kw">etaSquared</span>(test)[<span class="dv">1</span>, <span class="dv">2</span>]</span>
-<span id="cb748-19"><a href="appendix-3-comparison-to-brysbaert.html#cb748-19"></a>}</span></code></pre></div>
-<div class="sourceCode" id="cb749"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb749-1"><a href="appendix-3-comparison-to-brysbaert.html#cb749-1"></a><span class="co"># results are as predicted when omnibus ANOVA is significant, </span></span>
-<span id="cb749-2"><a href="appendix-3-comparison-to-brysbaert.html#cb749-2"></a><span class="co"># t-tests are significant between x and y plus x and z; </span></span>
-<span id="cb749-3"><a href="appendix-3-comparison-to-brysbaert.html#cb749-3"></a><span class="co"># not significant between y and z</span></span>
-<span id="cb749-4"><a href="appendix-3-comparison-to-brysbaert.html#cb749-4"></a><span class="co"># printing all unique tests (adjusted code by DL)</span></span>
-<span id="cb749-5"><a href="appendix-3-comparison-to-brysbaert.html#cb749-5"></a><span class="kw">sum</span>(p1 <span class="op">&lt;</span><span class="st"> </span>alpha1) <span class="op">/</span><span class="st"> </span>nSim</span>
-<span id="cb749-6"><a href="appendix-3-comparison-to-brysbaert.html#cb749-6"></a><span class="kw">sum</span>(p2 <span class="op">&lt;</span><span class="st"> </span>alpha2) <span class="op">/</span><span class="st"> </span>nSim</span>
-<span id="cb749-7"><a href="appendix-3-comparison-to-brysbaert.html#cb749-7"></a><span class="kw">sum</span>(p3 <span class="op">&lt;</span><span class="st"> </span>alpha2) <span class="op">/</span><span class="st"> </span>nSim</span>
-<span id="cb749-8"><a href="appendix-3-comparison-to-brysbaert.html#cb749-8"></a><span class="kw">sum</span>(p4 <span class="op">&lt;</span><span class="st"> </span>alpha2) <span class="op">/</span><span class="st"> </span>nSim</span>
-<span id="cb749-9"><a href="appendix-3-comparison-to-brysbaert.html#cb749-9"></a><span class="kw">mean</span>(pes1)</span>
-<span id="cb749-10"><a href="appendix-3-comparison-to-brysbaert.html#cb749-10"></a><span class="kw">mean</span>(pes2)</span></code></pre></div>
+<div id="variation-1" class="section level3" number="13.10.2">
+<h3><span class="header-section-number">13.10.2</span> Variation 1</h3>
+<div class="sourceCode" id="cb781"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb781-1"><a href="appendix-3-comparison-to-brysbaert.html#cb781-1" aria-hidden="true" tabindex="-1"></a><span class="co"># give sample sizes (all samples sizes are equal)</span></span>
+<span id="cb781-2"><a href="appendix-3-comparison-to-brysbaert.html#cb781-2" aria-hidden="true" tabindex="-1"></a>N <span class="ot">=</span> <span class="dv">145</span></span>
+<span id="cb781-3"><a href="appendix-3-comparison-to-brysbaert.html#cb781-3" aria-hidden="true" tabindex="-1"></a><span class="co"># give effect size d</span></span>
+<span id="cb781-4"><a href="appendix-3-comparison-to-brysbaert.html#cb781-4" aria-hidden="true" tabindex="-1"></a>d1 <span class="ot">=</span> .<span class="dv">4</span> <span class="co">#difference between the extremes</span></span>
+<span id="cb781-5"><a href="appendix-3-comparison-to-brysbaert.html#cb781-5" aria-hidden="true" tabindex="-1"></a>d2 <span class="ot">=</span> .<span class="dv">0</span> <span class="co">#third condition goes with the highest extreme</span></span>
+<span id="cb781-6"><a href="appendix-3-comparison-to-brysbaert.html#cb781-6" aria-hidden="true" tabindex="-1"></a><span class="co"># give number of simulations</span></span>
+<span id="cb781-7"><a href="appendix-3-comparison-to-brysbaert.html#cb781-7" aria-hidden="true" tabindex="-1"></a>nSim <span class="ot">=</span> nsims</span>
+<span id="cb781-8"><a href="appendix-3-comparison-to-brysbaert.html#cb781-8" aria-hidden="true" tabindex="-1"></a><span class="co"># give alpha levels</span></span>
+<span id="cb781-9"><a href="appendix-3-comparison-to-brysbaert.html#cb781-9" aria-hidden="true" tabindex="-1"></a><span class="co">#alpha level for the omnibus ANOVA</span></span>
+<span id="cb781-10"><a href="appendix-3-comparison-to-brysbaert.html#cb781-10" aria-hidden="true" tabindex="-1"></a>alpha1 <span class="ot">=</span> .<span class="dv">05</span> </span>
+<span id="cb781-11"><a href="appendix-3-comparison-to-brysbaert.html#cb781-11" aria-hidden="true" tabindex="-1"></a><span class="co">#alpha level for three post hoc one-tail t-test Bonferroni correction</span></span>
+<span id="cb781-12"><a href="appendix-3-comparison-to-brysbaert.html#cb781-12" aria-hidden="true" tabindex="-1"></a>alpha2 <span class="ot">=</span> .<span class="dv">05</span> </span></code></pre></div>
+<div class="sourceCode" id="cb782"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb782-1"><a href="appendix-3-comparison-to-brysbaert.html#cb782-1" aria-hidden="true" tabindex="-1"></a><span class="co"># create vectors to store p-values</span></span>
+<span id="cb782-2"><a href="appendix-3-comparison-to-brysbaert.html#cb782-2" aria-hidden="true" tabindex="-1"></a>p1 <span class="ot">&lt;-</span> <span class="fu">numeric</span>(nSim) <span class="co">#p-value omnibus ANOVA</span></span>
+<span id="cb782-3"><a href="appendix-3-comparison-to-brysbaert.html#cb782-3" aria-hidden="true" tabindex="-1"></a>p2 <span class="ot">&lt;-</span> <span class="fu">numeric</span>(nSim) <span class="co">#p-value first post hoc test</span></span>
+<span id="cb782-4"><a href="appendix-3-comparison-to-brysbaert.html#cb782-4" aria-hidden="true" tabindex="-1"></a>p3 <span class="ot">&lt;-</span> <span class="fu">numeric</span>(nSim) <span class="co">#p-value second post hoc test</span></span>
+<span id="cb782-5"><a href="appendix-3-comparison-to-brysbaert.html#cb782-5" aria-hidden="true" tabindex="-1"></a>p4 <span class="ot">&lt;-</span> <span class="fu">numeric</span>(nSim) <span class="co">#p-value third post hoc test</span></span>
+<span id="cb782-6"><a href="appendix-3-comparison-to-brysbaert.html#cb782-6" aria-hidden="true" tabindex="-1"></a>pes1 <span class="ot">&lt;-</span> <span class="fu">numeric</span>(nSim) <span class="co">#partial eta-squared</span></span>
+<span id="cb782-7"><a href="appendix-3-comparison-to-brysbaert.html#cb782-7" aria-hidden="true" tabindex="-1"></a>pes2 <span class="ot">&lt;-</span> <span class="fu">numeric</span>(nSim) <span class="co">#partial eta-squared two extreme conditions</span></span></code></pre></div>
+<div class="sourceCode" id="cb783"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb783-1"><a href="appendix-3-comparison-to-brysbaert.html#cb783-1" aria-hidden="true" tabindex="-1"></a><span class="cf">for</span> (i <span class="cf">in</span> <span class="dv">1</span><span class="sc">:</span>nSim) {</span>
+<span id="cb783-2"><a href="appendix-3-comparison-to-brysbaert.html#cb783-2" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb783-3"><a href="appendix-3-comparison-to-brysbaert.html#cb783-3" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb783-4"><a href="appendix-3-comparison-to-brysbaert.html#cb783-4" aria-hidden="true" tabindex="-1"></a>x <span class="ot">&lt;-</span> <span class="fu">rnorm</span>(<span class="at">n =</span> N, <span class="at">mean =</span> <span class="dv">0</span>, <span class="at">sd =</span> <span class="dv">1</span>)</span>
+<span id="cb783-5"><a href="appendix-3-comparison-to-brysbaert.html#cb783-5" aria-hidden="true" tabindex="-1"></a>y <span class="ot">&lt;-</span> <span class="fu">rnorm</span>(<span class="at">n =</span> N, <span class="at">mean =</span> d1, <span class="at">sd =</span> <span class="dv">1</span>)</span>
+<span id="cb783-6"><a href="appendix-3-comparison-to-brysbaert.html#cb783-6" aria-hidden="true" tabindex="-1"></a>z <span class="ot">&lt;-</span> <span class="fu">rnorm</span>(<span class="at">n =</span> N, <span class="at">mean =</span> d2, <span class="at">sd =</span> <span class="dv">1</span>)</span>
+<span id="cb783-7"><a href="appendix-3-comparison-to-brysbaert.html#cb783-7" aria-hidden="true" tabindex="-1"></a>data <span class="ot">=</span> <span class="fu">c</span>(x, y, z)</span>
+<span id="cb783-8"><a href="appendix-3-comparison-to-brysbaert.html#cb783-8" aria-hidden="true" tabindex="-1"></a>groups <span class="ot">=</span> <span class="fu">factor</span>(<span class="fu">rep</span>(letters[<span class="dv">24</span><span class="sc">:</span><span class="dv">26</span>], <span class="at">each =</span> N))</span>
+<span id="cb783-9"><a href="appendix-3-comparison-to-brysbaert.html#cb783-9" aria-hidden="true" tabindex="-1"></a>test <span class="ot">&lt;-</span> <span class="fu">aov</span>(data <span class="sc">~</span> groups)</span>
+<span id="cb783-10"><a href="appendix-3-comparison-to-brysbaert.html#cb783-10" aria-hidden="true" tabindex="-1"></a>pes1[i] <span class="ot">&lt;-</span> <span class="fu">etaSquared</span>(test)[<span class="dv">1</span>, <span class="dv">2</span>]</span>
+<span id="cb783-11"><a href="appendix-3-comparison-to-brysbaert.html#cb783-11" aria-hidden="true" tabindex="-1"></a>p1[i] <span class="ot">&lt;-</span> <span class="fu">summary</span>(test)[[<span class="dv">1</span>]][[<span class="st">&quot;Pr(&gt;F)&quot;</span>]][[<span class="dv">1</span>]]</span>
+<span id="cb783-12"><a href="appendix-3-comparison-to-brysbaert.html#cb783-12" aria-hidden="true" tabindex="-1"></a>p2[i] <span class="ot">&lt;-</span> <span class="fu">t.test</span>(x, y)<span class="sc">$</span>p.value</span>
+<span id="cb783-13"><a href="appendix-3-comparison-to-brysbaert.html#cb783-13" aria-hidden="true" tabindex="-1"></a>p3[i] <span class="ot">&lt;-</span> <span class="fu">t.test</span>(x, z)<span class="sc">$</span>p.value</span>
+<span id="cb783-14"><a href="appendix-3-comparison-to-brysbaert.html#cb783-14" aria-hidden="true" tabindex="-1"></a>p4[i] <span class="ot">&lt;-</span> <span class="fu">t.test</span>(y, z)<span class="sc">$</span>p.value</span>
+<span id="cb783-15"><a href="appendix-3-comparison-to-brysbaert.html#cb783-15" aria-hidden="true" tabindex="-1"></a>data <span class="ot">=</span> <span class="fu">c</span>(x, y)</span>
+<span id="cb783-16"><a href="appendix-3-comparison-to-brysbaert.html#cb783-16" aria-hidden="true" tabindex="-1"></a>groups <span class="ot">=</span> <span class="fu">factor</span>(<span class="fu">rep</span>(letters[<span class="dv">24</span><span class="sc">:</span><span class="dv">25</span>], <span class="at">each =</span> N))</span>
+<span id="cb783-17"><a href="appendix-3-comparison-to-brysbaert.html#cb783-17" aria-hidden="true" tabindex="-1"></a>test <span class="ot">&lt;-</span> <span class="fu">aov</span>(data <span class="sc">~</span> groups)</span>
+<span id="cb783-18"><a href="appendix-3-comparison-to-brysbaert.html#cb783-18" aria-hidden="true" tabindex="-1"></a>pes2[i] <span class="ot">&lt;-</span> <span class="fu">etaSquared</span>(test)[<span class="dv">1</span>, <span class="dv">2</span>]</span>
+<span id="cb783-19"><a href="appendix-3-comparison-to-brysbaert.html#cb783-19" aria-hidden="true" tabindex="-1"></a>}</span></code></pre></div>
+<div class="sourceCode" id="cb784"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb784-1"><a href="appendix-3-comparison-to-brysbaert.html#cb784-1" aria-hidden="true" tabindex="-1"></a><span class="co"># results are as predicted when omnibus ANOVA is significant, </span></span>
+<span id="cb784-2"><a href="appendix-3-comparison-to-brysbaert.html#cb784-2" aria-hidden="true" tabindex="-1"></a><span class="co"># t-tests are significant between x and y plus x and z; </span></span>
+<span id="cb784-3"><a href="appendix-3-comparison-to-brysbaert.html#cb784-3" aria-hidden="true" tabindex="-1"></a><span class="co"># not significant between y and z</span></span>
+<span id="cb784-4"><a href="appendix-3-comparison-to-brysbaert.html#cb784-4" aria-hidden="true" tabindex="-1"></a><span class="co"># printing all unique tests (adjusted code by DL)</span></span>
+<span id="cb784-5"><a href="appendix-3-comparison-to-brysbaert.html#cb784-5" aria-hidden="true" tabindex="-1"></a><span class="fu">sum</span>(p1 <span class="sc">&lt;</span> alpha1) <span class="sc">/</span> nSim</span>
+<span id="cb784-6"><a href="appendix-3-comparison-to-brysbaert.html#cb784-6" aria-hidden="true" tabindex="-1"></a><span class="fu">sum</span>(p2 <span class="sc">&lt;</span> alpha2) <span class="sc">/</span> nSim</span>
+<span id="cb784-7"><a href="appendix-3-comparison-to-brysbaert.html#cb784-7" aria-hidden="true" tabindex="-1"></a><span class="fu">sum</span>(p3 <span class="sc">&lt;</span> alpha2) <span class="sc">/</span> nSim</span>
+<span id="cb784-8"><a href="appendix-3-comparison-to-brysbaert.html#cb784-8" aria-hidden="true" tabindex="-1"></a><span class="fu">sum</span>(p4 <span class="sc">&lt;</span> alpha2) <span class="sc">/</span> nSim</span>
+<span id="cb784-9"><a href="appendix-3-comparison-to-brysbaert.html#cb784-9" aria-hidden="true" tabindex="-1"></a><span class="fu">mean</span>(pes1)</span>
+<span id="cb784-10"><a href="appendix-3-comparison-to-brysbaert.html#cb784-10" aria-hidden="true" tabindex="-1"></a><span class="fu">mean</span>(pes2)</span></code></pre></div>
 </div>
-<div id="three-conditions-replication-1" class="section level3">
-<h3><span class="header-section-number">12.10.3</span> Three conditions replication</h3>
-<div class="sourceCode" id="cb750"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb750-1"><a href="appendix-3-comparison-to-brysbaert.html#cb750-1"></a>K &lt;-<span class="st"> </span><span class="dv">3</span></span>
-<span id="cb750-2"><a href="appendix-3-comparison-to-brysbaert.html#cb750-2"></a>mu &lt;-<span class="st"> </span><span class="kw">c</span>(<span class="dv">0</span>, <span class="fl">0.4</span>, <span class="fl">0.0</span>)</span>
-<span id="cb750-3"><a href="appendix-3-comparison-to-brysbaert.html#cb750-3"></a>n &lt;-<span class="st"> </span><span class="dv">145</span></span>
-<span id="cb750-4"><a href="appendix-3-comparison-to-brysbaert.html#cb750-4"></a>sd &lt;-<span class="st"> </span><span class="dv">1</span></span>
-<span id="cb750-5"><a href="appendix-3-comparison-to-brysbaert.html#cb750-5"></a>r &lt;-<span class="st"> </span><span class="dv">0</span></span>
-<span id="cb750-6"><a href="appendix-3-comparison-to-brysbaert.html#cb750-6"></a>design =<span class="st"> </span><span class="kw">paste</span>(K, <span class="st">&quot;b&quot;</span>, <span class="dt">sep =</span> <span class="st">&quot;&quot;</span>)</span></code></pre></div>
-<div class="sourceCode" id="cb751"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb751-1"><a href="appendix-3-comparison-to-brysbaert.html#cb751-1"></a>design_result &lt;-<span class="st"> </span><span class="kw">ANOVA_design</span>(</span>
-<span id="cb751-2"><a href="appendix-3-comparison-to-brysbaert.html#cb751-2"></a>  <span class="dt">design =</span> design,</span>
-<span id="cb751-3"><a href="appendix-3-comparison-to-brysbaert.html#cb751-3"></a>  <span class="dt">n =</span> n,</span>
-<span id="cb751-4"><a href="appendix-3-comparison-to-brysbaert.html#cb751-4"></a>  <span class="dt">mu =</span> mu,</span>
-<span id="cb751-5"><a href="appendix-3-comparison-to-brysbaert.html#cb751-5"></a>  <span class="dt">sd =</span> sd,</span>
-<span id="cb751-6"><a href="appendix-3-comparison-to-brysbaert.html#cb751-6"></a>  <span class="dt">labelnames =</span> <span class="kw">c</span>(<span class="st">&quot;factor1&quot;</span>, <span class="st">&quot;level1&quot;</span>, <span class="st">&quot;level2&quot;</span>, <span class="st">&quot;level3&quot;</span>)</span>
-<span id="cb751-7"><a href="appendix-3-comparison-to-brysbaert.html#cb751-7"></a>  )</span></code></pre></div>
-<p><img src="SuperpowerValidation_files/figure-html/unnamed-chunk-322-1.png" width="672" /></p>
-<div class="sourceCode" id="cb752"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb752-1"><a href="appendix-3-comparison-to-brysbaert.html#cb752-1"></a>simulation_result &lt;-<span class="st"> </span><span class="kw">ANOVA_power</span>(design_result, </span>
-<span id="cb752-2"><a href="appendix-3-comparison-to-brysbaert.html#cb752-2"></a>                                 <span class="dt">alpha_level =</span> alpha_level, </span>
-<span id="cb752-3"><a href="appendix-3-comparison-to-brysbaert.html#cb752-3"></a>                                 <span class="dt">nsims =</span> nsims,</span>
-<span id="cb752-4"><a href="appendix-3-comparison-to-brysbaert.html#cb752-4"></a>                                 <span class="dt">verbose =</span> <span class="ot">FALSE</span>)</span></code></pre></div>
+<div id="three-conditions-replication-1" class="section level3" number="13.10.3">
+<h3><span class="header-section-number">13.10.3</span> Three conditions replication</h3>
+<div class="sourceCode" id="cb785"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb785-1"><a href="appendix-3-comparison-to-brysbaert.html#cb785-1" aria-hidden="true" tabindex="-1"></a>K <span class="ot">&lt;-</span> <span class="dv">3</span></span>
+<span id="cb785-2"><a href="appendix-3-comparison-to-brysbaert.html#cb785-2" aria-hidden="true" tabindex="-1"></a>mu <span class="ot">&lt;-</span> <span class="fu">c</span>(<span class="dv">0</span>, <span class="fl">0.4</span>, <span class="fl">0.0</span>)</span>
+<span id="cb785-3"><a href="appendix-3-comparison-to-brysbaert.html#cb785-3" aria-hidden="true" tabindex="-1"></a>n <span class="ot">&lt;-</span> <span class="dv">145</span></span>
+<span id="cb785-4"><a href="appendix-3-comparison-to-brysbaert.html#cb785-4" aria-hidden="true" tabindex="-1"></a>sd <span class="ot">&lt;-</span> <span class="dv">1</span></span>
+<span id="cb785-5"><a href="appendix-3-comparison-to-brysbaert.html#cb785-5" aria-hidden="true" tabindex="-1"></a>r <span class="ot">&lt;-</span> <span class="dv">0</span></span>
+<span id="cb785-6"><a href="appendix-3-comparison-to-brysbaert.html#cb785-6" aria-hidden="true" tabindex="-1"></a>design <span class="ot">=</span> <span class="fu">paste</span>(K, <span class="st">&quot;b&quot;</span>, <span class="at">sep =</span> <span class="st">&quot;&quot;</span>)</span></code></pre></div>
+<div class="sourceCode" id="cb786"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb786-1"><a href="appendix-3-comparison-to-brysbaert.html#cb786-1" aria-hidden="true" tabindex="-1"></a>design_result <span class="ot">&lt;-</span> <span class="fu">ANOVA_design</span>(</span>
+<span id="cb786-2"><a href="appendix-3-comparison-to-brysbaert.html#cb786-2" aria-hidden="true" tabindex="-1"></a>  <span class="at">design =</span> design,</span>
+<span id="cb786-3"><a href="appendix-3-comparison-to-brysbaert.html#cb786-3" aria-hidden="true" tabindex="-1"></a>  <span class="at">n =</span> n,</span>
+<span id="cb786-4"><a href="appendix-3-comparison-to-brysbaert.html#cb786-4" aria-hidden="true" tabindex="-1"></a>  <span class="at">mu =</span> mu,</span>
+<span id="cb786-5"><a href="appendix-3-comparison-to-brysbaert.html#cb786-5" aria-hidden="true" tabindex="-1"></a>  <span class="at">sd =</span> sd,</span>
+<span id="cb786-6"><a href="appendix-3-comparison-to-brysbaert.html#cb786-6" aria-hidden="true" tabindex="-1"></a>  <span class="at">labelnames =</span> <span class="fu">c</span>(<span class="st">&quot;factor1&quot;</span>, <span class="st">&quot;level1&quot;</span>, <span class="st">&quot;level2&quot;</span>, <span class="st">&quot;level3&quot;</span>)</span>
+<span id="cb786-7"><a href="appendix-3-comparison-to-brysbaert.html#cb786-7" aria-hidden="true" tabindex="-1"></a>  )</span></code></pre></div>
+<p><img src="SuperpowerValidation_files/figure-html/unnamed-chunk-347-1.png" width="672" /></p>
+<div class="sourceCode" id="cb787"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb787-1"><a href="appendix-3-comparison-to-brysbaert.html#cb787-1" aria-hidden="true" tabindex="-1"></a>simulation_result <span class="ot">&lt;-</span> <span class="fu">ANOVA_power</span>(design_result, </span>
+<span id="cb787-2"><a href="appendix-3-comparison-to-brysbaert.html#cb787-2" aria-hidden="true" tabindex="-1"></a>                                 <span class="at">alpha_level =</span> alpha_level, </span>
+<span id="cb787-3"><a href="appendix-3-comparison-to-brysbaert.html#cb787-3" aria-hidden="true" tabindex="-1"></a>                                 <span class="at">nsims =</span> nsims,</span>
+<span id="cb787-4"><a href="appendix-3-comparison-to-brysbaert.html#cb787-4" aria-hidden="true" tabindex="-1"></a>                                 <span class="at">verbose =</span> <span class="cn">FALSE</span>)</span></code></pre></div>
 <table class="table" style="margin-left: auto; margin-right: auto;">
 <caption>
-<span id="tab:unnamed-chunk-324">Table 12.3: </span>Simulated ANOVA Result
+<span id="tab:unnamed-chunk-349">Table 13.3: </span>Simulated ANOVA Result
 </caption>
 <thead>
 <tr>
@@ -524,12 +565,12 @@ anova_factor1
 </tr>
 </tbody>
 </table>
-<div class="sourceCode" id="cb753"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb753-1"><a href="appendix-3-comparison-to-brysbaert.html#cb753-1"></a>exact_result &lt;-<span class="st"> </span><span class="kw">ANOVA_exact</span>(design_result,</span>
-<span id="cb753-2"><a href="appendix-3-comparison-to-brysbaert.html#cb753-2"></a>                            <span class="dt">alpha_level =</span> alpha_level,</span>
-<span id="cb753-3"><a href="appendix-3-comparison-to-brysbaert.html#cb753-3"></a>                            <span class="dt">verbose =</span> <span class="ot">FALSE</span>)</span></code></pre></div>
+<div class="sourceCode" id="cb788"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb788-1"><a href="appendix-3-comparison-to-brysbaert.html#cb788-1" aria-hidden="true" tabindex="-1"></a>exact_result <span class="ot">&lt;-</span> <span class="fu">ANOVA_exact</span>(design_result,</span>
+<span id="cb788-2"><a href="appendix-3-comparison-to-brysbaert.html#cb788-2" aria-hidden="true" tabindex="-1"></a>                            <span class="at">alpha_level =</span> alpha_level,</span>
+<span id="cb788-3"><a href="appendix-3-comparison-to-brysbaert.html#cb788-3" aria-hidden="true" tabindex="-1"></a>                            <span class="at">verbose =</span> <span class="cn">FALSE</span>)</span></code></pre></div>
 <table class="table" style="margin-left: auto; margin-right: auto;">
 <caption>
-<span id="tab:unnamed-chunk-326">Table 12.4: </span>Exact ANOVA Result
+<span id="tab:unnamed-chunk-351">Table 13.4: </span>Exact ANOVA Result
 </caption>
 <thead>
 <tr>
@@ -570,74 +611,74 @@ factor1
 </tbody>
 </table>
 </div>
-<div id="variation-2" class="section level3">
-<h3><span class="header-section-number">12.10.4</span> Variation 2</h3>
-<div class="sourceCode" id="cb754"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb754-1"><a href="appendix-3-comparison-to-brysbaert.html#cb754-1"></a><span class="co"># give sample sizes (all samples sizes are equal)</span></span>
-<span id="cb754-2"><a href="appendix-3-comparison-to-brysbaert.html#cb754-2"></a>N =<span class="st"> </span><span class="dv">82</span></span>
-<span id="cb754-3"><a href="appendix-3-comparison-to-brysbaert.html#cb754-3"></a><span class="co"># give effect size d</span></span>
-<span id="cb754-4"><a href="appendix-3-comparison-to-brysbaert.html#cb754-4"></a>d1 =<span class="st"> </span><span class="fl">.4</span> <span class="co">#difference between the extremes</span></span>
-<span id="cb754-5"><a href="appendix-3-comparison-to-brysbaert.html#cb754-5"></a>d2 =<span class="st"> </span><span class="fl">.2</span> <span class="co">#third condition goes with the highest extreme</span></span>
-<span id="cb754-6"><a href="appendix-3-comparison-to-brysbaert.html#cb754-6"></a><span class="co"># give number of simulations</span></span>
-<span id="cb754-7"><a href="appendix-3-comparison-to-brysbaert.html#cb754-7"></a>nSim =<span class="st"> </span>nsims</span>
-<span id="cb754-8"><a href="appendix-3-comparison-to-brysbaert.html#cb754-8"></a><span class="co"># give alpha levels</span></span>
-<span id="cb754-9"><a href="appendix-3-comparison-to-brysbaert.html#cb754-9"></a><span class="co">#alpha level for the omnibus ANOVA</span></span>
-<span id="cb754-10"><a href="appendix-3-comparison-to-brysbaert.html#cb754-10"></a>alpha1 =<span class="st"> </span><span class="fl">.05</span> </span>
-<span id="cb754-11"><a href="appendix-3-comparison-to-brysbaert.html#cb754-11"></a><span class="co">#alpha level for three post hoc one-tail t-test Bonferroni correction</span></span>
-<span id="cb754-12"><a href="appendix-3-comparison-to-brysbaert.html#cb754-12"></a>alpha2 =<span class="st"> </span><span class="fl">.05</span> </span></code></pre></div>
-<div class="sourceCode" id="cb755"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb755-1"><a href="appendix-3-comparison-to-brysbaert.html#cb755-1"></a><span class="co"># create vectors to store p-values</span></span>
-<span id="cb755-2"><a href="appendix-3-comparison-to-brysbaert.html#cb755-2"></a>p1 &lt;-<span class="st"> </span><span class="kw">numeric</span>(nSim) <span class="co">#p-value omnibus ANOVA</span></span>
-<span id="cb755-3"><a href="appendix-3-comparison-to-brysbaert.html#cb755-3"></a>p2 &lt;-<span class="st"> </span><span class="kw">numeric</span>(nSim) <span class="co">#p-value first post hoc test</span></span>
-<span id="cb755-4"><a href="appendix-3-comparison-to-brysbaert.html#cb755-4"></a>p3 &lt;-<span class="st"> </span><span class="kw">numeric</span>(nSim) <span class="co">#p-value second post hoc test</span></span>
-<span id="cb755-5"><a href="appendix-3-comparison-to-brysbaert.html#cb755-5"></a>p4 &lt;-<span class="st"> </span><span class="kw">numeric</span>(nSim) <span class="co">#p-value third post hoc test</span></span>
-<span id="cb755-6"><a href="appendix-3-comparison-to-brysbaert.html#cb755-6"></a>pes1 &lt;-<span class="st"> </span><span class="kw">numeric</span>(nSim) <span class="co">#partial eta-squared</span></span></code></pre></div>
-<div class="sourceCode" id="cb756"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb756-1"><a href="appendix-3-comparison-to-brysbaert.html#cb756-1"></a><span class="cf">for</span> (i <span class="cf">in</span> <span class="dv">1</span><span class="op">:</span>nSim) {</span>
-<span id="cb756-2"><a href="appendix-3-comparison-to-brysbaert.html#cb756-2"></a><span class="co">#for each simulated experiment</span></span>
-<span id="cb756-3"><a href="appendix-3-comparison-to-brysbaert.html#cb756-3"></a></span>
-<span id="cb756-4"><a href="appendix-3-comparison-to-brysbaert.html#cb756-4"></a>x &lt;-<span class="st"> </span><span class="kw">rnorm</span>(<span class="dt">n =</span> N, <span class="dt">mean =</span> <span class="dv">0</span>, <span class="dt">sd =</span> <span class="dv">1</span>)</span>
-<span id="cb756-5"><a href="appendix-3-comparison-to-brysbaert.html#cb756-5"></a>y &lt;-<span class="st"> </span><span class="kw">rnorm</span>(<span class="dt">n =</span> N, <span class="dt">mean =</span> d1, <span class="dt">sd =</span> <span class="dv">1</span>)</span>
-<span id="cb756-6"><a href="appendix-3-comparison-to-brysbaert.html#cb756-6"></a>z &lt;-<span class="st"> </span><span class="kw">rnorm</span>(<span class="dt">n =</span> N, <span class="dt">mean =</span> d2, <span class="dt">sd =</span> <span class="dv">1</span>)</span>
-<span id="cb756-7"><a href="appendix-3-comparison-to-brysbaert.html#cb756-7"></a>data =<span class="st"> </span><span class="kw">c</span>(x, y, z)</span>
-<span id="cb756-8"><a href="appendix-3-comparison-to-brysbaert.html#cb756-8"></a>groups =<span class="st"> </span><span class="kw">factor</span>(<span class="kw">rep</span>(letters[<span class="dv">24</span><span class="op">:</span><span class="dv">26</span>], <span class="dt">each =</span> N))</span>
-<span id="cb756-9"><a href="appendix-3-comparison-to-brysbaert.html#cb756-9"></a>test &lt;-<span class="st"> </span><span class="kw">aov</span>(data <span class="op">~</span><span class="st"> </span>groups)</span>
-<span id="cb756-10"><a href="appendix-3-comparison-to-brysbaert.html#cb756-10"></a>pes1[i] &lt;-<span class="st"> </span><span class="kw">etaSquared</span>(test)[<span class="dv">1</span>, <span class="dv">2</span>]</span>
-<span id="cb756-11"><a href="appendix-3-comparison-to-brysbaert.html#cb756-11"></a>p1[i] &lt;-<span class="st"> </span><span class="kw">summary</span>(test)[[<span class="dv">1</span>]][[<span class="st">&quot;Pr(&gt;F)&quot;</span>]][[<span class="dv">1</span>]]</span>
-<span id="cb756-12"><a href="appendix-3-comparison-to-brysbaert.html#cb756-12"></a>p2[i] &lt;-<span class="st"> </span><span class="kw">t.test</span>(x, y)<span class="op">$</span>p.value</span>
-<span id="cb756-13"><a href="appendix-3-comparison-to-brysbaert.html#cb756-13"></a>p3[i] &lt;-<span class="st"> </span><span class="kw">t.test</span>(x, z)<span class="op">$</span>p.value</span>
-<span id="cb756-14"><a href="appendix-3-comparison-to-brysbaert.html#cb756-14"></a>p4[i] &lt;-<span class="st"> </span><span class="kw">t.test</span>(y, z)<span class="op">$</span>p.value</span>
-<span id="cb756-15"><a href="appendix-3-comparison-to-brysbaert.html#cb756-15"></a>data =<span class="st"> </span><span class="kw">c</span>(x, y)</span>
-<span id="cb756-16"><a href="appendix-3-comparison-to-brysbaert.html#cb756-16"></a>groups =<span class="st"> </span><span class="kw">factor</span>(<span class="kw">rep</span>(letters[<span class="dv">24</span><span class="op">:</span><span class="dv">25</span>], <span class="dt">each =</span> N))</span>
-<span id="cb756-17"><a href="appendix-3-comparison-to-brysbaert.html#cb756-17"></a>test &lt;-<span class="st"> </span><span class="kw">aov</span>(data <span class="op">~</span><span class="st"> </span>groups)</span>
-<span id="cb756-18"><a href="appendix-3-comparison-to-brysbaert.html#cb756-18"></a>pes2[i] &lt;-<span class="st"> </span><span class="kw">etaSquared</span>(test)[<span class="dv">1</span>, <span class="dv">2</span>]</span>
-<span id="cb756-19"><a href="appendix-3-comparison-to-brysbaert.html#cb756-19"></a>}</span></code></pre></div>
-<div class="sourceCode" id="cb757"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb757-1"><a href="appendix-3-comparison-to-brysbaert.html#cb757-1"></a><span class="kw">sum</span>(p1 <span class="op">&lt;</span><span class="st"> </span>alpha1) <span class="op">/</span><span class="st"> </span>nSim</span>
-<span id="cb757-2"><a href="appendix-3-comparison-to-brysbaert.html#cb757-2"></a><span class="kw">sum</span>(p2 <span class="op">&lt;</span><span class="st"> </span>alpha2) <span class="op">/</span><span class="st"> </span>nSim</span>
-<span id="cb757-3"><a href="appendix-3-comparison-to-brysbaert.html#cb757-3"></a><span class="kw">sum</span>(p3 <span class="op">&lt;</span><span class="st"> </span>alpha2) <span class="op">/</span><span class="st"> </span>nSim</span>
-<span id="cb757-4"><a href="appendix-3-comparison-to-brysbaert.html#cb757-4"></a><span class="kw">sum</span>(p4 <span class="op">&lt;</span><span class="st"> </span>alpha2) <span class="op">/</span><span class="st"> </span>nSim</span>
-<span id="cb757-5"><a href="appendix-3-comparison-to-brysbaert.html#cb757-5"></a><span class="kw">mean</span>(pes1)</span>
-<span id="cb757-6"><a href="appendix-3-comparison-to-brysbaert.html#cb757-6"></a><span class="kw">mean</span>(pes2)</span></code></pre></div>
+<div id="variation-2" class="section level3" number="13.10.4">
+<h3><span class="header-section-number">13.10.4</span> Variation 2</h3>
+<div class="sourceCode" id="cb789"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb789-1"><a href="appendix-3-comparison-to-brysbaert.html#cb789-1" aria-hidden="true" tabindex="-1"></a><span class="co"># give sample sizes (all samples sizes are equal)</span></span>
+<span id="cb789-2"><a href="appendix-3-comparison-to-brysbaert.html#cb789-2" aria-hidden="true" tabindex="-1"></a>N <span class="ot">=</span> <span class="dv">82</span></span>
+<span id="cb789-3"><a href="appendix-3-comparison-to-brysbaert.html#cb789-3" aria-hidden="true" tabindex="-1"></a><span class="co"># give effect size d</span></span>
+<span id="cb789-4"><a href="appendix-3-comparison-to-brysbaert.html#cb789-4" aria-hidden="true" tabindex="-1"></a>d1 <span class="ot">=</span> .<span class="dv">4</span> <span class="co">#difference between the extremes</span></span>
+<span id="cb789-5"><a href="appendix-3-comparison-to-brysbaert.html#cb789-5" aria-hidden="true" tabindex="-1"></a>d2 <span class="ot">=</span> .<span class="dv">2</span> <span class="co">#third condition goes with the highest extreme</span></span>
+<span id="cb789-6"><a href="appendix-3-comparison-to-brysbaert.html#cb789-6" aria-hidden="true" tabindex="-1"></a><span class="co"># give number of simulations</span></span>
+<span id="cb789-7"><a href="appendix-3-comparison-to-brysbaert.html#cb789-7" aria-hidden="true" tabindex="-1"></a>nSim <span class="ot">=</span> nsims</span>
+<span id="cb789-8"><a href="appendix-3-comparison-to-brysbaert.html#cb789-8" aria-hidden="true" tabindex="-1"></a><span class="co"># give alpha levels</span></span>
+<span id="cb789-9"><a href="appendix-3-comparison-to-brysbaert.html#cb789-9" aria-hidden="true" tabindex="-1"></a><span class="co">#alpha level for the omnibus ANOVA</span></span>
+<span id="cb789-10"><a href="appendix-3-comparison-to-brysbaert.html#cb789-10" aria-hidden="true" tabindex="-1"></a>alpha1 <span class="ot">=</span> .<span class="dv">05</span> </span>
+<span id="cb789-11"><a href="appendix-3-comparison-to-brysbaert.html#cb789-11" aria-hidden="true" tabindex="-1"></a><span class="co">#alpha level for three post hoc one-tail t-test Bonferroni correction</span></span>
+<span id="cb789-12"><a href="appendix-3-comparison-to-brysbaert.html#cb789-12" aria-hidden="true" tabindex="-1"></a>alpha2 <span class="ot">=</span> .<span class="dv">05</span> </span></code></pre></div>
+<div class="sourceCode" id="cb790"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb790-1"><a href="appendix-3-comparison-to-brysbaert.html#cb790-1" aria-hidden="true" tabindex="-1"></a><span class="co"># create vectors to store p-values</span></span>
+<span id="cb790-2"><a href="appendix-3-comparison-to-brysbaert.html#cb790-2" aria-hidden="true" tabindex="-1"></a>p1 <span class="ot">&lt;-</span> <span class="fu">numeric</span>(nSim) <span class="co">#p-value omnibus ANOVA</span></span>
+<span id="cb790-3"><a href="appendix-3-comparison-to-brysbaert.html#cb790-3" aria-hidden="true" tabindex="-1"></a>p2 <span class="ot">&lt;-</span> <span class="fu">numeric</span>(nSim) <span class="co">#p-value first post hoc test</span></span>
+<span id="cb790-4"><a href="appendix-3-comparison-to-brysbaert.html#cb790-4" aria-hidden="true" tabindex="-1"></a>p3 <span class="ot">&lt;-</span> <span class="fu">numeric</span>(nSim) <span class="co">#p-value second post hoc test</span></span>
+<span id="cb790-5"><a href="appendix-3-comparison-to-brysbaert.html#cb790-5" aria-hidden="true" tabindex="-1"></a>p4 <span class="ot">&lt;-</span> <span class="fu">numeric</span>(nSim) <span class="co">#p-value third post hoc test</span></span>
+<span id="cb790-6"><a href="appendix-3-comparison-to-brysbaert.html#cb790-6" aria-hidden="true" tabindex="-1"></a>pes1 <span class="ot">&lt;-</span> <span class="fu">numeric</span>(nSim) <span class="co">#partial eta-squared</span></span></code></pre></div>
+<div class="sourceCode" id="cb791"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb791-1"><a href="appendix-3-comparison-to-brysbaert.html#cb791-1" aria-hidden="true" tabindex="-1"></a><span class="cf">for</span> (i <span class="cf">in</span> <span class="dv">1</span><span class="sc">:</span>nSim) {</span>
+<span id="cb791-2"><a href="appendix-3-comparison-to-brysbaert.html#cb791-2" aria-hidden="true" tabindex="-1"></a><span class="co">#for each simulated experiment</span></span>
+<span id="cb791-3"><a href="appendix-3-comparison-to-brysbaert.html#cb791-3" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb791-4"><a href="appendix-3-comparison-to-brysbaert.html#cb791-4" aria-hidden="true" tabindex="-1"></a>x <span class="ot">&lt;-</span> <span class="fu">rnorm</span>(<span class="at">n =</span> N, <span class="at">mean =</span> <span class="dv">0</span>, <span class="at">sd =</span> <span class="dv">1</span>)</span>
+<span id="cb791-5"><a href="appendix-3-comparison-to-brysbaert.html#cb791-5" aria-hidden="true" tabindex="-1"></a>y <span class="ot">&lt;-</span> <span class="fu">rnorm</span>(<span class="at">n =</span> N, <span class="at">mean =</span> d1, <span class="at">sd =</span> <span class="dv">1</span>)</span>
+<span id="cb791-6"><a href="appendix-3-comparison-to-brysbaert.html#cb791-6" aria-hidden="true" tabindex="-1"></a>z <span class="ot">&lt;-</span> <span class="fu">rnorm</span>(<span class="at">n =</span> N, <span class="at">mean =</span> d2, <span class="at">sd =</span> <span class="dv">1</span>)</span>
+<span id="cb791-7"><a href="appendix-3-comparison-to-brysbaert.html#cb791-7" aria-hidden="true" tabindex="-1"></a>data <span class="ot">=</span> <span class="fu">c</span>(x, y, z)</span>
+<span id="cb791-8"><a href="appendix-3-comparison-to-brysbaert.html#cb791-8" aria-hidden="true" tabindex="-1"></a>groups <span class="ot">=</span> <span class="fu">factor</span>(<span class="fu">rep</span>(letters[<span class="dv">24</span><span class="sc">:</span><span class="dv">26</span>], <span class="at">each =</span> N))</span>
+<span id="cb791-9"><a href="appendix-3-comparison-to-brysbaert.html#cb791-9" aria-hidden="true" tabindex="-1"></a>test <span class="ot">&lt;-</span> <span class="fu">aov</span>(data <span class="sc">~</span> groups)</span>
+<span id="cb791-10"><a href="appendix-3-comparison-to-brysbaert.html#cb791-10" aria-hidden="true" tabindex="-1"></a>pes1[i] <span class="ot">&lt;-</span> <span class="fu">etaSquared</span>(test)[<span class="dv">1</span>, <span class="dv">2</span>]</span>
+<span id="cb791-11"><a href="appendix-3-comparison-to-brysbaert.html#cb791-11" aria-hidden="true" tabindex="-1"></a>p1[i] <span class="ot">&lt;-</span> <span class="fu">summary</span>(test)[[<span class="dv">1</span>]][[<span class="st">&quot;Pr(&gt;F)&quot;</span>]][[<span class="dv">1</span>]]</span>
+<span id="cb791-12"><a href="appendix-3-comparison-to-brysbaert.html#cb791-12" aria-hidden="true" tabindex="-1"></a>p2[i] <span class="ot">&lt;-</span> <span class="fu">t.test</span>(x, y)<span class="sc">$</span>p.value</span>
+<span id="cb791-13"><a href="appendix-3-comparison-to-brysbaert.html#cb791-13" aria-hidden="true" tabindex="-1"></a>p3[i] <span class="ot">&lt;-</span> <span class="fu">t.test</span>(x, z)<span class="sc">$</span>p.value</span>
+<span id="cb791-14"><a href="appendix-3-comparison-to-brysbaert.html#cb791-14" aria-hidden="true" tabindex="-1"></a>p4[i] <span class="ot">&lt;-</span> <span class="fu">t.test</span>(y, z)<span class="sc">$</span>p.value</span>
+<span id="cb791-15"><a href="appendix-3-comparison-to-brysbaert.html#cb791-15" aria-hidden="true" tabindex="-1"></a>data <span class="ot">=</span> <span class="fu">c</span>(x, y)</span>
+<span id="cb791-16"><a href="appendix-3-comparison-to-brysbaert.html#cb791-16" aria-hidden="true" tabindex="-1"></a>groups <span class="ot">=</span> <span class="fu">factor</span>(<span class="fu">rep</span>(letters[<span class="dv">24</span><span class="sc">:</span><span class="dv">25</span>], <span class="at">each =</span> N))</span>
+<span id="cb791-17"><a href="appendix-3-comparison-to-brysbaert.html#cb791-17" aria-hidden="true" tabindex="-1"></a>test <span class="ot">&lt;-</span> <span class="fu">aov</span>(data <span class="sc">~</span> groups)</span>
+<span id="cb791-18"><a href="appendix-3-comparison-to-brysbaert.html#cb791-18" aria-hidden="true" tabindex="-1"></a>pes2[i] <span class="ot">&lt;-</span> <span class="fu">etaSquared</span>(test)[<span class="dv">1</span>, <span class="dv">2</span>]</span>
+<span id="cb791-19"><a href="appendix-3-comparison-to-brysbaert.html#cb791-19" aria-hidden="true" tabindex="-1"></a>}</span></code></pre></div>
+<div class="sourceCode" id="cb792"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb792-1"><a href="appendix-3-comparison-to-brysbaert.html#cb792-1" aria-hidden="true" tabindex="-1"></a><span class="fu">sum</span>(p1 <span class="sc">&lt;</span> alpha1) <span class="sc">/</span> nSim</span>
+<span id="cb792-2"><a href="appendix-3-comparison-to-brysbaert.html#cb792-2" aria-hidden="true" tabindex="-1"></a><span class="fu">sum</span>(p2 <span class="sc">&lt;</span> alpha2) <span class="sc">/</span> nSim</span>
+<span id="cb792-3"><a href="appendix-3-comparison-to-brysbaert.html#cb792-3" aria-hidden="true" tabindex="-1"></a><span class="fu">sum</span>(p3 <span class="sc">&lt;</span> alpha2) <span class="sc">/</span> nSim</span>
+<span id="cb792-4"><a href="appendix-3-comparison-to-brysbaert.html#cb792-4" aria-hidden="true" tabindex="-1"></a><span class="fu">sum</span>(p4 <span class="sc">&lt;</span> alpha2) <span class="sc">/</span> nSim</span>
+<span id="cb792-5"><a href="appendix-3-comparison-to-brysbaert.html#cb792-5" aria-hidden="true" tabindex="-1"></a><span class="fu">mean</span>(pes1)</span>
+<span id="cb792-6"><a href="appendix-3-comparison-to-brysbaert.html#cb792-6" aria-hidden="true" tabindex="-1"></a><span class="fu">mean</span>(pes2)</span></code></pre></div>
 </div>
-<div id="three-conditions-replication-2" class="section level3">
-<h3><span class="header-section-number">12.10.5</span> Three conditions replication</h3>
-<div class="sourceCode" id="cb758"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb758-1"><a href="appendix-3-comparison-to-brysbaert.html#cb758-1"></a>K &lt;-<span class="st"> </span><span class="dv">3</span></span>
-<span id="cb758-2"><a href="appendix-3-comparison-to-brysbaert.html#cb758-2"></a>mu &lt;-<span class="st"> </span><span class="kw">c</span>(<span class="dv">0</span>, <span class="fl">0.4</span>, <span class="fl">0.2</span>)</span>
-<span id="cb758-3"><a href="appendix-3-comparison-to-brysbaert.html#cb758-3"></a>n &lt;-<span class="st"> </span><span class="dv">82</span></span>
-<span id="cb758-4"><a href="appendix-3-comparison-to-brysbaert.html#cb758-4"></a>sd &lt;-<span class="st"> </span><span class="dv">1</span></span>
-<span id="cb758-5"><a href="appendix-3-comparison-to-brysbaert.html#cb758-5"></a>design =<span class="st"> </span><span class="kw">paste</span>(K, <span class="st">&quot;b&quot;</span>, <span class="dt">sep =</span> <span class="st">&quot;&quot;</span>)</span></code></pre></div>
-<div class="sourceCode" id="cb759"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb759-1"><a href="appendix-3-comparison-to-brysbaert.html#cb759-1"></a>design_result &lt;-<span class="st"> </span><span class="kw">ANOVA_design</span>(</span>
-<span id="cb759-2"><a href="appendix-3-comparison-to-brysbaert.html#cb759-2"></a>  <span class="dt">design =</span> design,</span>
-<span id="cb759-3"><a href="appendix-3-comparison-to-brysbaert.html#cb759-3"></a>  <span class="dt">n =</span> n,</span>
-<span id="cb759-4"><a href="appendix-3-comparison-to-brysbaert.html#cb759-4"></a>  <span class="dt">mu =</span> mu,</span>
-<span id="cb759-5"><a href="appendix-3-comparison-to-brysbaert.html#cb759-5"></a>  <span class="dt">sd =</span> sd,</span>
-<span id="cb759-6"><a href="appendix-3-comparison-to-brysbaert.html#cb759-6"></a>  <span class="dt">labelnames =</span> <span class="kw">c</span>(<span class="st">&quot;factor1&quot;</span>, <span class="st">&quot;level1&quot;</span>, <span class="st">&quot;level2&quot;</span>, <span class="st">&quot;level3&quot;</span>)</span>
-<span id="cb759-7"><a href="appendix-3-comparison-to-brysbaert.html#cb759-7"></a>  )</span></code></pre></div>
-<p><img src="SuperpowerValidation_files/figure-html/unnamed-chunk-333-1.png" width="672" /></p>
-<div class="sourceCode" id="cb760"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb760-1"><a href="appendix-3-comparison-to-brysbaert.html#cb760-1"></a>simulation_result &lt;-<span class="st"> </span><span class="kw">ANOVA_power</span>(design_result, </span>
-<span id="cb760-2"><a href="appendix-3-comparison-to-brysbaert.html#cb760-2"></a>                                 <span class="dt">alpha_level =</span> alpha_level, </span>
-<span id="cb760-3"><a href="appendix-3-comparison-to-brysbaert.html#cb760-3"></a>                                 <span class="dt">nsims =</span> nsims,</span>
-<span id="cb760-4"><a href="appendix-3-comparison-to-brysbaert.html#cb760-4"></a>                                 <span class="dt">verbose =</span> <span class="ot">FALSE</span>)</span></code></pre></div>
+<div id="three-conditions-replication-2" class="section level3" number="13.10.5">
+<h3><span class="header-section-number">13.10.5</span> Three conditions replication</h3>
+<div class="sourceCode" id="cb793"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb793-1"><a href="appendix-3-comparison-to-brysbaert.html#cb793-1" aria-hidden="true" tabindex="-1"></a>K <span class="ot">&lt;-</span> <span class="dv">3</span></span>
+<span id="cb793-2"><a href="appendix-3-comparison-to-brysbaert.html#cb793-2" aria-hidden="true" tabindex="-1"></a>mu <span class="ot">&lt;-</span> <span class="fu">c</span>(<span class="dv">0</span>, <span class="fl">0.4</span>, <span class="fl">0.2</span>)</span>
+<span id="cb793-3"><a href="appendix-3-comparison-to-brysbaert.html#cb793-3" aria-hidden="true" tabindex="-1"></a>n <span class="ot">&lt;-</span> <span class="dv">82</span></span>
+<span id="cb793-4"><a href="appendix-3-comparison-to-brysbaert.html#cb793-4" aria-hidden="true" tabindex="-1"></a>sd <span class="ot">&lt;-</span> <span class="dv">1</span></span>
+<span id="cb793-5"><a href="appendix-3-comparison-to-brysbaert.html#cb793-5" aria-hidden="true" tabindex="-1"></a>design <span class="ot">=</span> <span class="fu">paste</span>(K, <span class="st">&quot;b&quot;</span>, <span class="at">sep =</span> <span class="st">&quot;&quot;</span>)</span></code></pre></div>
+<div class="sourceCode" id="cb794"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb794-1"><a href="appendix-3-comparison-to-brysbaert.html#cb794-1" aria-hidden="true" tabindex="-1"></a>design_result <span class="ot">&lt;-</span> <span class="fu">ANOVA_design</span>(</span>
+<span id="cb794-2"><a href="appendix-3-comparison-to-brysbaert.html#cb794-2" aria-hidden="true" tabindex="-1"></a>  <span class="at">design =</span> design,</span>
+<span id="cb794-3"><a href="appendix-3-comparison-to-brysbaert.html#cb794-3" aria-hidden="true" tabindex="-1"></a>  <span class="at">n =</span> n,</span>
+<span id="cb794-4"><a href="appendix-3-comparison-to-brysbaert.html#cb794-4" aria-hidden="true" tabindex="-1"></a>  <span class="at">mu =</span> mu,</span>
+<span id="cb794-5"><a href="appendix-3-comparison-to-brysbaert.html#cb794-5" aria-hidden="true" tabindex="-1"></a>  <span class="at">sd =</span> sd,</span>
+<span id="cb794-6"><a href="appendix-3-comparison-to-brysbaert.html#cb794-6" aria-hidden="true" tabindex="-1"></a>  <span class="at">labelnames =</span> <span class="fu">c</span>(<span class="st">&quot;factor1&quot;</span>, <span class="st">&quot;level1&quot;</span>, <span class="st">&quot;level2&quot;</span>, <span class="st">&quot;level3&quot;</span>)</span>
+<span id="cb794-7"><a href="appendix-3-comparison-to-brysbaert.html#cb794-7" aria-hidden="true" tabindex="-1"></a>  )</span></code></pre></div>
+<p><img src="SuperpowerValidation_files/figure-html/unnamed-chunk-358-1.png" width="672" /></p>
+<div class="sourceCode" id="cb795"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb795-1"><a href="appendix-3-comparison-to-brysbaert.html#cb795-1" aria-hidden="true" tabindex="-1"></a>simulation_result <span class="ot">&lt;-</span> <span class="fu">ANOVA_power</span>(design_result, </span>
+<span id="cb795-2"><a href="appendix-3-comparison-to-brysbaert.html#cb795-2" aria-hidden="true" tabindex="-1"></a>                                 <span class="at">alpha_level =</span> alpha_level, </span>
+<span id="cb795-3"><a href="appendix-3-comparison-to-brysbaert.html#cb795-3" aria-hidden="true" tabindex="-1"></a>                                 <span class="at">nsims =</span> nsims,</span>
+<span id="cb795-4"><a href="appendix-3-comparison-to-brysbaert.html#cb795-4" aria-hidden="true" tabindex="-1"></a>                                 <span class="at">verbose =</span> <span class="cn">FALSE</span>)</span></code></pre></div>
 <table class="table" style="margin-left: auto; margin-right: auto;">
 <caption>
-<span id="tab:unnamed-chunk-335">Table 12.5: </span>Simulated ANOVA Result
+<span id="tab:unnamed-chunk-360">Table 13.5: </span>Simulated ANOVA Result
 </caption>
 <thead>
 <tr>
@@ -665,12 +706,12 @@ anova_factor1
 </tr>
 </tbody>
 </table>
-<div class="sourceCode" id="cb761"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb761-1"><a href="appendix-3-comparison-to-brysbaert.html#cb761-1"></a>exact_result &lt;-<span class="st"> </span><span class="kw">ANOVA_exact</span>(design_result,</span>
-<span id="cb761-2"><a href="appendix-3-comparison-to-brysbaert.html#cb761-2"></a>                            <span class="dt">alpha_level =</span> alpha_level,</span>
-<span id="cb761-3"><a href="appendix-3-comparison-to-brysbaert.html#cb761-3"></a>                            <span class="dt">verbose =</span> <span class="ot">FALSE</span>)</span></code></pre></div>
+<div class="sourceCode" id="cb796"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb796-1"><a href="appendix-3-comparison-to-brysbaert.html#cb796-1" aria-hidden="true" tabindex="-1"></a>exact_result <span class="ot">&lt;-</span> <span class="fu">ANOVA_exact</span>(design_result,</span>
+<span id="cb796-2"><a href="appendix-3-comparison-to-brysbaert.html#cb796-2" aria-hidden="true" tabindex="-1"></a>                            <span class="at">alpha_level =</span> alpha_level,</span>
+<span id="cb796-3"><a href="appendix-3-comparison-to-brysbaert.html#cb796-3" aria-hidden="true" tabindex="-1"></a>                            <span class="at">verbose =</span> <span class="cn">FALSE</span>)</span></code></pre></div>
 <table class="table" style="margin-left: auto; margin-right: auto;">
 <caption>
-<span id="tab:unnamed-chunk-337">Table 12.6: </span>Exact ANOVA Result
+<span id="tab:unnamed-chunk-362">Table 13.6: </span>Exact ANOVA Result
 </caption>
 <thead>
 <tr>
@@ -712,30 +753,30 @@ factor1
 </table>
 </div>
 </div>
-<div id="repeated-measures" class="section level2">
-<h2><span class="header-section-number">12.11</span> Repeated Measures</h2>
+<div id="repeated-measures" class="section level2" number="13.11">
+<h2><span class="header-section-number">13.11</span> Repeated Measures</h2>
 <p>We can reproduce the same results as Brysbaert finds with his code:</p>
-<div class="sourceCode" id="cb762"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb762-1"><a href="appendix-3-comparison-to-brysbaert.html#cb762-1"></a>design &lt;-<span class="st"> &quot;3w&quot;</span></span>
-<span id="cb762-2"><a href="appendix-3-comparison-to-brysbaert.html#cb762-2"></a>n &lt;-<span class="st"> </span><span class="dv">75</span></span>
-<span id="cb762-3"><a href="appendix-3-comparison-to-brysbaert.html#cb762-3"></a>mu &lt;-<span class="st"> </span><span class="kw">c</span>(<span class="dv">0</span>, <span class="fl">0.4</span>, <span class="fl">0.4</span>)</span>
-<span id="cb762-4"><a href="appendix-3-comparison-to-brysbaert.html#cb762-4"></a>sd &lt;-<span class="st"> </span><span class="dv">1</span></span>
-<span id="cb762-5"><a href="appendix-3-comparison-to-brysbaert.html#cb762-5"></a>r &lt;-<span class="st"> </span><span class="fl">0.5</span></span>
-<span id="cb762-6"><a href="appendix-3-comparison-to-brysbaert.html#cb762-6"></a>labelnames &lt;-<span class="st"> </span><span class="kw">c</span>(<span class="st">&quot;speed&quot;</span>, <span class="st">&quot;fast&quot;</span>, <span class="st">&quot;medium&quot;</span>, <span class="st">&quot;slow&quot;</span>)</span></code></pre></div>
+<div class="sourceCode" id="cb797"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb797-1"><a href="appendix-3-comparison-to-brysbaert.html#cb797-1" aria-hidden="true" tabindex="-1"></a>design <span class="ot">&lt;-</span> <span class="st">&quot;3w&quot;</span></span>
+<span id="cb797-2"><a href="appendix-3-comparison-to-brysbaert.html#cb797-2" aria-hidden="true" tabindex="-1"></a>n <span class="ot">&lt;-</span> <span class="dv">75</span></span>
+<span id="cb797-3"><a href="appendix-3-comparison-to-brysbaert.html#cb797-3" aria-hidden="true" tabindex="-1"></a>mu <span class="ot">&lt;-</span> <span class="fu">c</span>(<span class="dv">0</span>, <span class="fl">0.4</span>, <span class="fl">0.4</span>)</span>
+<span id="cb797-4"><a href="appendix-3-comparison-to-brysbaert.html#cb797-4" aria-hidden="true" tabindex="-1"></a>sd <span class="ot">&lt;-</span> <span class="dv">1</span></span>
+<span id="cb797-5"><a href="appendix-3-comparison-to-brysbaert.html#cb797-5" aria-hidden="true" tabindex="-1"></a>r <span class="ot">&lt;-</span> <span class="fl">0.5</span></span>
+<span id="cb797-6"><a href="appendix-3-comparison-to-brysbaert.html#cb797-6" aria-hidden="true" tabindex="-1"></a>labelnames <span class="ot">&lt;-</span> <span class="fu">c</span>(<span class="st">&quot;speed&quot;</span>, <span class="st">&quot;fast&quot;</span>, <span class="st">&quot;medium&quot;</span>, <span class="st">&quot;slow&quot;</span>)</span></code></pre></div>
 <p>We create the within design, and run the simulation</p>
-<div class="sourceCode" id="cb763"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb763-1"><a href="appendix-3-comparison-to-brysbaert.html#cb763-1"></a>design_result &lt;-<span class="st"> </span><span class="kw">ANOVA_design</span>(<span class="dt">design =</span> design,</span>
-<span id="cb763-2"><a href="appendix-3-comparison-to-brysbaert.html#cb763-2"></a>                   <span class="dt">n =</span> n, </span>
-<span id="cb763-3"><a href="appendix-3-comparison-to-brysbaert.html#cb763-3"></a>                   <span class="dt">mu =</span> mu, </span>
-<span id="cb763-4"><a href="appendix-3-comparison-to-brysbaert.html#cb763-4"></a>                   <span class="dt">sd =</span> sd, </span>
-<span id="cb763-5"><a href="appendix-3-comparison-to-brysbaert.html#cb763-5"></a>                   <span class="dt">r =</span> r, </span>
-<span id="cb763-6"><a href="appendix-3-comparison-to-brysbaert.html#cb763-6"></a>                   <span class="dt">labelnames =</span> labelnames)</span></code></pre></div>
-<p><img src="SuperpowerValidation_files/figure-html/unnamed-chunk-339-1.png" width="672" /></p>
-<div class="sourceCode" id="cb764"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb764-1"><a href="appendix-3-comparison-to-brysbaert.html#cb764-1"></a>simulation_result &lt;-<span class="st"> </span><span class="kw">ANOVA_power</span>(design_result, </span>
-<span id="cb764-2"><a href="appendix-3-comparison-to-brysbaert.html#cb764-2"></a>                                 <span class="dt">alpha_level =</span> alpha_level, </span>
-<span id="cb764-3"><a href="appendix-3-comparison-to-brysbaert.html#cb764-3"></a>                                 <span class="dt">nsims =</span> nsims,</span>
-<span id="cb764-4"><a href="appendix-3-comparison-to-brysbaert.html#cb764-4"></a>                                 <span class="dt">verbose =</span> <span class="ot">FALSE</span>)</span></code></pre></div>
+<div class="sourceCode" id="cb798"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb798-1"><a href="appendix-3-comparison-to-brysbaert.html#cb798-1" aria-hidden="true" tabindex="-1"></a>design_result <span class="ot">&lt;-</span> <span class="fu">ANOVA_design</span>(<span class="at">design =</span> design,</span>
+<span id="cb798-2"><a href="appendix-3-comparison-to-brysbaert.html#cb798-2" aria-hidden="true" tabindex="-1"></a>                   <span class="at">n =</span> n, </span>
+<span id="cb798-3"><a href="appendix-3-comparison-to-brysbaert.html#cb798-3" aria-hidden="true" tabindex="-1"></a>                   <span class="at">mu =</span> mu, </span>
+<span id="cb798-4"><a href="appendix-3-comparison-to-brysbaert.html#cb798-4" aria-hidden="true" tabindex="-1"></a>                   <span class="at">sd =</span> sd, </span>
+<span id="cb798-5"><a href="appendix-3-comparison-to-brysbaert.html#cb798-5" aria-hidden="true" tabindex="-1"></a>                   <span class="at">r =</span> r, </span>
+<span id="cb798-6"><a href="appendix-3-comparison-to-brysbaert.html#cb798-6" aria-hidden="true" tabindex="-1"></a>                   <span class="at">labelnames =</span> labelnames)</span></code></pre></div>
+<p><img src="SuperpowerValidation_files/figure-html/unnamed-chunk-364-1.png" width="672" /></p>
+<div class="sourceCode" id="cb799"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb799-1"><a href="appendix-3-comparison-to-brysbaert.html#cb799-1" aria-hidden="true" tabindex="-1"></a>simulation_result <span class="ot">&lt;-</span> <span class="fu">ANOVA_power</span>(design_result, </span>
+<span id="cb799-2"><a href="appendix-3-comparison-to-brysbaert.html#cb799-2" aria-hidden="true" tabindex="-1"></a>                                 <span class="at">alpha_level =</span> alpha_level, </span>
+<span id="cb799-3"><a href="appendix-3-comparison-to-brysbaert.html#cb799-3" aria-hidden="true" tabindex="-1"></a>                                 <span class="at">nsims =</span> nsims,</span>
+<span id="cb799-4"><a href="appendix-3-comparison-to-brysbaert.html#cb799-4" aria-hidden="true" tabindex="-1"></a>                                 <span class="at">verbose =</span> <span class="cn">FALSE</span>)</span></code></pre></div>
 <table class="table" style="margin-left: auto; margin-right: auto;">
 <caption>
-<span id="tab:unnamed-chunk-341">Table 12.7: </span>Simulated ANOVA Result
+<span id="tab:unnamed-chunk-366">Table 13.7: </span>Simulated ANOVA Result
 </caption>
 <thead>
 <tr>
@@ -763,12 +804,12 @@ anova_speed
 </tr>
 </tbody>
 </table>
-<div class="sourceCode" id="cb765"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb765-1"><a href="appendix-3-comparison-to-brysbaert.html#cb765-1"></a>exact_result &lt;-<span class="st"> </span><span class="kw">ANOVA_exact</span>(design_result,</span>
-<span id="cb765-2"><a href="appendix-3-comparison-to-brysbaert.html#cb765-2"></a>                            <span class="dt">alpha_level =</span> alpha_level,</span>
-<span id="cb765-3"><a href="appendix-3-comparison-to-brysbaert.html#cb765-3"></a>                            <span class="dt">verbose =</span> <span class="ot">FALSE</span>)</span></code></pre></div>
+<div class="sourceCode" id="cb800"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb800-1"><a href="appendix-3-comparison-to-brysbaert.html#cb800-1" aria-hidden="true" tabindex="-1"></a>exact_result <span class="ot">&lt;-</span> <span class="fu">ANOVA_exact</span>(design_result,</span>
+<span id="cb800-2"><a href="appendix-3-comparison-to-brysbaert.html#cb800-2" aria-hidden="true" tabindex="-1"></a>                            <span class="at">alpha_level =</span> alpha_level,</span>
+<span id="cb800-3"><a href="appendix-3-comparison-to-brysbaert.html#cb800-3" aria-hidden="true" tabindex="-1"></a>                            <span class="at">verbose =</span> <span class="cn">FALSE</span>)</span></code></pre></div>
 <table class="table" style="margin-left: auto; margin-right: auto;">
 <caption>
-<span id="tab:unnamed-chunk-343">Table 12.8: </span>Exact ANOVA Result
+<span id="tab:unnamed-chunk-368">Table 13.8: </span>Exact ANOVA Result
 </caption>
 <thead>
 <tr>
@@ -812,94 +853,94 @@ speed
 <p>The results of the simulation are very similar. Power for the ANOVA <em>F</em>-test is around 95.2%. For the three paired t-tests, power is around 92.7. This is in line with the a-priori power analysis when using Gpower:</p>
 <p><img src="screenshots/gpower_2.png" /></p>
 <p>We can perform an post-hoc power analysis in Gpower. We can calculate Cohen´s f based on the means and sd, using our own custom formula.</p>
-<div class="sourceCode" id="cb766"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb766-1"><a href="appendix-3-comparison-to-brysbaert.html#cb766-1"></a><span class="co"># Our simulation is based onthe following means and sd:</span></span>
-<span id="cb766-2"><a href="appendix-3-comparison-to-brysbaert.html#cb766-2"></a><span class="co"># mu &lt;- c(0, 0.4, 0.4)</span></span>
-<span id="cb766-3"><a href="appendix-3-comparison-to-brysbaert.html#cb766-3"></a><span class="co"># sd &lt;- 1</span></span>
-<span id="cb766-4"><a href="appendix-3-comparison-to-brysbaert.html#cb766-4"></a><span class="co"># Cohen, 1988, formula 8.2.1 and 8.2.2</span></span>
-<span id="cb766-5"><a href="appendix-3-comparison-to-brysbaert.html#cb766-5"></a>f &lt;-<span class="st"> </span><span class="kw">sqrt</span>(<span class="kw">sum</span>((mu <span class="op">-</span><span class="st"> </span><span class="kw">mean</span>(mu)) <span class="op">^</span><span class="st"> </span><span class="dv">2</span>) <span class="op">/</span><span class="st"> </span><span class="kw">length</span>(mu)) <span class="op">/</span><span class="st"> </span>sd </span>
-<span id="cb766-6"><a href="appendix-3-comparison-to-brysbaert.html#cb766-6"></a></span>
-<span id="cb766-7"><a href="appendix-3-comparison-to-brysbaert.html#cb766-7"></a><span class="co"># We can see why f = 0.5*d.</span></span>
-<span id="cb766-8"><a href="appendix-3-comparison-to-brysbaert.html#cb766-8"></a><span class="co"># Imagine 2 group, mu = 1 and 2</span></span>
-<span id="cb766-9"><a href="appendix-3-comparison-to-brysbaert.html#cb766-9"></a><span class="co"># Grand mean is 1.5, </span></span>
-<span id="cb766-10"><a href="appendix-3-comparison-to-brysbaert.html#cb766-10"></a><span class="co"># we have sqrt(sum(0.5^2 + 0.5^2)/2), or sqrt(0.5/2), = 0.5.</span></span>
-<span id="cb766-11"><a href="appendix-3-comparison-to-brysbaert.html#cb766-11"></a><span class="co"># For Cohen&#39;s d we use the difference, 2-1 = 1. </span></span></code></pre></div>
+<div class="sourceCode" id="cb801"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb801-1"><a href="appendix-3-comparison-to-brysbaert.html#cb801-1" aria-hidden="true" tabindex="-1"></a><span class="co"># Our simulation is based onthe following means and sd:</span></span>
+<span id="cb801-2"><a href="appendix-3-comparison-to-brysbaert.html#cb801-2" aria-hidden="true" tabindex="-1"></a><span class="co"># mu &lt;- c(0, 0.4, 0.4)</span></span>
+<span id="cb801-3"><a href="appendix-3-comparison-to-brysbaert.html#cb801-3" aria-hidden="true" tabindex="-1"></a><span class="co"># sd &lt;- 1</span></span>
+<span id="cb801-4"><a href="appendix-3-comparison-to-brysbaert.html#cb801-4" aria-hidden="true" tabindex="-1"></a><span class="co"># Cohen, 1988, formula 8.2.1 and 8.2.2</span></span>
+<span id="cb801-5"><a href="appendix-3-comparison-to-brysbaert.html#cb801-5" aria-hidden="true" tabindex="-1"></a>f <span class="ot">&lt;-</span> <span class="fu">sqrt</span>(<span class="fu">sum</span>((mu <span class="sc">-</span> <span class="fu">mean</span>(mu)) <span class="sc">^</span> <span class="dv">2</span>) <span class="sc">/</span> <span class="fu">length</span>(mu)) <span class="sc">/</span> sd </span>
+<span id="cb801-6"><a href="appendix-3-comparison-to-brysbaert.html#cb801-6" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb801-7"><a href="appendix-3-comparison-to-brysbaert.html#cb801-7" aria-hidden="true" tabindex="-1"></a><span class="co"># We can see why f = 0.5*d.</span></span>
+<span id="cb801-8"><a href="appendix-3-comparison-to-brysbaert.html#cb801-8" aria-hidden="true" tabindex="-1"></a><span class="co"># Imagine 2 group, mu = 1 and 2</span></span>
+<span id="cb801-9"><a href="appendix-3-comparison-to-brysbaert.html#cb801-9" aria-hidden="true" tabindex="-1"></a><span class="co"># Grand mean is 1.5, </span></span>
+<span id="cb801-10"><a href="appendix-3-comparison-to-brysbaert.html#cb801-10" aria-hidden="true" tabindex="-1"></a><span class="co"># we have sqrt(sum(0.5^2 + 0.5^2)/2), or sqrt(0.5/2), = 0.5.</span></span>
+<span id="cb801-11"><a href="appendix-3-comparison-to-brysbaert.html#cb801-11" aria-hidden="true" tabindex="-1"></a><span class="co"># For Cohen&#39;s d we use the difference, 2-1 = 1. </span></span></code></pre></div>
 <p>The Cohen´s <em>f</em> is 0.1885618. We can enter the <em>f</em> (using the default ’as in G*Power 3.0’ in the option window) and enter a sample size of 75, number of groups as 1, number of measurements as 3, correlation as 0.5. This yields:</p>
 <p><img src="screenshots/gpower_3.png" /></p>
-<div id="reproducing-brysbaert-variation-1-changing-correlation" class="section level3">
-<h3><span class="header-section-number">12.11.1</span> Reproducing Brysbaert Variation 1: Changing Correlation</h3>
-<div class="sourceCode" id="cb767"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb767-1"><a href="appendix-3-comparison-to-brysbaert.html#cb767-1"></a><span class="co"># give sample size</span></span>
-<span id="cb767-2"><a href="appendix-3-comparison-to-brysbaert.html#cb767-2"></a>N =<span class="st"> </span><span class="dv">75</span></span>
-<span id="cb767-3"><a href="appendix-3-comparison-to-brysbaert.html#cb767-3"></a><span class="co"># give effect size d</span></span>
-<span id="cb767-4"><a href="appendix-3-comparison-to-brysbaert.html#cb767-4"></a>d1 =<span class="st"> </span><span class="fl">.4</span> <span class="co">#difference between the extremes</span></span>
-<span id="cb767-5"><a href="appendix-3-comparison-to-brysbaert.html#cb767-5"></a>d2 =<span class="st"> </span><span class="fl">.4</span> <span class="co">#third condition goes with the highest extreme</span></span>
-<span id="cb767-6"><a href="appendix-3-comparison-to-brysbaert.html#cb767-6"></a><span class="co"># give the correlation between the conditions</span></span>
-<span id="cb767-7"><a href="appendix-3-comparison-to-brysbaert.html#cb767-7"></a>r =<span class="st"> </span><span class="fl">.6</span> <span class="co">#increased correlation</span></span>
-<span id="cb767-8"><a href="appendix-3-comparison-to-brysbaert.html#cb767-8"></a><span class="co"># give number of simulations</span></span>
-<span id="cb767-9"><a href="appendix-3-comparison-to-brysbaert.html#cb767-9"></a>nSim =<span class="st"> </span>nsims</span>
-<span id="cb767-10"><a href="appendix-3-comparison-to-brysbaert.html#cb767-10"></a><span class="co"># give alpha levels</span></span>
-<span id="cb767-11"><a href="appendix-3-comparison-to-brysbaert.html#cb767-11"></a>alpha1 =<span class="st"> </span><span class="fl">.05</span> <span class="co">#alpha level for the omnibus ANOVA</span></span>
-<span id="cb767-12"><a href="appendix-3-comparison-to-brysbaert.html#cb767-12"></a>alpha2 =<span class="st"> </span><span class="fl">.05</span> <span class="co">#also adjusted from original by DL</span></span></code></pre></div>
-<div class="sourceCode" id="cb768"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb768-1"><a href="appendix-3-comparison-to-brysbaert.html#cb768-1"></a><span class="co"># create vectors to store p-values</span></span>
-<span id="cb768-2"><a href="appendix-3-comparison-to-brysbaert.html#cb768-2"></a>p1 &lt;-<span class="st"> </span><span class="kw">numeric</span>(nSim) <span class="co">#p-value omnibus ANOVA</span></span>
-<span id="cb768-3"><a href="appendix-3-comparison-to-brysbaert.html#cb768-3"></a>p2 &lt;-<span class="st"> </span><span class="kw">numeric</span>(nSim) <span class="co">#p-value first post hoc test</span></span>
-<span id="cb768-4"><a href="appendix-3-comparison-to-brysbaert.html#cb768-4"></a>p3 &lt;-<span class="st"> </span><span class="kw">numeric</span>(nSim) <span class="co">#p-value second post hoc test</span></span>
-<span id="cb768-5"><a href="appendix-3-comparison-to-brysbaert.html#cb768-5"></a>p4 &lt;-<span class="st"> </span><span class="kw">numeric</span>(nSim) <span class="co">#p-value third post hoc test</span></span>
-<span id="cb768-6"><a href="appendix-3-comparison-to-brysbaert.html#cb768-6"></a></span>
-<span id="cb768-7"><a href="appendix-3-comparison-to-brysbaert.html#cb768-7"></a><span class="co"># define correlation matrix</span></span>
-<span id="cb768-8"><a href="appendix-3-comparison-to-brysbaert.html#cb768-8"></a>rho &lt;-<span class="st"> </span><span class="kw">cbind</span>(<span class="kw">c</span>(<span class="dv">1</span>, r, r), <span class="kw">c</span>(r, <span class="dv">1</span>, r), <span class="kw">c</span>(r, r, <span class="dv">1</span>))</span>
-<span id="cb768-9"><a href="appendix-3-comparison-to-brysbaert.html#cb768-9"></a><span class="co"># define participant codes</span></span>
-<span id="cb768-10"><a href="appendix-3-comparison-to-brysbaert.html#cb768-10"></a>part &lt;-<span class="st"> </span><span class="kw">paste</span>(<span class="st">&quot;part&quot;</span>,<span class="kw">seq</span>(<span class="dv">1</span><span class="op">:</span>N))</span>
-<span id="cb768-11"><a href="appendix-3-comparison-to-brysbaert.html#cb768-11"></a><span class="cf">for</span> (i <span class="cf">in</span> <span class="dv">1</span><span class="op">:</span>nSim) {</span>
-<span id="cb768-12"><a href="appendix-3-comparison-to-brysbaert.html#cb768-12"></a>  </span>
-<span id="cb768-13"><a href="appendix-3-comparison-to-brysbaert.html#cb768-13"></a>  <span class="co">#for each simulated experiment</span></span>
-<span id="cb768-14"><a href="appendix-3-comparison-to-brysbaert.html#cb768-14"></a></span>
-<span id="cb768-15"><a href="appendix-3-comparison-to-brysbaert.html#cb768-15"></a>  data =<span class="st"> </span><span class="kw">mvrnorm</span>(<span class="dt">n =</span> N,</span>
-<span id="cb768-16"><a href="appendix-3-comparison-to-brysbaert.html#cb768-16"></a>  <span class="dt">mu =</span> <span class="kw">c</span>(<span class="dv">0</span>, <span class="dv">0</span>, <span class="dv">0</span>),</span>
-<span id="cb768-17"><a href="appendix-3-comparison-to-brysbaert.html#cb768-17"></a>  <span class="dt">Sigma =</span> rho)</span>
-<span id="cb768-18"><a href="appendix-3-comparison-to-brysbaert.html#cb768-18"></a>  data[, <span class="dv">2</span>] =<span class="st"> </span>data[, <span class="dv">2</span>] <span class="op">+</span><span class="st"> </span>d1</span>
-<span id="cb768-19"><a href="appendix-3-comparison-to-brysbaert.html#cb768-19"></a>  data[, <span class="dv">3</span>] =<span class="st"> </span>data[, <span class="dv">3</span>] <span class="op">+</span><span class="st"> </span>d2</span>
-<span id="cb768-20"><a href="appendix-3-comparison-to-brysbaert.html#cb768-20"></a>  datalong =<span class="st"> </span><span class="kw">c</span>(data[, <span class="dv">1</span>], data[, <span class="dv">2</span>], data[, <span class="dv">3</span>])</span>
-<span id="cb768-21"><a href="appendix-3-comparison-to-brysbaert.html#cb768-21"></a>  conds =<span class="st"> </span><span class="kw">factor</span>(<span class="kw">rep</span>(letters[<span class="dv">24</span><span class="op">:</span><span class="dv">26</span>], <span class="dt">each =</span> N))</span>
-<span id="cb768-22"><a href="appendix-3-comparison-to-brysbaert.html#cb768-22"></a>  partID =<span class="st"> </span><span class="kw">factor</span>(<span class="kw">rep</span>(part, <span class="dt">times =</span> <span class="dv">3</span>))</span>
-<span id="cb768-23"><a href="appendix-3-comparison-to-brysbaert.html#cb768-23"></a>  output &lt;-<span class="st"> </span><span class="kw">data.frame</span>(partID, conds, datalong)</span>
-<span id="cb768-24"><a href="appendix-3-comparison-to-brysbaert.html#cb768-24"></a>  test &lt;-<span class="st"> </span><span class="kw">aov</span>(datalong <span class="op">~</span><span class="st"> </span>conds <span class="op">+</span><span class="st"> </span><span class="kw">Error</span>(partID <span class="op">/</span><span class="st"> </span>conds), </span>
-<span id="cb768-25"><a href="appendix-3-comparison-to-brysbaert.html#cb768-25"></a>              <span class="dt">data =</span> output)</span>
-<span id="cb768-26"><a href="appendix-3-comparison-to-brysbaert.html#cb768-26"></a>  tests &lt;-<span class="st"> </span>(<span class="kw">summary</span>(test))</span>
-<span id="cb768-27"><a href="appendix-3-comparison-to-brysbaert.html#cb768-27"></a>  p1[i] &lt;-<span class="st"> </span>tests<span class="op">$</span><span class="st">&#39;Error: partID:conds&#39;</span>[[<span class="dv">1</span>]]<span class="op">$</span><span class="st">&#39;Pr(&gt;F)&#39;</span>[[<span class="dv">1</span>]]</span>
-<span id="cb768-28"><a href="appendix-3-comparison-to-brysbaert.html#cb768-28"></a>  p2[i] &lt;-<span class="st"> </span><span class="kw">t.test</span>(data[, <span class="dv">1</span>], data[, <span class="dv">2</span>], <span class="dt">paired =</span> <span class="ot">TRUE</span>)<span class="op">$</span>p.value</span>
-<span id="cb768-29"><a href="appendix-3-comparison-to-brysbaert.html#cb768-29"></a>  p3[i] &lt;-<span class="st"> </span><span class="kw">t.test</span>(data[, <span class="dv">1</span>], data[, <span class="dv">3</span>], <span class="dt">paired =</span> <span class="ot">TRUE</span>)<span class="op">$</span>p.value</span>
-<span id="cb768-30"><a href="appendix-3-comparison-to-brysbaert.html#cb768-30"></a>  p4[i] &lt;-<span class="st"> </span><span class="kw">t.test</span>(data[, <span class="dv">2</span>], data[, <span class="dv">3</span>], <span class="dt">paired =</span> <span class="ot">TRUE</span>)<span class="op">$</span>p.value</span>
-<span id="cb768-31"><a href="appendix-3-comparison-to-brysbaert.html#cb768-31"></a>}</span></code></pre></div>
-<div class="sourceCode" id="cb769"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb769-1"><a href="appendix-3-comparison-to-brysbaert.html#cb769-1"></a><span class="kw">sum</span>(p1 <span class="op">&lt;</span><span class="st"> </span>alpha1) <span class="op">/</span><span class="st"> </span>nSim</span>
-<span id="cb769-2"><a href="appendix-3-comparison-to-brysbaert.html#cb769-2"></a><span class="kw">sum</span>(p2 <span class="op">&lt;</span><span class="st"> </span>alpha2) <span class="op">/</span><span class="st"> </span>nSim</span>
-<span id="cb769-3"><a href="appendix-3-comparison-to-brysbaert.html#cb769-3"></a><span class="kw">sum</span>(p3 <span class="op">&lt;</span><span class="st"> </span>alpha2) <span class="op">/</span><span class="st"> </span>nSim</span>
-<span id="cb769-4"><a href="appendix-3-comparison-to-brysbaert.html#cb769-4"></a><span class="kw">sum</span>(p4 <span class="op">&lt;</span><span class="st"> </span>alpha2) <span class="op">/</span><span class="st"> </span>nSim</span></code></pre></div>
+<div id="reproducing-brysbaert-variation-1-changing-correlation" class="section level3" number="13.11.1">
+<h3><span class="header-section-number">13.11.1</span> Reproducing Brysbaert Variation 1: Changing Correlation</h3>
+<div class="sourceCode" id="cb802"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb802-1"><a href="appendix-3-comparison-to-brysbaert.html#cb802-1" aria-hidden="true" tabindex="-1"></a><span class="co"># give sample size</span></span>
+<span id="cb802-2"><a href="appendix-3-comparison-to-brysbaert.html#cb802-2" aria-hidden="true" tabindex="-1"></a>N <span class="ot">=</span> <span class="dv">75</span></span>
+<span id="cb802-3"><a href="appendix-3-comparison-to-brysbaert.html#cb802-3" aria-hidden="true" tabindex="-1"></a><span class="co"># give effect size d</span></span>
+<span id="cb802-4"><a href="appendix-3-comparison-to-brysbaert.html#cb802-4" aria-hidden="true" tabindex="-1"></a>d1 <span class="ot">=</span> .<span class="dv">4</span> <span class="co">#difference between the extremes</span></span>
+<span id="cb802-5"><a href="appendix-3-comparison-to-brysbaert.html#cb802-5" aria-hidden="true" tabindex="-1"></a>d2 <span class="ot">=</span> .<span class="dv">4</span> <span class="co">#third condition goes with the highest extreme</span></span>
+<span id="cb802-6"><a href="appendix-3-comparison-to-brysbaert.html#cb802-6" aria-hidden="true" tabindex="-1"></a><span class="co"># give the correlation between the conditions</span></span>
+<span id="cb802-7"><a href="appendix-3-comparison-to-brysbaert.html#cb802-7" aria-hidden="true" tabindex="-1"></a>r <span class="ot">=</span> .<span class="dv">6</span> <span class="co">#increased correlation</span></span>
+<span id="cb802-8"><a href="appendix-3-comparison-to-brysbaert.html#cb802-8" aria-hidden="true" tabindex="-1"></a><span class="co"># give number of simulations</span></span>
+<span id="cb802-9"><a href="appendix-3-comparison-to-brysbaert.html#cb802-9" aria-hidden="true" tabindex="-1"></a>nSim <span class="ot">=</span> nsims</span>
+<span id="cb802-10"><a href="appendix-3-comparison-to-brysbaert.html#cb802-10" aria-hidden="true" tabindex="-1"></a><span class="co"># give alpha levels</span></span>
+<span id="cb802-11"><a href="appendix-3-comparison-to-brysbaert.html#cb802-11" aria-hidden="true" tabindex="-1"></a>alpha1 <span class="ot">=</span> .<span class="dv">05</span> <span class="co">#alpha level for the omnibus ANOVA</span></span>
+<span id="cb802-12"><a href="appendix-3-comparison-to-brysbaert.html#cb802-12" aria-hidden="true" tabindex="-1"></a>alpha2 <span class="ot">=</span> .<span class="dv">05</span> <span class="co">#also adjusted from original by DL</span></span></code></pre></div>
+<div class="sourceCode" id="cb803"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb803-1"><a href="appendix-3-comparison-to-brysbaert.html#cb803-1" aria-hidden="true" tabindex="-1"></a><span class="co"># create vectors to store p-values</span></span>
+<span id="cb803-2"><a href="appendix-3-comparison-to-brysbaert.html#cb803-2" aria-hidden="true" tabindex="-1"></a>p1 <span class="ot">&lt;-</span> <span class="fu">numeric</span>(nSim) <span class="co">#p-value omnibus ANOVA</span></span>
+<span id="cb803-3"><a href="appendix-3-comparison-to-brysbaert.html#cb803-3" aria-hidden="true" tabindex="-1"></a>p2 <span class="ot">&lt;-</span> <span class="fu">numeric</span>(nSim) <span class="co">#p-value first post hoc test</span></span>
+<span id="cb803-4"><a href="appendix-3-comparison-to-brysbaert.html#cb803-4" aria-hidden="true" tabindex="-1"></a>p3 <span class="ot">&lt;-</span> <span class="fu">numeric</span>(nSim) <span class="co">#p-value second post hoc test</span></span>
+<span id="cb803-5"><a href="appendix-3-comparison-to-brysbaert.html#cb803-5" aria-hidden="true" tabindex="-1"></a>p4 <span class="ot">&lt;-</span> <span class="fu">numeric</span>(nSim) <span class="co">#p-value third post hoc test</span></span>
+<span id="cb803-6"><a href="appendix-3-comparison-to-brysbaert.html#cb803-6" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb803-7"><a href="appendix-3-comparison-to-brysbaert.html#cb803-7" aria-hidden="true" tabindex="-1"></a><span class="co"># define correlation matrix</span></span>
+<span id="cb803-8"><a href="appendix-3-comparison-to-brysbaert.html#cb803-8" aria-hidden="true" tabindex="-1"></a>rho <span class="ot">&lt;-</span> <span class="fu">cbind</span>(<span class="fu">c</span>(<span class="dv">1</span>, r, r), <span class="fu">c</span>(r, <span class="dv">1</span>, r), <span class="fu">c</span>(r, r, <span class="dv">1</span>))</span>
+<span id="cb803-9"><a href="appendix-3-comparison-to-brysbaert.html#cb803-9" aria-hidden="true" tabindex="-1"></a><span class="co"># define participant codes</span></span>
+<span id="cb803-10"><a href="appendix-3-comparison-to-brysbaert.html#cb803-10" aria-hidden="true" tabindex="-1"></a>part <span class="ot">&lt;-</span> <span class="fu">paste</span>(<span class="st">&quot;part&quot;</span>,<span class="fu">seq</span>(<span class="dv">1</span><span class="sc">:</span>N))</span>
+<span id="cb803-11"><a href="appendix-3-comparison-to-brysbaert.html#cb803-11" aria-hidden="true" tabindex="-1"></a><span class="cf">for</span> (i <span class="cf">in</span> <span class="dv">1</span><span class="sc">:</span>nSim) {</span>
+<span id="cb803-12"><a href="appendix-3-comparison-to-brysbaert.html#cb803-12" aria-hidden="true" tabindex="-1"></a>  </span>
+<span id="cb803-13"><a href="appendix-3-comparison-to-brysbaert.html#cb803-13" aria-hidden="true" tabindex="-1"></a>  <span class="co">#for each simulated experiment</span></span>
+<span id="cb803-14"><a href="appendix-3-comparison-to-brysbaert.html#cb803-14" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb803-15"><a href="appendix-3-comparison-to-brysbaert.html#cb803-15" aria-hidden="true" tabindex="-1"></a>  data <span class="ot">=</span> <span class="fu">mvrnorm</span>(<span class="at">n =</span> N,</span>
+<span id="cb803-16"><a href="appendix-3-comparison-to-brysbaert.html#cb803-16" aria-hidden="true" tabindex="-1"></a>  <span class="at">mu =</span> <span class="fu">c</span>(<span class="dv">0</span>, <span class="dv">0</span>, <span class="dv">0</span>),</span>
+<span id="cb803-17"><a href="appendix-3-comparison-to-brysbaert.html#cb803-17" aria-hidden="true" tabindex="-1"></a>  <span class="at">Sigma =</span> rho)</span>
+<span id="cb803-18"><a href="appendix-3-comparison-to-brysbaert.html#cb803-18" aria-hidden="true" tabindex="-1"></a>  data[, <span class="dv">2</span>] <span class="ot">=</span> data[, <span class="dv">2</span>] <span class="sc">+</span> d1</span>
+<span id="cb803-19"><a href="appendix-3-comparison-to-brysbaert.html#cb803-19" aria-hidden="true" tabindex="-1"></a>  data[, <span class="dv">3</span>] <span class="ot">=</span> data[, <span class="dv">3</span>] <span class="sc">+</span> d2</span>
+<span id="cb803-20"><a href="appendix-3-comparison-to-brysbaert.html#cb803-20" aria-hidden="true" tabindex="-1"></a>  datalong <span class="ot">=</span> <span class="fu">c</span>(data[, <span class="dv">1</span>], data[, <span class="dv">2</span>], data[, <span class="dv">3</span>])</span>
+<span id="cb803-21"><a href="appendix-3-comparison-to-brysbaert.html#cb803-21" aria-hidden="true" tabindex="-1"></a>  conds <span class="ot">=</span> <span class="fu">factor</span>(<span class="fu">rep</span>(letters[<span class="dv">24</span><span class="sc">:</span><span class="dv">26</span>], <span class="at">each =</span> N))</span>
+<span id="cb803-22"><a href="appendix-3-comparison-to-brysbaert.html#cb803-22" aria-hidden="true" tabindex="-1"></a>  partID <span class="ot">=</span> <span class="fu">factor</span>(<span class="fu">rep</span>(part, <span class="at">times =</span> <span class="dv">3</span>))</span>
+<span id="cb803-23"><a href="appendix-3-comparison-to-brysbaert.html#cb803-23" aria-hidden="true" tabindex="-1"></a>  output <span class="ot">&lt;-</span> <span class="fu">data.frame</span>(partID, conds, datalong)</span>
+<span id="cb803-24"><a href="appendix-3-comparison-to-brysbaert.html#cb803-24" aria-hidden="true" tabindex="-1"></a>  test <span class="ot">&lt;-</span> <span class="fu">aov</span>(datalong <span class="sc">~</span> conds <span class="sc">+</span> <span class="fu">Error</span>(partID <span class="sc">/</span> conds), </span>
+<span id="cb803-25"><a href="appendix-3-comparison-to-brysbaert.html#cb803-25" aria-hidden="true" tabindex="-1"></a>              <span class="at">data =</span> output)</span>
+<span id="cb803-26"><a href="appendix-3-comparison-to-brysbaert.html#cb803-26" aria-hidden="true" tabindex="-1"></a>  tests <span class="ot">&lt;-</span> (<span class="fu">summary</span>(test))</span>
+<span id="cb803-27"><a href="appendix-3-comparison-to-brysbaert.html#cb803-27" aria-hidden="true" tabindex="-1"></a>  p1[i] <span class="ot">&lt;-</span> tests<span class="sc">$</span><span class="st">&#39;Error: partID:conds&#39;</span>[[<span class="dv">1</span>]]<span class="sc">$</span><span class="st">&#39;Pr(&gt;F)&#39;</span>[[<span class="dv">1</span>]]</span>
+<span id="cb803-28"><a href="appendix-3-comparison-to-brysbaert.html#cb803-28" aria-hidden="true" tabindex="-1"></a>  p2[i] <span class="ot">&lt;-</span> <span class="fu">t.test</span>(data[, <span class="dv">1</span>], data[, <span class="dv">2</span>], <span class="at">paired =</span> <span class="cn">TRUE</span>)<span class="sc">$</span>p.value</span>
+<span id="cb803-29"><a href="appendix-3-comparison-to-brysbaert.html#cb803-29" aria-hidden="true" tabindex="-1"></a>  p3[i] <span class="ot">&lt;-</span> <span class="fu">t.test</span>(data[, <span class="dv">1</span>], data[, <span class="dv">3</span>], <span class="at">paired =</span> <span class="cn">TRUE</span>)<span class="sc">$</span>p.value</span>
+<span id="cb803-30"><a href="appendix-3-comparison-to-brysbaert.html#cb803-30" aria-hidden="true" tabindex="-1"></a>  p4[i] <span class="ot">&lt;-</span> <span class="fu">t.test</span>(data[, <span class="dv">2</span>], data[, <span class="dv">3</span>], <span class="at">paired =</span> <span class="cn">TRUE</span>)<span class="sc">$</span>p.value</span>
+<span id="cb803-31"><a href="appendix-3-comparison-to-brysbaert.html#cb803-31" aria-hidden="true" tabindex="-1"></a>}</span></code></pre></div>
+<div class="sourceCode" id="cb804"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb804-1"><a href="appendix-3-comparison-to-brysbaert.html#cb804-1" aria-hidden="true" tabindex="-1"></a><span class="fu">sum</span>(p1 <span class="sc">&lt;</span> alpha1) <span class="sc">/</span> nSim</span>
+<span id="cb804-2"><a href="appendix-3-comparison-to-brysbaert.html#cb804-2" aria-hidden="true" tabindex="-1"></a><span class="fu">sum</span>(p2 <span class="sc">&lt;</span> alpha2) <span class="sc">/</span> nSim</span>
+<span id="cb804-3"><a href="appendix-3-comparison-to-brysbaert.html#cb804-3" aria-hidden="true" tabindex="-1"></a><span class="fu">sum</span>(p3 <span class="sc">&lt;</span> alpha2) <span class="sc">/</span> nSim</span>
+<span id="cb804-4"><a href="appendix-3-comparison-to-brysbaert.html#cb804-4" aria-hidden="true" tabindex="-1"></a><span class="fu">sum</span>(p4 <span class="sc">&lt;</span> alpha2) <span class="sc">/</span> nSim</span></code></pre></div>
 <pre><code>## [1] 0.9479</code></pre>
 <pre><code>## [1] 0.9201</code></pre>
 <pre><code>## [1] 0.0494</code></pre>
 <pre><code>## [1] 0.9217</code></pre>
-<div class="sourceCode" id="cb774"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb774-1"><a href="appendix-3-comparison-to-brysbaert.html#cb774-1"></a>design &lt;-<span class="st"> &quot;3w&quot;</span></span>
-<span id="cb774-2"><a href="appendix-3-comparison-to-brysbaert.html#cb774-2"></a>n &lt;-<span class="st"> </span><span class="dv">75</span></span>
-<span id="cb774-3"><a href="appendix-3-comparison-to-brysbaert.html#cb774-3"></a>mu &lt;-<span class="st"> </span><span class="kw">c</span>(<span class="dv">0</span>, <span class="fl">0.4</span>, <span class="fl">0.4</span>)</span>
-<span id="cb774-4"><a href="appendix-3-comparison-to-brysbaert.html#cb774-4"></a>sd &lt;-<span class="st"> </span><span class="dv">1</span></span>
-<span id="cb774-5"><a href="appendix-3-comparison-to-brysbaert.html#cb774-5"></a>r &lt;-<span class="st"> </span><span class="fl">0.6</span></span>
-<span id="cb774-6"><a href="appendix-3-comparison-to-brysbaert.html#cb774-6"></a>labelnames &lt;-<span class="st"> </span><span class="kw">c</span>(<span class="st">&quot;SPEED&quot;</span>, </span>
-<span id="cb774-7"><a href="appendix-3-comparison-to-brysbaert.html#cb774-7"></a>                <span class="st">&quot;fast&quot;</span>, <span class="st">&quot;medium&quot;</span>, <span class="st">&quot;slow&quot;</span>)</span></code></pre></div>
+<div class="sourceCode" id="cb809"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb809-1"><a href="appendix-3-comparison-to-brysbaert.html#cb809-1" aria-hidden="true" tabindex="-1"></a>design <span class="ot">&lt;-</span> <span class="st">&quot;3w&quot;</span></span>
+<span id="cb809-2"><a href="appendix-3-comparison-to-brysbaert.html#cb809-2" aria-hidden="true" tabindex="-1"></a>n <span class="ot">&lt;-</span> <span class="dv">75</span></span>
+<span id="cb809-3"><a href="appendix-3-comparison-to-brysbaert.html#cb809-3" aria-hidden="true" tabindex="-1"></a>mu <span class="ot">&lt;-</span> <span class="fu">c</span>(<span class="dv">0</span>, <span class="fl">0.4</span>, <span class="fl">0.4</span>)</span>
+<span id="cb809-4"><a href="appendix-3-comparison-to-brysbaert.html#cb809-4" aria-hidden="true" tabindex="-1"></a>sd <span class="ot">&lt;-</span> <span class="dv">1</span></span>
+<span id="cb809-5"><a href="appendix-3-comparison-to-brysbaert.html#cb809-5" aria-hidden="true" tabindex="-1"></a>r <span class="ot">&lt;-</span> <span class="fl">0.6</span></span>
+<span id="cb809-6"><a href="appendix-3-comparison-to-brysbaert.html#cb809-6" aria-hidden="true" tabindex="-1"></a>labelnames <span class="ot">&lt;-</span> <span class="fu">c</span>(<span class="st">&quot;SPEED&quot;</span>, </span>
+<span id="cb809-7"><a href="appendix-3-comparison-to-brysbaert.html#cb809-7" aria-hidden="true" tabindex="-1"></a>                <span class="st">&quot;fast&quot;</span>, <span class="st">&quot;medium&quot;</span>, <span class="st">&quot;slow&quot;</span>)</span></code></pre></div>
 <p>We create the 3-level repeated measures design, and run the simulation.</p>
-<div class="sourceCode" id="cb775"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb775-1"><a href="appendix-3-comparison-to-brysbaert.html#cb775-1"></a>design_result &lt;-<span class="st"> </span><span class="kw">ANOVA_design</span>(<span class="dt">design =</span> design,</span>
-<span id="cb775-2"><a href="appendix-3-comparison-to-brysbaert.html#cb775-2"></a>                   <span class="dt">n =</span> n, </span>
-<span id="cb775-3"><a href="appendix-3-comparison-to-brysbaert.html#cb775-3"></a>                   <span class="dt">mu =</span> mu, </span>
-<span id="cb775-4"><a href="appendix-3-comparison-to-brysbaert.html#cb775-4"></a>                   <span class="dt">sd =</span> sd, </span>
-<span id="cb775-5"><a href="appendix-3-comparison-to-brysbaert.html#cb775-5"></a>                   <span class="dt">r =</span> r, </span>
-<span id="cb775-6"><a href="appendix-3-comparison-to-brysbaert.html#cb775-6"></a>                   <span class="dt">labelnames =</span> labelnames)</span></code></pre></div>
-<p><img src="SuperpowerValidation_files/figure-html/unnamed-chunk-350-1.png" width="672" /></p>
-<div class="sourceCode" id="cb776"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb776-1"><a href="appendix-3-comparison-to-brysbaert.html#cb776-1"></a>simulation_result &lt;-<span class="st"> </span><span class="kw">ANOVA_power</span>(design_result, </span>
-<span id="cb776-2"><a href="appendix-3-comparison-to-brysbaert.html#cb776-2"></a>                                 <span class="dt">alpha_level =</span> alpha_level, </span>
-<span id="cb776-3"><a href="appendix-3-comparison-to-brysbaert.html#cb776-3"></a>                                 <span class="dt">nsims =</span> nsims,</span>
-<span id="cb776-4"><a href="appendix-3-comparison-to-brysbaert.html#cb776-4"></a>                                 <span class="dt">verbose =</span> <span class="ot">FALSE</span>)</span></code></pre></div>
+<div class="sourceCode" id="cb810"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb810-1"><a href="appendix-3-comparison-to-brysbaert.html#cb810-1" aria-hidden="true" tabindex="-1"></a>design_result <span class="ot">&lt;-</span> <span class="fu">ANOVA_design</span>(<span class="at">design =</span> design,</span>
+<span id="cb810-2"><a href="appendix-3-comparison-to-brysbaert.html#cb810-2" aria-hidden="true" tabindex="-1"></a>                   <span class="at">n =</span> n, </span>
+<span id="cb810-3"><a href="appendix-3-comparison-to-brysbaert.html#cb810-3" aria-hidden="true" tabindex="-1"></a>                   <span class="at">mu =</span> mu, </span>
+<span id="cb810-4"><a href="appendix-3-comparison-to-brysbaert.html#cb810-4" aria-hidden="true" tabindex="-1"></a>                   <span class="at">sd =</span> sd, </span>
+<span id="cb810-5"><a href="appendix-3-comparison-to-brysbaert.html#cb810-5" aria-hidden="true" tabindex="-1"></a>                   <span class="at">r =</span> r, </span>
+<span id="cb810-6"><a href="appendix-3-comparison-to-brysbaert.html#cb810-6" aria-hidden="true" tabindex="-1"></a>                   <span class="at">labelnames =</span> labelnames)</span></code></pre></div>
+<p><img src="SuperpowerValidation_files/figure-html/unnamed-chunk-375-1.png" width="672" /></p>
+<div class="sourceCode" id="cb811"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb811-1"><a href="appendix-3-comparison-to-brysbaert.html#cb811-1" aria-hidden="true" tabindex="-1"></a>simulation_result <span class="ot">&lt;-</span> <span class="fu">ANOVA_power</span>(design_result, </span>
+<span id="cb811-2"><a href="appendix-3-comparison-to-brysbaert.html#cb811-2" aria-hidden="true" tabindex="-1"></a>                                 <span class="at">alpha_level =</span> alpha_level, </span>
+<span id="cb811-3"><a href="appendix-3-comparison-to-brysbaert.html#cb811-3" aria-hidden="true" tabindex="-1"></a>                                 <span class="at">nsims =</span> nsims,</span>
+<span id="cb811-4"><a href="appendix-3-comparison-to-brysbaert.html#cb811-4" aria-hidden="true" tabindex="-1"></a>                                 <span class="at">verbose =</span> <span class="cn">FALSE</span>)</span></code></pre></div>
 <table class="table" style="margin-left: auto; margin-right: auto;">
 <caption>
-<span id="tab:unnamed-chunk-352">Table 12.9: </span>Simulated ANOVA Result
+<span id="tab:unnamed-chunk-377">Table 13.9: </span>Simulated ANOVA Result
 </caption>
 <thead>
 <tr>
@@ -927,12 +968,12 @@ anova_SPEED
 </tr>
 </tbody>
 </table>
-<div class="sourceCode" id="cb777"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb777-1"><a href="appendix-3-comparison-to-brysbaert.html#cb777-1"></a>exact_result &lt;-<span class="st"> </span><span class="kw">ANOVA_exact</span>(design_result,</span>
-<span id="cb777-2"><a href="appendix-3-comparison-to-brysbaert.html#cb777-2"></a>                            <span class="dt">alpha_level =</span> alpha_level,</span>
-<span id="cb777-3"><a href="appendix-3-comparison-to-brysbaert.html#cb777-3"></a>                            <span class="dt">verbose =</span> <span class="ot">FALSE</span>)</span></code></pre></div>
+<div class="sourceCode" id="cb812"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb812-1"><a href="appendix-3-comparison-to-brysbaert.html#cb812-1" aria-hidden="true" tabindex="-1"></a>exact_result <span class="ot">&lt;-</span> <span class="fu">ANOVA_exact</span>(design_result,</span>
+<span id="cb812-2"><a href="appendix-3-comparison-to-brysbaert.html#cb812-2" aria-hidden="true" tabindex="-1"></a>                            <span class="at">alpha_level =</span> alpha_level,</span>
+<span id="cb812-3"><a href="appendix-3-comparison-to-brysbaert.html#cb812-3" aria-hidden="true" tabindex="-1"></a>                            <span class="at">verbose =</span> <span class="cn">FALSE</span>)</span></code></pre></div>
 <table class="table" style="margin-left: auto; margin-right: auto;">
 <caption>
-<span id="tab:unnamed-chunk-354">Table 12.10: </span>Exact ANOVA Result
+<span id="tab:unnamed-chunk-379">Table 13.10: </span>Exact ANOVA Result
 </caption>
 <thead>
 <tr>
@@ -976,12 +1017,6 @@ SPEED
 <p><img src="screenshots/gpower_4.png" /></p>
 
 </div>
-</div>
-</div>
-<h3>References</h3>
-<div id="refs" class="references">
-<div id="ref-brysbaert2019many">
-<p>Brysbaert, Marc. 2019. “How Many Participants Do We Have to Include in Properly Powered Experiments? A Tutorial of Power Analysis with Reference Tables.” <em>Journal of Cognition</em> 2 (1). <a href="http://doi.org/10.5334/joc.72">http://doi.org/10.5334/joc.72</a>.</p>
 </div>
 </div>
             </section>
