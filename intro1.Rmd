@@ -1,10 +1,11 @@
 
 # Introduction to Power Analysis
 
+In this first chapter we will introduce some basic concepts of power analysis. If you are already familiar with these concepts please feel free to move onto the next chapter where we discuss the specifics of how `Superpower` can used.
 
 ## Overview of Power Analysis
 
-The goal of null hypothesis significance testing (NHST) is to determine whether the null hypothesis ($H_0$) can be rejected. *Statistical power* is the probability of rejecting the null hypothesis when it is false. And a *power analysis* is a sample size planning procedure performed for a future *yet-to-be-conducted* study that will tell us how many observations are required to reject the null hypothesis with sufficiently high probability. 
+The goal of Neyman-Pearson hypothesis testing, often divisively labeled null hypothesis significance testing (NHST), is to determine whether the null hypothesis ($H_0$) can be rejected. *Statistical power* is the probability of rejecting the null hypothesis when it is false. And a *power analysis* is a sample size planning procedure performed for a future *yet-to-be-conducted* study that will tell us how many observations are required to reject the null hypothesis with sufficiently high probability. 
 
 For example, if you want to plan a study with 80% power, a power analysis will answer the question: 
 
@@ -28,7 +29,7 @@ Let's illustrate this with an example. Imagine we have conducted a literature re
 
 <!-- These parameters are fed to a `replicate()` function - the work horse of our simulation. This function performs `nsims` number of simulations, where in each simulation it draws `n` samples from two normal distributions where the true standardized mean difference is `d`. After doing this, it performs an independent groups *t* test on the two samples, and the *p* values for every *t* test is stored in a variable called `ps`. The `power` variable is computed by taking the sum of all simulations that yield *p* < .05 (i.e., which reject the null hypothesis), and this sum is divided by the total number of `nsims` performed. This final proportion is our estimated power for our given sample size per group, `n`. Finally, the function returns a matrix that pairs your inputted sample size `n` with the power of this sample size. We also include a nice plot to visualize how these computations are performed. Here is our function: -->
 
-```{r eval = TRUE, echo = FALSE}
+```{r eval = TRUE, echo = T}
 # Define our power analysis simulation function
 power_sim <- function(n, d, nsims, seed = TRUE, print_plot = TRUE){
   
