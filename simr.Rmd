@@ -1,5 +1,28 @@
 
 # Beyond Superpower I: Mixed Models with `simr`
 
-While the ANOVA is a flexible tool, there are many hypotheses that cannot be tested with an ANOVA. One of the most common situations is the introduction of "random" effects (i.e., mixed models), or the distribution of the dependent variable may not be "normal" (e.g., it may be a binary, 0 or 1, response).
+While the ANOVA is a flexible tool, there are many hypotheses that cannot be tested with an ANOVA. One of the most common situations is the introduction of "random" effects (i.e., mixed models), or the distribution of the dependent variable may not be "normal" (e.g., it may be a binary, 0 or 1, response). For these cases the `simr` R package can be very useful [@Green2016]. This is a flexible power analysis tool that can be used for linear mixed models *and* for generalized linear mixed models. Unfortunately, the documentation for this package, in the way of informative vignettes for new users, is sorely lacking. Therefore, we have added some basic information on how to perform power analyses from scratch using this package.
+
+## How does `simr` work?
+
+The `simr` package is quite elegant in its simplicity. Essentially, it builds a model using the `makeLmer` or `makeGlmer` functions and then simulates data (using `lme4` under-the-hood) to estimate the power of the model given the specified parameters. As a user all you have to do is specify the data and the variance components. So, the tricky part is that a user *must* have a dataset for the `simr` package to work with. However, this can be randomly generated data.
+
+For example, from the `simr` vignettes, we can imagine a study where a researcher has three levels for a random effect. For a basic scientist this could be different Petri dishes of cells/tissue, or, for a education researcher, this could be different schools. We then have a variable, "x", and we want to see our power to detect this effect on outcome "y". The data we need for `simr` could be generated with the following code.
+
+```{r}
+x <- rep(1:10)
+g <- c('a', 'b', 'c')
+
+X <- expand.grid(x=x, g=g)
+```
+
+```{r}
+b <- c(2, -0.1) # fixed intercept and slope
+V1 <- 0.5 # random intercept variance
+V2 <- matrix(c(0.5,0.05,0.05,0.1), 2) # random intercept and slope variance-covariance matrix
+s <- 1 # residual variance
+```
+
+
+
 

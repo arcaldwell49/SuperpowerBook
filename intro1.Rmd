@@ -47,17 +47,28 @@ if(seed == TRUE){set.seed(2)}
   
 # Visualize the results as a plot
   ps %>% 
-    as.data.frame() %>% 
+    as.data.frame() %>%
     ggplot(aes(x = .)) +
     geom_histogram(binwidth = 0.01) +
     scale_x_continuous(breaks = scales::pretty_breaks(n = 15)) +
-    geom_vline(xintercept = 0.05, linetype = "dashed", color = "red") +
+    geom_vline(xintercept = 0.05,
+               linetype = "dashed",
+               color = "red") +
     xlab(label = expression(italic(p) ~ "value")) +
     ylab(label = "Frequency") +
-    labs(caption = paste("Power =", power*100, "% \n",
-                         sum(ps < .05), "of", nsims, "simulations yield p < .05")) +
-    ggtitle(label = expr(paste("N = ", !!(n*2), 
-                               " (", n[1], " = ", !!n, "; ", n[2], " = ", !!n, ")"))) -> pl
+    labs(caption = paste(
+      "Power =",
+      power * 100,
+      "% \n",
+      sum(ps < .05),
+      "of",
+      nsims,
+      "simulations yield p < .05"
+    )) +
+    ggtitle(label = expr(paste(
+      "N = ",!!(n * 2),
+      " (", n[1], " = ",!!n, "; ", n[2], " = ",!!n, ")"
+    ))) -> pl
   
   # Print our plot
   if(print_plot == TRUE){print(pl)}
@@ -105,41 +116,49 @@ Power analysis is essential before embarking on any research study. As we will d
 
 ## Error and Power
 
-Null hypothesis significance testing (NHST) is associated with two kinds of errors that we must account for in power analysis. These are:
+In this Neyman-Pearson framework there are two kinds of errors that we must account for when desiging an experimental study. These are:
 
 1. Type I Error: rejecting the null hypothesis when it is true (also known as false positives or $\alpha$).
 
 2. Type II Error: failing to reject the null hypothesis when it is true (also known as false negatives or $\beta$).
 
-Recall that power is the probability of rejecting the null hypothesis when it is false. This corresponds to $1-\beta$. Power will depend crucially on sample size, effect size, and the Type I and Type II error rates that you are willing to accept. All other things being equal, a highly powered study will reduce both Type I and Type II error. For this reason, the statistical results of high power studies are more trustworthy and we are more likely to draw correct inferences from our data. 
+Recall that power is the probability of rejecting the null hypothesis when it is false. This corresponds to $1-\beta$. Power will depend crucially on sample size, effect size, and the Type I error rates that you are willing to accept.
 
 The typical power analysis parameters in psychology are as follows:
 
 * $\beta = .20$
 
-    * This means we are willing to make a Type II error 20% of the time.
+    * This means we are willing to make a Type II error 20% of the time (i.e., 80% power).
 
 * $\alpha = .05$
 
-    * This means we are willing to make a Type I error only 5% of the time.
+    * This means we are willing to make a Type I error only 5% of the time (i.e., significance < .05.
 
 * $1-\beta = .80$: 
 
-    * This means we want to be able to correctly reject the null hypothesis when it is false at least 80% of the time. 
+    * This means we want to be able to correctly reject the null hypothesis, with a effect size *at least as large* as hypothesized, when it is false at least 80% of the time. 
 
 The values of each of these parameters reflect our relative concerns regarding the cost of Type I and Type II errors. That is, we regard Type I errors as *four times* more serious than making a Type II error:
 
 $$\frac{\beta}{\alpha} = \frac{.20}{.05} = 4$$
+This may not always be the case and we may want to design a study where the errors are balanced:
+
+
+$$\frac{\beta}{\alpha} = \frac{.05}{.05} = 1$$
+
+And other times we may be willing to increase our Type I error rate slightly in order to reduce the Type II error rate. For example, we may raise our Type I error rate slightly in order to reduce the ratio of errors.
+
+$$\frac{\beta}{\alpha} = \frac{.15}{.075} = 2$$
 
 ## Effect size
 
-For any given $\alpha$ level, the power of a test will increase as the effect size increases. An effect size is a measure of the magnitude of some phenomenon. This might include a measure of the difference between two groups (e.g., the mean), the strength of association between variables (e.g., *r*: the Pearson's correlation coefficient), or the linear relationship between a dependent variable and one or more predictors (e.g., *b*: the regression coefficient). 
+For any given $\alpha$ level, the power of a test will increase as the effect size increases. An effect size is a measure of the magnitude of some phenomenon. This might include a measure of the difference between two groups (e.g., the mean), the strength of association between variables (e.g., *r*: the Pearson's correlation coefficient), or the linear relationship between a dependent variable and one or more predictors (e.g., *b*: the unstandardized regression coefficient). 
 
 A very common way to quantify effect size in psychological science is Cohen's *d*. This quantity represents the standardized difference between two means. It is computed as: 
 
 $$d = \frac{M_1-M_2}{SD_{pool}}$$
 
-Where $M_1$ is the mean of group one, $M_2$ is the mean of group two, and $SD_{pool}$ is the pooled standard deviation of group one and two. Cohen's *d* is sometimes given descriptive labels of small, moderate, and large that correspond to 0.2, 0.5, and 0.8, respectively. However, these descriptives can differ across different sub-fields of psychology. Some additional common effect sizes alongside their descriptive magnitudes are given in the following table: 
+Where $M_1$ is the mean of group one, $M_2$ is the mean of group two, and $SD_{pool}$ is the pooled standard deviation of group one and two. Cohen's *d* is sometimes given descriptive labels of small, moderate, and large that correspond to 0.2, 0.5, and 0.8, respectively. However, these descriptives can differ across different measurements. We would strongly advocate against using these "default" interpretation scales and instead understand your phenomena/measurements well enough to understand when an effect is meaningful [@Caldwell2020]. Some additional common effect sizes alongside their descriptive magnitudes are given in the following table: 
 
 ```{r echo = F}
 tibble::tribble(
@@ -151,14 +170,16 @@ tibble::tribble(
   ) %>% 
   mutate(Effect = c("*d*", "*r*", "*f*", "$\\eta^2$")) %>% 
   knitr::kable(escape = FALSE) %>% 
-  kableExtra::kable_styling(bootstrap_options = "striped", full_width = T, position = "left")
+  kableExtra::kable_styling(bootstrap_options = "striped", 
+                            full_width = T, 
+                            position = "left")
 ```
 
-## Sample effect size vs. population effect size {#samp_vs_pop}
+## Sample effect size vs. population effect size {##samp_vs_pop}
 
-When we run a study what we are doing is collecting a sample of the total population. It follows that any effect sizes computed on the sample data are an __*estimate of the true population effect size*__. This is an important consideration to keep in mind when performing power analyses. 
+When we run a study what we are doing is collecting a sample of the total population. It follows that any effect sizes computed on the sample data are an __*estimate of the true population effect size*__. This is an important consideration to keep in mind when performing power analyses. As @albers2018power demonstrate, researchers are very likely to miss out on interesting effects when studies are powered to detect previously observed effect sizes.
 
-To make this clear, imagine two groups with a known population standardized mean difference of $Cohen's \ \delta = 0.5$. (We use the greek symbol $\delta$ to refer to the population effect size, and the lower case $d$ to refer to the sample effect size). Now imagine that we have take a random sample of 20 measurements from each of these groups. We can simulate this in R using `rnorm()`:
+To make this clear, imagine two groups with a known population standardized mean difference of $Cohen's \ \delta = 0.5$. (We use the Greek symbol $\delta$ to refer to the population effect size, and the lower case $d$ to refer to the sample effect size). Now imagine that we have take a random sample of 20 measurements from each of these groups. We can simulate this in R using `rnorm()`:
 
 ```{r, out.width = '100%'}
 # Set random seed for reproducibility
@@ -174,7 +195,9 @@ data.frame(group_1, group_2) %>%
     names_to = "group", 
     values_to = "dv", 
     cols = everything()) %>% 
-  GGally::ggpairs(ggplot2::aes(colour = group), lower = list(combo = wrap(ggally_facethist, binwidth = 0.5)))
+  GGally::ggpairs(ggplot2::aes(colour = group), 
+                  lower = list(combo = wrap(ggally_facethist, 
+                                            binwidth = 0.5)))
 ```
 
 The above plot visualizes Group 1 (red) and Group 2 (teal) from left to right as: (1) counts, (2) box plots, (3) rotated histograms, and (4) density distributions. We can see clearly that the mean of Group 1 is greater than Group 2. 
@@ -221,15 +244,15 @@ d_ci %>%
   labs(caption = "Note: Error bar = 95% CI")
 ```
 
-So what do these results tell us? Although we know with certainty that the population effect size is a Cohen's $\delta$ of 0.5, our sample effect size is *d* = 0.62. Furthermore, the wide confidence interval on *d* means that our sample effect size is associated with considerable uncertainty. All values in the confidence interval are plausible values for the true population effect size. Indeed, in this unusal situation where we know the population effect size with certainty, we can see that the confidence interval on the sample effect size actually captures the true value (although, this will not always be the case).
+So what do these results tell us? Although we know with certainty that the population effect size is a Cohen's $\delta$ of 0.5, our sample effect size is *d* = 0.62. Furthermore, the wide confidence interval on *d* means that our sample effect size has considerable uncertainty. All values in the confidence interval can be considered plausible values for the true population effect size. Indeed, in this unusual situation where we know the population effect size with certainty, we can see that the confidence interval on the sample effect size actually captures the true value (this will not always be the case).
 
-The important take-home message for power analysis is that we want to use __*population effect size*__ and __*not the sample effect size*__ as our effect size input. When we identify sample effect sizes in the literature (which may be through individual studies, meta-analysis, or when appropriate, through internal pilot studies) we must be mindful that the sample effect size may not be equal to the true population effect size. If we were to use the sample effect size in the above example (*d* = 0.62) as our estimate of the population effect size in a power analysis, this would have resulted in much less power than we desired. This is because the sample effect size has __*overestimated*__ the true population effect size. Uncertainty in the population effect size is captured by the 95% CI on the sample effect size. It is wise to take this into consideration when choosing the correct effect size input for a power analysis. 
+The important take-home message for power analysis is that we want to use __*population effect size*__ and __*not the sample effect size*__ as our effect size input. When we identify sample effect sizes in the literature (which may be through individual studies, meta-analysis, or when appropriate, through internal pilot studies) we must be mindful that the sample effect size may not be equal to the true population effect size. If we were to use the sample effect size in the above example (*d* = 0.62) as our estimate of the population effect size in a power analysis, this would have resulted in much less power than we desired. The sample effect size has __*overestimated*__ the true population effect size. Uncertainty in the population effect size is captured by the 95% CI on the sample effect size. It is wise to take this into consideration when using previously reported effect sizes for a power analysis. 
 
 ## Safeguard Effect Size
 
-Our estimate of the population effect size is an educated guess based on the best information available to us. It's accuracy can have critical implications for the sample size required to attain a certain level of power. For this reason, researchers should routinely consider varying their effect size estimate and assessing the impact this has on their power analysis. If we are using sample effect sizes reported in the literature to estimate the population effect size, one excellent recommendation is to formally consider the uncertainty of sample effect sizes. That is, take into account the 95% CI on these reported effects. 
+Our estimate of the population effect size is an educated guess based on the best information available to us (much like the written hypotheses we have for a study). It's accuracy can have critical implications for the sample size required to attain a certain level of power. For this reason, researchers should routinely consider varying their effect size estimate and assessing the impact this has on their power analysis. If we are using sample effect sizes reported in the literature to estimate the population effect size, one excellent recommendation is to formally consider the uncertainty of sample effect sizes. That is, take into account the 95% CI on these reported effects. 
 
-Consider once again the data reported in the [previous section](#samp_vs_pop). If you skipped ahead, we simulated a study where the true population effect size was Cohen's $\delta$ = 0.5. However, we obtained a sample estimate of this effect size as Cohen's *d* = 0.62 in a sample of *N* = 40 observations. Were we to use *d* = 0.62 as our power analysis input, this would result in much less power than anticipated to detect an effect size of $\delta$ = 0.5. So what should we do?
+Consider once again the data reported in the previous section. If you skipped ahead, we simulated a study where the true population effect size was Cohen's $\delta$ = 0.5. However, we obtained a sample estimate of this effect size as Cohen's *d* = 0.62 in a sample of *N* = 40 observations. Were we to use *d* = 0.62 as our power analysis input, this would result in much less power than anticipated to detect an effect size of $\delta$ = 0.5. So what should we do?
 
 @Perugini2014 suggest we take into account the uncertainty of the sample effect size. To do so, they suggest for the researcher to compute the lower absolute limit of a 60% CI on the sample effect. This value would then be used as a __*safeguard effect size*__ and inputted into a power analysis.  Why 60%? Well, the lower limit of a 60% CI corresponds to a one-sided 80% CI. As @Perugini2014 describe, this implies a 20% risk that that the true population effect size is lower than this limit, and correspondingly, 80% assurance that the population effect size is equal to or greater than this limit. We focus on the lower boundary because of the asymmetry of overestimating compared to underestimating the population effect size in a power analysis. 
 
@@ -243,7 +266,7 @@ Using our sample Cohen's *d* = 0.62 in a sample of *N* = 40, the lower absolute 
 
 ## *Post hoc* power analysis
 
-*Post hoc* power analysis is useless.
+All authors of this book are in agreement: *post hoc* power analysis is useless. Many statisticians have made this abundantly clear [@gelman2019don; @Althouse2021].
 
 Sometimes editors or reviewers of manuscripts will insist that an author perform a post-experiment power calculation in order to interpret non-significant findings. These *post hoc* or *observed* power calculations are requested on the basis of explaining the observed data rather than planning some future experiment. These analyses are intended to answer the question: *"On the basis of my observed effect size, did I have enough power to reject my null hypothesis?"*. To avoid needless suspense, the answer is always: no. 
 
@@ -312,7 +335,7 @@ Using only the obtained *p* value and test degrees of freedom we obtain a *post 
 In general, the power of a test yielding exactly *p* = .05 will be around 50% (and inches ever closer to exactly 50% as degrees of freedom approaches infinity). If *p* < .05, power (in general) will be less than 50%. To demonstrate, let's test this with our function using degrees of freedom from five to infinity against *p* values of .05, .10, and .20:
 
 ```{r}
-v = list(5:500, Inf)
+v = list(seq(20,200,20), Inf)
 map_df(v, ~ data.frame(., 
                        power(p_val = .05, deg_f = ., alpha = .05), 
                        power(p_val = 0.10, deg_f = ., alpha = .05),
@@ -322,7 +345,9 @@ map_df(v, ~ data.frame(.,
                  "Power ($p$ = .10)", 
                  "Power ($p$ = .20)")) %>% 
   knitr::kable(escape = FALSE) %>% 
-  kableExtra::kable_styling(bootstrap_options = "striped", full_width = T, position = "left")
+  kableExtra::kable_styling(bootstrap_options = "striped", 
+                            full_width = T, 
+                            position = "left")
 ```
 
 As we can see, whenever a test is non-significant (as it was in our example) the power will usually be less than 50%. Therefore, whenever you are motivated to perform a *post hoc* power analysis to explain a non-significant result, it is an empty question of whether *post hoc* power is high. The answer, as we alluded to earlier, is always *no*. In our simulated dataset we already knew that *p* > .05, so of course this must mean we had low power. Otherwise we would not have obtained *p* > .05! *Post hoc* power is a mere transformation of the *p* value and provides us with no new information than that we already knew. 
