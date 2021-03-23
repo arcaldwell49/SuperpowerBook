@@ -274,15 +274,15 @@ We will discuss two reasons why *post hoc* power analyses are a problematic prac
 
 ### The sample effect size is *not* the population effect size
 
-As discussed at length in [previous sections](#samp_vs_pop), the sample effect size is __*not*__ the population effect size. For this simple reason alone, any *post hoc* power calculation will be an inaccurate estimate of the true power of an experiment. To illustrate, consider once more our simulated dataset. If you skipped ahead, we simulated random sample of *N* = 40 from two populations ($n_1$ = 20, $n_2$ = 20) where the true population effect size was Cohen's $\delta$ = 0.5. However, based on random sampling alone, we obtained a sample effect size of Cohen's *d* = 0.62. 
+As discussed at length in [previous sections](#samp_vs_pop), the sample effect size is __*not*__ the population effect size. For this simple reason alone, any *post hoc* power calculation will be an inaccurate estimate of the true power of an experiment. To illustrate, consider once more our simulated data set. If you skipped ahead, we simulated random sample of *N* = 40 from two populations ($n_1$ = 20, $n_2$ = 20) where the true population effect size was Cohen's $\delta$ = 0.5. However, based on random sampling alone, we obtained a sample effect size of Cohen's *d* = 0.62. 
 
-If we perform a *t* test on these data, we will find that the data are compatible with the null hypothesis of no difference. That is, *p* > .05. This is exactly the kind of scenario targetted by proponents of *post hoc* power analysis. Let's perform the test:
+If we perform a *t*-test on these data, we will find that the data are compatible with the null hypothesis of no difference. That is, *p* > .05. This is exactly the kind of scenario targeted by proponents of *post hoc* power analysis. Let's perform the test:
 
 ```{r}
 t.test(x = group_1, y = group_2, var.equal = TRUE)
 ```
 
-We obtain *p* = .057. Now let's compute a *post hoc* power calculation on the sample effect size. As will be explained in later sections, we can compute different kinds of power analyses by omitting a single parameter in a power function. Here, we omitt `power` and ask `pwr::pwr.t.test()` to estimate `power` on the basis of *n* = 20 per group (total *N* = 40) using *d* = 0.62 and $\alpha$ = .05 (two-sided):
+We obtain *p* = .057. Now let's compute a *post hoc* power calculation on the sample effect size. As will be explained in later sections, we can compute different kinds of power analyses by omitting a single parameter in a power function. Here, we omit `power` and ask `pwr::pwr.t.test()` to estimate `power` on the basis of *n* = 20 per group (total *N* = 40) using *d* = 0.62 and $\alpha$ = .05 (two-sided):
 
 ```{r}
 # Remind ourselves of the value of Cohen's d for these data:
@@ -332,7 +332,7 @@ power(p_val = 0.05707, deg_f = 38, alpha = .05)
 
 Using only the obtained *p* value and test degrees of freedom we obtain a *post hoc* power of 48%. This is identical to our power analysis based on the observed effect size (with error due to rounding of our *p* value). We could do this with any combination of obtained *p* value and degrees of freedom, and obtain exactly the result of a *post hoc* power analysis.
 
-In general, the power of a test yielding exactly *p* = .05 will be around 50% (and inches ever closer to exactly 50% as degrees of freedom approaches infinity). If *p* < .05, power (in general) will be less than 50%. To demonstrate, let's test this with our function using degrees of freedom from five to infinity against *p* values of .05, .10, and .20:
+In general, the power of a test yielding exactly *p* = .05 will be around 50% (and inches ever closer to exactly 50% as degrees of freedom approaches infinity). If *p* > .05, power (in general) will be less than 50%. To demonstrate, let's test this with our function using degrees of freedom from five to infinity against *p* values of .05, .10, and .20:
 
 ```{r}
 v = list(seq(20,200,20), Inf)
@@ -352,14 +352,14 @@ map_df(v, ~ data.frame(.,
 
 As we can see, whenever a test is non-significant (as it was in our example) the power will usually be less than 50%. Therefore, whenever you are motivated to perform a *post hoc* power analysis to explain a non-significant result, it is an empty question of whether *post hoc* power is high. The answer, as we alluded to earlier, is always *no*. In our simulated dataset we already knew that *p* > .05, so of course this must mean we had low power. Otherwise we would not have obtained *p* > .05! *Post hoc* power is a mere transformation of the *p* value and provides us with no new information than that we already knew. 
 
-Power calculations are useful for design. They are not useful for the analysis of data. Keep this in mind when performing your own power analyses, or attempting to explain non-significant results. 
+Power calculations are useful for designing experiments and planning studies. They are not useful once the data is collected and the final analyses have been completed. Keep this in mind when performing your own power analyses, or attempting to explain non-significant results. 
 
 
 ## The Minimal Detectable Effect Size
 
 In an ideal world all studies would proceed with sample sizes that give sufficient power to detect population effects. However, we operate within a world of limited resources, and there are often times where researchers are unable to increase sample sizes to attain a specific power. If an experiment is performed in this context, rather than calculating something like *post hoc* power, it is much more informative to compute the smallest effect size that could be detected in a study of this particular sample size. This requires fixing the $\alpha$ level and sample size, and computing the critical test statistic for the proposed (or conducted) statistical analysis. 
 
-We will once again draw on the simulated dataset we introduced [above](#samp_vs_pop). This dataset was generated by drawing a random sample of *N* = 40 from two populations ($n_1$ = 20, $n_2$ = 20) where the true population effect size was Cohen's $\delta$ = 0.5. However, the obtained sample effect size was Cohen's *d* = 0.62. Furthermore, using an independent groups *t* test ($\alpha$ = .05; two-sided) we found that this effect was non-significant (*p* = .057). Let's compute what minimum *t* value was necessary to attain statistical significance. This is the critical *t* value, which can be computed with the `qt()` function in R:
+We will once again draw on the simulated dataset we introduced [above](#samp_vs_pop). This dataset was generated by drawing a random sample of *N* = 40 from two populations ($n_1$ = 20, $n_2$ = 20) where the true population effect size was Cohen's $\delta$ = 0.5. However, the obtained sample effect size was Cohen's *d* = 0.62. Furthermore, using an independent groups *t*-test ($\alpha$ = .05; two-sided) we found that this effect was non-significant (*p* = .057). Let's compute what minimum *t* value was necessary to attain statistical significance. This is the critical *t* value, which can be computed with the `qt()` function in R:
 
 ```{r}
 n1 = length(group_1)
@@ -371,7 +371,7 @@ deg_f = n1 + n2 - 2
 
 The critical *t* value for our test is 2.024. This means that any obtained *t* statistic lower than this value will yield a statistically non-significant result (i.e., *p* > .05). Our *t* statistic was 1.96, so it is unsurprising that our result was non-significant. 
 
-There is an algebraic solution to converting an obtained independent groups *t* statistic to a Cohen's *d* value:
+There is an algebraic solution to converting an obtained independent groups *t* statistic (two sample *t*-test) to a Cohen's *d* value:
 
 $$d = t* \sqrt{\frac{1}{n_1} + \frac{1}{n_2}}$$
 
@@ -392,7 +392,7 @@ n2 = length(group_2)
 t_val * sqrt((1/n1 + 1/n2))
 ```
 
-*D* = 0.62. Magic. We can take advantage of this formula and, instead of inputting the obtained *t* statistic, we can input the critical *t* statistic for a study of this size. In doing so, we will obtain a critical *d* value:
+*d* = 0.62. Magic. We can take advantage of this formula and, instead of inputting the obtained *t* statistic, we can input the critical *t* statistic for a study of this size. In doing so, we will obtain a critical *d* value:
 
 ```{r}
 # Remind ourselves of what t_crit is
@@ -404,7 +404,6 @@ t_crit * sqrt((1/n1 + 1/n2))
 
 In a study of this size the critical *d* value is 0.64. This means that any obtained *d* statistic lower or equal to this value will yield a non-significant result (i.e., *p* > .05). As we obtained *d* = 0.62 as our sample effect size, it is unsurprising that our result is non-significant. The critical *d* value of 0.64 is the minimal detectable effect size in a study of this size. 
 
-What does this all mean? Well, if a researcher believes that the true population effect size is less than 0.62 (perhaps, $\delta$ = 0.5), they should be unsurprised if they find a non-significant finding in *N* = 40. The minimum effect size they could have hoped to have detected was *d* = 0.66. The non-significant result is explained by the fact that a study of this sample size cannot detect effect sizes below the critical *d* value. 
-
+What does this all mean? Well, if a researcher believes that the true population effect size is less than 0.62 (perhaps, $\delta$ = 0.5), they should be un-surprised if they find a non-significant finding in *N* = 40. The minimum effect size they could have hoped to have detected was *d* = 0.66. The non-significant result is explained by the fact that a study of this sample size cannot detect effect sizes below the critical *d* value. In later chapters we will discuss how to use `Superpower` to address these issues using tools such as the `plot_power` function and the `morey_plot` functions.
 
 

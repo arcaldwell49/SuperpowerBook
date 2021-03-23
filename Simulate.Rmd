@@ -1,8 +1,8 @@
 # Beyond Superpower II: Custom Simulations
 
-Sometimes it may be better just to simulate your planned study. If your study has peculiar features that current software does not support custom simulation may be your only possible solution. This approach is nice because it is flexible and you customize it as much as you are willing to code. The downside is that the process will be more time consuming and it is possible to introduce errors in your code.
+Sometimes it may be better just to simulate your planned study. If your study has peculiar features that current software does not support custom simulation may be your only possible solution. This approach is flexible and you can customize it as much as you are willing to code. The downside is that the process will be more time consuming and it is possible to introduce errors in your code.
 
-In this chapter, we will provide a few vignettes on how to implement simulation-based power analyses for a variety of outcomes and designs. Overall, all you need for these simulations is an accurate data generating process and the ability to repeat that process many times (preferably a few thousand iterations).
+In this chapter, we will provide a few vignettes on how to implement simulation-based power analyses for a variety of outcomes and designs. Overall, all you need for these simulations is an accurate data generating process and the ability to repeat that process many times (preferably a few thousand iterations). This is the same process that `Superpower` performs under-the-hood when you are running simulations with `ANOVA_power`. The ability to write your own simulations and data generating mechanisms is a powerful tool that allows you to test your analyses, and assumptions about those analyses, prior to any data being collected.
 
 ## A Clincal Trial with a Binary Outcome
 
@@ -10,7 +10,7 @@ This section was inspired by a Twitter [thread](https://twitter.com/ADAlthousePh
 
 In this section we will use `simstudy` as a way to pseudo-replicate the results from Dr. Althouse. This will serve as a simple introduce to simulating experimental designs and how this can be utilized for power analysis purposes. All the code here will be "functional" which means we will define new functions that will generate the data. This way you can run multiple variations on your simulation with only a few more lines of code (rather than copy and pasting the whole simulation again and again).
 
-**R Packages** 
+**R Packages**
 
 For this simulation I will try to restrict my use of packages to as few as possible. To simulate the data again I will need the `simstudy` package and I will also `tidyverse` set of packages to make the code "tidy". In addition, I will need the
 
@@ -29,7 +29,7 @@ According to Dr. Althouse's documentation he was trying to simulate the followin
 -   Patients receiving treatment 1 will have a 40% probability of death
 -   Patients receiving treatment 2 will have a 30% probability of death
 -   Analysis will be performed using a logistic regression model
--   We will run 1000 simulated RCT's and report the odds ratio, 95% confidence interval, and p-value for each simulated trial
+-   We will run 100 simulated RCT's and report the odds ratio, 95% confidence interval, and p-value for each simulated trial
 -   The "true" treatment effect for a treatment that reduces probability of outcome from 40% to 30% is about OR = 0.642
 -   The power of a trial with N=1000 patients and exactly 1:1 allocation under these assumptions is about 91-92%
 
@@ -180,3 +180,105 @@ Now, we have the new results in only 4 lines of code! Based on those results we 
 ### Conclusions on the Binary RCT Analysis
 
 In this section we have demonstrated how to create 2 R functions that 1) generate data and 2) generate a simulation based power analysis. Simulation is not necessary for a simple analysis such as this where analytic solutions exist in programs like `GPower` or `Superpower`. However, as we will detail in the next sections, simulation becomes *very* useful when the design becomes complicated (or when we want to violate the assumptions of the models we use).
+
+## Binary RCT with a Interim Analysis
+
+Now we can move onto a more complicated, but very useful, RCT design that involves analyzing the data at multiple sample sizes. The process of looking at the data early (i.e., before the full sample size is collected) is called a "interim" analysis, but is sometimes called a "sequential" analysis as well [@Lakens2014; @Lakens2021]. Regardless of what the process is called the goal is the same: more efficient study designs. There is an obvious advantage of including interim analyses is the ability to stop a study early. Therefore the sample size is lower and you can save resources. Why don't we do this for every study? Well, adjusting for the multiple looks at the data can be difficult, and if we do not adjust for the multiple possible stopping points the Type I error rate will be inflated (e.g., an alpha of 0.05 can be inflated to \~0.35 with unlimited looks at the data).
+
+### Proposed Study and Approach
+
+The approach mostly remains the same as the previous example but we have to account for a interim analysis.
+
+-   This code will mimic a 2-group parallel-arm randomized trial using 1:1 allocation of patients to treatment 1 versus treatment 2 with a maximum sample size of 1000 patients.
+-   For this example, we will use a binary outcome of "death"
+-   Patients receiving treatment 1 will have a 40% probability of death
+-   Patients receiving treatment 2 will have a 30% probability of death
+-   Analysis will be performed using a logistic regression model
+-   We will run 100 simulated RCT's and report the odds ratio, 95% confidence interval, and p-value for each simulated trial
+-   The "true" treatment effect for a treatment that reduces probability of outcome from 40% to 30% is about OR = 0.642
+-   There will be a interim analysis at 50% of the total sample size
+-   The alpha level will be adjusted with a O'Brien-Fleming correction (alpha spending function).
+
+Now, for this simulation we will need 1 more R package: \`rpact\`. This is a *very* useful package if you are interested in sequential analyses.
+
+```{r}
+library(rpact)
+# here is where you put the maximum number of analyses
+nLooks <- 3 
+# Here is where you list the information fraction (% of total N)
+## (e.g. here 50%, 75% and 100% information)
+analyses_scheduled <- (c(0.50, 0.75, 1))
+efficacy_thresholds <- numeric(nLooks)
+
+# Set up design in rpact
+design <- getDesignGroupSequential(sided = 1,
+                                   alpha = 0.05,
+                                   informationRates = analyses_scheduled,
+                                   typeOfDesign = "asOF")
+for(j in 1:nLooks){
+  efficacy_thresholds[j] = design$stageLevels[j]
+}
+```
+
+```{r}
+pwr_bidat2 = function(props, N,
+                      interim_n = c(500,750,1000),
+                      reps = 100,
+                      alpha = efficacy_thresholds,
+                      conf.level = .95){
+  
+  res = data.frame(N = rep(NA,reps),
+                   alpha = rep(NA,reps),
+                   success = rep(NA,reps),
+                   p.value = rep(NA,reps),
+                   estimate = rep(NA,reps))
+  
+for(i in 1:reps){
+  dat = gen_bidat(props, N = N) # Generate full data set
+  stop_trial = FALSE
+  # Run loop for each potential stopping point
+  for(j in 1:length(interim_n)){
+    val = interim_n[j]
+    alpha_j = alpha[j]
+    if(stop_trial != TRUE){
+      # Get interim data points
+      dat_i = dat[1:val,]
+      # Build model
+      mod_i = glm(y ~ trt,
+                  data = dat_i,
+                  family = binomial(link = "logit"))
+      
+      sum_i = summary(mod_i)$coefficients[2,]
+      
+      # Determine if the trial can stop
+      if(sum_i[4] < alpha_j){
+        stop_trial = TRUE
+        alpha_f = alpha_j
+        n_f = val
+      }
+    }
+  }
+  if(stop_trial == FALSE){
+    n_f = val
+    alpha_f = alpha_j
+  }
+  #print(n_f)
+  res$N[i] = n_f
+  res$alpha[i] = alpha_f
+  res$success[i] = stop_trial
+  res$p.value[i] = sum_i[4]
+  res$estimate[i] = sum_i[1]
+}
+  simspow = res %>%
+    summarize(
+      med_est = median(estimate),
+      power = mean(p.value < alpha),
+      # Calculate confidence intervals
+      power.lci = prop.test(sum(p.value < alpha), reps)$conf.int[1],
+      power.uci = prop.test(sum(p.value < alpha), reps)$conf.int[2]
+    )
+  
+  return(list(sims = res,
+              power_tab = simspow))
+}
+```
