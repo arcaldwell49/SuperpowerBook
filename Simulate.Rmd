@@ -196,10 +196,12 @@ The approach mostly remains the same as the previous example but we have to acco
 -   Analysis will be performed using a logistic regression model
 -   We will run 100 simulated RCT's and report the odds ratio, 95% confidence interval, and p-value for each simulated trial
 -   The "true" treatment effect for a treatment that reduces probability of outcome from 40% to 30% is about OR = 0.642
--   There will be a interim analysis at 50% of the total sample size
+-   There will be a total of 3 analyses at 50%, 75%, and 100% of the sample size.
 -   The alpha level will be adjusted with a O'Brien-Fleming correction (alpha spending function).
 
 Now, for this simulation we will need 1 more R package: \`rpact\`. This is a *very* useful package if you are interested in sequential analyses.
+
+To properly plan the study we have to define the number of looks at the data (`nLooks`), when these analyses would be scheduled as proportion of the total sample size (`analyses_scheduled`), and we can create an empty vector for the what the adjusted alpha should be (`efficacy_thresholds`).
 
 ```{r}
 library(rpact)
@@ -209,9 +211,15 @@ nLooks <- 3
 ## (e.g. here 50%, 75% and 100% information)
 analyses_scheduled <- (c(0.50, 0.75, 1))
 efficacy_thresholds <- numeric(nLooks)
+```
 
+Now, we setup the analysis procedure using the `getDesignGroupSequential` function from `rpact`. Notice that we set the if the hypothesis test is one or two sided (`sided = 2` for a two sided hypothesis in this case), and the overall alpha level is set with `alpha` argument. We then supply when the analyses will take place with the `informationRates` argument, and the type of correction to the alpha level for each interim analysis is set with `typeofDesign`. Since we want a O'Brien-Fleming correction we set it to `typeOfDesign = "asOF"`.
+
+Once the design is created we can extract it with a simple for loop for the number of analyses to extract the alpha level for each interim analysis.
+
+```{r}
 # Set up design in rpact
-design <- getDesignGroupSequential(sided = 1,
+design <- getDesignGroupSequential(sided = 2,
                                    alpha = 0.05,
                                    informationRates = analyses_scheduled,
                                    typeOfDesign = "asOF")
@@ -220,21 +228,25 @@ for(j in 1:nLooks){
 }
 ```
 
+Now we can create our own function again. We'll call it `pwr_bidat2`. Essentially this does the same thing as the function in the last example. However, it takes three looks at the data when there are 500, 750, and 1000 patients. So a for loop will split up the sample and add interim analyses at these points. The loop will stop for each repetition of the simulation when either the observed *p*-value is less than the corrected alpha or when the total sample size is reached. Those results are then counted and save in the `res_tab` portion of the function's output. 
+
 ```{r}
 pwr_bidat2 = function(props, N,
                       interim_n = c(500,750,1000),
                       reps = 100,
                       alpha = efficacy_thresholds,
                       conf.level = .95){
-  
+  #Create empty data frame for the 
   res = data.frame(N = rep(NA,reps),
                    alpha = rep(NA,reps),
                    success = rep(NA,reps),
                    p.value = rep(NA,reps),
                    estimate = rep(NA,reps))
-  
+
+# For loop for each repitition of the  simulation  
 for(i in 1:reps){
-  dat = gen_bidat(props, N = N) # Generate full data set
+  # Generate full data set
+  dat = gen_bidat(props, N = N) 
   stop_trial = FALSE
   # Run loop for each potential stopping point
   for(j in 1:length(interim_n)){
