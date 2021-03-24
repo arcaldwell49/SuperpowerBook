@@ -14,7 +14,7 @@ In this section we will use `simstudy` as a way to pseudo-replicate the results 
 
 For this simulation I will try to restrict my use of packages to as few as possible. To simulate the data again I will need the `simstudy` package and I will also `tidyverse` set of packages to make the code "tidy". In addition, I will need the
 
-```{r}
+```{r warning=FALSE, message=FALSE}
 library(simstudy)
 library(tidyverse)
 library(data.table)
@@ -203,7 +203,7 @@ Now, for this simulation we will need 1 more R package: \`rpact\`. This is a *ve
 
 To properly plan the study we have to define the number of looks at the data (`nLooks`), when these analyses would be scheduled as proportion of the total sample size (`analyses_scheduled`), and we can create an empty vector for the what the adjusted alpha should be (`efficacy_thresholds`).
 
-```{r}
+```{r warning=FALSE, message=FALSE}
 library(rpact)
 # here is where you put the maximum number of analyses
 nLooks <- 3 
@@ -236,51 +236,59 @@ pwr_bidat2 = function(props, N,
                       reps = 100,
                       alpha = efficacy_thresholds,
                       conf.level = .95){
-  #Create empty data frame for the 
+  #Create empty data frame for the results of each repetition 
   res = data.frame(N = rep(NA,reps),
                    alpha = rep(NA,reps),
                    success = rep(NA,reps),
+                   stop = rep(NA,reps),
                    p.value = rep(NA,reps),
                    estimate = rep(NA,reps))
-
-# For loop for each repitition of the  simulation  
-for(i in 1:reps){
-  # Generate full data set
-  dat = gen_bidat(props, N = N) 
-  stop_trial = FALSE
-  # Run loop for each potential stopping point
-  for(j in 1:length(interim_n)){
-    val = interim_n[j]
-    alpha_j = alpha[j]
-    if(stop_trial != TRUE){
-      # Get interim data points
-      dat_i = dat[1:val,]
-      # Build model
-      mod_i = glm(y ~ trt,
-                  data = dat_i,
-                  family = binomial(link = "logit"))
-      
-      sum_i = summary(mod_i)$coefficients[2,]
-      
-      # Determine if the trial can stop
-      if(sum_i[4] < alpha_j){
-        stop_trial = TRUE
-        alpha_f = alpha_j
-        n_f = val
+  
+  # For loop for each repitition of the  simulation  
+  for(i in 1:reps){
+    # Generate full data set
+    dat = gen_bidat(props, N = N) 
+    # Set logical indicator for stopping the trial
+    stop_trial = FALSE
+    # Run loop for each potential stopping point
+    for(j in 1:length(interim_n)){
+      # Set current N and alpha level
+      val = interim_n[j]
+      alpha_j = alpha[j]
+      # Only continue analysis if stopping criteria not met
+      if(stop_trial != TRUE){
+        # Get interim data points
+        dat_i = dat[1:val,]
+        # Build model
+        mod_i = glm(y ~ trt,
+                    data = dat_i,
+                    family = binomial(link = "logit"))
+        # Get results from the model
+        sum_i = summary(mod_i)$coefficients[2,]
+        
+        # Determine if the trial can stop
+        if(sum_i[4] < alpha_j){
+          stop_trial = TRUE
+          alpha_f = alpha_j
+          n_f = val
+        }
       }
     }
+    
+    # Get final alpha and N if no "success" at final N
+    if(stop_trial == FALSE){
+      n_f = val
+      alpha_f = alpha_j
+    }
+    # Store results from this repetition
+    res$N[i] = n_f
+    res$alpha[i] = alpha_f
+    res$success[i] = stop_trial
+    res$stop[i] = ifelse(stop_trial,n_f,"fail")
+    res$p.value[i] = sum_i[4]
+    res$estimate[i] = sum_i[1]
   }
-  if(stop_trial == FALSE){
-    n_f = val
-    alpha_f = alpha_j
-  }
-  #print(n_f)
-  res$N[i] = n_f
-  res$alpha[i] = alpha_f
-  res$success[i] = stop_trial
-  res$p.value[i] = sum_i[4]
-  res$estimate[i] = sum_i[1]
-}
+  # Create summary of results
   simspow = res %>%
     summarize(
       med_est = median(estimate),
@@ -290,7 +298,61 @@ for(i in 1:reps){
       power.uci = prop.test(sum(p.value < alpha), reps)$conf.int[2]
     )
   
+  stoppow = res %>%
+    group_by(stop) %>%
+    summarize(
+      prop = n()/reps,
+      prop.lci = prop.test(n(), reps)$conf.int[1],
+      prop.uci = prop.test(n(), reps)$conf.int[2],
+      mean.est = mean(estimate),
+      .groups = 'drop'
+    )
+  
+  
   return(list(sims = res,
-              power_tab = simspow))
+              power_tab = simspow,
+              stop_tab = stoppow))
 }
 ```
+
+Now, we can actually perform the simulation and with the same parameters from the last example.
+
+```{r}
+set.seed(20210324)
+test = pwr_bidat2(props = c(.3,.4),
+                  N = 1000)
+knitr::kable(test$power_tab,
+             caption = "Power for Interim Analysis Design")
+
+```
+
+As we can see from the summary table above, the overall statistical power is slightly reduced (at least with 100 simulations). Below, we can plot the proportion of results that are below the corrected alpha level at 1000, 750, and 500 patients (as well as the proportion where there was a failure to find a significant result). 
+
+```{r}
+test$stop_tab %>%
+  mutate(stop = factor(stop,
+                       levels = c("fail", "500","750","1000"))) %>%
+  ggplot(aes(x = stop, color = stop, y = prop)) +
+  geom_point(size=2) +
+  geom_errorbar(aes(ymin = prop.lci,
+                    ymax = prop.uci)) + 
+  coord_flip()
+```
+
+So how often can we expect the trial to end early? Well, according to this simulation we can expect the trial, under these conditions and stopping criteria, to end at N = 500 approximately 30% of the time and N = 750 about 35% of the time. So we have a very high chance of being able to save resources by using interim analyses. Note, that the confidence intervals are awfully wide from these simulations so we want to be re-run the simulation with a higher number of repetitions. 
+
+Another thing to point out is the effect size estimate. We can also plot the effect of treatment at every possible stopping point of the study.
+
+```{r}
+test$stop_tab %>%
+  mutate(stop = factor(stop,
+                       levels = c("fail", "500","750","1000"))) %>%
+  ggplot(aes(x = stop, color = stop, y = mean.est)) +
+  geom_point(size = 2) 
+```
+
+We can see that the effect size estimate, log-odds, are inflated when the study is stopped early (roughly double the average effect size at N=500). This is one of the disadvantages of early stopping: inflated effect size estimates. What is the reason for this peculiar pattern? In order to obtain a significant result at an early stopping point the observed effect size must be quite large. Therefore, interim analyses are selecting for very large effect sizes in order to stop the study early.
+
+## Conclusion on a Binary RCT with Interim Analyses
+
+As we have documented, planning for interim analyses can be implemented with a few modifications to our existing code from the previous example. For this example we switched to a for loop to make it easier to perform the interim analyses and record the stopping point (and the relevant statistics at the stopping point). The appropriate stopping criteria (i.e., the adjusted alpha level) can be obtained from specialized R packages like `rpact`.
