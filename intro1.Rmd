@@ -35,13 +35,17 @@ power_sim <- function(n, d, nsims, seed = TRUE, print_plot = TRUE){
   
 if(seed == TRUE){set.seed(2)}
   
-# For sample size `n`, we want to perform `nsims` number of simulations of our experiment using effect size `d`
+# For sample size `n`, we want to perform `nsims`
+## number of simulations of our experiment using effect size `d`
   replicate(n = nsims, exp = {
     x1 = rnorm(n, d, 1)
     x2 = rnorm(n, 0, 1)
     t.test(x = x1, y = x2, var.equal = TRUE)$p.value}) -> ps
 
-# Power for a given `n` is the long-run probability of rejecting the null hypothesis when it is true. In our simulation, it is the sum of all  `nsims` simulations of our study that yield p < .05 divided by the number of `nsims` performed. 
+# Power for a given `n` is the long-run probability
+## of rejecting the null hypothesis when it is true. 
+# In our simulation, it is the sum of all  `nsims` simulations 
+## of our study that yield p < .05 divided by the number of `nsims` performed. 
   power = sum(ps < .05) / nsims
   result = cbind(n, power)
   
@@ -288,7 +292,9 @@ We obtain *p* = .057. Now let's compute a *post hoc* power calculation on the sa
 # Remind ourselves of the value of Cohen's d for these data:
 (d)
 
-# Perform the post hoc power analysis by excluding `power`. Note: `n` refers to sample size 'per group':
+# Perform the post hoc power analysis
+## by excluding `power`. 
+## Note: `n` refers to sample size 'per group':
 pwr::pwr.t.test(n = 20, d = d, sig.level = 0.05)
 ```
 
@@ -388,7 +394,8 @@ result = t.test(x = group_1, y = group_2, var.equal = TRUE)
 n1 = length(group_1)
 n2 = length(group_2)
 
-# Compute Cohen's d from the t statistic and sample sizes alone
+# Compute Cohen's d from the t statistic 
+## and sample sizes alone
 t_val * sqrt((1/n1 + 1/n2))
 ```
 

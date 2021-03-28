@@ -104,7 +104,7 @@
 % title / author / date
 \title{Power Analysis with Superpower}
 \author{Aaron R. Caldwell, Daniël Lakens, Chelsea M. Parlett-Pelleriti, and Guy Prochilo}
-\date{2021-03-22}
+\date{2021-03-24}
 
 \usepackage{booktabs}
 \usepackage{longtable}
@@ -531,9 +531,9 @@ We will discuss two reasons why \emph{post hoc} power analyses are a problematic
 \hypertarget{the-sample-effect-size-is-not-the-population-effect-size}{%
 \subsection{\texorpdfstring{The sample effect size is \emph{not} the population effect size}{The sample effect size is not the population effect size}}\label{the-sample-effect-size-is-not-the-population-effect-size}}
 
-As discussed at length in \protect\hyperlink{samp_vs_pop}{previous sections}, the sample effect size is \textbf{\emph{not}} the population effect size. For this simple reason alone, any \emph{post hoc} power calculation will be an inaccurate estimate of the true power of an experiment. To illustrate, consider once more our simulated dataset. If you skipped ahead, we simulated random sample of \emph{N} = 40 from two populations (\(n_1\) = 20, \(n_2\) = 20) where the true population effect size was Cohen's \(\delta\) = 0.5. However, based on random sampling alone, we obtained a sample effect size of Cohen's \emph{d} = 0.62.
+As discussed at length in \protect\hyperlink{samp_vs_pop}{previous sections}, the sample effect size is \textbf{\emph{not}} the population effect size. For this simple reason alone, any \emph{post hoc} power calculation will be an inaccurate estimate of the true power of an experiment. To illustrate, consider once more our simulated data set. If you skipped ahead, we simulated random sample of \emph{N} = 40 from two populations (\(n_1\) = 20, \(n_2\) = 20) where the true population effect size was Cohen's \(\delta\) = 0.5. However, based on random sampling alone, we obtained a sample effect size of Cohen's \emph{d} = 0.62.
 
-If we perform a \emph{t} test on these data, we will find that the data are compatible with the null hypothesis of no difference. That is, \emph{p} \textgreater{} .05. This is exactly the kind of scenario targetted by proponents of \emph{post hoc} power analysis. Let's perform the test:
+If we perform a \emph{t}-test on these data, we will find that the data are compatible with the null hypothesis of no difference. That is, \emph{p} \textgreater{} .05. This is exactly the kind of scenario targeted by proponents of \emph{post hoc} power analysis. Let's perform the test:
 
 \begin{Shaded}
 \begin{Highlighting}[]
@@ -555,7 +555,7 @@ If we perform a \emph{t} test on these data, we will find that the data are comp
 ##  0.6954610335 -0.0002817572
 \end{verbatim}
 
-We obtain \emph{p} = .057. Now let's compute a \emph{post hoc} power calculation on the sample effect size. As will be explained in later sections, we can compute different kinds of power analyses by omitting a single parameter in a power function. Here, we omitt \texttt{power} and ask \texttt{pwr::pwr.t.test()} to estimate \texttt{power} on the basis of \emph{n} = 20 per group (total \emph{N} = 40) using \emph{d} = 0.62 and \(\alpha\) = .05 (two-sided):
+We obtain \emph{p} = .057. Now let's compute a \emph{post hoc} power calculation on the sample effect size. As will be explained in later sections, we can compute different kinds of power analyses by omitting a single parameter in a power function. Here, we omit \texttt{power} and ask \texttt{pwr::pwr.t.test()} to estimate \texttt{power} on the basis of \emph{n} = 20 per group (total \emph{N} = 40) using \emph{d} = 0.62 and \(\alpha\) = .05 (two-sided):
 
 \begin{Shaded}
 \begin{Highlighting}[]
@@ -652,7 +652,7 @@ Let's apply this function to our obtained \emph{p} value and associated degrees 
 
 Using only the obtained \emph{p} value and test degrees of freedom we obtain a \emph{post hoc} power of 48\%. This is identical to our power analysis based on the observed effect size (with error due to rounding of our \emph{p} value). We could do this with any combination of obtained \emph{p} value and degrees of freedom, and obtain exactly the result of a \emph{post hoc} power analysis.
 
-In general, the power of a test yielding exactly \emph{p} = .05 will be around 50\% (and inches ever closer to exactly 50\% as degrees of freedom approaches infinity). If \emph{p} \textless{} .05, power (in general) will be less than 50\%. To demonstrate, let's test this with our function using degrees of freedom from five to infinity against \emph{p} values of .05, .10, and .20:
+In general, the power of a test yielding exactly \emph{p} = .05 will be around 50\% (and inches ever closer to exactly 50\% as degrees of freedom approaches infinity). If \emph{p} \textgreater{} .05, power (in general) will be less than 50\%. To demonstrate, let's test this with our function using degrees of freedom from five to infinity against \emph{p} values of .05, .10, and .20:
 
 \begin{Shaded}
 \begin{Highlighting}[]
@@ -702,14 +702,14 @@ Inf & 0.5000443 & 0.3764951 & 0.2493496\\
 
 As we can see, whenever a test is non-significant (as it was in our example) the power will usually be less than 50\%. Therefore, whenever you are motivated to perform a \emph{post hoc} power analysis to explain a non-significant result, it is an empty question of whether \emph{post hoc} power is high. The answer, as we alluded to earlier, is always \emph{no}. In our simulated dataset we already knew that \emph{p} \textgreater{} .05, so of course this must mean we had low power. Otherwise we would not have obtained \emph{p} \textgreater{} .05! \emph{Post hoc} power is a mere transformation of the \emph{p} value and provides us with no new information than that we already knew.
 
-Power calculations are useful for design. They are not useful for the analysis of data. Keep this in mind when performing your own power analyses, or attempting to explain non-significant results.
+Power calculations are useful for designing experiments and planning studies. They are not useful once the data is collected and the final analyses have been completed. Keep this in mind when performing your own power analyses, or attempting to explain non-significant results.
 
 \hypertarget{the-minimal-detectable-effect-size}{%
 \section{The Minimal Detectable Effect Size}\label{the-minimal-detectable-effect-size}}
 
 In an ideal world all studies would proceed with sample sizes that give sufficient power to detect population effects. However, we operate within a world of limited resources, and there are often times where researchers are unable to increase sample sizes to attain a specific power. If an experiment is performed in this context, rather than calculating something like \emph{post hoc} power, it is much more informative to compute the smallest effect size that could be detected in a study of this particular sample size. This requires fixing the \(\alpha\) level and sample size, and computing the critical test statistic for the proposed (or conducted) statistical analysis.
 
-We will once again draw on the simulated dataset we introduced \protect\hyperlink{samp_vs_pop}{above}. This dataset was generated by drawing a random sample of \emph{N} = 40 from two populations (\(n_1\) = 20, \(n_2\) = 20) where the true population effect size was Cohen's \(\delta\) = 0.5. However, the obtained sample effect size was Cohen's \emph{d} = 0.62. Furthermore, using an independent groups \emph{t} test (\(\alpha\) = .05; two-sided) we found that this effect was non-significant (\emph{p} = .057). Let's compute what minimum \emph{t} value was necessary to attain statistical significance. This is the critical \emph{t} value, which can be computed with the \texttt{qt()} function in R:
+We will once again draw on the simulated dataset we introduced \protect\hyperlink{samp_vs_pop}{above}. This dataset was generated by drawing a random sample of \emph{N} = 40 from two populations (\(n_1\) = 20, \(n_2\) = 20) where the true population effect size was Cohen's \(\delta\) = 0.5. However, the obtained sample effect size was Cohen's \emph{d} = 0.62. Furthermore, using an independent groups \emph{t}-test (\(\alpha\) = .05; two-sided) we found that this effect was non-significant (\emph{p} = .057). Let's compute what minimum \emph{t} value was necessary to attain statistical significance. This is the critical \emph{t} value, which can be computed with the \texttt{qt()} function in R:
 
 \begin{Shaded}
 \begin{Highlighting}[]
@@ -727,7 +727,7 @@ We will once again draw on the simulated dataset we introduced \protect\hyperlin
 
 The critical \emph{t} value for our test is 2.024. This means that any obtained \emph{t} statistic lower than this value will yield a statistically non-significant result (i.e., \emph{p} \textgreater{} .05). Our \emph{t} statistic was 1.96, so it is unsurprising that our result was non-significant.
 
-There is an algebraic solution to converting an obtained independent groups \emph{t} statistic to a Cohen's \emph{d} value:
+There is an algebraic solution to converting an obtained independent groups \emph{t} statistic (two sample \emph{t}-test) to a Cohen's \emph{d} value:
 
 \[d = t* \sqrt{\frac{1}{n_1} + \frac{1}{n_2}}\]
 
@@ -762,7 +762,7 @@ Here, \emph{t} is the obtained \emph{t} statistic from an independent groups \em
 ## [1] 0.6205506
 \end{verbatim}
 
-\emph{D} = 0.62. Magic. We can take advantage of this formula and, instead of inputting the obtained \emph{t} statistic, we can input the critical \emph{t} statistic for a study of this size. In doing so, we will obtain a critical \emph{d} value:
+\emph{d} = 0.62. Magic. We can take advantage of this formula and, instead of inputting the obtained \emph{t} statistic, we can input the critical \emph{t} statistic for a study of this size. In doing so, we will obtain a critical \emph{d} value:
 
 \begin{Shaded}
 \begin{Highlighting}[]
@@ -788,7 +788,7 @@ Here, \emph{t} is the obtained \emph{t} statistic from an independent groups \em
 
 In a study of this size the critical \emph{d} value is 0.64. This means that any obtained \emph{d} statistic lower or equal to this value will yield a non-significant result (i.e., \emph{p} \textgreater{} .05). As we obtained \emph{d} = 0.62 as our sample effect size, it is unsurprising that our result is non-significant. The critical \emph{d} value of 0.64 is the minimal detectable effect size in a study of this size.
 
-What does this all mean? Well, if a researcher believes that the true population effect size is less than 0.62 (perhaps, \(\delta\) = 0.5), they should be unsurprised if they find a non-significant finding in \emph{N} = 40. The minimum effect size they could have hoped to have detected was \emph{d} = 0.66. The non-significant result is explained by the fact that a study of this sample size cannot detect effect sizes below the critical \emph{d} value.
+What does this all mean? Well, if a researcher believes that the true population effect size is less than 0.62 (perhaps, \(\delta\) = 0.5), they should be un-surprised if they find a non-significant finding in \emph{N} = 40. The minimum effect size they could have hoped to have detected was \emph{d} = 0.66. The non-significant result is explained by the fact that a study of this sample size cannot detect effect sizes below the critical \emph{d} value. In later chapters we will discuss how to use \texttt{Superpower} to address these issues using tools such as the \texttt{plot\_power} function and the \texttt{morey\_plot} functions.
 
 \hypertarget{the-experimental-design}{%
 \chapter{The Experimental Design}\label{the-experimental-design}}
@@ -8893,28 +8893,98 @@ For example, from the \texttt{simr} vignettes, we can imagine a study where a re
 
 \begin{Shaded}
 \begin{Highlighting}[]
+\KeywordTok{library}\NormalTok{(simr)}
+\CommentTok{# Some covariate that we have measured at 10 different levels}
 \NormalTok{x <-}\StringTok{ }\KeywordTok{rep}\NormalTok{(}\DecValTok{1}\OperatorTok{:}\DecValTok{10}\NormalTok{)}
+\CommentTok{# Three random grouping variables }
+\CommentTok{# (e.g., Petri dishes)}
 \NormalTok{g <-}\StringTok{ }\KeywordTok{c}\NormalTok{(}\StringTok{'a'}\NormalTok{, }\StringTok{'b'}\NormalTok{, }\StringTok{'c'}\NormalTok{)}
 
+\CommentTok{# Comine into 1 dataset}
 \NormalTok{X <-}\StringTok{ }\KeywordTok{expand.grid}\NormalTok{(}\DataTypeTok{x=}\NormalTok{x, }\DataTypeTok{g=}\NormalTok{g)}
+\end{Highlighting}
+\end{Shaded}
+
+Now we can define our model a little bit further by assigned the fixed and random effects. For this model we need to provide 2 slope coefficients, and the random intercept variance.
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\CommentTok{# fixed intercept and slope for the model}
+\NormalTok{b <-}\StringTok{ }\KeywordTok{c}\NormalTok{(}\DecValTok{2}\NormalTok{, }\FloatTok{-0.1}\NormalTok{) }
+\CommentTok{# random intercept *variance*}
+\NormalTok{V1 <-}\StringTok{ }\FloatTok{0.5} 
+
+\CommentTok{# residual variance}
+\NormalTok{s <-}\StringTok{ }\DecValTok{1} 
+\end{Highlighting}
+\end{Shaded}
+
+We then need to build a mixed model using the \texttt{makeLmer} function. In this case we define a new outcome variable (\texttt{y}) then assign a fixed effect for \texttt{x}, and provide the random effect structure as random intercept only (\texttt{(1\textbar{}g)}). The other model information we created above is also passed onto this function. We can print the model information to verify that the details are correct.
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\NormalTok{model1 <-}\StringTok{ }\KeywordTok{makeLmer}\NormalTok{(y }\OperatorTok{~}\StringTok{ }\NormalTok{x }\OperatorTok{+}\StringTok{ }\NormalTok{(}\DecValTok{1}\OperatorTok{|}\NormalTok{g),}
+                   \DataTypeTok{fixef=}\NormalTok{b, }
+                   \DataTypeTok{VarCorr=}\NormalTok{V1, }
+                   \DataTypeTok{sigma=}\NormalTok{s, }
+                   \DataTypeTok{data=}\NormalTok{X)}
+\KeywordTok{print}\NormalTok{(model1)}
+\end{Highlighting}
+\end{Shaded}
+
+\begin{verbatim}
+## Linear mixed model fit by REML ['lmerMod']
+## Formula: y ~ x + (1 | g)
+##    Data: X
+## REML criterion at convergence: 82.8826
+## Random effects:
+##  Groups   Name        Std.Dev.
+##  g        (Intercept) 0.7071  
+##  Residual             1.0000  
+## Number of obs: 30, groups:  g, 3
+## Fixed Effects:
+## (Intercept)            x  
+##         2.0         -0.1
+\end{verbatim}
+
+Now we can pass this information onto the \texttt{powerSim} function for a power analysis. Please note that the total number of observations and data structure (3 levels for the random effect) will be the same in these simulations.
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\NormalTok{sim1 =}\StringTok{ }\KeywordTok{powerSim}\NormalTok{(model1, }
+                \DataTypeTok{nsim=}\DecValTok{20}\NormalTok{, }
+                \DataTypeTok{progress=}\OtherTok{FALSE}\NormalTok{)}
 \end{Highlighting}
 \end{Shaded}
 
 \begin{Shaded}
 \begin{Highlighting}[]
-\NormalTok{b <-}\StringTok{ }\KeywordTok{c}\NormalTok{(}\DecValTok{2}\NormalTok{, }\FloatTok{-0.1}\NormalTok{) }\CommentTok{# fixed intercept and slope}
-\NormalTok{V1 <-}\StringTok{ }\FloatTok{0.5} \CommentTok{# random intercept variance}
-\NormalTok{V2 <-}\StringTok{ }\KeywordTok{matrix}\NormalTok{(}\KeywordTok{c}\NormalTok{(}\FloatTok{0.5}\NormalTok{,}\FloatTok{0.05}\NormalTok{,}\FloatTok{0.05}\NormalTok{,}\FloatTok{0.1}\NormalTok{), }\DecValTok{2}\NormalTok{) }\CommentTok{# random intercept and slope variance-covariance matrix}
-\NormalTok{s <-}\StringTok{ }\DecValTok{1} \CommentTok{# residual variance}
+\NormalTok{sim1}
 \end{Highlighting}
 \end{Shaded}
+
+\begin{verbatim}
+## Power for predictor 'x', (95% confidence interval):
+##       40.00% (19.12, 63.95)
+## 
+## Test: Kenward Roger (package pbkrtest)
+##       Effect size for x is -0.10
+## 
+## Based on 20 simulations, (0 warnings, 0 errors)
+## alpha = 0.05, nrow = 30
+## 
+## Time elapsed: 0 h 0 m 2 s
+\end{verbatim}
+
+\hypertarget{to-be-continued}{%
+\section{To Be Continued\ldots{}}\label{to-be-continued}}
 
 \hypertarget{beyond-superpower-ii-custom-simulations}{%
 \chapter{Beyond Superpower II: Custom Simulations}\label{beyond-superpower-ii-custom-simulations}}
 
-Sometimes it may be better just to simulate your planned study. If your study has peculiar features that current software does not support custom simulation may be your only possible solution. This approach is nice because it is flexible and you customize it as much as you are willing to code. The downside is that the process will be more time consuming and it is possible to introduce errors in your code.
+Sometimes it may be better just to simulate your planned study. If your study has peculiar features that current software does not support custom simulation may be your only possible solution. This approach is flexible and you can customize it as much as you are willing to code. The downside is that the process will be more time consuming and it is possible to introduce errors in your code.
 
-In this chapter, we will provide a few vignettes on how to implement simulation-based power analyses for a variety of outcomes and designs. Overall, all you need for these simulations is an accurate data generating process and the ability to repeat that process many times (preferably a few thousand iterations).
+In this chapter, we will provide a few vignettes on how to implement simulation-based power analyses for a variety of outcomes and designs. Overall, all you need for these simulations is an accurate data generating process and the ability to repeat that process many times (preferably a few thousand iterations). This is the same process that \texttt{Superpower} performs under-the-hood when you are running simulations with \texttt{ANOVA\_power}. The ability to write your own simulations and data generating mechanisms is a powerful tool that allows you to test your analyses, and assumptions about those analyses, prior to any data being collected.
 
 \hypertarget{a-clincal-trial-with-a-binary-outcome}{%
 \section{A Clincal Trial with a Binary Outcome}\label{a-clincal-trial-with-a-binary-outcome}}
@@ -8935,29 +9005,6 @@ For this simulation I will try to restrict my use of packages to as few as possi
 \end{Highlighting}
 \end{Shaded}
 
-\begin{verbatim}
-## 
-## Attaching package: 'data.table'
-\end{verbatim}
-
-\begin{verbatim}
-## The following objects are masked from 'package:dplyr':
-## 
-##     between, first, last
-\end{verbatim}
-
-\begin{verbatim}
-## The following object is masked from 'package:purrr':
-## 
-##     transpose
-\end{verbatim}
-
-\begin{verbatim}
-## The following objects are masked from 'package:reshape2':
-## 
-##     dcast, melt
-\end{verbatim}
-
 \hypertarget{proposed-study-and-approach}{%
 \subsection{Proposed Study and Approach}\label{proposed-study-and-approach}}
 
@@ -8976,7 +9023,7 @@ According to Dr.~Althouse's documentation he was trying to simulate the followin
 \item
   Analysis will be performed using a logistic regression model
 \item
-  We will run 1000 simulated RCT's and report the odds ratio, 95\% confidence interval, and p-value for each simulated trial
+  We will run 100 simulated RCT's and report the odds ratio, 95\% confidence interval, and p-value for each simulated trial
 \item
   The ``true'' treatment effect for a treatment that reduces probability of outcome from 40\% to 30\% is about OR = 0.642
 \item
@@ -9047,16 +9094,16 @@ This is part looks more complex than it is. All we are doing is making a functio
 
 \begin{verbatim}
 ##     id y trt
-##  1:  1 0   0
-##  2:  2 1   0
-##  3:  3 0   1
+##  1:  1 0   1
+##  2:  2 1   1
+##  3:  3 0   0
 ##  4:  4 0   1
-##  5:  5 0   1
-##  6:  6 0   1
-##  7:  7 0   0
-##  8:  8 0   1
-##  9:  9 0   0
-## 10: 10 0   0
+##  5:  5 1   0
+##  6:  6 0   0
+##  7:  7 1   0
+##  8:  8 0   0
+##  9:  9 0   1
+## 10: 10 0   1
 \end{verbatim}
 
 In some cases the function above is enough. We may just want to generate a data set reflective of study we have designed. We can then ``play'' with the data set to plan analyses for future study. However, that is not what we are after today and we will move onto the power analysis.
@@ -9131,7 +9178,7 @@ Now that we have the results we can create a table as output using the \texttt{k
 
 \begin{table}
 
-\caption{\label{tab:unnamed-chunk-313}Result from Power Simulation}
+\caption{\label{tab:unnamed-chunk-316}Result from Power Simulation}
 \centering
 \begin{tabular}[t]{l|r|r|r|r}
 \hline
@@ -9166,7 +9213,7 @@ All I have to do is use the same function I have created above but change the ar
 
 \begin{table}
 
-\caption{\label{tab:unnamed-chunk-314}Another Study of Binary Outcomes}
+\caption{\label{tab:unnamed-chunk-317}Another Study of Binary Outcomes}
 \centering
 \begin{tabular}[t]{l|r|r|r|r}
 \hline
@@ -9185,6 +9232,225 @@ Now, we have the new results in only 4 lines of code! Based on those results we 
 \subsection{Conclusions on the Binary RCT Analysis}\label{conclusions-on-the-binary-rct-analysis}}
 
 In this section we have demonstrated how to create 2 R functions that 1) generate data and 2) generate a simulation based power analysis. Simulation is not necessary for a simple analysis such as this where analytic solutions exist in programs like \texttt{GPower} or \texttt{Superpower}. However, as we will detail in the next sections, simulation becomes \emph{very} useful when the design becomes complicated (or when we want to violate the assumptions of the models we use).
+
+\hypertarget{binary-rct-with-a-interim-analysis}{%
+\section{Binary RCT with a Interim Analysis}\label{binary-rct-with-a-interim-analysis}}
+
+Now we can move onto a more complicated, but very useful, RCT design that involves analyzing the data at multiple sample sizes. The process of looking at the data early (i.e., before the full sample size is collected) is called a ``interim'' analysis, but is sometimes called a ``sequential'' analysis as well (Lakens \protect\hyperlink{ref-Lakens2014}{2014}; Lakens, Pahlke, and Wassmer \protect\hyperlink{ref-Lakens2021}{2021}). Regardless of what the process is called the goal is the same: more efficient study designs. There is an obvious advantage of including interim analyses is the ability to stop a study early. Therefore the sample size is lower and you can save resources. Why don't we do this for every study? Well, adjusting for the multiple looks at the data can be difficult, and if we do not adjust for the multiple possible stopping points the Type I error rate will be inflated (e.g., an alpha of 0.05 can be inflated to \textasciitilde0.35 with unlimited looks at the data).
+
+\hypertarget{proposed-study-and-approach-1}{%
+\subsection{Proposed Study and Approach}\label{proposed-study-and-approach-1}}
+
+The approach mostly remains the same as the previous example but we have to account for a interim analysis.
+
+\begin{itemize}
+\tightlist
+\item
+  This code will mimic a 2-group parallel-arm randomized trial using 1:1 allocation of patients to treatment 1 versus treatment 2 with a maximum sample size of 1000 patients.
+\item
+  For this example, we will use a binary outcome of ``death''
+\item
+  Patients receiving treatment 1 will have a 40\% probability of death
+\item
+  Patients receiving treatment 2 will have a 30\% probability of death
+\item
+  Analysis will be performed using a logistic regression model
+\item
+  We will run 100 simulated RCT's and report the odds ratio, 95\% confidence interval, and p-value for each simulated trial
+\item
+  The ``true'' treatment effect for a treatment that reduces probability of outcome from 40\% to 30\% is about OR = 0.642
+\item
+  There will be a total of 3 analyses at 50\%, 75\%, and 100\% of the sample size.
+\item
+  The alpha level will be adjusted with a O'Brien-Fleming correction (alpha spending function).
+\end{itemize}
+
+Now, for this simulation we will need 1 more R package: `rpact`. This is a \emph{very} useful package if you are interested in sequential analyses.
+
+To properly plan the study we have to define the number of looks at the data (\texttt{nLooks}), when these analyses would be scheduled as proportion of the total sample size (\texttt{analyses\_scheduled}), and we can create an empty vector for the what the adjusted alpha should be (\texttt{efficacy\_thresholds}).
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\KeywordTok{library}\NormalTok{(rpact)}
+\CommentTok{# here is where you put the maximum number of analyses}
+\NormalTok{nLooks <-}\StringTok{ }\DecValTok{3} 
+\CommentTok{# Here is where you list the information fraction (% of total N)}
+\CommentTok{## (e.g. here 50%, 75% and 100% information)}
+\NormalTok{analyses_scheduled <-}\StringTok{ }\NormalTok{(}\KeywordTok{c}\NormalTok{(}\FloatTok{0.50}\NormalTok{, }\FloatTok{0.75}\NormalTok{, }\DecValTok{1}\NormalTok{))}
+\NormalTok{efficacy_thresholds <-}\StringTok{ }\KeywordTok{numeric}\NormalTok{(nLooks)}
+\end{Highlighting}
+\end{Shaded}
+
+Now, we setup the analysis procedure using the \texttt{getDesignGroupSequential} function from \texttt{rpact}. Notice that we set the if the hypothesis test is one or two sided (\texttt{sided\ =\ 2} for a two sided hypothesis in this case), and the overall alpha level is set with \texttt{alpha} argument. We then supply when the analyses will take place with the \texttt{informationRates} argument, and the type of correction to the alpha level for each interim analysis is set with \texttt{typeofDesign}. Since we want a O'Brien-Fleming correction we set it to \texttt{typeOfDesign\ =\ "asOF"}.
+
+Once the design is created we can extract it with a simple for loop for the number of analyses to extract the alpha level for each interim analysis.
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\CommentTok{# Set up design in rpact}
+\NormalTok{design <-}\StringTok{ }\KeywordTok{getDesignGroupSequential}\NormalTok{(}\DataTypeTok{sided =} \DecValTok{2}\NormalTok{,}
+                                   \DataTypeTok{alpha =} \FloatTok{0.05}\NormalTok{,}
+                                   \DataTypeTok{informationRates =}\NormalTok{ analyses_scheduled,}
+                                   \DataTypeTok{typeOfDesign =} \StringTok{"asOF"}\NormalTok{)}
+\ControlFlowTok{for}\NormalTok{(j }\ControlFlowTok{in} \DecValTok{1}\OperatorTok{:}\NormalTok{nLooks)\{}
+\NormalTok{  efficacy_thresholds[j] =}\StringTok{ }\NormalTok{design}\OperatorTok{$}\NormalTok{stageLevels[j]}
+\NormalTok{\}}
+\end{Highlighting}
+\end{Shaded}
+
+Now we can create our own function again. We'll call it \texttt{pwr\_bidat2}. Essentially this does the same thing as the function in the last example. However, it takes three looks at the data when there are 500, 750, and 1000 patients. So a for loop will split up the sample and add interim analyses at these points. The loop will stop for each repetition of the simulation when either the observed \emph{p}-value is less than the corrected alpha or when the total sample size is reached. Those results are then counted and save in the \texttt{res\_tab} portion of the function's output.
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\NormalTok{pwr_bidat2 =}\StringTok{ }\ControlFlowTok{function}\NormalTok{(props, N,}
+                      \DataTypeTok{interim_n =} \KeywordTok{c}\NormalTok{(}\DecValTok{500}\NormalTok{,}\DecValTok{750}\NormalTok{,}\DecValTok{1000}\NormalTok{),}
+                      \DataTypeTok{reps =} \DecValTok{100}\NormalTok{,}
+                      \DataTypeTok{alpha =}\NormalTok{ efficacy_thresholds,}
+                      \DataTypeTok{conf.level =} \FloatTok{.95}\NormalTok{)\{}
+  \CommentTok{#Create empty data frame for the results of each repetition }
+\NormalTok{  res =}\StringTok{ }\KeywordTok{data.frame}\NormalTok{(}\DataTypeTok{N =} \KeywordTok{rep}\NormalTok{(}\OtherTok{NA}\NormalTok{,reps),}
+                   \DataTypeTok{alpha =} \KeywordTok{rep}\NormalTok{(}\OtherTok{NA}\NormalTok{,reps),}
+                   \DataTypeTok{success =} \KeywordTok{rep}\NormalTok{(}\OtherTok{NA}\NormalTok{,reps),}
+                   \DataTypeTok{stop =} \KeywordTok{rep}\NormalTok{(}\OtherTok{NA}\NormalTok{,reps),}
+                   \DataTypeTok{p.value =} \KeywordTok{rep}\NormalTok{(}\OtherTok{NA}\NormalTok{,reps),}
+                   \DataTypeTok{estimate =} \KeywordTok{rep}\NormalTok{(}\OtherTok{NA}\NormalTok{,reps))}
+  
+  \CommentTok{# For loop for each repitition of the  simulation  }
+  \ControlFlowTok{for}\NormalTok{(i }\ControlFlowTok{in} \DecValTok{1}\OperatorTok{:}\NormalTok{reps)\{}
+    \CommentTok{# Generate full data set}
+\NormalTok{    dat =}\StringTok{ }\KeywordTok{gen_bidat}\NormalTok{(props, }\DataTypeTok{N =}\NormalTok{ N) }
+    \CommentTok{# Set logical indicator for stopping the trial}
+\NormalTok{    stop_trial =}\StringTok{ }\OtherTok{FALSE}
+    \CommentTok{# Run loop for each potential stopping point}
+    \ControlFlowTok{for}\NormalTok{(j }\ControlFlowTok{in} \DecValTok{1}\OperatorTok{:}\KeywordTok{length}\NormalTok{(interim_n))\{}
+      \CommentTok{# Set current N and alpha level}
+\NormalTok{      val =}\StringTok{ }\NormalTok{interim_n[j]}
+\NormalTok{      alpha_j =}\StringTok{ }\NormalTok{alpha[j]}
+      \CommentTok{# Only continue analysis if stopping criteria not met}
+      \ControlFlowTok{if}\NormalTok{(stop_trial }\OperatorTok{!=}\StringTok{ }\OtherTok{TRUE}\NormalTok{)\{}
+        \CommentTok{# Get interim data points}
+\NormalTok{        dat_i =}\StringTok{ }\NormalTok{dat[}\DecValTok{1}\OperatorTok{:}\NormalTok{val,]}
+        \CommentTok{# Build model}
+\NormalTok{        mod_i =}\StringTok{ }\KeywordTok{glm}\NormalTok{(y }\OperatorTok{~}\StringTok{ }\NormalTok{trt,}
+                    \DataTypeTok{data =}\NormalTok{ dat_i,}
+                    \DataTypeTok{family =} \KeywordTok{binomial}\NormalTok{(}\DataTypeTok{link =} \StringTok{"logit"}\NormalTok{))}
+        \CommentTok{# Get results from the model}
+\NormalTok{        sum_i =}\StringTok{ }\KeywordTok{summary}\NormalTok{(mod_i)}\OperatorTok{$}\NormalTok{coefficients[}\DecValTok{2}\NormalTok{,]}
+        
+        \CommentTok{# Determine if the trial can stop}
+        \ControlFlowTok{if}\NormalTok{(sum_i[}\DecValTok{4}\NormalTok{] }\OperatorTok{<}\StringTok{ }\NormalTok{alpha_j)\{}
+\NormalTok{          stop_trial =}\StringTok{ }\OtherTok{TRUE}
+\NormalTok{          alpha_f =}\StringTok{ }\NormalTok{alpha_j}
+\NormalTok{          n_f =}\StringTok{ }\NormalTok{val}
+\NormalTok{        \}}
+\NormalTok{      \}}
+\NormalTok{    \}}
+    
+    \CommentTok{# Get final alpha and N if no "success" at final N}
+    \ControlFlowTok{if}\NormalTok{(stop_trial }\OperatorTok{==}\StringTok{ }\OtherTok{FALSE}\NormalTok{)\{}
+\NormalTok{      n_f =}\StringTok{ }\NormalTok{val}
+\NormalTok{      alpha_f =}\StringTok{ }\NormalTok{alpha_j}
+\NormalTok{    \}}
+    \CommentTok{# Store results from this repetition}
+\NormalTok{    res}\OperatorTok{$}\NormalTok{N[i] =}\StringTok{ }\NormalTok{n_f}
+\NormalTok{    res}\OperatorTok{$}\NormalTok{alpha[i] =}\StringTok{ }\NormalTok{alpha_f}
+\NormalTok{    res}\OperatorTok{$}\NormalTok{success[i] =}\StringTok{ }\NormalTok{stop_trial}
+\NormalTok{    res}\OperatorTok{$}\NormalTok{stop[i] =}\StringTok{ }\KeywordTok{ifelse}\NormalTok{(stop_trial,n_f,}\StringTok{"fail"}\NormalTok{)}
+\NormalTok{    res}\OperatorTok{$}\NormalTok{p.value[i] =}\StringTok{ }\NormalTok{sum_i[}\DecValTok{4}\NormalTok{]}
+\NormalTok{    res}\OperatorTok{$}\NormalTok{estimate[i] =}\StringTok{ }\NormalTok{sum_i[}\DecValTok{1}\NormalTok{]}
+\NormalTok{  \}}
+  \CommentTok{# Create summary of results}
+\NormalTok{  simspow =}\StringTok{ }\NormalTok{res }\OperatorTok{%>%}
+\StringTok{    }\KeywordTok{summarize}\NormalTok{(}
+      \DataTypeTok{med_est =} \KeywordTok{median}\NormalTok{(estimate),}
+      \DataTypeTok{power =} \KeywordTok{mean}\NormalTok{(p.value }\OperatorTok{<}\StringTok{ }\NormalTok{alpha),}
+      \CommentTok{# Calculate confidence intervals}
+      \DataTypeTok{power.lci =} \KeywordTok{prop.test}\NormalTok{(}\KeywordTok{sum}\NormalTok{(p.value }\OperatorTok{<}\StringTok{ }\NormalTok{alpha), reps)}\OperatorTok{$}\NormalTok{conf.int[}\DecValTok{1}\NormalTok{],}
+      \DataTypeTok{power.uci =} \KeywordTok{prop.test}\NormalTok{(}\KeywordTok{sum}\NormalTok{(p.value }\OperatorTok{<}\StringTok{ }\NormalTok{alpha), reps)}\OperatorTok{$}\NormalTok{conf.int[}\DecValTok{2}\NormalTok{]}
+\NormalTok{    )}
+  
+\NormalTok{  stoppow =}\StringTok{ }\NormalTok{res }\OperatorTok{%>%}
+\StringTok{    }\KeywordTok{group_by}\NormalTok{(stop) }\OperatorTok{%>%}
+\StringTok{    }\KeywordTok{summarize}\NormalTok{(}
+      \DataTypeTok{prop =} \KeywordTok{n}\NormalTok{()}\OperatorTok{/}\NormalTok{reps,}
+      \DataTypeTok{prop.lci =} \KeywordTok{prop.test}\NormalTok{(}\KeywordTok{n}\NormalTok{(), reps)}\OperatorTok{$}\NormalTok{conf.int[}\DecValTok{1}\NormalTok{],}
+      \DataTypeTok{prop.uci =} \KeywordTok{prop.test}\NormalTok{(}\KeywordTok{n}\NormalTok{(), reps)}\OperatorTok{$}\NormalTok{conf.int[}\DecValTok{2}\NormalTok{],}
+      \DataTypeTok{mean.est =} \KeywordTok{mean}\NormalTok{(estimate),}
+      \DataTypeTok{.groups =} \StringTok{'drop'}
+\NormalTok{    )}
+  
+  
+  \KeywordTok{return}\NormalTok{(}\KeywordTok{list}\NormalTok{(}\DataTypeTok{sims =}\NormalTok{ res,}
+              \DataTypeTok{power_tab =}\NormalTok{ simspow,}
+              \DataTypeTok{stop_tab =}\NormalTok{ stoppow))}
+\NormalTok{\}}
+\end{Highlighting}
+\end{Shaded}
+
+Now, we can actually perform the simulation and with the same parameters from the last example.
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\KeywordTok{set.seed}\NormalTok{(}\DecValTok{20210324}\NormalTok{)}
+\NormalTok{test =}\StringTok{ }\KeywordTok{pwr_bidat2}\NormalTok{(}\DataTypeTok{props =} \KeywordTok{c}\NormalTok{(.}\DecValTok{3}\NormalTok{,.}\DecValTok{4}\NormalTok{),}
+                  \DataTypeTok{N =} \DecValTok{1000}\NormalTok{)}
+\NormalTok{knitr}\OperatorTok{::}\KeywordTok{kable}\NormalTok{(test}\OperatorTok{$}\NormalTok{power_tab,}
+             \DataTypeTok{caption =} \StringTok{"Power for Interim Analysis Design"}\NormalTok{)}
+\end{Highlighting}
+\end{Shaded}
+
+\begin{table}
+
+\caption{\label{tab:unnamed-chunk-321}Power for Interim Analysis Design}
+\centering
+\begin{tabular}[t]{r|r|r|r}
+\hline
+med\_est & power & power.lci & power.uci\\
+\hline
+0.4617294 & 0.85 & 0.7614692 & 0.9108509\\
+\hline
+\end{tabular}
+\end{table}
+
+As we can see from the summary table above, the overall statistical power is slightly reduced (at least with 100 simulations). Below, we can plot the proportion of results that are below the corrected alpha level at 1000, 750, and 500 patients (as well as the proportion where there was a failure to find a significant result).
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\NormalTok{test}\OperatorTok{$}\NormalTok{stop_tab }\OperatorTok{%>%}
+\StringTok{  }\KeywordTok{mutate}\NormalTok{(}\DataTypeTok{stop =} \KeywordTok{factor}\NormalTok{(stop,}
+                       \DataTypeTok{levels =} \KeywordTok{c}\NormalTok{(}\StringTok{"fail"}\NormalTok{, }\StringTok{"500"}\NormalTok{,}\StringTok{"750"}\NormalTok{,}\StringTok{"1000"}\NormalTok{))) }\OperatorTok{%>%}
+\StringTok{  }\KeywordTok{ggplot}\NormalTok{(}\KeywordTok{aes}\NormalTok{(}\DataTypeTok{x =}\NormalTok{ stop, }\DataTypeTok{color =}\NormalTok{ stop, }\DataTypeTok{y =}\NormalTok{ prop)) }\OperatorTok{+}
+\StringTok{  }\KeywordTok{geom_point}\NormalTok{(}\DataTypeTok{size=}\DecValTok{2}\NormalTok{) }\OperatorTok{+}
+\StringTok{  }\KeywordTok{geom_errorbar}\NormalTok{(}\KeywordTok{aes}\NormalTok{(}\DataTypeTok{ymin =}\NormalTok{ prop.lci,}
+                    \DataTypeTok{ymax =}\NormalTok{ prop.uci)) }\OperatorTok{+}\StringTok{ }
+\StringTok{  }\KeywordTok{coord_flip}\NormalTok{()}
+\end{Highlighting}
+\end{Shaded}
+
+\includegraphics{SuperpowerValidation_files/figure-latex/unnamed-chunk-322-1}
+
+So how often can we expect the trial to end early? Well, according to this simulation we can expect the trial, under these conditions and stopping criteria, to end at N = 500 approximately 30\% of the time and N = 750 about 35\% of the time. So we have a very high chance of being able to save resources by using interim analyses. Note, that the confidence intervals are awfully wide from these simulations so we want to be re-run the simulation with a higher number of repetitions.
+
+Another thing to point out is the effect size estimate. We can also plot the effect of treatment at every possible stopping point of the study.
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\NormalTok{test}\OperatorTok{$}\NormalTok{stop_tab }\OperatorTok{%>%}
+\StringTok{  }\KeywordTok{mutate}\NormalTok{(}\DataTypeTok{stop =} \KeywordTok{factor}\NormalTok{(stop,}
+                       \DataTypeTok{levels =} \KeywordTok{c}\NormalTok{(}\StringTok{"fail"}\NormalTok{, }\StringTok{"500"}\NormalTok{,}\StringTok{"750"}\NormalTok{,}\StringTok{"1000"}\NormalTok{))) }\OperatorTok{%>%}
+\StringTok{  }\KeywordTok{ggplot}\NormalTok{(}\KeywordTok{aes}\NormalTok{(}\DataTypeTok{x =}\NormalTok{ stop, }\DataTypeTok{color =}\NormalTok{ stop, }\DataTypeTok{y =}\NormalTok{ mean.est)) }\OperatorTok{+}
+\StringTok{  }\KeywordTok{geom_point}\NormalTok{(}\DataTypeTok{size =} \DecValTok{2}\NormalTok{) }
+\end{Highlighting}
+\end{Shaded}
+
+\includegraphics{SuperpowerValidation_files/figure-latex/unnamed-chunk-323-1}
+
+We can see that the effect size estimate, log-odds, are inflated when the study is stopped early (roughly double the average effect size at N=500). This is one of the disadvantages of early stopping: inflated effect size estimates. What is the reason for this peculiar pattern? In order to obtain a significant result at an early stopping point the observed effect size must be quite large. Therefore, interim analyses are selecting for very large effect sizes in order to stop the study early.
+
+\hypertarget{conclusion-on-a-binary-rct-with-interim-analyses}{%
+\section{Conclusion on a Binary RCT with Interim Analyses}\label{conclusion-on-a-binary-rct-with-interim-analyses}}
+
+As we have documented, planning for interim analyses can be implemented with a few modifications to our existing code from the previous example. For this example we switched to a for loop to make it easier to perform the interim analyses and record the stopping point (and the relevant statistics at the stopping point). The appropriate stopping criteria (i.e., the adjusted alpha level) can be obtained from specialized R packages like \texttt{rpact}.
 
 \hypertarget{appendix-1-direct-comparison-to-pwr2ppl}{%
 \chapter*{Appendix 1: Direct Comparison to pwr2ppl}\label{appendix-1-direct-comparison-to-pwr2ppl}}
@@ -10007,7 +10273,7 @@ We can replicate the independent \emph{t}-test example in MOREpower:
 \end{Highlighting}
 \end{Shaded}
 
-\includegraphics{SuperpowerValidation_files/figure-latex/unnamed-chunk-332-1}
+\includegraphics{SuperpowerValidation_files/figure-latex/unnamed-chunk-341-1}
 
 \begin{Shaded}
 \begin{Highlighting}[]
@@ -10088,7 +10354,7 @@ We can also replicate the dependent \emph{t}-test example in MOREpower.
 \end{Highlighting}
 \end{Shaded}
 
-\includegraphics{SuperpowerValidation_files/figure-latex/unnamed-chunk-333-1}
+\includegraphics{SuperpowerValidation_files/figure-latex/unnamed-chunk-342-1}
 
 \begin{Shaded}
 \begin{Highlighting}[]
@@ -10167,7 +10433,7 @@ We can also replicate the 3-group within ANOVA example in MOREpower.
 \end{Highlighting}
 \end{Shaded}
 
-\includegraphics{SuperpowerValidation_files/figure-latex/unnamed-chunk-334-1}
+\includegraphics{SuperpowerValidation_files/figure-latex/unnamed-chunk-343-1}
 
 \begin{Shaded}
 \begin{Highlighting}[]
@@ -10242,7 +10508,7 @@ We can reproduce the 2x2 ANOVA example in MOREpower.
 \end{Highlighting}
 \end{Shaded}
 
-\includegraphics{SuperpowerValidation_files/figure-latex/unnamed-chunk-335-1}
+\includegraphics{SuperpowerValidation_files/figure-latex/unnamed-chunk-344-1}
 
 \begin{Shaded}
 \begin{Highlighting}[]
@@ -10305,7 +10571,7 @@ Let's replicate the 2x2x2 full between analysis (total N = 400, effects sizes di
 \end{Highlighting}
 \end{Shaded}
 
-\includegraphics{SuperpowerValidation_files/figure-latex/unnamed-chunk-336-1}
+\includegraphics{SuperpowerValidation_files/figure-latex/unnamed-chunk-345-1}
 
 \begin{Shaded}
 \begin{Highlighting}[]
@@ -10396,7 +10662,7 @@ And finally, let's replicate the 2x2 full within analysis.
 \end{Highlighting}
 \end{Shaded}
 
-\includegraphics{SuperpowerValidation_files/figure-latex/unnamed-chunk-337-1}
+\includegraphics{SuperpowerValidation_files/figure-latex/unnamed-chunk-346-1}
 
 \begin{Shaded}
 \begin{Highlighting}[]
@@ -10555,7 +10821,7 @@ Now we will simply replicate the simulations of Brysbaert (\protect\hyperlink{re
 \end{Highlighting}
 \end{Shaded}
 
-\includegraphics{SuperpowerValidation_files/figure-latex/unnamed-chunk-343-1}
+\includegraphics{SuperpowerValidation_files/figure-latex/unnamed-chunk-352-1}
 
 \begin{Shaded}
 \begin{Highlighting}[]
@@ -10568,7 +10834,7 @@ Now we will simply replicate the simulations of Brysbaert (\protect\hyperlink{re
 
 \begin{table}[!h]
 
-\caption{\label{tab:unnamed-chunk-345}Simulated ANOVA Result}
+\caption{\label{tab:unnamed-chunk-354}Simulated ANOVA Result}
 \centering
 \begin{tabular}[t]{l|r|r}
 \hline
@@ -10589,7 +10855,7 @@ anova\_factor1 & 79.6 & 0.0417248\\
 
 \begin{table}[!h]
 
-\caption{\label{tab:unnamed-chunk-347}Exact ANOVA Result}
+\caption{\label{tab:unnamed-chunk-356}Exact ANOVA Result}
 \centering
 \begin{tabular}[t]{l|r|r|r|r}
 \hline
@@ -10697,7 +10963,7 @@ factor1 & 79.37239 & 0.0347072 & 0.1896182 & 9.6\\
 \end{Highlighting}
 \end{Shaded}
 
-\includegraphics{SuperpowerValidation_files/figure-latex/unnamed-chunk-354-1}
+\includegraphics{SuperpowerValidation_files/figure-latex/unnamed-chunk-363-1}
 
 \begin{Shaded}
 \begin{Highlighting}[]
@@ -10710,7 +10976,7 @@ factor1 & 79.37239 & 0.0347072 & 0.1896182 & 9.6\\
 
 \begin{table}[!h]
 
-\caption{\label{tab:unnamed-chunk-356}Simulated ANOVA Result}
+\caption{\label{tab:unnamed-chunk-365}Simulated ANOVA Result}
 \centering
 \begin{tabular}[t]{l|r|r}
 \hline
@@ -10731,7 +10997,7 @@ anova\_factor1 & 94.75 & 0.0386366\\
 
 \begin{table}[!h]
 
-\caption{\label{tab:unnamed-chunk-358}Exact ANOVA Result}
+\caption{\label{tab:unnamed-chunk-367}Exact ANOVA Result}
 \centering
 \begin{tabular}[t]{l|r|r|r|r}
 \hline
@@ -10833,7 +11099,7 @@ factor1 & 94.89169 & 0.034565 & 0.1892154 & 15.46667\\
 \end{Highlighting}
 \end{Shaded}
 
-\includegraphics{SuperpowerValidation_files/figure-latex/unnamed-chunk-365-1}
+\includegraphics{SuperpowerValidation_files/figure-latex/unnamed-chunk-374-1}
 
 \begin{Shaded}
 \begin{Highlighting}[]
@@ -10846,7 +11112,7 @@ factor1 & 94.89169 & 0.034565 & 0.1892154 & 15.46667\\
 
 \begin{table}[!h]
 
-\caption{\label{tab:unnamed-chunk-367}Simulated ANOVA Result}
+\caption{\label{tab:unnamed-chunk-376}Simulated ANOVA Result}
 \centering
 \begin{tabular}[t]{l|r|r}
 \hline
@@ -10867,7 +11133,7 @@ anova\_factor1 & 62.9 & 0.0340814\\
 
 \begin{table}[!h]
 
-\caption{\label{tab:unnamed-chunk-369}Exact ANOVA Result}
+\caption{\label{tab:unnamed-chunk-378}Exact ANOVA Result}
 \centering
 \begin{tabular}[t]{l|r|r|r|r}
 \hline
@@ -10907,7 +11173,7 @@ We create the within design, and run the simulation
 \end{Highlighting}
 \end{Shaded}
 
-\includegraphics{SuperpowerValidation_files/figure-latex/unnamed-chunk-371-1}
+\includegraphics{SuperpowerValidation_files/figure-latex/unnamed-chunk-380-1}
 
 \begin{Shaded}
 \begin{Highlighting}[]
@@ -10920,7 +11186,7 @@ We create the within design, and run the simulation
 
 \begin{table}[!h]
 
-\caption{\label{tab:unnamed-chunk-373}Simulated ANOVA Result}
+\caption{\label{tab:unnamed-chunk-382}Simulated ANOVA Result}
 \centering
 \begin{tabular}[t]{l|r|r}
 \hline
@@ -10941,7 +11207,7 @@ anova\_speed & 95.11 & 0.1070021\\
 
 \begin{table}[!h]
 
-\caption{\label{tab:unnamed-chunk-375}Exact ANOVA Result}
+\caption{\label{tab:unnamed-chunk-384}Exact ANOVA Result}
 \centering
 \begin{tabular}[t]{l|r|r|r|r}
 \hline
@@ -11086,7 +11352,7 @@ We create the 3-level repeated measures design, and run the simulation.
 \end{Highlighting}
 \end{Shaded}
 
-\includegraphics{SuperpowerValidation_files/figure-latex/unnamed-chunk-382-1}
+\includegraphics{SuperpowerValidation_files/figure-latex/unnamed-chunk-391-1}
 
 \begin{Shaded}
 \begin{Highlighting}[]
@@ -11099,7 +11365,7 @@ We create the 3-level repeated measures design, and run the simulation.
 
 \begin{table}[!h]
 
-\caption{\label{tab:unnamed-chunk-384}Simulated ANOVA Result}
+\caption{\label{tab:unnamed-chunk-393}Simulated ANOVA Result}
 \centering
 \begin{tabular}[t]{l|r|r}
 \hline
@@ -11120,7 +11386,7 @@ anova\_SPEED & 98.39 & 0.1285941\\
 
 \begin{table}[!h]
 
-\caption{\label{tab:unnamed-chunk-386}Exact ANOVA Result}
+\caption{\label{tab:unnamed-chunk-395}Exact ANOVA Result}
 \centering
 \begin{tabular}[t]{l|r|r|r|r}
 \hline
@@ -11177,6 +11443,12 @@ Green, Peter, and Catriona J. MacLeod. 2016. ``SIMR : An R Package for Power Ana
 
 \leavevmode\hypertarget{ref-R-multcomp}{}%
 Hothorn, Torsten, Frank Bretz, and Peter Westfall. 2020. \emph{Multcomp: Simultaneous Inference in General Parametric Models}. \url{https://CRAN.R-project.org/package=multcomp}.
+
+\leavevmode\hypertarget{ref-Lakens2021}{}%
+Lakens, Daniel, Friedrich Pahlke, and Gernot Wassmer. 2021. ``Group Sequential Designs: A Tutorial,'' January. \url{https://doi.org/10.31234/osf.io/x4azm}.
+
+\leavevmode\hypertarget{ref-Lakens2014}{}%
+Lakens, Daniël. 2014. ``Performing High-Powered Studies Efficiently with Sequential Analyses.'' \emph{European Journal of Social Psychology} 44 (7): 701--10. \url{https://doi.org/10.1002/ejsp.2023}.
 
 \leavevmode\hypertarget{ref-Lenth2007}{}%
 Lenth, Russell V. 2007. ``Statistical Power Calculations.'' \emph{Journal of Animal Science} 85 (suppl\_13): E24--E29.
