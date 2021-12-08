@@ -6,7 +6,7 @@
   <meta http-equiv="X-UA-Compatible" content="IE=edge" />
   <title>Chapter 2 The Experimental Design | Power Analysis with Superpower</title>
   <meta name="description" content="This is a book describing the capabilities of the Superpower R package." />
-  <meta name="generator" content="bookdown 0.21 and GitBook 2.6.7" />
+  <meta name="generator" content="bookdown 0.24 and GitBook 2.6.7" />
 
   <meta property="og:title" content="Chapter 2 The Experimental Design | Power Analysis with Superpower" />
   <meta property="og:type" content="book" />
@@ -24,7 +24,7 @@
 <meta name="author" content="Aaron R. Caldwell, Daniël Lakens, Chelsea M. Parlett-Pelleriti, and Guy Prochilo" />
 
 
-<meta name="date" content="2021-03-24" />
+<meta name="date" content="2021-12-08" />
 
   <meta name="viewport" content="width=device-width, initial-scale=1" />
   <meta name="apple-mobile-web-app-capable" content="yes" />
@@ -33,7 +33,9 @@
   
 <link rel="prev" href="introduction-to-power-analysis.html"/>
 <link rel="next" href="one-way-anova.html"/>
-<script src="libs/jquery-2.2.3/jquery.min.js"></script>
+<script src="libs/header-attrs-2.11/header-attrs.js"></script>
+<script src="libs/jquery-3.6.0/jquery-3.6.0.min.js"></script>
+<script src="https://cdn.jsdelivr.net/npm/fuse.js@6.4.6/dist/fuse.min.js"></script>
 <link href="libs/gitbook-2.6.7/css/style.css" rel="stylesheet" />
 <link href="libs/gitbook-2.6.7/css/plugin-table.css" rel="stylesheet" />
 <link href="libs/gitbook-2.6.7/css/plugin-bookdown.css" rel="stylesheet" />
@@ -49,25 +51,25 @@
 
 
 
-
-<script src="libs/accessible-code-block-0.0.1/empty-anchor.js"></script>
+<link href="libs/anchor-sections-1.0.1/anchor-sections.css" rel="stylesheet" />
+<script src="libs/anchor-sections-1.0.1/anchor-sections.js"></script>
 <script src="libs/kePrint-0.0.1/kePrint.js"></script>
 <link href="libs/lightable-0.0.1/lightable.css" rel="stylesheet" />
 
 
 <style type="text/css">
-code.sourceCode > span { display: inline-block; line-height: 1.25; }
-code.sourceCode > span { color: inherit; text-decoration: inherit; }
-code.sourceCode > span:empty { height: 1.2em; }
+pre > code.sourceCode { white-space: pre; position: relative; }
+pre > code.sourceCode > span { display: inline-block; line-height: 1.25; }
+pre > code.sourceCode > span:empty { height: 1.2em; }
 .sourceCode { overflow: visible; }
-code.sourceCode { white-space: pre; position: relative; }
+code.sourceCode > span { color: inherit; text-decoration: inherit; }
 pre.sourceCode { margin: 0; }
 @media screen {
 div.sourceCode { overflow: auto; }
 }
 @media print {
-code.sourceCode { white-space: pre-wrap; }
-code.sourceCode > span { text-indent: -5em; padding-left: 5em; }
+pre > code.sourceCode { white-space: pre-wrap; }
+pre > code.sourceCode > span { text-indent: -5em; padding-left: 5em; }
 }
 pre.numberSource code
   { counter-reset: source-line 0; }
@@ -87,7 +89,7 @@ pre.numberSource { margin-left: 3em; border-left: 1px solid #aaaaaa;  padding-le
 div.sourceCode
   {   }
 @media screen {
-code.sourceCode > span > a:first-child::before { text-decoration: underline; }
+pre > code.sourceCode > span > a:first-child::before { text-decoration: underline; }
 }
 code span.al { color: #ff0000; font-weight: bold; } /* Alert */
 code span.an { color: #60a0b0; font-weight: bold; font-style: italic; } /* Annotation */
@@ -120,6 +122,29 @@ code span.vs { color: #4070a0; } /* VerbatimString */
 code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warning */
 </style>
 
+<style type="text/css">
+/* Used with Pandoc 2.11+ new --citeproc when CSL is used */
+div.csl-bib-body { }
+div.csl-entry {
+  clear: both;
+}
+.hanging div.csl-entry {
+  margin-left:2em;
+  text-indent:-2em;
+}
+div.csl-left-margin {
+  min-width:2em;
+  float:left;
+}
+div.csl-right-inline {
+  margin-left:2em;
+  padding-left:1em;
+}
+div.csl-indent {
+  margin-left: 2em;
+}
+</style>
+
 <link rel="stylesheet" href="style.css" type="text/css" />
 </head>
 
@@ -133,24 +158,29 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
       <nav role="navigation">
 
 <ul class="summary">
-<li class="chapter" data-level="" data-path="index.html"><a href="index.html"><i class="fa fa-check"></i>Preface</a><ul>
+<li class="chapter" data-level="" data-path="index.html"><a href="index.html"><i class="fa fa-check"></i>Preface</a>
+<ul>
 <li class="chapter" data-level="" data-path="index.html"><a href="index.html#contributors"><i class="fa fa-check"></i>Contributors</a></li>
 <li class="chapter" data-level="" data-path="index.html"><a href="index.html#funding"><i class="fa fa-check"></i>Funding</a></li>
 </ul></li>
-<li class="chapter" data-level="1" data-path="introduction-to-power-analysis.html"><a href="introduction-to-power-analysis.html"><i class="fa fa-check"></i><b>1</b> Introduction to Power Analysis</a><ul>
+<li class="chapter" data-level="1" data-path="introduction-to-power-analysis.html"><a href="introduction-to-power-analysis.html"><i class="fa fa-check"></i><b>1</b> Introduction to Power Analysis</a>
+<ul>
 <li class="chapter" data-level="1.1" data-path="introduction-to-power-analysis.html"><a href="introduction-to-power-analysis.html#overview-of-power-analysis"><i class="fa fa-check"></i><b>1.1</b> Overview of Power Analysis</a></li>
 <li class="chapter" data-level="1.2" data-path="introduction-to-power-analysis.html"><a href="introduction-to-power-analysis.html#error-and-power"><i class="fa fa-check"></i><b>1.2</b> Error and Power</a></li>
 <li class="chapter" data-level="1.3" data-path="introduction-to-power-analysis.html"><a href="introduction-to-power-analysis.html#effect-size"><i class="fa fa-check"></i><b>1.3</b> Effect size</a></li>
 <li class="chapter" data-level="1.4" data-path="introduction-to-power-analysis.html"><a href="introduction-to-power-analysis.html#samp_vs_pop"><i class="fa fa-check"></i><b>1.4</b> Sample effect size vs. population effect size</a></li>
 <li class="chapter" data-level="1.5" data-path="introduction-to-power-analysis.html"><a href="introduction-to-power-analysis.html#safeguard-effect-size"><i class="fa fa-check"></i><b>1.5</b> Safeguard Effect Size</a></li>
-<li class="chapter" data-level="1.6" data-path="introduction-to-power-analysis.html"><a href="introduction-to-power-analysis.html#post-hoc-power-analysis"><i class="fa fa-check"></i><b>1.6</b> <em>Post hoc</em> power analysis</a><ul>
+<li class="chapter" data-level="1.6" data-path="introduction-to-power-analysis.html"><a href="introduction-to-power-analysis.html#post-hoc-power-analysis"><i class="fa fa-check"></i><b>1.6</b> <em>Post hoc</em> power analysis</a>
+<ul>
 <li class="chapter" data-level="1.6.1" data-path="introduction-to-power-analysis.html"><a href="introduction-to-power-analysis.html#the-sample-effect-size-is-not-the-population-effect-size"><i class="fa fa-check"></i><b>1.6.1</b> The sample effect size is <em>not</em> the population effect size</a></li>
 <li class="chapter" data-level="1.6.2" data-path="introduction-to-power-analysis.html"><a href="introduction-to-power-analysis.html#post-hoc-power-is-merely-a-transformation-of-your-obtained-p-value"><i class="fa fa-check"></i><b>1.6.2</b> <em>Post hoc</em> power is merely a transformation of your obtained <em>p</em> value</a></li>
 </ul></li>
 <li class="chapter" data-level="1.7" data-path="introduction-to-power-analysis.html"><a href="introduction-to-power-analysis.html#the-minimal-detectable-effect-size"><i class="fa fa-check"></i><b>1.7</b> The Minimal Detectable Effect Size</a></li>
 </ul></li>
-<li class="chapter" data-level="2" data-path="the-experimental-design.html"><a href="the-experimental-design.html"><i class="fa fa-check"></i><b>2</b> The Experimental Design</a><ul>
-<li class="chapter" data-level="2.1" data-path="the-experimental-design.html"><a href="the-experimental-design.html#anova_design-function"><i class="fa fa-check"></i><b>2.1</b> ANOVA_design function</a><ul>
+<li class="chapter" data-level="2" data-path="the-experimental-design.html"><a href="the-experimental-design.html"><i class="fa fa-check"></i><b>2</b> The Experimental Design</a>
+<ul>
+<li class="chapter" data-level="2.1" data-path="the-experimental-design.html"><a href="the-experimental-design.html#anova_design-function"><i class="fa fa-check"></i><b>2.1</b> ANOVA_design function</a>
+<ul>
 <li class="chapter" data-level="2.1.1" data-path="the-experimental-design.html"><a href="the-experimental-design.html#specifying-the-design-using-design"><i class="fa fa-check"></i><b>2.1.1</b> Specifying the design using <code>design</code></a></li>
 <li class="chapter" data-level="2.1.2" data-path="the-experimental-design.html"><a href="the-experimental-design.html#specifying-the-means-using-mu"><i class="fa fa-check"></i><b>2.1.2</b> Specifying the means using <code>mu</code></a></li>
 <li class="chapter" data-level="2.1.3" data-path="the-experimental-design.html"><a href="the-experimental-design.html#specifying-label-names"><i class="fa fa-check"></i><b>2.1.3</b> Specifying label names</a></li>
@@ -159,68 +189,84 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 <li class="chapter" data-level="2.1.6" data-path="the-experimental-design.html"><a href="the-experimental-design.html#specifying-the-standard-deviation"><i class="fa fa-check"></i><b>2.1.6</b> Specifying the standard deviation</a></li>
 </ul></li>
 </ul></li>
-<li class="chapter" data-level="3" data-path="one-way-anova.html"><a href="one-way-anova.html"><i class="fa fa-check"></i><b>3</b> One-Way ANOVA</a><ul>
-<li class="chapter" data-level="3.1" data-path="one-way-anova.html"><a href="one-way-anova.html#introduction"><i class="fa fa-check"></i><b>3.1</b> Introduction</a><ul>
+<li class="chapter" data-level="3" data-path="one-way-anova.html"><a href="one-way-anova.html"><i class="fa fa-check"></i><b>3</b> One-Way ANOVA</a>
+<ul>
+<li class="chapter" data-level="3.1" data-path="one-way-anova.html"><a href="one-way-anova.html#introduction"><i class="fa fa-check"></i><b>3.1</b> Introduction</a>
+<ul>
 <li class="chapter" data-level="3.1.1" data-path="one-way-anova.html"><a href="one-way-anova.html#two-conditions"><i class="fa fa-check"></i><b>3.1.1</b> Two conditions</a></li>
 <li class="chapter" data-level="3.1.2" data-path="one-way-anova.html"><a href="one-way-anova.html#three-conditions"><i class="fa fa-check"></i><b>3.1.2</b> Three conditions</a></li>
 <li class="chapter" data-level="3.1.3" data-path="one-way-anova.html"><a href="one-way-anova.html#power-for-simple-effects"><i class="fa fa-check"></i><b>3.1.3</b> Power for simple effects</a></li>
 </ul></li>
-<li class="chapter" data-level="3.2" data-path="one-way-anova.html"><a href="one-way-anova.html#effect-size-estimates-for-one-way-anova"><i class="fa fa-check"></i><b>3.2</b> Effect Size Estimates for One-Way ANOVA</a><ul>
+<li class="chapter" data-level="3.2" data-path="one-way-anova.html"><a href="one-way-anova.html#effect-size-estimates-for-one-way-anova"><i class="fa fa-check"></i><b>3.2</b> Effect Size Estimates for One-Way ANOVA</a>
+<ul>
 <li class="chapter" data-level="3.2.1" data-path="one-way-anova.html"><a href="one-way-anova.html#three-conditions-small-effect-size"><i class="fa fa-check"></i><b>3.2.1</b> Three conditions, small effect size</a></li>
 <li class="chapter" data-level="3.2.2" data-path="one-way-anova.html"><a href="one-way-anova.html#four-conditions-medium-effect-size"><i class="fa fa-check"></i><b>3.2.2</b> Four conditions, medium effect size</a></li>
 <li class="chapter" data-level="3.2.3" data-path="one-way-anova.html"><a href="one-way-anova.html#two-conditions-large-effect-size"><i class="fa fa-check"></i><b>3.2.3</b> Two conditions, large effect size</a></li>
 </ul></li>
 </ul></li>
-<li class="chapter" data-level="4" data-path="repeated-measures-anova.html"><a href="repeated-measures-anova.html"><i class="fa fa-check"></i><b>4</b> Repeated Measures ANOVA</a><ul>
-<li class="chapter" data-level="4.1" data-path="repeated-measures-anova.html"><a href="repeated-measures-anova.html#part-1"><i class="fa fa-check"></i><b>4.1</b> Part 1</a><ul>
+<li class="chapter" data-level="4" data-path="repeated-measures-anova.html"><a href="repeated-measures-anova.html"><i class="fa fa-check"></i><b>4</b> Repeated Measures ANOVA</a>
+<ul>
+<li class="chapter" data-level="4.1" data-path="repeated-measures-anova.html"><a href="repeated-measures-anova.html#part-1"><i class="fa fa-check"></i><b>4.1</b> Part 1</a>
+<ul>
 <li class="chapter" data-level="4.1.1" data-path="repeated-measures-anova.html"><a href="repeated-measures-anova.html#two-conditions-medium-effect-size"><i class="fa fa-check"></i><b>4.1.1</b> Two conditions, medium effect size</a></li>
 </ul></li>
-<li class="chapter" data-level="4.2" data-path="repeated-measures-anova.html"><a href="repeated-measures-anova.html#part-2"><i class="fa fa-check"></i><b>4.2</b> Part 2</a><ul>
+<li class="chapter" data-level="4.2" data-path="repeated-measures-anova.html"><a href="repeated-measures-anova.html#part-2"><i class="fa fa-check"></i><b>4.2</b> Part 2</a>
+<ul>
 <li class="chapter" data-level="4.2.1" data-path="repeated-measures-anova.html"><a href="repeated-measures-anova.html#the-relation-between-cohens-f-and-cohens-d"><i class="fa fa-check"></i><b>4.2.1</b> The relation between Cohen’s f and Cohen’s d</a></li>
 <li class="chapter" data-level="4.2.2" data-path="repeated-measures-anova.html"><a href="repeated-measures-anova.html#three-within-conditions-medium-effect-size"><i class="fa fa-check"></i><b>4.2.2</b> Three within conditions, medium effect size</a></li>
 </ul></li>
 <li class="chapter" data-level="4.3" data-path="repeated-measures-anova.html"><a href="repeated-measures-anova.html#part-3"><i class="fa fa-check"></i><b>4.3</b> Part 3</a></li>
-<li class="chapter" data-level="4.4" data-path="repeated-measures-anova.html"><a href="repeated-measures-anova.html#part-4"><i class="fa fa-check"></i><b>4.4</b> Part 4</a><ul>
+<li class="chapter" data-level="4.4" data-path="repeated-measures-anova.html"><a href="repeated-measures-anova.html#part-4"><i class="fa fa-check"></i><b>4.4</b> Part 4</a>
+<ul>
 <li class="chapter" data-level="4.4.1" data-path="repeated-measures-anova.html"><a href="repeated-measures-anova.html#x2-anova-within-within-design"><i class="fa fa-check"></i><b>4.4.1</b> 2x2 ANOVA, within-within design</a></li>
 <li class="chapter" data-level="4.4.2" data-path="repeated-measures-anova.html"><a href="repeated-measures-anova.html#examine-variation-of-means-and-correlation"><i class="fa fa-check"></i><b>4.4.2</b> Examine variation of means and correlation</a></li>
 </ul></li>
-<li class="chapter" data-level="4.5" data-path="repeated-measures-anova.html"><a href="repeated-measures-anova.html#part-5"><i class="fa fa-check"></i><b>4.5</b> Part 5</a><ul>
+<li class="chapter" data-level="4.5" data-path="repeated-measures-anova.html"><a href="repeated-measures-anova.html#part-5"><i class="fa fa-check"></i><b>4.5</b> Part 5</a>
+<ul>
 <li class="chapter" data-level="4.5.1" data-path="repeated-measures-anova.html"><a href="repeated-measures-anova.html#x2-anova-within-design"><i class="fa fa-check"></i><b>4.5.1</b> 2x2 ANOVA, within design</a></li>
 </ul></li>
 <li class="chapter" data-level="4.6" data-path="repeated-measures-anova.html"><a href="repeated-measures-anova.html#multivariate-anova-manova"><i class="fa fa-check"></i><b>4.6</b> Multivariate ANOVA (MANOVA)</a></li>
 </ul></li>
-<li class="chapter" data-level="5" data-path="mixed-anova.html"><a href="mixed-anova.html"><i class="fa fa-check"></i><b>5</b> Mixed ANOVA</a><ul>
+<li class="chapter" data-level="5" data-path="mixed-anova.html"><a href="mixed-anova.html"><i class="fa fa-check"></i><b>5</b> Mixed ANOVA</a>
+<ul>
 <li class="chapter" data-level="5.1" data-path="mixed-anova.html"><a href="mixed-anova.html#simple-mixed-designs"><i class="fa fa-check"></i><b>5.1</b> Simple Mixed Designs</a></li>
-<li class="chapter" data-level="5.2" data-path="mixed-anova.html"><a href="mixed-anova.html#complex-mixed-designs"><i class="fa fa-check"></i><b>5.2</b> Complex Mixed Designs</a><ul>
+<li class="chapter" data-level="5.2" data-path="mixed-anova.html"><a href="mixed-anova.html#complex-mixed-designs"><i class="fa fa-check"></i><b>5.2</b> Complex Mixed Designs</a>
+<ul>
 <li class="chapter" data-level="5.2.1" data-path="mixed-anova.html"><a href="mixed-anova.html#b3w-design"><i class="fa fa-check"></i><b>5.2.1</b> 2b*3w Design</a></li>
 <li class="chapter" data-level="5.2.2" data-path="mixed-anova.html"><a href="mixed-anova.html#b4w-design"><i class="fa fa-check"></i><b>5.2.2</b> 2b*4w Design</a></li>
 </ul></li>
 </ul></li>
 <li class="chapter" data-level="6" data-path="power-for-three-way-interactions.html"><a href="power-for-three-way-interactions.html"><i class="fa fa-check"></i><b>6</b> Power for Three-way Interactions</a></li>
 <li class="chapter" data-level="7" data-path="the-no-way-interactions.html"><a href="the-no-way-interactions.html"><i class="fa fa-check"></i><b>7</b> The ‘No-Way’ Interactions</a></li>
-<li class="chapter" data-level="8" data-path="effect-of-varying-designs-on-power.html"><a href="effect-of-varying-designs-on-power.html"><i class="fa fa-check"></i><b>8</b> Effect of Varying Designs on Power</a><ul>
+<li class="chapter" data-level="8" data-path="effect-of-varying-designs-on-power.html"><a href="effect-of-varying-designs-on-power.html"><i class="fa fa-check"></i><b>8</b> Effect of Varying Designs on Power</a>
+<ul>
 <li class="chapter" data-level="8.1" data-path="effect-of-varying-designs-on-power.html"><a href="effect-of-varying-designs-on-power.html#within-designs"><i class="fa fa-check"></i><b>8.1</b> Within Designs</a></li>
 </ul></li>
 <li class="chapter" data-level="9" data-path="error-control-in-exploratory-anova.html"><a href="error-control-in-exploratory-anova.html"><i class="fa fa-check"></i><b>9</b> Error Control in Exploratory ANOVA</a></li>
-<li class="chapter" data-level="10" data-path="analytic-power-functions.html"><a href="analytic-power-functions.html"><i class="fa fa-check"></i><b>10</b> Analytic Power Functions</a><ul>
+<li class="chapter" data-level="10" data-path="analytic-power-functions.html"><a href="analytic-power-functions.html"><i class="fa fa-check"></i><b>10</b> Analytic Power Functions</a>
+<ul>
 <li class="chapter" data-level="10.1" data-path="analytic-power-functions.html"><a href="analytic-power-functions.html#one-way-between-subjects-anova"><i class="fa fa-check"></i><b>10.1</b> One-Way Between Subjects ANOVA</a></li>
 <li class="chapter" data-level="10.2" data-path="analytic-power-functions.html"><a href="analytic-power-functions.html#two-way-between-subject-interaction"><i class="fa fa-check"></i><b>10.2</b> Two-way Between Subject Interaction</a></li>
 <li class="chapter" data-level="10.3" data-path="analytic-power-functions.html"><a href="analytic-power-functions.html#x3-between-subject-anova"><i class="fa fa-check"></i><b>10.3</b> 3x3 Between Subject ANOVA</a></li>
 </ul></li>
-<li class="chapter" data-level="11" data-path="power-curve.html"><a href="power-curve.html"><i class="fa fa-check"></i><b>11</b> Power Curve</a><ul>
+<li class="chapter" data-level="11" data-path="power-curve.html"><a href="power-curve.html"><i class="fa fa-check"></i><b>11</b> Power Curve</a>
+<ul>
 <li class="chapter" data-level="11.1" data-path="power-curve.html"><a href="power-curve.html#explore-increase-in-effect-size-for-moderated-interactions."><i class="fa fa-check"></i><b>11.1</b> Explore increase in effect size for moderated interactions.</a></li>
 <li class="chapter" data-level="11.2" data-path="power-curve.html"><a href="power-curve.html#explore-increase-in-effect-size-for-cross-over-interactions."><i class="fa fa-check"></i><b>11.2</b> Explore increase in effect size for cross-over interactions.</a></li>
 <li class="chapter" data-level="11.3" data-path="power-curve.html"><a href="power-curve.html#explore-increase-in-correlation-in-moderated-interactions."><i class="fa fa-check"></i><b>11.3</b> Explore increase in correlation in moderated interactions.</a></li>
 <li class="chapter" data-level="11.4" data-path="power-curve.html"><a href="power-curve.html#increasing-correlation-in-on-factor-decreases-power-in-second-factor"><i class="fa fa-check"></i><b>11.4</b> Increasing correlation in on factor decreases power in second factor</a></li>
 <li class="chapter" data-level="11.5" data-path="power-curve.html"><a href="power-curve.html#code-to-reproduce-power-curve-figures"><i class="fa fa-check"></i><b>11.5</b> Code to Reproduce Power Curve Figures</a></li>
 </ul></li>
-<li class="chapter" data-level="12" data-path="violations-of-assumptions.html"><a href="violations-of-assumptions.html"><i class="fa fa-check"></i><b>12</b> Violations of Assumptions</a><ul>
+<li class="chapter" data-level="12" data-path="violations-of-assumptions.html"><a href="violations-of-assumptions.html"><i class="fa fa-check"></i><b>12</b> Violations of Assumptions</a>
+<ul>
 <li class="chapter" data-level="12.1" data-path="violations-of-assumptions.html"><a href="violations-of-assumptions.html#violation-of-heterogeneity-assumption"><i class="fa fa-check"></i><b>12.1</b> Violation of Heterogeneity Assumption</a></li>
-<li class="chapter" data-level="12.2" data-path="violations-of-assumptions.html"><a href="violations-of-assumptions.html#violation-of-the-sphericity-assumption"><i class="fa fa-check"></i><b>12.2</b> Violation of the sphericity assumption</a><ul>
+<li class="chapter" data-level="12.2" data-path="violations-of-assumptions.html"><a href="violations-of-assumptions.html#violation-of-the-sphericity-assumption"><i class="fa fa-check"></i><b>12.2</b> Violation of the sphericity assumption</a>
+<ul>
 <li class="chapter" data-level="12.2.1" data-path="violations-of-assumptions.html"><a href="violations-of-assumptions.html#manova-or-sphericity-adjustment"><i class="fa fa-check"></i><b>12.2.1</b> MANOVA or Sphericity Adjustment?</a></li>
 </ul></li>
 </ul></li>
-<li class="chapter" data-level="13" data-path="estimated-marginal-means.html"><a href="estimated-marginal-means.html"><i class="fa fa-check"></i><b>13</b> Estimated Marginal Means</a><ul>
+<li class="chapter" data-level="13" data-path="estimated-marginal-means.html"><a href="estimated-marginal-means.html"><i class="fa fa-check"></i><b>13</b> Estimated Marginal Means</a>
+<ul>
 <li class="chapter" data-level="13.1" data-path="estimated-marginal-means.html"><a href="estimated-marginal-means.html#a-note-of-caution"><i class="fa fa-check"></i><b>13.1</b> A note of caution</a></li>
 <li class="chapter" data-level="13.2" data-path="estimated-marginal-means.html"><a href="estimated-marginal-means.html#pairwise-comparisons"><i class="fa fa-check"></i><b>13.2</b> Pairwise Comparisons</a></li>
 <li class="chapter" data-level="13.3" data-path="estimated-marginal-means.html"><a href="estimated-marginal-means.html#customized-emmeans-contrasts"><i class="fa fa-check"></i><b>13.3</b> Customized <code>emmeans</code> contrasts</a></li>
@@ -228,47 +274,58 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 <li class="chapter" data-level="13.5" data-path="estimated-marginal-means.html"><a href="estimated-marginal-means.html#joint-tests"><i class="fa fa-check"></i><b>13.5</b> Joint tests</a></li>
 <li class="chapter" data-level="13.6" data-path="estimated-marginal-means.html"><a href="estimated-marginal-means.html#monte-carlo-simulations"><i class="fa fa-check"></i><b>13.6</b> Monte Carlo Simulations</a></li>
 </ul></li>
-<li class="chapter" data-level="14" data-path="beyond-superpower-i-mixed-models-with-simr.html"><a href="beyond-superpower-i-mixed-models-with-simr.html"><i class="fa fa-check"></i><b>14</b> Beyond Superpower I: Mixed Models with <code>simr</code></a><ul>
+<li class="chapter" data-level="14" data-path="beyond-superpower-i-mixed-models-with-simr.html"><a href="beyond-superpower-i-mixed-models-with-simr.html"><i class="fa fa-check"></i><b>14</b> Beyond Superpower I: Mixed Models with <code>simr</code></a>
+<ul>
 <li class="chapter" data-level="14.1" data-path="beyond-superpower-i-mixed-models-with-simr.html"><a href="beyond-superpower-i-mixed-models-with-simr.html#how-does-simr-work"><i class="fa fa-check"></i><b>14.1</b> How does <code>simr</code> work?</a></li>
 <li class="chapter" data-level="14.2" data-path="beyond-superpower-i-mixed-models-with-simr.html"><a href="beyond-superpower-i-mixed-models-with-simr.html#to-be-continued"><i class="fa fa-check"></i><b>14.2</b> To Be Continued…</a></li>
 </ul></li>
-<li class="chapter" data-level="15" data-path="beyond-superpower-ii-custom-simulations.html"><a href="beyond-superpower-ii-custom-simulations.html"><i class="fa fa-check"></i><b>15</b> Beyond Superpower II: Custom Simulations</a><ul>
-<li class="chapter" data-level="15.1" data-path="beyond-superpower-ii-custom-simulations.html"><a href="beyond-superpower-ii-custom-simulations.html#a-clincal-trial-with-a-binary-outcome"><i class="fa fa-check"></i><b>15.1</b> A Clincal Trial with a Binary Outcome</a><ul>
+<li class="chapter" data-level="15" data-path="beyond-superpower-ii-custom-simulations.html"><a href="beyond-superpower-ii-custom-simulations.html"><i class="fa fa-check"></i><b>15</b> Beyond Superpower II: Custom Simulations</a>
+<ul>
+<li class="chapter" data-level="15.1" data-path="beyond-superpower-ii-custom-simulations.html"><a href="beyond-superpower-ii-custom-simulations.html#a-clincal-trial-with-a-binary-outcome"><i class="fa fa-check"></i><b>15.1</b> A Clincal Trial with a Binary Outcome</a>
+<ul>
 <li class="chapter" data-level="15.1.1" data-path="beyond-superpower-ii-custom-simulations.html"><a href="beyond-superpower-ii-custom-simulations.html#proposed-study-and-approach"><i class="fa fa-check"></i><b>15.1.1</b> Proposed Study and Approach</a></li>
 <li class="chapter" data-level="15.1.2" data-path="beyond-superpower-ii-custom-simulations.html"><a href="beyond-superpower-ii-custom-simulations.html#step-1-create-a-data-generating-function"><i class="fa fa-check"></i><b>15.1.2</b> Step 1: Create a Data Generating Function</a></li>
 <li class="chapter" data-level="15.1.3" data-path="beyond-superpower-ii-custom-simulations.html"><a href="beyond-superpower-ii-custom-simulations.html#step-2-simulation"><i class="fa fa-check"></i><b>15.1.3</b> Step 2: Simulation</a></li>
 <li class="chapter" data-level="15.1.4" data-path="beyond-superpower-ii-custom-simulations.html"><a href="beyond-superpower-ii-custom-simulations.html#why-more-complicated-code"><i class="fa fa-check"></i><b>15.1.4</b> Why more complicated code?</a></li>
 <li class="chapter" data-level="15.1.5" data-path="beyond-superpower-ii-custom-simulations.html"><a href="beyond-superpower-ii-custom-simulations.html#conclusions-on-the-binary-rct-analysis"><i class="fa fa-check"></i><b>15.1.5</b> Conclusions on the Binary RCT Analysis</a></li>
 </ul></li>
-<li class="chapter" data-level="15.2" data-path="beyond-superpower-ii-custom-simulations.html"><a href="beyond-superpower-ii-custom-simulations.html#binary-rct-with-a-interim-analysis"><i class="fa fa-check"></i><b>15.2</b> Binary RCT with a Interim Analysis</a><ul>
+<li class="chapter" data-level="15.2" data-path="beyond-superpower-ii-custom-simulations.html"><a href="beyond-superpower-ii-custom-simulations.html#binary-rct-with-a-interim-analysis"><i class="fa fa-check"></i><b>15.2</b> Binary RCT with a Interim Analysis</a>
+<ul>
 <li class="chapter" data-level="15.2.1" data-path="beyond-superpower-ii-custom-simulations.html"><a href="beyond-superpower-ii-custom-simulations.html#proposed-study-and-approach-1"><i class="fa fa-check"></i><b>15.2.1</b> Proposed Study and Approach</a></li>
 </ul></li>
 <li class="chapter" data-level="15.3" data-path="beyond-superpower-ii-custom-simulations.html"><a href="beyond-superpower-ii-custom-simulations.html#conclusion-on-a-binary-rct-with-interim-analyses"><i class="fa fa-check"></i><b>15.3</b> Conclusion on a Binary RCT with Interim Analyses</a></li>
 </ul></li>
-<li class="chapter" data-level="" data-path="appendix-1-direct-comparison-to-pwr2ppl.html"><a href="appendix-1-direct-comparison-to-pwr2ppl.html"><i class="fa fa-check"></i>Appendix 1: Direct Comparison to pwr2ppl</a><ul>
-<li class="chapter" data-level="15.4" data-path="appendix-1-direct-comparison-to-pwr2ppl.html"><a href="appendix-1-direct-comparison-to-pwr2ppl.html#examples-from-chapter-5"><i class="fa fa-check"></i><b>15.4</b> Examples from Chapter 5</a><ul>
+<li class="chapter" data-level="" data-path="appendix-1-direct-comparison-to-pwr2ppl.html"><a href="appendix-1-direct-comparison-to-pwr2ppl.html"><i class="fa fa-check"></i>Appendix 1: Direct Comparison to pwr2ppl</a>
+<ul>
+<li class="chapter" data-level="15.4" data-path="appendix-1-direct-comparison-to-pwr2ppl.html"><a href="appendix-1-direct-comparison-to-pwr2ppl.html#examples-from-chapter-5"><i class="fa fa-check"></i><b>15.4</b> Examples from Chapter 5</a>
+<ul>
 <li class="chapter" data-level="15.4.1" data-path="appendix-1-direct-comparison-to-pwr2ppl.html"><a href="appendix-1-direct-comparison-to-pwr2ppl.html#example-5.15.2"><i class="fa fa-check"></i><b>15.4.1</b> Example 5.1/5.2</a></li>
 <li class="chapter" data-level="15.4.2" data-path="appendix-1-direct-comparison-to-pwr2ppl.html"><a href="appendix-1-direct-comparison-to-pwr2ppl.html#example-5.3"><i class="fa fa-check"></i><b>15.4.2</b> Example 5.3</a></li>
 </ul></li>
-<li class="chapter" data-level="15.5" data-path="appendix-1-direct-comparison-to-pwr2ppl.html"><a href="appendix-1-direct-comparison-to-pwr2ppl.html#examples-from-chapter-6"><i class="fa fa-check"></i><b>15.5</b> Examples from Chapter 6</a><ul>
+<li class="chapter" data-level="15.5" data-path="appendix-1-direct-comparison-to-pwr2ppl.html"><a href="appendix-1-direct-comparison-to-pwr2ppl.html#examples-from-chapter-6"><i class="fa fa-check"></i><b>15.5</b> Examples from Chapter 6</a>
+<ul>
 <li class="chapter" data-level="15.5.1" data-path="appendix-1-direct-comparison-to-pwr2ppl.html"><a href="appendix-1-direct-comparison-to-pwr2ppl.html#example-from-table-6.2"><i class="fa fa-check"></i><b>15.5.1</b> Example from Table 6.2</a></li>
 <li class="chapter" data-level="15.5.2" data-path="appendix-1-direct-comparison-to-pwr2ppl.html"><a href="appendix-1-direct-comparison-to-pwr2ppl.html#example-from-table-6.6"><i class="fa fa-check"></i><b>15.5.2</b> Example from Table 6.6</a></li>
 <li class="chapter" data-level="15.5.3" data-path="appendix-1-direct-comparison-to-pwr2ppl.html"><a href="appendix-1-direct-comparison-to-pwr2ppl.html#example-from-table-6.8"><i class="fa fa-check"></i><b>15.5.3</b> Example from Table 6.8</a></li>
 </ul></li>
-<li class="chapter" data-level="15.6" data-path="appendix-1-direct-comparison-to-pwr2ppl.html"><a href="appendix-1-direct-comparison-to-pwr2ppl.html#example-from-chapter-7"><i class="fa fa-check"></i><b>15.6</b> Example from Chapter 7</a><ul>
+<li class="chapter" data-level="15.6" data-path="appendix-1-direct-comparison-to-pwr2ppl.html"><a href="appendix-1-direct-comparison-to-pwr2ppl.html#example-from-chapter-7"><i class="fa fa-check"></i><b>15.6</b> Example from Chapter 7</a>
+<ul>
 <li class="chapter" data-level="15.6.1" data-path="appendix-1-direct-comparison-to-pwr2ppl.html"><a href="appendix-1-direct-comparison-to-pwr2ppl.html#from-table-7.2"><i class="fa fa-check"></i><b>15.6.1</b> From Table 7.2</a></li>
 </ul></li>
 </ul></li>
 <li class="chapter" data-level="" data-path="appendix-2-direct-comparison-to-morepower.html"><a href="appendix-2-direct-comparison-to-morepower.html"><i class="fa fa-check"></i>Appendix 2: Direct Comparison to MOREpower</a></li>
-<li class="chapter" data-level="" data-path="appendix-3-comparison-to-brysbaert.html"><a href="appendix-3-comparison-to-brysbaert.html"><i class="fa fa-check"></i>Appendix 3: Comparison to Brysbaert</a><ul>
-<li class="chapter" data-level="15.7" data-path="appendix-3-comparison-to-brysbaert.html"><a href="appendix-3-comparison-to-brysbaert.html#one-way-anova-1"><i class="fa fa-check"></i><b>15.7</b> One-Way ANOVA</a><ul>
+<li class="chapter" data-level="" data-path="appendix-3-comparison-to-brysbaert.html"><a href="appendix-3-comparison-to-brysbaert.html"><i class="fa fa-check"></i>Appendix 3: Comparison to Brysbaert</a>
+<ul>
+<li class="chapter" data-level="15.7" data-path="appendix-3-comparison-to-brysbaert.html"><a href="appendix-3-comparison-to-brysbaert.html#one-way-anova-1"><i class="fa fa-check"></i><b>15.7</b> One-Way ANOVA</a>
+<ul>
 <li class="chapter" data-level="15.7.1" data-path="appendix-3-comparison-to-brysbaert.html"><a href="appendix-3-comparison-to-brysbaert.html#three-conditions-replication"><i class="fa fa-check"></i><b>15.7.1</b> Three conditions replication</a></li>
 <li class="chapter" data-level="15.7.2" data-path="appendix-3-comparison-to-brysbaert.html"><a href="appendix-3-comparison-to-brysbaert.html#variation-1"><i class="fa fa-check"></i><b>15.7.2</b> Variation 1</a></li>
 <li class="chapter" data-level="15.7.3" data-path="appendix-3-comparison-to-brysbaert.html"><a href="appendix-3-comparison-to-brysbaert.html#three-conditions-replication-1"><i class="fa fa-check"></i><b>15.7.3</b> Three conditions replication</a></li>
 <li class="chapter" data-level="15.7.4" data-path="appendix-3-comparison-to-brysbaert.html"><a href="appendix-3-comparison-to-brysbaert.html#variation-2"><i class="fa fa-check"></i><b>15.7.4</b> Variation 2</a></li>
 <li class="chapter" data-level="15.7.5" data-path="appendix-3-comparison-to-brysbaert.html"><a href="appendix-3-comparison-to-brysbaert.html#three-conditions-replication-2"><i class="fa fa-check"></i><b>15.7.5</b> Three conditions replication</a></li>
 </ul></li>
-<li class="chapter" data-level="15.8" data-path="appendix-3-comparison-to-brysbaert.html"><a href="appendix-3-comparison-to-brysbaert.html#repeated-measures"><i class="fa fa-check"></i><b>15.8</b> Repeated Measures</a><ul>
+<li class="chapter" data-level="15.8" data-path="appendix-3-comparison-to-brysbaert.html"><a href="appendix-3-comparison-to-brysbaert.html#repeated-measures"><i class="fa fa-check"></i><b>15.8</b> Repeated Measures</a>
+<ul>
 <li class="chapter" data-level="15.8.1" data-path="appendix-3-comparison-to-brysbaert.html"><a href="appendix-3-comparison-to-brysbaert.html#reproducing-brysbaert-variation-1-changing-correlation"><i class="fa fa-check"></i><b>15.8.1</b> Reproducing Brysbaert Variation 1: Changing Correlation</a></li>
 </ul></li>
 </ul></li>
@@ -290,10 +347,10 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
           <div class="page-inner">
 
             <section class="normal" id="section-">
-<div id="the-experimental-design" class="section level1">
+<div id="the-experimental-design" class="section level1" number="2">
 <h1><span class="header-section-number">Chapter 2</span> The Experimental Design</h1>
 <p>Now that we have introduced the basics of what constitutes a power analysis we can move onto how to use <code>Superpower</code> as tool for power analyses. The first step is to define and specify the details of the experimental design. Currently, <code>Superpower</code> only provides power analysis capabilities for ANOVAs (and MANOVA for repeated measures) so all designs are currently defined by the <code>ANOVA_design</code> function.</p>
-<div id="anova_design-function" class="section level2">
+<div id="anova_design-function" class="section level2" number="2.1">
 <h2><span class="header-section-number">2.1</span> ANOVA_design function</h2>
 <p>Currently the <code>ANOVA_design</code> function can create designs with up to three factors, for both within, between, and mixed designs. It requires the following input: design, n, mu, sd, r, and optionally allows you to set <code>labelnames</code>.</p>
 <ol style="list-style-type: decimal">
@@ -305,7 +362,7 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 <li><code>labelnames</code>: This is an optional vector of words that indicates factor names and level names (see below).</li>
 <li>A final optional setting is to specify if you want to automatically print a plot or not (<code>plot</code> = TRUE or FALSE)</li>
 </ol>
-<div id="specifying-the-design-using-design" class="section level3">
+<div id="specifying-the-design-using-design" class="section level3" number="2.1.1">
 <h3><span class="header-section-number">2.1.1</span> Specifying the design using <code>design</code></h3>
 <p>The <code>design</code> option is used to specify the design.
 Every factor is specified with a number, indicating the number of levels of the factor, and a letter, b or w, to indicate whether the factor is manipulated between or within participants.
@@ -315,7 +372,7 @@ A <code>2b*3w</code> is a design with two factors (a 2b factor and a 3w factor),
 <strong>If there are multiple factors (the functions take up to three different factors) separate factors with a * (asterisk)</strong>.
 An example of a <code>2b*3w</code> design is a group of people in one condition who get a drug, and a group of people in another condition who get a placebo (hence <code>2b</code>), and we measure their health before they take the pill, one day after they take the pill, and a week after they take the pill (hence the <code>3w</code>).</p>
 </div>
-<div id="specifying-the-means-using-mu" class="section level3">
+<div id="specifying-the-means-using-mu" class="section level3" number="2.1.2">
 <h3><span class="header-section-number">2.1.2</span> Specifying the means using <code>mu</code></h3>
 <p>Note that for each cell in the design, a mean must be provided. Thus, for a <code>2b*3w</code> design, <strong>6</strong> (i.e., 2*3=6) means need to be entered.</p>
 <p>Means need to be entered in the correct order. ANOVA_design outputs a plot so you can check if you entered all means as you intended. Always carefully check if the plot that is generated matches your expectations.</p>
@@ -335,7 +392,7 @@ An example of a <code>2b*3w</code> design is a group of people in one condition 
 <p>The plot below visualizes means from 1 to 8 being entered in a vector: <code>mu = c(1, 2, 3, 4, 5, 6, 7, 8)</code> so you can see how the basic ordering works.</p>
 <p><img src="SuperpowerValidation_files/figure-html/unnamed-chunk-21-1.png" width="672" /></p>
 </div>
-<div id="specifying-label-names" class="section level3">
+<div id="specifying-label-names" class="section level3" number="2.1.3">
 <h3><span class="header-section-number">2.1.3</span> Specifying label names</h3>
 <p>To make sure the plots and tables with simulation results are easy to interpret, it really helps to name all factors and levels. You can enter the labels in the ‘labelnames’ variable. You can also choose not to specify names. Then all factors are indicated by letters (a, b, c) and all levels by numbers (a1, a2, a3).</p>
 <p>For the 2x3 design we have been using as an example, where there are 2 factors (condition and time of measurement), the first with 2 levels (placebo vs. medicine) and the second with three levels (time1, time2, and time3) we would enter the labels as follows:</p>
@@ -351,7 +408,7 @@ An example of a <code>2b*3w</code> design is a group of people in one condition 
 <code>c("time", "morning", "afternoon" ,"evening", "night", "group", "control", "experimental")</code></li>
 </ol>
 </div>
-<div id="specifying-the-correlation" class="section level3">
+<div id="specifying-the-correlation" class="section level3" number="2.1.4">
 <h3><span class="header-section-number">2.1.4</span> Specifying the correlation</h3>
 <p>Depending on whether factors are manipulated within or between, variables are correlated, or not. You can set the correlation for within-participant factors. You can either assume all factors have the same correlation (e.g., r = 0.7), or enter the correlations for each pair of observations separately by specifying a correlation matrix.</p>
 <p>In a 2x2 design, with factors A and B, each with 2 levels, there are 6 possible comparisons that can be made.</p>
@@ -364,10 +421,10 @@ An example of a <code>2b*3w</code> design is a group of people in one condition 
 <li>B1 vs. B2</li>
 </ol>
 <p>The number of possible comparisons is the product of the levels of all factors squared minus the product of all factors, divided by two. For a 2x2 design where each factor has two levels, this is:</p>
-<div class="sourceCode" id="cb38"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb38-1"><a href="the-experimental-design.html#cb38-1"></a>(((<span class="dv">2</span> <span class="op">*</span><span class="st"> </span><span class="dv">2</span>) <span class="op">^</span><span class="st"> </span><span class="dv">2</span>) <span class="op">-</span><span class="st"> </span>(<span class="dv">2</span> <span class="op">*</span><span class="st"> </span><span class="dv">2</span>))<span class="op">/</span><span class="dv">2</span></span></code></pre></div>
+<div class="sourceCode" id="cb38"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb38-1"><a href="the-experimental-design.html#cb38-1" aria-hidden="true" tabindex="-1"></a>(((<span class="dv">2</span> <span class="sc">*</span> <span class="dv">2</span>) <span class="sc">^</span> <span class="dv">2</span>) <span class="sc">-</span> (<span class="dv">2</span> <span class="sc">*</span> <span class="dv">2</span>))<span class="sc">/</span><span class="dv">2</span></span></code></pre></div>
 <pre><code>## [1] 6</code></pre>
 <p>The number of possible comparisons increases rapidly when adding factors and levels for each factor. For example, for a 2x2x4 design it is:</p>
-<div class="sourceCode" id="cb40"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb40-1"><a href="the-experimental-design.html#cb40-1"></a>(((<span class="dv">2</span> <span class="op">*</span><span class="st"> </span><span class="dv">2</span> <span class="op">*</span><span class="st"> </span><span class="dv">4</span>) <span class="op">^</span><span class="st"> </span><span class="dv">2</span>) <span class="op">-</span><span class="st"> </span>(<span class="dv">2</span> <span class="op">*</span><span class="st"> </span><span class="dv">2</span> <span class="op">*</span><span class="st"> </span><span class="dv">4</span>))<span class="op">/</span><span class="dv">2</span></span></code></pre></div>
+<div class="sourceCode" id="cb40"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb40-1"><a href="the-experimental-design.html#cb40-1" aria-hidden="true" tabindex="-1"></a>(((<span class="dv">2</span> <span class="sc">*</span> <span class="dv">2</span> <span class="sc">*</span> <span class="dv">4</span>) <span class="sc">^</span> <span class="dv">2</span>) <span class="sc">-</span> (<span class="dv">2</span> <span class="sc">*</span> <span class="dv">2</span> <span class="sc">*</span> <span class="dv">4</span>))<span class="sc">/</span><span class="dv">2</span></span></code></pre></div>
 <pre><code>## [1] 120</code></pre>
 <p>Each of these comparisons can have their own correlation if the factor is manipulated within subjects (if the factor is manipulated between subjects the correlation is 0).
 These correlations determine the covariance matrix.
@@ -420,23 +477,23 @@ The diagonal is generated dynamically (based on the standard deviation).</p>
 </table>
 <div style="page-break-after: always;"></div>
 <p>We would enter this correlation matrix in the <code>ANOVA_design</code> function as:</p>
-<div class="sourceCode" id="cb42"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb42-1"><a href="the-experimental-design.html#cb42-1"></a>design_result &lt;-<span class="st"> </span><span class="kw">ANOVA_design</span>(<span class="dt">design =</span> <span class="st">&quot;2w*2w&quot;</span>,</span>
-<span id="cb42-2"><a href="the-experimental-design.html#cb42-2"></a>                              <span class="dt">n =</span> <span class="dv">80</span>,</span>
-<span id="cb42-3"><a href="the-experimental-design.html#cb42-3"></a>                              <span class="dt">mu =</span> <span class="kw">c</span>(<span class="fl">1.1</span>, <span class="fl">1.2</span>,</span>
-<span id="cb42-4"><a href="the-experimental-design.html#cb42-4"></a>                                     <span class="fl">1.3</span>, <span class="fl">1.4</span>),</span>
-<span id="cb42-5"><a href="the-experimental-design.html#cb42-5"></a>                              <span class="dt">sd =</span> <span class="dv">1</span>,</span>
-<span id="cb42-6"><a href="the-experimental-design.html#cb42-6"></a>                              r &lt;-<span class="st"> </span><span class="kw">c</span>(<span class="fl">0.91</span>, <span class="fl">0.92</span>,</span>
-<span id="cb42-7"><a href="the-experimental-design.html#cb42-7"></a>                                     <span class="fl">0.93</span>, <span class="fl">0.94</span>,</span>
-<span id="cb42-8"><a href="the-experimental-design.html#cb42-8"></a>                                     <span class="fl">0.95</span>, <span class="fl">0.96</span>),</span>
-<span id="cb42-9"><a href="the-experimental-design.html#cb42-9"></a>                              <span class="dt">labelnames =</span> <span class="kw">c</span>(<span class="st">&quot;COLOR&quot;</span>,</span>
-<span id="cb42-10"><a href="the-experimental-design.html#cb42-10"></a>                                             <span class="st">&quot;red&quot;</span>, <span class="st">&quot;blue&quot;</span>,</span>
-<span id="cb42-11"><a href="the-experimental-design.html#cb42-11"></a>                                             <span class="st">&quot;SPEED&quot;</span>,</span>
-<span id="cb42-12"><a href="the-experimental-design.html#cb42-12"></a>                                             <span class="st">&quot;fast&quot;</span>, <span class="st">&quot;slow&quot;</span>),</span>
-<span id="cb42-13"><a href="the-experimental-design.html#cb42-13"></a>                              <span class="dt">plot =</span> <span class="ot">TRUE</span>)</span></code></pre></div>
+<div class="sourceCode" id="cb42"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb42-1"><a href="the-experimental-design.html#cb42-1" aria-hidden="true" tabindex="-1"></a>design_result <span class="ot">&lt;-</span> <span class="fu">ANOVA_design</span>(<span class="at">design =</span> <span class="st">&quot;2w*2w&quot;</span>,</span>
+<span id="cb42-2"><a href="the-experimental-design.html#cb42-2" aria-hidden="true" tabindex="-1"></a>                              <span class="at">n =</span> <span class="dv">80</span>,</span>
+<span id="cb42-3"><a href="the-experimental-design.html#cb42-3" aria-hidden="true" tabindex="-1"></a>                              <span class="at">mu =</span> <span class="fu">c</span>(<span class="fl">1.1</span>, <span class="fl">1.2</span>,</span>
+<span id="cb42-4"><a href="the-experimental-design.html#cb42-4" aria-hidden="true" tabindex="-1"></a>                                     <span class="fl">1.3</span>, <span class="fl">1.4</span>),</span>
+<span id="cb42-5"><a href="the-experimental-design.html#cb42-5" aria-hidden="true" tabindex="-1"></a>                              <span class="at">sd =</span> <span class="dv">1</span>,</span>
+<span id="cb42-6"><a href="the-experimental-design.html#cb42-6" aria-hidden="true" tabindex="-1"></a>                              r <span class="ot">&lt;-</span> <span class="fu">c</span>(<span class="fl">0.91</span>, <span class="fl">0.92</span>,</span>
+<span id="cb42-7"><a href="the-experimental-design.html#cb42-7" aria-hidden="true" tabindex="-1"></a>                                     <span class="fl">0.93</span>, <span class="fl">0.94</span>,</span>
+<span id="cb42-8"><a href="the-experimental-design.html#cb42-8" aria-hidden="true" tabindex="-1"></a>                                     <span class="fl">0.95</span>, <span class="fl">0.96</span>),</span>
+<span id="cb42-9"><a href="the-experimental-design.html#cb42-9" aria-hidden="true" tabindex="-1"></a>                              <span class="at">labelnames =</span> <span class="fu">c</span>(<span class="st">&quot;COLOR&quot;</span>,</span>
+<span id="cb42-10"><a href="the-experimental-design.html#cb42-10" aria-hidden="true" tabindex="-1"></a>                                             <span class="st">&quot;red&quot;</span>, <span class="st">&quot;blue&quot;</span>,</span>
+<span id="cb42-11"><a href="the-experimental-design.html#cb42-11" aria-hidden="true" tabindex="-1"></a>                                             <span class="st">&quot;SPEED&quot;</span>,</span>
+<span id="cb42-12"><a href="the-experimental-design.html#cb42-12" aria-hidden="true" tabindex="-1"></a>                                             <span class="st">&quot;fast&quot;</span>, <span class="st">&quot;slow&quot;</span>),</span>
+<span id="cb42-13"><a href="the-experimental-design.html#cb42-13" aria-hidden="true" tabindex="-1"></a>                              <span class="at">plot =</span> <span class="cn">TRUE</span>)</span></code></pre></div>
 <p><img src="SuperpowerValidation_files/figure-html/unnamed-chunk-23-1.png" width="672" />
 
 We can check the correlation matrix by printing it from the design_result object to check if it was entered the way we wanted:</p>
-<div class="sourceCode" id="cb43"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb43-1"><a href="the-experimental-design.html#cb43-1"></a>design_result<span class="op">$</span>cor_mat</span></code></pre></div>
+<div class="sourceCode" id="cb43"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb43-1"><a href="the-experimental-design.html#cb43-1" aria-hidden="true" tabindex="-1"></a>design_result<span class="sc">$</span>cor_mat</span></code></pre></div>
 <table class="table" style="margin-left: auto; margin-right: auto;">
 <caption>
 <span id="tab:unnamed-chunk-25">Table 2.1: </span>Correlation Matrix
@@ -533,7 +590,7 @@ blue_slow
 <p>We should also check the covariance-variance matrix to ensure the <code>ANOVA_design</code> function is working properly.
 The variance should be the diagonal element while the off-diagonal elements should be equal to <code>covariance = correlation*variance</code> or <span class="math inline">\(cov_{x,y}=\frac{\sum_{i=1}^{N}(x_{i}-\bar{x})(y_{i}-\bar{y})}{N-1}\)</span>.
 In this case, it is identical to the correlation matrix because the variance is equal to 1.</p>
-<div class="sourceCode" id="cb44"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb44-1"><a href="the-experimental-design.html#cb44-1"></a>design_result<span class="op">$</span>sigmatrix</span></code></pre></div>
+<div class="sourceCode" id="cb44"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb44-1"><a href="the-experimental-design.html#cb44-1" aria-hidden="true" tabindex="-1"></a>design_result<span class="sc">$</span>sigmatrix</span></code></pre></div>
 <table class="table" style="margin-left: auto; margin-right: auto;">
 <caption>
 <span id="tab:unnamed-chunk-27">Table 2.2: </span>Covariance-Variance Matrix
@@ -628,7 +685,7 @@ blue_slow
 </tbody>
 </table>
 </div>
-<div id="specifying-the-sample-size" class="section level3">
+<div id="specifying-the-sample-size" class="section level3" number="2.1.5">
 <h3><span class="header-section-number">2.1.5</span> Specifying the sample size</h3>
 <p>You can set the sample size <strong>per condition</strong> by setting a value for <code>n</code>.
 It is beneficial to have a fully balanced design (the same sample size in each condition) in case of any violations of assumptions (such as homogeneity of variances), but this might not always be possible in real life, and it can be more efficient to collect a larger sample size in some conditions (e.g., if the population from which other participants are drawn is more difficult to collect).
@@ -636,7 +693,7 @@ Superpower allows you to enter a single value (the same sample size in each cond
 <p>This means for the <code>2w*2w</code> design above there is a total of 80 participants/subjects with a total of 320 observations.
 Instead of 80 participants in each condition, for a <code>2b*2b</code> between subjects design, we could also specify the sample size as <code>n = c(60, 80, 80, 60)</code> if we plan to collect 60 participants in 2 conditions and 80 participants in 2 other conditions.</p>
 </div>
-<div id="specifying-the-standard-deviation" class="section level3">
+<div id="specifying-the-standard-deviation" class="section level3" number="2.1.6">
 <h3><span class="header-section-number">2.1.6</span> Specifying the standard deviation</h3>
 <p>You can set the standard deviation(s) by setting a value of <code>sd</code>.
 You can enter either a single standard deviation for all conditions, or you can <strong>violate the assumption of homogeneity of variance</strong> by entering a vector with different standard deviations for each conditions (e.g., <code>sd = c(0.8, 1.2, 0.92, 1.12)</code> for a <code>2b*2b</code> design.
@@ -657,7 +714,6 @@ It is therefore useful to perform sensitivity analyses (e.g., running the simula
     </div>
   </div>
 <script src="libs/gitbook-2.6.7/js/app.min.js"></script>
-<script src="libs/gitbook-2.6.7/js/lunr.js"></script>
 <script src="libs/gitbook-2.6.7/js/clipboard.min.js"></script>
 <script src="libs/gitbook-2.6.7/js/plugin-search.js"></script>
 <script src="libs/gitbook-2.6.7/js/plugin-sharing.js"></script>
@@ -676,6 +732,7 @@ gitbook.start({
 "weibo": false,
 "instapaper": false,
 "vk": false,
+"whatsapp": false,
 "all": ["facebook", "twitter", "linkedin", "weibo", "instapaper"]
 },
 "fontsettings": {
@@ -696,6 +753,10 @@ gitbook.start({
 "text": null
 },
 "download": ["SuperpowerValidation.pdf", "SuperpowerValidation.epub"],
+"search": {
+"engine": "fuse",
+"options": null
+},
 "toc": {
 "collapse": "section",
 "scroll_highlight": true

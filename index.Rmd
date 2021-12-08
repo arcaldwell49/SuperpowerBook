@@ -9,6 +9,8 @@ biblio-style: apalike
 link-citations: yes
 description: "This is a book describing the capabilities of the Superpower R package."
 output:
+  bookdown::pdf_book:
+    keep_tex: yes
   bookdown::tufte_book2:
     keep_tex: yes
   bookdown::gitbook:
@@ -20,9 +22,11 @@ output:
         after: null
 ---
 
+```{tex}
+
+```
+
 This is a compilation of documents for [Superpower](https://github.com/arcaldwell49/Superpower) R package written in **Markdown** [@R-rmarkdown] and compiled by **Bookdown** [@R-bookdown]. 
-
-
 
 ```{r include=FALSE}
 # automatically create a bib database for R packages
@@ -48,7 +52,7 @@ In this book we will display a variety of ways the `Superpower` package can be u
 
 ### Contributors {-}
 
-Daniël Lakens ![](screenshots/orcid.png) https://orcid.org/0000-0002-0247-239X.
+Dani&euml;l Lakens ![](screenshots/orcid.png) https://orcid.org/0000-0002-0247-239X.
 
 Aaron R. Caldwell ![](screenshots/orcid.png) https://orcid.org/0000-0002-4541-6283.
 
@@ -90,7 +94,10 @@ library(here) # Smart directory manipulation
 ```
 
 ```{r global_options, include=FALSE}
-options(knitr.table.format = "latex")
+
+if(knitr::is_latex_output()){
+  options(knitr.table.format = "latex")
+}
 
 ```
 
