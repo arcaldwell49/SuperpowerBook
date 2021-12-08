@@ -6,7 +6,7 @@
   <meta http-equiv="X-UA-Compatible" content="IE=edge" />
   <title>References | Power Analysis with Superpower</title>
   <meta name="description" content="This is a book describing the capabilities of the Superpower R package." />
-  <meta name="generator" content="bookdown 0.21 and GitBook 2.6.7" />
+  <meta name="generator" content="bookdown 0.24 and GitBook 2.6.7" />
 
   <meta property="og:title" content="References | Power Analysis with Superpower" />
   <meta property="og:type" content="book" />
@@ -21,19 +21,21 @@
   <meta name="twitter:description" content="This is a book describing the capabilities of the Superpower R package." />
   
 
-<meta name="author" content="Aaron R. Caldwell, Daniël Lakens, and Chelsea M. Parlett-Pelleriti" />
+<meta name="author" content="Aaron R. Caldwell, Daniël Lakens, Chelsea M. Parlett-Pelleriti, and Guy Prochilo" />
 
 
-<meta name="date" content="2021-01-25" />
+<meta name="date" content="2021-12-08" />
 
   <meta name="viewport" content="width=device-width, initial-scale=1" />
   <meta name="apple-mobile-web-app-capable" content="yes" />
   <meta name="apple-mobile-web-app-status-bar-style" content="black" />
   
   
-<link rel="prev" href="appendix-2-direct-comparison-to-morepower.html"/>
+<link rel="prev" href="appendix-3-comparison-to-brysbaert.html"/>
 
-<script src="libs/jquery-2.2.3/jquery.min.js"></script>
+<script src="libs/header-attrs-2.11/header-attrs.js"></script>
+<script src="libs/jquery-3.6.0/jquery-3.6.0.min.js"></script>
+<script src="https://cdn.jsdelivr.net/npm/fuse.js@6.4.6/dist/fuse.min.js"></script>
 <link href="libs/gitbook-2.6.7/css/style.css" rel="stylesheet" />
 <link href="libs/gitbook-2.6.7/css/plugin-table.css" rel="stylesheet" />
 <link href="libs/gitbook-2.6.7/css/plugin-bookdown.css" rel="stylesheet" />
@@ -49,27 +51,25 @@
 
 
 
-
-<script src="libs/accessible-code-block-0.0.1/empty-anchor.js"></script>
-<link href="libs/anchor-sections-1.0/anchor-sections.css" rel="stylesheet" />
-<script src="libs/anchor-sections-1.0/anchor-sections.js"></script>
+<link href="libs/anchor-sections-1.0.1/anchor-sections.css" rel="stylesheet" />
+<script src="libs/anchor-sections-1.0.1/anchor-sections.js"></script>
 <script src="libs/kePrint-0.0.1/kePrint.js"></script>
 <link href="libs/lightable-0.0.1/lightable.css" rel="stylesheet" />
 
 
 <style type="text/css">
-code.sourceCode > span { display: inline-block; line-height: 1.25; }
-code.sourceCode > span { color: inherit; text-decoration: inherit; }
-code.sourceCode > span:empty { height: 1.2em; }
+pre > code.sourceCode { white-space: pre; position: relative; }
+pre > code.sourceCode > span { display: inline-block; line-height: 1.25; }
+pre > code.sourceCode > span:empty { height: 1.2em; }
 .sourceCode { overflow: visible; }
-code.sourceCode { white-space: pre; position: relative; }
+code.sourceCode > span { color: inherit; text-decoration: inherit; }
 pre.sourceCode { margin: 0; }
 @media screen {
 div.sourceCode { overflow: auto; }
 }
 @media print {
-code.sourceCode { white-space: pre-wrap; }
-code.sourceCode > span { text-indent: -5em; padding-left: 5em; }
+pre > code.sourceCode { white-space: pre-wrap; }
+pre > code.sourceCode > span { text-indent: -5em; padding-left: 5em; }
 }
 pre.numberSource code
   { counter-reset: source-line 0; }
@@ -89,7 +89,7 @@ pre.numberSource { margin-left: 3em; border-left: 1px solid #aaaaaa;  padding-le
 div.sourceCode
   {   }
 @media screen {
-code.sourceCode > span > a:first-child::before { text-decoration: underline; }
+pre > code.sourceCode > span > a:first-child::before { text-decoration: underline; }
 }
 code span.al { color: #ff0000; font-weight: bold; } /* Alert */
 code span.an { color: #60a0b0; font-weight: bold; font-style: italic; } /* Annotation */
@@ -122,6 +122,29 @@ code span.vs { color: #4070a0; } /* VerbatimString */
 code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warning */
 </style>
 
+<style type="text/css">
+/* Used with Pandoc 2.11+ new --citeproc when CSL is used */
+div.csl-bib-body { }
+div.csl-entry {
+  clear: both;
+}
+.hanging div.csl-entry {
+  margin-left:2em;
+  text-indent:-2em;
+}
+div.csl-left-margin {
+  min-width:2em;
+  float:left;
+}
+div.csl-right-inline {
+  margin-left:2em;
+  padding-left:1em;
+}
+div.csl-indent {
+  margin-left: 2em;
+}
+</style>
+
 <link rel="stylesheet" href="style.css" type="text/css" />
 </head>
 
@@ -135,123 +158,178 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
       <nav role="navigation">
 
 <ul class="summary">
-<li><a href="./">Superpower</a></li>
-
-<li class="divider"></li>
-<li class="chapter" data-level="" data-path="index.html"><a href="index.html"><i class="fa fa-check"></i>Preface</a><ul>
+<li class="chapter" data-level="" data-path="index.html"><a href="index.html"><i class="fa fa-check"></i>Preface</a>
+<ul>
 <li class="chapter" data-level="" data-path="index.html"><a href="index.html#contributors"><i class="fa fa-check"></i>Contributors</a></li>
 <li class="chapter" data-level="" data-path="index.html"><a href="index.html#funding"><i class="fa fa-check"></i>Funding</a></li>
 </ul></li>
-<li class="chapter" data-level="1" data-path="the-experimental-design.html"><a href="the-experimental-design.html"><i class="fa fa-check"></i><b>1</b> The Experimental Design</a><ul>
-<li class="chapter" data-level="1.1" data-path="the-experimental-design.html"><a href="the-experimental-design.html#anova_design-function"><i class="fa fa-check"></i><b>1.1</b> ANOVA_design function</a><ul>
-<li class="chapter" data-level="1.1.1" data-path="the-experimental-design.html"><a href="the-experimental-design.html#specifying-the-design-using-design"><i class="fa fa-check"></i><b>1.1.1</b> Specifying the design using <code>design</code></a></li>
-<li class="chapter" data-level="1.1.2" data-path="the-experimental-design.html"><a href="the-experimental-design.html#specifying-the-means-using-mu"><i class="fa fa-check"></i><b>1.1.2</b> Specifying the means using <code>mu</code></a></li>
-<li class="chapter" data-level="1.1.3" data-path="the-experimental-design.html"><a href="the-experimental-design.html#specifying-label-names"><i class="fa fa-check"></i><b>1.1.3</b> Specifying label names</a></li>
-<li class="chapter" data-level="1.1.4" data-path="the-experimental-design.html"><a href="the-experimental-design.html#specifying-the-correlation"><i class="fa fa-check"></i><b>1.1.4</b> Specifying the correlation</a></li>
-<li class="chapter" data-level="1.1.5" data-path="the-experimental-design.html"><a href="the-experimental-design.html#specifying-the-sample-size"><i class="fa fa-check"></i><b>1.1.5</b> Specifying the sample size</a></li>
-<li class="chapter" data-level="1.1.6" data-path="the-experimental-design.html"><a href="the-experimental-design.html#specifying-the-standard-deviation"><i class="fa fa-check"></i><b>1.1.6</b> Specifying the standard deviation</a></li>
+<li class="chapter" data-level="1" data-path="introduction-to-power-analysis.html"><a href="introduction-to-power-analysis.html"><i class="fa fa-check"></i><b>1</b> Introduction to Power Analysis</a>
+<ul>
+<li class="chapter" data-level="1.1" data-path="introduction-to-power-analysis.html"><a href="introduction-to-power-analysis.html#overview-of-power-analysis"><i class="fa fa-check"></i><b>1.1</b> Overview of Power Analysis</a></li>
+<li class="chapter" data-level="1.2" data-path="introduction-to-power-analysis.html"><a href="introduction-to-power-analysis.html#error-and-power"><i class="fa fa-check"></i><b>1.2</b> Error and Power</a></li>
+<li class="chapter" data-level="1.3" data-path="introduction-to-power-analysis.html"><a href="introduction-to-power-analysis.html#effect-size"><i class="fa fa-check"></i><b>1.3</b> Effect size</a></li>
+<li class="chapter" data-level="1.4" data-path="introduction-to-power-analysis.html"><a href="introduction-to-power-analysis.html#samp_vs_pop"><i class="fa fa-check"></i><b>1.4</b> Sample effect size vs. population effect size</a></li>
+<li class="chapter" data-level="1.5" data-path="introduction-to-power-analysis.html"><a href="introduction-to-power-analysis.html#safeguard-effect-size"><i class="fa fa-check"></i><b>1.5</b> Safeguard Effect Size</a></li>
+<li class="chapter" data-level="1.6" data-path="introduction-to-power-analysis.html"><a href="introduction-to-power-analysis.html#post-hoc-power-analysis"><i class="fa fa-check"></i><b>1.6</b> <em>Post hoc</em> power analysis</a>
+<ul>
+<li class="chapter" data-level="1.6.1" data-path="introduction-to-power-analysis.html"><a href="introduction-to-power-analysis.html#the-sample-effect-size-is-not-the-population-effect-size"><i class="fa fa-check"></i><b>1.6.1</b> The sample effect size is <em>not</em> the population effect size</a></li>
+<li class="chapter" data-level="1.6.2" data-path="introduction-to-power-analysis.html"><a href="introduction-to-power-analysis.html#post-hoc-power-is-merely-a-transformation-of-your-obtained-p-value"><i class="fa fa-check"></i><b>1.6.2</b> <em>Post hoc</em> power is merely a transformation of your obtained <em>p</em> value</a></li>
+</ul></li>
+<li class="chapter" data-level="1.7" data-path="introduction-to-power-analysis.html"><a href="introduction-to-power-analysis.html#the-minimal-detectable-effect-size"><i class="fa fa-check"></i><b>1.7</b> The Minimal Detectable Effect Size</a></li>
+</ul></li>
+<li class="chapter" data-level="2" data-path="the-experimental-design.html"><a href="the-experimental-design.html"><i class="fa fa-check"></i><b>2</b> The Experimental Design</a>
+<ul>
+<li class="chapter" data-level="2.1" data-path="the-experimental-design.html"><a href="the-experimental-design.html#anova_design-function"><i class="fa fa-check"></i><b>2.1</b> ANOVA_design function</a>
+<ul>
+<li class="chapter" data-level="2.1.1" data-path="the-experimental-design.html"><a href="the-experimental-design.html#specifying-the-design-using-design"><i class="fa fa-check"></i><b>2.1.1</b> Specifying the design using <code>design</code></a></li>
+<li class="chapter" data-level="2.1.2" data-path="the-experimental-design.html"><a href="the-experimental-design.html#specifying-the-means-using-mu"><i class="fa fa-check"></i><b>2.1.2</b> Specifying the means using <code>mu</code></a></li>
+<li class="chapter" data-level="2.1.3" data-path="the-experimental-design.html"><a href="the-experimental-design.html#specifying-label-names"><i class="fa fa-check"></i><b>2.1.3</b> Specifying label names</a></li>
+<li class="chapter" data-level="2.1.4" data-path="the-experimental-design.html"><a href="the-experimental-design.html#specifying-the-correlation"><i class="fa fa-check"></i><b>2.1.4</b> Specifying the correlation</a></li>
+<li class="chapter" data-level="2.1.5" data-path="the-experimental-design.html"><a href="the-experimental-design.html#specifying-the-sample-size"><i class="fa fa-check"></i><b>2.1.5</b> Specifying the sample size</a></li>
+<li class="chapter" data-level="2.1.6" data-path="the-experimental-design.html"><a href="the-experimental-design.html#specifying-the-standard-deviation"><i class="fa fa-check"></i><b>2.1.6</b> Specifying the standard deviation</a></li>
 </ul></li>
 </ul></li>
-<li class="chapter" data-level="2" data-path="one-way-anova.html"><a href="one-way-anova.html"><i class="fa fa-check"></i><b>2</b> One-Way ANOVA</a><ul>
-<li class="chapter" data-level="2.1" data-path="one-way-anova.html"><a href="one-way-anova.html#introduction"><i class="fa fa-check"></i><b>2.1</b> Introduction</a><ul>
-<li class="chapter" data-level="2.1.1" data-path="one-way-anova.html"><a href="one-way-anova.html#two-conditions"><i class="fa fa-check"></i><b>2.1.1</b> Two conditions</a></li>
-<li class="chapter" data-level="2.1.2" data-path="one-way-anova.html"><a href="one-way-anova.html#three-conditions"><i class="fa fa-check"></i><b>2.1.2</b> Three conditions</a></li>
-<li class="chapter" data-level="2.1.3" data-path="one-way-anova.html"><a href="one-way-anova.html#power-for-simple-effects"><i class="fa fa-check"></i><b>2.1.3</b> Power for simple effects</a></li>
+<li class="chapter" data-level="3" data-path="one-way-anova.html"><a href="one-way-anova.html"><i class="fa fa-check"></i><b>3</b> One-Way ANOVA</a>
+<ul>
+<li class="chapter" data-level="3.1" data-path="one-way-anova.html"><a href="one-way-anova.html#introduction"><i class="fa fa-check"></i><b>3.1</b> Introduction</a>
+<ul>
+<li class="chapter" data-level="3.1.1" data-path="one-way-anova.html"><a href="one-way-anova.html#two-conditions"><i class="fa fa-check"></i><b>3.1.1</b> Two conditions</a></li>
+<li class="chapter" data-level="3.1.2" data-path="one-way-anova.html"><a href="one-way-anova.html#three-conditions"><i class="fa fa-check"></i><b>3.1.2</b> Three conditions</a></li>
+<li class="chapter" data-level="3.1.3" data-path="one-way-anova.html"><a href="one-way-anova.html#power-for-simple-effects"><i class="fa fa-check"></i><b>3.1.3</b> Power for simple effects</a></li>
 </ul></li>
-<li class="chapter" data-level="2.2" data-path="one-way-anova.html"><a href="one-way-anova.html#effect-size-estimates-for-one-way-anova"><i class="fa fa-check"></i><b>2.2</b> Effect Size Estimates for One-Way ANOVA</a><ul>
-<li class="chapter" data-level="2.2.1" data-path="one-way-anova.html"><a href="one-way-anova.html#three-conditions-small-effect-size"><i class="fa fa-check"></i><b>2.2.1</b> Three conditions, small effect size</a></li>
-<li class="chapter" data-level="2.2.2" data-path="one-way-anova.html"><a href="one-way-anova.html#four-conditions-medium-effect-size"><i class="fa fa-check"></i><b>2.2.2</b> Four conditions, medium effect size</a></li>
-<li class="chapter" data-level="2.2.3" data-path="one-way-anova.html"><a href="one-way-anova.html#two-conditions-large-effect-size"><i class="fa fa-check"></i><b>2.2.3</b> Two conditions, large effect size</a></li>
-</ul></li>
-</ul></li>
-<li class="chapter" data-level="3" data-path="repeated-measures-anova.html"><a href="repeated-measures-anova.html"><i class="fa fa-check"></i><b>3</b> Repeated Measures ANOVA</a><ul>
-<li class="chapter" data-level="3.1" data-path="repeated-measures-anova.html"><a href="repeated-measures-anova.html#part-1"><i class="fa fa-check"></i><b>3.1</b> Part 1</a><ul>
-<li class="chapter" data-level="3.1.1" data-path="repeated-measures-anova.html"><a href="repeated-measures-anova.html#two-conditions-medium-effect-size"><i class="fa fa-check"></i><b>3.1.1</b> Two conditions, medium effect size</a></li>
-</ul></li>
-<li class="chapter" data-level="3.2" data-path="repeated-measures-anova.html"><a href="repeated-measures-anova.html#part-2"><i class="fa fa-check"></i><b>3.2</b> Part 2</a><ul>
-<li class="chapter" data-level="3.2.1" data-path="repeated-measures-anova.html"><a href="repeated-measures-anova.html#the-relation-between-cohens-f-and-cohens-d"><i class="fa fa-check"></i><b>3.2.1</b> The relation between Cohen’s f and Cohen’s d</a></li>
-<li class="chapter" data-level="3.2.2" data-path="repeated-measures-anova.html"><a href="repeated-measures-anova.html#three-within-conditions-medium-effect-size"><i class="fa fa-check"></i><b>3.2.2</b> Three within conditions, medium effect size</a></li>
-</ul></li>
-<li class="chapter" data-level="3.3" data-path="repeated-measures-anova.html"><a href="repeated-measures-anova.html#part-3"><i class="fa fa-check"></i><b>3.3</b> Part 3</a></li>
-<li class="chapter" data-level="3.4" data-path="repeated-measures-anova.html"><a href="repeated-measures-anova.html#part-4"><i class="fa fa-check"></i><b>3.4</b> Part 4</a><ul>
-<li class="chapter" data-level="3.4.1" data-path="repeated-measures-anova.html"><a href="repeated-measures-anova.html#x2-anova-within-within-design"><i class="fa fa-check"></i><b>3.4.1</b> 2x2 ANOVA, within-within design</a></li>
-<li class="chapter" data-level="3.4.2" data-path="repeated-measures-anova.html"><a href="repeated-measures-anova.html#examine-variation-of-means-and-correlation"><i class="fa fa-check"></i><b>3.4.2</b> Examine variation of means and correlation</a></li>
-</ul></li>
-<li class="chapter" data-level="3.5" data-path="repeated-measures-anova.html"><a href="repeated-measures-anova.html#part-5"><i class="fa fa-check"></i><b>3.5</b> Part 5</a><ul>
-<li class="chapter" data-level="3.5.1" data-path="repeated-measures-anova.html"><a href="repeated-measures-anova.html#x2-anova-within-design"><i class="fa fa-check"></i><b>3.5.1</b> 2x2 ANOVA, within design</a></li>
-</ul></li>
-<li class="chapter" data-level="3.6" data-path="repeated-measures-anova.html"><a href="repeated-measures-anova.html#multivariate-anova-manova"><i class="fa fa-check"></i><b>3.6</b> Multivariate ANOVA (MANOVA)</a></li>
-</ul></li>
-<li class="chapter" data-level="4" data-path="mixed-anova.html"><a href="mixed-anova.html"><i class="fa fa-check"></i><b>4</b> Mixed ANOVA</a><ul>
-<li class="chapter" data-level="4.1" data-path="mixed-anova.html"><a href="mixed-anova.html#simple-mixed-designs"><i class="fa fa-check"></i><b>4.1</b> Simple Mixed Designs</a></li>
-<li class="chapter" data-level="4.2" data-path="mixed-anova.html"><a href="mixed-anova.html#complex-mixed-designs"><i class="fa fa-check"></i><b>4.2</b> Complex Mixed Designs</a><ul>
-<li class="chapter" data-level="4.2.1" data-path="mixed-anova.html"><a href="mixed-anova.html#b3w-design"><i class="fa fa-check"></i><b>4.2.1</b> 2b*3w Design</a></li>
-<li class="chapter" data-level="4.2.2" data-path="mixed-anova.html"><a href="mixed-anova.html#b4w-design"><i class="fa fa-check"></i><b>4.2.2</b> 2b*4w Design</a></li>
+<li class="chapter" data-level="3.2" data-path="one-way-anova.html"><a href="one-way-anova.html#effect-size-estimates-for-one-way-anova"><i class="fa fa-check"></i><b>3.2</b> Effect Size Estimates for One-Way ANOVA</a>
+<ul>
+<li class="chapter" data-level="3.2.1" data-path="one-way-anova.html"><a href="one-way-anova.html#three-conditions-small-effect-size"><i class="fa fa-check"></i><b>3.2.1</b> Three conditions, small effect size</a></li>
+<li class="chapter" data-level="3.2.2" data-path="one-way-anova.html"><a href="one-way-anova.html#four-conditions-medium-effect-size"><i class="fa fa-check"></i><b>3.2.2</b> Four conditions, medium effect size</a></li>
+<li class="chapter" data-level="3.2.3" data-path="one-way-anova.html"><a href="one-way-anova.html#two-conditions-large-effect-size"><i class="fa fa-check"></i><b>3.2.3</b> Two conditions, large effect size</a></li>
 </ul></li>
 </ul></li>
-<li class="chapter" data-level="5" data-path="power-for-three-way-interactions.html"><a href="power-for-three-way-interactions.html"><i class="fa fa-check"></i><b>5</b> Power for Three-way Interactions</a></li>
-<li class="chapter" data-level="6" data-path="the-no-way-interactions.html"><a href="the-no-way-interactions.html"><i class="fa fa-check"></i><b>6</b> The ‘No-Way’ Interactions</a></li>
-<li class="chapter" data-level="7" data-path="effect-of-varying-designs-on-power.html"><a href="effect-of-varying-designs-on-power.html"><i class="fa fa-check"></i><b>7</b> Effect of Varying Designs on Power</a><ul>
-<li class="chapter" data-level="7.1" data-path="effect-of-varying-designs-on-power.html"><a href="effect-of-varying-designs-on-power.html#within-designs"><i class="fa fa-check"></i><b>7.1</b> Within Designs</a></li>
+<li class="chapter" data-level="4" data-path="repeated-measures-anova.html"><a href="repeated-measures-anova.html"><i class="fa fa-check"></i><b>4</b> Repeated Measures ANOVA</a>
+<ul>
+<li class="chapter" data-level="4.1" data-path="repeated-measures-anova.html"><a href="repeated-measures-anova.html#part-1"><i class="fa fa-check"></i><b>4.1</b> Part 1</a>
+<ul>
+<li class="chapter" data-level="4.1.1" data-path="repeated-measures-anova.html"><a href="repeated-measures-anova.html#two-conditions-medium-effect-size"><i class="fa fa-check"></i><b>4.1.1</b> Two conditions, medium effect size</a></li>
 </ul></li>
-<li class="chapter" data-level="8" data-path="error-control-in-exploratory-anova.html"><a href="error-control-in-exploratory-anova.html"><i class="fa fa-check"></i><b>8</b> Error Control in Exploratory ANOVA</a></li>
-<li class="chapter" data-level="9" data-path="analytic-power-functions.html"><a href="analytic-power-functions.html"><i class="fa fa-check"></i><b>9</b> Analytic Power Functions</a><ul>
-<li class="chapter" data-level="9.1" data-path="analytic-power-functions.html"><a href="analytic-power-functions.html#one-way-between-subjects-anova"><i class="fa fa-check"></i><b>9.1</b> One-Way Between Subjects ANOVA</a></li>
-<li class="chapter" data-level="9.2" data-path="analytic-power-functions.html"><a href="analytic-power-functions.html#two-way-between-subject-interaction"><i class="fa fa-check"></i><b>9.2</b> Two-way Between Subject Interaction</a></li>
-<li class="chapter" data-level="9.3" data-path="analytic-power-functions.html"><a href="analytic-power-functions.html#x3-between-subject-anova"><i class="fa fa-check"></i><b>9.3</b> 3x3 Between Subject ANOVA</a></li>
+<li class="chapter" data-level="4.2" data-path="repeated-measures-anova.html"><a href="repeated-measures-anova.html#part-2"><i class="fa fa-check"></i><b>4.2</b> Part 2</a>
+<ul>
+<li class="chapter" data-level="4.2.1" data-path="repeated-measures-anova.html"><a href="repeated-measures-anova.html#the-relation-between-cohens-f-and-cohens-d"><i class="fa fa-check"></i><b>4.2.1</b> The relation between Cohen’s f and Cohen’s d</a></li>
+<li class="chapter" data-level="4.2.2" data-path="repeated-measures-anova.html"><a href="repeated-measures-anova.html#three-within-conditions-medium-effect-size"><i class="fa fa-check"></i><b>4.2.2</b> Three within conditions, medium effect size</a></li>
 </ul></li>
-<li class="chapter" data-level="10" data-path="power-curve.html"><a href="power-curve.html"><i class="fa fa-check"></i><b>10</b> Power Curve</a><ul>
-<li class="chapter" data-level="10.1" data-path="power-curve.html"><a href="power-curve.html#explore-increase-in-effect-size-for-moderated-interactions."><i class="fa fa-check"></i><b>10.1</b> Explore increase in effect size for moderated interactions.</a></li>
-<li class="chapter" data-level="10.2" data-path="power-curve.html"><a href="power-curve.html#explore-increase-in-effect-size-for-cross-over-interactions."><i class="fa fa-check"></i><b>10.2</b> Explore increase in effect size for cross-over interactions.</a></li>
-<li class="chapter" data-level="10.3" data-path="power-curve.html"><a href="power-curve.html#explore-increase-in-correlation-in-moderated-interactions."><i class="fa fa-check"></i><b>10.3</b> Explore increase in correlation in moderated interactions.</a></li>
-<li class="chapter" data-level="10.4" data-path="power-curve.html"><a href="power-curve.html#increasing-correlation-in-on-factor-decreases-power-in-second-factor"><i class="fa fa-check"></i><b>10.4</b> Increasing correlation in on factor decreases power in second factor</a></li>
-<li class="chapter" data-level="10.5" data-path="power-curve.html"><a href="power-curve.html#code-to-reproduce-power-curve-figures"><i class="fa fa-check"></i><b>10.5</b> Code to Reproduce Power Curve Figures</a></li>
+<li class="chapter" data-level="4.3" data-path="repeated-measures-anova.html"><a href="repeated-measures-anova.html#part-3"><i class="fa fa-check"></i><b>4.3</b> Part 3</a></li>
+<li class="chapter" data-level="4.4" data-path="repeated-measures-anova.html"><a href="repeated-measures-anova.html#part-4"><i class="fa fa-check"></i><b>4.4</b> Part 4</a>
+<ul>
+<li class="chapter" data-level="4.4.1" data-path="repeated-measures-anova.html"><a href="repeated-measures-anova.html#x2-anova-within-within-design"><i class="fa fa-check"></i><b>4.4.1</b> 2x2 ANOVA, within-within design</a></li>
+<li class="chapter" data-level="4.4.2" data-path="repeated-measures-anova.html"><a href="repeated-measures-anova.html#examine-variation-of-means-and-correlation"><i class="fa fa-check"></i><b>4.4.2</b> Examine variation of means and correlation</a></li>
 </ul></li>
-<li class="chapter" data-level="11" data-path="violations-of-assumptions.html"><a href="violations-of-assumptions.html"><i class="fa fa-check"></i><b>11</b> Violations of Assumptions</a><ul>
-<li class="chapter" data-level="11.1" data-path="violations-of-assumptions.html"><a href="violations-of-assumptions.html#violation-of-heterogeneity-assumption"><i class="fa fa-check"></i><b>11.1</b> Violation of Heterogeneity Assumption</a></li>
-<li class="chapter" data-level="11.2" data-path="violations-of-assumptions.html"><a href="violations-of-assumptions.html#violation-of-the-sphericity-assumption"><i class="fa fa-check"></i><b>11.2</b> Violation of the sphericity assumption</a><ul>
-<li class="chapter" data-level="11.2.1" data-path="violations-of-assumptions.html"><a href="violations-of-assumptions.html#manova-or-sphericity-adjustment"><i class="fa fa-check"></i><b>11.2.1</b> MANOVA or Sphericity Adjustment?</a></li>
+<li class="chapter" data-level="4.5" data-path="repeated-measures-anova.html"><a href="repeated-measures-anova.html#part-5"><i class="fa fa-check"></i><b>4.5</b> Part 5</a>
+<ul>
+<li class="chapter" data-level="4.5.1" data-path="repeated-measures-anova.html"><a href="repeated-measures-anova.html#x2-anova-within-design"><i class="fa fa-check"></i><b>4.5.1</b> 2x2 ANOVA, within design</a></li>
 </ul></li>
+<li class="chapter" data-level="4.6" data-path="repeated-measures-anova.html"><a href="repeated-measures-anova.html#multivariate-anova-manova"><i class="fa fa-check"></i><b>4.6</b> Multivariate ANOVA (MANOVA)</a></li>
 </ul></li>
-<li class="chapter" data-level="12" data-path="estimated-marginal-means.html"><a href="estimated-marginal-means.html"><i class="fa fa-check"></i><b>12</b> Estimated Marginal Means</a><ul>
-<li class="chapter" data-level="12.1" data-path="estimated-marginal-means.html"><a href="estimated-marginal-means.html#a-note-of-caution"><i class="fa fa-check"></i><b>12.1</b> A note of caution</a></li>
-<li class="chapter" data-level="12.2" data-path="estimated-marginal-means.html"><a href="estimated-marginal-means.html#pairwise-comparisons"><i class="fa fa-check"></i><b>12.2</b> Pairwise Comparisons</a></li>
-<li class="chapter" data-level="12.3" data-path="estimated-marginal-means.html"><a href="estimated-marginal-means.html#customized-emmeans-contrasts"><i class="fa fa-check"></i><b>12.3</b> Customized <code>emmeans</code> contrasts</a></li>
-<li class="chapter" data-level="12.4" data-path="estimated-marginal-means.html"><a href="estimated-marginal-means.html#equivalence-and-non-superiority-inferiority-tests"><i class="fa fa-check"></i><b>12.4</b> Equivalence and non-superiority/-inferiority tests</a></li>
-<li class="chapter" data-level="12.5" data-path="estimated-marginal-means.html"><a href="estimated-marginal-means.html#joint-tests"><i class="fa fa-check"></i><b>12.5</b> Joint tests</a></li>
-<li class="chapter" data-level="12.6" data-path="estimated-marginal-means.html"><a href="estimated-marginal-means.html#monte-carlo-simulations"><i class="fa fa-check"></i><b>12.6</b> Monte Carlo Simulations</a></li>
-</ul></li>
-<li class="chapter" data-level="" data-path="appendix-1-direct-comparison-to-pwr2ppl.html"><a href="appendix-1-direct-comparison-to-pwr2ppl.html"><i class="fa fa-check"></i>Appendix 1: Direct Comparison to pwr2ppl</a><ul>
-<li class="chapter" data-level="12.7" data-path="appendix-1-direct-comparison-to-pwr2ppl.html"><a href="appendix-1-direct-comparison-to-pwr2ppl.html#examples-from-chapter-5"><i class="fa fa-check"></i><b>12.7</b> Examples from Chapter 5</a><ul>
-<li class="chapter" data-level="12.7.1" data-path="appendix-1-direct-comparison-to-pwr2ppl.html"><a href="appendix-1-direct-comparison-to-pwr2ppl.html#example-5.15.2"><i class="fa fa-check"></i><b>12.7.1</b> Example 5.1/5.2</a></li>
-<li class="chapter" data-level="12.7.2" data-path="appendix-1-direct-comparison-to-pwr2ppl.html"><a href="appendix-1-direct-comparison-to-pwr2ppl.html#example-5.3"><i class="fa fa-check"></i><b>12.7.2</b> Example 5.3</a></li>
-</ul></li>
-<li class="chapter" data-level="12.8" data-path="appendix-1-direct-comparison-to-pwr2ppl.html"><a href="appendix-1-direct-comparison-to-pwr2ppl.html#examples-from-chapter-6"><i class="fa fa-check"></i><b>12.8</b> Examples from Chapter 6</a><ul>
-<li class="chapter" data-level="12.8.1" data-path="appendix-1-direct-comparison-to-pwr2ppl.html"><a href="appendix-1-direct-comparison-to-pwr2ppl.html#example-from-table-6.2"><i class="fa fa-check"></i><b>12.8.1</b> Example from Table 6.2</a></li>
-<li class="chapter" data-level="12.8.2" data-path="appendix-1-direct-comparison-to-pwr2ppl.html"><a href="appendix-1-direct-comparison-to-pwr2ppl.html#example-from-table-6.6"><i class="fa fa-check"></i><b>12.8.2</b> Example from Table 6.6</a></li>
-<li class="chapter" data-level="12.8.3" data-path="appendix-1-direct-comparison-to-pwr2ppl.html"><a href="appendix-1-direct-comparison-to-pwr2ppl.html#example-from-table-6.8"><i class="fa fa-check"></i><b>12.8.3</b> Example from Table 6.8</a></li>
-</ul></li>
-<li class="chapter" data-level="12.9" data-path="appendix-1-direct-comparison-to-pwr2ppl.html"><a href="appendix-1-direct-comparison-to-pwr2ppl.html#example-from-chapter-7"><i class="fa fa-check"></i><b>12.9</b> Example from Chapter 7</a><ul>
-<li class="chapter" data-level="12.9.1" data-path="appendix-1-direct-comparison-to-pwr2ppl.html"><a href="appendix-1-direct-comparison-to-pwr2ppl.html#from-table-7.2"><i class="fa fa-check"></i><b>12.9.1</b> From Table 7.2</a></li>
+<li class="chapter" data-level="5" data-path="mixed-anova.html"><a href="mixed-anova.html"><i class="fa fa-check"></i><b>5</b> Mixed ANOVA</a>
+<ul>
+<li class="chapter" data-level="5.1" data-path="mixed-anova.html"><a href="mixed-anova.html#simple-mixed-designs"><i class="fa fa-check"></i><b>5.1</b> Simple Mixed Designs</a></li>
+<li class="chapter" data-level="5.2" data-path="mixed-anova.html"><a href="mixed-anova.html#complex-mixed-designs"><i class="fa fa-check"></i><b>5.2</b> Complex Mixed Designs</a>
+<ul>
+<li class="chapter" data-level="5.2.1" data-path="mixed-anova.html"><a href="mixed-anova.html#b3w-design"><i class="fa fa-check"></i><b>5.2.1</b> 2b*3w Design</a></li>
+<li class="chapter" data-level="5.2.2" data-path="mixed-anova.html"><a href="mixed-anova.html#b4w-design"><i class="fa fa-check"></i><b>5.2.2</b> 2b*4w Design</a></li>
 </ul></li>
 </ul></li>
-<li class="chapter" data-level="" data-path="appendix-3-comparison-to-brysbaert.html"><a href="appendix-3-comparison-to-brysbaert.html"><i class="fa fa-check"></i>Appendix 3: Comparison to Brysbaert</a><ul>
-<li class="chapter" data-level="12.10" data-path="appendix-3-comparison-to-brysbaert.html"><a href="appendix-3-comparison-to-brysbaert.html#one-way-anova-1"><i class="fa fa-check"></i><b>12.10</b> One-Way ANOVA</a><ul>
-<li class="chapter" data-level="12.10.1" data-path="appendix-3-comparison-to-brysbaert.html"><a href="appendix-3-comparison-to-brysbaert.html#three-conditions-replication"><i class="fa fa-check"></i><b>12.10.1</b> Three conditions replication</a></li>
-<li class="chapter" data-level="12.10.2" data-path="appendix-3-comparison-to-brysbaert.html"><a href="appendix-3-comparison-to-brysbaert.html#variation-1"><i class="fa fa-check"></i><b>12.10.2</b> Variation 1</a></li>
-<li class="chapter" data-level="12.10.3" data-path="appendix-3-comparison-to-brysbaert.html"><a href="appendix-3-comparison-to-brysbaert.html#three-conditions-replication-1"><i class="fa fa-check"></i><b>12.10.3</b> Three conditions replication</a></li>
-<li class="chapter" data-level="12.10.4" data-path="appendix-3-comparison-to-brysbaert.html"><a href="appendix-3-comparison-to-brysbaert.html#variation-2"><i class="fa fa-check"></i><b>12.10.4</b> Variation 2</a></li>
-<li class="chapter" data-level="12.10.5" data-path="appendix-3-comparison-to-brysbaert.html"><a href="appendix-3-comparison-to-brysbaert.html#three-conditions-replication-2"><i class="fa fa-check"></i><b>12.10.5</b> Three conditions replication</a></li>
+<li class="chapter" data-level="6" data-path="power-for-three-way-interactions.html"><a href="power-for-three-way-interactions.html"><i class="fa fa-check"></i><b>6</b> Power for Three-way Interactions</a></li>
+<li class="chapter" data-level="7" data-path="the-no-way-interactions.html"><a href="the-no-way-interactions.html"><i class="fa fa-check"></i><b>7</b> The ‘No-Way’ Interactions</a></li>
+<li class="chapter" data-level="8" data-path="effect-of-varying-designs-on-power.html"><a href="effect-of-varying-designs-on-power.html"><i class="fa fa-check"></i><b>8</b> Effect of Varying Designs on Power</a>
+<ul>
+<li class="chapter" data-level="8.1" data-path="effect-of-varying-designs-on-power.html"><a href="effect-of-varying-designs-on-power.html#within-designs"><i class="fa fa-check"></i><b>8.1</b> Within Designs</a></li>
 </ul></li>
-<li class="chapter" data-level="12.11" data-path="appendix-3-comparison-to-brysbaert.html"><a href="appendix-3-comparison-to-brysbaert.html#repeated-measures"><i class="fa fa-check"></i><b>12.11</b> Repeated Measures</a><ul>
-<li class="chapter" data-level="12.11.1" data-path="appendix-3-comparison-to-brysbaert.html"><a href="appendix-3-comparison-to-brysbaert.html#reproducing-brysbaert-variation-1-changing-correlation"><i class="fa fa-check"></i><b>12.11.1</b> Reproducing Brysbaert Variation 1: Changing Correlation</a></li>
+<li class="chapter" data-level="9" data-path="error-control-in-exploratory-anova.html"><a href="error-control-in-exploratory-anova.html"><i class="fa fa-check"></i><b>9</b> Error Control in Exploratory ANOVA</a></li>
+<li class="chapter" data-level="10" data-path="analytic-power-functions.html"><a href="analytic-power-functions.html"><i class="fa fa-check"></i><b>10</b> Analytic Power Functions</a>
+<ul>
+<li class="chapter" data-level="10.1" data-path="analytic-power-functions.html"><a href="analytic-power-functions.html#one-way-between-subjects-anova"><i class="fa fa-check"></i><b>10.1</b> One-Way Between Subjects ANOVA</a></li>
+<li class="chapter" data-level="10.2" data-path="analytic-power-functions.html"><a href="analytic-power-functions.html#two-way-between-subject-interaction"><i class="fa fa-check"></i><b>10.2</b> Two-way Between Subject Interaction</a></li>
+<li class="chapter" data-level="10.3" data-path="analytic-power-functions.html"><a href="analytic-power-functions.html#x3-between-subject-anova"><i class="fa fa-check"></i><b>10.3</b> 3x3 Between Subject ANOVA</a></li>
+</ul></li>
+<li class="chapter" data-level="11" data-path="power-curve.html"><a href="power-curve.html"><i class="fa fa-check"></i><b>11</b> Power Curve</a>
+<ul>
+<li class="chapter" data-level="11.1" data-path="power-curve.html"><a href="power-curve.html#explore-increase-in-effect-size-for-moderated-interactions."><i class="fa fa-check"></i><b>11.1</b> Explore increase in effect size for moderated interactions.</a></li>
+<li class="chapter" data-level="11.2" data-path="power-curve.html"><a href="power-curve.html#explore-increase-in-effect-size-for-cross-over-interactions."><i class="fa fa-check"></i><b>11.2</b> Explore increase in effect size for cross-over interactions.</a></li>
+<li class="chapter" data-level="11.3" data-path="power-curve.html"><a href="power-curve.html#explore-increase-in-correlation-in-moderated-interactions."><i class="fa fa-check"></i><b>11.3</b> Explore increase in correlation in moderated interactions.</a></li>
+<li class="chapter" data-level="11.4" data-path="power-curve.html"><a href="power-curve.html#increasing-correlation-in-on-factor-decreases-power-in-second-factor"><i class="fa fa-check"></i><b>11.4</b> Increasing correlation in on factor decreases power in second factor</a></li>
+<li class="chapter" data-level="11.5" data-path="power-curve.html"><a href="power-curve.html#code-to-reproduce-power-curve-figures"><i class="fa fa-check"></i><b>11.5</b> Code to Reproduce Power Curve Figures</a></li>
+</ul></li>
+<li class="chapter" data-level="12" data-path="violations-of-assumptions.html"><a href="violations-of-assumptions.html"><i class="fa fa-check"></i><b>12</b> Violations of Assumptions</a>
+<ul>
+<li class="chapter" data-level="12.1" data-path="violations-of-assumptions.html"><a href="violations-of-assumptions.html#violation-of-heterogeneity-assumption"><i class="fa fa-check"></i><b>12.1</b> Violation of Heterogeneity Assumption</a></li>
+<li class="chapter" data-level="12.2" data-path="violations-of-assumptions.html"><a href="violations-of-assumptions.html#violation-of-the-sphericity-assumption"><i class="fa fa-check"></i><b>12.2</b> Violation of the sphericity assumption</a>
+<ul>
+<li class="chapter" data-level="12.2.1" data-path="violations-of-assumptions.html"><a href="violations-of-assumptions.html#manova-or-sphericity-adjustment"><i class="fa fa-check"></i><b>12.2.1</b> MANOVA or Sphericity Adjustment?</a></li>
+</ul></li>
+</ul></li>
+<li class="chapter" data-level="13" data-path="estimated-marginal-means.html"><a href="estimated-marginal-means.html"><i class="fa fa-check"></i><b>13</b> Estimated Marginal Means</a>
+<ul>
+<li class="chapter" data-level="13.1" data-path="estimated-marginal-means.html"><a href="estimated-marginal-means.html#a-note-of-caution"><i class="fa fa-check"></i><b>13.1</b> A note of caution</a></li>
+<li class="chapter" data-level="13.2" data-path="estimated-marginal-means.html"><a href="estimated-marginal-means.html#pairwise-comparisons"><i class="fa fa-check"></i><b>13.2</b> Pairwise Comparisons</a></li>
+<li class="chapter" data-level="13.3" data-path="estimated-marginal-means.html"><a href="estimated-marginal-means.html#customized-emmeans-contrasts"><i class="fa fa-check"></i><b>13.3</b> Customized <code>emmeans</code> contrasts</a></li>
+<li class="chapter" data-level="13.4" data-path="estimated-marginal-means.html"><a href="estimated-marginal-means.html#equivalence-and-non-superiority-inferiority-tests"><i class="fa fa-check"></i><b>13.4</b> Equivalence and non-superiority/-inferiority tests</a></li>
+<li class="chapter" data-level="13.5" data-path="estimated-marginal-means.html"><a href="estimated-marginal-means.html#joint-tests"><i class="fa fa-check"></i><b>13.5</b> Joint tests</a></li>
+<li class="chapter" data-level="13.6" data-path="estimated-marginal-means.html"><a href="estimated-marginal-means.html#monte-carlo-simulations"><i class="fa fa-check"></i><b>13.6</b> Monte Carlo Simulations</a></li>
+</ul></li>
+<li class="chapter" data-level="14" data-path="beyond-superpower-i-mixed-models-with-simr.html"><a href="beyond-superpower-i-mixed-models-with-simr.html"><i class="fa fa-check"></i><b>14</b> Beyond Superpower I: Mixed Models with <code>simr</code></a>
+<ul>
+<li class="chapter" data-level="14.1" data-path="beyond-superpower-i-mixed-models-with-simr.html"><a href="beyond-superpower-i-mixed-models-with-simr.html#how-does-simr-work"><i class="fa fa-check"></i><b>14.1</b> How does <code>simr</code> work?</a></li>
+<li class="chapter" data-level="14.2" data-path="beyond-superpower-i-mixed-models-with-simr.html"><a href="beyond-superpower-i-mixed-models-with-simr.html#to-be-continued"><i class="fa fa-check"></i><b>14.2</b> To Be Continued…</a></li>
+</ul></li>
+<li class="chapter" data-level="15" data-path="beyond-superpower-ii-custom-simulations.html"><a href="beyond-superpower-ii-custom-simulations.html"><i class="fa fa-check"></i><b>15</b> Beyond Superpower II: Custom Simulations</a>
+<ul>
+<li class="chapter" data-level="15.1" data-path="beyond-superpower-ii-custom-simulations.html"><a href="beyond-superpower-ii-custom-simulations.html#a-clincal-trial-with-a-binary-outcome"><i class="fa fa-check"></i><b>15.1</b> A Clincal Trial with a Binary Outcome</a>
+<ul>
+<li class="chapter" data-level="15.1.1" data-path="beyond-superpower-ii-custom-simulations.html"><a href="beyond-superpower-ii-custom-simulations.html#proposed-study-and-approach"><i class="fa fa-check"></i><b>15.1.1</b> Proposed Study and Approach</a></li>
+<li class="chapter" data-level="15.1.2" data-path="beyond-superpower-ii-custom-simulations.html"><a href="beyond-superpower-ii-custom-simulations.html#step-1-create-a-data-generating-function"><i class="fa fa-check"></i><b>15.1.2</b> Step 1: Create a Data Generating Function</a></li>
+<li class="chapter" data-level="15.1.3" data-path="beyond-superpower-ii-custom-simulations.html"><a href="beyond-superpower-ii-custom-simulations.html#step-2-simulation"><i class="fa fa-check"></i><b>15.1.3</b> Step 2: Simulation</a></li>
+<li class="chapter" data-level="15.1.4" data-path="beyond-superpower-ii-custom-simulations.html"><a href="beyond-superpower-ii-custom-simulations.html#why-more-complicated-code"><i class="fa fa-check"></i><b>15.1.4</b> Why more complicated code?</a></li>
+<li class="chapter" data-level="15.1.5" data-path="beyond-superpower-ii-custom-simulations.html"><a href="beyond-superpower-ii-custom-simulations.html#conclusions-on-the-binary-rct-analysis"><i class="fa fa-check"></i><b>15.1.5</b> Conclusions on the Binary RCT Analysis</a></li>
+</ul></li>
+<li class="chapter" data-level="15.2" data-path="beyond-superpower-ii-custom-simulations.html"><a href="beyond-superpower-ii-custom-simulations.html#binary-rct-with-a-interim-analysis"><i class="fa fa-check"></i><b>15.2</b> Binary RCT with a Interim Analysis</a>
+<ul>
+<li class="chapter" data-level="15.2.1" data-path="beyond-superpower-ii-custom-simulations.html"><a href="beyond-superpower-ii-custom-simulations.html#proposed-study-and-approach-1"><i class="fa fa-check"></i><b>15.2.1</b> Proposed Study and Approach</a></li>
+</ul></li>
+<li class="chapter" data-level="15.3" data-path="beyond-superpower-ii-custom-simulations.html"><a href="beyond-superpower-ii-custom-simulations.html#conclusion-on-a-binary-rct-with-interim-analyses"><i class="fa fa-check"></i><b>15.3</b> Conclusion on a Binary RCT with Interim Analyses</a></li>
+</ul></li>
+<li class="chapter" data-level="" data-path="appendix-1-direct-comparison-to-pwr2ppl.html"><a href="appendix-1-direct-comparison-to-pwr2ppl.html"><i class="fa fa-check"></i>Appendix 1: Direct Comparison to pwr2ppl</a>
+<ul>
+<li class="chapter" data-level="15.4" data-path="appendix-1-direct-comparison-to-pwr2ppl.html"><a href="appendix-1-direct-comparison-to-pwr2ppl.html#examples-from-chapter-5"><i class="fa fa-check"></i><b>15.4</b> Examples from Chapter 5</a>
+<ul>
+<li class="chapter" data-level="15.4.1" data-path="appendix-1-direct-comparison-to-pwr2ppl.html"><a href="appendix-1-direct-comparison-to-pwr2ppl.html#example-5.15.2"><i class="fa fa-check"></i><b>15.4.1</b> Example 5.1/5.2</a></li>
+<li class="chapter" data-level="15.4.2" data-path="appendix-1-direct-comparison-to-pwr2ppl.html"><a href="appendix-1-direct-comparison-to-pwr2ppl.html#example-5.3"><i class="fa fa-check"></i><b>15.4.2</b> Example 5.3</a></li>
+</ul></li>
+<li class="chapter" data-level="15.5" data-path="appendix-1-direct-comparison-to-pwr2ppl.html"><a href="appendix-1-direct-comparison-to-pwr2ppl.html#examples-from-chapter-6"><i class="fa fa-check"></i><b>15.5</b> Examples from Chapter 6</a>
+<ul>
+<li class="chapter" data-level="15.5.1" data-path="appendix-1-direct-comparison-to-pwr2ppl.html"><a href="appendix-1-direct-comparison-to-pwr2ppl.html#example-from-table-6.2"><i class="fa fa-check"></i><b>15.5.1</b> Example from Table 6.2</a></li>
+<li class="chapter" data-level="15.5.2" data-path="appendix-1-direct-comparison-to-pwr2ppl.html"><a href="appendix-1-direct-comparison-to-pwr2ppl.html#example-from-table-6.6"><i class="fa fa-check"></i><b>15.5.2</b> Example from Table 6.6</a></li>
+<li class="chapter" data-level="15.5.3" data-path="appendix-1-direct-comparison-to-pwr2ppl.html"><a href="appendix-1-direct-comparison-to-pwr2ppl.html#example-from-table-6.8"><i class="fa fa-check"></i><b>15.5.3</b> Example from Table 6.8</a></li>
+</ul></li>
+<li class="chapter" data-level="15.6" data-path="appendix-1-direct-comparison-to-pwr2ppl.html"><a href="appendix-1-direct-comparison-to-pwr2ppl.html#example-from-chapter-7"><i class="fa fa-check"></i><b>15.6</b> Example from Chapter 7</a>
+<ul>
+<li class="chapter" data-level="15.6.1" data-path="appendix-1-direct-comparison-to-pwr2ppl.html"><a href="appendix-1-direct-comparison-to-pwr2ppl.html#from-table-7.2"><i class="fa fa-check"></i><b>15.6.1</b> From Table 7.2</a></li>
 </ul></li>
 </ul></li>
 <li class="chapter" data-level="" data-path="appendix-2-direct-comparison-to-morepower.html"><a href="appendix-2-direct-comparison-to-morepower.html"><i class="fa fa-check"></i>Appendix 2: Direct Comparison to MOREpower</a></li>
+<li class="chapter" data-level="" data-path="appendix-3-comparison-to-brysbaert.html"><a href="appendix-3-comparison-to-brysbaert.html"><i class="fa fa-check"></i>Appendix 3: Comparison to Brysbaert</a>
+<ul>
+<li class="chapter" data-level="15.7" data-path="appendix-3-comparison-to-brysbaert.html"><a href="appendix-3-comparison-to-brysbaert.html#one-way-anova-1"><i class="fa fa-check"></i><b>15.7</b> One-Way ANOVA</a>
+<ul>
+<li class="chapter" data-level="15.7.1" data-path="appendix-3-comparison-to-brysbaert.html"><a href="appendix-3-comparison-to-brysbaert.html#three-conditions-replication"><i class="fa fa-check"></i><b>15.7.1</b> Three conditions replication</a></li>
+<li class="chapter" data-level="15.7.2" data-path="appendix-3-comparison-to-brysbaert.html"><a href="appendix-3-comparison-to-brysbaert.html#variation-1"><i class="fa fa-check"></i><b>15.7.2</b> Variation 1</a></li>
+<li class="chapter" data-level="15.7.3" data-path="appendix-3-comparison-to-brysbaert.html"><a href="appendix-3-comparison-to-brysbaert.html#three-conditions-replication-1"><i class="fa fa-check"></i><b>15.7.3</b> Three conditions replication</a></li>
+<li class="chapter" data-level="15.7.4" data-path="appendix-3-comparison-to-brysbaert.html"><a href="appendix-3-comparison-to-brysbaert.html#variation-2"><i class="fa fa-check"></i><b>15.7.4</b> Variation 2</a></li>
+<li class="chapter" data-level="15.7.5" data-path="appendix-3-comparison-to-brysbaert.html"><a href="appendix-3-comparison-to-brysbaert.html#three-conditions-replication-2"><i class="fa fa-check"></i><b>15.7.5</b> Three conditions replication</a></li>
+</ul></li>
+<li class="chapter" data-level="15.8" data-path="appendix-3-comparison-to-brysbaert.html"><a href="appendix-3-comparison-to-brysbaert.html#repeated-measures"><i class="fa fa-check"></i><b>15.8</b> Repeated Measures</a>
+<ul>
+<li class="chapter" data-level="15.8.1" data-path="appendix-3-comparison-to-brysbaert.html"><a href="appendix-3-comparison-to-brysbaert.html#reproducing-brysbaert-variation-1-changing-correlation"><i class="fa fa-check"></i><b>15.8.1</b> Reproducing Brysbaert Variation 1: Changing Correlation</a></li>
+</ul></li>
+</ul></li>
 <li class="chapter" data-level="" data-path="references.html"><a href="references.html"><i class="fa fa-check"></i>References</a></li>
-<li class="divider"></li>
-<li><a href="https://github.com/rstudio/bookdown" target="blank">Published with bookdown</a></li>
-
 </ul>
 
       </nav>
@@ -272,66 +350,90 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 <div id="references" class="section level1 unnumbered">
 <h1>References</h1>
 
-<div id="refs" class="references">
-<div>
-<p>Aberson, Chris. 2020. <em>Pwr2ppl: Power Analyses for Common Designs (Power to the People)</em>. <a href="https://CRAN.R-project.org/package=pwr2ppl">https://CRAN.R-project.org/package=pwr2ppl</a>.</p>
+<div id="refs" class="references csl-bib-body hanging-indent">
+<div class="csl-entry">
+Aberson, Chris. 2021. <em>Pwr2ppl: Power Analyses for Common Designs (Power to the People)</em>. <a href="https://CRAN.R-project.org/package=pwr2ppl">https://CRAN.R-project.org/package=pwr2ppl</a>.
 </div>
-<div>
-<p>Albers, Casper, and Daniël Lakens. 2018. “When Power Analyses Based on Pilot Data Are Biased: Inaccurate Effect Size Estimators and Follow-up Bias.” <em>Journal of Experimental Social Psychology</em> 74: 187–95. <a href="https://doi.org/10.1016/j.jesp.2017.09.004">https://doi.org/10.1016/j.jesp.2017.09.004</a>.</p>
+<div class="csl-entry">
+Albers, Casper, and Daniël Lakens. 2018. <span>“When Power Analyses Based on Pilot Data Are Biased: Inaccurate Effect Size Estimators and Follow-up Bias.”</span> <em>Journal of Experimental Social Psychology</em> 74: 187–95. <a href="https://doi.org/10.1016/j.jesp.2017.09.004">https://doi.org/10.1016/j.jesp.2017.09.004</a>.
 </div>
-<div>
-<p>Algina, James, and H. J. Keselman. 1997. “Detecting Repeated Measures Effects with Univariate and Multivariate Statistics.” <em>Psychological Methods</em> 2 (2): 208–18. <a href="https://doi.org/10.1037/1082-989X.2.2.208">https://doi.org/10.1037/1082-989X.2.2.208</a>.</p>
+<div class="csl-entry">
+Algina, James, and H. J. Keselman. 1997. <span>“Detecting Repeated Measures Effects with Univariate and Multivariate Statistics.”</span> <em>Psychological Methods</em> 2 (2): 208–18. <a href="https://doi.org/10.1037/1082-989X.2.2.208">https://doi.org/10.1037/1082-989X.2.2.208</a>.
 </div>
-<div>
-<p>Allaire, JJ, Yihui Xie, Jonathan McPherson, Javier Luraschi, Kevin Ushey, Aron Atkins, Hadley Wickham, Joe Cheng, Winston Chang, and Richard Iannone. 2020. <em>Rmarkdown: Dynamic Documents for R</em>. <a href="https://github.com/rstudio/rmarkdown">https://github.com/rstudio/rmarkdown</a>.</p>
+<div class="csl-entry">
+Allaire, JJ, Yihui Xie, Jonathan McPherson, Javier Luraschi, Kevin Ushey, Aron Atkins, Hadley Wickham, Joe Cheng, Winston Chang, and Richard Iannone. 2021. <em>Rmarkdown: Dynamic Documents for r</em>. <a href="https://CRAN.R-project.org/package=rmarkdown">https://CRAN.R-project.org/package=rmarkdown</a>.
 </div>
-<div>
-<p>Brysbaert, Marc. 2019. “How Many Participants Do We Have to Include in Properly Powered Experiments? A Tutorial of Power Analysis with Reference Tables.” <em>Journal of Cognition</em> 2 (1). <a href="http://doi.org/10.5334/joc.72">http://doi.org/10.5334/joc.72</a>.</p>
+<div class="csl-entry">
+Althouse, Andrew D. 2021. <span>“Post Hoc Power: Not Empowering, Just Misleading.”</span> <em>Journal of Surgical Research</em> 259 (March): A3–6. <a href="https://doi.org/10.1016/j.jss.2019.10.049">https://doi.org/10.1016/j.jss.2019.10.049</a>.
 </div>
-<div>
-<p>Campbell, Jamie, and Valerie A. Thompson. 2012. “MorePower 6.0 for Anova with Relational Confidence Intervals and Bayesian Analysis.” <em>Behavior Research Methods</em> 44: 1255–65. <a href="https://doi.org/10.3758/s13428-012-0186-0">https://doi.org/10.3758/s13428-012-0186-0</a>.</p>
+<div class="csl-entry">
+Brysbaert, Marc. 2019. <span>“How Many Participants Do We Have to Include in Properly Powered Experiments? A Tutorial of Power Analysis with Reference Tables.”</span> <em>Journal of Cognition</em> 2 (1). <a href="http://doi.org/10.5334/joc.72">http://doi.org/10.5334/joc.72</a>.
 </div>
-<div>
-<p>Champely, Stephane. 2020. <em>Pwr: Basic Functions for Power Analysis</em>. <a href="https://github.com/heliosdrm/pwr">https://github.com/heliosdrm/pwr</a>.</p>
+<div class="csl-entry">
+Caldwell, Aaron, and Andrew D. Vigotsky. 2020. <span>“A Case Against Default Effect Sizes in Sport and Exercise Science.”</span> <em><span>PeerJ</span></em> 8 (November): e10314. <a href="https://doi.org/10.7717/peerj.10314">https://doi.org/10.7717/peerj.10314</a>.
 </div>
-<div>
-<p>Cohen, J. 1988. <em>Statistical Power Analysis for the Behavioral Sciences</em>. Lawrence Erlbaum Associates.</p>
+<div class="csl-entry">
+Campbell, Jamie, and Valerie A. Thompson. 2012. <span>“MorePower 6.0 for ANOVA with Relational Confidence Intervals and Bayesian Analysis.”</span> <em>Behavior Research Methods</em> 44: 1255–65. <a href="https://doi.org/10.3758/s13428-012-0186-0">https://doi.org/10.3758/s13428-012-0186-0</a>.
 </div>
-<div>
-<p>Faul, Franz, Edgar Erdfelder, Albert-Georg Lang, and Axel Buchner. 2007. “G*Power 3: A Flexible Statistical Power Analysis Program for the Social, Behavioral, and Biomedical Sciences.” <em>Behavior Research Methods</em> 39 (2): 175–91. <a href="http://www.psychologie.hhu.de/arbeitsgruppen/allgemeine-psychologie-und-arbeitspsychologie/gpower.html">http://www.psychologie.hhu.de/arbeitsgruppen/allgemeine-psychologie-und-arbeitspsychologie/gpower.html</a>.</p>
+<div class="csl-entry">
+Champely, Stephane. 2020. <em>Pwr: Basic Functions for Power Analysis</em>. <a href="https://github.com/heliosdrm/pwr">https://github.com/heliosdrm/pwr</a>.
 </div>
-<div>
-<p>Hothorn, Torsten, Frank Bretz, and Peter Westfall. 2020. <em>Multcomp: Simultaneous Inference in General Parametric Models</em>. <a href="https://CRAN.R-project.org/package=multcomp">https://CRAN.R-project.org/package=multcomp</a>.</p>
+<div class="csl-entry">
+Cohen, J. 1988. <em><span class="nocase">Statistical Power Analysis for the Behavioral Sciences</span></em>. Lawrence Erlbaum Associates.
 </div>
-<div>
-<p>Maxwell, S. E., H. D. Delaney, and K. Kelley. 2004. <em>Designing Experiments and Analyzing Data: A Model Comparison Perspective</em>. Avec CD, v. 1. Lawrence Erlbaum Associates. <a href="https://designingexperiments.com/">https://designingexperiments.com/</a>.</p>
+<div class="csl-entry">
+Faul, Franz, Edgar Erdfelder, Albert-Georg Lang, and Axel Buchner. 2007. <span>“G*power 3: A Flexible Statistical Power Analysis Program for the Social, Behavioral, and Biomedical Sciences.”</span> <em>Behavior Research Methods</em> 39 (2): 175–91. <a href="http://www.psychologie.hhu.de/arbeitsgruppen/allgemeine-psychologie-und-arbeitspsychologie/gpower.html">http://www.psychologie.hhu.de/arbeitsgruppen/allgemeine-psychologie-und-arbeitspsychologie/gpower.html</a>.
 </div>
-<div>
-<p>Muller, Keith E, and Bercedis L Peterson. 1984. “Practical Methods for Computing Power in Testing the Multivariate General Linear Hypothesis.” <em>Computational Statistics &amp; Data Analysis</em> 2 (2): 143–58. <a href="https://doi.org/10.1016/0167-9473(84)90002-1">https://doi.org/10.1016/0167-9473(84)90002-1</a>.</p>
+<div class="csl-entry">
+Gelman, Andrew. 2019. <span>“Don’t Calculate Post-Hoc Power Using Observed Estimate of Effect Size.”</span> <em>Annals of Surgery</em> 269 (1): e9–10.
 </div>
-<div>
-<p>O’Brien, Ralph G, and Gwowen Shieh. 1999. “Pragmatic, Unifying Algorithm Gives Power Probabilities for Common F Tests of the Multivariate General Linear Hypothesis.” Citeseer. <a href="https://pdfs.semanticscholar.org/deda/facfd686feea985e134babc524ceb46f0422.pdf">https://pdfs.semanticscholar.org/deda/facfd686feea985e134babc524ceb46f0422.pdf</a>.</p>
+<div class="csl-entry">
+Green, Peter, and Catriona J. MacLeod. 2016. <span>“<span>SIMR</span> : An r Package for Power Analysis of Generalized Linear Mixed Models by Simulation.”</span> Edited by Shinichi Nakagawa. <em>Methods in Ecology and Evolution</em> 7 (4): 493–98. <a href="https://doi.org/10.1111/2041-210x.12504">https://doi.org/10.1111/2041-210x.12504</a>.
 </div>
-<div>
-<p>Pavot, William, and Ed Diener. 1993. “The Affective and Cognitive Context of Self-Reported Measures of Subjective Well-Being.” <em>Social Indicators Research</em> 28 (1): 1–20.</p>
+<div class="csl-entry">
+Hothorn, Torsten, Frank Bretz, and Peter Westfall. 2021. <em>Multcomp: Simultaneous Inference in General Parametric Models</em>. <a href="https://CRAN.R-project.org/package=multcomp">https://CRAN.R-project.org/package=multcomp</a>.
 </div>
-<div>
-<p>Potvin, Patrick J, and Robert W Schutz. 2000. “Statistical Power for the Two-Factor Repeated Measures Anova.” <em>Behavior Research Methods, Instruments, &amp; Computers</em> 32 (2): 347–56. <a href="https://psycnet.apa.org/doi/10.3758/BF03207805">https://psycnet.apa.org/doi/10.3758/BF03207805</a>.</p>
+<div class="csl-entry">
+Lakens, Daniel, Friedrich Pahlke, and Gernot Wassmer. 2021. <span>“Group Sequential Designs: A Tutorial,”</span> January. <a href="https://doi.org/10.31234/osf.io/x4azm">https://doi.org/10.31234/osf.io/x4azm</a>.
 </div>
-<div>
-<p>R Core Team. 2020. <em>R: A Language and Environment for Statistical Computing</em>. Vienna, Austria: R Foundation for Statistical Computing. <a href="https://www.R-project.org/">https://www.R-project.org/</a>.</p>
+<div class="csl-entry">
+Lakens, Daniël. 2014. <span>“Performing High-Powered Studies Efficiently with Sequential Analyses.”</span> <em>European Journal of Social Psychology</em> 44 (7): 701–10. <a href="https://doi.org/10.1002/ejsp.2023">https://doi.org/10.1002/ejsp.2023</a>.
 </div>
-<div>
-<p>SAS. 2015. “The Glmpower Procedure.” In <em>SAS/Stat 14.1 User’s Guide</em>, 3738–98. Cary, NC: SAS Institute Inc. <a href="http://support.sas.com/documentation/cdl/en/statug/68162/HTML/default/viewer.htm#statug_glmpower_toc.htm">http://support.sas.com/documentation/cdl/en/statug/68162/HTML/default/viewer.htm#statug_glmpower_toc.htm</a>.</p>
+<div class="csl-entry">
+Lenth, Russell V. 2007. <span>“Statistical Power Calculations.”</span> <em>Journal of Animal Science</em> 85 (suppl_13): E24–29.
 </div>
-<div>
-<p>Simonsohn, Uri. 2014. “No-Way Interactions.” <em>Data Colada</em>. <a href="http://datacolada.org/17">http://datacolada.org/17</a>.</p>
+<div class="csl-entry">
+Maxwell, S. E., H. D. Delaney, and K. Kelley. 2004. <em>Designing <span>Experiments</span> and <span>Analyzing</span> <span>Data</span>: <span>A</span> <span>Model</span> <span>Comparison</span> <span>Perspective</span></em>. Avec <span>CD</span>, v. 1. Lawrence Erlbaum Associates. <a href="https://designingexperiments.com/">https://designingexperiments.com/</a>.
 </div>
-<div>
-<p>Vonesh, Edward F, and M Anthony Schork. 1986. “Sample Sizes in the Multivariate Analysis of Repeated Measurements.” <em>Biometrics</em>, 601–10. <a href="http://dx.doi.org/10.2307/2531210">http://dx.doi.org/10.2307/2531210</a>.</p>
+<div class="csl-entry">
+Muller, Keith E, and Bercedis L Peterson. 1984. <span>“Practical Methods for Computing Power in Testing the Multivariate General Linear Hypothesis.”</span> <em>Computational Statistics &amp; Data Analysis</em> 2 (2): 143–58. <a href="https://doi.org/10.1016/0167-9473(84)90002-1">https://doi.org/10.1016/0167-9473(84)90002-1</a>.
 </div>
-<div>
-<p>Xie, Yihui. 2020. <em>Bookdown: Authoring Books and Technical Documents with R Markdown</em>. <a href="https://github.com/rstudio/bookdown">https://github.com/rstudio/bookdown</a>.</p>
+<div class="csl-entry">
+O’Brien, Ralph G, and Gwowen Shieh. 1999. <span>“Pragmatic, Unifying Algorithm Gives Power Probabilities for Common f Tests of the Multivariate General Linear Hypothesis.”</span> Citeseer. <a href="https://pdfs.semanticscholar.org/deda/facfd686feea985e134babc524ceb46f0422.pdf">https://pdfs.semanticscholar.org/deda/facfd686feea985e134babc524ceb46f0422.pdf</a>.
+</div>
+<div class="csl-entry">
+Pavot, William, and Ed Diener. 1993. <span>“The Affective and Cognitive Context of Self-Reported Measures of Subjective Well-Being.”</span> <em>Social Indicators Research</em> 28 (1): 1–20.
+</div>
+<div class="csl-entry">
+Perugini, Marco, Marcello Gallucci, and Giulio Costantini. 2014. <span>“Safeguard Power as a Protection Against Imprecise Power Estimates.”</span> <em>Perspectives on Psychological Science</em> 9 (3): 319–32.
+</div>
+<div class="csl-entry">
+Potvin, Patrick J, and Robert W Schutz. 2000. <span>“Statistical Power for the Two-Factor Repeated Measures ANOVA.”</span> <em>Behavior Research Methods, Instruments, &amp; Computers</em> 32 (2): 347–56. <a href="https://psycnet.apa.org/doi/10.3758/BF03207805">https://psycnet.apa.org/doi/10.3758/BF03207805</a>.
+</div>
+<div class="csl-entry">
+R Core Team. 2021. <em>R: A Language and Environment for Statistical Computing</em>. Vienna, Austria: R Foundation for Statistical Computing. <a href="https://www.R-project.org/">https://www.R-project.org/</a>.
+</div>
+<div class="csl-entry">
+SAS. 2015. <span>“The GLMPOWER Procedure.”</span> In <em>SAS/STAT 14.1 User’s Guide</em>, 3738–98. Cary, NC: SAS Institute Inc. <a href="http://support.sas.com/documentation/cdl/en/statug/68162/HTML/default/viewer.htm#statug_glmpower_toc.htm">http://support.sas.com/documentation/cdl/en/statug/68162/HTML/default/viewer.htm#statug_glmpower_toc.htm</a>.
+</div>
+<div class="csl-entry">
+Simonsohn, Uri. 2014. <span>“No-Way Interactions.”</span> <em>Data Colada</em>. <a href="http://datacolada.org/17">http://datacolada.org/17</a>.
+</div>
+<div class="csl-entry">
+Vonesh, Edward F, and M Anthony Schork. 1986. <span>“Sample Sizes in the Multivariate Analysis of Repeated Measurements.”</span> <em>Biometrics</em>, 601–10. <a href="http://dx.doi.org/10.2307/2531210">http://dx.doi.org/10.2307/2531210</a>.
+</div>
+<div class="csl-entry">
+Xie, Yihui. 2021. <em>Bookdown: Authoring Books and Technical Documents with r Markdown</em>. <a href="https://CRAN.R-project.org/package=bookdown">https://CRAN.R-project.org/package=bookdown</a>.
 </div>
 </div>
 </div>
@@ -340,12 +442,11 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
           </div>
         </div>
       </div>
-<a href="appendix-2-direct-comparison-to-morepower.html" class="navigation navigation-prev navigation-unique" aria-label="Previous page"><i class="fa fa-angle-left"></i></a>
+<a href="appendix-3-comparison-to-brysbaert.html" class="navigation navigation-prev navigation-unique" aria-label="Previous page"><i class="fa fa-angle-left"></i></a>
 
     </div>
   </div>
 <script src="libs/gitbook-2.6.7/js/app.min.js"></script>
-<script src="libs/gitbook-2.6.7/js/lunr.js"></script>
 <script src="libs/gitbook-2.6.7/js/clipboard.min.js"></script>
 <script src="libs/gitbook-2.6.7/js/plugin-search.js"></script>
 <script src="libs/gitbook-2.6.7/js/plugin-sharing.js"></script>
@@ -364,6 +465,7 @@ gitbook.start({
 "weibo": false,
 "instapaper": false,
 "vk": false,
+"whatsapp": false,
 "all": ["facebook", "twitter", "linkedin", "weibo", "instapaper"]
 },
 "fontsettings": {
@@ -384,8 +486,13 @@ gitbook.start({
 "text": null
 },
 "download": ["SuperpowerValidation.pdf", "SuperpowerValidation.epub"],
+"search": {
+"engine": "fuse",
+"options": null
+},
 "toc": {
-"collapse": "subsection"
+"collapse": "section",
+"scroll_highlight": true
 }
 });
 });

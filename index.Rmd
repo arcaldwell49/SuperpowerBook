@@ -1,6 +1,6 @@
 --- 
 title: "Power Analysis with Superpower"
-author: "Aaron R. Caldwell, Dani&euml;l Lakens, and Chelsea M. Parlett-Pelleriti"
+author: "Aaron R. Caldwell, Dani&euml;l Lakens, Chelsea M. Parlett-Pelleriti, and Guy Prochilo"
 date: "`r Sys.Date()`"
 site: bookdown::bookdown_site
 documentclass: book
@@ -8,11 +8,25 @@ bibliography: [book.bib, packages.bib, references.bib]
 biblio-style: apalike
 link-citations: yes
 description: "This is a book describing the capabilities of the Superpower R package."
+output:
+  bookdown::pdf_book:
+    keep_tex: yes
+  bookdown::tufte_book2:
+    keep_tex: yes
+  bookdown::gitbook:
+    config:
+      toc:
+        collapse: section
+        scroll_highlight: yes
+        before: null
+        after: null
 ---
 
+```{tex}
+
+```
+
 This is a compilation of documents for [Superpower](https://github.com/arcaldwell49/Superpower) R package written in **Markdown** [@R-rmarkdown] and compiled by **Bookdown** [@R-bookdown]. 
-
-
 
 ```{r include=FALSE}
 # automatically create a bib database for R packages
@@ -38,11 +52,13 @@ In this book we will display a variety of ways the `Superpower` package can be u
 
 ### Contributors {-}
 
-Daniël Lakens ![](screenshots/orcid.png) https://orcid.org/0000-0002-0247-239X.
+Dani&euml;l Lakens ![](screenshots/orcid.png) https://orcid.org/0000-0002-0247-239X.
 
 Aaron R. Caldwell ![](screenshots/orcid.png) https://orcid.org/0000-0002-4541-6283.
 
 Chelsea M. Parlett-Pelleriti ![](screenshots/github5.png) https://cmparlettpelleriti.github.io/
+
+Guy Prochilo ![screenshots/github5.png] http://www.guyprochilo.com/
 
 
 ### Funding {-}
@@ -69,12 +85,19 @@ library(tidyverse)
 library(Superpower)
 library(knitr)
 library(kableExtra)
-
+library(MBESS) # Confidence intervals on standardized effect sizes / precision
+library(grid) # Combining plots
+library(GGally) # Beautiful plots
+library(scales) # Improve axis ticks
+library(here) # Smart directory manipulation
 #latex_options = "hold_position"
 ```
 
 ```{r global_options, include=FALSE}
-#options(knitr.table.format = "latex")
+
+if(knitr::is_latex_output()){
+  options(knitr.table.format = "latex")
+}
 
 ```
 
