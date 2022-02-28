@@ -21,10 +21,14 @@
   <meta name="twitter:description" content="This is a book describing the capabilities of the Superpower R package." />
   
 
-<meta name="author" content="Aaron R. Caldwell, Daniël Lakens, Chelsea M. Parlett-Pelleriti, and Guy Prochilo" />
+<meta name="author" content="Aaron R. Caldwell" />
+<meta name="author" content="Daniël Lakens" />
+<meta name="author" content="Chelsea M. Parlett-Pelleriti" />
+<meta name="author" content="Guy Prochilo" />
+<meta name="author" content="Frederik Aust" />
 
 
-<meta name="date" content="2021-12-08" />
+<meta name="date" content="2022-02-28" />
 
   <meta name="viewport" content="width=device-width, initial-scale=1" />
   <meta name="apple-mobile-web-app-capable" content="yes" />
@@ -350,20 +354,20 @@ div.csl-indent {
 <div id="power-curve" class="section level1" number="11">
 <h1><span class="header-section-number">Chapter 11</span> Power Curve</h1>
 <p>Power is calculated for a specific value of an effect size, alpha level, and sample size. Because you often do not know the true effect size, it often makes more sense to think of the power curve as a function of the size of the effect. Although power curves could be constructed from Monte Carlo simulations (<code>ANOVA_power</code>) the <code>plot_power</code> function utilizes the <code>ANOVA_exact</code> function within its code because these “exact” simulations are much faster. The basic approach is to calculate power for a specific pattern of means, a specific effect size, a given alpha level, and a specific pattern of correlations. This is one example:</p>
-<div class="sourceCode" id="cb636"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb636-1"><a href="power-curve.html#cb636-1" aria-hidden="true" tabindex="-1"></a><span class="co">#2x2 design</span></span>
-<span id="cb636-2"><a href="power-curve.html#cb636-2" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb636-3"><a href="power-curve.html#cb636-3" aria-hidden="true" tabindex="-1"></a>design_result <span class="ot">&lt;-</span> <span class="fu">ANOVA_design</span>(<span class="at">design =</span> <span class="st">&quot;2w*2w&quot;</span>,</span>
-<span id="cb636-4"><a href="power-curve.html#cb636-4" aria-hidden="true" tabindex="-1"></a>                              <span class="at">n =</span> <span class="dv">20</span>, </span>
-<span id="cb636-5"><a href="power-curve.html#cb636-5" aria-hidden="true" tabindex="-1"></a>                              <span class="at">mu =</span> <span class="fu">c</span>(<span class="dv">0</span>,<span class="dv">0</span>,<span class="dv">0</span>,<span class="fl">0.5</span>), </span>
-<span id="cb636-6"><a href="power-curve.html#cb636-6" aria-hidden="true" tabindex="-1"></a>                              <span class="at">sd =</span> <span class="dv">1</span>, </span>
-<span id="cb636-7"><a href="power-curve.html#cb636-7" aria-hidden="true" tabindex="-1"></a>                              <span class="at">r =</span> <span class="fl">0.5</span>)</span></code></pre></div>
-<p><img src="SuperpowerValidation_files/figure-html/unnamed-chunk-277-1.png" width="672" /></p>
-<div class="sourceCode" id="cb637"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb637-1"><a href="power-curve.html#cb637-1" aria-hidden="true" tabindex="-1"></a>exact_result <span class="ot">&lt;-</span> <span class="fu">ANOVA_exact</span>(design_result,</span>
-<span id="cb637-2"><a href="power-curve.html#cb637-2" aria-hidden="true" tabindex="-1"></a>                            <span class="at">alpha_level =</span> alpha_level,</span>
-<span id="cb637-3"><a href="power-curve.html#cb637-3" aria-hidden="true" tabindex="-1"></a>                            <span class="at">verbose =</span> <span class="cn">FALSE</span>)</span></code></pre></div>
+<div class="sourceCode" id="cb637"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb637-1"><a href="power-curve.html#cb637-1" aria-hidden="true" tabindex="-1"></a><span class="co">#2x2 design</span></span>
+<span id="cb637-2"><a href="power-curve.html#cb637-2" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb637-3"><a href="power-curve.html#cb637-3" aria-hidden="true" tabindex="-1"></a>design_result <span class="ot">&lt;-</span> <span class="fu">ANOVA_design</span>(<span class="at">design =</span> <span class="st">&quot;2w*2w&quot;</span>,</span>
+<span id="cb637-4"><a href="power-curve.html#cb637-4" aria-hidden="true" tabindex="-1"></a>                              <span class="at">n =</span> <span class="dv">20</span>, </span>
+<span id="cb637-5"><a href="power-curve.html#cb637-5" aria-hidden="true" tabindex="-1"></a>                              <span class="at">mu =</span> <span class="fu">c</span>(<span class="dv">0</span>,<span class="dv">0</span>,<span class="dv">0</span>,<span class="fl">0.5</span>), </span>
+<span id="cb637-6"><a href="power-curve.html#cb637-6" aria-hidden="true" tabindex="-1"></a>                              <span class="at">sd =</span> <span class="dv">1</span>, </span>
+<span id="cb637-7"><a href="power-curve.html#cb637-7" aria-hidden="true" tabindex="-1"></a>                              <span class="at">r =</span> <span class="fl">0.5</span>)</span></code></pre></div>
+<p><img src="SuperpowerValidation_files/figure-html/unnamed-chunk-280-1.png" width="672" /></p>
+<div class="sourceCode" id="cb638"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb638-1"><a href="power-curve.html#cb638-1" aria-hidden="true" tabindex="-1"></a>exact_result <span class="ot">&lt;-</span> <span class="fu">ANOVA_exact</span>(design_result,</span>
+<span id="cb638-2"><a href="power-curve.html#cb638-2" aria-hidden="true" tabindex="-1"></a>                            <span class="at">alpha_level =</span> alpha_level,</span>
+<span id="cb638-3"><a href="power-curve.html#cb638-3" aria-hidden="true" tabindex="-1"></a>                            <span class="at">verbose =</span> <span class="cn">FALSE</span>)</span></code></pre></div>
 <table class="table" style="margin-left: auto; margin-right: auto;">
 <caption>
-<span id="tab:unnamed-chunk-278">Table 11.1: </span>Exact ANOVA Result
+<span id="tab:unnamed-chunk-281">Table 11.1: </span>Exact ANOVA Result
 </caption>
 <thead>
 <tr>
@@ -439,11 +443,11 @@ a:b
 </table>
 <div style="page-break-after: always;"></div>
 <p>We can make these calculations for a range of sample sizes, to get a power curve. We created a simple function that performs these calculations across a range of sample sizes (from n = 3 to max_, a variable you can specify in the function).</p>
-<div class="sourceCode" id="cb638"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb638-1"><a href="power-curve.html#cb638-1" aria-hidden="true" tabindex="-1"></a>p_a <span class="ot">&lt;-</span> <span class="fu">plot_power</span>(design_result,</span>
-<span id="cb638-2"><a href="power-curve.html#cb638-2" aria-hidden="true" tabindex="-1"></a>                  <span class="at">max_n =</span> <span class="dv">50</span>,</span>
-<span id="cb638-3"><a href="power-curve.html#cb638-3" aria-hidden="true" tabindex="-1"></a>                  <span class="at">plot =</span> <span class="cn">TRUE</span>,</span>
-<span id="cb638-4"><a href="power-curve.html#cb638-4" aria-hidden="true" tabindex="-1"></a>                  <span class="at">verbose =</span> <span class="cn">TRUE</span>)</span></code></pre></div>
-<p><img src="SuperpowerValidation_files/figure-html/unnamed-chunk-279-1.png" width="672" /></p>
+<div class="sourceCode" id="cb639"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb639-1"><a href="power-curve.html#cb639-1" aria-hidden="true" tabindex="-1"></a>p_a <span class="ot">&lt;-</span> <span class="fu">plot_power</span>(design_result,</span>
+<span id="cb639-2"><a href="power-curve.html#cb639-2" aria-hidden="true" tabindex="-1"></a>                  <span class="at">max_n =</span> <span class="dv">50</span>,</span>
+<span id="cb639-3"><a href="power-curve.html#cb639-3" aria-hidden="true" tabindex="-1"></a>                  <span class="at">plot =</span> <span class="cn">TRUE</span>,</span>
+<span id="cb639-4"><a href="power-curve.html#cb639-4" aria-hidden="true" tabindex="-1"></a>                  <span class="at">verbose =</span> <span class="cn">TRUE</span>)</span></code></pre></div>
+<p><img src="SuperpowerValidation_files/figure-html/unnamed-chunk-282-1.png" width="672" /></p>
 <pre><code>## Achieved Power and Sample Size for ANOVA-level effects
 ##   variable                     label  n achieved_power desired_power
 ## 1        a Desired Power Not Reached 50          68.82            90
@@ -454,19 +458,19 @@ a:b
 <div id="explore-increase-in-effect-size-for-moderated-interactions." class="section level2" number="11.1">
 <h2><span class="header-section-number">11.1</span> Explore increase in effect size for moderated interactions.</h2>
 <p>The design has means 0, 0, 0, 0, with one cell increasing by 0.1, up to 0, 0, 0, 0.5. The standard deviation is set to 1. The correlation between all variables is 0.5.</p>
-<p><img src="SuperpowerValidation_files/figure-html/unnamed-chunk-280-1.png" width="672" /></p>
+<p><img src="SuperpowerValidation_files/figure-html/unnamed-chunk-283-1.png" width="672" /></p>
 <div style="page-break-after: always;"></div>
 </div>
 <div id="explore-increase-in-effect-size-for-cross-over-interactions." class="section level2" number="11.2">
 <h2><span class="header-section-number">11.2</span> Explore increase in effect size for cross-over interactions.</h2>
 <p>The design has means 0, 0, 0, 0, with two cells increasing by 0.1, up to 0.5, 0, 0, 0.5. The standard deviation is set to 1. The correlation between all variables is 0.5.</p>
-<p><img src="SuperpowerValidation_files/figure-html/unnamed-chunk-281-1.png" width="672" />
+<p><img src="SuperpowerValidation_files/figure-html/unnamed-chunk-284-1.png" width="672" />
 </p>
 </div>
 <div id="explore-increase-in-correlation-in-moderated-interactions." class="section level2" number="11.3">
 <h2><span class="header-section-number">11.3</span> Explore increase in correlation in moderated interactions.</h2>
 <p>The design has means 0, 0, 0, 0.3. The standard deviation is set to 1. The correlation between all variables increases from 0 to 0.9.</p>
-<p><img src="SuperpowerValidation_files/figure-html/unnamed-chunk-282-1.png" width="672" />
+<p><img src="SuperpowerValidation_files/figure-html/unnamed-chunk-285-1.png" width="672" />
 </p>
 </div>
 <div id="increasing-correlation-in-on-factor-decreases-power-in-second-factor" class="section level2" number="11.4">
@@ -476,380 +480,380 @@ a:b
 <p>The more important finding with respect to the effect of <em>r</em> on power relates to the effect of the correlations associated with one factor on the power of the test of the main effect of the other factor. Specifically, if the correlations among the levels of B are larger than those within the AB matrix (i.e., <em>r</em>(B) - <em>r</em>(AB) &gt; 0.0), there is a reduction in the power for the test of the A effect (and the test on B is similarly affected by the A correlations).</p>
 </blockquote>
 <p>We see this in the plots below. As the correlation of the A factor increases from 0.4 to 0.9, we see the power for the main effect decreases.</p>
-<p><img src="SuperpowerValidation_files/figure-html/unnamed-chunk-283-1.png" width="672" /></p>
+<p><img src="SuperpowerValidation_files/figure-html/unnamed-chunk-286-1.png" width="672" /></p>
 <div style="page-break-after: always;"></div>
 </div>
 <div id="code-to-reproduce-power-curve-figures" class="section level2" number="11.5">
 <h2><span class="header-section-number">11.5</span> Code to Reproduce Power Curve Figures</h2>
-<div class="sourceCode" id="cb640"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb640-1"><a href="power-curve.html#cb640-1" aria-hidden="true" tabindex="-1"></a>nsims <span class="ot">=</span> <span class="dv">10000</span></span>
-<span id="cb640-2"><a href="power-curve.html#cb640-2" aria-hidden="true" tabindex="-1"></a><span class="fu">library</span>(Superpower)</span>
-<span id="cb640-3"><a href="power-curve.html#cb640-3" aria-hidden="true" tabindex="-1"></a><span class="fu">library</span>(pwr)</span>
-<span id="cb640-4"><a href="power-curve.html#cb640-4" aria-hidden="true" tabindex="-1"></a><span class="fu">library</span>(tidyverse)</span>
-<span id="cb640-5"><a href="power-curve.html#cb640-5" aria-hidden="true" tabindex="-1"></a><span class="fu">library</span>(viridis)</span>
-<span id="cb640-6"><a href="power-curve.html#cb640-6" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb640-7"><a href="power-curve.html#cb640-7" aria-hidden="true" tabindex="-1"></a>string <span class="ot">&lt;-</span> <span class="st">&quot;2w*2w&quot;</span></span>
-<span id="cb640-8"><a href="power-curve.html#cb640-8" aria-hidden="true" tabindex="-1"></a>labelnames <span class="ot">=</span> <span class="fu">c</span>(<span class="st">&quot;A&quot;</span>, <span class="st">&quot;a1&quot;</span>, <span class="st">&quot;a2&quot;</span>, <span class="st">&quot;B&quot;</span>, <span class="st">&quot;b1&quot;</span>, <span class="st">&quot;b2&quot;</span>)</span>
-<span id="cb640-9"><a href="power-curve.html#cb640-9" aria-hidden="true" tabindex="-1"></a>design_result <span class="ot">&lt;-</span> <span class="fu">ANOVA_design</span>(<span class="at">design =</span> string,</span>
-<span id="cb640-10"><a href="power-curve.html#cb640-10" aria-hidden="true" tabindex="-1"></a>                              <span class="at">n =</span> <span class="dv">20</span>, </span>
-<span id="cb640-11"><a href="power-curve.html#cb640-11" aria-hidden="true" tabindex="-1"></a>                              <span class="at">mu =</span> <span class="fu">c</span>(<span class="dv">0</span>,<span class="dv">0</span>,<span class="dv">0</span>,<span class="fl">0.0</span>), </span>
-<span id="cb640-12"><a href="power-curve.html#cb640-12" aria-hidden="true" tabindex="-1"></a>                              <span class="at">sd =</span> <span class="dv">1</span>, </span>
-<span id="cb640-13"><a href="power-curve.html#cb640-13" aria-hidden="true" tabindex="-1"></a>                              <span class="at">r =</span> <span class="fl">0.5</span>, </span>
-<span id="cb640-14"><a href="power-curve.html#cb640-14" aria-hidden="true" tabindex="-1"></a>                              <span class="at">labelnames =</span> labelnames)</span>
-<span id="cb640-15"><a href="power-curve.html#cb640-15" aria-hidden="true" tabindex="-1"></a>p_a <span class="ot">&lt;-</span> <span class="fu">plot_power</span>(design_result,</span>
-<span id="cb640-16"><a href="power-curve.html#cb640-16" aria-hidden="true" tabindex="-1"></a>                  <span class="at">max_n =</span> <span class="dv">100</span>)</span>
-<span id="cb640-17"><a href="power-curve.html#cb640-17" aria-hidden="true" tabindex="-1"></a>p_a<span class="sc">$</span>power_df<span class="sc">$</span>effect <span class="ot">&lt;-</span> <span class="dv">0</span></span>
-<span id="cb640-18"><a href="power-curve.html#cb640-18" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb640-19"><a href="power-curve.html#cb640-19" aria-hidden="true" tabindex="-1"></a>design_result <span class="ot">&lt;-</span> <span class="fu">ANOVA_design</span>(<span class="at">design =</span> string,</span>
-<span id="cb640-20"><a href="power-curve.html#cb640-20" aria-hidden="true" tabindex="-1"></a>                              <span class="at">n =</span> <span class="dv">20</span>, </span>
-<span id="cb640-21"><a href="power-curve.html#cb640-21" aria-hidden="true" tabindex="-1"></a>                              <span class="at">mu =</span> <span class="fu">c</span>(<span class="dv">0</span>,<span class="dv">0</span>,<span class="dv">0</span>,<span class="fl">0.1</span>), </span>
-<span id="cb640-22"><a href="power-curve.html#cb640-22" aria-hidden="true" tabindex="-1"></a>                              <span class="at">sd =</span> <span class="dv">1</span>, </span>
-<span id="cb640-23"><a href="power-curve.html#cb640-23" aria-hidden="true" tabindex="-1"></a>                              <span class="at">r =</span> <span class="fl">0.5</span>, </span>
-<span id="cb640-24"><a href="power-curve.html#cb640-24" aria-hidden="true" tabindex="-1"></a>                              <span class="at">labelnames =</span> labelnames)</span>
-<span id="cb640-25"><a href="power-curve.html#cb640-25" aria-hidden="true" tabindex="-1"></a>p_b <span class="ot">&lt;-</span> <span class="fu">plot_power</span>(design_result,</span>
-<span id="cb640-26"><a href="power-curve.html#cb640-26" aria-hidden="true" tabindex="-1"></a>                  <span class="at">max_n =</span> <span class="dv">100</span>)</span>
-<span id="cb640-27"><a href="power-curve.html#cb640-27" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb640-28"><a href="power-curve.html#cb640-28" aria-hidden="true" tabindex="-1"></a>p_b<span class="sc">$</span>power_df<span class="sc">$</span>effect <span class="ot">&lt;-</span> <span class="fl">0.1</span></span>
-<span id="cb640-29"><a href="power-curve.html#cb640-29" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb640-30"><a href="power-curve.html#cb640-30" aria-hidden="true" tabindex="-1"></a>design_result <span class="ot">&lt;-</span> <span class="fu">ANOVA_design</span>(<span class="at">design =</span> string,</span>
-<span id="cb640-31"><a href="power-curve.html#cb640-31" aria-hidden="true" tabindex="-1"></a>                              <span class="at">n =</span> <span class="dv">20</span>, </span>
-<span id="cb640-32"><a href="power-curve.html#cb640-32" aria-hidden="true" tabindex="-1"></a>                              <span class="at">mu =</span> <span class="fu">c</span>(<span class="dv">0</span>,<span class="dv">0</span>,<span class="dv">0</span>,<span class="fl">0.2</span>), </span>
-<span id="cb640-33"><a href="power-curve.html#cb640-33" aria-hidden="true" tabindex="-1"></a>                              <span class="at">sd =</span> <span class="dv">1</span>, </span>
-<span id="cb640-34"><a href="power-curve.html#cb640-34" aria-hidden="true" tabindex="-1"></a>                              <span class="at">r =</span> <span class="fl">0.5</span>, </span>
-<span id="cb640-35"><a href="power-curve.html#cb640-35" aria-hidden="true" tabindex="-1"></a>                              <span class="at">labelnames =</span> labelnames)</span>
-<span id="cb640-36"><a href="power-curve.html#cb640-36" aria-hidden="true" tabindex="-1"></a>p_c <span class="ot">&lt;-</span> <span class="fu">plot_power</span>(design_result,</span>
-<span id="cb640-37"><a href="power-curve.html#cb640-37" aria-hidden="true" tabindex="-1"></a>                  <span class="at">max_n =</span> <span class="dv">100</span>)</span>
-<span id="cb640-38"><a href="power-curve.html#cb640-38" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb640-39"><a href="power-curve.html#cb640-39" aria-hidden="true" tabindex="-1"></a>p_c<span class="sc">$</span>power_df<span class="sc">$</span>effect <span class="ot">&lt;-</span> <span class="fl">0.2</span></span>
-<span id="cb640-40"><a href="power-curve.html#cb640-40" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb640-41"><a href="power-curve.html#cb640-41" aria-hidden="true" tabindex="-1"></a>design_result <span class="ot">&lt;-</span> <span class="fu">ANOVA_design</span>(<span class="at">design =</span> string,</span>
-<span id="cb640-42"><a href="power-curve.html#cb640-42" aria-hidden="true" tabindex="-1"></a>                              <span class="at">n =</span> <span class="dv">20</span>, </span>
-<span id="cb640-43"><a href="power-curve.html#cb640-43" aria-hidden="true" tabindex="-1"></a>                              <span class="at">mu =</span> <span class="fu">c</span>(<span class="dv">0</span>,<span class="dv">0</span>,<span class="dv">0</span>,<span class="fl">0.3</span>), </span>
-<span id="cb640-44"><a href="power-curve.html#cb640-44" aria-hidden="true" tabindex="-1"></a>                              <span class="at">sd =</span> <span class="dv">1</span>, </span>
-<span id="cb640-45"><a href="power-curve.html#cb640-45" aria-hidden="true" tabindex="-1"></a>                              <span class="at">r =</span> <span class="fl">0.5</span>, </span>
-<span id="cb640-46"><a href="power-curve.html#cb640-46" aria-hidden="true" tabindex="-1"></a>                              <span class="at">labelnames =</span> labelnames)</span>
-<span id="cb640-47"><a href="power-curve.html#cb640-47" aria-hidden="true" tabindex="-1"></a>p_d <span class="ot">&lt;-</span> <span class="fu">plot_power</span>(design_result,</span>
-<span id="cb640-48"><a href="power-curve.html#cb640-48" aria-hidden="true" tabindex="-1"></a>                  <span class="at">max_n =</span> <span class="dv">100</span>)</span>
-<span id="cb640-49"><a href="power-curve.html#cb640-49" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb640-50"><a href="power-curve.html#cb640-50" aria-hidden="true" tabindex="-1"></a>p_d<span class="sc">$</span>power_df<span class="sc">$</span>effect <span class="ot">&lt;-</span> <span class="fl">0.3</span></span>
-<span id="cb640-51"><a href="power-curve.html#cb640-51" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb640-52"><a href="power-curve.html#cb640-52" aria-hidden="true" tabindex="-1"></a>design_result <span class="ot">&lt;-</span> <span class="fu">ANOVA_design</span>(<span class="at">design =</span> string,</span>
-<span id="cb640-53"><a href="power-curve.html#cb640-53" aria-hidden="true" tabindex="-1"></a>                              <span class="at">n =</span> <span class="dv">20</span>, </span>
-<span id="cb640-54"><a href="power-curve.html#cb640-54" aria-hidden="true" tabindex="-1"></a>                              <span class="at">mu =</span> <span class="fu">c</span>(<span class="dv">0</span>,<span class="dv">0</span>,<span class="dv">0</span>,<span class="fl">0.4</span>), </span>
-<span id="cb640-55"><a href="power-curve.html#cb640-55" aria-hidden="true" tabindex="-1"></a>                              <span class="at">sd =</span> <span class="dv">1</span>, </span>
-<span id="cb640-56"><a href="power-curve.html#cb640-56" aria-hidden="true" tabindex="-1"></a>                              <span class="at">r =</span> <span class="fl">0.5</span>, </span>
-<span id="cb640-57"><a href="power-curve.html#cb640-57" aria-hidden="true" tabindex="-1"></a>                              <span class="at">labelnames =</span> labelnames)</span>
-<span id="cb640-58"><a href="power-curve.html#cb640-58" aria-hidden="true" tabindex="-1"></a>p_e <span class="ot">&lt;-</span> <span class="fu">plot_power</span>(design_result,</span>
-<span id="cb640-59"><a href="power-curve.html#cb640-59" aria-hidden="true" tabindex="-1"></a>                  <span class="at">max_n =</span> <span class="dv">100</span>)</span>
-<span id="cb640-60"><a href="power-curve.html#cb640-60" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb640-61"><a href="power-curve.html#cb640-61" aria-hidden="true" tabindex="-1"></a>p_e<span class="sc">$</span>power_df<span class="sc">$</span>effect <span class="ot">&lt;-</span> <span class="fl">0.4</span></span>
-<span id="cb640-62"><a href="power-curve.html#cb640-62" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb640-63"><a href="power-curve.html#cb640-63" aria-hidden="true" tabindex="-1"></a>design_result <span class="ot">&lt;-</span> <span class="fu">ANOVA_design</span>(<span class="at">design =</span> string,</span>
-<span id="cb640-64"><a href="power-curve.html#cb640-64" aria-hidden="true" tabindex="-1"></a>                              <span class="at">n =</span> <span class="dv">20</span>, </span>
-<span id="cb640-65"><a href="power-curve.html#cb640-65" aria-hidden="true" tabindex="-1"></a>                              <span class="at">mu =</span> <span class="fu">c</span>(<span class="dv">0</span>,<span class="dv">0</span>,<span class="dv">0</span>,<span class="fl">0.5</span>), </span>
-<span id="cb640-66"><a href="power-curve.html#cb640-66" aria-hidden="true" tabindex="-1"></a>                              <span class="at">sd =</span> <span class="dv">1</span>, </span>
-<span id="cb640-67"><a href="power-curve.html#cb640-67" aria-hidden="true" tabindex="-1"></a>                              <span class="at">r =</span> <span class="fl">0.5</span>, </span>
-<span id="cb640-68"><a href="power-curve.html#cb640-68" aria-hidden="true" tabindex="-1"></a>                              <span class="at">labelnames =</span> labelnames)</span>
-<span id="cb640-69"><a href="power-curve.html#cb640-69" aria-hidden="true" tabindex="-1"></a>p_f <span class="ot">&lt;-</span> <span class="fu">plot_power</span>(design_result,</span>
-<span id="cb640-70"><a href="power-curve.html#cb640-70" aria-hidden="true" tabindex="-1"></a>                  <span class="at">max_n =</span> <span class="dv">100</span>)</span>
-<span id="cb640-71"><a href="power-curve.html#cb640-71" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb640-72"><a href="power-curve.html#cb640-72" aria-hidden="true" tabindex="-1"></a>p_f<span class="sc">$</span>power_df<span class="sc">$</span>effect <span class="ot">&lt;-</span> <span class="fl">0.5</span></span>
-<span id="cb640-73"><a href="power-curve.html#cb640-73" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb640-74"><a href="power-curve.html#cb640-74" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb640-75"><a href="power-curve.html#cb640-75" aria-hidden="true" tabindex="-1"></a>plot_data <span class="ot">&lt;-</span> <span class="fu">rbind</span>(p_a<span class="sc">$</span>power_df, p_b<span class="sc">$</span>power_df, p_c<span class="sc">$</span>power_df, </span>
-<span id="cb640-76"><a href="power-curve.html#cb640-76" aria-hidden="true" tabindex="-1"></a>                   p_d<span class="sc">$</span>power_df, p_e<span class="sc">$</span>power_df, p_f<span class="sc">$</span>power_df)<span class="sc">%&gt;%</span></span>
-<span id="cb640-77"><a href="power-curve.html#cb640-77" aria-hidden="true" tabindex="-1"></a>  <span class="fu">mutate</span>(<span class="at">AxB =</span> <span class="st">`</span><span class="at">A:B</span><span class="st">`</span>) <span class="sc">%&gt;%</span> <span class="fu">select</span>(n,effect,A,B,AxB)</span>
-<span id="cb640-78"><a href="power-curve.html#cb640-78" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb640-79"><a href="power-curve.html#cb640-79" aria-hidden="true" tabindex="-1"></a>long_data <span class="ot">=</span> plot_data <span class="sc">%&gt;%</span></span>
-<span id="cb640-80"><a href="power-curve.html#cb640-80" aria-hidden="true" tabindex="-1"></a>  <span class="fu">gather</span>(<span class="st">&quot;A&quot;</span>, <span class="st">&quot;B&quot;</span>, <span class="st">&quot;AxB&quot;</span>, <span class="at">key =</span> factor, <span class="at">value =</span> power)</span>
-<span id="cb640-81"><a href="power-curve.html#cb640-81" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb640-82"><a href="power-curve.html#cb640-82" aria-hidden="true" tabindex="-1"></a>plot1 <span class="ot">&lt;-</span> <span class="fu">ggplot</span>(long_data, <span class="fu">aes</span>(<span class="at">x =</span> n, <span class="at">y =</span> power,</span>
-<span id="cb640-83"><a href="power-curve.html#cb640-83" aria-hidden="true" tabindex="-1"></a>                               <span class="at">color =</span> <span class="fu">as.factor</span>(effect))) <span class="sc">+</span></span>
-<span id="cb640-84"><a href="power-curve.html#cb640-84" aria-hidden="true" tabindex="-1"></a>  <span class="fu">geom_line</span>(<span class="at">size =</span> <span class="fl">1.5</span>) <span class="sc">+</span></span>
-<span id="cb640-85"><a href="power-curve.html#cb640-85" aria-hidden="true" tabindex="-1"></a>  <span class="fu">scale_y_continuous</span>(<span class="at">breaks =</span> <span class="fu">seq</span>(<span class="dv">0</span>,<span class="dv">100</span>,<span class="dv">10</span>)) <span class="sc">+</span></span>
-<span id="cb640-86"><a href="power-curve.html#cb640-86" aria-hidden="true" tabindex="-1"></a>  <span class="fu">labs</span>(<span class="at">color =</span> <span class="st">&quot;Effect Size&quot;</span>,</span>
-<span id="cb640-87"><a href="power-curve.html#cb640-87" aria-hidden="true" tabindex="-1"></a>       <span class="at">x =</span> <span class="st">&quot;Sample Size per Group&quot;</span>,</span>
-<span id="cb640-88"><a href="power-curve.html#cb640-88" aria-hidden="true" tabindex="-1"></a>       <span class="at">y =</span> <span class="st">&quot;Power (%)&quot;</span>) <span class="sc">+</span></span>
-<span id="cb640-89"><a href="power-curve.html#cb640-89" aria-hidden="true" tabindex="-1"></a>  <span class="fu">scale_color_viridis_d</span>() <span class="sc">+</span> <span class="fu">facet_wrap</span>( <span class="sc">~</span> factor, <span class="at">ncol=</span><span class="dv">2</span>)</span>
-<span id="cb640-90"><a href="power-curve.html#cb640-90" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb640-91"><a href="power-curve.html#cb640-91" aria-hidden="true" tabindex="-1"></a><span class="do">####</span></span>
-<span id="cb640-92"><a href="power-curve.html#cb640-92" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb640-93"><a href="power-curve.html#cb640-93" aria-hidden="true" tabindex="-1"></a>design_result <span class="ot">&lt;-</span> <span class="fu">ANOVA_design</span>(<span class="at">design =</span> string,</span>
-<span id="cb640-94"><a href="power-curve.html#cb640-94" aria-hidden="true" tabindex="-1"></a>                              <span class="at">n =</span> <span class="dv">20</span>, </span>
-<span id="cb640-95"><a href="power-curve.html#cb640-95" aria-hidden="true" tabindex="-1"></a>                              <span class="at">mu =</span> <span class="fu">c</span>(<span class="dv">0</span>,<span class="dv">0</span>,<span class="dv">0</span>,<span class="fl">0.0</span>), </span>
-<span id="cb640-96"><a href="power-curve.html#cb640-96" aria-hidden="true" tabindex="-1"></a>                              <span class="at">sd =</span> <span class="dv">1</span>, </span>
-<span id="cb640-97"><a href="power-curve.html#cb640-97" aria-hidden="true" tabindex="-1"></a>                              <span class="at">r =</span> <span class="fl">0.5</span>, </span>
-<span id="cb640-98"><a href="power-curve.html#cb640-98" aria-hidden="true" tabindex="-1"></a>                              <span class="at">labelnames =</span> labelnames)</span>
-<span id="cb640-99"><a href="power-curve.html#cb640-99" aria-hidden="true" tabindex="-1"></a>p_a <span class="ot">&lt;-</span> <span class="fu">plot_power</span>(design_result,</span>
-<span id="cb640-100"><a href="power-curve.html#cb640-100" aria-hidden="true" tabindex="-1"></a>                  <span class="at">max_n =</span> <span class="dv">100</span>)</span>
-<span id="cb640-101"><a href="power-curve.html#cb640-101" aria-hidden="true" tabindex="-1"></a>p_a<span class="sc">$</span>power_df<span class="sc">$</span>effect <span class="ot">&lt;-</span> <span class="dv">0</span></span>
-<span id="cb640-102"><a href="power-curve.html#cb640-102" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb640-103"><a href="power-curve.html#cb640-103" aria-hidden="true" tabindex="-1"></a>design_result <span class="ot">&lt;-</span> <span class="fu">ANOVA_design</span>(<span class="at">design =</span> string,</span>
-<span id="cb640-104"><a href="power-curve.html#cb640-104" aria-hidden="true" tabindex="-1"></a>                              <span class="at">n =</span> <span class="dv">20</span>, </span>
-<span id="cb640-105"><a href="power-curve.html#cb640-105" aria-hidden="true" tabindex="-1"></a>                              <span class="at">mu =</span> <span class="fu">c</span>(<span class="fl">0.1</span>,<span class="dv">0</span>,<span class="dv">0</span>,<span class="fl">0.1</span>), </span>
-<span id="cb640-106"><a href="power-curve.html#cb640-106" aria-hidden="true" tabindex="-1"></a>                              <span class="at">sd =</span> <span class="dv">1</span>, </span>
-<span id="cb640-107"><a href="power-curve.html#cb640-107" aria-hidden="true" tabindex="-1"></a>                              <span class="at">r =</span> <span class="fl">0.5</span>, </span>
-<span id="cb640-108"><a href="power-curve.html#cb640-108" aria-hidden="true" tabindex="-1"></a>                              <span class="at">labelnames =</span> labelnames)</span>
-<span id="cb640-109"><a href="power-curve.html#cb640-109" aria-hidden="true" tabindex="-1"></a>p_b <span class="ot">&lt;-</span> <span class="fu">plot_power</span>(design_result,</span>
-<span id="cb640-110"><a href="power-curve.html#cb640-110" aria-hidden="true" tabindex="-1"></a>                  <span class="at">max_n =</span> <span class="dv">100</span>)</span>
-<span id="cb640-111"><a href="power-curve.html#cb640-111" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb640-112"><a href="power-curve.html#cb640-112" aria-hidden="true" tabindex="-1"></a>p_b<span class="sc">$</span>power_df<span class="sc">$</span>effect <span class="ot">&lt;-</span> <span class="fl">0.1</span></span>
-<span id="cb640-113"><a href="power-curve.html#cb640-113" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb640-114"><a href="power-curve.html#cb640-114" aria-hidden="true" tabindex="-1"></a>design_result <span class="ot">&lt;-</span> <span class="fu">ANOVA_design</span>(<span class="at">design =</span> string,</span>
-<span id="cb640-115"><a href="power-curve.html#cb640-115" aria-hidden="true" tabindex="-1"></a>                              <span class="at">n =</span> <span class="dv">20</span>, </span>
-<span id="cb640-116"><a href="power-curve.html#cb640-116" aria-hidden="true" tabindex="-1"></a>                              <span class="at">mu =</span> <span class="fu">c</span>(<span class="fl">0.2</span>,<span class="dv">0</span>,<span class="dv">0</span>,<span class="fl">0.2</span>), </span>
-<span id="cb640-117"><a href="power-curve.html#cb640-117" aria-hidden="true" tabindex="-1"></a>                              <span class="at">sd =</span> <span class="dv">1</span>, </span>
-<span id="cb640-118"><a href="power-curve.html#cb640-118" aria-hidden="true" tabindex="-1"></a>                              <span class="at">r =</span> <span class="fl">0.5</span>, </span>
-<span id="cb640-119"><a href="power-curve.html#cb640-119" aria-hidden="true" tabindex="-1"></a>                              <span class="at">labelnames =</span> labelnames)</span>
-<span id="cb640-120"><a href="power-curve.html#cb640-120" aria-hidden="true" tabindex="-1"></a>p_c <span class="ot">&lt;-</span> <span class="fu">plot_power</span>(design_result,</span>
-<span id="cb640-121"><a href="power-curve.html#cb640-121" aria-hidden="true" tabindex="-1"></a>                  <span class="at">max_n =</span> <span class="dv">100</span>)</span>
-<span id="cb640-122"><a href="power-curve.html#cb640-122" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb640-123"><a href="power-curve.html#cb640-123" aria-hidden="true" tabindex="-1"></a>p_c<span class="sc">$</span>power_df<span class="sc">$</span>effect <span class="ot">&lt;-</span> <span class="fl">0.2</span></span>
-<span id="cb640-124"><a href="power-curve.html#cb640-124" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb640-125"><a href="power-curve.html#cb640-125" aria-hidden="true" tabindex="-1"></a>design_result <span class="ot">&lt;-</span> <span class="fu">ANOVA_design</span>(<span class="at">design =</span> string,</span>
-<span id="cb640-126"><a href="power-curve.html#cb640-126" aria-hidden="true" tabindex="-1"></a>                              <span class="at">n =</span> <span class="dv">20</span>, </span>
-<span id="cb640-127"><a href="power-curve.html#cb640-127" aria-hidden="true" tabindex="-1"></a>                              <span class="at">mu =</span> <span class="fu">c</span>(<span class="fl">0.3</span>,<span class="dv">0</span>,<span class="dv">0</span>,<span class="fl">0.3</span>), </span>
-<span id="cb640-128"><a href="power-curve.html#cb640-128" aria-hidden="true" tabindex="-1"></a>                              <span class="at">sd =</span> <span class="dv">1</span>, </span>
-<span id="cb640-129"><a href="power-curve.html#cb640-129" aria-hidden="true" tabindex="-1"></a>                              <span class="at">r =</span> <span class="fl">0.5</span>, </span>
-<span id="cb640-130"><a href="power-curve.html#cb640-130" aria-hidden="true" tabindex="-1"></a>                              <span class="at">labelnames =</span> labelnames)</span>
-<span id="cb640-131"><a href="power-curve.html#cb640-131" aria-hidden="true" tabindex="-1"></a>p_d <span class="ot">&lt;-</span> <span class="fu">plot_power</span>(design_result,</span>
-<span id="cb640-132"><a href="power-curve.html#cb640-132" aria-hidden="true" tabindex="-1"></a>                  <span class="at">max_n =</span> <span class="dv">100</span>)</span>
-<span id="cb640-133"><a href="power-curve.html#cb640-133" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb640-134"><a href="power-curve.html#cb640-134" aria-hidden="true" tabindex="-1"></a>p_d<span class="sc">$</span>power_df<span class="sc">$</span>effect <span class="ot">&lt;-</span> <span class="fl">0.3</span></span>
-<span id="cb640-135"><a href="power-curve.html#cb640-135" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb640-136"><a href="power-curve.html#cb640-136" aria-hidden="true" tabindex="-1"></a>design_result <span class="ot">&lt;-</span> <span class="fu">ANOVA_design</span>(<span class="at">design =</span> string,</span>
-<span id="cb640-137"><a href="power-curve.html#cb640-137" aria-hidden="true" tabindex="-1"></a>                              <span class="at">n =</span> <span class="dv">20</span>, </span>
-<span id="cb640-138"><a href="power-curve.html#cb640-138" aria-hidden="true" tabindex="-1"></a>                              <span class="at">mu =</span> <span class="fu">c</span>(<span class="fl">0.4</span>,<span class="dv">0</span>,<span class="dv">0</span>,<span class="fl">0.4</span>), </span>
-<span id="cb640-139"><a href="power-curve.html#cb640-139" aria-hidden="true" tabindex="-1"></a>                              <span class="at">sd =</span> <span class="dv">1</span>, </span>
-<span id="cb640-140"><a href="power-curve.html#cb640-140" aria-hidden="true" tabindex="-1"></a>                              <span class="at">r =</span> <span class="fl">0.5</span>, </span>
-<span id="cb640-141"><a href="power-curve.html#cb640-141" aria-hidden="true" tabindex="-1"></a>                              <span class="at">labelnames =</span> labelnames)</span>
-<span id="cb640-142"><a href="power-curve.html#cb640-142" aria-hidden="true" tabindex="-1"></a>p_e <span class="ot">&lt;-</span> <span class="fu">plot_power</span>(design_result,</span>
-<span id="cb640-143"><a href="power-curve.html#cb640-143" aria-hidden="true" tabindex="-1"></a>                  <span class="at">max_n =</span> <span class="dv">100</span>)</span>
-<span id="cb640-144"><a href="power-curve.html#cb640-144" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb640-145"><a href="power-curve.html#cb640-145" aria-hidden="true" tabindex="-1"></a>p_e<span class="sc">$</span>power_df<span class="sc">$</span>effect <span class="ot">&lt;-</span> <span class="fl">0.4</span></span>
-<span id="cb640-146"><a href="power-curve.html#cb640-146" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb640-147"><a href="power-curve.html#cb640-147" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb640-148"><a href="power-curve.html#cb640-148" aria-hidden="true" tabindex="-1"></a>design_result <span class="ot">&lt;-</span> <span class="fu">ANOVA_design</span>(<span class="at">design =</span> string,</span>
-<span id="cb640-149"><a href="power-curve.html#cb640-149" aria-hidden="true" tabindex="-1"></a>                              <span class="at">n =</span> <span class="dv">20</span>, </span>
-<span id="cb640-150"><a href="power-curve.html#cb640-150" aria-hidden="true" tabindex="-1"></a>                              <span class="at">mu =</span> <span class="fu">c</span>(<span class="fl">0.5</span>,<span class="dv">0</span>,<span class="dv">0</span>,<span class="fl">0.5</span>), </span>
-<span id="cb640-151"><a href="power-curve.html#cb640-151" aria-hidden="true" tabindex="-1"></a>                              <span class="at">sd =</span> <span class="dv">1</span>, </span>
-<span id="cb640-152"><a href="power-curve.html#cb640-152" aria-hidden="true" tabindex="-1"></a>                              <span class="at">r =</span> <span class="fl">0.5</span>, </span>
-<span id="cb640-153"><a href="power-curve.html#cb640-153" aria-hidden="true" tabindex="-1"></a>                              <span class="at">labelnames =</span> labelnames)</span>
-<span id="cb640-154"><a href="power-curve.html#cb640-154" aria-hidden="true" tabindex="-1"></a>p_f <span class="ot">&lt;-</span> <span class="fu">plot_power</span>(design_result,</span>
-<span id="cb640-155"><a href="power-curve.html#cb640-155" aria-hidden="true" tabindex="-1"></a>                  <span class="at">max_n =</span> <span class="dv">100</span>)</span>
-<span id="cb640-156"><a href="power-curve.html#cb640-156" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb640-157"><a href="power-curve.html#cb640-157" aria-hidden="true" tabindex="-1"></a>p_f<span class="sc">$</span>power_df<span class="sc">$</span>effect <span class="ot">&lt;-</span> <span class="fl">0.5</span></span>
-<span id="cb640-158"><a href="power-curve.html#cb640-158" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb640-159"><a href="power-curve.html#cb640-159" aria-hidden="true" tabindex="-1"></a>plot_data <span class="ot">&lt;-</span> <span class="fu">rbind</span>(p_a<span class="sc">$</span>power_df, p_b<span class="sc">$</span>power_df, p_c<span class="sc">$</span>power_df,</span>
-<span id="cb640-160"><a href="power-curve.html#cb640-160" aria-hidden="true" tabindex="-1"></a>                   p_d<span class="sc">$</span>power_df, p_e<span class="sc">$</span>power_df, p_f<span class="sc">$</span>power_df)<span class="sc">%&gt;%</span></span>
-<span id="cb640-161"><a href="power-curve.html#cb640-161" aria-hidden="true" tabindex="-1"></a>  <span class="fu">mutate</span>(<span class="at">AxB =</span> <span class="st">`</span><span class="at">A:B</span><span class="st">`</span>) <span class="sc">%&gt;%</span> <span class="fu">select</span>(n,effect,A,B,AxB)</span>
-<span id="cb640-162"><a href="power-curve.html#cb640-162" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb640-163"><a href="power-curve.html#cb640-163" aria-hidden="true" tabindex="-1"></a>long_data <span class="ot">=</span> plot_data <span class="sc">%&gt;%</span></span>
-<span id="cb640-164"><a href="power-curve.html#cb640-164" aria-hidden="true" tabindex="-1"></a>  <span class="fu">gather</span>(<span class="st">&quot;A&quot;</span>, <span class="st">&quot;B&quot;</span>, <span class="st">&quot;AxB&quot;</span>, <span class="at">key =</span> factor, <span class="at">value =</span> power)</span>
-<span id="cb640-165"><a href="power-curve.html#cb640-165" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb640-166"><a href="power-curve.html#cb640-166" aria-hidden="true" tabindex="-1"></a>plot2 <span class="ot">&lt;-</span> <span class="fu">ggplot</span>(long_data, <span class="fu">aes</span>(<span class="at">x =</span> n, <span class="at">y =</span> power,</span>
-<span id="cb640-167"><a href="power-curve.html#cb640-167" aria-hidden="true" tabindex="-1"></a>                               <span class="at">color =</span> <span class="fu">as.factor</span>(effect))) <span class="sc">+</span></span>
-<span id="cb640-168"><a href="power-curve.html#cb640-168" aria-hidden="true" tabindex="-1"></a>  <span class="fu">geom_line</span>(<span class="at">size =</span> <span class="fl">1.5</span>) <span class="sc">+</span></span>
-<span id="cb640-169"><a href="power-curve.html#cb640-169" aria-hidden="true" tabindex="-1"></a>  <span class="fu">scale_y_continuous</span>(<span class="at">breaks =</span> <span class="fu">seq</span>(<span class="dv">0</span>,<span class="dv">100</span>,<span class="dv">10</span>)) <span class="sc">+</span></span>
-<span id="cb640-170"><a href="power-curve.html#cb640-170" aria-hidden="true" tabindex="-1"></a>  <span class="fu">labs</span>(<span class="at">color =</span> <span class="st">&quot;Effect Size&quot;</span>,</span>
-<span id="cb640-171"><a href="power-curve.html#cb640-171" aria-hidden="true" tabindex="-1"></a>       <span class="at">x =</span> <span class="st">&quot;Sample Size per Group&quot;</span>,</span>
-<span id="cb640-172"><a href="power-curve.html#cb640-172" aria-hidden="true" tabindex="-1"></a>       <span class="at">y =</span> <span class="st">&quot;Power (%)&quot;</span>) <span class="sc">+</span></span>
-<span id="cb640-173"><a href="power-curve.html#cb640-173" aria-hidden="true" tabindex="-1"></a>  <span class="fu">scale_color_viridis_d</span>() <span class="sc">+</span> <span class="fu">facet_wrap</span>( <span class="sc">~</span> factor, <span class="at">ncol=</span><span class="dv">2</span>)</span>
-<span id="cb640-174"><a href="power-curve.html#cb640-174" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb640-175"><a href="power-curve.html#cb640-175" aria-hidden="true" tabindex="-1"></a><span class="do">##</span></span>
-<span id="cb640-176"><a href="power-curve.html#cb640-176" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb640-177"><a href="power-curve.html#cb640-177" aria-hidden="true" tabindex="-1"></a>string <span class="ot">&lt;-</span> <span class="st">&quot;2w*2w&quot;</span></span>
-<span id="cb640-178"><a href="power-curve.html#cb640-178" aria-hidden="true" tabindex="-1"></a>labelnames <span class="ot">=</span> <span class="fu">c</span>(<span class="st">&quot;A&quot;</span>, <span class="st">&quot;a1&quot;</span>, <span class="st">&quot;a2&quot;</span>, <span class="st">&quot;B&quot;</span>, <span class="st">&quot;b1&quot;</span>, <span class="st">&quot;b2&quot;</span>)</span>
-<span id="cb640-179"><a href="power-curve.html#cb640-179" aria-hidden="true" tabindex="-1"></a>design_result <span class="ot">&lt;-</span> <span class="fu">ANOVA_design</span>(<span class="at">design =</span> string,</span>
-<span id="cb640-180"><a href="power-curve.html#cb640-180" aria-hidden="true" tabindex="-1"></a>                              <span class="at">n =</span> <span class="dv">20</span>, </span>
-<span id="cb640-181"><a href="power-curve.html#cb640-181" aria-hidden="true" tabindex="-1"></a>                              <span class="at">mu =</span> <span class="fu">c</span>(<span class="dv">0</span>,<span class="dv">0</span>,<span class="dv">0</span>,<span class="fl">0.3</span>), </span>
-<span id="cb640-182"><a href="power-curve.html#cb640-182" aria-hidden="true" tabindex="-1"></a>                              <span class="at">sd =</span> <span class="dv">1</span>, </span>
-<span id="cb640-183"><a href="power-curve.html#cb640-183" aria-hidden="true" tabindex="-1"></a>                              <span class="at">r =</span> <span class="fl">0.0</span>, </span>
-<span id="cb640-184"><a href="power-curve.html#cb640-184" aria-hidden="true" tabindex="-1"></a>                              <span class="at">labelnames =</span> labelnames)</span>
-<span id="cb640-185"><a href="power-curve.html#cb640-185" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb640-186"><a href="power-curve.html#cb640-186" aria-hidden="true" tabindex="-1"></a>p_a <span class="ot">&lt;-</span> <span class="fu">plot_power</span>(design_result,</span>
-<span id="cb640-187"><a href="power-curve.html#cb640-187" aria-hidden="true" tabindex="-1"></a>                  <span class="at">max_n =</span> <span class="dv">100</span>)</span>
-<span id="cb640-188"><a href="power-curve.html#cb640-188" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb640-189"><a href="power-curve.html#cb640-189" aria-hidden="true" tabindex="-1"></a>p_a<span class="sc">$</span>power_df<span class="sc">$</span>correlation <span class="ot">&lt;-</span> <span class="fl">0.0</span> </span>
-<span id="cb640-190"><a href="power-curve.html#cb640-190" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb640-191"><a href="power-curve.html#cb640-191" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb640-192"><a href="power-curve.html#cb640-192" aria-hidden="true" tabindex="-1"></a>design_result <span class="ot">&lt;-</span> <span class="fu">ANOVA_design</span>(<span class="at">design =</span> string,</span>
-<span id="cb640-193"><a href="power-curve.html#cb640-193" aria-hidden="true" tabindex="-1"></a>                              <span class="at">n =</span> <span class="dv">20</span>, </span>
-<span id="cb640-194"><a href="power-curve.html#cb640-194" aria-hidden="true" tabindex="-1"></a>                              <span class="at">mu =</span> <span class="fu">c</span>(<span class="dv">0</span>,<span class="dv">0</span>,<span class="dv">0</span>,<span class="fl">0.3</span>), </span>
-<span id="cb640-195"><a href="power-curve.html#cb640-195" aria-hidden="true" tabindex="-1"></a>                              <span class="at">sd =</span> <span class="dv">1</span>, </span>
-<span id="cb640-196"><a href="power-curve.html#cb640-196" aria-hidden="true" tabindex="-1"></a>                              <span class="at">r =</span> <span class="fl">0.1</span>, </span>
-<span id="cb640-197"><a href="power-curve.html#cb640-197" aria-hidden="true" tabindex="-1"></a>                              <span class="at">labelnames =</span> labelnames)</span>
-<span id="cb640-198"><a href="power-curve.html#cb640-198" aria-hidden="true" tabindex="-1"></a>p_b <span class="ot">&lt;-</span> <span class="fu">plot_power</span>(design_result,</span>
-<span id="cb640-199"><a href="power-curve.html#cb640-199" aria-hidden="true" tabindex="-1"></a>                  <span class="at">max_n =</span> <span class="dv">100</span>)</span>
-<span id="cb640-200"><a href="power-curve.html#cb640-200" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb640-201"><a href="power-curve.html#cb640-201" aria-hidden="true" tabindex="-1"></a>p_b<span class="sc">$</span>power_df<span class="sc">$</span>correlation <span class="ot">&lt;-</span> <span class="fl">0.1</span></span>
-<span id="cb640-202"><a href="power-curve.html#cb640-202" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb640-203"><a href="power-curve.html#cb640-203" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb640-204"><a href="power-curve.html#cb640-204" aria-hidden="true" tabindex="-1"></a>design_result <span class="ot">&lt;-</span> <span class="fu">ANOVA_design</span>(<span class="at">design =</span> string,</span>
-<span id="cb640-205"><a href="power-curve.html#cb640-205" aria-hidden="true" tabindex="-1"></a>                              <span class="at">n =</span> <span class="dv">20</span>, </span>
-<span id="cb640-206"><a href="power-curve.html#cb640-206" aria-hidden="true" tabindex="-1"></a>                              <span class="at">mu =</span> <span class="fu">c</span>(<span class="dv">0</span>,<span class="dv">0</span>,<span class="dv">0</span>,<span class="fl">0.3</span>), </span>
-<span id="cb640-207"><a href="power-curve.html#cb640-207" aria-hidden="true" tabindex="-1"></a>                              <span class="at">sd =</span> <span class="dv">1</span>, </span>
-<span id="cb640-208"><a href="power-curve.html#cb640-208" aria-hidden="true" tabindex="-1"></a>                              <span class="at">r =</span> <span class="fl">0.3</span>, </span>
-<span id="cb640-209"><a href="power-curve.html#cb640-209" aria-hidden="true" tabindex="-1"></a>                              <span class="at">labelnames =</span> labelnames)</span>
-<span id="cb640-210"><a href="power-curve.html#cb640-210" aria-hidden="true" tabindex="-1"></a>p_c <span class="ot">&lt;-</span> <span class="fu">plot_power</span>(design_result,</span>
-<span id="cb640-211"><a href="power-curve.html#cb640-211" aria-hidden="true" tabindex="-1"></a>                  <span class="at">max_n =</span> <span class="dv">100</span>)</span>
-<span id="cb640-212"><a href="power-curve.html#cb640-212" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb640-213"><a href="power-curve.html#cb640-213" aria-hidden="true" tabindex="-1"></a>p_c<span class="sc">$</span>power_df<span class="sc">$</span>correlation <span class="ot">&lt;-</span> <span class="fl">0.3</span></span>
-<span id="cb640-214"><a href="power-curve.html#cb640-214" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb640-215"><a href="power-curve.html#cb640-215" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb640-216"><a href="power-curve.html#cb640-216" aria-hidden="true" tabindex="-1"></a>design_result <span class="ot">&lt;-</span> <span class="fu">ANOVA_design</span>(<span class="at">design =</span> string,</span>
-<span id="cb640-217"><a href="power-curve.html#cb640-217" aria-hidden="true" tabindex="-1"></a>                              <span class="at">n =</span> <span class="dv">20</span>, </span>
-<span id="cb640-218"><a href="power-curve.html#cb640-218" aria-hidden="true" tabindex="-1"></a>                              <span class="at">mu =</span> <span class="fu">c</span>(<span class="dv">0</span>,<span class="dv">0</span>,<span class="dv">0</span>,<span class="fl">0.3</span>), </span>
-<span id="cb640-219"><a href="power-curve.html#cb640-219" aria-hidden="true" tabindex="-1"></a>                              <span class="at">sd =</span> <span class="dv">1</span>, </span>
-<span id="cb640-220"><a href="power-curve.html#cb640-220" aria-hidden="true" tabindex="-1"></a>                              <span class="at">r =</span> <span class="fl">0.5</span>, </span>
-<span id="cb640-221"><a href="power-curve.html#cb640-221" aria-hidden="true" tabindex="-1"></a>                              <span class="at">labelnames =</span> labelnames)</span>
-<span id="cb640-222"><a href="power-curve.html#cb640-222" aria-hidden="true" tabindex="-1"></a>p_d <span class="ot">&lt;-</span> <span class="fu">plot_power</span>(design_result,</span>
-<span id="cb640-223"><a href="power-curve.html#cb640-223" aria-hidden="true" tabindex="-1"></a>                  <span class="at">max_n =</span> <span class="dv">100</span>)</span>
-<span id="cb640-224"><a href="power-curve.html#cb640-224" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb640-225"><a href="power-curve.html#cb640-225" aria-hidden="true" tabindex="-1"></a>p_d<span class="sc">$</span>power_df<span class="sc">$</span>correlation <span class="ot">&lt;-</span> <span class="fl">0.5</span></span>
-<span id="cb640-226"><a href="power-curve.html#cb640-226" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb640-227"><a href="power-curve.html#cb640-227" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb640-228"><a href="power-curve.html#cb640-228" aria-hidden="true" tabindex="-1"></a>design_result <span class="ot">&lt;-</span> <span class="fu">ANOVA_design</span>(<span class="at">design =</span> string,</span>
-<span id="cb640-229"><a href="power-curve.html#cb640-229" aria-hidden="true" tabindex="-1"></a>                              <span class="at">n =</span> <span class="dv">20</span>, </span>
-<span id="cb640-230"><a href="power-curve.html#cb640-230" aria-hidden="true" tabindex="-1"></a>                              <span class="at">mu =</span> <span class="fu">c</span>(<span class="dv">0</span>,<span class="dv">0</span>,<span class="dv">0</span>,<span class="fl">0.3</span>), </span>
-<span id="cb640-231"><a href="power-curve.html#cb640-231" aria-hidden="true" tabindex="-1"></a>                              <span class="at">sd =</span> <span class="dv">1</span>, </span>
-<span id="cb640-232"><a href="power-curve.html#cb640-232" aria-hidden="true" tabindex="-1"></a>                              <span class="at">r =</span> <span class="fl">0.7</span>, </span>
-<span id="cb640-233"><a href="power-curve.html#cb640-233" aria-hidden="true" tabindex="-1"></a>                              <span class="at">labelnames =</span> labelnames)</span>
-<span id="cb640-234"><a href="power-curve.html#cb640-234" aria-hidden="true" tabindex="-1"></a>p_e <span class="ot">&lt;-</span> <span class="fu">plot_power</span>(design_result,</span>
-<span id="cb640-235"><a href="power-curve.html#cb640-235" aria-hidden="true" tabindex="-1"></a>                  <span class="at">max_n =</span> <span class="dv">100</span>)</span>
-<span id="cb640-236"><a href="power-curve.html#cb640-236" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb640-237"><a href="power-curve.html#cb640-237" aria-hidden="true" tabindex="-1"></a>p_e<span class="sc">$</span>power_df<span class="sc">$</span>correlation <span class="ot">&lt;-</span> <span class="fl">0.7</span></span>
-<span id="cb640-238"><a href="power-curve.html#cb640-238" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb640-239"><a href="power-curve.html#cb640-239" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb640-240"><a href="power-curve.html#cb640-240" aria-hidden="true" tabindex="-1"></a>design_result <span class="ot">&lt;-</span> <span class="fu">ANOVA_design</span>(<span class="at">design =</span> string,</span>
-<span id="cb640-241"><a href="power-curve.html#cb640-241" aria-hidden="true" tabindex="-1"></a>                              <span class="at">n =</span> <span class="dv">20</span>, </span>
-<span id="cb640-242"><a href="power-curve.html#cb640-242" aria-hidden="true" tabindex="-1"></a>                              <span class="at">mu =</span> <span class="fu">c</span>(<span class="dv">0</span>,<span class="dv">0</span>,<span class="dv">0</span>,<span class="fl">0.3</span>), </span>
-<span id="cb640-243"><a href="power-curve.html#cb640-243" aria-hidden="true" tabindex="-1"></a>                              <span class="at">sd =</span> <span class="dv">1</span>, </span>
-<span id="cb640-244"><a href="power-curve.html#cb640-244" aria-hidden="true" tabindex="-1"></a>                              <span class="at">r =</span> <span class="fl">0.9</span>, </span>
-<span id="cb640-245"><a href="power-curve.html#cb640-245" aria-hidden="true" tabindex="-1"></a>                              <span class="at">labelnames =</span> labelnames)</span>
-<span id="cb640-246"><a href="power-curve.html#cb640-246" aria-hidden="true" tabindex="-1"></a>p_f <span class="ot">&lt;-</span> <span class="fu">plot_power</span>(design_result,</span>
-<span id="cb640-247"><a href="power-curve.html#cb640-247" aria-hidden="true" tabindex="-1"></a>                  <span class="at">max_n =</span> <span class="dv">100</span>)</span>
-<span id="cb640-248"><a href="power-curve.html#cb640-248" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb640-249"><a href="power-curve.html#cb640-249" aria-hidden="true" tabindex="-1"></a>p_f<span class="sc">$</span>power_df<span class="sc">$</span>correlation <span class="ot">&lt;-</span> <span class="fl">0.9</span></span>
-<span id="cb640-250"><a href="power-curve.html#cb640-250" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb640-251"><a href="power-curve.html#cb640-251" aria-hidden="true" tabindex="-1"></a>plot_data <span class="ot">&lt;-</span> <span class="fu">rbind</span>(p_a<span class="sc">$</span>power_df, p_b<span class="sc">$</span>power_df, </span>
-<span id="cb640-252"><a href="power-curve.html#cb640-252" aria-hidden="true" tabindex="-1"></a>                   p_c<span class="sc">$</span>power_df, p_d<span class="sc">$</span>power_df, p_e<span class="sc">$</span>power_df, p_f<span class="sc">$</span>power_df)<span class="sc">%&gt;%</span></span>
-<span id="cb640-253"><a href="power-curve.html#cb640-253" aria-hidden="true" tabindex="-1"></a>  <span class="fu">mutate</span>(<span class="at">AxB =</span> <span class="st">`</span><span class="at">A:B</span><span class="st">`</span>) <span class="sc">%&gt;%</span> <span class="fu">select</span>(n,correlation,A,B,AxB)</span>
-<span id="cb640-254"><a href="power-curve.html#cb640-254" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb640-255"><a href="power-curve.html#cb640-255" aria-hidden="true" tabindex="-1"></a>long_data <span class="ot">=</span> plot_data <span class="sc">%&gt;%</span></span>
-<span id="cb640-256"><a href="power-curve.html#cb640-256" aria-hidden="true" tabindex="-1"></a>  <span class="fu">gather</span>(<span class="st">&quot;A&quot;</span>, <span class="st">&quot;B&quot;</span>, <span class="st">&quot;AxB&quot;</span>, <span class="at">key =</span> factor, <span class="at">value =</span> power)</span>
-<span id="cb640-257"><a href="power-curve.html#cb640-257" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb640-258"><a href="power-curve.html#cb640-258" aria-hidden="true" tabindex="-1"></a>plot3 <span class="ot">&lt;-</span> <span class="fu">ggplot</span>(long_data, <span class="fu">aes</span>(<span class="at">x =</span> n, <span class="at">y =</span> power,</span>
-<span id="cb640-259"><a href="power-curve.html#cb640-259" aria-hidden="true" tabindex="-1"></a>                               <span class="at">color =</span> <span class="fu">as.factor</span>(correlation))) <span class="sc">+</span></span>
-<span id="cb640-260"><a href="power-curve.html#cb640-260" aria-hidden="true" tabindex="-1"></a>  <span class="fu">geom_line</span>(<span class="at">size =</span> <span class="fl">1.5</span>) <span class="sc">+</span></span>
-<span id="cb640-261"><a href="power-curve.html#cb640-261" aria-hidden="true" tabindex="-1"></a>  <span class="fu">scale_y_continuous</span>(<span class="at">breaks =</span> <span class="fu">seq</span>(<span class="dv">0</span>,<span class="dv">100</span>,<span class="dv">10</span>)) <span class="sc">+</span></span>
-<span id="cb640-262"><a href="power-curve.html#cb640-262" aria-hidden="true" tabindex="-1"></a>  <span class="fu">labs</span>(<span class="at">color =</span> <span class="st">&quot;Correlation&quot;</span>,</span>
-<span id="cb640-263"><a href="power-curve.html#cb640-263" aria-hidden="true" tabindex="-1"></a>       <span class="at">x =</span> <span class="st">&quot;Sample Size per Group&quot;</span>,</span>
-<span id="cb640-264"><a href="power-curve.html#cb640-264" aria-hidden="true" tabindex="-1"></a>       <span class="at">y =</span> <span class="st">&quot;Power (%)&quot;</span>) <span class="sc">+</span></span>
-<span id="cb640-265"><a href="power-curve.html#cb640-265" aria-hidden="true" tabindex="-1"></a>  <span class="fu">scale_color_viridis_d</span>() <span class="sc">+</span> <span class="fu">facet_wrap</span>( <span class="sc">~</span> factor, <span class="at">ncol=</span><span class="dv">2</span>)</span>
-<span id="cb640-266"><a href="power-curve.html#cb640-266" aria-hidden="true" tabindex="-1"></a><span class="do">##############</span></span>
-<span id="cb640-267"><a href="power-curve.html#cb640-267" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb640-268"><a href="power-curve.html#cb640-268" aria-hidden="true" tabindex="-1"></a>string <span class="ot">&lt;-</span> <span class="st">&quot;2w*2w&quot;</span></span>
-<span id="cb640-269"><a href="power-curve.html#cb640-269" aria-hidden="true" tabindex="-1"></a>labelnames <span class="ot">=</span> <span class="fu">c</span>(<span class="st">&quot;A&quot;</span>, <span class="st">&quot;a1&quot;</span>, <span class="st">&quot;a2&quot;</span>, <span class="st">&quot;B&quot;</span>, <span class="st">&quot;b1&quot;</span>, <span class="st">&quot;b2&quot;</span>)</span>
-<span id="cb640-270"><a href="power-curve.html#cb640-270" aria-hidden="true" tabindex="-1"></a>design_result <span class="ot">&lt;-</span> <span class="fu">ANOVA_design</span>(<span class="at">design =</span> string,</span>
-<span id="cb640-271"><a href="power-curve.html#cb640-271" aria-hidden="true" tabindex="-1"></a>                              <span class="at">n =</span> <span class="dv">20</span>, </span>
-<span id="cb640-272"><a href="power-curve.html#cb640-272" aria-hidden="true" tabindex="-1"></a>                              <span class="at">mu =</span> <span class="fu">c</span>(<span class="dv">0</span>,<span class="dv">0</span>,<span class="dv">0</span>,<span class="fl">0.3</span>), </span>
-<span id="cb640-273"><a href="power-curve.html#cb640-273" aria-hidden="true" tabindex="-1"></a>                              <span class="at">sd =</span> <span class="dv">1</span>, </span>
-<span id="cb640-274"><a href="power-curve.html#cb640-274" aria-hidden="true" tabindex="-1"></a>                              r <span class="ot">&lt;-</span> <span class="fu">c</span>(</span>
-<span id="cb640-275"><a href="power-curve.html#cb640-275" aria-hidden="true" tabindex="-1"></a>                                <span class="fl">0.4</span>, <span class="fl">0.4</span>, <span class="fl">0.4</span>,</span>
-<span id="cb640-276"><a href="power-curve.html#cb640-276" aria-hidden="true" tabindex="-1"></a>                                <span class="fl">0.4</span>, <span class="fl">0.4</span>,</span>
-<span id="cb640-277"><a href="power-curve.html#cb640-277" aria-hidden="true" tabindex="-1"></a>                                <span class="fl">0.4</span>),</span>
-<span id="cb640-278"><a href="power-curve.html#cb640-278" aria-hidden="true" tabindex="-1"></a>                              <span class="at">labelnames =</span> labelnames)</span>
-<span id="cb640-279"><a href="power-curve.html#cb640-279" aria-hidden="true" tabindex="-1"></a>p_a <span class="ot">&lt;-</span> <span class="fu">plot_power</span>(design_result,</span>
-<span id="cb640-280"><a href="power-curve.html#cb640-280" aria-hidden="true" tabindex="-1"></a>                  <span class="at">max_n =</span> <span class="dv">100</span>)</span>
-<span id="cb640-281"><a href="power-curve.html#cb640-281" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb640-282"><a href="power-curve.html#cb640-282" aria-hidden="true" tabindex="-1"></a>p_a<span class="sc">$</span>power_df<span class="sc">$</span>corr_diff <span class="ot">&lt;-</span> <span class="dv">0</span></span>
-<span id="cb640-283"><a href="power-curve.html#cb640-283" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb640-284"><a href="power-curve.html#cb640-284" aria-hidden="true" tabindex="-1"></a>design_result <span class="ot">&lt;-</span> <span class="fu">ANOVA_design</span>(<span class="at">design =</span> string,</span>
-<span id="cb640-285"><a href="power-curve.html#cb640-285" aria-hidden="true" tabindex="-1"></a>                              <span class="at">n =</span> <span class="dv">20</span>, </span>
-<span id="cb640-286"><a href="power-curve.html#cb640-286" aria-hidden="true" tabindex="-1"></a>                              <span class="at">mu =</span> <span class="fu">c</span>(<span class="dv">0</span>,<span class="dv">0</span>,<span class="dv">0</span>,<span class="fl">0.3</span>), </span>
-<span id="cb640-287"><a href="power-curve.html#cb640-287" aria-hidden="true" tabindex="-1"></a>                              <span class="at">sd =</span> <span class="dv">1</span>, </span>
-<span id="cb640-288"><a href="power-curve.html#cb640-288" aria-hidden="true" tabindex="-1"></a>                              r <span class="ot">&lt;-</span> <span class="fu">c</span>(</span>
-<span id="cb640-289"><a href="power-curve.html#cb640-289" aria-hidden="true" tabindex="-1"></a>                                <span class="fl">0.5</span>, <span class="fl">0.4</span>, <span class="fl">0.4</span>,</span>
-<span id="cb640-290"><a href="power-curve.html#cb640-290" aria-hidden="true" tabindex="-1"></a>                                <span class="fl">0.4</span>, <span class="fl">0.4</span>,</span>
-<span id="cb640-291"><a href="power-curve.html#cb640-291" aria-hidden="true" tabindex="-1"></a>                                <span class="fl">0.5</span>),</span>
-<span id="cb640-292"><a href="power-curve.html#cb640-292" aria-hidden="true" tabindex="-1"></a>                              <span class="at">labelnames =</span> labelnames)</span>
-<span id="cb640-293"><a href="power-curve.html#cb640-293" aria-hidden="true" tabindex="-1"></a>p_b <span class="ot">&lt;-</span> <span class="fu">plot_power</span>(design_result,</span>
-<span id="cb640-294"><a href="power-curve.html#cb640-294" aria-hidden="true" tabindex="-1"></a>                  <span class="at">max_n =</span> <span class="dv">100</span>)</span>
-<span id="cb640-295"><a href="power-curve.html#cb640-295" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb640-296"><a href="power-curve.html#cb640-296" aria-hidden="true" tabindex="-1"></a>p_b<span class="sc">$</span>power_df<span class="sc">$</span>corr_diff <span class="ot">&lt;-</span> <span class="fl">0.1</span></span>
-<span id="cb640-297"><a href="power-curve.html#cb640-297" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb640-298"><a href="power-curve.html#cb640-298" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb640-299"><a href="power-curve.html#cb640-299" aria-hidden="true" tabindex="-1"></a>design_result <span class="ot">&lt;-</span> <span class="fu">ANOVA_design</span>(<span class="at">design =</span> string,</span>
-<span id="cb640-300"><a href="power-curve.html#cb640-300" aria-hidden="true" tabindex="-1"></a>                              <span class="at">n =</span> <span class="dv">20</span>, </span>
-<span id="cb640-301"><a href="power-curve.html#cb640-301" aria-hidden="true" tabindex="-1"></a>                              <span class="at">mu =</span> <span class="fu">c</span>(<span class="dv">0</span>,<span class="dv">0</span>,<span class="dv">0</span>,<span class="fl">0.3</span>), </span>
-<span id="cb640-302"><a href="power-curve.html#cb640-302" aria-hidden="true" tabindex="-1"></a>                              <span class="at">sd =</span> <span class="dv">1</span>, </span>
-<span id="cb640-303"><a href="power-curve.html#cb640-303" aria-hidden="true" tabindex="-1"></a>                              r <span class="ot">&lt;-</span> <span class="fu">c</span>(</span>
-<span id="cb640-304"><a href="power-curve.html#cb640-304" aria-hidden="true" tabindex="-1"></a>                                <span class="fl">0.6</span>, <span class="fl">0.4</span>, <span class="fl">0.4</span>,</span>
-<span id="cb640-305"><a href="power-curve.html#cb640-305" aria-hidden="true" tabindex="-1"></a>                                <span class="fl">0.4</span>, <span class="fl">0.4</span>,</span>
-<span id="cb640-306"><a href="power-curve.html#cb640-306" aria-hidden="true" tabindex="-1"></a>                                <span class="fl">0.6</span>),</span>
-<span id="cb640-307"><a href="power-curve.html#cb640-307" aria-hidden="true" tabindex="-1"></a>                              <span class="at">labelnames =</span> labelnames)</span>
-<span id="cb640-308"><a href="power-curve.html#cb640-308" aria-hidden="true" tabindex="-1"></a>p_c <span class="ot">&lt;-</span> <span class="fu">plot_power</span>(design_result,</span>
-<span id="cb640-309"><a href="power-curve.html#cb640-309" aria-hidden="true" tabindex="-1"></a>                  <span class="at">max_n =</span> <span class="dv">100</span>)</span>
-<span id="cb640-310"><a href="power-curve.html#cb640-310" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb640-311"><a href="power-curve.html#cb640-311" aria-hidden="true" tabindex="-1"></a>p_c<span class="sc">$</span>power_df<span class="sc">$</span>corr_diff <span class="ot">&lt;-</span> <span class="fl">0.2</span></span>
-<span id="cb640-312"><a href="power-curve.html#cb640-312" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb640-313"><a href="power-curve.html#cb640-313" aria-hidden="true" tabindex="-1"></a>design_result <span class="ot">&lt;-</span> <span class="fu">ANOVA_design</span>(<span class="at">design =</span> string,</span>
-<span id="cb640-314"><a href="power-curve.html#cb640-314" aria-hidden="true" tabindex="-1"></a>                              <span class="at">n =</span> <span class="dv">20</span>, </span>
-<span id="cb640-315"><a href="power-curve.html#cb640-315" aria-hidden="true" tabindex="-1"></a>                              <span class="at">mu =</span> <span class="fu">c</span>(<span class="dv">0</span>,<span class="dv">0</span>,<span class="dv">0</span>,<span class="fl">0.3</span>), </span>
-<span id="cb640-316"><a href="power-curve.html#cb640-316" aria-hidden="true" tabindex="-1"></a>                              <span class="at">sd =</span> <span class="dv">1</span>, </span>
-<span id="cb640-317"><a href="power-curve.html#cb640-317" aria-hidden="true" tabindex="-1"></a>                              r <span class="ot">&lt;-</span> <span class="fu">c</span>(</span>
-<span id="cb640-318"><a href="power-curve.html#cb640-318" aria-hidden="true" tabindex="-1"></a>                                <span class="fl">0.7</span>, <span class="fl">0.4</span>, <span class="fl">0.4</span>,</span>
-<span id="cb640-319"><a href="power-curve.html#cb640-319" aria-hidden="true" tabindex="-1"></a>                                <span class="fl">0.4</span>, <span class="fl">0.4</span>,</span>
-<span id="cb640-320"><a href="power-curve.html#cb640-320" aria-hidden="true" tabindex="-1"></a>                                <span class="fl">0.7</span>), </span>
-<span id="cb640-321"><a href="power-curve.html#cb640-321" aria-hidden="true" tabindex="-1"></a>                              <span class="at">labelnames =</span> labelnames)</span>
-<span id="cb640-322"><a href="power-curve.html#cb640-322" aria-hidden="true" tabindex="-1"></a>p_d <span class="ot">&lt;-</span> <span class="fu">plot_power</span>(design_result,</span>
-<span id="cb640-323"><a href="power-curve.html#cb640-323" aria-hidden="true" tabindex="-1"></a>                  <span class="at">max_n =</span> <span class="dv">100</span>)</span>
-<span id="cb640-324"><a href="power-curve.html#cb640-324" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb640-325"><a href="power-curve.html#cb640-325" aria-hidden="true" tabindex="-1"></a>p_d<span class="sc">$</span>power_df<span class="sc">$</span>corr_diff <span class="ot">&lt;-</span> <span class="fl">0.3</span></span>
-<span id="cb640-326"><a href="power-curve.html#cb640-326" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb640-327"><a href="power-curve.html#cb640-327" aria-hidden="true" tabindex="-1"></a>design_result <span class="ot">&lt;-</span> <span class="fu">ANOVA_design</span>(<span class="at">design =</span> string,</span>
-<span id="cb640-328"><a href="power-curve.html#cb640-328" aria-hidden="true" tabindex="-1"></a>                              <span class="at">n =</span> <span class="dv">20</span>, </span>
-<span id="cb640-329"><a href="power-curve.html#cb640-329" aria-hidden="true" tabindex="-1"></a>                              <span class="at">mu =</span> <span class="fu">c</span>(<span class="dv">0</span>,<span class="dv">0</span>,<span class="dv">0</span>,<span class="fl">0.3</span>), </span>
-<span id="cb640-330"><a href="power-curve.html#cb640-330" aria-hidden="true" tabindex="-1"></a>                              <span class="at">sd =</span> <span class="dv">1</span>, </span>
-<span id="cb640-331"><a href="power-curve.html#cb640-331" aria-hidden="true" tabindex="-1"></a>                              r <span class="ot">&lt;-</span> <span class="fu">c</span>(</span>
-<span id="cb640-332"><a href="power-curve.html#cb640-332" aria-hidden="true" tabindex="-1"></a>                                <span class="fl">0.8</span>, <span class="fl">0.4</span>, <span class="fl">0.4</span>,</span>
-<span id="cb640-333"><a href="power-curve.html#cb640-333" aria-hidden="true" tabindex="-1"></a>                                <span class="fl">0.4</span>, <span class="fl">0.4</span>,</span>
-<span id="cb640-334"><a href="power-curve.html#cb640-334" aria-hidden="true" tabindex="-1"></a>                                <span class="fl">0.8</span>), </span>
-<span id="cb640-335"><a href="power-curve.html#cb640-335" aria-hidden="true" tabindex="-1"></a>                              <span class="at">labelnames =</span> labelnames)</span>
-<span id="cb640-336"><a href="power-curve.html#cb640-336" aria-hidden="true" tabindex="-1"></a>p_e <span class="ot">&lt;-</span> <span class="fu">plot_power</span>(design_result,</span>
-<span id="cb640-337"><a href="power-curve.html#cb640-337" aria-hidden="true" tabindex="-1"></a>                  <span class="at">max_n =</span> <span class="dv">100</span>)</span>
-<span id="cb640-338"><a href="power-curve.html#cb640-338" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb640-339"><a href="power-curve.html#cb640-339" aria-hidden="true" tabindex="-1"></a>p_e<span class="sc">$</span>power_df<span class="sc">$</span>corr_diff <span class="ot">&lt;-</span> <span class="fl">0.4</span></span>
-<span id="cb640-340"><a href="power-curve.html#cb640-340" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb640-341"><a href="power-curve.html#cb640-341" aria-hidden="true" tabindex="-1"></a>design_result <span class="ot">&lt;-</span> <span class="fu">ANOVA_design</span>(<span class="at">design =</span> string,</span>
-<span id="cb640-342"><a href="power-curve.html#cb640-342" aria-hidden="true" tabindex="-1"></a>                              <span class="at">n =</span> <span class="dv">20</span>, </span>
-<span id="cb640-343"><a href="power-curve.html#cb640-343" aria-hidden="true" tabindex="-1"></a>                              <span class="at">mu =</span> <span class="fu">c</span>(<span class="dv">0</span>,<span class="dv">0</span>,<span class="dv">0</span>,<span class="fl">0.3</span>), </span>
-<span id="cb640-344"><a href="power-curve.html#cb640-344" aria-hidden="true" tabindex="-1"></a>                              <span class="at">sd =</span> <span class="dv">1</span>, </span>
-<span id="cb640-345"><a href="power-curve.html#cb640-345" aria-hidden="true" tabindex="-1"></a>                              r <span class="ot">&lt;-</span> <span class="fu">c</span>(</span>
-<span id="cb640-346"><a href="power-curve.html#cb640-346" aria-hidden="true" tabindex="-1"></a>                                <span class="fl">0.9</span>, <span class="fl">0.4</span>, <span class="fl">0.4</span>,</span>
-<span id="cb640-347"><a href="power-curve.html#cb640-347" aria-hidden="true" tabindex="-1"></a>                                <span class="fl">0.4</span>, <span class="fl">0.4</span>,</span>
-<span id="cb640-348"><a href="power-curve.html#cb640-348" aria-hidden="true" tabindex="-1"></a>                                <span class="fl">0.9</span>), </span>
-<span id="cb640-349"><a href="power-curve.html#cb640-349" aria-hidden="true" tabindex="-1"></a>                              <span class="at">labelnames =</span> labelnames)</span>
-<span id="cb640-350"><a href="power-curve.html#cb640-350" aria-hidden="true" tabindex="-1"></a>p_f <span class="ot">&lt;-</span> <span class="fu">plot_power</span>(design_result,</span>
-<span id="cb640-351"><a href="power-curve.html#cb640-351" aria-hidden="true" tabindex="-1"></a>                  <span class="at">max_n =</span> <span class="dv">100</span>)</span>
-<span id="cb640-352"><a href="power-curve.html#cb640-352" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb640-353"><a href="power-curve.html#cb640-353" aria-hidden="true" tabindex="-1"></a>p_f<span class="sc">$</span>power_df<span class="sc">$</span>corr_diff <span class="ot">&lt;-</span> <span class="fl">0.5</span></span>
-<span id="cb640-354"><a href="power-curve.html#cb640-354" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb640-355"><a href="power-curve.html#cb640-355" aria-hidden="true" tabindex="-1"></a>plot_data <span class="ot">&lt;-</span> <span class="fu">rbind</span>(p_a<span class="sc">$</span>power_df, p_b<span class="sc">$</span>power_df, p_c<span class="sc">$</span>power_df, </span>
-<span id="cb640-356"><a href="power-curve.html#cb640-356" aria-hidden="true" tabindex="-1"></a>                   p_d<span class="sc">$</span>power_df, p_e<span class="sc">$</span>power_df, p_f<span class="sc">$</span>power_df)<span class="sc">%&gt;%</span></span>
-<span id="cb640-357"><a href="power-curve.html#cb640-357" aria-hidden="true" tabindex="-1"></a>  <span class="fu">mutate</span>(<span class="at">AxB =</span> <span class="st">`</span><span class="at">A:B</span><span class="st">`</span>) <span class="sc">%&gt;%</span> <span class="fu">select</span>(n,corr_diff,A,B,AxB)</span>
-<span id="cb640-358"><a href="power-curve.html#cb640-358" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb640-359"><a href="power-curve.html#cb640-359" aria-hidden="true" tabindex="-1"></a>long_data <span class="ot">=</span> plot_data <span class="sc">%&gt;%</span></span>
-<span id="cb640-360"><a href="power-curve.html#cb640-360" aria-hidden="true" tabindex="-1"></a>  <span class="fu">gather</span>(<span class="st">&quot;A&quot;</span>, <span class="st">&quot;B&quot;</span>, <span class="st">&quot;AxB&quot;</span>, <span class="at">key =</span> factor, <span class="at">value =</span> power)</span>
-<span id="cb640-361"><a href="power-curve.html#cb640-361" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb640-362"><a href="power-curve.html#cb640-362" aria-hidden="true" tabindex="-1"></a>plot4 <span class="ot">&lt;-</span> <span class="fu">ggplot</span>(long_data, <span class="fu">aes</span>(<span class="at">x =</span> n, <span class="at">y =</span> power,</span>
-<span id="cb640-363"><a href="power-curve.html#cb640-363" aria-hidden="true" tabindex="-1"></a>                               <span class="at">color =</span> <span class="fu">as.factor</span>(corr_diff))) <span class="sc">+</span></span>
-<span id="cb640-364"><a href="power-curve.html#cb640-364" aria-hidden="true" tabindex="-1"></a>  <span class="fu">geom_line</span>(<span class="at">size =</span> <span class="fl">1.5</span>) <span class="sc">+</span></span>
-<span id="cb640-365"><a href="power-curve.html#cb640-365" aria-hidden="true" tabindex="-1"></a>  <span class="fu">scale_y_continuous</span>(<span class="at">breaks =</span> <span class="fu">seq</span>(<span class="dv">0</span>,<span class="dv">100</span>,<span class="dv">10</span>)) <span class="sc">+</span></span>
-<span id="cb640-366"><a href="power-curve.html#cb640-366" aria-hidden="true" tabindex="-1"></a>  <span class="fu">labs</span>(<span class="at">color =</span> <span class="st">&quot;Difference in Correlation&quot;</span>,</span>
-<span id="cb640-367"><a href="power-curve.html#cb640-367" aria-hidden="true" tabindex="-1"></a>       <span class="at">x =</span> <span class="st">&quot;Sample Size per Group&quot;</span>,</span>
-<span id="cb640-368"><a href="power-curve.html#cb640-368" aria-hidden="true" tabindex="-1"></a>       <span class="at">y =</span> <span class="st">&quot;Power (%)&quot;</span>) <span class="sc">+</span></span>
-<span id="cb640-369"><a href="power-curve.html#cb640-369" aria-hidden="true" tabindex="-1"></a>  <span class="fu">scale_color_viridis_d</span>() <span class="sc">+</span> <span class="fu">facet_wrap</span>( <span class="sc">~</span> factor, <span class="at">ncol=</span><span class="dv">2</span>)</span></code></pre></div>
+<div class="sourceCode" id="cb641"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb641-1"><a href="power-curve.html#cb641-1" aria-hidden="true" tabindex="-1"></a>nsims <span class="ot">=</span> <span class="dv">10000</span></span>
+<span id="cb641-2"><a href="power-curve.html#cb641-2" aria-hidden="true" tabindex="-1"></a><span class="fu">library</span>(Superpower)</span>
+<span id="cb641-3"><a href="power-curve.html#cb641-3" aria-hidden="true" tabindex="-1"></a><span class="fu">library</span>(pwr)</span>
+<span id="cb641-4"><a href="power-curve.html#cb641-4" aria-hidden="true" tabindex="-1"></a><span class="fu">library</span>(tidyverse)</span>
+<span id="cb641-5"><a href="power-curve.html#cb641-5" aria-hidden="true" tabindex="-1"></a><span class="fu">library</span>(viridis)</span>
+<span id="cb641-6"><a href="power-curve.html#cb641-6" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb641-7"><a href="power-curve.html#cb641-7" aria-hidden="true" tabindex="-1"></a>string <span class="ot">&lt;-</span> <span class="st">&quot;2w*2w&quot;</span></span>
+<span id="cb641-8"><a href="power-curve.html#cb641-8" aria-hidden="true" tabindex="-1"></a>labelnames <span class="ot">=</span> <span class="fu">c</span>(<span class="st">&quot;A&quot;</span>, <span class="st">&quot;a1&quot;</span>, <span class="st">&quot;a2&quot;</span>, <span class="st">&quot;B&quot;</span>, <span class="st">&quot;b1&quot;</span>, <span class="st">&quot;b2&quot;</span>)</span>
+<span id="cb641-9"><a href="power-curve.html#cb641-9" aria-hidden="true" tabindex="-1"></a>design_result <span class="ot">&lt;-</span> <span class="fu">ANOVA_design</span>(<span class="at">design =</span> string,</span>
+<span id="cb641-10"><a href="power-curve.html#cb641-10" aria-hidden="true" tabindex="-1"></a>                              <span class="at">n =</span> <span class="dv">20</span>, </span>
+<span id="cb641-11"><a href="power-curve.html#cb641-11" aria-hidden="true" tabindex="-1"></a>                              <span class="at">mu =</span> <span class="fu">c</span>(<span class="dv">0</span>,<span class="dv">0</span>,<span class="dv">0</span>,<span class="fl">0.0</span>), </span>
+<span id="cb641-12"><a href="power-curve.html#cb641-12" aria-hidden="true" tabindex="-1"></a>                              <span class="at">sd =</span> <span class="dv">1</span>, </span>
+<span id="cb641-13"><a href="power-curve.html#cb641-13" aria-hidden="true" tabindex="-1"></a>                              <span class="at">r =</span> <span class="fl">0.5</span>, </span>
+<span id="cb641-14"><a href="power-curve.html#cb641-14" aria-hidden="true" tabindex="-1"></a>                              <span class="at">labelnames =</span> labelnames)</span>
+<span id="cb641-15"><a href="power-curve.html#cb641-15" aria-hidden="true" tabindex="-1"></a>p_a <span class="ot">&lt;-</span> <span class="fu">plot_power</span>(design_result,</span>
+<span id="cb641-16"><a href="power-curve.html#cb641-16" aria-hidden="true" tabindex="-1"></a>                  <span class="at">max_n =</span> <span class="dv">100</span>)</span>
+<span id="cb641-17"><a href="power-curve.html#cb641-17" aria-hidden="true" tabindex="-1"></a>p_a<span class="sc">$</span>power_df<span class="sc">$</span>effect <span class="ot">&lt;-</span> <span class="dv">0</span></span>
+<span id="cb641-18"><a href="power-curve.html#cb641-18" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb641-19"><a href="power-curve.html#cb641-19" aria-hidden="true" tabindex="-1"></a>design_result <span class="ot">&lt;-</span> <span class="fu">ANOVA_design</span>(<span class="at">design =</span> string,</span>
+<span id="cb641-20"><a href="power-curve.html#cb641-20" aria-hidden="true" tabindex="-1"></a>                              <span class="at">n =</span> <span class="dv">20</span>, </span>
+<span id="cb641-21"><a href="power-curve.html#cb641-21" aria-hidden="true" tabindex="-1"></a>                              <span class="at">mu =</span> <span class="fu">c</span>(<span class="dv">0</span>,<span class="dv">0</span>,<span class="dv">0</span>,<span class="fl">0.1</span>), </span>
+<span id="cb641-22"><a href="power-curve.html#cb641-22" aria-hidden="true" tabindex="-1"></a>                              <span class="at">sd =</span> <span class="dv">1</span>, </span>
+<span id="cb641-23"><a href="power-curve.html#cb641-23" aria-hidden="true" tabindex="-1"></a>                              <span class="at">r =</span> <span class="fl">0.5</span>, </span>
+<span id="cb641-24"><a href="power-curve.html#cb641-24" aria-hidden="true" tabindex="-1"></a>                              <span class="at">labelnames =</span> labelnames)</span>
+<span id="cb641-25"><a href="power-curve.html#cb641-25" aria-hidden="true" tabindex="-1"></a>p_b <span class="ot">&lt;-</span> <span class="fu">plot_power</span>(design_result,</span>
+<span id="cb641-26"><a href="power-curve.html#cb641-26" aria-hidden="true" tabindex="-1"></a>                  <span class="at">max_n =</span> <span class="dv">100</span>)</span>
+<span id="cb641-27"><a href="power-curve.html#cb641-27" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb641-28"><a href="power-curve.html#cb641-28" aria-hidden="true" tabindex="-1"></a>p_b<span class="sc">$</span>power_df<span class="sc">$</span>effect <span class="ot">&lt;-</span> <span class="fl">0.1</span></span>
+<span id="cb641-29"><a href="power-curve.html#cb641-29" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb641-30"><a href="power-curve.html#cb641-30" aria-hidden="true" tabindex="-1"></a>design_result <span class="ot">&lt;-</span> <span class="fu">ANOVA_design</span>(<span class="at">design =</span> string,</span>
+<span id="cb641-31"><a href="power-curve.html#cb641-31" aria-hidden="true" tabindex="-1"></a>                              <span class="at">n =</span> <span class="dv">20</span>, </span>
+<span id="cb641-32"><a href="power-curve.html#cb641-32" aria-hidden="true" tabindex="-1"></a>                              <span class="at">mu =</span> <span class="fu">c</span>(<span class="dv">0</span>,<span class="dv">0</span>,<span class="dv">0</span>,<span class="fl">0.2</span>), </span>
+<span id="cb641-33"><a href="power-curve.html#cb641-33" aria-hidden="true" tabindex="-1"></a>                              <span class="at">sd =</span> <span class="dv">1</span>, </span>
+<span id="cb641-34"><a href="power-curve.html#cb641-34" aria-hidden="true" tabindex="-1"></a>                              <span class="at">r =</span> <span class="fl">0.5</span>, </span>
+<span id="cb641-35"><a href="power-curve.html#cb641-35" aria-hidden="true" tabindex="-1"></a>                              <span class="at">labelnames =</span> labelnames)</span>
+<span id="cb641-36"><a href="power-curve.html#cb641-36" aria-hidden="true" tabindex="-1"></a>p_c <span class="ot">&lt;-</span> <span class="fu">plot_power</span>(design_result,</span>
+<span id="cb641-37"><a href="power-curve.html#cb641-37" aria-hidden="true" tabindex="-1"></a>                  <span class="at">max_n =</span> <span class="dv">100</span>)</span>
+<span id="cb641-38"><a href="power-curve.html#cb641-38" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb641-39"><a href="power-curve.html#cb641-39" aria-hidden="true" tabindex="-1"></a>p_c<span class="sc">$</span>power_df<span class="sc">$</span>effect <span class="ot">&lt;-</span> <span class="fl">0.2</span></span>
+<span id="cb641-40"><a href="power-curve.html#cb641-40" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb641-41"><a href="power-curve.html#cb641-41" aria-hidden="true" tabindex="-1"></a>design_result <span class="ot">&lt;-</span> <span class="fu">ANOVA_design</span>(<span class="at">design =</span> string,</span>
+<span id="cb641-42"><a href="power-curve.html#cb641-42" aria-hidden="true" tabindex="-1"></a>                              <span class="at">n =</span> <span class="dv">20</span>, </span>
+<span id="cb641-43"><a href="power-curve.html#cb641-43" aria-hidden="true" tabindex="-1"></a>                              <span class="at">mu =</span> <span class="fu">c</span>(<span class="dv">0</span>,<span class="dv">0</span>,<span class="dv">0</span>,<span class="fl">0.3</span>), </span>
+<span id="cb641-44"><a href="power-curve.html#cb641-44" aria-hidden="true" tabindex="-1"></a>                              <span class="at">sd =</span> <span class="dv">1</span>, </span>
+<span id="cb641-45"><a href="power-curve.html#cb641-45" aria-hidden="true" tabindex="-1"></a>                              <span class="at">r =</span> <span class="fl">0.5</span>, </span>
+<span id="cb641-46"><a href="power-curve.html#cb641-46" aria-hidden="true" tabindex="-1"></a>                              <span class="at">labelnames =</span> labelnames)</span>
+<span id="cb641-47"><a href="power-curve.html#cb641-47" aria-hidden="true" tabindex="-1"></a>p_d <span class="ot">&lt;-</span> <span class="fu">plot_power</span>(design_result,</span>
+<span id="cb641-48"><a href="power-curve.html#cb641-48" aria-hidden="true" tabindex="-1"></a>                  <span class="at">max_n =</span> <span class="dv">100</span>)</span>
+<span id="cb641-49"><a href="power-curve.html#cb641-49" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb641-50"><a href="power-curve.html#cb641-50" aria-hidden="true" tabindex="-1"></a>p_d<span class="sc">$</span>power_df<span class="sc">$</span>effect <span class="ot">&lt;-</span> <span class="fl">0.3</span></span>
+<span id="cb641-51"><a href="power-curve.html#cb641-51" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb641-52"><a href="power-curve.html#cb641-52" aria-hidden="true" tabindex="-1"></a>design_result <span class="ot">&lt;-</span> <span class="fu">ANOVA_design</span>(<span class="at">design =</span> string,</span>
+<span id="cb641-53"><a href="power-curve.html#cb641-53" aria-hidden="true" tabindex="-1"></a>                              <span class="at">n =</span> <span class="dv">20</span>, </span>
+<span id="cb641-54"><a href="power-curve.html#cb641-54" aria-hidden="true" tabindex="-1"></a>                              <span class="at">mu =</span> <span class="fu">c</span>(<span class="dv">0</span>,<span class="dv">0</span>,<span class="dv">0</span>,<span class="fl">0.4</span>), </span>
+<span id="cb641-55"><a href="power-curve.html#cb641-55" aria-hidden="true" tabindex="-1"></a>                              <span class="at">sd =</span> <span class="dv">1</span>, </span>
+<span id="cb641-56"><a href="power-curve.html#cb641-56" aria-hidden="true" tabindex="-1"></a>                              <span class="at">r =</span> <span class="fl">0.5</span>, </span>
+<span id="cb641-57"><a href="power-curve.html#cb641-57" aria-hidden="true" tabindex="-1"></a>                              <span class="at">labelnames =</span> labelnames)</span>
+<span id="cb641-58"><a href="power-curve.html#cb641-58" aria-hidden="true" tabindex="-1"></a>p_e <span class="ot">&lt;-</span> <span class="fu">plot_power</span>(design_result,</span>
+<span id="cb641-59"><a href="power-curve.html#cb641-59" aria-hidden="true" tabindex="-1"></a>                  <span class="at">max_n =</span> <span class="dv">100</span>)</span>
+<span id="cb641-60"><a href="power-curve.html#cb641-60" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb641-61"><a href="power-curve.html#cb641-61" aria-hidden="true" tabindex="-1"></a>p_e<span class="sc">$</span>power_df<span class="sc">$</span>effect <span class="ot">&lt;-</span> <span class="fl">0.4</span></span>
+<span id="cb641-62"><a href="power-curve.html#cb641-62" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb641-63"><a href="power-curve.html#cb641-63" aria-hidden="true" tabindex="-1"></a>design_result <span class="ot">&lt;-</span> <span class="fu">ANOVA_design</span>(<span class="at">design =</span> string,</span>
+<span id="cb641-64"><a href="power-curve.html#cb641-64" aria-hidden="true" tabindex="-1"></a>                              <span class="at">n =</span> <span class="dv">20</span>, </span>
+<span id="cb641-65"><a href="power-curve.html#cb641-65" aria-hidden="true" tabindex="-1"></a>                              <span class="at">mu =</span> <span class="fu">c</span>(<span class="dv">0</span>,<span class="dv">0</span>,<span class="dv">0</span>,<span class="fl">0.5</span>), </span>
+<span id="cb641-66"><a href="power-curve.html#cb641-66" aria-hidden="true" tabindex="-1"></a>                              <span class="at">sd =</span> <span class="dv">1</span>, </span>
+<span id="cb641-67"><a href="power-curve.html#cb641-67" aria-hidden="true" tabindex="-1"></a>                              <span class="at">r =</span> <span class="fl">0.5</span>, </span>
+<span id="cb641-68"><a href="power-curve.html#cb641-68" aria-hidden="true" tabindex="-1"></a>                              <span class="at">labelnames =</span> labelnames)</span>
+<span id="cb641-69"><a href="power-curve.html#cb641-69" aria-hidden="true" tabindex="-1"></a>p_f <span class="ot">&lt;-</span> <span class="fu">plot_power</span>(design_result,</span>
+<span id="cb641-70"><a href="power-curve.html#cb641-70" aria-hidden="true" tabindex="-1"></a>                  <span class="at">max_n =</span> <span class="dv">100</span>)</span>
+<span id="cb641-71"><a href="power-curve.html#cb641-71" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb641-72"><a href="power-curve.html#cb641-72" aria-hidden="true" tabindex="-1"></a>p_f<span class="sc">$</span>power_df<span class="sc">$</span>effect <span class="ot">&lt;-</span> <span class="fl">0.5</span></span>
+<span id="cb641-73"><a href="power-curve.html#cb641-73" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb641-74"><a href="power-curve.html#cb641-74" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb641-75"><a href="power-curve.html#cb641-75" aria-hidden="true" tabindex="-1"></a>plot_data <span class="ot">&lt;-</span> <span class="fu">rbind</span>(p_a<span class="sc">$</span>power_df, p_b<span class="sc">$</span>power_df, p_c<span class="sc">$</span>power_df, </span>
+<span id="cb641-76"><a href="power-curve.html#cb641-76" aria-hidden="true" tabindex="-1"></a>                   p_d<span class="sc">$</span>power_df, p_e<span class="sc">$</span>power_df, p_f<span class="sc">$</span>power_df)<span class="sc">%&gt;%</span></span>
+<span id="cb641-77"><a href="power-curve.html#cb641-77" aria-hidden="true" tabindex="-1"></a>  <span class="fu">mutate</span>(<span class="at">AxB =</span> <span class="st">`</span><span class="at">A:B</span><span class="st">`</span>) <span class="sc">%&gt;%</span> <span class="fu">select</span>(n,effect,A,B,AxB)</span>
+<span id="cb641-78"><a href="power-curve.html#cb641-78" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb641-79"><a href="power-curve.html#cb641-79" aria-hidden="true" tabindex="-1"></a>long_data <span class="ot">=</span> plot_data <span class="sc">%&gt;%</span></span>
+<span id="cb641-80"><a href="power-curve.html#cb641-80" aria-hidden="true" tabindex="-1"></a>  <span class="fu">gather</span>(<span class="st">&quot;A&quot;</span>, <span class="st">&quot;B&quot;</span>, <span class="st">&quot;AxB&quot;</span>, <span class="at">key =</span> factor, <span class="at">value =</span> power)</span>
+<span id="cb641-81"><a href="power-curve.html#cb641-81" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb641-82"><a href="power-curve.html#cb641-82" aria-hidden="true" tabindex="-1"></a>plot1 <span class="ot">&lt;-</span> <span class="fu">ggplot</span>(long_data, <span class="fu">aes</span>(<span class="at">x =</span> n, <span class="at">y =</span> power,</span>
+<span id="cb641-83"><a href="power-curve.html#cb641-83" aria-hidden="true" tabindex="-1"></a>                               <span class="at">color =</span> <span class="fu">as.factor</span>(effect))) <span class="sc">+</span></span>
+<span id="cb641-84"><a href="power-curve.html#cb641-84" aria-hidden="true" tabindex="-1"></a>  <span class="fu">geom_line</span>(<span class="at">size =</span> <span class="fl">1.5</span>) <span class="sc">+</span></span>
+<span id="cb641-85"><a href="power-curve.html#cb641-85" aria-hidden="true" tabindex="-1"></a>  <span class="fu">scale_y_continuous</span>(<span class="at">breaks =</span> <span class="fu">seq</span>(<span class="dv">0</span>,<span class="dv">100</span>,<span class="dv">10</span>)) <span class="sc">+</span></span>
+<span id="cb641-86"><a href="power-curve.html#cb641-86" aria-hidden="true" tabindex="-1"></a>  <span class="fu">labs</span>(<span class="at">color =</span> <span class="st">&quot;Effect Size&quot;</span>,</span>
+<span id="cb641-87"><a href="power-curve.html#cb641-87" aria-hidden="true" tabindex="-1"></a>       <span class="at">x =</span> <span class="st">&quot;Sample Size per Group&quot;</span>,</span>
+<span id="cb641-88"><a href="power-curve.html#cb641-88" aria-hidden="true" tabindex="-1"></a>       <span class="at">y =</span> <span class="st">&quot;Power (%)&quot;</span>) <span class="sc">+</span></span>
+<span id="cb641-89"><a href="power-curve.html#cb641-89" aria-hidden="true" tabindex="-1"></a>  <span class="fu">scale_color_viridis_d</span>() <span class="sc">+</span> <span class="fu">facet_wrap</span>( <span class="sc">~</span> factor, <span class="at">ncol=</span><span class="dv">2</span>)</span>
+<span id="cb641-90"><a href="power-curve.html#cb641-90" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb641-91"><a href="power-curve.html#cb641-91" aria-hidden="true" tabindex="-1"></a><span class="do">####</span></span>
+<span id="cb641-92"><a href="power-curve.html#cb641-92" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb641-93"><a href="power-curve.html#cb641-93" aria-hidden="true" tabindex="-1"></a>design_result <span class="ot">&lt;-</span> <span class="fu">ANOVA_design</span>(<span class="at">design =</span> string,</span>
+<span id="cb641-94"><a href="power-curve.html#cb641-94" aria-hidden="true" tabindex="-1"></a>                              <span class="at">n =</span> <span class="dv">20</span>, </span>
+<span id="cb641-95"><a href="power-curve.html#cb641-95" aria-hidden="true" tabindex="-1"></a>                              <span class="at">mu =</span> <span class="fu">c</span>(<span class="dv">0</span>,<span class="dv">0</span>,<span class="dv">0</span>,<span class="fl">0.0</span>), </span>
+<span id="cb641-96"><a href="power-curve.html#cb641-96" aria-hidden="true" tabindex="-1"></a>                              <span class="at">sd =</span> <span class="dv">1</span>, </span>
+<span id="cb641-97"><a href="power-curve.html#cb641-97" aria-hidden="true" tabindex="-1"></a>                              <span class="at">r =</span> <span class="fl">0.5</span>, </span>
+<span id="cb641-98"><a href="power-curve.html#cb641-98" aria-hidden="true" tabindex="-1"></a>                              <span class="at">labelnames =</span> labelnames)</span>
+<span id="cb641-99"><a href="power-curve.html#cb641-99" aria-hidden="true" tabindex="-1"></a>p_a <span class="ot">&lt;-</span> <span class="fu">plot_power</span>(design_result,</span>
+<span id="cb641-100"><a href="power-curve.html#cb641-100" aria-hidden="true" tabindex="-1"></a>                  <span class="at">max_n =</span> <span class="dv">100</span>)</span>
+<span id="cb641-101"><a href="power-curve.html#cb641-101" aria-hidden="true" tabindex="-1"></a>p_a<span class="sc">$</span>power_df<span class="sc">$</span>effect <span class="ot">&lt;-</span> <span class="dv">0</span></span>
+<span id="cb641-102"><a href="power-curve.html#cb641-102" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb641-103"><a href="power-curve.html#cb641-103" aria-hidden="true" tabindex="-1"></a>design_result <span class="ot">&lt;-</span> <span class="fu">ANOVA_design</span>(<span class="at">design =</span> string,</span>
+<span id="cb641-104"><a href="power-curve.html#cb641-104" aria-hidden="true" tabindex="-1"></a>                              <span class="at">n =</span> <span class="dv">20</span>, </span>
+<span id="cb641-105"><a href="power-curve.html#cb641-105" aria-hidden="true" tabindex="-1"></a>                              <span class="at">mu =</span> <span class="fu">c</span>(<span class="fl">0.1</span>,<span class="dv">0</span>,<span class="dv">0</span>,<span class="fl">0.1</span>), </span>
+<span id="cb641-106"><a href="power-curve.html#cb641-106" aria-hidden="true" tabindex="-1"></a>                              <span class="at">sd =</span> <span class="dv">1</span>, </span>
+<span id="cb641-107"><a href="power-curve.html#cb641-107" aria-hidden="true" tabindex="-1"></a>                              <span class="at">r =</span> <span class="fl">0.5</span>, </span>
+<span id="cb641-108"><a href="power-curve.html#cb641-108" aria-hidden="true" tabindex="-1"></a>                              <span class="at">labelnames =</span> labelnames)</span>
+<span id="cb641-109"><a href="power-curve.html#cb641-109" aria-hidden="true" tabindex="-1"></a>p_b <span class="ot">&lt;-</span> <span class="fu">plot_power</span>(design_result,</span>
+<span id="cb641-110"><a href="power-curve.html#cb641-110" aria-hidden="true" tabindex="-1"></a>                  <span class="at">max_n =</span> <span class="dv">100</span>)</span>
+<span id="cb641-111"><a href="power-curve.html#cb641-111" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb641-112"><a href="power-curve.html#cb641-112" aria-hidden="true" tabindex="-1"></a>p_b<span class="sc">$</span>power_df<span class="sc">$</span>effect <span class="ot">&lt;-</span> <span class="fl">0.1</span></span>
+<span id="cb641-113"><a href="power-curve.html#cb641-113" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb641-114"><a href="power-curve.html#cb641-114" aria-hidden="true" tabindex="-1"></a>design_result <span class="ot">&lt;-</span> <span class="fu">ANOVA_design</span>(<span class="at">design =</span> string,</span>
+<span id="cb641-115"><a href="power-curve.html#cb641-115" aria-hidden="true" tabindex="-1"></a>                              <span class="at">n =</span> <span class="dv">20</span>, </span>
+<span id="cb641-116"><a href="power-curve.html#cb641-116" aria-hidden="true" tabindex="-1"></a>                              <span class="at">mu =</span> <span class="fu">c</span>(<span class="fl">0.2</span>,<span class="dv">0</span>,<span class="dv">0</span>,<span class="fl">0.2</span>), </span>
+<span id="cb641-117"><a href="power-curve.html#cb641-117" aria-hidden="true" tabindex="-1"></a>                              <span class="at">sd =</span> <span class="dv">1</span>, </span>
+<span id="cb641-118"><a href="power-curve.html#cb641-118" aria-hidden="true" tabindex="-1"></a>                              <span class="at">r =</span> <span class="fl">0.5</span>, </span>
+<span id="cb641-119"><a href="power-curve.html#cb641-119" aria-hidden="true" tabindex="-1"></a>                              <span class="at">labelnames =</span> labelnames)</span>
+<span id="cb641-120"><a href="power-curve.html#cb641-120" aria-hidden="true" tabindex="-1"></a>p_c <span class="ot">&lt;-</span> <span class="fu">plot_power</span>(design_result,</span>
+<span id="cb641-121"><a href="power-curve.html#cb641-121" aria-hidden="true" tabindex="-1"></a>                  <span class="at">max_n =</span> <span class="dv">100</span>)</span>
+<span id="cb641-122"><a href="power-curve.html#cb641-122" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb641-123"><a href="power-curve.html#cb641-123" aria-hidden="true" tabindex="-1"></a>p_c<span class="sc">$</span>power_df<span class="sc">$</span>effect <span class="ot">&lt;-</span> <span class="fl">0.2</span></span>
+<span id="cb641-124"><a href="power-curve.html#cb641-124" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb641-125"><a href="power-curve.html#cb641-125" aria-hidden="true" tabindex="-1"></a>design_result <span class="ot">&lt;-</span> <span class="fu">ANOVA_design</span>(<span class="at">design =</span> string,</span>
+<span id="cb641-126"><a href="power-curve.html#cb641-126" aria-hidden="true" tabindex="-1"></a>                              <span class="at">n =</span> <span class="dv">20</span>, </span>
+<span id="cb641-127"><a href="power-curve.html#cb641-127" aria-hidden="true" tabindex="-1"></a>                              <span class="at">mu =</span> <span class="fu">c</span>(<span class="fl">0.3</span>,<span class="dv">0</span>,<span class="dv">0</span>,<span class="fl">0.3</span>), </span>
+<span id="cb641-128"><a href="power-curve.html#cb641-128" aria-hidden="true" tabindex="-1"></a>                              <span class="at">sd =</span> <span class="dv">1</span>, </span>
+<span id="cb641-129"><a href="power-curve.html#cb641-129" aria-hidden="true" tabindex="-1"></a>                              <span class="at">r =</span> <span class="fl">0.5</span>, </span>
+<span id="cb641-130"><a href="power-curve.html#cb641-130" aria-hidden="true" tabindex="-1"></a>                              <span class="at">labelnames =</span> labelnames)</span>
+<span id="cb641-131"><a href="power-curve.html#cb641-131" aria-hidden="true" tabindex="-1"></a>p_d <span class="ot">&lt;-</span> <span class="fu">plot_power</span>(design_result,</span>
+<span id="cb641-132"><a href="power-curve.html#cb641-132" aria-hidden="true" tabindex="-1"></a>                  <span class="at">max_n =</span> <span class="dv">100</span>)</span>
+<span id="cb641-133"><a href="power-curve.html#cb641-133" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb641-134"><a href="power-curve.html#cb641-134" aria-hidden="true" tabindex="-1"></a>p_d<span class="sc">$</span>power_df<span class="sc">$</span>effect <span class="ot">&lt;-</span> <span class="fl">0.3</span></span>
+<span id="cb641-135"><a href="power-curve.html#cb641-135" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb641-136"><a href="power-curve.html#cb641-136" aria-hidden="true" tabindex="-1"></a>design_result <span class="ot">&lt;-</span> <span class="fu">ANOVA_design</span>(<span class="at">design =</span> string,</span>
+<span id="cb641-137"><a href="power-curve.html#cb641-137" aria-hidden="true" tabindex="-1"></a>                              <span class="at">n =</span> <span class="dv">20</span>, </span>
+<span id="cb641-138"><a href="power-curve.html#cb641-138" aria-hidden="true" tabindex="-1"></a>                              <span class="at">mu =</span> <span class="fu">c</span>(<span class="fl">0.4</span>,<span class="dv">0</span>,<span class="dv">0</span>,<span class="fl">0.4</span>), </span>
+<span id="cb641-139"><a href="power-curve.html#cb641-139" aria-hidden="true" tabindex="-1"></a>                              <span class="at">sd =</span> <span class="dv">1</span>, </span>
+<span id="cb641-140"><a href="power-curve.html#cb641-140" aria-hidden="true" tabindex="-1"></a>                              <span class="at">r =</span> <span class="fl">0.5</span>, </span>
+<span id="cb641-141"><a href="power-curve.html#cb641-141" aria-hidden="true" tabindex="-1"></a>                              <span class="at">labelnames =</span> labelnames)</span>
+<span id="cb641-142"><a href="power-curve.html#cb641-142" aria-hidden="true" tabindex="-1"></a>p_e <span class="ot">&lt;-</span> <span class="fu">plot_power</span>(design_result,</span>
+<span id="cb641-143"><a href="power-curve.html#cb641-143" aria-hidden="true" tabindex="-1"></a>                  <span class="at">max_n =</span> <span class="dv">100</span>)</span>
+<span id="cb641-144"><a href="power-curve.html#cb641-144" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb641-145"><a href="power-curve.html#cb641-145" aria-hidden="true" tabindex="-1"></a>p_e<span class="sc">$</span>power_df<span class="sc">$</span>effect <span class="ot">&lt;-</span> <span class="fl">0.4</span></span>
+<span id="cb641-146"><a href="power-curve.html#cb641-146" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb641-147"><a href="power-curve.html#cb641-147" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb641-148"><a href="power-curve.html#cb641-148" aria-hidden="true" tabindex="-1"></a>design_result <span class="ot">&lt;-</span> <span class="fu">ANOVA_design</span>(<span class="at">design =</span> string,</span>
+<span id="cb641-149"><a href="power-curve.html#cb641-149" aria-hidden="true" tabindex="-1"></a>                              <span class="at">n =</span> <span class="dv">20</span>, </span>
+<span id="cb641-150"><a href="power-curve.html#cb641-150" aria-hidden="true" tabindex="-1"></a>                              <span class="at">mu =</span> <span class="fu">c</span>(<span class="fl">0.5</span>,<span class="dv">0</span>,<span class="dv">0</span>,<span class="fl">0.5</span>), </span>
+<span id="cb641-151"><a href="power-curve.html#cb641-151" aria-hidden="true" tabindex="-1"></a>                              <span class="at">sd =</span> <span class="dv">1</span>, </span>
+<span id="cb641-152"><a href="power-curve.html#cb641-152" aria-hidden="true" tabindex="-1"></a>                              <span class="at">r =</span> <span class="fl">0.5</span>, </span>
+<span id="cb641-153"><a href="power-curve.html#cb641-153" aria-hidden="true" tabindex="-1"></a>                              <span class="at">labelnames =</span> labelnames)</span>
+<span id="cb641-154"><a href="power-curve.html#cb641-154" aria-hidden="true" tabindex="-1"></a>p_f <span class="ot">&lt;-</span> <span class="fu">plot_power</span>(design_result,</span>
+<span id="cb641-155"><a href="power-curve.html#cb641-155" aria-hidden="true" tabindex="-1"></a>                  <span class="at">max_n =</span> <span class="dv">100</span>)</span>
+<span id="cb641-156"><a href="power-curve.html#cb641-156" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb641-157"><a href="power-curve.html#cb641-157" aria-hidden="true" tabindex="-1"></a>p_f<span class="sc">$</span>power_df<span class="sc">$</span>effect <span class="ot">&lt;-</span> <span class="fl">0.5</span></span>
+<span id="cb641-158"><a href="power-curve.html#cb641-158" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb641-159"><a href="power-curve.html#cb641-159" aria-hidden="true" tabindex="-1"></a>plot_data <span class="ot">&lt;-</span> <span class="fu">rbind</span>(p_a<span class="sc">$</span>power_df, p_b<span class="sc">$</span>power_df, p_c<span class="sc">$</span>power_df,</span>
+<span id="cb641-160"><a href="power-curve.html#cb641-160" aria-hidden="true" tabindex="-1"></a>                   p_d<span class="sc">$</span>power_df, p_e<span class="sc">$</span>power_df, p_f<span class="sc">$</span>power_df)<span class="sc">%&gt;%</span></span>
+<span id="cb641-161"><a href="power-curve.html#cb641-161" aria-hidden="true" tabindex="-1"></a>  <span class="fu">mutate</span>(<span class="at">AxB =</span> <span class="st">`</span><span class="at">A:B</span><span class="st">`</span>) <span class="sc">%&gt;%</span> <span class="fu">select</span>(n,effect,A,B,AxB)</span>
+<span id="cb641-162"><a href="power-curve.html#cb641-162" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb641-163"><a href="power-curve.html#cb641-163" aria-hidden="true" tabindex="-1"></a>long_data <span class="ot">=</span> plot_data <span class="sc">%&gt;%</span></span>
+<span id="cb641-164"><a href="power-curve.html#cb641-164" aria-hidden="true" tabindex="-1"></a>  <span class="fu">gather</span>(<span class="st">&quot;A&quot;</span>, <span class="st">&quot;B&quot;</span>, <span class="st">&quot;AxB&quot;</span>, <span class="at">key =</span> factor, <span class="at">value =</span> power)</span>
+<span id="cb641-165"><a href="power-curve.html#cb641-165" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb641-166"><a href="power-curve.html#cb641-166" aria-hidden="true" tabindex="-1"></a>plot2 <span class="ot">&lt;-</span> <span class="fu">ggplot</span>(long_data, <span class="fu">aes</span>(<span class="at">x =</span> n, <span class="at">y =</span> power,</span>
+<span id="cb641-167"><a href="power-curve.html#cb641-167" aria-hidden="true" tabindex="-1"></a>                               <span class="at">color =</span> <span class="fu">as.factor</span>(effect))) <span class="sc">+</span></span>
+<span id="cb641-168"><a href="power-curve.html#cb641-168" aria-hidden="true" tabindex="-1"></a>  <span class="fu">geom_line</span>(<span class="at">size =</span> <span class="fl">1.5</span>) <span class="sc">+</span></span>
+<span id="cb641-169"><a href="power-curve.html#cb641-169" aria-hidden="true" tabindex="-1"></a>  <span class="fu">scale_y_continuous</span>(<span class="at">breaks =</span> <span class="fu">seq</span>(<span class="dv">0</span>,<span class="dv">100</span>,<span class="dv">10</span>)) <span class="sc">+</span></span>
+<span id="cb641-170"><a href="power-curve.html#cb641-170" aria-hidden="true" tabindex="-1"></a>  <span class="fu">labs</span>(<span class="at">color =</span> <span class="st">&quot;Effect Size&quot;</span>,</span>
+<span id="cb641-171"><a href="power-curve.html#cb641-171" aria-hidden="true" tabindex="-1"></a>       <span class="at">x =</span> <span class="st">&quot;Sample Size per Group&quot;</span>,</span>
+<span id="cb641-172"><a href="power-curve.html#cb641-172" aria-hidden="true" tabindex="-1"></a>       <span class="at">y =</span> <span class="st">&quot;Power (%)&quot;</span>) <span class="sc">+</span></span>
+<span id="cb641-173"><a href="power-curve.html#cb641-173" aria-hidden="true" tabindex="-1"></a>  <span class="fu">scale_color_viridis_d</span>() <span class="sc">+</span> <span class="fu">facet_wrap</span>( <span class="sc">~</span> factor, <span class="at">ncol=</span><span class="dv">2</span>)</span>
+<span id="cb641-174"><a href="power-curve.html#cb641-174" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb641-175"><a href="power-curve.html#cb641-175" aria-hidden="true" tabindex="-1"></a><span class="do">##</span></span>
+<span id="cb641-176"><a href="power-curve.html#cb641-176" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb641-177"><a href="power-curve.html#cb641-177" aria-hidden="true" tabindex="-1"></a>string <span class="ot">&lt;-</span> <span class="st">&quot;2w*2w&quot;</span></span>
+<span id="cb641-178"><a href="power-curve.html#cb641-178" aria-hidden="true" tabindex="-1"></a>labelnames <span class="ot">=</span> <span class="fu">c</span>(<span class="st">&quot;A&quot;</span>, <span class="st">&quot;a1&quot;</span>, <span class="st">&quot;a2&quot;</span>, <span class="st">&quot;B&quot;</span>, <span class="st">&quot;b1&quot;</span>, <span class="st">&quot;b2&quot;</span>)</span>
+<span id="cb641-179"><a href="power-curve.html#cb641-179" aria-hidden="true" tabindex="-1"></a>design_result <span class="ot">&lt;-</span> <span class="fu">ANOVA_design</span>(<span class="at">design =</span> string,</span>
+<span id="cb641-180"><a href="power-curve.html#cb641-180" aria-hidden="true" tabindex="-1"></a>                              <span class="at">n =</span> <span class="dv">20</span>, </span>
+<span id="cb641-181"><a href="power-curve.html#cb641-181" aria-hidden="true" tabindex="-1"></a>                              <span class="at">mu =</span> <span class="fu">c</span>(<span class="dv">0</span>,<span class="dv">0</span>,<span class="dv">0</span>,<span class="fl">0.3</span>), </span>
+<span id="cb641-182"><a href="power-curve.html#cb641-182" aria-hidden="true" tabindex="-1"></a>                              <span class="at">sd =</span> <span class="dv">1</span>, </span>
+<span id="cb641-183"><a href="power-curve.html#cb641-183" aria-hidden="true" tabindex="-1"></a>                              <span class="at">r =</span> <span class="fl">0.0</span>, </span>
+<span id="cb641-184"><a href="power-curve.html#cb641-184" aria-hidden="true" tabindex="-1"></a>                              <span class="at">labelnames =</span> labelnames)</span>
+<span id="cb641-185"><a href="power-curve.html#cb641-185" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb641-186"><a href="power-curve.html#cb641-186" aria-hidden="true" tabindex="-1"></a>p_a <span class="ot">&lt;-</span> <span class="fu">plot_power</span>(design_result,</span>
+<span id="cb641-187"><a href="power-curve.html#cb641-187" aria-hidden="true" tabindex="-1"></a>                  <span class="at">max_n =</span> <span class="dv">100</span>)</span>
+<span id="cb641-188"><a href="power-curve.html#cb641-188" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb641-189"><a href="power-curve.html#cb641-189" aria-hidden="true" tabindex="-1"></a>p_a<span class="sc">$</span>power_df<span class="sc">$</span>correlation <span class="ot">&lt;-</span> <span class="fl">0.0</span> </span>
+<span id="cb641-190"><a href="power-curve.html#cb641-190" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb641-191"><a href="power-curve.html#cb641-191" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb641-192"><a href="power-curve.html#cb641-192" aria-hidden="true" tabindex="-1"></a>design_result <span class="ot">&lt;-</span> <span class="fu">ANOVA_design</span>(<span class="at">design =</span> string,</span>
+<span id="cb641-193"><a href="power-curve.html#cb641-193" aria-hidden="true" tabindex="-1"></a>                              <span class="at">n =</span> <span class="dv">20</span>, </span>
+<span id="cb641-194"><a href="power-curve.html#cb641-194" aria-hidden="true" tabindex="-1"></a>                              <span class="at">mu =</span> <span class="fu">c</span>(<span class="dv">0</span>,<span class="dv">0</span>,<span class="dv">0</span>,<span class="fl">0.3</span>), </span>
+<span id="cb641-195"><a href="power-curve.html#cb641-195" aria-hidden="true" tabindex="-1"></a>                              <span class="at">sd =</span> <span class="dv">1</span>, </span>
+<span id="cb641-196"><a href="power-curve.html#cb641-196" aria-hidden="true" tabindex="-1"></a>                              <span class="at">r =</span> <span class="fl">0.1</span>, </span>
+<span id="cb641-197"><a href="power-curve.html#cb641-197" aria-hidden="true" tabindex="-1"></a>                              <span class="at">labelnames =</span> labelnames)</span>
+<span id="cb641-198"><a href="power-curve.html#cb641-198" aria-hidden="true" tabindex="-1"></a>p_b <span class="ot">&lt;-</span> <span class="fu">plot_power</span>(design_result,</span>
+<span id="cb641-199"><a href="power-curve.html#cb641-199" aria-hidden="true" tabindex="-1"></a>                  <span class="at">max_n =</span> <span class="dv">100</span>)</span>
+<span id="cb641-200"><a href="power-curve.html#cb641-200" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb641-201"><a href="power-curve.html#cb641-201" aria-hidden="true" tabindex="-1"></a>p_b<span class="sc">$</span>power_df<span class="sc">$</span>correlation <span class="ot">&lt;-</span> <span class="fl">0.1</span></span>
+<span id="cb641-202"><a href="power-curve.html#cb641-202" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb641-203"><a href="power-curve.html#cb641-203" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb641-204"><a href="power-curve.html#cb641-204" aria-hidden="true" tabindex="-1"></a>design_result <span class="ot">&lt;-</span> <span class="fu">ANOVA_design</span>(<span class="at">design =</span> string,</span>
+<span id="cb641-205"><a href="power-curve.html#cb641-205" aria-hidden="true" tabindex="-1"></a>                              <span class="at">n =</span> <span class="dv">20</span>, </span>
+<span id="cb641-206"><a href="power-curve.html#cb641-206" aria-hidden="true" tabindex="-1"></a>                              <span class="at">mu =</span> <span class="fu">c</span>(<span class="dv">0</span>,<span class="dv">0</span>,<span class="dv">0</span>,<span class="fl">0.3</span>), </span>
+<span id="cb641-207"><a href="power-curve.html#cb641-207" aria-hidden="true" tabindex="-1"></a>                              <span class="at">sd =</span> <span class="dv">1</span>, </span>
+<span id="cb641-208"><a href="power-curve.html#cb641-208" aria-hidden="true" tabindex="-1"></a>                              <span class="at">r =</span> <span class="fl">0.3</span>, </span>
+<span id="cb641-209"><a href="power-curve.html#cb641-209" aria-hidden="true" tabindex="-1"></a>                              <span class="at">labelnames =</span> labelnames)</span>
+<span id="cb641-210"><a href="power-curve.html#cb641-210" aria-hidden="true" tabindex="-1"></a>p_c <span class="ot">&lt;-</span> <span class="fu">plot_power</span>(design_result,</span>
+<span id="cb641-211"><a href="power-curve.html#cb641-211" aria-hidden="true" tabindex="-1"></a>                  <span class="at">max_n =</span> <span class="dv">100</span>)</span>
+<span id="cb641-212"><a href="power-curve.html#cb641-212" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb641-213"><a href="power-curve.html#cb641-213" aria-hidden="true" tabindex="-1"></a>p_c<span class="sc">$</span>power_df<span class="sc">$</span>correlation <span class="ot">&lt;-</span> <span class="fl">0.3</span></span>
+<span id="cb641-214"><a href="power-curve.html#cb641-214" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb641-215"><a href="power-curve.html#cb641-215" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb641-216"><a href="power-curve.html#cb641-216" aria-hidden="true" tabindex="-1"></a>design_result <span class="ot">&lt;-</span> <span class="fu">ANOVA_design</span>(<span class="at">design =</span> string,</span>
+<span id="cb641-217"><a href="power-curve.html#cb641-217" aria-hidden="true" tabindex="-1"></a>                              <span class="at">n =</span> <span class="dv">20</span>, </span>
+<span id="cb641-218"><a href="power-curve.html#cb641-218" aria-hidden="true" tabindex="-1"></a>                              <span class="at">mu =</span> <span class="fu">c</span>(<span class="dv">0</span>,<span class="dv">0</span>,<span class="dv">0</span>,<span class="fl">0.3</span>), </span>
+<span id="cb641-219"><a href="power-curve.html#cb641-219" aria-hidden="true" tabindex="-1"></a>                              <span class="at">sd =</span> <span class="dv">1</span>, </span>
+<span id="cb641-220"><a href="power-curve.html#cb641-220" aria-hidden="true" tabindex="-1"></a>                              <span class="at">r =</span> <span class="fl">0.5</span>, </span>
+<span id="cb641-221"><a href="power-curve.html#cb641-221" aria-hidden="true" tabindex="-1"></a>                              <span class="at">labelnames =</span> labelnames)</span>
+<span id="cb641-222"><a href="power-curve.html#cb641-222" aria-hidden="true" tabindex="-1"></a>p_d <span class="ot">&lt;-</span> <span class="fu">plot_power</span>(design_result,</span>
+<span id="cb641-223"><a href="power-curve.html#cb641-223" aria-hidden="true" tabindex="-1"></a>                  <span class="at">max_n =</span> <span class="dv">100</span>)</span>
+<span id="cb641-224"><a href="power-curve.html#cb641-224" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb641-225"><a href="power-curve.html#cb641-225" aria-hidden="true" tabindex="-1"></a>p_d<span class="sc">$</span>power_df<span class="sc">$</span>correlation <span class="ot">&lt;-</span> <span class="fl">0.5</span></span>
+<span id="cb641-226"><a href="power-curve.html#cb641-226" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb641-227"><a href="power-curve.html#cb641-227" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb641-228"><a href="power-curve.html#cb641-228" aria-hidden="true" tabindex="-1"></a>design_result <span class="ot">&lt;-</span> <span class="fu">ANOVA_design</span>(<span class="at">design =</span> string,</span>
+<span id="cb641-229"><a href="power-curve.html#cb641-229" aria-hidden="true" tabindex="-1"></a>                              <span class="at">n =</span> <span class="dv">20</span>, </span>
+<span id="cb641-230"><a href="power-curve.html#cb641-230" aria-hidden="true" tabindex="-1"></a>                              <span class="at">mu =</span> <span class="fu">c</span>(<span class="dv">0</span>,<span class="dv">0</span>,<span class="dv">0</span>,<span class="fl">0.3</span>), </span>
+<span id="cb641-231"><a href="power-curve.html#cb641-231" aria-hidden="true" tabindex="-1"></a>                              <span class="at">sd =</span> <span class="dv">1</span>, </span>
+<span id="cb641-232"><a href="power-curve.html#cb641-232" aria-hidden="true" tabindex="-1"></a>                              <span class="at">r =</span> <span class="fl">0.7</span>, </span>
+<span id="cb641-233"><a href="power-curve.html#cb641-233" aria-hidden="true" tabindex="-1"></a>                              <span class="at">labelnames =</span> labelnames)</span>
+<span id="cb641-234"><a href="power-curve.html#cb641-234" aria-hidden="true" tabindex="-1"></a>p_e <span class="ot">&lt;-</span> <span class="fu">plot_power</span>(design_result,</span>
+<span id="cb641-235"><a href="power-curve.html#cb641-235" aria-hidden="true" tabindex="-1"></a>                  <span class="at">max_n =</span> <span class="dv">100</span>)</span>
+<span id="cb641-236"><a href="power-curve.html#cb641-236" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb641-237"><a href="power-curve.html#cb641-237" aria-hidden="true" tabindex="-1"></a>p_e<span class="sc">$</span>power_df<span class="sc">$</span>correlation <span class="ot">&lt;-</span> <span class="fl">0.7</span></span>
+<span id="cb641-238"><a href="power-curve.html#cb641-238" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb641-239"><a href="power-curve.html#cb641-239" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb641-240"><a href="power-curve.html#cb641-240" aria-hidden="true" tabindex="-1"></a>design_result <span class="ot">&lt;-</span> <span class="fu">ANOVA_design</span>(<span class="at">design =</span> string,</span>
+<span id="cb641-241"><a href="power-curve.html#cb641-241" aria-hidden="true" tabindex="-1"></a>                              <span class="at">n =</span> <span class="dv">20</span>, </span>
+<span id="cb641-242"><a href="power-curve.html#cb641-242" aria-hidden="true" tabindex="-1"></a>                              <span class="at">mu =</span> <span class="fu">c</span>(<span class="dv">0</span>,<span class="dv">0</span>,<span class="dv">0</span>,<span class="fl">0.3</span>), </span>
+<span id="cb641-243"><a href="power-curve.html#cb641-243" aria-hidden="true" tabindex="-1"></a>                              <span class="at">sd =</span> <span class="dv">1</span>, </span>
+<span id="cb641-244"><a href="power-curve.html#cb641-244" aria-hidden="true" tabindex="-1"></a>                              <span class="at">r =</span> <span class="fl">0.9</span>, </span>
+<span id="cb641-245"><a href="power-curve.html#cb641-245" aria-hidden="true" tabindex="-1"></a>                              <span class="at">labelnames =</span> labelnames)</span>
+<span id="cb641-246"><a href="power-curve.html#cb641-246" aria-hidden="true" tabindex="-1"></a>p_f <span class="ot">&lt;-</span> <span class="fu">plot_power</span>(design_result,</span>
+<span id="cb641-247"><a href="power-curve.html#cb641-247" aria-hidden="true" tabindex="-1"></a>                  <span class="at">max_n =</span> <span class="dv">100</span>)</span>
+<span id="cb641-248"><a href="power-curve.html#cb641-248" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb641-249"><a href="power-curve.html#cb641-249" aria-hidden="true" tabindex="-1"></a>p_f<span class="sc">$</span>power_df<span class="sc">$</span>correlation <span class="ot">&lt;-</span> <span class="fl">0.9</span></span>
+<span id="cb641-250"><a href="power-curve.html#cb641-250" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb641-251"><a href="power-curve.html#cb641-251" aria-hidden="true" tabindex="-1"></a>plot_data <span class="ot">&lt;-</span> <span class="fu">rbind</span>(p_a<span class="sc">$</span>power_df, p_b<span class="sc">$</span>power_df, </span>
+<span id="cb641-252"><a href="power-curve.html#cb641-252" aria-hidden="true" tabindex="-1"></a>                   p_c<span class="sc">$</span>power_df, p_d<span class="sc">$</span>power_df, p_e<span class="sc">$</span>power_df, p_f<span class="sc">$</span>power_df)<span class="sc">%&gt;%</span></span>
+<span id="cb641-253"><a href="power-curve.html#cb641-253" aria-hidden="true" tabindex="-1"></a>  <span class="fu">mutate</span>(<span class="at">AxB =</span> <span class="st">`</span><span class="at">A:B</span><span class="st">`</span>) <span class="sc">%&gt;%</span> <span class="fu">select</span>(n,correlation,A,B,AxB)</span>
+<span id="cb641-254"><a href="power-curve.html#cb641-254" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb641-255"><a href="power-curve.html#cb641-255" aria-hidden="true" tabindex="-1"></a>long_data <span class="ot">=</span> plot_data <span class="sc">%&gt;%</span></span>
+<span id="cb641-256"><a href="power-curve.html#cb641-256" aria-hidden="true" tabindex="-1"></a>  <span class="fu">gather</span>(<span class="st">&quot;A&quot;</span>, <span class="st">&quot;B&quot;</span>, <span class="st">&quot;AxB&quot;</span>, <span class="at">key =</span> factor, <span class="at">value =</span> power)</span>
+<span id="cb641-257"><a href="power-curve.html#cb641-257" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb641-258"><a href="power-curve.html#cb641-258" aria-hidden="true" tabindex="-1"></a>plot3 <span class="ot">&lt;-</span> <span class="fu">ggplot</span>(long_data, <span class="fu">aes</span>(<span class="at">x =</span> n, <span class="at">y =</span> power,</span>
+<span id="cb641-259"><a href="power-curve.html#cb641-259" aria-hidden="true" tabindex="-1"></a>                               <span class="at">color =</span> <span class="fu">as.factor</span>(correlation))) <span class="sc">+</span></span>
+<span id="cb641-260"><a href="power-curve.html#cb641-260" aria-hidden="true" tabindex="-1"></a>  <span class="fu">geom_line</span>(<span class="at">size =</span> <span class="fl">1.5</span>) <span class="sc">+</span></span>
+<span id="cb641-261"><a href="power-curve.html#cb641-261" aria-hidden="true" tabindex="-1"></a>  <span class="fu">scale_y_continuous</span>(<span class="at">breaks =</span> <span class="fu">seq</span>(<span class="dv">0</span>,<span class="dv">100</span>,<span class="dv">10</span>)) <span class="sc">+</span></span>
+<span id="cb641-262"><a href="power-curve.html#cb641-262" aria-hidden="true" tabindex="-1"></a>  <span class="fu">labs</span>(<span class="at">color =</span> <span class="st">&quot;Correlation&quot;</span>,</span>
+<span id="cb641-263"><a href="power-curve.html#cb641-263" aria-hidden="true" tabindex="-1"></a>       <span class="at">x =</span> <span class="st">&quot;Sample Size per Group&quot;</span>,</span>
+<span id="cb641-264"><a href="power-curve.html#cb641-264" aria-hidden="true" tabindex="-1"></a>       <span class="at">y =</span> <span class="st">&quot;Power (%)&quot;</span>) <span class="sc">+</span></span>
+<span id="cb641-265"><a href="power-curve.html#cb641-265" aria-hidden="true" tabindex="-1"></a>  <span class="fu">scale_color_viridis_d</span>() <span class="sc">+</span> <span class="fu">facet_wrap</span>( <span class="sc">~</span> factor, <span class="at">ncol=</span><span class="dv">2</span>)</span>
+<span id="cb641-266"><a href="power-curve.html#cb641-266" aria-hidden="true" tabindex="-1"></a><span class="do">##############</span></span>
+<span id="cb641-267"><a href="power-curve.html#cb641-267" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb641-268"><a href="power-curve.html#cb641-268" aria-hidden="true" tabindex="-1"></a>string <span class="ot">&lt;-</span> <span class="st">&quot;2w*2w&quot;</span></span>
+<span id="cb641-269"><a href="power-curve.html#cb641-269" aria-hidden="true" tabindex="-1"></a>labelnames <span class="ot">=</span> <span class="fu">c</span>(<span class="st">&quot;A&quot;</span>, <span class="st">&quot;a1&quot;</span>, <span class="st">&quot;a2&quot;</span>, <span class="st">&quot;B&quot;</span>, <span class="st">&quot;b1&quot;</span>, <span class="st">&quot;b2&quot;</span>)</span>
+<span id="cb641-270"><a href="power-curve.html#cb641-270" aria-hidden="true" tabindex="-1"></a>design_result <span class="ot">&lt;-</span> <span class="fu">ANOVA_design</span>(<span class="at">design =</span> string,</span>
+<span id="cb641-271"><a href="power-curve.html#cb641-271" aria-hidden="true" tabindex="-1"></a>                              <span class="at">n =</span> <span class="dv">20</span>, </span>
+<span id="cb641-272"><a href="power-curve.html#cb641-272" aria-hidden="true" tabindex="-1"></a>                              <span class="at">mu =</span> <span class="fu">c</span>(<span class="dv">0</span>,<span class="dv">0</span>,<span class="dv">0</span>,<span class="fl">0.3</span>), </span>
+<span id="cb641-273"><a href="power-curve.html#cb641-273" aria-hidden="true" tabindex="-1"></a>                              <span class="at">sd =</span> <span class="dv">1</span>, </span>
+<span id="cb641-274"><a href="power-curve.html#cb641-274" aria-hidden="true" tabindex="-1"></a>                              r <span class="ot">&lt;-</span> <span class="fu">c</span>(</span>
+<span id="cb641-275"><a href="power-curve.html#cb641-275" aria-hidden="true" tabindex="-1"></a>                                <span class="fl">0.4</span>, <span class="fl">0.4</span>, <span class="fl">0.4</span>,</span>
+<span id="cb641-276"><a href="power-curve.html#cb641-276" aria-hidden="true" tabindex="-1"></a>                                <span class="fl">0.4</span>, <span class="fl">0.4</span>,</span>
+<span id="cb641-277"><a href="power-curve.html#cb641-277" aria-hidden="true" tabindex="-1"></a>                                <span class="fl">0.4</span>),</span>
+<span id="cb641-278"><a href="power-curve.html#cb641-278" aria-hidden="true" tabindex="-1"></a>                              <span class="at">labelnames =</span> labelnames)</span>
+<span id="cb641-279"><a href="power-curve.html#cb641-279" aria-hidden="true" tabindex="-1"></a>p_a <span class="ot">&lt;-</span> <span class="fu">plot_power</span>(design_result,</span>
+<span id="cb641-280"><a href="power-curve.html#cb641-280" aria-hidden="true" tabindex="-1"></a>                  <span class="at">max_n =</span> <span class="dv">100</span>)</span>
+<span id="cb641-281"><a href="power-curve.html#cb641-281" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb641-282"><a href="power-curve.html#cb641-282" aria-hidden="true" tabindex="-1"></a>p_a<span class="sc">$</span>power_df<span class="sc">$</span>corr_diff <span class="ot">&lt;-</span> <span class="dv">0</span></span>
+<span id="cb641-283"><a href="power-curve.html#cb641-283" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb641-284"><a href="power-curve.html#cb641-284" aria-hidden="true" tabindex="-1"></a>design_result <span class="ot">&lt;-</span> <span class="fu">ANOVA_design</span>(<span class="at">design =</span> string,</span>
+<span id="cb641-285"><a href="power-curve.html#cb641-285" aria-hidden="true" tabindex="-1"></a>                              <span class="at">n =</span> <span class="dv">20</span>, </span>
+<span id="cb641-286"><a href="power-curve.html#cb641-286" aria-hidden="true" tabindex="-1"></a>                              <span class="at">mu =</span> <span class="fu">c</span>(<span class="dv">0</span>,<span class="dv">0</span>,<span class="dv">0</span>,<span class="fl">0.3</span>), </span>
+<span id="cb641-287"><a href="power-curve.html#cb641-287" aria-hidden="true" tabindex="-1"></a>                              <span class="at">sd =</span> <span class="dv">1</span>, </span>
+<span id="cb641-288"><a href="power-curve.html#cb641-288" aria-hidden="true" tabindex="-1"></a>                              r <span class="ot">&lt;-</span> <span class="fu">c</span>(</span>
+<span id="cb641-289"><a href="power-curve.html#cb641-289" aria-hidden="true" tabindex="-1"></a>                                <span class="fl">0.5</span>, <span class="fl">0.4</span>, <span class="fl">0.4</span>,</span>
+<span id="cb641-290"><a href="power-curve.html#cb641-290" aria-hidden="true" tabindex="-1"></a>                                <span class="fl">0.4</span>, <span class="fl">0.4</span>,</span>
+<span id="cb641-291"><a href="power-curve.html#cb641-291" aria-hidden="true" tabindex="-1"></a>                                <span class="fl">0.5</span>),</span>
+<span id="cb641-292"><a href="power-curve.html#cb641-292" aria-hidden="true" tabindex="-1"></a>                              <span class="at">labelnames =</span> labelnames)</span>
+<span id="cb641-293"><a href="power-curve.html#cb641-293" aria-hidden="true" tabindex="-1"></a>p_b <span class="ot">&lt;-</span> <span class="fu">plot_power</span>(design_result,</span>
+<span id="cb641-294"><a href="power-curve.html#cb641-294" aria-hidden="true" tabindex="-1"></a>                  <span class="at">max_n =</span> <span class="dv">100</span>)</span>
+<span id="cb641-295"><a href="power-curve.html#cb641-295" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb641-296"><a href="power-curve.html#cb641-296" aria-hidden="true" tabindex="-1"></a>p_b<span class="sc">$</span>power_df<span class="sc">$</span>corr_diff <span class="ot">&lt;-</span> <span class="fl">0.1</span></span>
+<span id="cb641-297"><a href="power-curve.html#cb641-297" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb641-298"><a href="power-curve.html#cb641-298" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb641-299"><a href="power-curve.html#cb641-299" aria-hidden="true" tabindex="-1"></a>design_result <span class="ot">&lt;-</span> <span class="fu">ANOVA_design</span>(<span class="at">design =</span> string,</span>
+<span id="cb641-300"><a href="power-curve.html#cb641-300" aria-hidden="true" tabindex="-1"></a>                              <span class="at">n =</span> <span class="dv">20</span>, </span>
+<span id="cb641-301"><a href="power-curve.html#cb641-301" aria-hidden="true" tabindex="-1"></a>                              <span class="at">mu =</span> <span class="fu">c</span>(<span class="dv">0</span>,<span class="dv">0</span>,<span class="dv">0</span>,<span class="fl">0.3</span>), </span>
+<span id="cb641-302"><a href="power-curve.html#cb641-302" aria-hidden="true" tabindex="-1"></a>                              <span class="at">sd =</span> <span class="dv">1</span>, </span>
+<span id="cb641-303"><a href="power-curve.html#cb641-303" aria-hidden="true" tabindex="-1"></a>                              r <span class="ot">&lt;-</span> <span class="fu">c</span>(</span>
+<span id="cb641-304"><a href="power-curve.html#cb641-304" aria-hidden="true" tabindex="-1"></a>                                <span class="fl">0.6</span>, <span class="fl">0.4</span>, <span class="fl">0.4</span>,</span>
+<span id="cb641-305"><a href="power-curve.html#cb641-305" aria-hidden="true" tabindex="-1"></a>                                <span class="fl">0.4</span>, <span class="fl">0.4</span>,</span>
+<span id="cb641-306"><a href="power-curve.html#cb641-306" aria-hidden="true" tabindex="-1"></a>                                <span class="fl">0.6</span>),</span>
+<span id="cb641-307"><a href="power-curve.html#cb641-307" aria-hidden="true" tabindex="-1"></a>                              <span class="at">labelnames =</span> labelnames)</span>
+<span id="cb641-308"><a href="power-curve.html#cb641-308" aria-hidden="true" tabindex="-1"></a>p_c <span class="ot">&lt;-</span> <span class="fu">plot_power</span>(design_result,</span>
+<span id="cb641-309"><a href="power-curve.html#cb641-309" aria-hidden="true" tabindex="-1"></a>                  <span class="at">max_n =</span> <span class="dv">100</span>)</span>
+<span id="cb641-310"><a href="power-curve.html#cb641-310" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb641-311"><a href="power-curve.html#cb641-311" aria-hidden="true" tabindex="-1"></a>p_c<span class="sc">$</span>power_df<span class="sc">$</span>corr_diff <span class="ot">&lt;-</span> <span class="fl">0.2</span></span>
+<span id="cb641-312"><a href="power-curve.html#cb641-312" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb641-313"><a href="power-curve.html#cb641-313" aria-hidden="true" tabindex="-1"></a>design_result <span class="ot">&lt;-</span> <span class="fu">ANOVA_design</span>(<span class="at">design =</span> string,</span>
+<span id="cb641-314"><a href="power-curve.html#cb641-314" aria-hidden="true" tabindex="-1"></a>                              <span class="at">n =</span> <span class="dv">20</span>, </span>
+<span id="cb641-315"><a href="power-curve.html#cb641-315" aria-hidden="true" tabindex="-1"></a>                              <span class="at">mu =</span> <span class="fu">c</span>(<span class="dv">0</span>,<span class="dv">0</span>,<span class="dv">0</span>,<span class="fl">0.3</span>), </span>
+<span id="cb641-316"><a href="power-curve.html#cb641-316" aria-hidden="true" tabindex="-1"></a>                              <span class="at">sd =</span> <span class="dv">1</span>, </span>
+<span id="cb641-317"><a href="power-curve.html#cb641-317" aria-hidden="true" tabindex="-1"></a>                              r <span class="ot">&lt;-</span> <span class="fu">c</span>(</span>
+<span id="cb641-318"><a href="power-curve.html#cb641-318" aria-hidden="true" tabindex="-1"></a>                                <span class="fl">0.7</span>, <span class="fl">0.4</span>, <span class="fl">0.4</span>,</span>
+<span id="cb641-319"><a href="power-curve.html#cb641-319" aria-hidden="true" tabindex="-1"></a>                                <span class="fl">0.4</span>, <span class="fl">0.4</span>,</span>
+<span id="cb641-320"><a href="power-curve.html#cb641-320" aria-hidden="true" tabindex="-1"></a>                                <span class="fl">0.7</span>), </span>
+<span id="cb641-321"><a href="power-curve.html#cb641-321" aria-hidden="true" tabindex="-1"></a>                              <span class="at">labelnames =</span> labelnames)</span>
+<span id="cb641-322"><a href="power-curve.html#cb641-322" aria-hidden="true" tabindex="-1"></a>p_d <span class="ot">&lt;-</span> <span class="fu">plot_power</span>(design_result,</span>
+<span id="cb641-323"><a href="power-curve.html#cb641-323" aria-hidden="true" tabindex="-1"></a>                  <span class="at">max_n =</span> <span class="dv">100</span>)</span>
+<span id="cb641-324"><a href="power-curve.html#cb641-324" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb641-325"><a href="power-curve.html#cb641-325" aria-hidden="true" tabindex="-1"></a>p_d<span class="sc">$</span>power_df<span class="sc">$</span>corr_diff <span class="ot">&lt;-</span> <span class="fl">0.3</span></span>
+<span id="cb641-326"><a href="power-curve.html#cb641-326" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb641-327"><a href="power-curve.html#cb641-327" aria-hidden="true" tabindex="-1"></a>design_result <span class="ot">&lt;-</span> <span class="fu">ANOVA_design</span>(<span class="at">design =</span> string,</span>
+<span id="cb641-328"><a href="power-curve.html#cb641-328" aria-hidden="true" tabindex="-1"></a>                              <span class="at">n =</span> <span class="dv">20</span>, </span>
+<span id="cb641-329"><a href="power-curve.html#cb641-329" aria-hidden="true" tabindex="-1"></a>                              <span class="at">mu =</span> <span class="fu">c</span>(<span class="dv">0</span>,<span class="dv">0</span>,<span class="dv">0</span>,<span class="fl">0.3</span>), </span>
+<span id="cb641-330"><a href="power-curve.html#cb641-330" aria-hidden="true" tabindex="-1"></a>                              <span class="at">sd =</span> <span class="dv">1</span>, </span>
+<span id="cb641-331"><a href="power-curve.html#cb641-331" aria-hidden="true" tabindex="-1"></a>                              r <span class="ot">&lt;-</span> <span class="fu">c</span>(</span>
+<span id="cb641-332"><a href="power-curve.html#cb641-332" aria-hidden="true" tabindex="-1"></a>                                <span class="fl">0.8</span>, <span class="fl">0.4</span>, <span class="fl">0.4</span>,</span>
+<span id="cb641-333"><a href="power-curve.html#cb641-333" aria-hidden="true" tabindex="-1"></a>                                <span class="fl">0.4</span>, <span class="fl">0.4</span>,</span>
+<span id="cb641-334"><a href="power-curve.html#cb641-334" aria-hidden="true" tabindex="-1"></a>                                <span class="fl">0.8</span>), </span>
+<span id="cb641-335"><a href="power-curve.html#cb641-335" aria-hidden="true" tabindex="-1"></a>                              <span class="at">labelnames =</span> labelnames)</span>
+<span id="cb641-336"><a href="power-curve.html#cb641-336" aria-hidden="true" tabindex="-1"></a>p_e <span class="ot">&lt;-</span> <span class="fu">plot_power</span>(design_result,</span>
+<span id="cb641-337"><a href="power-curve.html#cb641-337" aria-hidden="true" tabindex="-1"></a>                  <span class="at">max_n =</span> <span class="dv">100</span>)</span>
+<span id="cb641-338"><a href="power-curve.html#cb641-338" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb641-339"><a href="power-curve.html#cb641-339" aria-hidden="true" tabindex="-1"></a>p_e<span class="sc">$</span>power_df<span class="sc">$</span>corr_diff <span class="ot">&lt;-</span> <span class="fl">0.4</span></span>
+<span id="cb641-340"><a href="power-curve.html#cb641-340" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb641-341"><a href="power-curve.html#cb641-341" aria-hidden="true" tabindex="-1"></a>design_result <span class="ot">&lt;-</span> <span class="fu">ANOVA_design</span>(<span class="at">design =</span> string,</span>
+<span id="cb641-342"><a href="power-curve.html#cb641-342" aria-hidden="true" tabindex="-1"></a>                              <span class="at">n =</span> <span class="dv">20</span>, </span>
+<span id="cb641-343"><a href="power-curve.html#cb641-343" aria-hidden="true" tabindex="-1"></a>                              <span class="at">mu =</span> <span class="fu">c</span>(<span class="dv">0</span>,<span class="dv">0</span>,<span class="dv">0</span>,<span class="fl">0.3</span>), </span>
+<span id="cb641-344"><a href="power-curve.html#cb641-344" aria-hidden="true" tabindex="-1"></a>                              <span class="at">sd =</span> <span class="dv">1</span>, </span>
+<span id="cb641-345"><a href="power-curve.html#cb641-345" aria-hidden="true" tabindex="-1"></a>                              r <span class="ot">&lt;-</span> <span class="fu">c</span>(</span>
+<span id="cb641-346"><a href="power-curve.html#cb641-346" aria-hidden="true" tabindex="-1"></a>                                <span class="fl">0.9</span>, <span class="fl">0.4</span>, <span class="fl">0.4</span>,</span>
+<span id="cb641-347"><a href="power-curve.html#cb641-347" aria-hidden="true" tabindex="-1"></a>                                <span class="fl">0.4</span>, <span class="fl">0.4</span>,</span>
+<span id="cb641-348"><a href="power-curve.html#cb641-348" aria-hidden="true" tabindex="-1"></a>                                <span class="fl">0.9</span>), </span>
+<span id="cb641-349"><a href="power-curve.html#cb641-349" aria-hidden="true" tabindex="-1"></a>                              <span class="at">labelnames =</span> labelnames)</span>
+<span id="cb641-350"><a href="power-curve.html#cb641-350" aria-hidden="true" tabindex="-1"></a>p_f <span class="ot">&lt;-</span> <span class="fu">plot_power</span>(design_result,</span>
+<span id="cb641-351"><a href="power-curve.html#cb641-351" aria-hidden="true" tabindex="-1"></a>                  <span class="at">max_n =</span> <span class="dv">100</span>)</span>
+<span id="cb641-352"><a href="power-curve.html#cb641-352" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb641-353"><a href="power-curve.html#cb641-353" aria-hidden="true" tabindex="-1"></a>p_f<span class="sc">$</span>power_df<span class="sc">$</span>corr_diff <span class="ot">&lt;-</span> <span class="fl">0.5</span></span>
+<span id="cb641-354"><a href="power-curve.html#cb641-354" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb641-355"><a href="power-curve.html#cb641-355" aria-hidden="true" tabindex="-1"></a>plot_data <span class="ot">&lt;-</span> <span class="fu">rbind</span>(p_a<span class="sc">$</span>power_df, p_b<span class="sc">$</span>power_df, p_c<span class="sc">$</span>power_df, </span>
+<span id="cb641-356"><a href="power-curve.html#cb641-356" aria-hidden="true" tabindex="-1"></a>                   p_d<span class="sc">$</span>power_df, p_e<span class="sc">$</span>power_df, p_f<span class="sc">$</span>power_df)<span class="sc">%&gt;%</span></span>
+<span id="cb641-357"><a href="power-curve.html#cb641-357" aria-hidden="true" tabindex="-1"></a>  <span class="fu">mutate</span>(<span class="at">AxB =</span> <span class="st">`</span><span class="at">A:B</span><span class="st">`</span>) <span class="sc">%&gt;%</span> <span class="fu">select</span>(n,corr_diff,A,B,AxB)</span>
+<span id="cb641-358"><a href="power-curve.html#cb641-358" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb641-359"><a href="power-curve.html#cb641-359" aria-hidden="true" tabindex="-1"></a>long_data <span class="ot">=</span> plot_data <span class="sc">%&gt;%</span></span>
+<span id="cb641-360"><a href="power-curve.html#cb641-360" aria-hidden="true" tabindex="-1"></a>  <span class="fu">gather</span>(<span class="st">&quot;A&quot;</span>, <span class="st">&quot;B&quot;</span>, <span class="st">&quot;AxB&quot;</span>, <span class="at">key =</span> factor, <span class="at">value =</span> power)</span>
+<span id="cb641-361"><a href="power-curve.html#cb641-361" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb641-362"><a href="power-curve.html#cb641-362" aria-hidden="true" tabindex="-1"></a>plot4 <span class="ot">&lt;-</span> <span class="fu">ggplot</span>(long_data, <span class="fu">aes</span>(<span class="at">x =</span> n, <span class="at">y =</span> power,</span>
+<span id="cb641-363"><a href="power-curve.html#cb641-363" aria-hidden="true" tabindex="-1"></a>                               <span class="at">color =</span> <span class="fu">as.factor</span>(corr_diff))) <span class="sc">+</span></span>
+<span id="cb641-364"><a href="power-curve.html#cb641-364" aria-hidden="true" tabindex="-1"></a>  <span class="fu">geom_line</span>(<span class="at">size =</span> <span class="fl">1.5</span>) <span class="sc">+</span></span>
+<span id="cb641-365"><a href="power-curve.html#cb641-365" aria-hidden="true" tabindex="-1"></a>  <span class="fu">scale_y_continuous</span>(<span class="at">breaks =</span> <span class="fu">seq</span>(<span class="dv">0</span>,<span class="dv">100</span>,<span class="dv">10</span>)) <span class="sc">+</span></span>
+<span id="cb641-366"><a href="power-curve.html#cb641-366" aria-hidden="true" tabindex="-1"></a>  <span class="fu">labs</span>(<span class="at">color =</span> <span class="st">&quot;Difference in Correlation&quot;</span>,</span>
+<span id="cb641-367"><a href="power-curve.html#cb641-367" aria-hidden="true" tabindex="-1"></a>       <span class="at">x =</span> <span class="st">&quot;Sample Size per Group&quot;</span>,</span>
+<span id="cb641-368"><a href="power-curve.html#cb641-368" aria-hidden="true" tabindex="-1"></a>       <span class="at">y =</span> <span class="st">&quot;Power (%)&quot;</span>) <span class="sc">+</span></span>
+<span id="cb641-369"><a href="power-curve.html#cb641-369" aria-hidden="true" tabindex="-1"></a>  <span class="fu">scale_color_viridis_d</span>() <span class="sc">+</span> <span class="fu">facet_wrap</span>( <span class="sc">~</span> factor, <span class="at">ncol=</span><span class="dv">2</span>)</span></code></pre></div>
 
 </div>
 </div>

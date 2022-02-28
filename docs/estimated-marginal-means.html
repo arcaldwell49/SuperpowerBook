@@ -21,10 +21,14 @@
   <meta name="twitter:description" content="This is a book describing the capabilities of the Superpower R package." />
   
 
-<meta name="author" content="Aaron R. Caldwell, Daniël Lakens, Chelsea M. Parlett-Pelleriti, and Guy Prochilo" />
+<meta name="author" content="Aaron R. Caldwell" />
+<meta name="author" content="Daniël Lakens" />
+<meta name="author" content="Chelsea M. Parlett-Pelleriti" />
+<meta name="author" content="Guy Prochilo" />
+<meta name="author" content="Frederik Aust" />
 
 
-<meta name="date" content="2021-12-08" />
+<meta name="date" content="2022-02-28" />
 
   <meta name="viewport" content="width=device-width, initial-scale=1" />
   <meta name="apple-mobile-web-app-capable" content="yes" />
@@ -374,26 +378,26 @@ As noted below, for the Bonferroni-adjustment this limitation can be overcome by
 When calling <code>ANOVA_exact()</code> pairwise comparisons of expected marginal means are added by setting <code>emm = TRUE</code> and <code>contrast_type = "pairwise"</code> (default).
 The <code>emm_comp</code> parameter will automatically be set to <code>condition*voice</code>.
 If you wanted to look at the main effect of <code>condition</code> or <code>voice</code> all you need to do is set <code>emm_comp</code> to that specific factor rather than the interaction.</p>
-<div class="sourceCode" id="cb650"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb650-1"><a href="estimated-marginal-means.html#cb650-1" aria-hidden="true" tabindex="-1"></a><span class="co"># Set up a within design with 2 factors, each with 2 and 3 levels</span></span>
-<span id="cb650-2"><a href="estimated-marginal-means.html#cb650-2" aria-hidden="true" tabindex="-1"></a>design_result <span class="ot">&lt;-</span> <span class="fu">ANOVA_design</span>(</span>
-<span id="cb650-3"><a href="estimated-marginal-means.html#cb650-3" aria-hidden="true" tabindex="-1"></a>  <span class="at">design =</span> <span class="st">&quot;2w*3w&quot;</span>,</span>
-<span id="cb650-4"><a href="estimated-marginal-means.html#cb650-4" aria-hidden="true" tabindex="-1"></a>  <span class="at">n =</span> <span class="dv">40</span>,</span>
-<span id="cb650-5"><a href="estimated-marginal-means.html#cb650-5" aria-hidden="true" tabindex="-1"></a>  <span class="at">mu =</span> <span class="fu">c</span>(<span class="fl">0.3</span>, <span class="dv">0</span>, <span class="fl">0.5</span>, <span class="fl">0.3</span>, <span class="dv">0</span>, <span class="dv">0</span>),</span>
-<span id="cb650-6"><a href="estimated-marginal-means.html#cb650-6" aria-hidden="true" tabindex="-1"></a>  <span class="at">sd =</span> <span class="dv">2</span>,</span>
-<span id="cb650-7"><a href="estimated-marginal-means.html#cb650-7" aria-hidden="true" tabindex="-1"></a>  <span class="at">r =</span> <span class="fl">0.8</span>, </span>
-<span id="cb650-8"><a href="estimated-marginal-means.html#cb650-8" aria-hidden="true" tabindex="-1"></a>  <span class="at">labelnames =</span> <span class="fu">c</span>(<span class="st">&quot;condition&quot;</span>, <span class="st">&quot;cheerful&quot;</span>, <span class="st">&quot;sad&quot;</span>, <span class="st">&quot;voice&quot;</span>, <span class="st">&quot;human&quot;</span>, <span class="st">&quot;robot&quot;</span>, <span class="st">&quot;cartoon&quot;</span>),</span>
-<span id="cb650-9"><a href="estimated-marginal-means.html#cb650-9" aria-hidden="true" tabindex="-1"></a>  <span class="at">plot =</span> <span class="cn">TRUE</span></span>
-<span id="cb650-10"><a href="estimated-marginal-means.html#cb650-10" aria-hidden="true" tabindex="-1"></a>)</span></code></pre></div>
-<p><img src="SuperpowerValidation_files/figure-html/unnamed-chunk-296-1.png" width="672" /></p>
-<div class="sourceCode" id="cb651"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb651-1"><a href="estimated-marginal-means.html#cb651-1" aria-hidden="true" tabindex="-1"></a>exact_result <span class="ot">&lt;-</span> <span class="fu">ANOVA_exact</span>(</span>
-<span id="cb651-2"><a href="estimated-marginal-means.html#cb651-2" aria-hidden="true" tabindex="-1"></a>  design_result,</span>
-<span id="cb651-3"><a href="estimated-marginal-means.html#cb651-3" aria-hidden="true" tabindex="-1"></a>  <span class="at">alpha_level =</span> <span class="fl">0.05</span>,</span>
-<span id="cb651-4"><a href="estimated-marginal-means.html#cb651-4" aria-hidden="true" tabindex="-1"></a>  <span class="at">verbose =</span> <span class="cn">FALSE</span>,</span>
-<span id="cb651-5"><a href="estimated-marginal-means.html#cb651-5" aria-hidden="true" tabindex="-1"></a>  <span class="at">emm =</span> <span class="cn">TRUE</span>,</span>
-<span id="cb651-6"><a href="estimated-marginal-means.html#cb651-6" aria-hidden="true" tabindex="-1"></a>  <span class="at">contrast_type =</span> <span class="st">&quot;pairwise&quot;</span></span>
-<span id="cb651-7"><a href="estimated-marginal-means.html#cb651-7" aria-hidden="true" tabindex="-1"></a>)</span></code></pre></div>
+<div class="sourceCode" id="cb651"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb651-1"><a href="estimated-marginal-means.html#cb651-1" aria-hidden="true" tabindex="-1"></a><span class="co"># Set up a within design with 2 factors, each with 2 and 3 levels</span></span>
+<span id="cb651-2"><a href="estimated-marginal-means.html#cb651-2" aria-hidden="true" tabindex="-1"></a>design_result <span class="ot">&lt;-</span> <span class="fu">ANOVA_design</span>(</span>
+<span id="cb651-3"><a href="estimated-marginal-means.html#cb651-3" aria-hidden="true" tabindex="-1"></a>  <span class="at">design =</span> <span class="st">&quot;2w*3w&quot;</span>,</span>
+<span id="cb651-4"><a href="estimated-marginal-means.html#cb651-4" aria-hidden="true" tabindex="-1"></a>  <span class="at">n =</span> <span class="dv">40</span>,</span>
+<span id="cb651-5"><a href="estimated-marginal-means.html#cb651-5" aria-hidden="true" tabindex="-1"></a>  <span class="at">mu =</span> <span class="fu">c</span>(<span class="fl">0.3</span>, <span class="dv">0</span>, <span class="fl">0.5</span>, <span class="fl">0.3</span>, <span class="dv">0</span>, <span class="dv">0</span>),</span>
+<span id="cb651-6"><a href="estimated-marginal-means.html#cb651-6" aria-hidden="true" tabindex="-1"></a>  <span class="at">sd =</span> <span class="dv">2</span>,</span>
+<span id="cb651-7"><a href="estimated-marginal-means.html#cb651-7" aria-hidden="true" tabindex="-1"></a>  <span class="at">r =</span> <span class="fl">0.8</span>, </span>
+<span id="cb651-8"><a href="estimated-marginal-means.html#cb651-8" aria-hidden="true" tabindex="-1"></a>  <span class="at">labelnames =</span> <span class="fu">c</span>(<span class="st">&quot;condition&quot;</span>, <span class="st">&quot;cheerful&quot;</span>, <span class="st">&quot;sad&quot;</span>, <span class="st">&quot;voice&quot;</span>, <span class="st">&quot;human&quot;</span>, <span class="st">&quot;robot&quot;</span>, <span class="st">&quot;cartoon&quot;</span>),</span>
+<span id="cb651-9"><a href="estimated-marginal-means.html#cb651-9" aria-hidden="true" tabindex="-1"></a>  <span class="at">plot =</span> <span class="cn">TRUE</span></span>
+<span id="cb651-10"><a href="estimated-marginal-means.html#cb651-10" aria-hidden="true" tabindex="-1"></a>)</span></code></pre></div>
+<p><img src="SuperpowerValidation_files/figure-html/unnamed-chunk-299-1.png" width="672" /></p>
+<div class="sourceCode" id="cb652"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb652-1"><a href="estimated-marginal-means.html#cb652-1" aria-hidden="true" tabindex="-1"></a>exact_result <span class="ot">&lt;-</span> <span class="fu">ANOVA_exact</span>(</span>
+<span id="cb652-2"><a href="estimated-marginal-means.html#cb652-2" aria-hidden="true" tabindex="-1"></a>  design_result,</span>
+<span id="cb652-3"><a href="estimated-marginal-means.html#cb652-3" aria-hidden="true" tabindex="-1"></a>  <span class="at">alpha_level =</span> <span class="fl">0.05</span>,</span>
+<span id="cb652-4"><a href="estimated-marginal-means.html#cb652-4" aria-hidden="true" tabindex="-1"></a>  <span class="at">verbose =</span> <span class="cn">FALSE</span>,</span>
+<span id="cb652-5"><a href="estimated-marginal-means.html#cb652-5" aria-hidden="true" tabindex="-1"></a>  <span class="at">emm =</span> <span class="cn">TRUE</span>,</span>
+<span id="cb652-6"><a href="estimated-marginal-means.html#cb652-6" aria-hidden="true" tabindex="-1"></a>  <span class="at">contrast_type =</span> <span class="st">&quot;pairwise&quot;</span></span>
+<span id="cb652-7"><a href="estimated-marginal-means.html#cb652-7" aria-hidden="true" tabindex="-1"></a>)</span></code></pre></div>
 <p>The result contains the power calculations for both the omnibus <span class="math inline">\(F\)</span>-tests and pairwise post-hoc comparisons.</p>
-<div class="sourceCode" id="cb652"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb652-1"><a href="estimated-marginal-means.html#cb652-1" aria-hidden="true" tabindex="-1"></a>knitr<span class="sc">::</span><span class="fu">kable</span>(exact_result<span class="sc">$</span>main_results[<span class="dv">1</span><span class="sc">:</span><span class="dv">2</span>])</span></code></pre></div>
+<div class="sourceCode" id="cb653"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb653-1"><a href="estimated-marginal-means.html#cb653-1" aria-hidden="true" tabindex="-1"></a>knitr<span class="sc">::</span><span class="fu">kable</span>(exact_result<span class="sc">$</span>main_results[<span class="dv">1</span><span class="sc">:</span><span class="dv">2</span>])</span></code></pre></div>
 <table>
 <thead>
 <tr>
@@ -443,7 +447,7 @@ condition:voice
 </tr>
 </tbody>
 </table>
-<div class="sourceCode" id="cb653"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb653-1"><a href="estimated-marginal-means.html#cb653-1" aria-hidden="true" tabindex="-1"></a>knitr<span class="sc">::</span><span class="fu">kable</span>((exact_result<span class="sc">$</span>emm_results[<span class="dv">1</span><span class="sc">:</span><span class="dv">2</span>]))</span></code></pre></div>
+<div class="sourceCode" id="cb654"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb654-1"><a href="estimated-marginal-means.html#cb654-1" aria-hidden="true" tabindex="-1"></a>knitr<span class="sc">::</span><span class="fu">kable</span>((exact_result<span class="sc">$</span>emm_results[<span class="dv">1</span><span class="sc">:</span><span class="dv">2</span>]))</span></code></pre></div>
 <table>
 <thead>
 <tr>
@@ -586,7 +590,7 @@ That is, based on the dataset simulated with <code>ANOVA_exact()</code> we can w
 <h2><span class="header-section-number">13.3</span> Customized <code>emmeans</code> contrasts</h2>
 <p>The <code>emmeans</code> reference grid and contrasts are included in the output of <code>ANOVA_exact()</code>. This can be accessed through <code>exact_result$emmeans</code></p>
 <p>By using <code>emmeans_power()</code> on the contrasts, we can reproduce the results of the previous power analysis for the pairwise comparisons.</p>
-<div class="sourceCode" id="cb654"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb654-1"><a href="estimated-marginal-means.html#cb654-1" aria-hidden="true" tabindex="-1"></a>knitr<span class="sc">::</span><span class="fu">kable</span>(<span class="fu">emmeans_power</span>(exact_result<span class="sc">$</span>emmeans<span class="sc">$</span>contrasts)[<span class="dv">1</span><span class="sc">:</span><span class="dv">2</span>])</span></code></pre></div>
+<div class="sourceCode" id="cb655"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb655-1"><a href="estimated-marginal-means.html#cb655-1" aria-hidden="true" tabindex="-1"></a>knitr<span class="sc">::</span><span class="fu">kable</span>(<span class="fu">emmeans_power</span>(exact_result<span class="sc">$</span>emmeans<span class="sc">$</span>contrasts)[<span class="dv">1</span><span class="sc">:</span><span class="dv">2</span>])</span></code></pre></div>
 <table>
 <thead>
 <tr>
@@ -723,12 +727,12 @@ condition_cheerful voice_robot - condition_sad voice_robot
 </table>
 <p>Now, we can manipulate the <code>emmeans</code> reference grid to perform additional power analyses.
 In the following example, we calculate the power for the contrasts between sad and cheerful condition for each voice.</p>
-<div class="sourceCode" id="cb655"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb655-1"><a href="estimated-marginal-means.html#cb655-1" aria-hidden="true" tabindex="-1"></a>simple_condition_effects <span class="ot">&lt;-</span> <span class="fu">emmeans</span>(</span>
-<span id="cb655-2"><a href="estimated-marginal-means.html#cb655-2" aria-hidden="true" tabindex="-1"></a>  exact_result<span class="sc">$</span>emmeans<span class="sc">$</span>emmeans,</span>
-<span id="cb655-3"><a href="estimated-marginal-means.html#cb655-3" aria-hidden="true" tabindex="-1"></a>  <span class="at">specs =</span> <span class="sc">~</span> condition <span class="sc">|</span> voice</span>
-<span id="cb655-4"><a href="estimated-marginal-means.html#cb655-4" aria-hidden="true" tabindex="-1"></a>)</span>
-<span id="cb655-5"><a href="estimated-marginal-means.html#cb655-5" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb655-6"><a href="estimated-marginal-means.html#cb655-6" aria-hidden="true" tabindex="-1"></a>knitr<span class="sc">::</span><span class="fu">kable</span>(<span class="fu">emmeans_power</span>(<span class="fu">pairs</span>(simple_condition_effects))[<span class="dv">1</span><span class="sc">:</span><span class="dv">2</span>])</span></code></pre></div>
+<div class="sourceCode" id="cb656"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb656-1"><a href="estimated-marginal-means.html#cb656-1" aria-hidden="true" tabindex="-1"></a>simple_condition_effects <span class="ot">&lt;-</span> <span class="fu">emmeans</span>(</span>
+<span id="cb656-2"><a href="estimated-marginal-means.html#cb656-2" aria-hidden="true" tabindex="-1"></a>  exact_result<span class="sc">$</span>emmeans<span class="sc">$</span>emmeans,</span>
+<span id="cb656-3"><a href="estimated-marginal-means.html#cb656-3" aria-hidden="true" tabindex="-1"></a>  <span class="at">specs =</span> <span class="sc">~</span> condition <span class="sc">|</span> voice</span>
+<span id="cb656-4"><a href="estimated-marginal-means.html#cb656-4" aria-hidden="true" tabindex="-1"></a>)</span>
+<span id="cb656-5"><a href="estimated-marginal-means.html#cb656-5" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb656-6"><a href="estimated-marginal-means.html#cb656-6" aria-hidden="true" tabindex="-1"></a>knitr<span class="sc">::</span><span class="fu">kable</span>(<span class="fu">emmeans_power</span>(<span class="fu">pairs</span>(simple_condition_effects))[<span class="dv">1</span><span class="sc">:</span><span class="dv">2</span>])</span></code></pre></div>
 <table>
 <thead>
 <tr>
@@ -768,7 +772,7 @@ voice_robot
 </tbody>
 </table>
 <p>We may also calculate the power for testing all condition means against an arbitrary constant. <strong>Remember</strong>, these are two-tailed tests, so it is not testing against the null that the individual cells in the design are more or less than 0.5, but rather different from 0.5 at all.</p>
-<div class="sourceCode" id="cb656"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb656-1"><a href="estimated-marginal-means.html#cb656-1" aria-hidden="true" tabindex="-1"></a>knitr<span class="sc">::</span><span class="fu">kable</span>(<span class="fu">emmeans_power</span>(<span class="fu">test</span>(simple_condition_effects, <span class="at">null =</span> <span class="fl">0.5</span>))[<span class="dv">1</span><span class="sc">:</span><span class="dv">2</span>])</span></code></pre></div>
+<div class="sourceCode" id="cb657"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb657-1"><a href="estimated-marginal-means.html#cb657-1" aria-hidden="true" tabindex="-1"></a>knitr<span class="sc">::</span><span class="fu">kable</span>(<span class="fu">emmeans_power</span>(<span class="fu">test</span>(simple_condition_effects, <span class="at">null =</span> <span class="fl">0.5</span>))[<span class="dv">1</span><span class="sc">:</span><span class="dv">2</span>])</span></code></pre></div>
 <table>
 <thead>
 <tr>
@@ -832,12 +836,12 @@ voice_robot
 </tbody>
 </table>
 <p>Finally, we can calculate the power for custom contrasts between any linear combination of conditions.</p>
-<div class="sourceCode" id="cb657"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb657-1"><a href="estimated-marginal-means.html#cb657-1" aria-hidden="true" tabindex="-1"></a>custom_contrast <span class="ot">&lt;-</span> <span class="fu">contrast</span>(</span>
-<span id="cb657-2"><a href="estimated-marginal-means.html#cb657-2" aria-hidden="true" tabindex="-1"></a>  exact_result<span class="sc">$</span>emmeans<span class="sc">$</span>emmeans,</span>
-<span id="cb657-3"><a href="estimated-marginal-means.html#cb657-3" aria-hidden="true" tabindex="-1"></a>  <span class="fu">list</span>(<span class="at">robot_vs_sad_human =</span> <span class="fu">c</span>(<span class="dv">0</span>, <span class="dv">0</span>, <span class="dv">0</span>, <span class="dv">1</span>, <span class="sc">-</span><span class="fl">0.5</span>, <span class="sc">-</span><span class="fl">0.5</span>))</span>
-<span id="cb657-4"><a href="estimated-marginal-means.html#cb657-4" aria-hidden="true" tabindex="-1"></a>)</span>
-<span id="cb657-5"><a href="estimated-marginal-means.html#cb657-5" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb657-6"><a href="estimated-marginal-means.html#cb657-6" aria-hidden="true" tabindex="-1"></a>knitr<span class="sc">::</span><span class="fu">kable</span>(<span class="fu">emmeans_power</span>(custom_contrast))</span></code></pre></div>
+<div class="sourceCode" id="cb658"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb658-1"><a href="estimated-marginal-means.html#cb658-1" aria-hidden="true" tabindex="-1"></a>custom_contrast <span class="ot">&lt;-</span> <span class="fu">contrast</span>(</span>
+<span id="cb658-2"><a href="estimated-marginal-means.html#cb658-2" aria-hidden="true" tabindex="-1"></a>  exact_result<span class="sc">$</span>emmeans<span class="sc">$</span>emmeans,</span>
+<span id="cb658-3"><a href="estimated-marginal-means.html#cb658-3" aria-hidden="true" tabindex="-1"></a>  <span class="fu">list</span>(<span class="at">robot_vs_sad_human =</span> <span class="fu">c</span>(<span class="dv">0</span>, <span class="dv">0</span>, <span class="dv">0</span>, <span class="dv">1</span>, <span class="sc">-</span><span class="fl">0.5</span>, <span class="sc">-</span><span class="fl">0.5</span>))</span>
+<span id="cb658-4"><a href="estimated-marginal-means.html#cb658-4" aria-hidden="true" tabindex="-1"></a>)</span>
+<span id="cb658-5"><a href="estimated-marginal-means.html#cb658-5" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb658-6"><a href="estimated-marginal-means.html#cb658-6" aria-hidden="true" tabindex="-1"></a>knitr<span class="sc">::</span><span class="fu">kable</span>(<span class="fu">emmeans_power</span>(custom_contrast))</span></code></pre></div>
 <table>
 <thead>
 <tr>
@@ -879,12 +883,12 @@ robot_vs_sad_human
 </tbody>
 </table>
 <p>Although <code>emmeans_power()</code> currently ignores adjustments for multiple comparisons, it is possible to calculate the power for Bonferroni-corrected tests by adjusting <code>alpha_level</code>.</p>
-<div class="sourceCode" id="cb658"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb658-1"><a href="estimated-marginal-means.html#cb658-1" aria-hidden="true" tabindex="-1"></a>n_contrasts <span class="ot">&lt;-</span> <span class="fu">nrow</span>(<span class="fu">as.data.frame</span>(simple_condition_effects))</span>
-<span id="cb658-2"><a href="estimated-marginal-means.html#cb658-2" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb658-3"><a href="estimated-marginal-means.html#cb658-3" aria-hidden="true" tabindex="-1"></a>knitr<span class="sc">::</span><span class="fu">kable</span>(<span class="fu">emmeans_power</span>(</span>
-<span id="cb658-4"><a href="estimated-marginal-means.html#cb658-4" aria-hidden="true" tabindex="-1"></a>  <span class="fu">pairs</span>(simple_condition_effects),</span>
-<span id="cb658-5"><a href="estimated-marginal-means.html#cb658-5" aria-hidden="true" tabindex="-1"></a>  <span class="at">alpha_level =</span> <span class="fl">0.05</span> <span class="sc">/</span> n_contrasts</span>
-<span id="cb658-6"><a href="estimated-marginal-means.html#cb658-6" aria-hidden="true" tabindex="-1"></a>)[<span class="dv">1</span><span class="sc">:</span><span class="dv">3</span>])</span></code></pre></div>
+<div class="sourceCode" id="cb659"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb659-1"><a href="estimated-marginal-means.html#cb659-1" aria-hidden="true" tabindex="-1"></a>n_contrasts <span class="ot">&lt;-</span> <span class="fu">nrow</span>(<span class="fu">as.data.frame</span>(simple_condition_effects))</span>
+<span id="cb659-2"><a href="estimated-marginal-means.html#cb659-2" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb659-3"><a href="estimated-marginal-means.html#cb659-3" aria-hidden="true" tabindex="-1"></a>knitr<span class="sc">::</span><span class="fu">kable</span>(<span class="fu">emmeans_power</span>(</span>
+<span id="cb659-4"><a href="estimated-marginal-means.html#cb659-4" aria-hidden="true" tabindex="-1"></a>  <span class="fu">pairs</span>(simple_condition_effects),</span>
+<span id="cb659-5"><a href="estimated-marginal-means.html#cb659-5" aria-hidden="true" tabindex="-1"></a>  <span class="at">alpha_level =</span> <span class="fl">0.05</span> <span class="sc">/</span> n_contrasts</span>
+<span id="cb659-6"><a href="estimated-marginal-means.html#cb659-6" aria-hidden="true" tabindex="-1"></a>)[<span class="dv">1</span><span class="sc">:</span><span class="dv">3</span>])</span></code></pre></div>
 <table>
 <thead>
 <tr>
@@ -936,10 +940,10 @@ voice_robot
 </tbody>
 </table>
 <p>Similarly, if we want to calculate power for a one-sided test, we can use the “hack” of doubling the <code>alpha_level</code> parameter.</p>
-<div class="sourceCode" id="cb659"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb659-1"><a href="estimated-marginal-means.html#cb659-1" aria-hidden="true" tabindex="-1"></a>knitr<span class="sc">::</span><span class="fu">kable</span>(<span class="fu">emmeans_power</span>(</span>
-<span id="cb659-2"><a href="estimated-marginal-means.html#cb659-2" aria-hidden="true" tabindex="-1"></a>  <span class="fu">pairs</span>(simple_condition_effects)[<span class="dv">1</span>],</span>
-<span id="cb659-3"><a href="estimated-marginal-means.html#cb659-3" aria-hidden="true" tabindex="-1"></a>  <span class="at">alpha_level =</span> <span class="dv">2</span> <span class="sc">*</span> <span class="fl">0.05</span></span>
-<span id="cb659-4"><a href="estimated-marginal-means.html#cb659-4" aria-hidden="true" tabindex="-1"></a>))</span></code></pre></div>
+<div class="sourceCode" id="cb660"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb660-1"><a href="estimated-marginal-means.html#cb660-1" aria-hidden="true" tabindex="-1"></a>knitr<span class="sc">::</span><span class="fu">kable</span>(<span class="fu">emmeans_power</span>(</span>
+<span id="cb660-2"><a href="estimated-marginal-means.html#cb660-2" aria-hidden="true" tabindex="-1"></a>  <span class="fu">pairs</span>(simple_condition_effects)[<span class="dv">1</span>],</span>
+<span id="cb660-3"><a href="estimated-marginal-means.html#cb660-3" aria-hidden="true" tabindex="-1"></a>  <span class="at">alpha_level =</span> <span class="dv">2</span> <span class="sc">*</span> <span class="fl">0.05</span></span>
+<span id="cb660-4"><a href="estimated-marginal-means.html#cb660-4" aria-hidden="true" tabindex="-1"></a>))</span></code></pre></div>
 <table>
 <thead>
 <tr>
@@ -992,9 +996,9 @@ That is, the difference of the condition means is <em>consistent with the tested
 <div id="equivalence-and-non-superiority-inferiority-tests" class="section level2" number="13.4">
 <h2><span class="header-section-number">13.4</span> Equivalence and non-superiority/-inferiority tests</h2>
 <p>Because <code>emmeans</code> can perform equivalence, non-superiority, and -inferiority tests, <code>emmeans_power()</code> can calculate the corresponding power for these tests.</p>
-<div class="sourceCode" id="cb660"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb660-1"><a href="estimated-marginal-means.html#cb660-1" aria-hidden="true" tabindex="-1"></a>knitr<span class="sc">::</span><span class="fu">kable</span>(<span class="fu">emmeans_power</span>(</span>
-<span id="cb660-2"><a href="estimated-marginal-means.html#cb660-2" aria-hidden="true" tabindex="-1"></a>  <span class="fu">pairs</span>(simple_condition_effects, <span class="at">side =</span> <span class="st">&quot;equivalence&quot;</span>, <span class="at">delta =</span> <span class="fl">0.3</span>)[<span class="dv">2</span>]</span>
-<span id="cb660-3"><a href="estimated-marginal-means.html#cb660-3" aria-hidden="true" tabindex="-1"></a>)[<span class="dv">1</span><span class="sc">:</span><span class="dv">2</span>])</span></code></pre></div>
+<div class="sourceCode" id="cb661"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb661-1"><a href="estimated-marginal-means.html#cb661-1" aria-hidden="true" tabindex="-1"></a>knitr<span class="sc">::</span><span class="fu">kable</span>(<span class="fu">emmeans_power</span>(</span>
+<span id="cb661-2"><a href="estimated-marginal-means.html#cb661-2" aria-hidden="true" tabindex="-1"></a>  <span class="fu">pairs</span>(simple_condition_effects, <span class="at">side =</span> <span class="st">&quot;equivalence&quot;</span>, <span class="at">delta =</span> <span class="fl">0.3</span>)[<span class="dv">2</span>]</span>
+<span id="cb661-3"><a href="estimated-marginal-means.html#cb661-3" aria-hidden="true" tabindex="-1"></a>)[<span class="dv">1</span><span class="sc">:</span><span class="dv">2</span>])</span></code></pre></div>
 <table>
 <thead>
 <tr>
@@ -1030,12 +1034,12 @@ That is, the difference between the condition means is consistent with the teste
 <p>Another useful application of <code>emmeans_power()</code> is to joint tests.
 Lets assume we plan to test the main effect of voice for each of the two conditions separately using <code>joint_tests()</code>.
 We can then calculate the power for each Bonferroni-corrected <span class="math inline">\(F\)</span>-test as follows.</p>
-<div class="sourceCode" id="cb661"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb661-1"><a href="estimated-marginal-means.html#cb661-1" aria-hidden="true" tabindex="-1"></a>voice_by_condition <span class="ot">&lt;-</span> <span class="fu">joint_tests</span>(</span>
-<span id="cb661-2"><a href="estimated-marginal-means.html#cb661-2" aria-hidden="true" tabindex="-1"></a>  exact_result<span class="sc">$</span>emmeans<span class="sc">$</span>emmeans,</span>
-<span id="cb661-3"><a href="estimated-marginal-means.html#cb661-3" aria-hidden="true" tabindex="-1"></a>  <span class="at">by =</span> <span class="st">&quot;condition&quot;</span></span>
-<span id="cb661-4"><a href="estimated-marginal-means.html#cb661-4" aria-hidden="true" tabindex="-1"></a>)</span>
-<span id="cb661-5"><a href="estimated-marginal-means.html#cb661-5" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb661-6"><a href="estimated-marginal-means.html#cb661-6" aria-hidden="true" tabindex="-1"></a>knitr<span class="sc">::</span><span class="fu">kable</span>(<span class="fu">emmeans_power</span>(voice_by_condition, <span class="at">alpha_level =</span> <span class="fl">0.05</span> <span class="sc">/</span> <span class="dv">2</span>)[<span class="dv">1</span><span class="sc">:</span><span class="dv">3</span>])</span></code></pre></div>
+<div class="sourceCode" id="cb662"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb662-1"><a href="estimated-marginal-means.html#cb662-1" aria-hidden="true" tabindex="-1"></a>voice_by_condition <span class="ot">&lt;-</span> <span class="fu">joint_tests</span>(</span>
+<span id="cb662-2"><a href="estimated-marginal-means.html#cb662-2" aria-hidden="true" tabindex="-1"></a>  exact_result<span class="sc">$</span>emmeans<span class="sc">$</span>emmeans,</span>
+<span id="cb662-3"><a href="estimated-marginal-means.html#cb662-3" aria-hidden="true" tabindex="-1"></a>  <span class="at">by =</span> <span class="st">&quot;condition&quot;</span></span>
+<span id="cb662-4"><a href="estimated-marginal-means.html#cb662-4" aria-hidden="true" tabindex="-1"></a>)</span>
+<span id="cb662-5"><a href="estimated-marginal-means.html#cb662-5" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb662-6"><a href="estimated-marginal-means.html#cb662-6" aria-hidden="true" tabindex="-1"></a>knitr<span class="sc">::</span><span class="fu">kable</span>(<span class="fu">emmeans_power</span>(voice_by_condition, <span class="at">alpha_level =</span> <span class="fl">0.05</span> <span class="sc">/</span> <span class="dv">2</span>)[<span class="dv">1</span><span class="sc">:</span><span class="dv">3</span>])</span></code></pre></div>
 <table>
 <thead>
 <tr>
@@ -1094,28 +1098,28 @@ So, again, we can setup the same design and pass this onto the <code>ANOVA_power
 In this particular case I have decided to set the <code>emm_p_adjust</code> to “holm” for a Holm-Bonferroni correction.
 This out of personal preference for this stepdown procedure since it preserves the alpha but is more powerful than the normal Bonferroni adjustment itself.
 However, I would like to warn users that some adjustments, such as Tukey or Scheffe, are not appropriate for designs with within-subject factors (i.e., the do not fully preserve the Type 1 error rate).</p>
-<div class="sourceCode" id="cb662"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb662-1"><a href="estimated-marginal-means.html#cb662-1" aria-hidden="true" tabindex="-1"></a>design_result <span class="ot">&lt;-</span> <span class="fu">ANOVA_design</span>(</span>
-<span id="cb662-2"><a href="estimated-marginal-means.html#cb662-2" aria-hidden="true" tabindex="-1"></a>  <span class="at">design =</span> <span class="st">&quot;2w*3w&quot;</span>,</span>
-<span id="cb662-3"><a href="estimated-marginal-means.html#cb662-3" aria-hidden="true" tabindex="-1"></a>  <span class="at">n =</span> <span class="dv">40</span>,</span>
-<span id="cb662-4"><a href="estimated-marginal-means.html#cb662-4" aria-hidden="true" tabindex="-1"></a>  <span class="at">mu =</span> <span class="fu">c</span>(<span class="fl">0.3</span>, <span class="dv">0</span>, <span class="fl">0.5</span>, <span class="fl">0.3</span>, <span class="dv">0</span>, <span class="dv">0</span>),</span>
-<span id="cb662-5"><a href="estimated-marginal-means.html#cb662-5" aria-hidden="true" tabindex="-1"></a>  <span class="at">sd =</span> <span class="dv">2</span>,</span>
-<span id="cb662-6"><a href="estimated-marginal-means.html#cb662-6" aria-hidden="true" tabindex="-1"></a>  <span class="at">r =</span> <span class="fl">0.8</span>, </span>
-<span id="cb662-7"><a href="estimated-marginal-means.html#cb662-7" aria-hidden="true" tabindex="-1"></a>  <span class="at">labelnames =</span> <span class="fu">c</span>(<span class="st">&quot;condition&quot;</span>, <span class="st">&quot;cheerful&quot;</span>, <span class="st">&quot;sad&quot;</span>, <span class="st">&quot;voice&quot;</span>, <span class="st">&quot;human&quot;</span>, <span class="st">&quot;robot&quot;</span>, <span class="st">&quot;cartoon&quot;</span>),</span>
-<span id="cb662-8"><a href="estimated-marginal-means.html#cb662-8" aria-hidden="true" tabindex="-1"></a>  <span class="at">plot =</span> <span class="cn">FALSE</span></span>
-<span id="cb662-9"><a href="estimated-marginal-means.html#cb662-9" aria-hidden="true" tabindex="-1"></a>)</span>
-<span id="cb662-10"><a href="estimated-marginal-means.html#cb662-10" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb662-11"><a href="estimated-marginal-means.html#cb662-11" aria-hidden="true" tabindex="-1"></a>monte_result1 <span class="ot">&lt;-</span> <span class="fu">ANOVA_power</span>(</span>
-<span id="cb662-12"><a href="estimated-marginal-means.html#cb662-12" aria-hidden="true" tabindex="-1"></a>  design_result,</span>
-<span id="cb662-13"><a href="estimated-marginal-means.html#cb662-13" aria-hidden="true" tabindex="-1"></a>  <span class="at">alpha_level =</span> <span class="fl">0.05</span>,</span>
-<span id="cb662-14"><a href="estimated-marginal-means.html#cb662-14" aria-hidden="true" tabindex="-1"></a>  <span class="at">verbose =</span> <span class="cn">FALSE</span>,</span>
-<span id="cb662-15"><a href="estimated-marginal-means.html#cb662-15" aria-hidden="true" tabindex="-1"></a>  <span class="at">emm =</span> <span class="cn">TRUE</span>,</span>
-<span id="cb662-16"><a href="estimated-marginal-means.html#cb662-16" aria-hidden="true" tabindex="-1"></a>  <span class="at">contrast_type =</span> <span class="st">&quot;pairwise&quot;</span>,</span>
-<span id="cb662-17"><a href="estimated-marginal-means.html#cb662-17" aria-hidden="true" tabindex="-1"></a>  <span class="at">emm_p_adjust =</span> <span class="st">&quot;holm&quot;</span>,</span>
-<span id="cb662-18"><a href="estimated-marginal-means.html#cb662-18" aria-hidden="true" tabindex="-1"></a>  <span class="at">nsims =</span> <span class="dv">10000</span>, <span class="co">#set total number of simulations</span></span>
-<span id="cb662-19"><a href="estimated-marginal-means.html#cb662-19" aria-hidden="true" tabindex="-1"></a>  <span class="at">seed =</span> <span class="dv">27042020</span>, <span class="co">#set seed for reproducibility</span></span>
-<span id="cb662-20"><a href="estimated-marginal-means.html#cb662-20" aria-hidden="true" tabindex="-1"></a>)</span></code></pre></div>
+<div class="sourceCode" id="cb663"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb663-1"><a href="estimated-marginal-means.html#cb663-1" aria-hidden="true" tabindex="-1"></a>design_result <span class="ot">&lt;-</span> <span class="fu">ANOVA_design</span>(</span>
+<span id="cb663-2"><a href="estimated-marginal-means.html#cb663-2" aria-hidden="true" tabindex="-1"></a>  <span class="at">design =</span> <span class="st">&quot;2w*3w&quot;</span>,</span>
+<span id="cb663-3"><a href="estimated-marginal-means.html#cb663-3" aria-hidden="true" tabindex="-1"></a>  <span class="at">n =</span> <span class="dv">40</span>,</span>
+<span id="cb663-4"><a href="estimated-marginal-means.html#cb663-4" aria-hidden="true" tabindex="-1"></a>  <span class="at">mu =</span> <span class="fu">c</span>(<span class="fl">0.3</span>, <span class="dv">0</span>, <span class="fl">0.5</span>, <span class="fl">0.3</span>, <span class="dv">0</span>, <span class="dv">0</span>),</span>
+<span id="cb663-5"><a href="estimated-marginal-means.html#cb663-5" aria-hidden="true" tabindex="-1"></a>  <span class="at">sd =</span> <span class="dv">2</span>,</span>
+<span id="cb663-6"><a href="estimated-marginal-means.html#cb663-6" aria-hidden="true" tabindex="-1"></a>  <span class="at">r =</span> <span class="fl">0.8</span>, </span>
+<span id="cb663-7"><a href="estimated-marginal-means.html#cb663-7" aria-hidden="true" tabindex="-1"></a>  <span class="at">labelnames =</span> <span class="fu">c</span>(<span class="st">&quot;condition&quot;</span>, <span class="st">&quot;cheerful&quot;</span>, <span class="st">&quot;sad&quot;</span>, <span class="st">&quot;voice&quot;</span>, <span class="st">&quot;human&quot;</span>, <span class="st">&quot;robot&quot;</span>, <span class="st">&quot;cartoon&quot;</span>),</span>
+<span id="cb663-8"><a href="estimated-marginal-means.html#cb663-8" aria-hidden="true" tabindex="-1"></a>  <span class="at">plot =</span> <span class="cn">FALSE</span></span>
+<span id="cb663-9"><a href="estimated-marginal-means.html#cb663-9" aria-hidden="true" tabindex="-1"></a>)</span>
+<span id="cb663-10"><a href="estimated-marginal-means.html#cb663-10" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb663-11"><a href="estimated-marginal-means.html#cb663-11" aria-hidden="true" tabindex="-1"></a>monte_result1 <span class="ot">&lt;-</span> <span class="fu">ANOVA_power</span>(</span>
+<span id="cb663-12"><a href="estimated-marginal-means.html#cb663-12" aria-hidden="true" tabindex="-1"></a>  design_result,</span>
+<span id="cb663-13"><a href="estimated-marginal-means.html#cb663-13" aria-hidden="true" tabindex="-1"></a>  <span class="at">alpha_level =</span> <span class="fl">0.05</span>,</span>
+<span id="cb663-14"><a href="estimated-marginal-means.html#cb663-14" aria-hidden="true" tabindex="-1"></a>  <span class="at">verbose =</span> <span class="cn">FALSE</span>,</span>
+<span id="cb663-15"><a href="estimated-marginal-means.html#cb663-15" aria-hidden="true" tabindex="-1"></a>  <span class="at">emm =</span> <span class="cn">TRUE</span>,</span>
+<span id="cb663-16"><a href="estimated-marginal-means.html#cb663-16" aria-hidden="true" tabindex="-1"></a>  <span class="at">contrast_type =</span> <span class="st">&quot;pairwise&quot;</span>,</span>
+<span id="cb663-17"><a href="estimated-marginal-means.html#cb663-17" aria-hidden="true" tabindex="-1"></a>  <span class="at">emm_p_adjust =</span> <span class="st">&quot;holm&quot;</span>,</span>
+<span id="cb663-18"><a href="estimated-marginal-means.html#cb663-18" aria-hidden="true" tabindex="-1"></a>  <span class="at">nsims =</span> <span class="dv">10000</span>, <span class="co">#set total number of simulations</span></span>
+<span id="cb663-19"><a href="estimated-marginal-means.html#cb663-19" aria-hidden="true" tabindex="-1"></a>  <span class="at">seed =</span> <span class="dv">27042020</span>, <span class="co">#set seed for reproducibility</span></span>
+<span id="cb663-20"><a href="estimated-marginal-means.html#cb663-20" aria-hidden="true" tabindex="-1"></a>)</span></code></pre></div>
 <p>We can now inspect the results contained within the monte_result object.</p>
-<div class="sourceCode" id="cb663"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb663-1"><a href="estimated-marginal-means.html#cb663-1" aria-hidden="true" tabindex="-1"></a>knitr<span class="sc">::</span><span class="fu">kable</span>(monte_result1<span class="sc">$</span>emm_results[<span class="dv">1</span><span class="sc">:</span><span class="dv">2</span>])</span></code></pre></div>
+<div class="sourceCode" id="cb664"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb664-1"><a href="estimated-marginal-means.html#cb664-1" aria-hidden="true" tabindex="-1"></a>knitr<span class="sc">::</span><span class="fu">kable</span>(monte_result1<span class="sc">$</span>emm_results[<span class="dv">1</span><span class="sc">:</span><span class="dv">2</span>])</span></code></pre></div>
 <table>
 <thead>
 <tr>

@@ -21,10 +21,14 @@
   <meta name="twitter:description" content="This is a book describing the capabilities of the Superpower R package." />
   
 
-<meta name="author" content="Aaron R. Caldwell, Daniël Lakens, Chelsea M. Parlett-Pelleriti, and Guy Prochilo" />
+<meta name="author" content="Aaron R. Caldwell" />
+<meta name="author" content="Daniël Lakens" />
+<meta name="author" content="Chelsea M. Parlett-Pelleriti" />
+<meta name="author" content="Guy Prochilo" />
+<meta name="author" content="Frederik Aust" />
 
 
-<meta name="date" content="2021-12-08" />
+<meta name="date" content="2022-02-28" />
 
   <meta name="viewport" content="width=device-width, initial-scale=1" />
   <meta name="apple-mobile-web-app-capable" content="yes" />
@@ -390,7 +394,7 @@ An example of a <code>2b*3w</code> design is a group of people in one condition 
 </ol>
 <p>So if you enter the means 1, 2, 3, 4, 5, 6, 7, 8 the first 4 means correspond to level 1 of factor 1, the second 4 means correspond to level 2 of factor 1. Within the first 4 means, the first 2 correspond to level 1 of factor 2, and within those 2 means, the first corresponds to level 1 of factor 3.</p>
 <p>The plot below visualizes means from 1 to 8 being entered in a vector: <code>mu = c(1, 2, 3, 4, 5, 6, 7, 8)</code> so you can see how the basic ordering works.</p>
-<p><img src="SuperpowerValidation_files/figure-html/unnamed-chunk-21-1.png" width="672" /></p>
+<p><img src="SuperpowerValidation_files/figure-html/unnamed-chunk-22-1.png" width="672" /></p>
 </div>
 <div id="specifying-label-names" class="section level3" number="2.1.3">
 <h3><span class="header-section-number">2.1.3</span> Specifying label names</h3>
@@ -400,12 +404,9 @@ An example of a <code>2b*3w</code> design is a group of people in one condition 
 <p>As you can see, you follow the order of the design (<code>2b*3w</code>), and first write the <strong>FACTOR</strong> label (condition) followed by the levels of that factor (placebo and medicine). Then you write the second factor name (time) followed by the three labels for each <strong>LEVEL</strong> (time1, time2, time3). <strong>Do not use spaces or special characters in the names (so not “time 1” or “time_1” but “time1”).</strong></p>
 <p>Some examples:</p>
 <ol style="list-style-type: decimal">
-<li>One within factor (time with 2 levels), 2w:
-<code>c("time", "morning", "evening")</code></li>
-<li>Two between factors (time and group, each with 2 levels), 2b*2b:
-<code>c("time", "morning", "evening", "group", "control", "experimental")</code></li>
-<li>Two between factors (time and group, first with 4 levels, second with 2 levels), 4b*2b:
-<code>c("time", "morning", "afternoon" ,"evening", "night", "group", "control", "experimental")</code></li>
+<li>One within factor (time with 2 levels), 2w: <code>c("time", "morning", "evening")</code></li>
+<li>Two between factors (time and group, each with 2 levels), 2b*2b: <code>c("time", "morning", "evening", "group", "control", "experimental")</code></li>
+<li>Two between factors (time and group, first with 4 levels, second with 2 levels), 4b*2b: <code>c("time", "morning", "afternoon" ,"evening", "night", "group", "control", "experimental")</code></li>
 </ol>
 </div>
 <div id="specifying-the-correlation" class="section level3" number="2.1.4">
@@ -413,18 +414,18 @@ An example of a <code>2b*3w</code> design is a group of people in one condition 
 <p>Depending on whether factors are manipulated within or between, variables are correlated, or not. You can set the correlation for within-participant factors. You can either assume all factors have the same correlation (e.g., r = 0.7), or enter the correlations for each pair of observations separately by specifying a correlation matrix.</p>
 <p>In a 2x2 design, with factors A and B, each with 2 levels, there are 6 possible comparisons that can be made.</p>
 <ol style="list-style-type: decimal">
-<li>A1 vs. A2</li>
-<li>A1 vs. B1</li>
-<li>A1 vs. B2</li>
-<li>A2 vs. B1</li>
-<li>A2 vs. B2</li>
-<li>B1 vs. B2</li>
+<li>A1 vs A2</li>
+<li>A1 vs B1</li>
+<li>A1 vs B2</li>
+<li>A2 vs B1</li>
+<li>A2 vs B2</li>
+<li>B1 vs B2</li>
 </ol>
 <p>The number of possible comparisons is the product of the levels of all factors squared minus the product of all factors, divided by two. For a 2x2 design where each factor has two levels, this is:</p>
-<div class="sourceCode" id="cb38"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb38-1"><a href="the-experimental-design.html#cb38-1" aria-hidden="true" tabindex="-1"></a>(((<span class="dv">2</span> <span class="sc">*</span> <span class="dv">2</span>) <span class="sc">^</span> <span class="dv">2</span>) <span class="sc">-</span> (<span class="dv">2</span> <span class="sc">*</span> <span class="dv">2</span>))<span class="sc">/</span><span class="dv">2</span></span></code></pre></div>
+<div class="sourceCode" id="cb39"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb39-1"><a href="the-experimental-design.html#cb39-1" aria-hidden="true" tabindex="-1"></a>(((<span class="dv">2</span> <span class="sc">*</span> <span class="dv">2</span>) <span class="sc">^</span> <span class="dv">2</span>) <span class="sc">-</span> (<span class="dv">2</span> <span class="sc">*</span> <span class="dv">2</span>))<span class="sc">/</span><span class="dv">2</span></span></code></pre></div>
 <pre><code>## [1] 6</code></pre>
 <p>The number of possible comparisons increases rapidly when adding factors and levels for each factor. For example, for a 2x2x4 design it is:</p>
-<div class="sourceCode" id="cb40"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb40-1"><a href="the-experimental-design.html#cb40-1" aria-hidden="true" tabindex="-1"></a>(((<span class="dv">2</span> <span class="sc">*</span> <span class="dv">2</span> <span class="sc">*</span> <span class="dv">4</span>) <span class="sc">^</span> <span class="dv">2</span>) <span class="sc">-</span> (<span class="dv">2</span> <span class="sc">*</span> <span class="dv">2</span> <span class="sc">*</span> <span class="dv">4</span>))<span class="sc">/</span><span class="dv">2</span></span></code></pre></div>
+<div class="sourceCode" id="cb41"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb41-1"><a href="the-experimental-design.html#cb41-1" aria-hidden="true" tabindex="-1"></a>(((<span class="dv">2</span> <span class="sc">*</span> <span class="dv">2</span> <span class="sc">*</span> <span class="dv">4</span>) <span class="sc">^</span> <span class="dv">2</span>) <span class="sc">-</span> (<span class="dv">2</span> <span class="sc">*</span> <span class="dv">2</span> <span class="sc">*</span> <span class="dv">4</span>))<span class="sc">/</span><span class="dv">2</span></span></code></pre></div>
 <pre><code>## [1] 120</code></pre>
 <p>Each of these comparisons can have their own correlation if the factor is manipulated within subjects (if the factor is manipulated between subjects the correlation is 0).
 These correlations determine the covariance matrix.
@@ -435,68 +436,120 @@ If you do not want to assume equal correlations for all paired comparisons, you 
 The order for a 2x2 design is given in the 6 item list above. The general pattern is that the matrix is filled from top to bottom, and left to right, illustrated by the increasing correlations in the table below.
 The diagonal is generated dynamically (based on the standard deviation).</p>
 <table>
+<caption>
+<span id="tab:unnamed-chunk-25">Table 2.1: </span>Correlation Matrix
+</caption>
 <thead>
-<tr class="header">
-<th>Matrix</th>
-<th>a1_b1</th>
-<th>a1_b2</th>
-<th>a2_b1</th>
-<th>a2_b2</th>
+<tr>
+<th style="text-align:left;">
+</th>
+<th style="text-align:right;">
+a1_b1
+</th>
+<th style="text-align:right;">
+a1_b2
+</th>
+<th style="text-align:right;">
+a2_b1
+</th>
+<th style="text-align:right;">
+a2_b2
+</th>
 </tr>
 </thead>
 <tbody>
-<tr class="odd">
-<td>a1_b1</td>
-<td>1.00</td>
-<td>0.91</td>
-<td>0.92</td>
-<td>0.93</td>
+<tr>
+<td style="text-align:left;">
+a1_b1
+</td>
+<td style="text-align:right;">
+1.00
+</td>
+<td style="text-align:right;">
+0.91
+</td>
+<td style="text-align:right;">
+0.92
+</td>
+<td style="text-align:right;">
+0.93
+</td>
 </tr>
-<tr class="even">
-<td>a1_b2</td>
-<td>0.91</td>
-<td>1.00</td>
-<td>0.94</td>
-<td>0.95</td>
+<tr>
+<td style="text-align:left;">
+a1_b2
+</td>
+<td style="text-align:right;">
+0.91
+</td>
+<td style="text-align:right;">
+1.00
+</td>
+<td style="text-align:right;">
+0.94
+</td>
+<td style="text-align:right;">
+0.95
+</td>
 </tr>
-<tr class="odd">
-<td>a2_b1</td>
-<td>0.92</td>
-<td>0.94</td>
-<td>1.00</td>
-<td>0.96</td>
+<tr>
+<td style="text-align:left;">
+a2_b1
+</td>
+<td style="text-align:right;">
+0.92
+</td>
+<td style="text-align:right;">
+0.94
+</td>
+<td style="text-align:right;">
+1.00
+</td>
+<td style="text-align:right;">
+0.96
+</td>
 </tr>
-<tr class="even">
-<td>a2_b2</td>
-<td>0.93</td>
-<td>0.95</td>
-<td>0.96</td>
-<td>1.00</td>
+<tr>
+<td style="text-align:left;">
+a2_b2
+</td>
+<td style="text-align:right;">
+0.93
+</td>
+<td style="text-align:right;">
+0.95
+</td>
+<td style="text-align:right;">
+0.96
+</td>
+<td style="text-align:right;">
+1.00
+</td>
 </tr>
 </tbody>
 </table>
 <div style="page-break-after: always;"></div>
 <p>We would enter this correlation matrix in the <code>ANOVA_design</code> function as:</p>
-<div class="sourceCode" id="cb42"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb42-1"><a href="the-experimental-design.html#cb42-1" aria-hidden="true" tabindex="-1"></a>design_result <span class="ot">&lt;-</span> <span class="fu">ANOVA_design</span>(<span class="at">design =</span> <span class="st">&quot;2w*2w&quot;</span>,</span>
-<span id="cb42-2"><a href="the-experimental-design.html#cb42-2" aria-hidden="true" tabindex="-1"></a>                              <span class="at">n =</span> <span class="dv">80</span>,</span>
-<span id="cb42-3"><a href="the-experimental-design.html#cb42-3" aria-hidden="true" tabindex="-1"></a>                              <span class="at">mu =</span> <span class="fu">c</span>(<span class="fl">1.1</span>, <span class="fl">1.2</span>,</span>
-<span id="cb42-4"><a href="the-experimental-design.html#cb42-4" aria-hidden="true" tabindex="-1"></a>                                     <span class="fl">1.3</span>, <span class="fl">1.4</span>),</span>
-<span id="cb42-5"><a href="the-experimental-design.html#cb42-5" aria-hidden="true" tabindex="-1"></a>                              <span class="at">sd =</span> <span class="dv">1</span>,</span>
-<span id="cb42-6"><a href="the-experimental-design.html#cb42-6" aria-hidden="true" tabindex="-1"></a>                              r <span class="ot">&lt;-</span> <span class="fu">c</span>(<span class="fl">0.91</span>, <span class="fl">0.92</span>,</span>
-<span id="cb42-7"><a href="the-experimental-design.html#cb42-7" aria-hidden="true" tabindex="-1"></a>                                     <span class="fl">0.93</span>, <span class="fl">0.94</span>,</span>
-<span id="cb42-8"><a href="the-experimental-design.html#cb42-8" aria-hidden="true" tabindex="-1"></a>                                     <span class="fl">0.95</span>, <span class="fl">0.96</span>),</span>
-<span id="cb42-9"><a href="the-experimental-design.html#cb42-9" aria-hidden="true" tabindex="-1"></a>                              <span class="at">labelnames =</span> <span class="fu">c</span>(<span class="st">&quot;COLOR&quot;</span>,</span>
-<span id="cb42-10"><a href="the-experimental-design.html#cb42-10" aria-hidden="true" tabindex="-1"></a>                                             <span class="st">&quot;red&quot;</span>, <span class="st">&quot;blue&quot;</span>,</span>
-<span id="cb42-11"><a href="the-experimental-design.html#cb42-11" aria-hidden="true" tabindex="-1"></a>                                             <span class="st">&quot;SPEED&quot;</span>,</span>
-<span id="cb42-12"><a href="the-experimental-design.html#cb42-12" aria-hidden="true" tabindex="-1"></a>                                             <span class="st">&quot;fast&quot;</span>, <span class="st">&quot;slow&quot;</span>),</span>
-<span id="cb42-13"><a href="the-experimental-design.html#cb42-13" aria-hidden="true" tabindex="-1"></a>                              <span class="at">plot =</span> <span class="cn">TRUE</span>)</span></code></pre></div>
-<p><img src="SuperpowerValidation_files/figure-html/unnamed-chunk-23-1.png" width="672" />
-
-We can check the correlation matrix by printing it from the design_result object to check if it was entered the way we wanted:</p>
-<div class="sourceCode" id="cb43"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb43-1"><a href="the-experimental-design.html#cb43-1" aria-hidden="true" tabindex="-1"></a>design_result<span class="sc">$</span>cor_mat</span></code></pre></div>
+<div class="sourceCode" id="cb43"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb43-1"><a href="the-experimental-design.html#cb43-1" aria-hidden="true" tabindex="-1"></a>design_result <span class="ot">&lt;-</span> <span class="fu">ANOVA_design</span>(<span class="at">design =</span> <span class="st">&quot;2w*2w&quot;</span>,</span>
+<span id="cb43-2"><a href="the-experimental-design.html#cb43-2" aria-hidden="true" tabindex="-1"></a>                              <span class="at">n =</span> <span class="dv">80</span>,</span>
+<span id="cb43-3"><a href="the-experimental-design.html#cb43-3" aria-hidden="true" tabindex="-1"></a>                              <span class="at">mu =</span> <span class="fu">c</span>(<span class="fl">1.1</span>, <span class="fl">1.2</span>,</span>
+<span id="cb43-4"><a href="the-experimental-design.html#cb43-4" aria-hidden="true" tabindex="-1"></a>                                     <span class="fl">1.3</span>, <span class="fl">1.4</span>),</span>
+<span id="cb43-5"><a href="the-experimental-design.html#cb43-5" aria-hidden="true" tabindex="-1"></a>                              <span class="at">sd =</span> <span class="dv">1</span>,</span>
+<span id="cb43-6"><a href="the-experimental-design.html#cb43-6" aria-hidden="true" tabindex="-1"></a>                              r <span class="ot">&lt;-</span> <span class="fu">c</span>(<span class="fl">0.91</span>, <span class="fl">0.92</span>,</span>
+<span id="cb43-7"><a href="the-experimental-design.html#cb43-7" aria-hidden="true" tabindex="-1"></a>                                     <span class="fl">0.93</span>, <span class="fl">0.94</span>,</span>
+<span id="cb43-8"><a href="the-experimental-design.html#cb43-8" aria-hidden="true" tabindex="-1"></a>                                     <span class="fl">0.95</span>, <span class="fl">0.96</span>),</span>
+<span id="cb43-9"><a href="the-experimental-design.html#cb43-9" aria-hidden="true" tabindex="-1"></a>                              <span class="at">labelnames =</span> <span class="fu">c</span>(<span class="st">&quot;COLOR&quot;</span>,</span>
+<span id="cb43-10"><a href="the-experimental-design.html#cb43-10" aria-hidden="true" tabindex="-1"></a>                                             <span class="st">&quot;red&quot;</span>, <span class="st">&quot;blue&quot;</span>,</span>
+<span id="cb43-11"><a href="the-experimental-design.html#cb43-11" aria-hidden="true" tabindex="-1"></a>                                             <span class="st">&quot;SPEED&quot;</span>,</span>
+<span id="cb43-12"><a href="the-experimental-design.html#cb43-12" aria-hidden="true" tabindex="-1"></a>                                             <span class="st">&quot;fast&quot;</span>, <span class="st">&quot;slow&quot;</span>),</span>
+<span id="cb43-13"><a href="the-experimental-design.html#cb43-13" aria-hidden="true" tabindex="-1"></a>                              <span class="at">plot =</span> <span class="cn">TRUE</span>)</span></code></pre></div>
+<p><img src="SuperpowerValidation_files/figure-html/unnamed-chunk-26-1.png" width="672" /></p>
+<div style="page-break-after: always;"></div>
+<p>We can check the correlation matrix by printing it from the design_result object to check if it was entered the way we wanted:</p>
+<div class="sourceCode" id="cb44"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb44-1"><a href="the-experimental-design.html#cb44-1" aria-hidden="true" tabindex="-1"></a>design_result<span class="sc">$</span>cor_mat</span></code></pre></div>
 <table class="table" style="margin-left: auto; margin-right: auto;">
 <caption>
-<span id="tab:unnamed-chunk-25">Table 2.1: </span>Correlation Matrix
+<span id="tab:unnamed-chunk-28">Table 2.2: </span>Correlation Matrix
 </caption>
 <thead>
 <tr>
@@ -590,10 +643,10 @@ blue_slow
 <p>We should also check the covariance-variance matrix to ensure the <code>ANOVA_design</code> function is working properly.
 The variance should be the diagonal element while the off-diagonal elements should be equal to <code>covariance = correlation*variance</code> or <span class="math inline">\(cov_{x,y}=\frac{\sum_{i=1}^{N}(x_{i}-\bar{x})(y_{i}-\bar{y})}{N-1}\)</span>.
 In this case, it is identical to the correlation matrix because the variance is equal to 1.</p>
-<div class="sourceCode" id="cb44"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb44-1"><a href="the-experimental-design.html#cb44-1" aria-hidden="true" tabindex="-1"></a>design_result<span class="sc">$</span>sigmatrix</span></code></pre></div>
+<div class="sourceCode" id="cb45"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb45-1"><a href="the-experimental-design.html#cb45-1" aria-hidden="true" tabindex="-1"></a>design_result<span class="sc">$</span>sigmatrix</span></code></pre></div>
 <table class="table" style="margin-left: auto; margin-right: auto;">
 <caption>
-<span id="tab:unnamed-chunk-27">Table 2.2: </span>Covariance-Variance Matrix
+<span id="tab:unnamed-chunk-30">Table 2.3: </span>Covariance-Variance Matrix
 </caption>
 <thead>
 <tr>

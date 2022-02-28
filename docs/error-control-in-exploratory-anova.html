@@ -21,10 +21,14 @@
   <meta name="twitter:description" content="This is a book describing the capabilities of the Superpower R package." />
   
 
-<meta name="author" content="Aaron R. Caldwell, Daniël Lakens, Chelsea M. Parlett-Pelleriti, and Guy Prochilo" />
+<meta name="author" content="Aaron R. Caldwell" />
+<meta name="author" content="Daniël Lakens" />
+<meta name="author" content="Chelsea M. Parlett-Pelleriti" />
+<meta name="author" content="Guy Prochilo" />
+<meta name="author" content="Frederik Aust" />
 
 
-<meta name="date" content="2021-12-08" />
+<meta name="date" content="2022-02-28" />
 
   <meta name="viewport" content="width=device-width, initial-scale=1" />
   <meta name="apple-mobile-web-app-capable" content="yes" />
@@ -350,32 +354,32 @@ div.csl-indent {
 <div id="error-control-in-exploratory-anova" class="section level1" number="9">
 <h1><span class="header-section-number">Chapter 9</span> Error Control in Exploratory ANOVA</h1>
 <p>In a 2 x 2 x 2 design, an ANOVA will give the test results for three main effects, three two-way interactions, and one three-way interaction. That’s 7 statistical tests. The probability of making at least one type I error in a single 2 x 2 x 2 ANOVA is <span class="math inline">\(1-(0.95)^7 = 30\)</span>%.</p>
-<div class="sourceCode" id="cb596"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb596-1"><a href="error-control-in-exploratory-anova.html#cb596-1" aria-hidden="true" tabindex="-1"></a>string <span class="ot">&lt;-</span> <span class="st">&quot;2b*2b*2b&quot;</span></span>
-<span id="cb596-2"><a href="error-control-in-exploratory-anova.html#cb596-2" aria-hidden="true" tabindex="-1"></a>n <span class="ot">&lt;-</span> <span class="dv">50</span></span>
-<span id="cb596-3"><a href="error-control-in-exploratory-anova.html#cb596-3" aria-hidden="true" tabindex="-1"></a>mu <span class="ot">&lt;-</span> <span class="fu">c</span>(<span class="dv">20</span>, <span class="dv">20</span>, <span class="dv">20</span>, <span class="dv">20</span>, <span class="dv">20</span>, <span class="dv">20</span>, <span class="dv">20</span>, <span class="dv">20</span>) </span>
-<span id="cb596-4"><a href="error-control-in-exploratory-anova.html#cb596-4" aria-hidden="true" tabindex="-1"></a><span class="co"># All means are equal - so there is no real difference.</span></span>
-<span id="cb596-5"><a href="error-control-in-exploratory-anova.html#cb596-5" aria-hidden="true" tabindex="-1"></a><span class="co"># Enter means in the order that matches the labels below.</span></span>
-<span id="cb596-6"><a href="error-control-in-exploratory-anova.html#cb596-6" aria-hidden="true" tabindex="-1"></a>sd <span class="ot">&lt;-</span> <span class="dv">5</span></span>
-<span id="cb596-7"><a href="error-control-in-exploratory-anova.html#cb596-7" aria-hidden="true" tabindex="-1"></a>p_adjust <span class="ot">=</span> <span class="st">&quot;none&quot;</span></span>
-<span id="cb596-8"><a href="error-control-in-exploratory-anova.html#cb596-8" aria-hidden="true" tabindex="-1"></a><span class="co"># &quot;none&quot; means we do not correct for multiple comparisons</span></span>
-<span id="cb596-9"><a href="error-control-in-exploratory-anova.html#cb596-9" aria-hidden="true" tabindex="-1"></a>labelnames <span class="ot">&lt;-</span> <span class="fu">c</span>(<span class="st">&quot;condition1&quot;</span>, <span class="st">&quot;a&quot;</span>, <span class="st">&quot;b&quot;</span>, </span>
-<span id="cb596-10"><a href="error-control-in-exploratory-anova.html#cb596-10" aria-hidden="true" tabindex="-1"></a>                <span class="st">&quot;condition2&quot;</span>, <span class="st">&quot;c&quot;</span>, <span class="st">&quot;d&quot;</span>, </span>
-<span id="cb596-11"><a href="error-control-in-exploratory-anova.html#cb596-11" aria-hidden="true" tabindex="-1"></a>                <span class="st">&quot;condition3&quot;</span>, <span class="st">&quot;e&quot;</span>, <span class="st">&quot;f&quot;</span>) <span class="co">#</span></span>
-<span id="cb596-12"><a href="error-control-in-exploratory-anova.html#cb596-12" aria-hidden="true" tabindex="-1"></a><span class="co"># The label names should be in the order of the means specified above.</span></span>
-<span id="cb596-13"><a href="error-control-in-exploratory-anova.html#cb596-13" aria-hidden="true" tabindex="-1"></a>design_result <span class="ot">&lt;-</span> <span class="fu">ANOVA_design</span>(<span class="at">design =</span> string,</span>
-<span id="cb596-14"><a href="error-control-in-exploratory-anova.html#cb596-14" aria-hidden="true" tabindex="-1"></a>                   <span class="at">n =</span> n, </span>
-<span id="cb596-15"><a href="error-control-in-exploratory-anova.html#cb596-15" aria-hidden="true" tabindex="-1"></a>                   <span class="at">mu =</span> mu, </span>
-<span id="cb596-16"><a href="error-control-in-exploratory-anova.html#cb596-16" aria-hidden="true" tabindex="-1"></a>                   <span class="at">sd =</span> sd, </span>
-<span id="cb596-17"><a href="error-control-in-exploratory-anova.html#cb596-17" aria-hidden="true" tabindex="-1"></a>                   <span class="at">labelnames =</span> labelnames)</span></code></pre></div>
+<div class="sourceCode" id="cb597"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb597-1"><a href="error-control-in-exploratory-anova.html#cb597-1" aria-hidden="true" tabindex="-1"></a>string <span class="ot">&lt;-</span> <span class="st">&quot;2b*2b*2b&quot;</span></span>
+<span id="cb597-2"><a href="error-control-in-exploratory-anova.html#cb597-2" aria-hidden="true" tabindex="-1"></a>n <span class="ot">&lt;-</span> <span class="dv">50</span></span>
+<span id="cb597-3"><a href="error-control-in-exploratory-anova.html#cb597-3" aria-hidden="true" tabindex="-1"></a>mu <span class="ot">&lt;-</span> <span class="fu">c</span>(<span class="dv">20</span>, <span class="dv">20</span>, <span class="dv">20</span>, <span class="dv">20</span>, <span class="dv">20</span>, <span class="dv">20</span>, <span class="dv">20</span>, <span class="dv">20</span>) </span>
+<span id="cb597-4"><a href="error-control-in-exploratory-anova.html#cb597-4" aria-hidden="true" tabindex="-1"></a><span class="co"># All means are equal - so there is no real difference.</span></span>
+<span id="cb597-5"><a href="error-control-in-exploratory-anova.html#cb597-5" aria-hidden="true" tabindex="-1"></a><span class="co"># Enter means in the order that matches the labels below.</span></span>
+<span id="cb597-6"><a href="error-control-in-exploratory-anova.html#cb597-6" aria-hidden="true" tabindex="-1"></a>sd <span class="ot">&lt;-</span> <span class="dv">5</span></span>
+<span id="cb597-7"><a href="error-control-in-exploratory-anova.html#cb597-7" aria-hidden="true" tabindex="-1"></a>p_adjust <span class="ot">=</span> <span class="st">&quot;none&quot;</span></span>
+<span id="cb597-8"><a href="error-control-in-exploratory-anova.html#cb597-8" aria-hidden="true" tabindex="-1"></a><span class="co"># &quot;none&quot; means we do not correct for multiple comparisons</span></span>
+<span id="cb597-9"><a href="error-control-in-exploratory-anova.html#cb597-9" aria-hidden="true" tabindex="-1"></a>labelnames <span class="ot">&lt;-</span> <span class="fu">c</span>(<span class="st">&quot;condition1&quot;</span>, <span class="st">&quot;a&quot;</span>, <span class="st">&quot;b&quot;</span>, </span>
+<span id="cb597-10"><a href="error-control-in-exploratory-anova.html#cb597-10" aria-hidden="true" tabindex="-1"></a>                <span class="st">&quot;condition2&quot;</span>, <span class="st">&quot;c&quot;</span>, <span class="st">&quot;d&quot;</span>, </span>
+<span id="cb597-11"><a href="error-control-in-exploratory-anova.html#cb597-11" aria-hidden="true" tabindex="-1"></a>                <span class="st">&quot;condition3&quot;</span>, <span class="st">&quot;e&quot;</span>, <span class="st">&quot;f&quot;</span>) <span class="co">#</span></span>
+<span id="cb597-12"><a href="error-control-in-exploratory-anova.html#cb597-12" aria-hidden="true" tabindex="-1"></a><span class="co"># The label names should be in the order of the means specified above.</span></span>
+<span id="cb597-13"><a href="error-control-in-exploratory-anova.html#cb597-13" aria-hidden="true" tabindex="-1"></a>design_result <span class="ot">&lt;-</span> <span class="fu">ANOVA_design</span>(<span class="at">design =</span> string,</span>
+<span id="cb597-14"><a href="error-control-in-exploratory-anova.html#cb597-14" aria-hidden="true" tabindex="-1"></a>                   <span class="at">n =</span> n, </span>
+<span id="cb597-15"><a href="error-control-in-exploratory-anova.html#cb597-15" aria-hidden="true" tabindex="-1"></a>                   <span class="at">mu =</span> mu, </span>
+<span id="cb597-16"><a href="error-control-in-exploratory-anova.html#cb597-16" aria-hidden="true" tabindex="-1"></a>                   <span class="at">sd =</span> sd, </span>
+<span id="cb597-17"><a href="error-control-in-exploratory-anova.html#cb597-17" aria-hidden="true" tabindex="-1"></a>                   <span class="at">labelnames =</span> labelnames)</span></code></pre></div>
 <p><img src="SuperpowerValidation_files/figure-html/error_control-1.png" width="672" /></p>
-<div class="sourceCode" id="cb597"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb597-1"><a href="error-control-in-exploratory-anova.html#cb597-1" aria-hidden="true" tabindex="-1"></a>alpha_level <span class="ot">&lt;-</span> <span class="fl">0.05</span></span>
-<span id="cb597-2"><a href="error-control-in-exploratory-anova.html#cb597-2" aria-hidden="true" tabindex="-1"></a><span class="co">#We set the alpha level at 0.05. </span></span></code></pre></div>
-<div class="sourceCode" id="cb598"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb598-1"><a href="error-control-in-exploratory-anova.html#cb598-1" aria-hidden="true" tabindex="-1"></a>simulation_result <span class="ot">&lt;-</span> <span class="fu">ANOVA_power</span>(design_result,</span>
-<span id="cb598-2"><a href="error-control-in-exploratory-anova.html#cb598-2" aria-hidden="true" tabindex="-1"></a>                                 <span class="at">alpha_level =</span> alpha_level,</span>
-<span id="cb598-3"><a href="error-control-in-exploratory-anova.html#cb598-3" aria-hidden="true" tabindex="-1"></a>                                 <span class="at">verbose =</span> <span class="cn">FALSE</span>)</span></code></pre></div>
+<div class="sourceCode" id="cb598"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb598-1"><a href="error-control-in-exploratory-anova.html#cb598-1" aria-hidden="true" tabindex="-1"></a>alpha_level <span class="ot">&lt;-</span> <span class="fl">0.05</span></span>
+<span id="cb598-2"><a href="error-control-in-exploratory-anova.html#cb598-2" aria-hidden="true" tabindex="-1"></a><span class="co">#We set the alpha level at 0.05. </span></span></code></pre></div>
+<div class="sourceCode" id="cb599"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb599-1"><a href="error-control-in-exploratory-anova.html#cb599-1" aria-hidden="true" tabindex="-1"></a>simulation_result <span class="ot">&lt;-</span> <span class="fu">ANOVA_power</span>(design_result,</span>
+<span id="cb599-2"><a href="error-control-in-exploratory-anova.html#cb599-2" aria-hidden="true" tabindex="-1"></a>                                 <span class="at">alpha_level =</span> alpha_level,</span>
+<span id="cb599-3"><a href="error-control-in-exploratory-anova.html#cb599-3" aria-hidden="true" tabindex="-1"></a>                                 <span class="at">verbose =</span> <span class="cn">FALSE</span>)</span></code></pre></div>
 <table class="table" style="margin-left: auto; margin-right: auto;">
 <caption>
-<span id="tab:unnamed-chunk-256">Table 9.1: </span>Simulated ANOVA Result
+<span id="tab:unnamed-chunk-259">Table 9.1: </span>Simulated ANOVA Result
 </caption>
 <thead>
 <tr>
@@ -471,8 +475,8 @@ anova_condition1:condition2:condition3
 </table>
 <p>When there is no true effect, we formally do not have ‘power’ (which is defined as the probability of finding p &lt; <span class="math inline">\(\alpha\)</span> if there is a true effect to be found) so the power column should be read as the ‘type I error rate.’ Because we have saved the power simulation in the ‘simulation_result’ object, we can perform calculations on the ‘sim_data’ dataframe that is stored. This dataframe contains the results for the nsims simulations (e.g., 10000 rows if you ran 10000 simulations) and stores the p-values and effect size estimates for each ANOVA. The first 7 columns are the p-values for the ANOVA, first the main effects of condition 1, 2, and 3, then three two-way interactions, and finally the threeway interaction.</p>
 <p>We can calculate the number of significant results for each test (which should be 5%) by counting the number of significant p-values in each of the 7 rows:</p>
-<div class="sourceCode" id="cb599"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb599-1"><a href="error-control-in-exploratory-anova.html#cb599-1" aria-hidden="true" tabindex="-1"></a><span class="fu">apply</span>(<span class="fu">as.matrix</span>(simulation_result_8<span class="fl">.1</span><span class="sc">$</span>sim_data[(<span class="dv">1</span><span class="sc">:</span><span class="dv">7</span>)]), <span class="dv">2</span>, </span>
-<span id="cb599-2"><a href="error-control-in-exploratory-anova.html#cb599-2" aria-hidden="true" tabindex="-1"></a>    <span class="cf">function</span>(x) <span class="fu">round</span>(<span class="fu">mean</span>(<span class="fu">ifelse</span>(x <span class="sc">&lt;</span> alpha_level, <span class="dv">1</span>, <span class="dv">0</span>)),<span class="dv">4</span>))</span></code></pre></div>
+<div class="sourceCode" id="cb600"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb600-1"><a href="error-control-in-exploratory-anova.html#cb600-1" aria-hidden="true" tabindex="-1"></a><span class="fu">apply</span>(<span class="fu">as.matrix</span>(simulation_result_8<span class="fl">.1</span><span class="sc">$</span>sim_data[(<span class="dv">1</span><span class="sc">:</span><span class="dv">7</span>)]), <span class="dv">2</span>, </span>
+<span id="cb600-2"><a href="error-control-in-exploratory-anova.html#cb600-2" aria-hidden="true" tabindex="-1"></a>    <span class="cf">function</span>(x) <span class="fu">round</span>(<span class="fu">mean</span>(<span class="fu">ifelse</span>(x <span class="sc">&lt;</span> alpha_level, <span class="dv">1</span>, <span class="dv">0</span>)),<span class="dv">4</span>))</span></code></pre></div>
 <pre><code>##                       anova_condition1                       anova_condition2 
 ##                                  0.046                                  0.037 
 ##                       anova_condition3            anova_condition1:condition2 
@@ -483,9 +487,9 @@ anova_condition1:condition2:condition3
 ##                                  0.055</code></pre>
 <p>This is the type I error rate for each test. The familywise error rate referrs to the probability of one or more of the tests in the ANOVA being significant, even though none of the 7 effects exist (3 main effects, 3 two-way interactions, and 1 three-way interaction).</p>
 <p>To calculate this error rate we do not just add the 7 error rates (so 7 * 5% - 35%). Instead, we calculate the probability that there will be at least one significant result in an ANOVA we perform. Some ANOVA results will have multiple significant results, just due to the type I error rate (e.g., a significant result for the three-way interaction, and for the main effect of condition 1) but such an ANOVA is counted only once. If we calculate this percentage from our simulations, we see the number is indeed very close to <span class="math inline">\(1-(0.95)^7 = 30%\)</span>.</p>
-<div class="sourceCode" id="cb601"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb601-1"><a href="error-control-in-exploratory-anova.html#cb601-1" aria-hidden="true" tabindex="-1"></a><span class="fu">sum</span>(<span class="fu">apply</span>(<span class="fu">as.matrix</span>(simulation_result_8<span class="fl">.1</span><span class="sc">$</span>sim_data[(<span class="dv">1</span><span class="sc">:</span><span class="dv">7</span>)]), <span class="dv">1</span>, </span>
-<span id="cb601-2"><a href="error-control-in-exploratory-anova.html#cb601-2" aria-hidden="true" tabindex="-1"></a>    <span class="cf">function</span>(x) </span>
-<span id="cb601-3"><a href="error-control-in-exploratory-anova.html#cb601-3" aria-hidden="true" tabindex="-1"></a>      <span class="fu">round</span>(<span class="fu">mean</span>(<span class="fu">ifelse</span>(x <span class="sc">&lt;</span> alpha_level, <span class="dv">1</span>, <span class="dv">0</span>)),<span class="dv">4</span>)) <span class="sc">&gt;</span> <span class="dv">0</span>) <span class="sc">/</span> nsims</span></code></pre></div>
+<div class="sourceCode" id="cb602"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb602-1"><a href="error-control-in-exploratory-anova.html#cb602-1" aria-hidden="true" tabindex="-1"></a><span class="fu">sum</span>(<span class="fu">apply</span>(<span class="fu">as.matrix</span>(simulation_result_8<span class="fl">.1</span><span class="sc">$</span>sim_data[(<span class="dv">1</span><span class="sc">:</span><span class="dv">7</span>)]), <span class="dv">1</span>, </span>
+<span id="cb602-2"><a href="error-control-in-exploratory-anova.html#cb602-2" aria-hidden="true" tabindex="-1"></a>    <span class="cf">function</span>(x) </span>
+<span id="cb602-3"><a href="error-control-in-exploratory-anova.html#cb602-3" aria-hidden="true" tabindex="-1"></a>      <span class="fu">round</span>(<span class="fu">mean</span>(<span class="fu">ifelse</span>(x <span class="sc">&lt;</span> alpha_level, <span class="dv">1</span>, <span class="dv">0</span>)),<span class="dv">4</span>)) <span class="sc">&gt;</span> <span class="dv">0</span>) <span class="sc">/</span> nsims</span></code></pre></div>
 <pre><code>## [1] 0.0275</code></pre>
 <p>But what we should do about this alpha inflation? We do not want to perform exploratory ANOVAs and observe more type I errors than expected, because these significant effects will often not replicate if you try to build on them. Therefore, you need to control the type I error rate.</p>
 <p>In the simulation code, which relies on the afex package, there is the option to set p_adjust. In the simulation above, <code>p_adjust</code> was set to <code>"none"</code>. This means no adjustment is made to alpha level for each test (above this was 0.05).</p>
@@ -500,32 +504,32 @@ anova_condition1:condition2:condition3
 <p>The “BH” (aka “fdr”) and “BY” method of Benjamini, Hochberg, and Yekutieli control the false discovery rate, the expected proportion of false discoveries amongst the rejected hypotheses. The false discovery rate is a less stringent condition than the family-wise error rate, so these methods are more powerful than the others.</p>
 </blockquote>
 <p>Let’s re-run the simulation with the Holm-Bonferroni correction, which is simple and require no assumptions.</p>
-<div class="sourceCode" id="cb603"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb603-1"><a href="error-control-in-exploratory-anova.html#cb603-1" aria-hidden="true" tabindex="-1"></a>string <span class="ot">&lt;-</span> <span class="st">&quot;2b*2b*2b&quot;</span></span>
-<span id="cb603-2"><a href="error-control-in-exploratory-anova.html#cb603-2" aria-hidden="true" tabindex="-1"></a>n <span class="ot">&lt;-</span> <span class="dv">50</span></span>
-<span id="cb603-3"><a href="error-control-in-exploratory-anova.html#cb603-3" aria-hidden="true" tabindex="-1"></a>mu <span class="ot">&lt;-</span> <span class="fu">c</span>(<span class="dv">20</span>, <span class="dv">20</span>, <span class="dv">20</span>, <span class="dv">20</span>, <span class="dv">20</span>, <span class="dv">20</span>, <span class="dv">20</span>, <span class="dv">20</span>) </span>
-<span id="cb603-4"><a href="error-control-in-exploratory-anova.html#cb603-4" aria-hidden="true" tabindex="-1"></a><span class="co">#All means are equal - so there is no real difference.</span></span>
-<span id="cb603-5"><a href="error-control-in-exploratory-anova.html#cb603-5" aria-hidden="true" tabindex="-1"></a><span class="co"># Enter means in the order that matches the labels below.</span></span>
-<span id="cb603-6"><a href="error-control-in-exploratory-anova.html#cb603-6" aria-hidden="true" tabindex="-1"></a>sd <span class="ot">&lt;-</span> <span class="dv">5</span></span>
-<span id="cb603-7"><a href="error-control-in-exploratory-anova.html#cb603-7" aria-hidden="true" tabindex="-1"></a>p_adjust <span class="ot">=</span> <span class="st">&quot;holm&quot;</span></span>
-<span id="cb603-8"><a href="error-control-in-exploratory-anova.html#cb603-8" aria-hidden="true" tabindex="-1"></a><span class="co"># Changed to Holm-Bonferroni</span></span>
-<span id="cb603-9"><a href="error-control-in-exploratory-anova.html#cb603-9" aria-hidden="true" tabindex="-1"></a>labelnames <span class="ot">&lt;-</span> <span class="fu">c</span>(<span class="st">&quot;condition1&quot;</span>, <span class="st">&quot;a&quot;</span>, <span class="st">&quot;b&quot;</span>, </span>
-<span id="cb603-10"><a href="error-control-in-exploratory-anova.html#cb603-10" aria-hidden="true" tabindex="-1"></a>                <span class="st">&quot;condition2&quot;</span>, <span class="st">&quot;c&quot;</span>, <span class="st">&quot;d&quot;</span>, </span>
-<span id="cb603-11"><a href="error-control-in-exploratory-anova.html#cb603-11" aria-hidden="true" tabindex="-1"></a>                <span class="st">&quot;condition3&quot;</span>, <span class="st">&quot;e&quot;</span>, <span class="st">&quot;f&quot;</span>) <span class="co">#</span></span>
-<span id="cb603-12"><a href="error-control-in-exploratory-anova.html#cb603-12" aria-hidden="true" tabindex="-1"></a><span class="co"># the label names should be in the order of the means specified above.</span></span>
-<span id="cb603-13"><a href="error-control-in-exploratory-anova.html#cb603-13" aria-hidden="true" tabindex="-1"></a>design_result <span class="ot">&lt;-</span> <span class="fu">ANOVA_design</span>(<span class="at">design =</span> string,</span>
-<span id="cb603-14"><a href="error-control-in-exploratory-anova.html#cb603-14" aria-hidden="true" tabindex="-1"></a>                   <span class="at">n =</span> n, </span>
-<span id="cb603-15"><a href="error-control-in-exploratory-anova.html#cb603-15" aria-hidden="true" tabindex="-1"></a>                   <span class="at">mu =</span> mu, </span>
-<span id="cb603-16"><a href="error-control-in-exploratory-anova.html#cb603-16" aria-hidden="true" tabindex="-1"></a>                   <span class="at">sd =</span> sd, </span>
-<span id="cb603-17"><a href="error-control-in-exploratory-anova.html#cb603-17" aria-hidden="true" tabindex="-1"></a>                   <span class="at">labelnames =</span> labelnames)</span></code></pre></div>
-<p><img src="SuperpowerValidation_files/figure-html/unnamed-chunk-259-1.png" width="672" /></p>
-<div class="sourceCode" id="cb604"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb604-1"><a href="error-control-in-exploratory-anova.html#cb604-1" aria-hidden="true" tabindex="-1"></a>alpha_level <span class="ot">&lt;-</span> <span class="fl">0.05</span></span></code></pre></div>
-<div class="sourceCode" id="cb605"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb605-1"><a href="error-control-in-exploratory-anova.html#cb605-1" aria-hidden="true" tabindex="-1"></a>simulation_result <span class="ot">&lt;-</span> <span class="fu">ANOVA_power</span>(design_result, </span>
-<span id="cb605-2"><a href="error-control-in-exploratory-anova.html#cb605-2" aria-hidden="true" tabindex="-1"></a>                                 <span class="at">alpha_level =</span> alpha_level,</span>
-<span id="cb605-3"><a href="error-control-in-exploratory-anova.html#cb605-3" aria-hidden="true" tabindex="-1"></a>                                 <span class="at">p_adjust =</span> p_adjust,</span>
-<span id="cb605-4"><a href="error-control-in-exploratory-anova.html#cb605-4" aria-hidden="true" tabindex="-1"></a>                                 <span class="at">verbose =</span> <span class="cn">FALSE</span>)</span></code></pre></div>
+<div class="sourceCode" id="cb604"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb604-1"><a href="error-control-in-exploratory-anova.html#cb604-1" aria-hidden="true" tabindex="-1"></a>string <span class="ot">&lt;-</span> <span class="st">&quot;2b*2b*2b&quot;</span></span>
+<span id="cb604-2"><a href="error-control-in-exploratory-anova.html#cb604-2" aria-hidden="true" tabindex="-1"></a>n <span class="ot">&lt;-</span> <span class="dv">50</span></span>
+<span id="cb604-3"><a href="error-control-in-exploratory-anova.html#cb604-3" aria-hidden="true" tabindex="-1"></a>mu <span class="ot">&lt;-</span> <span class="fu">c</span>(<span class="dv">20</span>, <span class="dv">20</span>, <span class="dv">20</span>, <span class="dv">20</span>, <span class="dv">20</span>, <span class="dv">20</span>, <span class="dv">20</span>, <span class="dv">20</span>) </span>
+<span id="cb604-4"><a href="error-control-in-exploratory-anova.html#cb604-4" aria-hidden="true" tabindex="-1"></a><span class="co">#All means are equal - so there is no real difference.</span></span>
+<span id="cb604-5"><a href="error-control-in-exploratory-anova.html#cb604-5" aria-hidden="true" tabindex="-1"></a><span class="co"># Enter means in the order that matches the labels below.</span></span>
+<span id="cb604-6"><a href="error-control-in-exploratory-anova.html#cb604-6" aria-hidden="true" tabindex="-1"></a>sd <span class="ot">&lt;-</span> <span class="dv">5</span></span>
+<span id="cb604-7"><a href="error-control-in-exploratory-anova.html#cb604-7" aria-hidden="true" tabindex="-1"></a>p_adjust <span class="ot">=</span> <span class="st">&quot;holm&quot;</span></span>
+<span id="cb604-8"><a href="error-control-in-exploratory-anova.html#cb604-8" aria-hidden="true" tabindex="-1"></a><span class="co"># Changed to Holm-Bonferroni</span></span>
+<span id="cb604-9"><a href="error-control-in-exploratory-anova.html#cb604-9" aria-hidden="true" tabindex="-1"></a>labelnames <span class="ot">&lt;-</span> <span class="fu">c</span>(<span class="st">&quot;condition1&quot;</span>, <span class="st">&quot;a&quot;</span>, <span class="st">&quot;b&quot;</span>, </span>
+<span id="cb604-10"><a href="error-control-in-exploratory-anova.html#cb604-10" aria-hidden="true" tabindex="-1"></a>                <span class="st">&quot;condition2&quot;</span>, <span class="st">&quot;c&quot;</span>, <span class="st">&quot;d&quot;</span>, </span>
+<span id="cb604-11"><a href="error-control-in-exploratory-anova.html#cb604-11" aria-hidden="true" tabindex="-1"></a>                <span class="st">&quot;condition3&quot;</span>, <span class="st">&quot;e&quot;</span>, <span class="st">&quot;f&quot;</span>) <span class="co">#</span></span>
+<span id="cb604-12"><a href="error-control-in-exploratory-anova.html#cb604-12" aria-hidden="true" tabindex="-1"></a><span class="co"># the label names should be in the order of the means specified above.</span></span>
+<span id="cb604-13"><a href="error-control-in-exploratory-anova.html#cb604-13" aria-hidden="true" tabindex="-1"></a>design_result <span class="ot">&lt;-</span> <span class="fu">ANOVA_design</span>(<span class="at">design =</span> string,</span>
+<span id="cb604-14"><a href="error-control-in-exploratory-anova.html#cb604-14" aria-hidden="true" tabindex="-1"></a>                   <span class="at">n =</span> n, </span>
+<span id="cb604-15"><a href="error-control-in-exploratory-anova.html#cb604-15" aria-hidden="true" tabindex="-1"></a>                   <span class="at">mu =</span> mu, </span>
+<span id="cb604-16"><a href="error-control-in-exploratory-anova.html#cb604-16" aria-hidden="true" tabindex="-1"></a>                   <span class="at">sd =</span> sd, </span>
+<span id="cb604-17"><a href="error-control-in-exploratory-anova.html#cb604-17" aria-hidden="true" tabindex="-1"></a>                   <span class="at">labelnames =</span> labelnames)</span></code></pre></div>
+<p><img src="SuperpowerValidation_files/figure-html/unnamed-chunk-262-1.png" width="672" /></p>
+<div class="sourceCode" id="cb605"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb605-1"><a href="error-control-in-exploratory-anova.html#cb605-1" aria-hidden="true" tabindex="-1"></a>alpha_level <span class="ot">&lt;-</span> <span class="fl">0.05</span></span></code></pre></div>
+<div class="sourceCode" id="cb606"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb606-1"><a href="error-control-in-exploratory-anova.html#cb606-1" aria-hidden="true" tabindex="-1"></a>simulation_result <span class="ot">&lt;-</span> <span class="fu">ANOVA_power</span>(design_result, </span>
+<span id="cb606-2"><a href="error-control-in-exploratory-anova.html#cb606-2" aria-hidden="true" tabindex="-1"></a>                                 <span class="at">alpha_level =</span> alpha_level,</span>
+<span id="cb606-3"><a href="error-control-in-exploratory-anova.html#cb606-3" aria-hidden="true" tabindex="-1"></a>                                 <span class="at">p_adjust =</span> p_adjust,</span>
+<span id="cb606-4"><a href="error-control-in-exploratory-anova.html#cb606-4" aria-hidden="true" tabindex="-1"></a>                                 <span class="at">verbose =</span> <span class="cn">FALSE</span>)</span></code></pre></div>
 <table class="table" style="margin-left: auto; margin-right: auto;">
 <caption>
-<span id="tab:unnamed-chunk-261">Table 9.2: </span>ANOVA Results
+<span id="tab:unnamed-chunk-264">Table 9.2: </span>ANOVA Results
 </caption>
 <thead>
 <tr>
@@ -621,7 +625,7 @@ anova_condition1:condition2:condition3
 </table>
 <table class="table" style="margin-left: auto; margin-right: auto;">
 <caption>
-<span id="tab:unnamed-chunk-262">Table 9.3: </span>Pairwise Results
+<span id="tab:unnamed-chunk-265">Table 9.3: </span>Pairwise Results
 </caption>
 <thead>
 <tr>
@@ -946,9 +950,9 @@ p_condition1_b_condition2_d_condition3_e_condition1_b_condition2_d_condition3_f
 </tr>
 </tbody>
 </table>
-<div class="sourceCode" id="cb606"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb606-1"><a href="error-control-in-exploratory-anova.html#cb606-1" aria-hidden="true" tabindex="-1"></a><span class="fu">sum</span>(<span class="fu">apply</span>(<span class="fu">as.matrix</span>(simulation_result_8<span class="fl">.2</span><span class="sc">$</span>sim_data[(<span class="dv">1</span><span class="sc">:</span><span class="dv">7</span>)]), <span class="dv">1</span>, </span>
-<span id="cb606-2"><a href="error-control-in-exploratory-anova.html#cb606-2" aria-hidden="true" tabindex="-1"></a>    <span class="cf">function</span>(x) </span>
-<span id="cb606-3"><a href="error-control-in-exploratory-anova.html#cb606-3" aria-hidden="true" tabindex="-1"></a>      <span class="fu">round</span>(<span class="fu">mean</span>(<span class="fu">ifelse</span>(x <span class="sc">&lt;</span> alpha_level, <span class="dv">1</span>, <span class="dv">0</span>) <span class="sc">*</span> <span class="dv">100</span>),<span class="dv">4</span>)) <span class="sc">&gt;</span> <span class="dv">0</span>) <span class="sc">/</span> nsims</span></code></pre></div>
+<div class="sourceCode" id="cb607"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb607-1"><a href="error-control-in-exploratory-anova.html#cb607-1" aria-hidden="true" tabindex="-1"></a><span class="fu">sum</span>(<span class="fu">apply</span>(<span class="fu">as.matrix</span>(simulation_result_8<span class="fl">.2</span><span class="sc">$</span>sim_data[(<span class="dv">1</span><span class="sc">:</span><span class="dv">7</span>)]), <span class="dv">1</span>, </span>
+<span id="cb607-2"><a href="error-control-in-exploratory-anova.html#cb607-2" aria-hidden="true" tabindex="-1"></a>    <span class="cf">function</span>(x) </span>
+<span id="cb607-3"><a href="error-control-in-exploratory-anova.html#cb607-3" aria-hidden="true" tabindex="-1"></a>      <span class="fu">round</span>(<span class="fu">mean</span>(<span class="fu">ifelse</span>(x <span class="sc">&lt;</span> alpha_level, <span class="dv">1</span>, <span class="dv">0</span>) <span class="sc">*</span> <span class="dv">100</span>),<span class="dv">4</span>)) <span class="sc">&gt;</span> <span class="dv">0</span>) <span class="sc">/</span> nsims</span></code></pre></div>
 <pre><code>## [1] 0.0061</code></pre>
 <p>We see it is close to 5%.
 Note that error rates have variation, and even in a ten thousand simulations, the error rate in the sample of studies can easily be half a percentage point higher or lower (see <a href="https://daniellakens.blogspot.com/2020/01/observed-alpha-levels-why-statistical.html">this blog</a>.

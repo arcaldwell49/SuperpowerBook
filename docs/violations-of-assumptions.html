@@ -21,10 +21,14 @@
   <meta name="twitter:description" content="This is a book describing the capabilities of the Superpower R package." />
   
 
-<meta name="author" content="Aaron R. Caldwell, Daniël Lakens, Chelsea M. Parlett-Pelleriti, and Guy Prochilo" />
+<meta name="author" content="Aaron R. Caldwell" />
+<meta name="author" content="Daniël Lakens" />
+<meta name="author" content="Chelsea M. Parlett-Pelleriti" />
+<meta name="author" content="Guy Prochilo" />
+<meta name="author" content="Frederik Aust" />
 
 
-<meta name="date" content="2021-12-08" />
+<meta name="date" content="2022-02-28" />
 
   <meta name="viewport" content="width=device-width, initial-scale=1" />
   <meta name="apple-mobile-web-app-capable" content="yes" />
@@ -361,44 +365,44 @@ Superpower allows researchers to perform power analyses for unequal variances (o
 So far we have used simulations in Superpower to simulate patterns of means where there is a true effect, but we can also simulate a null effect.
 Such Monte Carlo simulation studies are used in published articles to examine the Type 1 error rate under a range of assumptions and while performing different tests.
 Superpower makes it easy to perform such simulations studies for the specific scenario a researcher is faced with, and can help to make a decision whether violations of assumptions are something to worry about, and whether choices to deal with violations are sufficient.</p>
-<div class="sourceCode" id="cb641"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb641-1"><a href="violations-of-assumptions.html#cb641-1" aria-hidden="true" tabindex="-1"></a>design_result_violation <span class="ot">&lt;-</span> <span class="fu">ANOVA_design</span>(</span>
-<span id="cb641-2"><a href="violations-of-assumptions.html#cb641-2" aria-hidden="true" tabindex="-1"></a>  <span class="at">design =</span> <span class="st">&quot;2b*2b&quot;</span>,</span>
-<span id="cb641-3"><a href="violations-of-assumptions.html#cb641-3" aria-hidden="true" tabindex="-1"></a>  <span class="at">n =</span> <span class="fu">c</span>(<span class="dv">20</span>, <span class="dv">80</span>, <span class="dv">40</span>, <span class="dv">80</span>),</span>
-<span id="cb641-4"><a href="violations-of-assumptions.html#cb641-4" aria-hidden="true" tabindex="-1"></a>  <span class="at">mu =</span> <span class="fu">c</span>(<span class="dv">0</span>, <span class="dv">0</span>, <span class="dv">0</span>, <span class="dv">0</span>),</span>
-<span id="cb641-5"><a href="violations-of-assumptions.html#cb641-5" aria-hidden="true" tabindex="-1"></a>  <span class="at">sd =</span> <span class="fu">c</span>(<span class="dv">3</span>, <span class="dv">1</span>, <span class="dv">5</span>, <span class="dv">1</span>),</span>
-<span id="cb641-6"><a href="violations-of-assumptions.html#cb641-6" aria-hidden="true" tabindex="-1"></a>  <span class="at">labelnames =</span> <span class="fu">c</span>(<span class="st">&quot;condition&quot;</span>, <span class="st">&quot;cheerful&quot;</span>, <span class="st">&quot;sad&quot;</span>, <span class="st">&quot;voice&quot;</span>, <span class="st">&quot;human&quot;</span>, <span class="st">&quot;robot&quot;</span>))</span></code></pre></div>
+<div class="sourceCode" id="cb642"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb642-1"><a href="violations-of-assumptions.html#cb642-1" aria-hidden="true" tabindex="-1"></a>design_result_violation <span class="ot">&lt;-</span> <span class="fu">ANOVA_design</span>(</span>
+<span id="cb642-2"><a href="violations-of-assumptions.html#cb642-2" aria-hidden="true" tabindex="-1"></a>  <span class="at">design =</span> <span class="st">&quot;2b*2b&quot;</span>,</span>
+<span id="cb642-3"><a href="violations-of-assumptions.html#cb642-3" aria-hidden="true" tabindex="-1"></a>  <span class="at">n =</span> <span class="fu">c</span>(<span class="dv">20</span>, <span class="dv">80</span>, <span class="dv">40</span>, <span class="dv">80</span>),</span>
+<span id="cb642-4"><a href="violations-of-assumptions.html#cb642-4" aria-hidden="true" tabindex="-1"></a>  <span class="at">mu =</span> <span class="fu">c</span>(<span class="dv">0</span>, <span class="dv">0</span>, <span class="dv">0</span>, <span class="dv">0</span>),</span>
+<span id="cb642-5"><a href="violations-of-assumptions.html#cb642-5" aria-hidden="true" tabindex="-1"></a>  <span class="at">sd =</span> <span class="fu">c</span>(<span class="dv">3</span>, <span class="dv">1</span>, <span class="dv">5</span>, <span class="dv">1</span>),</span>
+<span id="cb642-6"><a href="violations-of-assumptions.html#cb642-6" aria-hidden="true" tabindex="-1"></a>  <span class="at">labelnames =</span> <span class="fu">c</span>(<span class="st">&quot;condition&quot;</span>, <span class="st">&quot;cheerful&quot;</span>, <span class="st">&quot;sad&quot;</span>, <span class="st">&quot;voice&quot;</span>, <span class="st">&quot;human&quot;</span>, <span class="st">&quot;robot&quot;</span>))</span></code></pre></div>
 <p><img src="SuperpowerValidation_files/figure-html/sphercity_1-1.png" width="672" /></p>
-<div class="sourceCode" id="cb642"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb642-1"><a href="violations-of-assumptions.html#cb642-1" aria-hidden="true" tabindex="-1"></a><span class="co"># power_result_violation &lt;- ANOVA_power(</span></span>
-<span id="cb642-2"><a href="violations-of-assumptions.html#cb642-2" aria-hidden="true" tabindex="-1"></a><span class="co">#    design_result_violation,</span></span>
-<span id="cb642-3"><a href="violations-of-assumptions.html#cb642-3" aria-hidden="true" tabindex="-1"></a><span class="co">#    nsims = 10000,</span></span>
-<span id="cb642-4"><a href="violations-of-assumptions.html#cb642-4" aria-hidden="true" tabindex="-1"></a><span class="co">#    verbose = TRUE)</span></span>
-<span id="cb642-5"><a href="violations-of-assumptions.html#cb642-5" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb642-6"><a href="violations-of-assumptions.html#cb642-6" aria-hidden="true" tabindex="-1"></a>design_result_violation_2 <span class="ot">&lt;-</span> <span class="fu">ANOVA_design</span>(</span>
-<span id="cb642-7"><a href="violations-of-assumptions.html#cb642-7" aria-hidden="true" tabindex="-1"></a>  <span class="at">design =</span> <span class="st">&quot;2b*2b&quot;</span>,</span>
-<span id="cb642-8"><a href="violations-of-assumptions.html#cb642-8" aria-hidden="true" tabindex="-1"></a>  <span class="at">n =</span> <span class="fu">c</span>(<span class="dv">80</span>, <span class="dv">80</span>, <span class="dv">80</span>, <span class="dv">80</span>),</span>
-<span id="cb642-9"><a href="violations-of-assumptions.html#cb642-9" aria-hidden="true" tabindex="-1"></a>  <span class="at">mu =</span> <span class="fu">c</span>(<span class="dv">0</span>, <span class="dv">0</span>, <span class="dv">0</span>, <span class="dv">0</span>),</span>
-<span id="cb642-10"><a href="violations-of-assumptions.html#cb642-10" aria-hidden="true" tabindex="-1"></a>  <span class="at">sd =</span> <span class="fu">c</span>(<span class="dv">3</span>, <span class="dv">1</span>, <span class="dv">5</span>, <span class="dv">1</span>),</span>
-<span id="cb642-11"><a href="violations-of-assumptions.html#cb642-11" aria-hidden="true" tabindex="-1"></a>  <span class="at">labelnames =</span> <span class="fu">c</span>(<span class="st">&quot;condition&quot;</span>, <span class="st">&quot;cheerful&quot;</span>, <span class="st">&quot;sad&quot;</span>, <span class="st">&quot;voice&quot;</span>, <span class="st">&quot;human&quot;</span>, <span class="st">&quot;robot&quot;</span>))</span></code></pre></div>
-<p><img src="SuperpowerValidation_files/figure-html/sphercity_1-2.png" width="672" /></p>
-<div class="sourceCode" id="cb643"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb643-1"><a href="violations-of-assumptions.html#cb643-1" aria-hidden="true" tabindex="-1"></a><span class="co"># power_result_violation_2 &lt;- ANOVA_power_unequal_n(</span></span>
-<span id="cb643-2"><a href="violations-of-assumptions.html#cb643-2" aria-hidden="true" tabindex="-1"></a><span class="co">#    design_result_violation_2,</span></span>
+<div class="sourceCode" id="cb643"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb643-1"><a href="violations-of-assumptions.html#cb643-1" aria-hidden="true" tabindex="-1"></a><span class="co"># power_result_violation &lt;- ANOVA_power(</span></span>
+<span id="cb643-2"><a href="violations-of-assumptions.html#cb643-2" aria-hidden="true" tabindex="-1"></a><span class="co">#    design_result_violation,</span></span>
 <span id="cb643-3"><a href="violations-of-assumptions.html#cb643-3" aria-hidden="true" tabindex="-1"></a><span class="co">#    nsims = 10000,</span></span>
-<span id="cb643-4"><a href="violations-of-assumptions.html#cb643-4" aria-hidden="true" tabindex="-1"></a><span class="co">#    verbose = TRUE)</span></span></code></pre></div>
+<span id="cb643-4"><a href="violations-of-assumptions.html#cb643-4" aria-hidden="true" tabindex="-1"></a><span class="co">#    verbose = TRUE)</span></span>
+<span id="cb643-5"><a href="violations-of-assumptions.html#cb643-5" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb643-6"><a href="violations-of-assumptions.html#cb643-6" aria-hidden="true" tabindex="-1"></a>design_result_violation_2 <span class="ot">&lt;-</span> <span class="fu">ANOVA_design</span>(</span>
+<span id="cb643-7"><a href="violations-of-assumptions.html#cb643-7" aria-hidden="true" tabindex="-1"></a>  <span class="at">design =</span> <span class="st">&quot;2b*2b&quot;</span>,</span>
+<span id="cb643-8"><a href="violations-of-assumptions.html#cb643-8" aria-hidden="true" tabindex="-1"></a>  <span class="at">n =</span> <span class="fu">c</span>(<span class="dv">80</span>, <span class="dv">80</span>, <span class="dv">80</span>, <span class="dv">80</span>),</span>
+<span id="cb643-9"><a href="violations-of-assumptions.html#cb643-9" aria-hidden="true" tabindex="-1"></a>  <span class="at">mu =</span> <span class="fu">c</span>(<span class="dv">0</span>, <span class="dv">0</span>, <span class="dv">0</span>, <span class="dv">0</span>),</span>
+<span id="cb643-10"><a href="violations-of-assumptions.html#cb643-10" aria-hidden="true" tabindex="-1"></a>  <span class="at">sd =</span> <span class="fu">c</span>(<span class="dv">3</span>, <span class="dv">1</span>, <span class="dv">5</span>, <span class="dv">1</span>),</span>
+<span id="cb643-11"><a href="violations-of-assumptions.html#cb643-11" aria-hidden="true" tabindex="-1"></a>  <span class="at">labelnames =</span> <span class="fu">c</span>(<span class="st">&quot;condition&quot;</span>, <span class="st">&quot;cheerful&quot;</span>, <span class="st">&quot;sad&quot;</span>, <span class="st">&quot;voice&quot;</span>, <span class="st">&quot;human&quot;</span>, <span class="st">&quot;robot&quot;</span>))</span></code></pre></div>
+<p><img src="SuperpowerValidation_files/figure-html/sphercity_1-2.png" width="672" /></p>
+<div class="sourceCode" id="cb644"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb644-1"><a href="violations-of-assumptions.html#cb644-1" aria-hidden="true" tabindex="-1"></a><span class="co"># power_result_violation_2 &lt;- ANOVA_power_unequal_n(</span></span>
+<span id="cb644-2"><a href="violations-of-assumptions.html#cb644-2" aria-hidden="true" tabindex="-1"></a><span class="co">#    design_result_violation_2,</span></span>
+<span id="cb644-3"><a href="violations-of-assumptions.html#cb644-3" aria-hidden="true" tabindex="-1"></a><span class="co">#    nsims = 10000,</span></span>
+<span id="cb644-4"><a href="violations-of-assumptions.html#cb644-4" aria-hidden="true" tabindex="-1"></a><span class="co">#    verbose = TRUE)</span></span></code></pre></div>
 <p>As an example, let’s revisit our earlier 2x2 between subjects design.
 Balanced designs (the same sample size in each condition) reduce the impact of violations of the homogeneity assumption, but let’s assume that for some reason sample sizes varied between 20 and 80 per cell, and the population standard violations varied extremely across conditions (from 1 to 5).
 We can use Superpower to estimate the impact of violating the homogeneity assumption by simulating a null effect (the means in all conditions are the same) and examining the Type 1 error rate.
 We can specify a design with unequal sample sizes and unequal variances as illustrated in the code below.</p>
-<div class="sourceCode" id="cb644"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb644-1"><a href="violations-of-assumptions.html#cb644-1" aria-hidden="true" tabindex="-1"></a>design_result_violation <span class="ot">&lt;-</span><span class="fu">ANOVA_design</span>(</span>
-<span id="cb644-2"><a href="violations-of-assumptions.html#cb644-2" aria-hidden="true" tabindex="-1"></a>  <span class="at">design =</span> <span class="st">&quot;2b*2b&quot;</span>,</span>
-<span id="cb644-3"><a href="violations-of-assumptions.html#cb644-3" aria-hidden="true" tabindex="-1"></a>  <span class="at">n =</span> <span class="fu">c</span>(<span class="dv">20</span>, <span class="dv">80</span>, <span class="dv">40</span>, <span class="dv">80</span>),</span>
-<span id="cb644-4"><a href="violations-of-assumptions.html#cb644-4" aria-hidden="true" tabindex="-1"></a>  <span class="at">mu =</span> <span class="fu">c</span>(<span class="dv">0</span>, <span class="dv">0</span>, <span class="dv">0</span>, <span class="dv">0</span>),</span>
-<span id="cb644-5"><a href="violations-of-assumptions.html#cb644-5" aria-hidden="true" tabindex="-1"></a>  <span class="at">sd =</span> <span class="fu">c</span>(<span class="dv">3</span>, <span class="dv">1</span>, <span class="dv">5</span>, <span class="dv">1</span>),</span>
-<span id="cb644-6"><a href="violations-of-assumptions.html#cb644-6" aria-hidden="true" tabindex="-1"></a>  <span class="at">labelnames =</span> <span class="fu">c</span>(<span class="st">&quot;condition&quot;</span>, <span class="st">&quot;cheerful&quot;</span>, <span class="st">&quot;sad&quot;</span>, <span class="st">&quot;voice&quot;</span>, <span class="st">&quot;human&quot;</span>, <span class="st">&quot;robot&quot;</span>))</span>
-<span id="cb644-7"><a href="violations-of-assumptions.html#cb644-7" aria-hidden="true" tabindex="-1"></a><span class="er">)</span></span>
-<span id="cb644-8"><a href="violations-of-assumptions.html#cb644-8" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb644-9"><a href="violations-of-assumptions.html#cb644-9" aria-hidden="true" tabindex="-1"></a>power_result_violation <span class="ot">&lt;-</span> <span class="fu">ANOVA_power</span>(</span>
-<span id="cb644-10"><a href="violations-of-assumptions.html#cb644-10" aria-hidden="true" tabindex="-1"></a>  design_result_violation,</span>
-<span id="cb644-11"><a href="violations-of-assumptions.html#cb644-11" aria-hidden="true" tabindex="-1"></a>  <span class="at">nsims =</span> <span class="dv">100000</span>)</span></code></pre></div>
+<div class="sourceCode" id="cb645"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb645-1"><a href="violations-of-assumptions.html#cb645-1" aria-hidden="true" tabindex="-1"></a>design_result_violation <span class="ot">&lt;-</span><span class="fu">ANOVA_design</span>(</span>
+<span id="cb645-2"><a href="violations-of-assumptions.html#cb645-2" aria-hidden="true" tabindex="-1"></a>  <span class="at">design =</span> <span class="st">&quot;2b*2b&quot;</span>,</span>
+<span id="cb645-3"><a href="violations-of-assumptions.html#cb645-3" aria-hidden="true" tabindex="-1"></a>  <span class="at">n =</span> <span class="fu">c</span>(<span class="dv">20</span>, <span class="dv">80</span>, <span class="dv">40</span>, <span class="dv">80</span>),</span>
+<span id="cb645-4"><a href="violations-of-assumptions.html#cb645-4" aria-hidden="true" tabindex="-1"></a>  <span class="at">mu =</span> <span class="fu">c</span>(<span class="dv">0</span>, <span class="dv">0</span>, <span class="dv">0</span>, <span class="dv">0</span>),</span>
+<span id="cb645-5"><a href="violations-of-assumptions.html#cb645-5" aria-hidden="true" tabindex="-1"></a>  <span class="at">sd =</span> <span class="fu">c</span>(<span class="dv">3</span>, <span class="dv">1</span>, <span class="dv">5</span>, <span class="dv">1</span>),</span>
+<span id="cb645-6"><a href="violations-of-assumptions.html#cb645-6" aria-hidden="true" tabindex="-1"></a>  <span class="at">labelnames =</span> <span class="fu">c</span>(<span class="st">&quot;condition&quot;</span>, <span class="st">&quot;cheerful&quot;</span>, <span class="st">&quot;sad&quot;</span>, <span class="st">&quot;voice&quot;</span>, <span class="st">&quot;human&quot;</span>, <span class="st">&quot;robot&quot;</span>))</span>
+<span id="cb645-7"><a href="violations-of-assumptions.html#cb645-7" aria-hidden="true" tabindex="-1"></a><span class="er">)</span></span>
+<span id="cb645-8"><a href="violations-of-assumptions.html#cb645-8" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb645-9"><a href="violations-of-assumptions.html#cb645-9" aria-hidden="true" tabindex="-1"></a>power_result_violation <span class="ot">&lt;-</span> <span class="fu">ANOVA_power</span>(</span>
+<span id="cb645-10"><a href="violations-of-assumptions.html#cb645-10" aria-hidden="true" tabindex="-1"></a>  design_result_violation,</span>
+<span id="cb645-11"><a href="violations-of-assumptions.html#cb645-11" aria-hidden="true" tabindex="-1"></a>  <span class="at">nsims =</span> <span class="dv">100000</span>)</span></code></pre></div>
 <p>Based on this simulation, the Type 1 error rate for the main effects and interactions for the ANOVA are approximately 14.5%.
 Under these assumptions it is clear that the Type 1 error rate is too high.
 One solution would be to make sure that an experiment has equal sample sizes.
@@ -413,30 +417,30 @@ This assumption is often tenuous at best in real life, and is typically “adjus
 We can simulate an example (below) wherein there are no differences between the repeated measures (i.e., the null-hypothesis is true) and the correlations between the levels vary from <em>r</em> = .05 to <em>r</em> = .90, and the standard deviations from 1 to 7.
 This leads to unequal variances of the differences between conditions, and thus violates the sphericity assumption.
 We scan simulate the consequences be specifying the design in the ANOVA_design function.</p>
-<div class="sourceCode" id="cb645"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb645-1"><a href="violations-of-assumptions.html#cb645-1" aria-hidden="true" tabindex="-1"></a>design_result_violation_3 <span class="ot">&lt;-</span> <span class="fu">ANOVA_design</span>(</span>
-<span id="cb645-2"><a href="violations-of-assumptions.html#cb645-2" aria-hidden="true" tabindex="-1"></a>  <span class="at">design =</span> <span class="st">&quot;4w&quot;</span>,</span>
-<span id="cb645-3"><a href="violations-of-assumptions.html#cb645-3" aria-hidden="true" tabindex="-1"></a>  <span class="at">n =</span> <span class="dv">29</span>,</span>
-<span id="cb645-4"><a href="violations-of-assumptions.html#cb645-4" aria-hidden="true" tabindex="-1"></a>  <span class="at">r =</span> <span class="fu">c</span>(.<span class="dv">05</span>, .<span class="dv">15</span>, .<span class="dv">25</span>, .<span class="dv">55</span>, .<span class="dv">65</span>, .<span class="dv">9</span>),</span>
-<span id="cb645-5"><a href="violations-of-assumptions.html#cb645-5" aria-hidden="true" tabindex="-1"></a>  <span class="at">sd =</span> <span class="fu">c</span>(<span class="dv">1</span>,<span class="dv">3</span>,<span class="dv">5</span>,<span class="dv">7</span>),</span>
-<span id="cb645-6"><a href="violations-of-assumptions.html#cb645-6" aria-hidden="true" tabindex="-1"></a>  <span class="at">mu =</span> <span class="fu">c</span>(<span class="dv">0</span>, <span class="dv">0</span>, <span class="dv">0</span>, <span class="dv">0</span>)</span>
-<span id="cb645-7"><a href="violations-of-assumptions.html#cb645-7" aria-hidden="true" tabindex="-1"></a>)</span></code></pre></div>
+<div class="sourceCode" id="cb646"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb646-1"><a href="violations-of-assumptions.html#cb646-1" aria-hidden="true" tabindex="-1"></a>design_result_violation_3 <span class="ot">&lt;-</span> <span class="fu">ANOVA_design</span>(</span>
+<span id="cb646-2"><a href="violations-of-assumptions.html#cb646-2" aria-hidden="true" tabindex="-1"></a>  <span class="at">design =</span> <span class="st">&quot;4w&quot;</span>,</span>
+<span id="cb646-3"><a href="violations-of-assumptions.html#cb646-3" aria-hidden="true" tabindex="-1"></a>  <span class="at">n =</span> <span class="dv">29</span>,</span>
+<span id="cb646-4"><a href="violations-of-assumptions.html#cb646-4" aria-hidden="true" tabindex="-1"></a>  <span class="at">r =</span> <span class="fu">c</span>(.<span class="dv">05</span>, .<span class="dv">15</span>, .<span class="dv">25</span>, .<span class="dv">55</span>, .<span class="dv">65</span>, .<span class="dv">9</span>),</span>
+<span id="cb646-5"><a href="violations-of-assumptions.html#cb646-5" aria-hidden="true" tabindex="-1"></a>  <span class="at">sd =</span> <span class="fu">c</span>(<span class="dv">1</span>,<span class="dv">3</span>,<span class="dv">5</span>,<span class="dv">7</span>),</span>
+<span id="cb646-6"><a href="violations-of-assumptions.html#cb646-6" aria-hidden="true" tabindex="-1"></a>  <span class="at">mu =</span> <span class="fu">c</span>(<span class="dv">0</span>, <span class="dv">0</span>, <span class="dv">0</span>, <span class="dv">0</span>)</span>
+<span id="cb646-7"><a href="violations-of-assumptions.html#cb646-7" aria-hidden="true" tabindex="-1"></a>)</span></code></pre></div>
 <p>We then perform the Monte Carlo simulation using the ANOVA_power function.</p>
-<div class="sourceCode" id="cb646"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb646-1"><a href="violations-of-assumptions.html#cb646-1" aria-hidden="true" tabindex="-1"></a>power_result_violation_3 <span class="ot">&lt;-</span> <span class="fu">ANOVA_power</span>(design_result_violation_3, </span>
-<span id="cb646-2"><a href="violations-of-assumptions.html#cb646-2" aria-hidden="true" tabindex="-1"></a>                                        <span class="at">alpha_level =</span> <span class="fl">0.05</span>, </span>
-<span id="cb646-3"><a href="violations-of-assumptions.html#cb646-3" aria-hidden="true" tabindex="-1"></a>                                        <span class="at">nsims =</span> <span class="dv">10000</span>)</span></code></pre></div>
+<div class="sourceCode" id="cb647"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb647-1"><a href="violations-of-assumptions.html#cb647-1" aria-hidden="true" tabindex="-1"></a>power_result_violation_3 <span class="ot">&lt;-</span> <span class="fu">ANOVA_power</span>(design_result_violation_3, </span>
+<span id="cb647-2"><a href="violations-of-assumptions.html#cb647-2" aria-hidden="true" tabindex="-1"></a>                                        <span class="at">alpha_level =</span> <span class="fl">0.05</span>, </span>
+<span id="cb647-3"><a href="violations-of-assumptions.html#cb647-3" aria-hidden="true" tabindex="-1"></a>                                        <span class="at">nsims =</span> <span class="dv">10000</span>)</span></code></pre></div>
 <p>The simulated type 1 error rate for the univariate ANOVA is 8.25%.
 The multivariate ANOVA (MANOVA) does not assume sphericity and therefore should be robust to this pattern of correlations.
 We can then check the MANOVA results and see this analysis approach maintains the Type 1 error rate at 4.91%. Alternatively, we could re-run the simulation with a Greenhouse-Geisser (<code>correction = "GG"</code>) or Huynh-Feldt (<code>correction = "HF"</code>) corrections for sphericity.</p>
-<div class="sourceCode" id="cb647"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb647-1"><a href="violations-of-assumptions.html#cb647-1" aria-hidden="true" tabindex="-1"></a>power_result_violation_4 <span class="ot">&lt;-</span> <span class="fu">ANOVA_power</span>(design_result_violation_4, </span>
-<span id="cb647-2"><a href="violations-of-assumptions.html#cb647-2" aria-hidden="true" tabindex="-1"></a>                                        <span class="at">alpha_level =</span> <span class="fl">0.05</span>, </span>
-<span id="cb647-3"><a href="violations-of-assumptions.html#cb647-3" aria-hidden="true" tabindex="-1"></a>                                        <span class="at">nsims =</span> nsims,</span>
-<span id="cb647-4"><a href="violations-of-assumptions.html#cb647-4" aria-hidden="true" tabindex="-1"></a>                                        <span class="at">correction =</span> <span class="st">&quot;GG&quot;</span>,</span>
-<span id="cb647-5"><a href="violations-of-assumptions.html#cb647-5" aria-hidden="true" tabindex="-1"></a>                                        <span class="at">verbose =</span> <span class="cn">FALSE</span>)</span>
-<span id="cb647-6"><a href="violations-of-assumptions.html#cb647-6" aria-hidden="true" tabindex="-1"></a>power_result_violation_5 <span class="ot">&lt;-</span> <span class="fu">ANOVA_power</span>(design_result_violation_4, </span>
-<span id="cb647-7"><a href="violations-of-assumptions.html#cb647-7" aria-hidden="true" tabindex="-1"></a>                                        <span class="at">alpha_level =</span> <span class="fl">0.05</span>, </span>
-<span id="cb647-8"><a href="violations-of-assumptions.html#cb647-8" aria-hidden="true" tabindex="-1"></a>                                        <span class="at">nsims =</span> nsims,</span>
-<span id="cb647-9"><a href="violations-of-assumptions.html#cb647-9" aria-hidden="true" tabindex="-1"></a>                                        <span class="at">correction =</span> <span class="st">&quot;HF&quot;</span>,</span>
-<span id="cb647-10"><a href="violations-of-assumptions.html#cb647-10" aria-hidden="true" tabindex="-1"></a>                                        <span class="at">verbose =</span> <span class="cn">FALSE</span>)</span></code></pre></div>
+<div class="sourceCode" id="cb648"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb648-1"><a href="violations-of-assumptions.html#cb648-1" aria-hidden="true" tabindex="-1"></a>power_result_violation_4 <span class="ot">&lt;-</span> <span class="fu">ANOVA_power</span>(design_result_violation_4, </span>
+<span id="cb648-2"><a href="violations-of-assumptions.html#cb648-2" aria-hidden="true" tabindex="-1"></a>                                        <span class="at">alpha_level =</span> <span class="fl">0.05</span>, </span>
+<span id="cb648-3"><a href="violations-of-assumptions.html#cb648-3" aria-hidden="true" tabindex="-1"></a>                                        <span class="at">nsims =</span> nsims,</span>
+<span id="cb648-4"><a href="violations-of-assumptions.html#cb648-4" aria-hidden="true" tabindex="-1"></a>                                        <span class="at">correction =</span> <span class="st">&quot;GG&quot;</span>,</span>
+<span id="cb648-5"><a href="violations-of-assumptions.html#cb648-5" aria-hidden="true" tabindex="-1"></a>                                        <span class="at">verbose =</span> <span class="cn">FALSE</span>)</span>
+<span id="cb648-6"><a href="violations-of-assumptions.html#cb648-6" aria-hidden="true" tabindex="-1"></a>power_result_violation_5 <span class="ot">&lt;-</span> <span class="fu">ANOVA_power</span>(design_result_violation_4, </span>
+<span id="cb648-7"><a href="violations-of-assumptions.html#cb648-7" aria-hidden="true" tabindex="-1"></a>                                        <span class="at">alpha_level =</span> <span class="fl">0.05</span>, </span>
+<span id="cb648-8"><a href="violations-of-assumptions.html#cb648-8" aria-hidden="true" tabindex="-1"></a>                                        <span class="at">nsims =</span> nsims,</span>
+<span id="cb648-9"><a href="violations-of-assumptions.html#cb648-9" aria-hidden="true" tabindex="-1"></a>                                        <span class="at">correction =</span> <span class="st">&quot;HF&quot;</span>,</span>
+<span id="cb648-10"><a href="violations-of-assumptions.html#cb648-10" aria-hidden="true" tabindex="-1"></a>                                        <span class="at">verbose =</span> <span class="cn">FALSE</span>)</span></code></pre></div>
 <p>The simulated type 1 error rate for the univariate ANOVA with a Greenhouse-Geisser correction is now 4.82% and it is 5.36% with a Huynh-Feldt correction.
 After we determine which analysis approach best preserves the Type 1 error rate, given assumptions about the data generation model (e.g., the standard deviations and correlations) we could then re-run the simulation with the pattern of means we want to detect and estimate the power for the given design.
 This way, we control our Type 1 error rate, and can estimate our statistical power for an analysis that handles violations of the sphericity assumption.</p>
@@ -451,7 +455,7 @@ Researchers can simulate both the expected reality when the null hypothesis is t
 <p>As we saw above, the unadjusted repeated measures ANOVA has an elevated type I error rate, but the MANOVA analysis and corrections control Type 1 error rates well.</p>
 <table class="table" style="margin-left: auto; margin-right: auto;">
 <caption>
-<span id="tab:unnamed-chunk-290">Table 12.1: </span>Simulated MANOVA Result
+<span id="tab:unnamed-chunk-293">Table 12.1: </span>Simulated MANOVA Result
 </caption>
 <thead>
 <tr>
@@ -483,7 +487,7 @@ manova_a
 </table>
 <table class="table" style="margin-left: auto; margin-right: auto;">
 <caption>
-<span id="tab:unnamed-chunk-291">Table 12.2: </span>Simulated ANOVA Result
+<span id="tab:unnamed-chunk-294">Table 12.2: </span>Simulated ANOVA Result
 </caption>
 <thead>
 <tr>
@@ -513,7 +517,7 @@ anova_a
 </table>
 <table class="table" style="margin-left: auto; margin-right: auto;">
 <caption>
-<span id="tab:unnamed-chunk-292">Table 12.3: </span>Simulated ANOVA Result
+<span id="tab:unnamed-chunk-295">Table 12.3: </span>Simulated ANOVA Result
 </caption>
 <thead>
 <tr>
@@ -545,19 +549,19 @@ anova_a
 <p>Both the sphericity corrections, Greenhouse-Geisser (<code>GG</code>) and Huynh-Feldt (<code>HF</code>), as well as the MANOVA were able to adequately control type I error rate.
 However, Greenhouse-Geisser seemed to be more conservative.
 We can now directly compare the power of the MANOVA or <code>HF</code>-adjusted approach. We can adjust the study design to the alternative, or hypothesized, model with the predicted means of <code>0, 0.75, 1.5, 3</code> instead of the null model.</p>
-<div class="sourceCode" id="cb648"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb648-1"><a href="violations-of-assumptions.html#cb648-1" aria-hidden="true" tabindex="-1"></a>design_result_power <span class="ot">&lt;-</span> <span class="fu">ANOVA_design</span>(<span class="st">&quot;4w&quot;</span>,</span>
-<span id="cb648-2"><a href="violations-of-assumptions.html#cb648-2" aria-hidden="true" tabindex="-1"></a>                              <span class="at">n =</span> <span class="dv">29</span>,</span>
-<span id="cb648-3"><a href="violations-of-assumptions.html#cb648-3" aria-hidden="true" tabindex="-1"></a>                              <span class="at">r =</span> <span class="fu">c</span>(.<span class="dv">05</span>,.<span class="dv">15</span>,.<span class="dv">25</span>,.<span class="dv">55</span>, .<span class="dv">65</span>, .<span class="dv">9</span>),</span>
-<span id="cb648-4"><a href="violations-of-assumptions.html#cb648-4" aria-hidden="true" tabindex="-1"></a>                              <span class="at">sd =</span> <span class="fu">c</span>(<span class="dv">1</span>,<span class="dv">3</span>,<span class="dv">5</span>,<span class="dv">7</span>),</span>
-<span id="cb648-5"><a href="violations-of-assumptions.html#cb648-5" aria-hidden="true" tabindex="-1"></a>                              <span class="at">mu=</span> <span class="fu">c</span>(<span class="dv">0</span>,<span class="fl">0.75</span>,<span class="fl">1.5</span>,<span class="dv">3</span>))</span></code></pre></div>
-<p><img src="SuperpowerValidation_files/figure-html/unnamed-chunk-293-1.png" width="672" /></p>
-<div class="sourceCode" id="cb649"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb649-1"><a href="violations-of-assumptions.html#cb649-1" aria-hidden="true" tabindex="-1"></a><span class="co"># power_result_hfeffect &lt;- ANOVA_power(design_result_power, </span></span>
-<span id="cb649-2"><a href="violations-of-assumptions.html#cb649-2" aria-hidden="true" tabindex="-1"></a><span class="co">#                                      correction = &quot;HF&quot;,</span></span>
-<span id="cb649-3"><a href="violations-of-assumptions.html#cb649-3" aria-hidden="true" tabindex="-1"></a><span class="co">#                                      nsims = nsims, </span></span>
-<span id="cb649-4"><a href="violations-of-assumptions.html#cb649-4" aria-hidden="true" tabindex="-1"></a><span class="co">#                                      verbose = FALSE)</span></span></code></pre></div>
+<div class="sourceCode" id="cb649"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb649-1"><a href="violations-of-assumptions.html#cb649-1" aria-hidden="true" tabindex="-1"></a>design_result_power <span class="ot">&lt;-</span> <span class="fu">ANOVA_design</span>(<span class="st">&quot;4w&quot;</span>,</span>
+<span id="cb649-2"><a href="violations-of-assumptions.html#cb649-2" aria-hidden="true" tabindex="-1"></a>                              <span class="at">n =</span> <span class="dv">29</span>,</span>
+<span id="cb649-3"><a href="violations-of-assumptions.html#cb649-3" aria-hidden="true" tabindex="-1"></a>                              <span class="at">r =</span> <span class="fu">c</span>(.<span class="dv">05</span>,.<span class="dv">15</span>,.<span class="dv">25</span>,.<span class="dv">55</span>, .<span class="dv">65</span>, .<span class="dv">9</span>),</span>
+<span id="cb649-4"><a href="violations-of-assumptions.html#cb649-4" aria-hidden="true" tabindex="-1"></a>                              <span class="at">sd =</span> <span class="fu">c</span>(<span class="dv">1</span>,<span class="dv">3</span>,<span class="dv">5</span>,<span class="dv">7</span>),</span>
+<span id="cb649-5"><a href="violations-of-assumptions.html#cb649-5" aria-hidden="true" tabindex="-1"></a>                              <span class="at">mu=</span> <span class="fu">c</span>(<span class="dv">0</span>,<span class="fl">0.75</span>,<span class="fl">1.5</span>,<span class="dv">3</span>))</span></code></pre></div>
+<p><img src="SuperpowerValidation_files/figure-html/unnamed-chunk-296-1.png" width="672" /></p>
+<div class="sourceCode" id="cb650"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb650-1"><a href="violations-of-assumptions.html#cb650-1" aria-hidden="true" tabindex="-1"></a><span class="co"># power_result_hfeffect &lt;- ANOVA_power(design_result_power, </span></span>
+<span id="cb650-2"><a href="violations-of-assumptions.html#cb650-2" aria-hidden="true" tabindex="-1"></a><span class="co">#                                      correction = &quot;HF&quot;,</span></span>
+<span id="cb650-3"><a href="violations-of-assumptions.html#cb650-3" aria-hidden="true" tabindex="-1"></a><span class="co">#                                      nsims = nsims, </span></span>
+<span id="cb650-4"><a href="violations-of-assumptions.html#cb650-4" aria-hidden="true" tabindex="-1"></a><span class="co">#                                      verbose = FALSE)</span></span></code></pre></div>
 <table class="table" style="margin-left: auto; margin-right: auto;">
 <caption>
-<span id="tab:unnamed-chunk-294">Table 12.4: </span>Simulated ANOVA Result
+<span id="tab:unnamed-chunk-297">Table 12.4: </span>Simulated ANOVA Result
 </caption>
 <thead>
 <tr>
@@ -587,7 +591,7 @@ anova_a
 </table>
 <table class="table" style="margin-left: auto; margin-right: auto;">
 <caption>
-<span id="tab:unnamed-chunk-295">Table 12.5: </span>Simulated MANOVA Result
+<span id="tab:unnamed-chunk-298">Table 12.5: </span>Simulated MANOVA Result
 </caption>
 <thead>
 <tr>
