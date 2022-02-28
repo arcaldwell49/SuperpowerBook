@@ -37,7 +37,7 @@
 \IfFileExists{bookmark.sty}{\usepackage{bookmark}}{\usepackage{hyperref}}
 \hypersetup{
   pdftitle={Power Analysis with Superpower},
-  pdfauthor={Aaron R. Caldwell, Daniël Lakens, Chelsea M. Parlett-Pelleriti, and Guy Prochilo},
+  pdfauthor={Aaron R. Caldwell; Daniël Lakens; Chelsea M. Parlett-Pelleriti; Guy Prochilo; Frederik Aust},
   hidelinks,
   pdfcreator={LaTeX via pandoc}}
 \urlstyle{same} % disable monospaced font for URLs
@@ -130,8 +130,8 @@
 \bibliographystyle{apalike}
 
 \title{Power Analysis with Superpower}
-\author{Aaron R. Caldwell, Daniël Lakens, Chelsea M. Parlett-Pelleriti, and Guy Prochilo}
-\date{2021-12-08}
+\author{Aaron R. Caldwell \and Daniël Lakens \and Chelsea M. Parlett-Pelleriti \and Guy Prochilo \and Frederik Aust}
+\date{2022-02-28}
 
 \begin{document}
 \maketitle
@@ -167,13 +167,43 @@ In this book we will display a variety of ways the \texttt{Superpower} package c
 \subsection*{Contributors}\label{contributors}}
 \addcontentsline{toc}{subsection}{Contributors}
 
-Daniël Lakens \includegraphics{screenshots/orcid.png} \url{https://orcid.org/0000-0002-0247-239X}.
+\begin{itemize}
+\tightlist
+\item
+  \href{https://aaroncaldwell.us}{Aaron R. Caldwell}
 
-Aaron R. Caldwell \includegraphics{screenshots/orcid.png} \url{https://orcid.org/0000-0002-4541-6283}.
+  \begin{itemize}
+  \tightlist
+  \item
+    ORCID: \url{https://orcid.org/0000-0002-4541-6283}
+  \end{itemize}
+\item
+  \href{https://sites.google.com/site/lakens2/}{Daniël Lakens}
 
-Chelsea M. Parlett-Pelleriti \includegraphics{screenshots/github5.png} \url{https://cmparlettpelleriti.github.io/}
+  \begin{itemize}
+  \tightlist
+  \item
+    ORCID: \url{https://orcid.org/0000-0002-0247-239X}
+  \end{itemize}
+\item
+  \href{https://cmparlettpelleriti.github.io/}{Chelsea M. Parlett-Pelleriti}
+\item
+  \href{http://www.guyprochilo.com/}{Guy Prochilo}
+\item
+  \href{http://frederikaust.com/}{Frederik Aust}
 
-Guy Prochilo {[}screenshots/github5.png{]} \url{http://www.guyprochilo.com/}
+  \begin{itemize}
+  \tightlist
+  \item
+    ORCID: \url{https://orcid.org/0000-0003-4900-788X}
+  \end{itemize}
+\end{itemize}
+
+\hypertarget{contributions}{%
+\subsection*{Contributions}\label{contributions}}
+\addcontentsline{toc}{subsection}{Contributions}
+
+ARC and DL wrote the majority of this book together when creating the \texttt{Superpower} R package. Initially, these were meant to be validation documents to show that Superpower worked as intended, but later decided to convert this into a teaching tool. CMPP was hired in 2019 to aide in compiling this book and was instrumental in editing/fact checking early versions of the book. GP wrote the majority of the first chapter as part of a instructional manual to his students and was kind enough to share a version to be included in this book. FA, creator of the \texttt{emmeans\_power} function in \texttt{Superpower}, wrote an early version of the \texttt{emmeans} chapter which serves as the vignette in the package.
 
 \hypertarget{funding}{%
 \subsection*{Funding}\label{funding}}
@@ -4017,10 +4047,10 @@ So far we have discussed the simple one-way ANOVA, various forms of the repeated
 
 We can simulate a two-way ANOVA with a specific alpha, sample size and effect size, to achieve a specified statistical power. We will try to reproduce the power analysis in g*power \citep{faul2007g} for an F-test from an ANOVA with a repeated measures, within-between interaction effect. While g*power is a great tool it has limited options for mixed factorial ANOVAs.
 \newpage 
-Let us setup a simple 2x2 design.
+Let us setup a simple 2x2 design\footnote{Note, G*power is set to using SPSS settings for mixed/repeated measures.}.
 For the 2-way interaction, the result should be a power of 91.25\% with at total sample size of 46. Since we have 2 groups in the between -subjects factor that means the sample size per group is 23 with two measurements per subject (i.e., \texttt{2w}).
 
-\includegraphics{screenshots/gpower_5.png}
+\includegraphics{screenshots/pes_cohenfu.png}
 \newpage
 
 Now, we can repeat the process in \texttt{Superpower}.
